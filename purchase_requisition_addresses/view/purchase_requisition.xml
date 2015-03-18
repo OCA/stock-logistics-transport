@@ -10,7 +10,8 @@
 
         <field name="picking_type_id" position="after">
           <field name="dest_address_id" attrs="{'readonly': [('state','not in',('draft'))]}"/>
-        </field>
+          <field name="consignee_id" attrs="{'readonly': [('state','not in',('draft'))]}"/>
+       </field>
 
         <field name="picking_type_id" position="attributes">
           <!-- make this field consistent with the same field on the purchase order -->
