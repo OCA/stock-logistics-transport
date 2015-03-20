@@ -1,10 +1,10 @@
-Sale Address Management
-=======================
+Stock Address Management
+=====)==================
 
 Description
 ===========
 
-This module (together with stock_addresses and purchase_addresses) manages in a
+This module (together with sale_addresses and purchase_addresses) manages in a
 coherent way the following addresses in the standard Odoo workflows:
 
 * origin address
