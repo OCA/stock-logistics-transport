@@ -33,6 +33,7 @@
  'demo': [],
  'data': ['view/stock.xml',
           'view/procurement.xml',
+          'view/res_partner.xml',
           ],
  'auto_install': False,
  'installable': True,
