@@ -19,9 +19,8 @@
 #
 #
 
-{'name': 'Purchase Requisition Addresses',
- 'summary': 'Manage origin / destination / consignee addresses '
-            'on purchase requisitions',
+{'name': 'Sale Addresses',
+ 'summary': 'Manage origin / destination / consignee addresses on sales',
  'version': '1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
@@ -29,11 +28,13 @@
  'complexity': 'expert',
  'images': [],
  'website': "http://www.camptocamp.com",
- 'depends': ['purchase_requisition',
-             'purchase_addresses'
+ 'depends': ['sale_stock',
+             'stock_transport_multi_address',
              ],
- 'demo': [],
- 'data': ['view/purchase_requisition.xml',
+ 'demo': ['demo/sale.xml',
+          ],
+ 'data': ['view/sale.xml',
+          'view/report_saleorder.xml',
           ],
  'auto_install': False,
  'installable': True,
