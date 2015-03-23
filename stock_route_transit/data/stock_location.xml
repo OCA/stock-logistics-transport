@@ -33,5 +33,12 @@
      <field name="route_id" ref="stock_dropshipping.route_drop_shipping"/>
    </record>
 
+   <record id="stock_dropshipping.picking_type_dropship" model="stock.picking.type">
+     <field name="name">Dropship</field>
+     <!-- this location is used by purchase_requisition as the destination of
+     the generated purchase orders -->
+     <field name="default_location_dest_id" ref="transit_outgoing"/>
+   </record>
+
   </data>
 </openerp>
