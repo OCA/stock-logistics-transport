@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/OCA/stock-logistics-transport.svg?branch=8.0)](https://travis-ci.org/OCA/stock-logistics-transport)
-[![Coverage Status](https://img.shields.io/coveralls/OCA/stock-logistics-transport.svg)](https://coveralls.io/r/OCA/stock-logistics-transport?branch=8.0)
+[![Build Status](https://travis-ci.org/OCA/stock-logistics-transport.svg?branch=7.0)](https://travis-ci.org/OCA/stock-logistics-transport)
+[![Coverage Status](https://img.shields.io/coveralls/OCA/stock-logistics-transport.svg)](https://coveralls.io/r/OCA/stock-logistics-transport?branch=7.0)
 
 Odoo Stock Logistics Transport
 ==============================
