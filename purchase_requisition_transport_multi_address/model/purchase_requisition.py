@@ -19,6 +19,7 @@
 #
 #
 from openerp import models, fields, api, exceptions
+from openerp.tools.translate import _
 
 
 class PurchaseRequisition(models.Model):
@@ -70,8 +71,9 @@ class PurchaseRequisition(models.Model):
             picking_type_id = self.env.ref(ref)
         else:
             raise exceptions.Warning(
-                'No picking types were found on warehouse. Please verify you '
-                'have set an address on warehouse.')
+                _('The delivery address %s is not the address of a '
+                  'warehouse or the address of a customer.') %
+                self.dest_address_id.name)
         self.picking_type_id = picking_type_id
 
     @api.onchange('picking_type_id')
