@@ -46,7 +46,7 @@ class PurchaseRequisition(models.Model):
         """Find a picking type from the address.
 
         There is a similar onchange in the module
-        purchase_requisition_delivery_address.  A similar logic to choose the
+        purchase_requisition_delivery_address. A similar logic to choose the
         picking type is used in the module framework_agreement_sourcing in
         github.com/OCA/vertical-ngo.
 

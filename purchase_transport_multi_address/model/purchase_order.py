@@ -36,7 +36,7 @@ class PurchaseOrder(models.Model):
         If the address can be an internal warehouse or a customer, the picking
         type is changed accordingly. This intentionally overrides the original
         without super, and should be consistent with the module
-        purchase_requisition_delivery_address.
+        purchase_requisition_transport_multi_address.
 
         A similar logic to choose the picking type is used in the module
         framework_agreement_sourcing in github.com/OCA/vertical-ngo.
@@ -68,9 +68,8 @@ class PurchaseOrder(models.Model):
     def onchange_picking_type_id(self):
         """If the picking type has an address, use it.
 
-        We cannot empty the address if one is not found, because that gives a
+        Do not empty the address none is found, because that gives a
         short circuit with the onchange of the address.
-
         """
 
         if self.picking_type_id:
