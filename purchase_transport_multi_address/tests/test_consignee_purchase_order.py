@@ -29,8 +29,7 @@ class TestConsigneePurchaseOrder(common.TransactionCase):
     def setUp(self):
         super(TestConsigneePurchaseOrder, self).setUp()
 
-        model_data = self.env['ir.model.data']
-        ref = model_data.xmlid_to_res_id
+        ref = self.env.ref
         self.part1_id = ref('base.res_partner_1')
         self.part12_id = ref('base.res_partner_12')
 
