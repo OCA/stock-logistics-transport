@@ -30,12 +30,10 @@ class StockMove(models.Model):
     departure_shipment_id = fields.Many2one(
         'shipment.plan', 'Departure shipment',
         readonly=True,
-        copy=False
     )
     arrival_shipment_id = fields.Many2one(
         'shipment.plan', 'Arrival shipment',
         readonly=True,
-        copy=False
     )
 
     product_volume = fields.Float(
