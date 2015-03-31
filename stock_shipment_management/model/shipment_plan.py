@@ -250,9 +250,14 @@ class ShipmentPlan(models.Model):
 
     @api.multi
     def action_cancel(self):
-        if any(m for m in self.departure_move_ids if m.state == 'done'):
+        has_done_moves = any(m for m in self.mapped('departure_move_ids')
+                             if m.state == 'done')
+        if has_done_moves:
             raise exceptions.Warning(
                 "You cannot cancel a shipment plan with done moves")
+        # Free all related moves
+        self.departure_move_ids.write({'departure_shipment_id': False})
+        self.arrival_move_ids.write({'arrival_shipment_id': False})
         self.write({'state': 'cancel'})
         return True
 
