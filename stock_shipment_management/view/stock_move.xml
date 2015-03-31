@@ -72,7 +72,7 @@
     </record>
 
     <record id="action_move_transit_pipeline_waiting" model="ir.actions.act_window">
-        <field name="name">Waiting planifitation</field>
+        <field name="name">Waiting planification</field>
         <field name="res_model">stock.move</field>
         <field name="type">ir.actions.act_window</field>
         <field name="view_type">form</field>

@@ -638,7 +638,7 @@ msgstr ""
 #. module: stock_shipment_management
 #: model:ir.actions.act_window,name:stock_shipment_management.action_move_transit_pipeline_waiting
 #: model:ir.ui.menu,name:stock_shipment_management.menu_action_move_transit_pipeline_waiting
-msgid "Waiting planifitation"
+msgid "Waiting planification"
 msgstr ""
 
 #. module: stock_shipment_management
