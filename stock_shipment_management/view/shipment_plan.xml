@@ -140,6 +140,8 @@
           <field name="carrier_tracking_ref"/>
           <field name="eta"/>
           <field name="etd"/>
+          <field name="weight"/>
+          <field name="volume"/>
           <field name="state"/>
         </tree>
       </field>

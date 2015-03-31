@@ -157,10 +157,12 @@ class ShipmentPlan(models.Model):
     volume = fields.Float(
         compute='_compute_volume',
         readonly=True,
+        store=True,
     )
     weight = fields.Float(
         compute='_compute_weights',
         readonly=True,
+        store=True,
     )
     weight_net = fields.Float(
         compute='_compute_weights',
@@ -207,8 +209,7 @@ class ShipmentPlan(models.Model):
             shipment.arrival_picking_ids = [(6, 0, pickings[shipment.id])]
 
     @api.one
-    @api.depends('departure_move_ids.product_id',
-                 'departure_move_ids.product_qty',
+    @api.depends('departure_move_ids.product_qty',
                  'departure_move_ids.product_id.volume')
     def _compute_volume(self):
         volume = 0.0

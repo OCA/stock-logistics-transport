@@ -38,6 +38,12 @@ class StockMove(models.Model):
         copy=False
     )
 
+    product_volume = fields.Float(
+        related='product_id.volume',
+        readonly=True,
+        store=True
+    )
+
     ship_carrier_id = fields.Many2one(
         related='departure_shipment_id.carrier_id',
         readonly=True,
