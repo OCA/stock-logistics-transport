@@ -333,7 +333,7 @@ msgstr ""
 #. module: stock_shipment_management
 #: selection:shipment.plan,state:0
 #: view:stock.move:stock_shipment_management.view_move_transit_pipeline_search
-msgid "New"
+msgid "Draft"
 msgstr ""
 
 #. module: stock_shipment_management

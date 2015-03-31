@@ -123,7 +123,7 @@ class ShipmentPlan(models.Model):
         states={'draft': [('readonly', False)]}
     )
     state = fields.Selection(
-        [('draft', 'New'),
+        [('draft', 'Draft'),
          ('confirmed', 'Confirmed'),
          ('in_transit', 'In Transit'),
          ('done', 'Done'),
