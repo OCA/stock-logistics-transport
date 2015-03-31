@@ -30,18 +30,18 @@ class TestConsigneeSaleOrder(common.TransactionCase):
 
         ref = self.env.ref
 
-        part1_id = ref('base.res_partner_1')
-        part12_id = ref('base.res_partner_12')
+        part1 = ref('base.res_partner_1')
+        part12 = ref('base.res_partner_12')
 
         SO = self.env['sale.order']
         SOL = self.env['sale.order.line']
 
         so_vals = {
-            'partner_id': part12_id,
-            'consignee_id': part1_id,
+            'partner_id': part12.id,
+            'consignee_id': part1.id,
             }
 
-        res = SO.onchange_partner_id(part12_id)
+        res = SO.onchange_partner_id(part12.id)
         so_vals.update(res['value'])
 
         self.so = SO.create(so_vals)
@@ -52,10 +52,10 @@ class TestConsigneeSaleOrder(common.TransactionCase):
 
         sol_vals = {
             'order_id': self.so.id,
-            'product_id': ref('product.product_product_33'),
+            'product_id': ref('product.product_product_33').id,
             'name': "[HEAD-USB] Headset USB",
             'product_uom_qty': 24,
-            'product_uom': ref('product.product_uom_unit'),
+            'product_uom': ref('product.product_uom_unit').id,
             'price_unit': 65,
             }
         SOL.create(sol_vals)
