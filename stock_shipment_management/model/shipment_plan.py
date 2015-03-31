@@ -20,7 +20,7 @@
 #
 import time
 import logging
-from openerp import fields, models, api
+from openerp import fields, models, api, exceptions
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT as DT_FORMAT
 from openerp.addons.purchase import purchase
 
@@ -250,6 +250,9 @@ class ShipmentPlan(models.Model):
 
     @api.multi
     def action_cancel(self):
+        if any(m for m in self.departure_move_ids if m.state == 'done'):
+            raise exceptions.Warning(
+                "You cannot cancel a shipment plan with done moves")
         self.write({'state': 'cancel'})
         return True
 
