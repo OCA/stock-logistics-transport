@@ -166,6 +166,9 @@
             <filter string="Carrier" domain="[]" context="{'group_by':'carrier_id'}"/>
             <filter string="From" domain="[]" context="{'group_by':'from_address_id'}"/>
             <filter string="To" domain="[]" context="{'group_by':'to_address_id'}"/>
+            <filter string="ETD" domain="[]" context="{'group_by':'etd'}"/>
+            <filter string="ETA" domain="[]" context="{'group_by':'eta'}"/>
+            <filter string="Purchase Order" domain="[]" context="{'group_by':'purchase_id'}"/>
             <filter string="Transport Mode" domain="[]" context="{'group_by':'transport_mode_id'}"/>
             <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
           </group>
