@@ -25,26 +25,26 @@ class TestAddresses(common.TransactionCase):
         super(TestAddresses, self).setUp()
 
         ref = self.env.ref
-        self.part1_id = ref('base.res_partner_1')
-        self.part12_id = ref('base.res_partner_12')
+        self.part1 = ref('base.res_partner_1')
+        self.part12 = ref('base.res_partner_12')
         PO = self.env['purchase.order']
         POL = self.env['purchase.order.line']
 
         po_vals = {
-            'partner_id': self.part1_id,
-            'location_id': ref('stock.stock_location_stock')
+            'partner_id': self.part1.id,
+            'location_id': ref('stock.stock_location_stock').id
         }
 
-        res = PO.onchange_partner_id(self.part1_id)
+        res = PO.onchange_partner_id(self.part1.id)
         po_vals.update(res['value'])
         self.po = PO.create(po_vals)
 
         POL.create({
             'order_id': self.po.id,
-            'product_id': ref('product.product_product_33'),
+            'product_id': ref('product.product_product_33').id,
             'name': "[HEAD-USB] Headset USB",
             'product_qty': 24,
-            'product_uom': ref('product.product_uom_unit'),
+            'product_uom': ref('product.product_uom_unit').id,
             'date_planned': fields.Datetime.now(),
             'price_unit': 65,
         })
@@ -54,7 +54,7 @@ class TestAddresses(common.TransactionCase):
         self.assertFalse(self.po.picking_ids.delivery_address_id.id)
 
     def test_propagate_supplier_and_chosen_address_to_picking(self):
-        self.po.dest_address_id = self.part12_id
+        self.po.dest_address_id = self.part12.id
         self.po.signal_workflow('purchase_confirm')
         self.assertEquals(self.po.picking_ids.delivery_address_id,
                           self.po.dest_address_id)
@@ -90,7 +90,7 @@ class TestAddresses(common.TransactionCase):
 
         """
 
-        self.po.origin_address_id = self.part12_id
+        self.po.origin_address_id = self.part12.id
         self.po.signal_workflow('purchase_confirm')
         self.assertEquals(self.po.picking_ids.origin_address_id,
                           self.po.origin_address_id)

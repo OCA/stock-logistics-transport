@@ -30,28 +30,28 @@ class TestConsigneePurchaseOrder(common.TransactionCase):
         super(TestConsigneePurchaseOrder, self).setUp()
 
         ref = self.env.ref
-        self.part1_id = ref('base.res_partner_1')
-        self.part12_id = ref('base.res_partner_12')
+        self.part1 = ref('base.res_partner_1')
+        self.part12 = ref('base.res_partner_12')
 
         PO = self.env['purchase.order']
         POL = self.env['purchase.order.line']
 
         po_vals = {
-            'location_id': ref('stock.stock_location_stock'),
-            'partner_id': self.part12_id,
+            'location_id': ref('stock.stock_location_stock').id,
+            'partner_id': self.part12.id,
             }
 
-        res = PO.onchange_partner_id(self.part12_id)
+        res = PO.onchange_partner_id(self.part12.id)
         po_vals.update(res['value'])
 
         self.po = PO.create(po_vals)
 
         pol_vals = {
             'order_id': self.po.id,
-            'product_id': ref('product.product_product_33'),
+            'product_id': ref('product.product_product_33').id,
             'name': "[HEAD-USB] Headset USB",
             'product_qty': 24,
-            'product_uom': ref('product.product_uom_unit'),
+            'product_uom': ref('product.product_uom_unit').id,
             'date_planned': fields.Datetime.now(),
             'price_unit': 65,
             }
@@ -63,7 +63,7 @@ class TestConsigneePurchaseOrder(common.TransactionCase):
 
         """
 
-        self.po.consignee_id = self.part1_id
+        self.po.consignee_id = self.part1.id
         self.po.signal_workflow('purchase_confirm')
         self.assertTrue(self.po.picking_ids)
         self.assertEquals(self.po.picking_ids.consignee_id,
