@@ -14,6 +14,7 @@
           <field name="product_packaging" domain="[('product_tmpl_id','=',product_id)]" groups="product.group_stock_packaging"/>
           <field name="weight"/>
           <field name="product_volume"/>
+          <field name="departure_shipment_id"/>
           <field name="ship_etd"/>
           <field name="ship_eta"/>
           <field name="ship_carrier_tracking_ref"/>
@@ -22,7 +23,6 @@
           <field name="ship_consignee_id"/>
           <field name="ship_transport_mode_id"/>
           <field name="ship_state"/>
-          <field name="departure_shipment_id" invisible="1"/>
           <field name="picking_id" invisible="1"/>
           <field name="restrict_lot_id" invisible="1"/>
           <field name="ship_carrier_id" invisible="1"/>
