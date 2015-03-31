@@ -6,7 +6,7 @@
       <field name="name">shipment.plan.form</field>
       <field name="model">shipment.plan</field>
       <field name="arch" type="xml">
-        <form string="Shipment Plan" version="7.0">
+        <form string="Shipment Plan">
           <header>
             <button name="shipment_confirm"
                 string="Confirm"
