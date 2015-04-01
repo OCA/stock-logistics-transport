@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 
 
 class ETDSetter(models.TransientModel):
@@ -33,8 +33,10 @@ class ETDSetter(models.TransientModel):
     @api.multi
     def set_value(self):
         """ Changes the Shipment ETD and update departure moves """
-        for setter in self:
-            self.shipment_id.etd = self.etd
+        eta = self.shipment_id.eta
+        if eta and self.etd > eta:
+            raise exceptions.Warning(_("ETD must be before ETA (%s)") % eta)
+        self.shipment_id.etd = self.etd
         moves = self.shipment_id.departure_move_ids
         to_write = moves.filtered(lambda r: r.state not in ('done', 'cancel'))
         to_write.write({'date_expected': self.etd})

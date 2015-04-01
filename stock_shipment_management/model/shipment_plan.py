@@ -20,7 +20,7 @@
 #
 import time
 import logging
-from openerp import fields, models, api, exceptions
+from openerp import fields, models, api, exceptions, _
 from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT as DT_FORMAT
 from openerp.addons.purchase import purchase
 
@@ -174,6 +174,21 @@ class ShipmentPlan(models.Model):
     arrival_picking_count = fields.Integer(
         compute='_arrival_picking_count',
     )
+
+    @api.one
+    @api.constrains('initial_etd', 'initial_eta')
+    def _check_initial_estimated_times(self):
+        if (self.initial_etd and self.initial_eta and
+                self.initial_etd > self.initial_eta):
+            raise exceptions.ValidationError(
+                _('Initial ETD cannot be set after initial ETD.'))
+
+    @api.one
+    @api.constrains('etd', 'eta')
+    def _check_estimated_times(self):
+        if self.etd and self.eta and self.etd > self.eta:
+            raise exceptions.ValidationError(
+                _('ETD cannot be set after ETD.'))
 
     @api.multi
     def _get_related_picking(self, direction):

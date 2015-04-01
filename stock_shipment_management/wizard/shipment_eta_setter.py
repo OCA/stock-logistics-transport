@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #
-from openerp import models, fields, api
+from openerp import models, fields, api, exceptions, _
 
 
 class ETASetter(models.TransientModel):
@@ -33,8 +33,10 @@ class ETASetter(models.TransientModel):
     @api.multi
     def set_value(self):
         """ Changes the Shipment ETA and update arrival moves """
-        for setter in self:
-            self.shipment_id.eta = self.eta
+        etd = self.shipment_id.etd
+        if etd and etd > self.eta:
+            raise exceptions.Warning(_("ETA must be after ETD (%s)" % etd))
+        self.shipment_id.eta = self.eta
         moves = self.shipment_id.arrival_move_ids
         to_write = moves.filtered(lambda r: r.state not in ('done', 'cancel'))
         to_write.write({'date_expected': self.eta})
