@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="view_shipment_transit_confirm" model="ir.ui.view">
+      <field name="name">Shipment Transit</field>
+      <field name="model">shipment.transit.confirm</field>
+      <field name="arch" type="xml">
+        <form string="Confirm transit?">
+          <group>
+            <p>Following departure moves are not done and will be removed from shipment.
+            Do you want to exclude those moves from shipment?</p>
+            <field name="undone_move_ids" nolabel="1" colspan="4">
+              <tree string="Undone moves">
+                <field name="product_id"/>
+                <field name="product_uom_qty"/>
+                <field name="product_uom"  string="Unit of Measure" groups="product.group_uom"/>
+                <field name="state"/>
+              </tree>
+            </field>
+          </group>
+          <footer>
+            <button name="action_confirm" string="_Confirm"
+              class="oe_highlight"
+              colspan="1" type="object"/>
+            or
+            <button string="_Cancel" class="oe_link" special="cancel" />
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_shipment_transit_confirm" model="ir.actions.act_window">
+      <field name="name">Transit confirm</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">shipment.transit.confirm</field>
+      <field name="view_type">form</field>
+      <field name="view_mode">form</field>
+      <field name="view_id" ref="view_shipment_transit_confirm"/>
+      <field name="target">new</field>
+    </record>
+
+  </data>
+</openerp>

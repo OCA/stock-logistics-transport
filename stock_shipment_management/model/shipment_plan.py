@@ -250,6 +250,14 @@ class ShipmentPlan(models.Model):
         return True
 
     @api.multi
+    def is_departed(self):
+        """
+        Check if all departure moves are done
+        """
+        return all(m.state == 'done' for m
+                   in self.mapped('departure_move_ids'))
+
+    @api.multi
     def action_cancel(self):
         has_done_moves = any(m for m in self.mapped('departure_move_ids')
                              if m.state == 'done')
@@ -266,6 +274,20 @@ class ShipmentPlan(models.Model):
     def action_confirm(self):
         self.write({'state': 'confirmed'})
         return True
+
+    @api.multi
+    def _popup_to_transit_confirm(self):
+        ctx = {'active_id': self.id, 'active_ids': self.ids,
+               'active_model': self._name}
+        wiz_model = self.env['shipment.transit.confirm']
+        wiz = wiz_model.with_context(ctx).create({})
+        return wiz.action_open_window()
+
+    @api.multi
+    def button_action_transit(self):
+        if not self.is_departed():
+            return self._popup_to_transit_confirm()
+        return self.signal_workflow('transit_start')
 
     @api.multi
     def action_transit(self):

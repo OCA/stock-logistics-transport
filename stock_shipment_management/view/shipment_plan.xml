@@ -12,6 +12,11 @@
                 string="Confirm"
                 states="draft"
                 class="oe_highlight"/>
+            <button name="button_action_transit"
+                string="Sent to transit"
+                states="confirmed"
+                class="oe_highlight"
+                type="object"/>
             <button name="cancel"
                 string="Cancel"
                 states="draft,confirmed"/>

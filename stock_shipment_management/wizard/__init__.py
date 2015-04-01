@@ -24,3 +24,4 @@ from . import shipment_carrier_tracking_ref_setter
 from . import shipment_etd_setter
 from . import shipment_eta_setter
 from . import create_shipment
+from . import shipment_transit_confirm
