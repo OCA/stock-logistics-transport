@@ -144,3 +144,9 @@ class StockMove(models.Model):
         if self.env.context.get('split_transit_arrival') == 'arrival':
             default['picking_id'] = False
         return super(StockMove, self).copy(default=default)
+
+    @api.multi
+    def action_remove_from_shipment(self):
+        self.move_dest_id.arrival_shipment_id = False
+        self.departure_shipment_id = False
+        return True
