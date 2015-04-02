@@ -43,6 +43,8 @@
           "view/menu.xml",
           "view/shipment_plan.xml",
           "view/stock_move.xml",
+          "view/sale_order.xml",
+          "view/purchase_order.xml",
           "workflow/shipment_plan.xml",
           "security/ir.model.access.csv",
           ],
