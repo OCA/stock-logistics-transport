@@ -19,7 +19,7 @@
 #
 #
 
-{'name': 'Purchase Addresses',
+{'name': 'Purchase - Transport Addresses',
  'summary': 'Manage origin / destination / consignee addresses on purchases',
  'version': '1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",

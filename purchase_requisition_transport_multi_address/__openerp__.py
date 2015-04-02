@@ -19,7 +19,7 @@
 #
 #
 
-{'name': 'Purchase Requisition Addresses',
+{'name': 'Purchase Requisition - Transport Addresses',
  'summary': 'Manage origin / destination / consignee addresses '
             'on purchase requisitions',
  'version': '1.0',

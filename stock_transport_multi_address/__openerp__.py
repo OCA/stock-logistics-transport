@@ -19,7 +19,7 @@
 #
 #
 
-{'name': 'Stock Addresses',
+{'name': 'Stock - Transport Addresses',
  'summary': 'Manage origin / destination / consignee addresses on pickings',
  'version': '1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",

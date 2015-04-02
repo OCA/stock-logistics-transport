@@ -1,13 +1,14 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License
 
-Purchase Address Management
-===========================
+Purchase - Transport Addresses
+==============================
 
 Description
 ===========
 
-This module (together with stock_addresses and sale_addresses) manages in a
+This module - together with **Stock - Transport Addresses** (`stock_transport_multi_address`)
+and **Sale - Transport Addresses** (`sale_transport_multi_address`) - manages in a
 coherent way the following addresses in the standard Odoo workflows:
 
 * origin address

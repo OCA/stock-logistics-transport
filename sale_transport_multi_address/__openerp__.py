@@ -19,7 +19,7 @@
 #
 #
 
-{'name': 'Sale Addresses',
+{'name': 'Sale - Transport Addresses',
  'summary': 'Manage origin / destination / consignee addresses on sales',
  'version': '1.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
