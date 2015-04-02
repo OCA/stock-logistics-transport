@@ -1,0 +1,58 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* purchase_requisition_transport_multi_address
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-27 13:22+0000\n"
+"PO-Revision-Date: 2015-03-27 13:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_requisition_transport_multi_address
+#: field:purchase.requisition,consignee_id:0
+msgid "Consignee"
+msgstr "Consignee"
+
+#. module: purchase_requisition_transport_multi_address
+#: view:purchase.requisition:purchase_requisition_transport_multi_address.view_purchase_requisition_form
+msgid "Deliver To"
+msgstr "Deliver To"
+
+#. module: purchase_requisition_transport_multi_address
+#: field:purchase.requisition,dest_address_id:0
+msgid "Delivery Address"
+msgstr "Delivery Address"
+
+#. module: purchase_requisition_transport_multi_address
+#: model:ir.model,name:purchase_requisition_transport_multi_address.model_purchase_requisition
+msgid "Purchase Requisition"
+msgstr "Purchase Requisition"
+
+#. module: purchase_requisition_transport_multi_address
+#: code:addons/purchase_requisition_transport_multi_address/model/purchase_requisition.py:73
+#, python-format
+msgid "The delivery address %s is not the address of a warehouse or the address of a customer."
+msgstr "The delivery address %s is not the address of a warehouse or the address of a customer."
+
+#. module: purchase_requisition_transport_multi_address
+#: help:purchase.requisition,consignee_id:0
+msgid "The person to whom the shipment is to be delivered."
+msgstr "The person to whom the shipment is to be delivered."
+
+#. module: purchase_requisition_transport_multi_address
+#: view:purchase.requisition:purchase_requisition_transport_multi_address.view_purchase_requisition_form
+msgid "[('code','=','incoming')]"
+msgstr "[('code','=','incoming')]"
+
+#. module: purchase_requisition_transport_multi_address
+#: view:purchase.requisition:purchase_requisition_transport_multi_address.view_purchase_requisition_form
+msgid "{'special_shortened_wh_name': True}"
+msgstr "{'special_shortened_wh_name': True}"
+
