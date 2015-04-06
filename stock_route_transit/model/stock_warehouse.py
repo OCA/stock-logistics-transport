@@ -480,8 +480,8 @@ class StockWarehouse(orm.Model):
                          'code': 'incoming',
                          'sequence_id': in_transit_seq_id,
                          'default_location_src_id': supplier_loc.id,
-                         'default_location_dest_id':
-                             warehouse.wh_transit_in_loc_id.id,
+                         'default_location_dest_id': (
+                             warehouse.wh_transit_in_loc_id.id),
                          'active': 'transit' in warehouse.reception_steps,
                          }
         in_transit_type = picking_type_obj.create(cr, uid,
@@ -507,8 +507,8 @@ class StockWarehouse(orm.Model):
                          'warehouse_id': warehouse.id,
                          'code': 'reception',
                          'sequence_id': out_transit_seq_id,
-                         'default_location_src_id':
-                             warehouse.wh_transit_out_loc_id.id,
+                         'default_location_src_id': (
+                             warehouse.wh_transit_out_loc_id.id),
                          'default_location_dest_id': customer_loc.id,
                          'active': 'transit' in warehouse.delivery_steps,
                          }
