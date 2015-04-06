@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_transport_multi_address
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-27 13:22+0000\n"
+"PO-Revision-Date: 2015-03-27 13:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_transport_multi_address
+#: field:sale.order,consignee_id:0
+msgid "Consignee"
+msgstr "Consignatario"
+
+#. module: sale_transport_multi_address
+#: view:website:sale.report_saleorder_document
+msgid "Consignee address :"
+msgstr "Direccion del consignatario:"
+
+#. module: sale_transport_multi_address
+#: help:sale.order,consignee_id:0
+msgid "The person to whom the shipment is to be delivered."
+msgstr "La persona a la que se va a entregar el envío."
+
+#. module: sale_transport_multi_address
+#: view:website:sale.report_saleorder_document
+msgid "VAT:"
+msgstr "NIF:"
+
