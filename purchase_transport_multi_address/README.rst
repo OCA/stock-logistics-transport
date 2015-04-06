@@ -16,8 +16,8 @@ coherent way the following addresses in the standard Odoo workflows:
 * consignee
 
 
-delivery addresses management:
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Delivery addresses management:
+------------------------------
 
 This module adds a delivery address to the purchase order, which is
 automatically propagated to a corresponding field in the generated picking.
