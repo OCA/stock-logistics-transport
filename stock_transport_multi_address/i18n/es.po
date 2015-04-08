@@ -22,7 +22,7 @@ msgid "<p class=\"oe_view_nocontent_create\">\n"
 "        </p>\n"
 "      "
 msgstr "<p class=\"oe_view_nocontent_create\">\n"
-"          Click to add a consignee in your address book.\n"
+"          Pulse para añadir un consignatario en su libreta de direcciones.\n"
 "        </p>\n"
 "      "
 
@@ -32,78 +32,53 @@ msgstr "<p class=\"oe_view_nocontent_create\">\n"
 #: field:res.partner,is_consignee:0
 #: field:stock.picking,consignee_id:0
 msgid "Consignee"
-msgstr "Consignee"
+msgstr "Consignatario"
 
 #. module: stock_transport_multi_address
 #: view:res.partner:stock_transport_multi_address.view_res_partner_filter
 msgid "Consignee Partners"
-msgstr "Consignee Partners"
+msgstr "Empresas consignatarias"
 
 #. module: stock_transport_multi_address
 #: model:ir.actions.act_window,name:stock_transport_multi_address.action_consignee_form
 #: model:ir.ui.menu,name:stock_transport_multi_address.menu_consignee
 #: view:res.partner:stock_transport_multi_address.view_res_partner_filter
 msgid "Consignees"
-msgstr "Consignees"
+msgstr "Consignatarios"
 
 #. module: stock_transport_multi_address
 #: field:procurement.group,delivery_address_id:0
 #: field:stock.picking,delivery_address_id:0
 msgid "Delivery Address"
-msgstr "Delivery Address"
+msgstr "Dirección de entrega"
 
 #. module: stock_transport_multi_address
 #: field:procurement.group,origin_address_id:0
 #: field:procurement.order,origin_address_id:0
 #: field:stock.picking,origin_address_id:0
 msgid "Origin Address"
-msgstr "Origin Address"
-
-#. module: stock_transport_multi_address
-#: model:ir.model,name:stock_transport_multi_address.model_res_partner
-msgid "Partner"
-msgstr "Partner"
-
-#. module: stock_transport_multi_address
-#: model:ir.model,name:stock_transport_multi_address.model_stock_picking
-msgid "Picking List"
-msgstr "Picking List"
-
-#. module: stock_transport_multi_address
-#: model:ir.model,name:stock_transport_multi_address.model_procurement_order
-msgid "Procurement"
-msgstr "Procurement"
-
-#. module: stock_transport_multi_address
-#: model:ir.model,name:stock_transport_multi_address.model_procurement_group
-msgid "Procurement Requisition"
-msgstr "Procurement Requisition"
-
-#. module: stock_transport_multi_address
-#: model:ir.model,name:stock_transport_multi_address.model_stock_move
-msgid "Stock Move"
-msgstr "Stock Move"
+msgstr "Dirección origen"
 
 #. module: stock_transport_multi_address
 #: help:procurement.group,delivery_address_id:0
 msgid "The final delivery address of the procurement group"
-msgstr "The final delivery address of the procurement group"
+msgstr "La dirección final de entrega del grupo de abastecimiento"
 
 #. module: stock_transport_multi_address
 #: help:procurement.group,consignee_id:0
 #: help:stock.picking,consignee_id:0
 msgid "The person to whom the shipment is to be delivered"
-msgstr "The person to whom the shipment is to be delivered"
+msgstr "La persona a la que se va a entregar el envío."
 
 #. module: stock_transport_multi_address
 #: help:stock.picking,delivery_address_id:0
 msgid "The delivery address of the shipment"
-msgstr "The delivery address of the shipment"
+msgstr "La dirección de entrega del envío"
 
 #. module: stock_transport_multi_address
 #: help:procurement.group,origin_address_id:0
 #: help:procurement.order,origin_address_id:0
 #: help:stock.picking,origin_address_id:0
 msgid "The origin address of the shipment"
-msgstr "The origin address of the shipment"
+msgstr "La dirección origen del envío"
 

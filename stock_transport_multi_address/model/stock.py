@@ -89,10 +89,10 @@ class StockPicking(models.Model):
     delivery_address_id = fields.Many2one(
         'res.partner',
         'Delivery Address',
-        help='the delivery address of the shipment'
+        help='The delivery address of the shipment'
         )
     origin_address_id = fields.Many2one(
         'res.partner',
         'Origin Address',
-        help='the origin address of the shipment'
+        help='The origin address of the shipment'
         )

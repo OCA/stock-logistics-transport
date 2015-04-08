@@ -1,0 +1,43 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* purchase_transport_multi_address
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-03-27 13:22+0000\n"
+"PO-Revision-Date: 2015-03-27 13:22+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_transport_multi_address
+#: field:purchase.order,consignee_id:0
+msgid "Consignee"
+msgstr "Consignatario"
+
+#. module: purchase_transport_multi_address
+#: view:purchase.order:purchase_transport_multi_address.purchase_order_form
+msgid "Delivery Address"
+msgstr "Dirección de entrega"
+
+#. module: purchase_transport_multi_address
+#: field:purchase.order,origin_address_id:0
+msgid "Origin Address"
+msgstr "Dirección origen"
+
+#. module: purchase_transport_multi_address
+#: code:addons/purchase_transport_multi_address/model/purchase_order.py:62
+#, python-format
+msgid "The delivery address %s is not the address of a warehouse or the address of a customer."
+msgstr "La dirección de entrega %s no es la dirección de un almacén o la dirección de un cliente."
+
+#. module: purchase_transport_multi_address
+#: help:purchase.order,consignee_id:0
+msgid "The person to whom the shipment is to be delivered."
+msgstr "La persona a la que se va a entregar el envío."
+
