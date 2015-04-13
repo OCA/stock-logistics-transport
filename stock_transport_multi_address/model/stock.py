@@ -45,7 +45,7 @@ class StockMove(models.Model):
             if not picking.consignee_id:
                 changes['consignee_id'] = group.consignee_id.id
             if not picking.delivery_address_id:
-                changes['delivery_address_id'] = group.partner_id.id
+                changes['delivery_address_id'] = group.delivery_address_id.id
             if not picking.origin_address_id:
                 # for the origin address, the information on the
                 # procurement.order trumps the information on the procurement
