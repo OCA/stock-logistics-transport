@@ -19,7 +19,7 @@
 #
 #
 {"name": "Shipment Management",
- "version": "0.1.1",
+ "version": "1.0",
  "author": "Camptocamp,Odoo Community Association (OCA)",
  "category": "Transportation",
  "license": 'AGPL-3',
