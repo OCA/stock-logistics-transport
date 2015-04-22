@@ -55,6 +55,7 @@ class StockMove(models.Model):
     ship_from_address_id = fields.Many2one(
         related='picking_id.origin_address_id',
         string='From Address',
+        readonly=True,
         store=True
     )
     ship_to_address_id = fields.Many2one(
