@@ -63,7 +63,7 @@ class StockMove(models.Model):
         store=True
     )
     ship_consignee_id = fields.Many2one(
-        related='departure_shipment_id.consignee_id',
+        related='picking_id.consignee_id',
         string='Consignee',
         readonly=True,
     )
