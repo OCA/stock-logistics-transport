@@ -80,11 +80,9 @@ class ShipmentPlanCreator(models.TransientModel):
         if len(from_addresses) > 1:
             raise exceptions.Warning("Multiple From Address")
         to_addresses = moves.mapped('ship_to_address_id')
-        if len(to_addresses) > 1:
-            raise exceptions.Warning("Multiple To Address")
         data.update(
             from_address_id=from_addresses.id,
-            to_address_id=to_addresses.id
+            to_address_id=to_addresses[0].id
         )
 
         etds = set(m.date_expected for m in moves)
