@@ -27,12 +27,14 @@ class TestConsigneeSaleOrder(common.TransactionCase):
 
     def setUp(self):
         super(TestConsigneeSaleOrder, self).setUp()
-
         ref = self.env.ref
 
         part1 = ref('base.res_partner_1')
         part12 = ref('base.res_partner_12')
-
+        self.env['res.partner'].create(
+            {'name': 'part12 delivery',
+             'type': 'delivery',
+             'parent_id': part12.id})
         SO = self.env['sale.order']
         SOL = self.env['sale.order.line']
 
@@ -65,10 +67,14 @@ class TestConsigneeSaleOrder(common.TransactionCase):
         consignee is copied
 
         """
+        self.assertEquals(self.so.partner_shipping_id.parent_id,
+                          self.so.partner_id)
         self.so.signal_workflow('order_confirm')
         self.assertEquals(self.so.picking_ids.consignee_id,
                           self.so.consignee_id)
         self.assertEquals(self.so.picking_ids.origin_address_id,
                           self.so.company_id.partner_id)
         self.assertEquals(self.so.picking_ids.delivery_address_id,
+                          self.so.partner_shipping_id)
+        self.assertEquals(self.so.picking_ids.partner_id,
                           self.so.partner_id)
