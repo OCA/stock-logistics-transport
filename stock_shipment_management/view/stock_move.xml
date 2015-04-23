@@ -17,6 +17,7 @@
           <field name="ship_etd"/>
           <field name="ship_eta"/>
           <field name="ship_carrier_tracking_ref"/>
+          <field name="ship_partner_id"/>
           <field name="ship_from_address_id"/>
           <field name="ship_to_address_id"/>
           <field name="ship_consignee_id"/>
@@ -50,6 +51,7 @@
             <field name="picking_id"/>
             <field name="ship_carrier_id"/>
             <field name="ship_consignee_id"/>
+            <field name="ship_partner_id"/>
             <field name="ship_from_address_id"/>
             <field name="ship_to_address_id"/>
             <group expand="0" string="Group By">

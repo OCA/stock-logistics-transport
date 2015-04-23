@@ -42,6 +42,13 @@ class StockMove(models.Model):
         store=True
     )
 
+    ship_partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        compute='_get_ship_partner_id',
+        string='Partner',
+        readonly=True,
+        store=True,
+    )
     ship_carrier_id = fields.Many2one(
         related='departure_shipment_id.carrier_id',
         readonly=True,
@@ -88,6 +95,17 @@ class StockMove(models.Model):
         string='ETA',
         store=True
     )
+
+    @api.one
+    @api.depends('picking_id.sale_id',
+                 'purchase_line_id.order_id')
+    def _get_ship_partner_id(self):
+        partner = False
+        if self.picking_id.sale_id:
+            partner = self.picking_id.sale_id.partner_id
+        elif self.purchase_line_id.order_id.partner_id:
+            partner = self.purchase_line_id.order_id.partner_id
+        self.ship_partner_id = partner
 
     @api.multi
     def write(self, values):
