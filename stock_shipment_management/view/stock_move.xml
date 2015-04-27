@@ -56,6 +56,7 @@
             <field name="ship_to_address_id"/>
             <group expand="0" string="Group By">
                 <filter string="Shipment Plan" name="groupby_shipment_plan" domain="[]"  context="{'group_by':'departure_shipment_id'}"/>
+                <filter string="Source Document" name="groupby_proc_group" domain="[]"  context="{'group_by':'group_id'}"/>
                 <filter string="Picking" name="groupby_picking_id" domain="[]"  context="{'group_by':'picking_id'}"/>
                 <filter string="Shipping Consignee" name="groupby_ship_consignee" domain="[]" context="{'group_by':'ship_consignee_id'}"/>
                 <filter string="Product" name="by_product" domain="[]"  context="{'group_by':'product_id'}"/>
