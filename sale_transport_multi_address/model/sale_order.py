@@ -62,6 +62,7 @@ class SaleOrder(models.Model):
         'res.partner',
         string='Consignee',
         states=LO_STATES,
+        domain=[('is_consignee', '=', True)],
         help="The person to whom the shipment is to be delivered.")
 
     @api.model

@@ -27,6 +27,7 @@ class PurchaseOrder(models.Model):
         'Origin Address')
     consignee_id = fields.Many2one(
         'res.partner', 'Consignee',
+        domain=[('is_consignee', '=', True)],
         help="The person to whom the shipment is to be delivered.")
 
     @api.onchange('dest_address_id')
