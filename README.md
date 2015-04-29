@@ -17,3 +17,10 @@ Please don't hesitate to suggest one of your module to this project. Also, you m
  - https://github.com/OCA/stock-logistics-barcode
  - https://github.com/OCA/stock-logistics-warehouse
  - https://github.com/OCA/stock-logistics-workflow
+
+
+## Porting to v8
+
++ stock_internal_transfer / stock_internal_transfer_transit:
+Please check `stock_route_transit` before porting one of these modules to Odoo v8
+
