@@ -28,8 +28,8 @@ Wizard to simplify creation of internal transfers between stock locations.
 Creates stock moves and pickings to transfer selected goods between two
 stock locations.
 """,
-    'author': 'initOS GmbH & Co. KG',
-    'website': 'http://www.initos.com, Odoo Community Association (OCA)',
+    'author': 'initOS GmbH & Co. KG, Odoo Community Association (OCA)',
+    'website': 'http://www.initos.com',
     'depends': [
         'stock',
     ],
