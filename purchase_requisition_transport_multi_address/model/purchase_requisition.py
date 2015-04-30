@@ -31,6 +31,7 @@ class PurchaseRequisition(models.Model):
     consignee_id = fields.Many2one(
         'res.partner',
         'Consignee',
+        domain=[('is_consignee', '=', True)],
         help="The person to whom the shipment is to be delivered.")
 
     @api.model
