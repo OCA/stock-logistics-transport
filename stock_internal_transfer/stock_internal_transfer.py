@@ -59,10 +59,10 @@ class StockInternalTransfer(orm.TransientModel):
     _columns = {
         'location_id': fields.many2one(
             'stock.location', string="Location", required=True,
-            ondelete='CASCADE', domain=[('usage', '<>', 'view')]),
+            ondelete='CASCADE', domain=[('usage', '!=', 'view')]),
         'location_dest_id': fields.many2one(
             'stock.location', string="Dest. Location", required=True,
-            ondelete='CASCADE', domain=[('usage', '<>', 'view')]),
+            ondelete='CASCADE', domain=[('usage', '!=', 'view')]),
         'line_ids': fields.one2many(
             'stock.internal.transfer.line', 'wizard_id', 'Move Lines'),
         'mode': fields.selection(
