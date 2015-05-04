@@ -104,8 +104,8 @@ class ShipmentPlan(models.Model):
         'res.partner',
         'Consignee',
         readonly=True,  # updated by wizard
-        states={'draft': [('readonly', False)]},
         track_visibility='onchange',
+        domain=[('is_consignee', '=', True)],
     )
     carrier_tracking_ref = fields.Char(
         'Tracking Ref.',
