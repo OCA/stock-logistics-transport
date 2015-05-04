@@ -13,7 +13,7 @@
                 states="draft"
                 class="oe_highlight"/>
             <button name="button_action_transit"
-                string="Sent to transit"
+                string="Send to transit"
                 states="confirmed"
                 class="oe_highlight"
                 type="object"/>

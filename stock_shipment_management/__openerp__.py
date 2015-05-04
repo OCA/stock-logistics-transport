@@ -18,7 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #
-{"name": "Shipment Management",
+{"name": "Shipment Management (Consignment)",
  "version": "1.0",
  "author": "Camptocamp,Odoo Community Association (OCA)",
  "category": "Transportation",
