@@ -49,8 +49,20 @@
               <group>
                 <field name="user_id"/>
                 <field name="from_address_id"/>
-                <field name="to_address_id"/>
-                <field name="consignee_id"/>
+                <label for="to_address_id"/>
+                <div>
+                  <field name="to_address_id" class="oe_inline"/>
+                  <button name="%(action_view_change_shipment_to_address)d" string="⇒ Update"
+                      type="action"
+                      class="oe_link"/>
+                </div>
+                <label for="consignee_id"/>
+                <div>
+                  <field name="consignee_id" class="oe_inline"/>
+                  <button name="%(action_view_change_shipment_consignee)d" string="⇒ Update"
+                      type="action"
+                      class="oe_link"/>
+                </div>
               </group>
               <group>
                 <field name="transport_mode_id" widget="selection"/>

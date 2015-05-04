@@ -96,15 +96,17 @@ class ShipmentPlan(models.Model):
     to_address_id = fields.Many2one(
         'res.partner',
         'To Address',
-        readonly=True,
+        readonly=True,  # updated by wizard
         states={'draft': [('readonly', False)]},
+        track_visibility='onchange',
         required=True,
     )
     consignee_id = fields.Many2one(
         'res.partner',
         'Consignee',
-        readonly=True,
+        readonly=True,  # updated by wizard
         states={'draft': [('readonly', False)]},
+        track_visibility='onchange',
     )
     carrier_tracking_ref = fields.Char(
         'Tracking Ref.',

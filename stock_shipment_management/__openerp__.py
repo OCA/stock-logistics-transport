@@ -19,7 +19,7 @@
 #
 #
 {"name": "Shipment Management",
- "version": "0.1.1",
+ "version": "1.0",
  "author": "Camptocamp,Odoo Community Association (OCA)",
  "category": "Transportation",
  "license": 'AGPL-3',
@@ -36,8 +36,10 @@
  "data": ["data/shipment_plan_sequence.xml",
           "wizard/shipment_carrier_setter_view.xml",
           "wizard/shipment_carrier_tracking_ref_setter_view.xml",
+          "wizard/shipment_consignee_setter_view.xml",
           "wizard/shipment_etd_setter_view.xml",
           "wizard/shipment_eta_setter_view.xml",
+          "wizard/shipment_to_address_setter_view.xml",
           "wizard/create_shipment_view.xml",
           "wizard/shipment_transit_confirm_view.xml",
           "view/menu.xml",

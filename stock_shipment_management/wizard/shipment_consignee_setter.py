@@ -18,12 +18,27 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #
-from . import value_setter
-from . import shipment_carrier_setter
-from . import shipment_carrier_tracking_ref_setter
-from . import shipment_consignee_setter
-from . import shipment_etd_setter
-from . import shipment_eta_setter
-from . import shipment_to_address_setter
-from . import create_shipment
-from . import shipment_transit_confirm
+from openerp import models, fields, api
+
+
+class ConsigneeSetter(models.TransientModel):
+    _name = "shipment.consignee.setter"
+    _inherit = "shipment.value.setter"
+
+    consignee_id = fields.Many2one(
+        'res.partner',
+        'Consignee',
+        help="Shipment consignee"
+    )
+
+    @api.multi
+    def set_value(self):
+        """ Changes the Shipment Consignee and update departure and arrival
+        pickings """
+        self.ensure_one()
+        self.shipment_id.consignee_id = self.consignee_id
+        pickings = self.shipment_id.departure_picking_ids
+        pickings |= self.shipment_id.arrival_picking_ids
+        to_write = pickings.filtered(
+            lambda r: r.state not in ('done', 'cancel'))
+        to_write.write({'consignee_id': self.consignee_id.id})

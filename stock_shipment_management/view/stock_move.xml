@@ -10,8 +10,6 @@
           <field name="product_id"/>
           <field name="product_uom_qty"/>
           <field name="product_uom"  string="Unit of Measure" groups="product.group_uom"/>
-          <field name="origin" string="Origin"/>
-          <field name="product_packaging" domain="[('product_tmpl_id','=',product_id)]" groups="product.group_stock_packaging"/>
           <field name="group_id"/>
           <field name="weight"/>
           <field name="product_volume"/>
@@ -19,13 +17,14 @@
           <field name="ship_etd"/>
           <field name="ship_eta"/>
           <field name="ship_carrier_tracking_ref"/>
+          <field name="ship_partner_id"/>
           <field name="ship_from_address_id"/>
           <field name="ship_to_address_id"/>
           <field name="ship_consignee_id"/>
           <field name="ship_transport_mode_id"/>
           <field name="ship_state"/>
+          <field name="origin" invisible="1"/>
           <field name="picking_id" invisible="1"/>
-          <field name="restrict_lot_id" invisible="1"/>
           <field name="ship_carrier_id" invisible="1"/>
           <field name="date_expected" invisible="1"/>
           <field name="state" invisible="1"/>
@@ -47,23 +46,20 @@
             <filter string="In Transit" name="ship_in_transit" domain="[('ship_state', '=', 'in_transit')]"/>
             <filter string="Done" name="ship_done" domain="[('ship_state', '=', 'done')]"/>
             <separator/>
-            <field name="restrict_lot_id"/>
             <field name="product_id"/>
             <field name="departure_shipment_id"/>
-            <field name="product_packaging"/>
             <field name="picking_id"/>
             <field name="ship_carrier_id"/>
             <field name="ship_consignee_id"/>
+            <field name="ship_partner_id"/>
             <field name="ship_from_address_id"/>
             <field name="ship_to_address_id"/>
             <group expand="0" string="Group By">
-                <filter string="Origin" name="origin" domain="[]"  context="{'group_by':'origin'}"/>
                 <filter string="Shipment Plan" name="groupby_shipment_plan" domain="[]"  context="{'group_by':'departure_shipment_id'}"/>
-                <filter string="Package" name="groupby_package" domain="[]"  context="{'group_by':'product_packaging'}"/>
+                <filter string="Source Document" name="groupby_proc_group" domain="[]"  context="{'group_by':'group_id'}"/>
                 <filter string="Picking" name="groupby_picking_id" domain="[]"  context="{'group_by':'picking_id'}"/>
                 <filter string="Shipping Consignee" name="groupby_ship_consignee" domain="[]" context="{'group_by':'ship_consignee_id'}"/>
                 <filter string="Product" name="by_product" domain="[]"  context="{'group_by':'product_id'}"/>
-                <filter string="Lot" name="groupby_lot" domain="[]"  context="{'group_by':'restrict_lot_id'}"/>
                 <filter string="Shipping Carrier" name="groupby_ship_carrier" domain="[]" context="{'group_by':'ship_carrier_id'}"/>
                 <filter string="Scheduled Date" name="groupby_date" domain="[]" context="{'group_by':'date_expected'}"/>
                 <filter string="Shipping state" name="groupby_ship_state" domain="[]" context="{'group_by': 'ship_state'}"/>
