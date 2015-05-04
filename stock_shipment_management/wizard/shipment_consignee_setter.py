@@ -35,8 +35,8 @@ class ConsigneeSetter(models.TransientModel):
     def set_value(self):
         """ Changes the Shipment Consignee and update departure and arrival
         pickings """
-        for setter in self:
-            self.shipment_id.consignee_id = self.consignee_id
+        self.ensure_one()
+        self.shipment_id.consignee_id = self.consignee_id
         pickings = self.shipment_id.departure_picking_ids
         pickings |= self.shipment_id.arrival_picking_ids
         to_write = pickings.filtered(

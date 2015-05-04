@@ -35,8 +35,8 @@ class ToAddressSetter(models.TransientModel):
     def set_value(self):
         """ Changes the Shipment To Address and update departure and arrival
         pickings """
-        for setter in self:
-            self.shipment_id.to_address_id = self.to_address_id
+        self.ensure_one()
+        self.shipment_id.to_address_id = self.to_address_id
         pickings = self.shipment_id.departure_picking_ids
         pickings |= self.shipment_id.arrival_picking_ids
         to_write = pickings.filtered(
