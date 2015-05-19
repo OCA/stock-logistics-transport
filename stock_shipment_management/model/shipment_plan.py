@@ -182,14 +182,14 @@ class ShipmentPlan(models.Model):
         if (self.initial_etd and self.initial_eta and
                 self.initial_etd > self.initial_eta):
             raise exceptions.ValidationError(
-                _('Initial ETD cannot be set after initial ETD.'))
+                _('Initial ETD cannot be set after initial ETA.'))
 
     @api.one
     @api.constrains('etd', 'eta')
     def _check_estimated_times(self):
         if self.etd and self.eta and self.etd > self.eta:
             raise exceptions.ValidationError(
-                _('ETD cannot be set after ETD.'))
+                _('ETD cannot be set after ETA.'))
 
     @api.multi
     def _get_related_picking(self, direction):
