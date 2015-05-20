@@ -77,6 +77,14 @@ class ShipmentPlanCreator(models.TransientModel):
         """
         data = {}
         from_addresses = moves.mapped('ship_from_address_id')
+        if not from_addresses:
+            dropshipping = self.env.ref(
+                'stock_dropshipping.picking_type_dropship')
+            pickings = moves.mapped('picking_id')
+            picking_type = pickings.mapped('picking_type_id')
+            if len(picking_type) == 1 and picking_type == dropshipping:
+                from_addresses = pickings.mapped('partner_id')
+
         if len(from_addresses) > 1:
             raise exceptions.Warning("Multiple From Address")
         to_addresses = moves.mapped('ship_to_address_id')
