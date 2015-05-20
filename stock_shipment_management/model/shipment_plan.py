@@ -89,7 +89,7 @@ class ShipmentPlan(models.Model):
     )
     from_address_id = fields.Many2one(
         'res.partner', 'From Address',
-        readonly=True, # You can't update the from address
+        readonly=True,  # You can't update the from address
         required=True,
     )
     to_address_id = fields.Many2one(
