@@ -3,10 +3,10 @@ Shipment plan management (Consignment)
 
 This module allows you to manage your transport.
 
-A shipment plan (consignment) represent a kind of "contract" with your carrier and contain
-the goods consigned together. It will show you show you transit status of your deliveries 
-or reception, help you monitor your goods in transit and provide an easy way of dealing
-the the dates of departure and arrival.
+A shipment plan (consignment) represents a kind of "contract" with your carrier and contains
+the goods consigned together. It will show you the transit status of your deliveries or receptions,
+help you monitor your goods in transit and provide an easy way of dealing with the dates of
+departure and arrival.
 
 Configuration
 =============
@@ -22,7 +22,7 @@ To configure this module, you need to configure your Warehouse to use Transit Lo
 
    * **Outgoing Shippings**: *Ship from stock to Transit location*
 
-You now have a new menu under *Warehouse/Shipment* to deal with your shipment plan,
+You now have a new menu under *Warehouse/Shipment* to deal with your shipment plan.
 
 Usage
 =====
@@ -39,36 +39,37 @@ To create shipment plan, you need to:
  * Select or Open some pickings/moves
  * Use **Add to a shipment** wizard
 
-There, you will be able to create a new shipment or add selected moves to an existing shipment. 
-Only moves from same source within same carrier can be bound together in a same shipment plan.
+There, you will be able to create a new shipment or add selected moves to an existing shipment.
+Only moves from the same source within same carrier can be bound together in a single shipment plan.
 
 Confirm and send a shipment:
 ----------------------------
 
-Once created the shipment plan must be confirm. At that stage, you'll able to load goods in the 
-consignment(by validating the departure pickings). 
+Once created the shipment plan must be confirmed. At that stage, you'll be able to load goods in
+the consignment (by validating the departure pickings).
 
-When the carrier comes and takes the consigned goods, the person in charge must click on 
+When the carrier comes and takes the consigned goods, the person in charge must click on
 "Send to transit". There the system will:
+
  * If all departure pickings have been validated, mark the shipment plan as "In transit"
- * If not all departure picking have been validated (e.g. all goods do not fit in the consignment),
-   the system will warn you and if you still sent the shipment plan, he will exclude the remaining
+ * If not all departure pickings have been validated (e.g. all goods do not fit in the consignment),
+   the system will warn you and if you still send the shipment plan, it will exclude the remaining
    goods so you can plan them in another shipment.
 
-Reception a shipment:
----------------------
+Receive a shipment:
+-------------------
 
-At the reception, you'll be asked to validate all arrival pickings. All related moves must be 
-receptioned to end the shipment plan workflow. In case not everything is here or you have damaged
+Upon reception, you'll be asked to validate all arrival pickings. All related moves must be
+received to end the shipment plan workflow. In case not everything is here or you have damaged
 goods, send them in a proper location (e.g lost in transit), so the shipment plan will be closed.
 
 Monitor you goods in transit:
 -----------------------------
 
-From the menu *Warehouse/Shipment/In Transit* you can monitor what's in transit, what will arrive 
+From the menu *Warehouse/Shipment/In Transit* you can monitor what's in transit, what will arrive
 when, etc..
 
-On every shipment plan you can update the following informations using the relevant "Update" 
+On every shipment plan you can update the following information using the relevant "Update"
 link on the form:
 
  * To Address
@@ -77,7 +78,7 @@ link on the form:
  * Tracking Ref.
  * ETD and ETA
 
- Those informations will be update on all related pickings and loged in the chatter.
+ This information will be updated on all related pickings and logged in the chatter.
 
 Known issues / Roadmap
 ======================
@@ -92,7 +93,7 @@ Contributors
 ------------
 
 * Yannick Vaucher <yannick.vaucher@camptocamp.com>
-* Joel Grand-Guillaume <joel.grandguillaume@camptocamp.com>
+* Joël Grand-Guillaume <joel.grandguillaume@camptocamp.com>
 
 Maintainer
 ----------
