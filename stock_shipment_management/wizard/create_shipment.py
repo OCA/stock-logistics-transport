@@ -215,8 +215,20 @@ class ShipmentPlanCreator(models.TransientModel):
         recs.write({'departure_shipment_id': self.shipment_id.id})
         dest_moves = recs.mapped('move_dest_id')
         dest_moves.write({'arrival_shipment_id': self.shipment_id.id})
+        return self._open_shipment(self.shipment_id)
 
-        return {'type': 'ir.actions.act_window_close'}
+    @api.model
+    def _open_shipment(self, shipment_id):
+        return {
+            'name': _('Shipment Plan'),
+            'view_mode': 'form',
+            'res_model': 'shipment.plan',
+            'res_id': shipment_id.id,
+            'target': 'current',
+            'view_id': False,
+            'context': {},
+            'type': 'ir.actions.act_window',
+        }
 
     @api.onchange('shipment_id')
     def onchange_shipment(self):

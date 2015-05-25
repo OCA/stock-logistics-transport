@@ -89,8 +89,7 @@ class ShipmentPlan(models.Model):
     )
     from_address_id = fields.Many2one(
         'res.partner', 'From Address',
-        readonly=True,
-        states={'draft': [('readonly', False)]},
+        readonly=True,  # You can't update the from address
         required=True,
     )
     to_address_id = fields.Many2one(
@@ -105,8 +104,8 @@ class ShipmentPlan(models.Model):
         'res.partner',
         'Consignee',
         readonly=True,  # updated by wizard
-        states={'draft': [('readonly', False)]},
         track_visibility='onchange',
+        domain=[('is_consignee', '=', True)],
     )
     carrier_tracking_ref = fields.Char(
         'Tracking Ref.',
@@ -183,14 +182,14 @@ class ShipmentPlan(models.Model):
         if (self.initial_etd and self.initial_eta and
                 self.initial_etd > self.initial_eta):
             raise exceptions.ValidationError(
-                _('Initial ETD cannot be set after initial ETD.'))
+                _('Initial ETD cannot be set after initial ETA.'))
 
     @api.one
     @api.constrains('etd', 'eta')
     def _check_estimated_times(self):
         if self.etd and self.eta and self.etd > self.eta:
             raise exceptions.ValidationError(
-                _('ETD cannot be set after ETD.'))
+                _('ETD cannot be set after ETA.'))
 
     @api.multi
     def _get_related_picking(self, direction):
