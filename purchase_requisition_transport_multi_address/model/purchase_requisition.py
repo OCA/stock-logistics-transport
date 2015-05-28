@@ -38,6 +38,8 @@ class PurchaseRequisition(models.Model):
     def _prepare_purchase_order(self, requisition, supplier):
         values = super(PurchaseRequisition, self
                        )._prepare_purchase_order(requisition, supplier)
+
+        values['origin_address_id'] = values.get('partner_id')
         values['dest_address_id'] = requisition.dest_address_id.id
         values['consignee_id'] = requisition.consignee_id.id
         return values
