@@ -82,6 +82,7 @@ class PurchaseOrder(models.Model):
             if pick_type.default_location_dest_id:
                 self.location_id = pick_type.default_location_dest_id
                 self.related_location_id = pick_type.default_location_dest_id
+                self.related_usage = pick_type.default_location_dest_id.usage
 
     @api.multi
     def onchange_partner_id(self, partner_id):
