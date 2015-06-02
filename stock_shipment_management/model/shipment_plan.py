@@ -96,7 +96,6 @@ class ShipmentPlan(models.Model):
         'res.partner',
         'To Address',
         readonly=True,  # updated by wizard
-        states={'draft': [('readonly', False)]},
         track_visibility='onchange',
         required=True,
     )
