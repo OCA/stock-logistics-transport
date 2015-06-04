@@ -1,3 +1,6 @@
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+    :alt: License: AGPL-3
+
 Transport Information
 =====================
 This simple module is an extraction of objects related to transportation of goods that are needed
