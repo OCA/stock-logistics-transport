@@ -42,7 +42,7 @@
 
             <filter string="Draft" name="ship_draft" domain="[('ship_state', '=', 'draft')]"/>
             <filter string="To Plan" name="ship_to_plan" domain="[('ship_state', '=', False), ('state', 'not in', ('done', 'cancel'))]"/>
-            <filter string="Planned" name="ship_planned" domain="[('ship_state', '=', 'confirm')]"/>
+            <filter string="Planned" name="ship_planned" domain="[('ship_state', '=', 'confirmed')]"/>
             <filter string="In Transit" name="ship_in_transit" domain="[('ship_state', '=', 'in_transit')]"/>
             <filter string="Done" name="ship_done" domain="[('ship_state', '=', 'done')]"/>
             <separator/>
