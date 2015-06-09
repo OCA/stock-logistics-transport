@@ -28,6 +28,7 @@ class ConsigneeSetter(models.TransientModel):
     consignee_id = fields.Many2one(
         'res.partner',
         'Consignee',
+        domain=[('is_consignee', '=', True)],
         help="Shipment consignee"
     )
 
