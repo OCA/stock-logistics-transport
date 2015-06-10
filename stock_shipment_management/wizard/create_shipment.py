@@ -33,8 +33,7 @@ class ShipmentPlanCreator(models.TransientModel):
     shipment_id = fields.Many2one(
         'shipment.plan', 'Shipment',
         domain="[('state', '=', 'draft'),"
-               " ('from_address_id', '=', from_address_id),"
-               " ('to_address_id', '=', to_address_id)]",
+               " ('from_address_id', '=', from_address_id)]",
         help="Shipment to which moves will be added.\nOnly shipment in draft "
              "can be extended.",
     )
@@ -60,7 +59,11 @@ class ShipmentPlanCreator(models.TransientModel):
     to_address_id = fields.Many2one(
         'res.partner',
         'To Address',
-        readonly=True,
+        domain="[('id', 'in', allowed_to_address_ids[0][2])]",
+    )
+    allowed_to_address_ids = fields.Many2many(
+        compute=lambda rec: True,
+        comodel_name='res.partner',
     )
     consignee_id = fields.Many2one(
         'res.partner',
@@ -82,7 +85,8 @@ class ShipmentPlanCreator(models.TransientModel):
         to_addresses = moves.mapped('ship_to_address_id')
         data.update(
             from_address_id=from_addresses.id,
-            to_address_id=to_addresses and to_addresses[0].id
+            to_address_id=to_addresses and to_addresses[0].id,
+            allowed_to_address_ids=to_addresses.ids if to_addresses else False
         )
 
         etds = set(m.date_expected for m in moves)

@@ -5,13 +5,14 @@
       <field name="name">shipment_plan_create_form</field>
       <field name="model">shipment.plan.creator</field>
       <field name="arch" type="xml">
-        <form string="Shipment plan creation" version="7.0">
+        <form string="Shipment plan creation">
 
           Create a new Shipment Plan using following data taken from selected moves:
           <group>
             <group>
               <field name="from_address_id"/>
-              <field name="to_address_id"/>
+              <field name="to_address_id" attrs="{'readonly': [('shipment_id','!=',False)]}" widget="selection"/>
+              <field name="allowed_to_address_ids" invisible="1"/>
               <field name="initial_etd" attrs="{'readonly': [('shipment_id','!=',False)]}"/>
               <field name="initial_eta" attrs="{'readonly': [('shipment_id','!=',False)]}"/>
               <field name="consignee_id" attrs="{'readonly': [('shipment_id','!=',False)]}"/>
