@@ -219,6 +219,12 @@ class ShipmentPlanCreator(models.TransientModel):
         recs.write({'departure_shipment_id': self.shipment_id.id})
         dest_moves = recs.mapped('move_dest_id')
         dest_moves.write({'arrival_shipment_id': self.shipment_id.id})
+
+        arrival_pickings = dest_moves.mapped('picking_id')
+
+        # update data of pickings and moves linked to that shipment plan
+        self.shipment_id.update_arrival_pickings(arrival_pickings)
+
         return self._open_shipment(self.shipment_id)
 
     @api.model

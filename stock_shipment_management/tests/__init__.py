@@ -19,3 +19,4 @@
 #
 #
 from . import test_shipment_creation
+from . import test_add_to_shipment
