@@ -11,7 +11,7 @@
             <p>Following departure moves are not done and will be removed from shipment.
             Do you want to exclude those moves from shipment?</p>
             <field name="undone_move_ids" nolabel="1" colspan="4">
-              <tree string="Undone moves">
+              <tree string="Undone moves" colors="red:True">
                 <field name="product_id"/>
                 <field name="product_uom_qty"/>
                 <field name="product_uom"  string="Unit of Measure" groups="product.group_uom"/>
