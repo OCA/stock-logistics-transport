@@ -110,7 +110,7 @@ class StockMove(models.Model):
     @api.multi
     def write(self, values):
         res = super(StockMove, self).write(values)
-        if values.get('state', '') == 'done':
+        if values.get('state', '') in ('done', 'cancel'):
             for ship in self.mapped('arrival_shipment_id'):
                 if ship.state == 'in_transit':
                     ship.signal_workflow('transit_end')
