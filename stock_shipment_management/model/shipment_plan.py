@@ -265,20 +265,29 @@ class ShipmentPlan(models.Model):
         return True
 
     @api.multi
+    def _get_confirmed_departure_moves(self):
+        return [m.state == 'done' for m
+                in self.mapped('departure_move_ids')]
+
+    @api.multi
     def is_departed(self):
         """
         Check if all departure moves are done
         """
-        return all(m.state == 'done' for m
-                   in self.mapped('departure_move_ids'))
+        return all(self._get_confirmed_departure_moves())
+
+    @api.multi
+    def has_done_moves(self):
+        """
+        Check if at least one departure move is done
+        """
+        return any(self._get_confirmed_departure_moves())
 
     @api.multi
     def action_cancel(self):
-        has_done_moves = any(m for m in self.mapped('departure_move_ids')
-                             if m.state == 'done')
-        if has_done_moves:
+        if self.has_done_moves():
             raise exceptions.Warning(
-                "You cannot cancel a shipment plan with done moves")
+                _("You cannot cancel a shipment plan with done moves"))
         # Free all related moves
         self.departure_move_ids.write({'departure_shipment_id': False})
         self.arrival_move_ids.write({'arrival_shipment_id': False})
@@ -300,6 +309,10 @@ class ShipmentPlan(models.Model):
 
     @api.multi
     def button_action_transit(self):
+        if not self.has_done_moves():
+            raise exceptions.Warning(
+                _("You cannot send to transit a shipment plan without any "
+                  "done moves"))
         if not self.is_departed():
             return self._popup_to_transit_confirm()
         return self.signal_workflow('transit_start')
