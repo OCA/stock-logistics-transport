@@ -82,7 +82,7 @@ class ShipmentPlanCreator(models.TransientModel):
         to_addresses = moves.mapped('ship_to_address_id')
         data.update(
             from_address_id=from_addresses.id,
-            to_address_id=to_addresses and to_addresses[0].id
+            to_address_id=to_addresses[:1].id
         )
 
         etds = set(m.date_expected for m in moves)
