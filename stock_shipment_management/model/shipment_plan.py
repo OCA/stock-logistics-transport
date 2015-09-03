@@ -369,3 +369,17 @@ class ShipmentPlan(models.Model):
     def _arrival_picking_count(self):
         self.ensure_one()
         self.arrival_picking_count = len(self.arrival_picking_ids)
+
+    @api.multi
+    def update_arrival_pickings(self, pickings):
+        """
+        Update pickings to match definition on the shipment plan
+        Ensure following data is updated:
+        - delivery_address_id
+        """
+        data = {}
+        to_addresses = pickings.mapped('delivery_address_id')
+        if len(to_addresses) > 1 or to_addresses != self.to_address_id:
+            data['delivery_address_id'] = self.to_address_id.id
+        if data:
+            pickings.write(data)
