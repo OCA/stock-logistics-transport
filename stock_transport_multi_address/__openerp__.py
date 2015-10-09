@@ -21,7 +21,7 @@
 
 {'name': 'Stock - Transport Addresses',
  'summary': 'Manage origin / destination / consignee addresses on pickings',
- 'version': '1.0',
+ 'version': '8.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',

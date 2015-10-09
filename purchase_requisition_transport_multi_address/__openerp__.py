@@ -22,7 +22,7 @@
 {'name': 'Purchase Requisition - Transport Addresses',
  'summary': 'Manage origin / destination / consignee addresses '
             'on purchase requisitions',
- 'version': '1.0',
+ 'version': '8.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
