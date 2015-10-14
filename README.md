@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/OCA/stock-logistics-transport.svg?branch=8.0)](https://travis-ci.org/OCA/stock-logistics-transport)
-[![Coverage Status](https://img.shields.io/coveralls/OCA/stock-logistics-transport.svg)](https://coveralls.io/r/OCA/stock-logistics-transport?branch=8.0)
+[![Build Status](https://travis-ci.org/OCA/stock-logistics-transport.svg?branch=9.0)](https://travis-ci.org/OCA/stock-logistics-transport)
+[![Coverage Status](https://img.shields.io/coveralls/OCA/stock-logistics-transport.svg)](https://coveralls.io/r/OCA/stock-logistics-transport?branch=9.0)
 
 Odoo Stock Logistics Transport
 ==============================
@@ -19,16 +19,4 @@ Please don't hesitate to suggest one of your module to this project. Also, you m
  - https://github.com/OCA/stock-logistics-workflow
 
 [//]: # (addons)
-Available addons
-----------------
-addon | version | summary
---- | --- | ---
-[purchase_requisition_transport_multi_address](purchase_requisition_transport_multi_address/) | 8.0.1.0.0 | Manage origin / destination / consignee addresses on purchase requisitions
-[purchase_transport_multi_address](purchase_transport_multi_address/) | 8.0.1.0.0 | Manage origin / destination / consignee addresses on purchases
-[sale_transport_multi_address](sale_transport_multi_address/) | 8.0.1.0.0 | Manage origin / destination / consignee addresses on sales
-[stock_route_transit](stock_route_transit/) | 8.0.0.2.0 | Stock Routes Transit
-[stock_shipment_management](stock_shipment_management/) | 8.0.1.0.2 | Shipment Management (Consignment)
-[stock_transport_multi_address](stock_transport_multi_address/) | 8.0.1.0.0 | Manage origin / destination / consignee addresses on pickings
-[transport_information](transport_information/) | 8.0.0.1.0 | Transport Information
-
 [//]: # (end addons)
