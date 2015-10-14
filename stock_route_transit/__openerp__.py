@@ -28,7 +28,7 @@
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Generic Modules/Stock",
-    "installable": True,
+    'installable': False,
     "data": ["view/stock_warehouse.xml",
              "data/stock_location.xml",
              "security/groups.xml",

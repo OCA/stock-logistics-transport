@@ -32,5 +32,5 @@
           "view/transport_vehicle.xml",
           "security/ir.model.access.csv",
           ],
- "installable": True,
+ 'installable': False,
  }

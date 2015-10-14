@@ -36,5 +36,5 @@
  'data': ['view/purchase_requisition.xml',
           ],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  }

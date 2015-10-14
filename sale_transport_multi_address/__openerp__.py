@@ -37,5 +37,5 @@
           'view/report_saleorder.xml',
           ],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  }

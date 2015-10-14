@@ -41,5 +41,5 @@
           'test/test_propagate_address.yml',
           ],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  }

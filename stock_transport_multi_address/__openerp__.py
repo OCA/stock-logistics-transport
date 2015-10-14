@@ -36,5 +36,5 @@
           'view/res_partner.xml',
           ],
  'auto_install': False,
- 'installable': True,
+ 'installable': False,
  }
