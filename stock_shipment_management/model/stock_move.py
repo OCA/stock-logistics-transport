@@ -19,7 +19,7 @@
 #
 #
 import logging
-from openerp import models, fields, api
+from openerp import models, fields, api, _, exceptions
 
 _logger = logging.getLogger(__name__)
 
@@ -108,9 +108,33 @@ class StockMove(models.Model):
         self.ship_partner_id = partner
 
     @api.multi
+    def action_cancel(self):
+        """ Forbid to cancel a shipment arrival move if it's departure move
+        is not canceled.
+
+        As dest_move are canceled before origin moves, we check that
+
+        """
+        cancel_list = self.env.context.get('cancel_list', [])
+        for move in self:
+            if (
+                move.arrival_shipment_id and
+                not (move.move_orig_ids.state == 'cancel' or
+                     set(move.move_orig_ids.ids).issubset(set(cancel_list))
+                     )
+            ):
+                raise exceptions.Warning(
+                    _('You cannot cancel a shipment arrival stock move that '
+                      'depends on an uncancelled shipment departure stock '
+                      'move.'))
+            cancel_list.append(move.id)
+        return super(StockMove, self.with_context(cancel_list=cancel_list)
+                     ).action_cancel()
+
+    @api.multi
     def write(self, values):
         res = super(StockMove, self).write(values)
-        if values.get('state', '') == 'done':
+        if values.get('state', '') in ('done', 'cancel'):
             for ship in self.mapped('arrival_shipment_id'):
                 if ship.state == 'in_transit':
                     ship.signal_workflow('transit_end')

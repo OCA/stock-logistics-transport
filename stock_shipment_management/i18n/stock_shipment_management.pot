@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-11 11:34+0000\n"
-"PO-Revision-Date: 2015-06-11 11:34+0000\n"
+"POT-Creation-Date: 2015-07-16 09:17+0000\n"
+"PO-Revision-Date: 2015-07-16 09:17+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -808,6 +808,11 @@ msgstr ""
 #. module: stock_shipment_management
 #: field:shipment.plan,weight:0
 msgid "Weight"
+msgstr ""
+
+#: code:addons/stock_shipment_management/model/stock_move.py:127
+#, python-format
+msgid "You cannot cancel a shipment arrival stock move that depends on an uncancelled shipment departure stock move."
 msgstr ""
 
 #. module: stock_shipment_management
