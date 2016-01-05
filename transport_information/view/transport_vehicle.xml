@@ -33,7 +33,7 @@
 
     <menuitem
       name="Vehicles"
-      parent="purchase.menu_purchase_config_purchase"
+      parent="purchase.menu_purchase_config"
       action="action_transport_vehicle"
       id="menu_transport_vehicle"/>
 

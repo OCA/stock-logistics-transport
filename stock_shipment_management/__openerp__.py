@@ -19,7 +19,7 @@
 #
 #
 {"name": "Shipment Management (Consignment)",
- "version": "8.0.1.0.2",
+ "version": "9.0.1.0.2",
  "author": "Camptocamp,Odoo Community Association (OCA)",
  "category": "Transportation",
  "license": 'AGPL-3',
@@ -52,5 +52,4 @@
           ],
  "auto_install": False,
  "test": [],
- 'installable': False,
  }

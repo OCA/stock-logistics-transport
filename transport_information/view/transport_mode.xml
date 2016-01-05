@@ -33,7 +33,7 @@
 
     <menuitem
       name="Transport Modes"
-      parent="purchase.menu_purchase_config_purchase"
+      parent="purchase.menu_purchase_config"
       action="action_transport_mode"
       id="menu_transport_mode"/>
 

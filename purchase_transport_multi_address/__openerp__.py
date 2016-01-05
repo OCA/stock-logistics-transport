@@ -21,7 +21,7 @@
 
 {'name': 'Purchase - Transport Addresses',
  'summary': 'Manage origin / destination / consignee addresses on purchases',
- 'version': '8.0.1.0.0',
+ 'version': '9.0.1.0.0',
  'author': "Camptocamp,Odoo Community Association (OCA)",
  'category': 'Warehouse',
  'license': 'AGPL-3',
@@ -41,5 +41,4 @@
           'test/test_propagate_address.yml',
           ],
  'auto_install': False,
- 'installable': False,
  }

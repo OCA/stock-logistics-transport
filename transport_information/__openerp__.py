@@ -21,7 +21,7 @@
 
 {"name": "Transport Information",
  "summary": "Transport Information",
- "version": "8.0.0.1.0",
+ "version": "9.0.0.1.0",
  "author": "Camptocamp,Odoo Community Association (OCA)",
  "category": "Purchase Management",
  "license": "AGPL-3",
@@ -32,5 +32,4 @@
           "view/transport_vehicle.xml",
           "security/ir.model.access.csv",
           ],
- 'installable': False,
  }
