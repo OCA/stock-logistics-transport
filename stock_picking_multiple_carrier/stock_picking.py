@@ -39,14 +39,18 @@ class StockPickingDelivery(models.Model):
 
 @api.model
 def _carrier_tracking_ref_display(self):
-    # use this function with the functional field "carrier_tracking_ref" in StockPicking class
-    # to show the carrier information in another module (in sale order for example)
+    # use this function with the functional field "carrier_tracking_ref"
+    # in StockPicking class
+    # to show the carrier information in another module
+    # (in sale order for example)
         pickings = self.browse()
-        deliveries = dict([(picking.id, picking.delivery_ids) for picking in pickings])
+        deliveries = dict([(picking.id, picking.delivery_ids)
+                           for picking in pickings])
         result = {}
         for record_id in pickings:
-            refs = map(lambda delivery: (delivery.carrier_id.name or '') + ': ' +
-                                        (delivery.carrier_tracking_ref or ''),
+            refs = map(lambda delivery:
+                       (delivery.carrier_id.name or '') + ': ' +
+                       (delivery.carrier_tracking_ref or ''),
                        deliveries[record_id])
             result[record_id] = ', '.join(refs)
         return result

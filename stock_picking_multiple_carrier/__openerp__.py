@@ -23,18 +23,24 @@
     "name": "Multiple Carriers",
     "version": "0.1",
     "depends": ["delivery",
-                 "stock",
-    ],
+                "stock",
+                ],
     'author': 'initOS GmbH',
     "category": "",
     "summary": "",
     'license': 'AGPL-3',
     "description": """
 Multiple carriers per picking.
+=======================================
+Each picking can have more than one Carrier
+the user can select the carrier type
+and assign a tracking number for it
     """,
     'data': ['security/ir.model.access.csv',
              'stock_picking_views.xml',
     ],
+    'images': [
+            ],
     'demo': [
     ],
     'test': [
