@@ -38,9 +38,8 @@ and assign a tracking number for it
     """,
     'data': ['security/ir.model.access.csv',
              'stock_picking_views.xml',
-    ],
-    'images': [
-            ],
+             ],
+    'images': [],
     'demo': [
     ],
     'test': [

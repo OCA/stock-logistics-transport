@@ -33,7 +33,7 @@ Migration - Multiple Carrier
  'author': "initOS GmbH",
  'license': 'AGPL-3',
  'data': ['trigger.xml',
- ],
+          ],
  'installable': True,
  'application': False,
  }
