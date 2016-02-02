@@ -22,7 +22,7 @@
 from openerp import models, api
 
 
-class stock_picking(models.Model):
+class StockPicking(models.Model):
 
     _inherit = 'stock.picking'
 
