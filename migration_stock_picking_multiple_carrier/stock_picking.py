@@ -36,4 +36,5 @@ class StockPicking(models.Model):
                             'carrier_tracking_ref':
                             picking.carrier_tracking_ref,
                             'picking_id': picking.id})
-        return delivery_ids
+            return delivery_ids
+        return 
