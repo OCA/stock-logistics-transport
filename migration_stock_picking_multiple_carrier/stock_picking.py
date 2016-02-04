@@ -33,6 +33,7 @@ class StockPicking(models.Model):
             if picking.carrier_tracking_ref:
                 self.env['stock.picking.delivery'].\
                     create({'carrier_id': picking.carrier_id.id,
-                            'carrier_tracking_ref': picking.carrier_tracking_ref,
+                            'carrier_tracking_ref':
+                            picking.carrier_tracking_ref,
                             'picking_id': picking.id})
         return
