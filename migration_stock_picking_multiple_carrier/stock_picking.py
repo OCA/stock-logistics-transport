@@ -31,9 +31,8 @@ class StockPicking(models.Model):
         pickings = self.search([])
         for picking in pickings:
             if picking.carrier_tracking_ref:
-                delivery_ids = self.env['stock.picking.delivery'].\
+                self.env['stock.picking.delivery'].\
                     create({'carrier_id': picking.carrier_id.id,
-                            'carrier_tracking_ref':
-                            picking.carrier_tracking_ref,
+                            'carrier_tracking_ref': picking.carrier_tracking_ref,
                             'picking_id': picking.id})
         return
