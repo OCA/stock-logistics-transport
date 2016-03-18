@@ -1,23 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Author: Rami Alwafaie
-#    Copyright 2015 initOS GmbH
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2016 initOS GmbH
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, api
 
@@ -28,7 +11,7 @@ class StockPicking(models.Model):
 
     @api.model
     def _carrier_migration(self):
-        pickings = self.search([])
+        pickings = self.search([('carrier_tracking_ref', '!=', False)])
         for picking in pickings:
             if picking.carrier_tracking_ref:
                 self.env['stock.picking.delivery'].\
@@ -36,4 +19,4 @@ class StockPicking(models.Model):
                             'carrier_tracking_ref':
                             picking.carrier_tracking_ref,
                             'picking_id': picking.id})
-        return
+        return super(StockPicking, self)._carrier_migration()
