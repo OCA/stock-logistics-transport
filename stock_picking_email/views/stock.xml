@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="stock_tracking_view_form" model="ir.ui.view">
+            <field name="name">stock_tracking_view_form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                 <xpath expr="//header/button[@string='Reverse Transfer']" position="after">
+                    <button name="send_tracking_email" string="Send Tracking Email" type="object"
+                            states="done" groups="base.group_user"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
