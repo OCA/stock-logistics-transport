@@ -22,7 +22,6 @@ class StockPicking(models.Model):
     @api.model
     def _carrier_migration(self):
         pickings = self.search([('carrier_tracking_ref', '!=', False)])
-        for picking in pickings:
-            if picking.carrier_tracking_ref:
+        if pickings:
                 self._get_dict()
         return
