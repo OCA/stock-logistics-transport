@@ -1,2 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import model
+# © 2015 Camptocamp SA - Alexandre Fayolle
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+from . import models
