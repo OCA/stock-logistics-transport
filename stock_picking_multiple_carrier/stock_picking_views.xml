@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <record id="view_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form.delivery</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Additional Info']" position="after">
+                    <page string="Tracking information">
+                        <field name="delivery_ids">
+                            <tree string="Tracking Information" editable="bottom">
+                                <field name="carrier_id"/>
+                                <field name="carrier_tracking_ref"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_picking_withcarrier_out_form" model="ir.ui.view">
+            <field name="name">stock.picking.out.form.delivery</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="delivery.view_picking_withcarrier_out_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='carrier_id']" position="replace">
+                    <field name="carrier_id" string="Default Carrier"/>
+                </xpath>
+                <xpath expr="//field[@name='carrier_tracking_ref']" position="replace"/>
+            </field>
+        </record>
+
+    </data>
+</openerp>
