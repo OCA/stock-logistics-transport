@@ -12,8 +12,6 @@
     'depends': [
         'stock',
     ],
-    'demo': [
-    ],
     'data': [
         'views/stock_location_views.xml',
     ],

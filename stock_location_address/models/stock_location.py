@@ -17,10 +17,18 @@ class StockLocation(models.Model):
         compute='_compute_real_address_id',
     )
 
+    def _get_parent_address(self):
+        if self.location_id and self.location_id.address_id:
+            return self.location_id.address_id
+        elif self.location_id:
+            return self.location_id._get_parent_address()
+        else:
+            return self.env['res.partner']
+
     @api.depends('address_id', 'location_id')
     def _compute_real_address_id(self):
         for record in self:
             if record.address_id:
                 record.real_address_id = record.address_id
             elif record.location_id:
-                record.real_address_id = record.location_id.real_address_id
+                record.real_address_id = record._get_parent_address()
