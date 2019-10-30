@@ -13,7 +13,7 @@ class StockLocation(models.Model):
     )
     real_address_id = fields.Many2one(
         comodel_name='res.partner',
-        string='Address',
+        string='Real Address',
         compute='_compute_real_address_id',
     )
 
