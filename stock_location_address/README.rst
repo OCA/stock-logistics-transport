@@ -14,11 +14,6 @@ Usage
 Go to 'Inventory > Master Data > Locations' and select an address for the
 location. If no address is selected, parent address will be used.
 
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/168/11.0
-
-
 Bug Tracker
 ===========
 
