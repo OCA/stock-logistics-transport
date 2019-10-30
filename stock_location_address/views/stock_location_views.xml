@@ -9,7 +9,7 @@
         <field name="inherit_id" ref="stock.view_location_form"/>
         <field name="arch" type="xml">
             <field name="partner_id" position="after">
-                <label for="real_address_id" class="oe_read_only"/>
+                <label for="real_address_id" string="Address" class="oe_read_only"/>
                 <div>
                     <field name="real_address_id" class="oe_inline oe_read_only"/>
                 </div>
