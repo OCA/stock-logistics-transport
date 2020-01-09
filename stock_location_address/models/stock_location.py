@@ -1,20 +1,17 @@
 #  Copyright 2018 Creu Blanca
 #  License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models, fields
+from odoo import api, fields, models
 
 
 class StockLocation(models.Model):
-    _inherit = 'stock.location'
+    _inherit = "stock.location"
 
-    address_id = fields.Many2one(
-        comodel_name='res.partner',
-        string='Address',
-    )
+    address_id = fields.Many2one(comodel_name="res.partner", string="Address")
     real_address_id = fields.Many2one(
-        comodel_name='res.partner',
-        string='Real Address',
-        compute='_compute_real_address_id',
+        comodel_name="res.partner",
+        string="Real Address",
+        compute="_compute_real_address_id",
     )
 
     def _get_parent_address(self):
@@ -23,9 +20,9 @@ class StockLocation(models.Model):
         elif self.location_id:
             return self.location_id._get_parent_address()
         else:
-            return self.env['res.partner']
+            return self.env["res.partner"]
 
-    @api.depends('address_id', 'location_id')
+    @api.depends("address_id", "location_id")
     def _compute_real_address_id(self):
         for record in self:
             if record.address_id:
