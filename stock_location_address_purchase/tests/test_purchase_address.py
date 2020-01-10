@@ -31,6 +31,7 @@ class TestPickingAddress(TransactionCase):
                 "code": "incoming",
                 "name": "Picking 01",
                 "sequence_id": self.sequence.id,
+                "sequence_code": "IN",
                 "warehouse_id": self.warehouse.id,
                 "default_location_dest_id": self.location.id,
             }
@@ -40,6 +41,7 @@ class TestPickingAddress(TransactionCase):
                 "code": "incoming",
                 "name": "Picking 02",
                 "sequence_id": self.sequence.id,
+                "sequence_code": "IN",
                 "warehouse_id": self.warehouse.id,
                 "default_location_dest_id": self.warehouse.lot_stock_id.id,
             }
