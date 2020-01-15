@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo13-addon-stock_location_address',
+        'odoo13-addon-stock_location_address_purchase',
     ],
     classifiers=[
         'Programming Language :: Python',
