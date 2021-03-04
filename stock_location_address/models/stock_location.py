@@ -29,3 +29,5 @@ class StockLocation(models.Model):
                 record.real_address_id = record.address_id
             elif record.location_id:
                 record.real_address_id = record._get_parent_address()
+            else:
+                record.real_address_id = False
