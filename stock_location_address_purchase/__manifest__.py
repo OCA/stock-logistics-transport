@@ -11,7 +11,7 @@
               'Odoo Community Association (OCA)',
     'category': 'Purchases',
     'depends': [
-        'purchase',
+        'purchase_stock',
         'stock_location_address',
     ],
     'installable': True,
