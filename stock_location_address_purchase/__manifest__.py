@@ -4,11 +4,11 @@
 {
     "name": "Purchase Location address",
     "summary": "Uses the location address on purchases",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "license": "LGPL-3",
     "website": "https://github.com/purchase-workflow",
     "author": "Creu Blanca, Odoo Community Association (OCA)",
     "category": "Purchases",
-    "depends": ["purchase", "stock_location_address"],
+    "depends": ["purchase_stock", "stock_location_address"],
     "installable": True,
 }
