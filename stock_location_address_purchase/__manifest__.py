@@ -9,6 +9,6 @@
     "website": "https://github.com/purchase-workflow",
     "author": "Creu Blanca, Odoo Community Association (OCA)",
     "category": "Purchases",
-    "depends": ["purchase", "stock_location_address"],
+    "depends": ["purchase_stock", "stock_location_address"],
     "installable": True,
 }
