@@ -18,3 +18,8 @@ msgstr ""
 msgid "Purchase Order"
 msgstr ""
 
+#. module: stock_location_address_purchase
+#: model:ir.model,name:stock_location_address_purchase.model_stock_rule
+msgid "Stock Rule"
+msgstr ""
+
