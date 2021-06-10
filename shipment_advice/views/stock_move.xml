@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_move_tree" model="ir.ui.view">
+        <field name="name">stock.move.tree.inherit</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="shipment_advice_id" />
+            </field>
+        </field>
+    </record>
+    <record id="view_move_search" model="ir.ui.view">
+        <field name="name">stock.move.search.inherit</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="stock.view_move_search" />
+        <field name="arch" type="xml">
+            <group position="inside">
+                <filter
+                    name="shipment_advice"
+                    string="Shipment Advice"
+                    domain="[]"
+                    context="{'group_by': 'shipment_advice_id'}"
+                />
+            </group>
+        </field>
+    </record>
+    <record id="wizard_plan_shipment_move_action" model="ir.actions.act_window">
+        <field name="name">Plan in shipment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.plan.shipment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
+        <field name="binding_model_id" ref="stock.model_stock_move" />
+        <field name="binding_view_types">list</field>
+    </record>
+    <record id="wizard_unplan_shipment_move_action" model="ir.actions.act_window">
+        <field name="name">Unplan from shipment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.unplan.shipment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
+        <field name="binding_model_id" ref="stock.model_stock_move" />
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

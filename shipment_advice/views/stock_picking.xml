@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <header position="inside">
+                <field name="is_fully_loaded_in_shipment" invisible="1" />
+                <button
+                    name="button_plan_in_shipment"
+                    type="object"
+                    string="Plan in shipment"
+                    class="btn-primary"
+                    attrs="{'invisible': ['|', '|', ('planned_shipment_advice_id', '!=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ('cancel', 'done'))]}"
+                />
+                <button
+                    name="button_load_in_shipment"
+                    type="object"
+                    string="Load in shipment"
+                    class="btn-primary"
+                    attrs="{'invisible': ['|', '|', ('is_fully_loaded_in_shipment', '=', True), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ('cancel', 'done'))]}"
+                />
+                <button
+                    name="button_unload_from_shipment"
+                    type="object"
+                    string="Unload from shipment"
+                    class="btn-primary"
+                    attrs="{'invisible': ['|', '|', ('is_fully_loaded_in_shipment', '=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ('cancel', 'done'))]}"
+                />
+            </header>
+            <xpath
+                expr="//field[@name='move_ids_without_package']/tree/button[@name='action_show_details']"
+                position="before"
+            >
+                <field
+                    name="shipment_advice_id"
+                    attrs="{'column_invisible': [('parent.picking_type_code', 'not in', ['incoming', 'outgoing'])]}"
+                    optional="show"
+                />
+            </xpath>
+            <group name="other_infos" position="inside">
+                <field name="planned_shipment_advice_id" />
+            </group>
+        </field>
+    </record>
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="name">stock.picking.tree.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field name="planned_shipment_advice_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field name="name">stock.picking.search.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <group position="before">
+                <separator />
+                <field
+                    name="planned_shipment_advice_id"
+                    string="Planned Shipment Advice"
+                    filter_domain="[('planned_shipment_advice_id', 'ilike', self)]"
+                />
+                <filter
+                    name="loaded_shipment_advice"
+                    string="Loaded Shipment Advice"
+                    domain="[('move_line_ids.shipment_advice_id', '=', self)]"
+                />
+                <filter
+                    name="no_shipment_advice"
+                    string="To plan in Shipment Advice"
+                    domain="['|', ('move_lines.shipment_advice_id', '=', False), ('move_line_ids.shipment_advice_id', '=', False)]"
+                />
+            </group>
+            <group position="inside">
+                <filter
+                    name="planned_shipment_advice"
+                    string="Planned Shipment Advice"
+                    domain="[]"
+                    context="{'group_by': 'planned_shipment_advice_id'}"
+                />
+            </group>
+        </field>
+    </record>
+    <record id="stock_picking_limited_view_tree" model="ir.ui.view">
+        <field name="name">stock.picking.limited.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+            <tree string="Transfers" create="0">
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="scheduled_date" />
+                <field name="origin" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record id="stock_picking_loading_progress_view_tree" model="ir.ui.view">
+        <field name="name">stock.picking.loading.progress.tree</field>
+        <field name="model">stock.picking</field>
+        <field name="priority" eval="110" />
+        <field name="arch" type="xml">
+            <tree
+                string="Transfers"
+                create="0"
+                decoration-success="is_fully_loaded_in_shipment"
+                decoration-warning="is_partially_loaded_in_shipment"
+            >
+                <field name="is_fully_loaded_in_shipment" invisible="1" />
+                <field name="is_partially_loaded_in_shipment" invisible="1" />
+                <field name="name" />
+                <field name="picking_type_code" invisible="1" />
+                <field name="loaded_packages_progress" />
+                <field name="loaded_move_lines_progress" />
+                <field name="loaded_weight_progress" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record id="wizard_plan_shipment_picking_action" model="ir.actions.act_window">
+        <field name="name">Plan in shipment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.plan.shipment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="binding_view_types">list</field>
+    </record>
+    <record id="wizard_unplan_shipment_picking_action" model="ir.actions.act_window">
+        <field name="name">Unplan in shipment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.unplan.shipment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="binding_view_types">list</field>
+    </record>
+    <record id="wizard_load_shipment_picking_action" model="ir.actions.act_window">
+        <field name="name">Load in shipment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.load.shipment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="binding_view_types">list</field>
+    </record>
+    <record id="wizard_unload_shipment_picking_action" model="ir.actions.act_window">
+        <field name="name">Unload in shipment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.unload.shipment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template id="report_shipment_advice_document">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <table class="table table-sm" name="header">
+                        <tr>
+                            <th>Shipment advice</th>
+                            <td>
+                                <span t-field="o.name" />
+                            </td>
+                            <th>Nb. of packages</th>
+                            <td>
+                                <span t-field="o.loaded_packages_count" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Arrival date</th>
+                            <td>
+                                <span t-field="o.arrival_date" />
+                            </td>
+                            <th>Total load (kg)</th>
+                            <td>
+                                <span t-field="o.total_load" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Departure date</th>
+                            <td colspan="3">
+                                <span t-field="o.departure_date" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Truck ref.</th>
+                            <td colspan="3">
+                                <span t-field="o.ref" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Loading dock</th>
+                            <td>
+                                <span t-field="o.dock_id" />
+                            </td>
+                            <th>Driver signature</th>
+                            <td style="border-bottom: 2px dotted black;" />
+                        </tr>
+                        <tr>
+                            <th>Warehouse address</th>
+                            <td colspan="3">
+                                <div
+                                    t-esc="o.warehouse_id.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": False, "no_tag_br": True}'
+                                />
+                            </td>
+                        </tr>
+                    </table>
+                    <table
+                        class="table table-sm"
+                        name="package_content"
+                        t-if="o.loaded_package_level_ids"
+                    >
+                        <strong>Package content</strong>
+                        <thead>
+                            <tr>
+                                <th>Package</th>
+                                <th>Code</th>
+                                <th>Transfer</th>
+                                <th>Delivery date</th>
+                                <th>Delivery Addr.</th>
+                                <th>Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                t-foreach="o.loaded_package_level_ids"
+                                t-as="package_level"
+                            >
+                                <td>
+                                    <span t-field="package_level.package_id" />
+                                </td>
+                                <td>
+                                    <span
+                                        t-field="package_level.package_id.packaging_id.shipper_package_code"
+                                    />
+                                </td>
+                                <td>
+                                    <span t-field="package_level.picking_id" />
+                                </td>
+                                <td>
+                                    <span
+                                        t-field="package_level.picking_id.scheduled_date"
+                                    />
+                                </td>
+                                <td>
+                                    <div
+                                        t-esc="package_level.picking_id.partner_id"
+                                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True, "no_tag_br": True}'
+                                    />
+                                </td>
+                                <td>
+                                    <span
+                                        t-field="package_level.package_id.shipping_weight"
+                                    />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table
+                        class="table table-sm"
+                        name="bulk_content"
+                        t-if="o.loaded_move_line_without_package_ids"
+                    >
+                        <strong>Bulk content</strong>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Transfer</th>
+                                <th>Delivery date</th>
+                                <th>Delivery Addr.</th>
+                                <th>Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                t-foreach="o.loaded_move_line_without_package_ids"
+                                t-as="line"
+                            >
+                                <td>
+                                    <span t-field="line.product_id" />
+                                </td>
+                                <td>
+                                    <span t-field="line.qty_done" />
+                                </td>
+                                <td>
+                                    <span t-field="line.picking_id" />
+                                </td>
+                                <td>
+                                    <span t-field="line.picking_id.scheduled_date" />
+                                </td>
+                                <td>
+                                    <div
+                                        t-esc="line.picking_id.partner_id"
+                                        t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True, "no_tag_br": True}'
+                                    />
+                                </td>
+                                <td>
+                                    <span t-field="line.move_id.weight" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+    <template id="report_shipment_advice">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="shipment_advice.report_shipment_advice_document" />
+        </t>
+    </template>
+</odoo>
