@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="shipment_advice_outgoing_sequence" model="ir.sequence">
+        <field name="name">Shipment Advices Outgoing sequence</field>
+        <field name="code">shipment.advice.outgoing</field>
+        <field name="prefix">SA/OUT/</field>
+        <field eval="1" name="number_next" />
+        <field eval="1" name="number_increment" />
+        <field eval="False" name="company_id" />
+        <field name="padding">7</field>
+    </record>
+    <record id="shipment_advice_incoming_sequence" model="ir.sequence">
+        <field name="name">Shipment Advices Incoming sequence</field>
+        <field name="code">shipment.advice.incoming</field>
+        <field name="prefix">SA/IN/</field>
+        <field eval="1" name="number_next" />
+        <field eval="1" name="number_increment" />
+        <field eval="False" name="company_id" />
+        <field name="padding">7</field>
+    </record>
+</odoo>

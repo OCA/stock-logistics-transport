@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="package_level_tree_view_picking" model="ir.ui.view">
+        <field name="name">stock.package_level.tree.inherit</field>
+        <field name="model">stock.package_level</field>
+        <field name="inherit_id" ref="stock.package_level_tree_view_picking" />
+        <field name="arch" type="xml">
+            <field name="location_dest_id" position="after">
+                <field
+                    name="shipment_advice_id"
+                    attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'outgoing')]}"
+                />
+            </field>
+            <field name="is_done" position="after">
+                <button
+                    name="button_load_in_shipment"
+                    type="object"
+                    icon="fa-truck"
+                    title="Load in shipment"
+                    attrs="{'invisible': ['|', ('shipment_advice_id', '!=', False), ('parent.picking_type_code', '!=', 'outgoing')]}"
+                    context="{'open_shipment': False}"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="stock_package_level_limited_view_tree" model="ir.ui.view">
+        <field name="name">stock.package_level.limited.tree</field>
+        <field name="model">stock.package_level</field>
+        <field name="priority">2000</field>
+        <field name="arch" type="xml">
+            <tree decoration-muted="state == 'done'" create="0">
+                <field name="picking_id" />
+                <field name="package_id" />
+                <field name="location_id" groups="stock.group_stock_multi_locations" />
+                <field
+                    name="location_dest_id"
+                    groups="stock.group_stock_multi_locations"
+                />
+                <field name="state" />
+                <field name="is_done" />
+                <field name="package_shipping_weight" />
+                <field name="package_weight_uom_name" string=" " />
+            </tree>
+        </field>
+    </record>
+</odoo>
