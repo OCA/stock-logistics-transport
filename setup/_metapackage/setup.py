@@ -8,6 +8,8 @@ setuptools.setup(
     description="Meta package for oca-stock-logistics-transport Odoo addons",
     version=version,
     install_requires=[
+        'odoo13-addon-shipment_advice',
+        'odoo13-addon-stock_dock',
         'odoo13-addon-stock_location_address',
         'odoo13-addon-stock_location_address_purchase',
     ],
