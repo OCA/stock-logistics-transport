@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="stock_dock_view_form" model="ir.ui.view">
+        <field name="name">stock.dock.form</field>
+        <field name="model">stock.dock</field>
+        <field name="arch" type="xml">
+            <form string="Dock">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <label for="name" class="oe_edit_only" />
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                    <label for="barcode" />
+                    <field name="barcode" />
+                    <group name="info">
+                        <field name="active" invisible="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="stock_dock_view_tree" model="ir.ui.view">
+        <field name="name">stock.dock.tree</field>
+        <field name="model">stock.dock</field>
+        <field name="arch" type="xml">
+            <tree string="Dock">
+                <field name="name" />
+                <field name="barcode" />
+            </tree>
+        </field>
+    </record>
+    <record id="stock_dock_action" model="ir.actions.act_window">
+        <field name="name">Docks</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.dock</field>
+        <field name="view_id" ref="stock_dock_view_tree" />
+    </record>
+    <menuitem
+        id="stock_dock_menu"
+        parent="stock.menu_warehouse_config"
+        action="stock_dock_action"
+    />
+</odoo>
