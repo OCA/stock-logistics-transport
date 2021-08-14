@@ -22,14 +22,14 @@ Please don't hesitate to suggest one of your module to this project. Also, you m
 
 Available addons
 ----------------
-addon | version | summary
---- | --- | ---
-[purchase_requisition_transport_multi_address](purchase_requisition_transport_multi_address/) | 8.0.1.0.0 | Manage origin / destination / consignee addresses on purchase requisitions
-[purchase_transport_multi_address](purchase_transport_multi_address/) | 8.0.1.0.0 | Manage origin / destination / consignee addresses on purchases
-[sale_transport_multi_address](sale_transport_multi_address/) | 8.0.1.0.0 | Manage origin / destination / consignee addresses on sales
-[stock_route_transit](stock_route_transit/) | 8.0.0.2.0 | Stock Routes Transit
-[stock_shipment_management](stock_shipment_management/) | 8.0.1.0.2 | Shipment Management (Consignment)
-[stock_transport_multi_address](stock_transport_multi_address/) | 8.0.1.0.0 | Manage origin / destination / consignee addresses on pickings
-[transport_information](transport_information/) | 8.0.0.1.0 | Transport Information
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[purchase_requisition_transport_multi_address](purchase_requisition_transport_multi_address/) | 8.0.1.0.0 |  | Manage origin / destination / consignee addresses on purchase requisitions
+[purchase_transport_multi_address](purchase_transport_multi_address/) | 8.0.1.0.0 |  | Manage origin / destination / consignee addresses on purchases
+[sale_transport_multi_address](sale_transport_multi_address/) | 8.0.1.0.0 |  | Manage origin / destination / consignee addresses on sales
+[stock_route_transit](stock_route_transit/) | 8.0.0.2.0 |  | Stock Routes Transit
+[stock_shipment_management](stock_shipment_management/) | 8.0.1.0.2 |  | Shipment Management (Consignment)
+[stock_transport_multi_address](stock_transport_multi_address/) | 8.0.1.0.0 |  | Manage origin / destination / consignee addresses on pickings
+[transport_information](transport_information/) | 8.0.0.1.0 |  | Transport Information
 
 [//]: # (end addons)
