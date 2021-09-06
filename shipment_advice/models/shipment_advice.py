@@ -177,6 +177,13 @@ class ShipmentAdvice(models.Model):
         ),
     ]
 
+    def _check_include_package_level(self, package_level):
+        """Check if a package level should be listed in the shipment advice.
+
+        Aim to be overridden by sub-modules.
+        """
+        return True
+
     @api.depends("loaded_move_line_ids.result_package_id.shipping_weight")
     def _compute_total_load(self):
         for shipment in self:
@@ -192,12 +199,15 @@ class ShipmentAdvice(models.Model):
     @api.depends("loaded_move_line_ids.package_level_id.package_id",)
     def _compute_package_ids(self):
         for shipment in self:
-            shipment.loaded_package_level_ids = (
-                shipment.loaded_move_line_ids.package_level_id
+            package_levels = shipment.loaded_move_line_ids.package_level_id
+            shipment.loaded_package_level_ids = package_levels.filtered(
+                self._check_include_package_level
             )
             package_ids = set()
             for line in shipment.loaded_move_line_ids:
-                if line.package_level_id:
+                if line.package_level_id and self._check_include_package_level(
+                    line.package_level_id
+                ):
                     package_ids.add(line.package_level_id.package_id.id)
             shipment.loaded_package_ids = self.env["stock.quant.package"].browse(
                 package_ids
