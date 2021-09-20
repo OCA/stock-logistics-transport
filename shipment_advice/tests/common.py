@@ -34,7 +34,9 @@ class Common(SavepointCase):
         cls.product_out3 = cls.env.ref("product.consu_delivery_03")
         # Stock levels
         cls._update_qty_in_location(
-            cls.picking_type_out.default_location_src_id, cls.product_out1, 20,
+            cls.picking_type_out.default_location_src_id,
+            cls.product_out1,
+            20,
         )
         cls.package = cls.env["stock.quant.package"].create({"name": "PKG_OUT2"})
         cls._update_qty_in_location(
@@ -124,7 +126,8 @@ class Common(SavepointCase):
 
     def _plan_records_in_shipment(self, shipment_advice, records):
         wiz_model = self.env["wizard.plan.shipment"].with_context(
-            active_model=records._name, active_ids=records.ids,
+            active_model=records._name,
+            active_ids=records.ids,
         )
         wiz = wiz_model.create({"shipment_advice_id": shipment_advice.id})
         wiz.action_plan()
@@ -133,7 +136,8 @@ class Common(SavepointCase):
     def _load_records_in_shipment(self, shipment_advice, records):
         """Load pickings, move lines or package levels in the givent shipment."""
         wiz_model = self.env["wizard.load.shipment"].with_context(
-            active_model=records._name, active_ids=records.ids,
+            active_model=records._name,
+            active_ids=records.ids,
         )
         wiz = wiz_model.create({"shipment_advice_id": shipment_advice.id})
         wiz.action_load()
@@ -142,7 +146,8 @@ class Common(SavepointCase):
     def _unload_records_from_shipment(self, shipment_advice, records):
         """Unload pickings, move lines or package levels from the givent shipment."""
         wiz_model = self.env["wizard.unload.shipment"].with_context(
-            active_model=records._name, active_ids=records.ids,
+            active_model=records._name,
+            active_ids=records.ids,
         )
         wiz = wiz_model.create({})
         wiz.action_unload()
