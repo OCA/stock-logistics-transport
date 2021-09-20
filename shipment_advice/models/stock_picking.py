@@ -15,23 +15,28 @@ class StockPicking(models.Model):
         index=True,
     )
     is_fully_loaded_in_shipment = fields.Boolean(
-        string="Is fully loaded in a shipment?", compute="_compute_loaded_in_shipment",
+        string="Is fully loaded in a shipment?",
+        compute="_compute_loaded_in_shipment",
     )
     is_partially_loaded_in_shipment = fields.Boolean(
         string="Is partially loaded in a shipment?",
         compute="_compute_loaded_in_shipment",
     )
     loaded_packages_count = fields.Integer(
-        "Packages loaded", compute="_compute_shipment_loaded_progress",
+        "Packages loaded",
+        compute="_compute_shipment_loaded_progress",
     )
     total_packages_count = fields.Integer(
-        "Total packages", compute="_compute_shipment_loaded_progress",
+        "Total packages",
+        compute="_compute_shipment_loaded_progress",
     )
     loaded_move_lines_count = fields.Integer(
-        "Bulk lines loaded", compute="_compute_shipment_loaded_progress",
+        "Bulk lines loaded",
+        compute="_compute_shipment_loaded_progress",
     )
     total_move_lines_count = fields.Integer(
-        "Total bulk lines", compute="_compute_shipment_loaded_progress",
+        "Total bulk lines",
+        compute="_compute_shipment_loaded_progress",
     )
     loaded_packages_progress_f = fields.Float(
         "Packages loaded/total %",
@@ -62,7 +67,8 @@ class StockPicking(models.Model):
         "Weight/total", compute="_compute_shipment_loaded_progress"
     )
     loaded_shipment_advice_ids = fields.Many2many(
-        "shipment.advice", compute="_compute_loaded_in_shipment",
+        "shipment.advice",
+        compute="_compute_loaded_in_shipment",
     )
 
     @api.depends("move_line_ids.shipment_advice_id")
@@ -145,7 +151,8 @@ class StockPicking(models.Model):
                     ]
                 )
                 total_weight = float_round(
-                    picking.shipping_weight, precision_rounding=0.01,
+                    picking.shipping_weight,
+                    precision_rounding=0.01,
                 )
                 picking.loaded_weight_progress = (
                     f"{picking.loaded_weight} / {total_weight}"
