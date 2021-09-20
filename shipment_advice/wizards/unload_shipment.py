@@ -10,7 +10,8 @@ class WizardUnloadShipment(models.TransientModel):
     _description = "Unload shipment"
 
     picking_ids = fields.Many2many(
-        comodel_name="stock.picking", string="Transfers to unload",
+        comodel_name="stock.picking",
+        string="Transfers to unload",
     )
     move_line_ids = fields.Many2many(
         comodel_name="stock.move.line", string="Products to unload"

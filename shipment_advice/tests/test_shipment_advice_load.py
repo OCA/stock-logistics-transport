@@ -11,7 +11,8 @@ class TestShipmentAdviceLoad(Common):
         self._in_progress_shipment_advice(self.shipment_advice_out)
         picking = self.move_product_out1.picking_id
         wiz_model = self.env["wizard.load.shipment"].with_context(
-            active_model=picking._name, active_ids=picking.ids,
+            active_model=picking._name,
+            active_ids=picking.ids,
         )
         wiz = wiz_model.create({"shipment_advice_id": self.shipment_advice_out.id})
         self.assertEqual(wiz.picking_ids, picking)
@@ -72,7 +73,8 @@ class TestShipmentAdviceLoad(Common):
         self._in_progress_shipment_advice(self.shipment_advice_out)
         move = self.move_product_out1
         wiz_model = self.env["wizard.load.shipment"].with_context(
-            active_model=move.move_line_ids._name, active_ids=move.move_line_ids.ids,
+            active_model=move.move_line_ids._name,
+            active_ids=move.move_line_ids.ids,
         )
         wiz = wiz_model.create({"shipment_advice_id": self.shipment_advice_out.id})
         self.assertEqual(wiz.move_line_ids, move.move_line_ids)
@@ -128,5 +130,6 @@ class TestShipmentAdviceLoad(Common):
         self._in_progress_shipment_advice(self.shipment_advice_out)
         with self.assertRaisesRegex(UserError, "planned already"):
             self._load_records_in_shipment(
-                self.shipment_advice_out, package_level,
+                self.shipment_advice_out,
+                package_level,
             )

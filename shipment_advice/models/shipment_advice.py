@@ -96,7 +96,9 @@ class ShipmentAdvice(models.Model):
         readonly=True,
     )
     total_load = fields.Float(
-        string="Total load (kg)", digits=(16, 2), compute="_compute_total_load",
+        string="Total load (kg)",
+        digits=(16, 2),
+        compute="_compute_total_load",
     )
     planned_move_ids = fields.One2many(
         comodel_name="stock.move",
@@ -189,7 +191,9 @@ class ShipmentAdvice(models.Model):
             shipment.planned_picking_ids = shipment.planned_move_ids.picking_id
             shipment.loaded_picking_ids = shipment.loaded_move_line_ids.picking_id
 
-    @api.depends("loaded_move_line_ids.package_level_id.package_id",)
+    @api.depends(
+        "loaded_move_line_ids.package_level_id.package_id",
+    )
     def _compute_package_ids(self):
         for shipment in self:
             shipment.loaded_package_level_ids = (
