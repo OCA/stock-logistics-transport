@@ -10,9 +10,13 @@ class WizardPlanShipment(models.TransientModel):
     _description = "Plan shipment"
 
     picking_ids = fields.Many2many(
-        comodel_name="stock.picking", string="Transfers to plan",
+        comodel_name="stock.picking",
+        string="Transfers to plan",
     )
-    move_ids = fields.Many2many(comodel_name="stock.move", string="Moves to plan",)
+    move_ids = fields.Many2many(
+        comodel_name="stock.move",
+        string="Moves to plan",
+    )
     shipment_advice_id = fields.Many2one(
         comodel_name="shipment.advice",
         string="Shipment Advice",

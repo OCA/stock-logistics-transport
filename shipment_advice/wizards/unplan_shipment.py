@@ -10,9 +10,13 @@ class WizardUnplanShipment(models.TransientModel):
     _description = "Unplan shipment"
 
     picking_ids = fields.Many2many(
-        comodel_name="stock.picking", string="Transfers to unplan",
+        comodel_name="stock.picking",
+        string="Transfers to unplan",
     )
-    move_ids = fields.Many2many(comodel_name="stock.move", string="Moves to unplan",)
+    move_ids = fields.Many2many(
+        comodel_name="stock.move",
+        string="Moves to unplan",
+    )
     warning = fields.Char(string="Warning", readonly=True)
 
     @api.model
