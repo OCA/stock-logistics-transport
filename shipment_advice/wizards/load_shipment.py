@@ -53,7 +53,7 @@ class WizardLoadInShipment(models.TransientModel):
         pickings_to_keep = pickings.filtered_domain(
             [("state", "=", "assigned"), ("picking_type_id.code", "=", "outgoing")]
         )
-        res["picking_ids"] = pickings_to_keep.ids
+        res["picking_ids"] = [(6, False, pickings_to_keep.ids)]
         if not pickings_to_keep:
             res["warning"] = _(
                 "No transfer to load among selected ones (already done or "
@@ -90,7 +90,7 @@ class WizardLoadInShipment(models.TransientModel):
                 ("picking_id.picking_type_id.code", "=", "outgoing"),
             ]
         )
-        res["move_line_ids"] = lines_to_keep.ids
+        res["move_line_ids"] = [(6, False, lines_to_keep.ids)]
         if not lines_to_keep:
             res["warning"] = _(
                 "No product to load among selected ones (already done or "
@@ -116,7 +116,7 @@ class WizardLoadInShipment(models.TransientModel):
                 ("picking_type_code", "=", "outgoing"),
             ]
         )
-        res["package_level_ids"] = package_levels_to_keep.ids
+        res["package_level_ids"] = [(6, False, package_levels_to_keep.ids)]
         if not package_levels_to_keep:
             res["warning"] = _(
                 "No package to load among selected ones (already done or "

@@ -36,7 +36,7 @@ class TestShipmentAdvice(Common):
         self._in_progress_shipment_advice(self.shipment_advice_in)
         for ml in picking.move_line_ids:
             ml.qty_done = ml.product_uom_qty
-        picking.action_done()
+        picking._action_done()
         self.shipment_advice_in.action_done()
         self.assertEqual(self.shipment_advice_in.state, "done")
         self.assertTrue(

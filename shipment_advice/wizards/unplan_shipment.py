@@ -50,7 +50,7 @@ class WizardUnplanShipment(models.TransientModel):
                 and o.picking_type_code in ("incoming", "outgoing")
             )
         )
-        res["picking_ids"] = pickings_to_keep.ids
+        res["picking_ids"] = [(6, False, pickings_to_keep.ids)]
         if not pickings_to_keep:
             res["warning"] = _(
                 "No transfer to unplan among selected ones (already done or "
@@ -85,7 +85,7 @@ class WizardUnplanShipment(models.TransientModel):
                 ("shipment_advice_id.state", "in", ("draft", "confirmed")),
             ]
         )
-        res["move_ids"] = moves_to_keep.ids
+        res["move_ids"] = [(6, False, moves_to_keep.ids)]
         if not moves_to_keep:
             res["warning"] = _(
                 "No move to unplan among selected ones (already done, "
