@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="shipment_advice_view_calendar" model="ir.ui.view">
+        <field name="name">shipment.advice.calendar</field>
+        <field name="model">shipment.advice</field>
+        <field name="arch" type="xml">
+            <calendar
+                string="Shipment Advices"
+                date_start="arrival_date"
+                date_stop="departure_date"
+                mode="week"
+                color="dock_id"
+                quick_add="False"
+            >
+                <field name="name" />
+                <field name="state" />
+            </calendar>
+        </field>
+    </record>
+    <record id="shipment_advice_view_form" model="ir.ui.view">
+        <field name="name">shipment.advice.form</field>
+        <field name="model">shipment.advice</field>
+        <field name="arch" type="xml">
+            <form string="Shipment Advice">
+                <header>
+                    <button
+                        name="action_confirm"
+                        type="object"
+                        string="Confirm"
+                        class="btn-primary"
+                        states="draft"
+                    />
+                    <button
+                        name="action_in_progress"
+                        type="object"
+                        string="Start"
+                        class="btn-primary"
+                        states="confirmed"
+                    />
+                    <button
+                        name="action_done"
+                        type="object"
+                        string="Mark as done"
+                        class="btn-primary"
+                        states="in_progress"
+                    />
+                    <button
+                        name="action_cancel"
+                        type="object"
+                        string="Cancel"
+                        class="btn-secondary"
+                        states="confirmed,in_progress"
+                    />
+                    <button
+                        name="action_draft"
+                        type="object"
+                        string="Back to draft"
+                        class="btn-secondary"
+                        states="cancel"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,confirmed,in_progress,done"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="button_open_planned_pickings"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-truck"
+                            states="draft,confirmed"
+                            attrs="{'invisible': [('planned_picking_ids', '=', [])]}"
+                        >
+                            <field
+                                string="Planned"
+                                name="planned_pickings_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            name="button_open_planned_moves"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-list"
+                            states="draft,confirmed"
+                            attrs="{'invisible': [('planned_move_ids', '=', [])]}"
+                        >
+                            <field
+                                string="Planned bulk"
+                                name="planned_moves_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            name="button_open_loaded_pickings"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-truck"
+                            states="in_progress"
+                            attrs="{'invisible': ['|', ('shipment_type', '!=', 'outgoing'), ('loaded_picking_ids', '=', [])]}"
+                        >
+                            <field
+                                string="Loaded"
+                                name="loaded_pickings_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            name="button_open_loaded_move_lines"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-list"
+                            states="in_progress"
+                            attrs="{'invisible': ['|', ('shipment_type', '!=', 'outgoing'), ('loaded_move_line_without_package_ids', '=', [])]}"
+                        >
+                            <field
+                                string="Loaded bulk"
+                                name="loaded_move_lines_without_package_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            name="button_open_loaded_packages"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-cubes"
+                            states="in_progress"
+                            attrs="{'invisible': ['|', ('shipment_type', '!=', 'outgoing'), ('loaded_package_ids', '=', [])]}"
+                        >
+                            <field
+                                string="Loaded packages"
+                                name="loaded_packages_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
+                            name="button_open_deliveries_in_progress"
+                            type="object"
+                            string="Loading Progress"
+                            class="oe_stat_button"
+                            icon="fa-tasks"
+                            states="in_progress"
+                            attrs="{'invisible': ['|', '|', ('shipment_type', '!=', 'outgoing'), ('loaded_picking_ids', '=', []), ('state', '!=', 'in_progress')]}"
+                        />
+                        <button
+                            name="button_open_receptions_in_progress"
+                            type="object"
+                            string="Unloading Progress"
+                            class="oe_stat_button"
+                            icon="fa-tasks"
+                            attrs="{'invisible': ['|', '|', ('shipment_type', '!=', 'incoming'), ('planned_picking_ids', '=', []), ('state', '!=', 'in_progress')]}"
+                        />
+                    </div>
+                    <h1>
+                        <field name="name" attrs="{'invisible': [('name','=','/')]}" />
+                    </h1>
+                    <group>
+                        <group name="info1">
+                            <field
+                                name="warehouse_id"
+                                groups="stock.group_stock_multi_warehouses"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="shipment_type" />
+                        </group>
+                        <group name="info2">
+                            <field name="dock_id" />
+                            <field name="arrival_date" />
+                            <field name="departure_date" />
+                            <field name="ref" />
+                        </group>
+                    </group>
+                    <field name="planned_picking_ids" invisible="1" />
+                    <field name="planned_move_ids" invisible="1" />
+                    <field name="loaded_picking_ids" invisible="1" />
+                    <field name="loaded_package_ids" invisible="1" />
+                    <notebook>
+                        <page
+                            string="Lading"
+                            name="loaded_move_lines_without_package"
+                            attrs="{'invisible': [('state', 'in', ('draft', 'confirmed'))]}"
+                        >
+                            <span class="o_horizontal_separator">Bulk content</span>
+                            <field name="loaded_move_line_without_package_ids">
+                                <tree create="0">
+                                    <field name="picking_id" />
+                                    <field name="product_id" />
+                                    <field name="lot_id" />
+                                    <field name="product_uom_qty" />
+                                    <field name="qty_done" />
+                                    <field name="product_uom_id" />
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                            <span class="o_horizontal_separator">Package content</span>
+                            <field
+                                name="loaded_package_level_ids"
+                                nolabel="1"
+                                context="{'tree_view_ref': 'shipment_advice.stock_package_level_limited_view_tree'}"
+                            />
+                        </page>
+                        <page name="carriers" string="Related shipping methods">
+                            <field name="carrier_ids" nolabel="1" />
+                        </page>
+                    </notebook>
+                    <group class="oe_right" name="total_load">
+                        <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                            <label for="total_load" />
+                        </div>
+                        <strong>
+                            <field
+                                name="total_load"
+                                nolabel="1"
+                                class="oe_subtotal_footer_separator"
+                            />
+                        </strong>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="shipment_advice_view_tree" model="ir.ui.view">
+        <field name="name">shipment.advice.tree</field>
+        <field name="model">shipment.advice</field>
+        <field name="arch" type="xml">
+            <tree
+                string="Shipment Advices"
+                decoration-info="state == 'draft'"
+                decoration-muted="state == 'cancel'"
+                decoration-danger="state not in ('draft', 'cancel', 'done') and arrival_date &lt; current_date"
+            >
+                <field name="name" />
+                <field name="shipment_type" />
+                <field name="dock_id" />
+                <field name="arrival_date" />
+                <field name="departure_date" />
+                <field name="ref" />
+                <field name="total_load" />
+                <field
+                    name="warehouse_id"
+                    groups="stock.group_stock_multi_warehouses"
+                />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record id="shipment_advice_view_search" model="ir.ui.view">
+        <field name="name">shipment.advice.search</field>
+        <field name="model">shipment.advice</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="Shipment Advices">
+                <field name="name" />
+                <field name="ref" />
+                <filter
+                    name="incoming"
+                    string="Incoming"
+                    domain="[('shipment_type', '=', 'incoming')]"
+                />
+                <filter
+                    name="outgoing"
+                    string="Outgoing"
+                    domain="[('shipment_type', '=', 'outgoing')]"
+                />
+                <filter
+                    string="Today"
+                    name="today"
+                    domain="[('arrival_date','&gt;=', ((context_today()).strftime('%Y-%m-%d'))), ('arrival_date','&lt;=', ((context_today()+datetime.timedelta(days=1)).strftime('%Y-%m-%d')))]"
+                />
+                <filter
+                    string="This Week"
+                    name="week"
+                    domain="[('arrival_date','&gt;=', ((context_today()).strftime('%Y-%m-%d'))), ('arrival_date','&lt;=', ((context_today()+datetime.timedelta(days=7)).strftime('%Y-%m-%d')))]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Loading dock"
+                        name="dock_id"
+                        domain="[]"
+                        context="{'group_by': 'dock_id'}"
+                    />
+                    <filter
+                        string="Status"
+                        name="status"
+                        domain="[]"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        string="Warehouse"
+                        name="warehouse"
+                        domain="[]"
+                        context="{'group_by': 'warehouse_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="shipment_advice_action" model="ir.actions.act_window">
+        <field name="name">Shipment Advices</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">shipment.advice</field>
+        <field name="view_mode">calendar,tree,form</field>
+        <field name="context">{'default_name': '/'}</field>
+    </record>
+    <record
+        id="shipment_advice_action_view_calendar"
+        model="ir.actions.act_window.view"
+    >
+        <field name="sequence" eval="1" />
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="shipment_advice_view_calendar" />
+        <field name="act_window_id" ref="shipment_advice_action" />
+    </record>
+    <record id="shipment_advice_action_view_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2" />
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="shipment_advice_view_tree" />
+        <field name="act_window_id" ref="shipment_advice_action" />
+    </record>
+    <menuitem
+        id="shipment_advice_menu"
+        parent="stock.menu_stock_warehouse_mgmt"
+        action="shipment_advice_action"
+    />
+</odoo>
