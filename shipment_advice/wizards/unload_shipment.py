@@ -49,7 +49,7 @@ class WizardUnloadShipment(models.TransientModel):
                 and o.picking_type_code == "outgoing"
             )
         )
-        res["picking_ids"] = pickings_to_keep.ids
+        res["picking_ids"] = [(6, False, pickings_to_keep.ids)]
         if not pickings_to_keep:
             res["warning"] = _(
                 "No transfer to unload among selected ones (already done or "
@@ -77,7 +77,7 @@ class WizardUnloadShipment(models.TransientModel):
                 and o.picking_code == "outgoing"
             )
         )
-        res["move_line_ids"] = lines_to_keep.ids
+        res["move_line_ids"] = [(6, False, lines_to_keep.ids)]
         if not lines_to_keep:
             res["warning"] = _(
                 "No product to unload among selected ones (already done or "
