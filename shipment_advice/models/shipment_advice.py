@@ -288,9 +288,11 @@ class ShipmentAdvice(models.Model):
                     if picking._check_backorder():
                         wiz = wiz_model.create({})
                         wiz.pick_ids = picking
-                        wiz.process()
+                        wiz.with_context(
+                            button_validate_picking_ids=picking.ids
+                        ).process()
                     else:
-                        picking.action_done()
+                        picking._action_done()
             else:
                 backorder_policy = (
                     shipment.company_id.shipment_advice_outgoing_backorder_policy
@@ -300,15 +302,17 @@ class ShipmentAdvice(models.Model):
                         if picking._check_backorder():
                             wiz = wiz_model.create({})
                             wiz.pick_ids = picking
-                            wiz.process()
+                            wiz.with_context(
+                                button_validate_picking_ids=picking.ids
+                            ).process()
                         else:
-                            picking.action_done()
+                            picking._action_done()
                 else:
                     for picking in self.loaded_picking_ids:
                         if not picking._check_backorder():
                             # no backorder needed means that all qty_done are
                             # set to fullfill the need => validate
-                            picking.action_done()
+                            picking._action_done()
                 # Unplan moves that were not loaded and validated
                 moves_to_unplan = self.loaded_move_line_ids.move_id.filtered(
                     lambda m: m.state not in ("cancel", "done") and not m.quantity_done
