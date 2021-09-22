@@ -19,6 +19,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[shipment_advice](shipment_advice/) | 14.0.1.0.0 |  | Manage your (un)loading process through shipment advices.
 [stock_dock](stock_dock/) | 14.0.1.0.0 |  | Manage the loading docks of your warehouse.
 
 [//]: # (end addons)
