@@ -12,9 +12,8 @@ class StockPackageLevel(models.Model):
     package_weight_uom_name = fields.Char(related="package_id.weight_uom_name")
 
     def button_load_in_shipment(self):
-        action = self.env.ref(
-            "shipment_advice.wizard_load_shipment_picking_action"
-        ).read()[0]
+        action_xmlid = "shipment_advice.wizard_load_shipment_picking_action"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["context"] = {
             "active_model": self._name,
             "active_ids": self.ids,
