@@ -364,12 +364,14 @@ class ShipmentAdvice(models.Model):
             shipment.state = "draft"
 
     def button_open_planned_pickings(self):
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
+        action_xmlid = "stock.action_picking_tree_all"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["domain"] = [("id", "in", self.planned_picking_ids.ids)]
         return action
 
     def button_open_planned_moves(self):
-        action = self.env.ref("stock.stock_move_action").read()[0]
+        action_xmlid = "stock.stock_move_action"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["views"] = [
             (self.env.ref("stock.view_picking_move_tree").id, "tree"),
         ]
@@ -378,23 +380,27 @@ class ShipmentAdvice(models.Model):
         return action
 
     def button_open_loaded_pickings(self):
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
+        action_xmlid = "stock.action_picking_tree_all"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["domain"] = [("id", "in", self.loaded_picking_ids.ids)]
         return action
 
     def button_open_loaded_move_lines(self):
-        action = self.env.ref("stock.stock_move_line_action").read()[0]
+        action_xmlid = "stock.stock_move_line_action"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["domain"] = [("id", "in", self.loaded_move_line_without_package_ids.ids)]
         action["context"] = {}  # Disable filters
         return action
 
     def button_open_loaded_packages(self):
-        action = self.env.ref("stock.action_package_view").read()[0]
+        action_xmlid = "stock.action_package_view"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["domain"] = [("id", "in", self.loaded_package_ids.ids)]
         return action
 
     def button_open_deliveries_in_progress(self):
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
+        action_xmlid = "stock.action_picking_tree_all"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         view_tree = self.env.ref(
             "shipment_advice.stock_picking_loading_progress_view_tree"
         )
@@ -423,7 +429,8 @@ class ShipmentAdvice(models.Model):
         return action
 
     def button_open_receptions_in_progress(self):
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
+        action_xmlid = "stock.action_picking_tree_all"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         view_tree = self.env.ref(
             "shipment_advice.stock_picking_loading_progress_view_tree"
         )

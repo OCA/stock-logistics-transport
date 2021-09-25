@@ -202,7 +202,8 @@ class WizardLoadInShipment(models.TransientModel):
             self.shipment_advice_id.action_in_progress()
         if self.open_shipment:
             view_form = self.env.ref("shipment_advice.shipment_advice_view_form")
-            action = self.env.ref("shipment_advice.shipment_advice_action").read()[0]
+            action_xmlid = "shipment_advice.shipment_advice_action"
+            action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
             del action["views"]
             action["res_id"] = self.shipment_advice_id.id
             action["view_id"] = view_form.id

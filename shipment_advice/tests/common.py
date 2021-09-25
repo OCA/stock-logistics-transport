@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import fields
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import SavepointCase, new_test_user
 
 
 class Common(SavepointCase):
@@ -65,6 +65,24 @@ class Common(SavepointCase):
             cls.picking_type_out, cls.product_out3, 10, cls.group
         )
 
+    # Inspired by
+    # https://github.com/OCA/wms/commit/11730a7119a9695a72ed754e4cf078e56664cd1a
+    # https://github.com/OCA/wms/commit/73bd34ea551a45fcfe09396f0e48f1ed47574616
+
+    @classmethod
+    def setUpClassUsers(cls):
+        cls.stock_user = new_test_user(cls.env, **cls._stock_user_values())
+        return cls.stock_user
+
+    @classmethod
+    def _stock_user_values(cls):
+        return {
+            "name": "Pauline Poivraisselle",
+            "login": "pauline2",
+            "email": "p.p@example.com",
+            "groups": "stock.group_stock_user",
+        }
+
     @classmethod
     def _update_qty_in_location(
         cls, location, product, quantity, package=None, lot=None
@@ -124,22 +142,26 @@ class Common(SavepointCase):
         shipment_advice.action_cancel()
         self.assertEqual(shipment_advice.state, "cancel")
 
-    def _plan_records_in_shipment(self, shipment_advice, records):
+    def _plan_records_in_shipment(self, shipment_advice, records, user=None):
         wiz_model = self.env["wizard.plan.shipment"].with_context(
             active_model=records._name,
             active_ids=records.ids,
         )
         wiz = wiz_model.create({"shipment_advice_id": shipment_advice.id})
+        if user:
+            wiz = wiz.with_user(user)
         wiz.action_plan()
         return wiz
 
-    def _load_records_in_shipment(self, shipment_advice, records):
+    def _load_records_in_shipment(self, shipment_advice, records, user=None):
         """Load pickings, move lines or package levels in the givent shipment."""
         wiz_model = self.env["wizard.load.shipment"].with_context(
             active_model=records._name,
             active_ids=records.ids,
         )
         wiz = wiz_model.create({"shipment_advice_id": shipment_advice.id})
+        if user:
+            wiz = wiz.with_user(user)
         wiz.action_load()
         return wiz
 
