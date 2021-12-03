@@ -401,10 +401,14 @@ class ShipmentAdvice(models.Model):
         tree_view_index = action["views"].index((False, "tree"))
         action["views"][tree_view_index] = (view_tree.id, "tree")
         if self.planned_picking_ids:
-            action["domain"] = [("id", "in", self.planned_picking_ids.ids)]
+            action["domain"] = [
+                ("picking_type_id.warehouse_id", "=", self.warehouse_id.id),
+                ("id", "in", self.planned_picking_ids.ids),
+            ]
         else:
             domain = [
                 ("picking_type_id.code", "=", self.shipment_type),
+                ("picking_type_id.warehouse_id", "=", self.warehouse_id.id),
                 ("state", "=", "assigned"),
                 # Loaded in the current shipment or not loaded at all
                 "|",
