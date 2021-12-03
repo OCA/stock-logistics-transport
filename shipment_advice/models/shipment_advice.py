@@ -277,6 +277,11 @@ class ShipmentAdvice(models.Model):
             shipment.state = "in_progress"
         return True
 
+    def _lock_records(self, records):
+        """Lock records for the current SQL transaction."""
+        sql = "SELECT id FROM %s WHERE ID IN %%s FOR UPDATE" % records._table
+        self.env.cr.execute(sql, (tuple(records.ids),), log_exceptions=False)
+
     def action_done(self):
         wiz_model = self.env["stock.backorder.confirmation"]
         for shipment in self:
@@ -288,6 +293,7 @@ class ShipmentAdvice(models.Model):
                 )
             # Validate transfers (create backorders for unprocessed lines)
             if shipment.shipment_type == "incoming":
+                self._lock_records(self.planned_picking_ids)
                 for picking in self.planned_picking_ids:
                     if picking.state in ("cancel", "done"):
                         continue
@@ -301,8 +307,11 @@ class ShipmentAdvice(models.Model):
                 backorder_policy = (
                     shipment.company_id.shipment_advice_outgoing_backorder_policy
                 )
+                self._lock_records(self.loaded_picking_ids)
                 if backorder_policy == "create_backorder":
                     for picking in self.loaded_picking_ids:
+                        if picking.state in ("cancel", "done"):
+                            continue
                         if picking._check_backorder():
                             wiz = wiz_model.create({})
                             wiz.pick_ids = picking
@@ -311,6 +320,8 @@ class ShipmentAdvice(models.Model):
                             picking.action_done()
                 else:
                     for picking in self.loaded_picking_ids:
+                        if picking.state in ("cancel", "done"):
+                            continue
                         if not picking._check_backorder():
                             # no backorder needed means that all qty_done are
                             # set to fullfill the need => validate
