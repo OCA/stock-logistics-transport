@@ -62,6 +62,9 @@ class TestShipmentAdviceLoad(Common):
             | self.move_product_out2.move_line_ids
             | self.move_product_out3.move_line_ids,
         )
+        lines = wiz.shipment_advice_id.loaded_move_line_ids
+        lines[1].result_package_id.shipping_weight = 10.0
+        self.assertEqual(wiz.shipment_advice_id.total_load, 10.0)
         self.assertEqual(len(wiz.shipment_advice_id.loaded_move_line_ids), 3)
         self.assertEqual(
             wiz.shipment_advice_id.loaded_move_lines_without_package_count, 1

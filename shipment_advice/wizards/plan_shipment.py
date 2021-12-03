@@ -140,7 +140,8 @@ class WizardPlanShipment(models.TransientModel):
         self.picking_ids._plan_in_shipment(self.shipment_advice_id)
         self.move_ids._plan_in_shipment(self.shipment_advice_id)
         view_form = self.env.ref("shipment_advice.shipment_advice_view_form")
-        action = self.env.ref("shipment_advice.shipment_advice_action").sudo().read()[0]
+        action_xmlid = "shipment_advice.shipment_advice_action"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         del action["views"]
         action["res_id"] = self.shipment_advice_id.id
         action["view_id"] = view_form.id
