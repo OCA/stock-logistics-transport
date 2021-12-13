@@ -4,7 +4,7 @@
 {
     "name": "Purchase Location address",
     "summary": "Uses the location address on purchases",
-    "version": "13.0.1.0.1",
+    "version": "14.0.1.0.0",
     "license": "LGPL-3",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "author": "Creu Blanca, Odoo Community Association (OCA)",
