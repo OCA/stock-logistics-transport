@@ -21,6 +21,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [shipment_advice](shipment_advice/) | 14.0.1.0.2 |  | Manage your (un)loading process through shipment advices.
 [stock_dock](stock_dock/) | 14.0.1.0.0 |  | Manage the loading docks of your warehouse.
+[stock_location_address](stock_location_address/) | 14.0.1.0.0 |  | Adds an address on locations
 
 [//]: # (end addons)
 
