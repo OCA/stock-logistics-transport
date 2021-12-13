@@ -6,7 +6,7 @@
     "summary": "Uses the location address on purchases",
     "version": "13.0.1.0.1",
     "license": "LGPL-3",
-    "website": "https://github.com/purchase-workflow",
+    "website": "https://github.com/OCA/stock-logistics-transport",
     "author": "Creu Blanca, Odoo Community Association (OCA)",
     "category": "Purchases",
     "depends": ["purchase_stock", "stock_location_address"],
