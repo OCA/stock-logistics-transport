@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-shipment_advice',
         'odoo14-addon-stock_dock',
+        'odoo14-addon-stock_location_address',
     ],
     classifiers=[
         'Programming Language :: Python',
