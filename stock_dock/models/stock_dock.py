@@ -11,3 +11,23 @@ class StockDock(models.Model):
     name = fields.Char(required=True)
     barcode = fields.Char()
     active = fields.Boolean(string="Active", default=True)
+    warehouse_id = fields.Many2one(
+        comodel_name="stock.warehouse",
+        ondelete="cascade",
+        string="Warehouse",
+        required=True,
+        check_company=True,
+        default=lambda self: self._default_warehouse_id(),
+    )
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        string="Company",
+        related="warehouse_id.company_id",
+        readonly=True,
+        store=True,
+        index=True,
+    )
+
+    def _default_warehouse_id(self):
+        wh = self.env.ref("stock.warehouse0", raise_if_not_found=False)
+        return wh.id or False
