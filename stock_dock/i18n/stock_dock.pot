@@ -20,12 +20,19 @@ msgstr ""
 
 #. module: stock_dock
 #: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_form
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
 msgid "Archived"
 msgstr ""
 
 #. module: stock_dock
 #: model:ir.model.fields,field_description:stock_dock.field_stock_dock__barcode
 msgid "Barcode"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__company_id
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
+msgid "Company"
 msgstr ""
 
 #. module: stock_dock
@@ -45,7 +52,6 @@ msgstr ""
 
 #. module: stock_dock
 #: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_form
-#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_tree
 msgid "Dock"
 msgstr ""
 
@@ -57,7 +63,14 @@ msgstr ""
 #. module: stock_dock
 #: model:ir.actions.act_window,name:stock_dock.stock_dock_action
 #: model:ir.ui.menu,name:stock_dock.stock_dock_menu
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_tree
 msgid "Docks"
+msgstr ""
+
+#. module: stock_dock
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
+msgid "Group By"
 msgstr ""
 
 #. module: stock_dock
@@ -83,4 +96,15 @@ msgstr ""
 #. module: stock_dock
 #: model:ir.model.fields,field_description:stock_dock.field_stock_dock__name
 msgid "Name"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,help:stock_dock.field_stock_dock__company_id
+msgid "The company is automatically set from your user preferences."
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__warehouse_id
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
+msgid "Warehouse"
 msgstr ""
