@@ -9,7 +9,7 @@ class ShipmentAdvice(models.Model):
     _name = "shipment.advice"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _description = "Shipment Advice"
-    _order = "arrival_date asc, id desc"
+    _order = "arrival_date DESC, id DESC"
 
     def _default_warehouse_id(self):
         wh = self.env.ref("stock.warehouse0", raise_if_not_found=False)
