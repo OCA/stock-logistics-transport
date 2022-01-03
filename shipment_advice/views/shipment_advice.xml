@@ -172,7 +172,10 @@
                             <field name="shipment_type" />
                         </group>
                         <group name="info2">
-                            <field name="dock_id" />
+                            <field
+                                name="dock_id"
+                                domain="[('warehouse_id', '=', warehouse_id)]"
+                            />
                             <field name="arrival_date" />
                             <field name="departure_date" />
                             <field name="ref" />
