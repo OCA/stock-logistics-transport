@@ -385,20 +385,16 @@ class ShipmentAdvice(models.Model):
         action["domain"] = [("id", "in", self.loaded_package_ids.ids)]
         return action
 
-    def button_open_deliveries_in_progress(self):
-        action = self.env.ref("stock.action_picking_tree_all").read()[0]
-        view_tree = self.env.ref(
-            "shipment_advice.stock_picking_loading_progress_view_tree"
-        )
-        tree_view_index = action["views"].index((False, "tree"))
-        action["views"][tree_view_index] = (view_tree.id, "tree")
+    def _domain_open_deliveries_in_progress(self):
+        self.ensure_one()
+        domain = []
         if self.planned_picking_ids:
-            action["domain"] = [
+            domain += [
                 ("picking_type_id.warehouse_id", "=", self.warehouse_id.id),
                 ("id", "in", self.planned_picking_ids.ids),
             ]
         else:
-            domain = [
+            domain += [
                 ("picking_type_id.code", "=", self.shipment_type),
                 ("picking_type_id.warehouse_id", "=", self.warehouse_id.id),
                 ("state", "=", "assigned"),
@@ -414,8 +410,16 @@ class ShipmentAdvice(models.Model):
                 domain.append(("move_lines.shipment_advice_id", "=", False))
             if self.carrier_ids:
                 domain.append(("carrier_id", "in", self.carrier_ids.ids))
-            pickings = self.env["stock.picking"].search(domain)
-            action["domain"] = [("id", "in", pickings.ids)]
+        return domain
+
+    def button_open_deliveries_in_progress(self):
+        action = self.env.ref("stock.action_picking_tree_all").read()[0]
+        view_tree = self.env.ref(
+            "shipment_advice.stock_picking_loading_progress_view_tree"
+        )
+        tree_view_index = action["views"].index((False, "tree"))
+        action["views"][tree_view_index] = (view_tree.id, "tree")
+        action["domain"] = self._domain_open_deliveries_in_progress()
         return action
 
     def button_open_receptions_in_progress(self):
