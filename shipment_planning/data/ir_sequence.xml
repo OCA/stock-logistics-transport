@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="shipment_planning_outgoing_sequence" model="ir.sequence">
+        <field name="name">Shipment Plannings Outgoing sequence</field>
+        <field name="code">shipment.planning.outgoing</field>
+        <field name="prefix">SP/OUT/</field>
+        <field eval="1" name="number_next" />
+        <field eval="1" name="number_increment" />
+        <field eval="False" name="company_id" />
+        <field name="padding">7</field>
+    </record>
+    <record id="shipment_planning_incoming_sequence" model="ir.sequence">
+        <field name="name">Shipment Plannings Incoming sequence</field>
+        <field name="code">shipment.planning.incoming</field>
+        <field name="prefix">SP/IN/</field>
+        <field eval="1" name="number_next" />
+        <field eval="1" name="number_increment" />
+        <field eval="False" name="company_id" />
+        <field name="padding">7</field>
+    </record>
+</odoo>

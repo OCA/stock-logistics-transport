@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="shipment_planning_view_form" model="ir.ui.view">
+        <field name="name">shipment.planning.form</field>
+        <field name="model">shipment.planning</field>
+        <field name="arch" type="xml">
+            <form string="Shipment Planning">
+                <header>
+                    <button
+                        name="action_confirm"
+                        type="object"
+                        string="Confirm"
+                        class="btn-primary"
+                        states="draft"
+                    />
+                    <button
+                        name="action_in_progress"
+                        type="object"
+                        string="Start"
+                        class="btn-primary"
+                        states="confirmed"
+                    />
+                    <button
+                        name="action_done"
+                        type="object"
+                        string="Mark as done"
+                        class="btn-primary"
+                        states="in_progress"
+                    />
+                    <button
+                        name="action_cancel"
+                        type="object"
+                        string="Cancel"
+                        class="btn-secondary"
+                        states="confirmed,in_progress"
+                    />
+                    <button
+                        name="action_draft"
+                        type="object"
+                        string="Back to draft"
+                        class="btn-secondary"
+                        states="cancel"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,confirmed,in_progress,done"
+                    />
+                </header>
+                <sheet>
+                    <h1>
+                        <field name="name" attrs="{'invisible': [('name','=','/')]}" />
+                    </h1>
+                    <group>
+                        <group name="info1">
+                            <field
+                                name="warehouse_id"
+                                groups="stock.group_stock_multi_warehouses"
+                            />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="shipment_type" />
+                        </group>
+                        <group name="info2">
+                            <field name="date_from" />
+                            <field name="date_to" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Pickings" name="pickings">
+                            <field name="picking_to_plan_domain" invisible="1" />
+                            <field
+                                name="picking_to_plan_ids"
+                                widget="many2many"
+                                domain="picking_to_plan_domain"
+                            />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="shipment_planning_view_tree" model="ir.ui.view">
+        <field name="name">shipment.planning.tree</field>
+        <field name="model">shipment.planning</field>
+        <field name="arch" type="xml">
+            <tree string="Shipment Plannings">
+                <field name="name" />
+                <field name="shipment_type" />
+                <field
+                    name="warehouse_id"
+                    groups="stock.group_stock_multi_warehouses"
+                />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+    <record id="shipment_planning_view_search" model="ir.ui.view">
+        <field name="name">shipment.planning.search</field>
+        <field name="model">shipment.planning</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="Shipment Plannings">
+                <field name="name" />
+                <filter
+                    name="incoming"
+                    string="Incoming"
+                    domain="[('shipment_type', '=', 'incoming')]"
+                />
+                <filter
+                    name="outgoing"
+                    string="Outgoing"
+                    domain="[('shipment_type', '=', 'outgoing')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Status"
+                        name="status"
+                        domain="[]"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        string="Warehouse"
+                        name="warehouse"
+                        domain="[]"
+                        context="{'group_by': 'warehouse_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="shipment_planning_action" model="ir.actions.act_window">
+        <field name="name">Shipment Plannings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">shipment.planning</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'default_name': '/'}</field>
+        <field name="view_id" ref="shipment_planning_view_tree" />
+        <field name="search_view_id" ref="shipment_planning_view_search" />
+    </record>
+    <menuitem
+        id="shipment_planning_menu"
+        parent="stock.menu_stock_warehouse_mgmt"
+        action="shipment_planning_action"
+    />
+</odoo>
