@@ -192,7 +192,10 @@
                             attrs="{'invisible': [('state', 'in', ('draft', 'confirmed'))]}"
                         >
                             <span class="o_horizontal_separator">Bulk content</span>
-                            <field name="loaded_move_line_without_package_ids">
+                            <field
+                                name="loaded_move_line_without_package_ids"
+                                widget="many2many"
+                            >
                                 <tree create="0">
                                     <field name="picking_id" />
                                     <field name="product_id" />
