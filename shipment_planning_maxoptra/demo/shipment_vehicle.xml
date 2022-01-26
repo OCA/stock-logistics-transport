@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="shipment.vehicle" id="demo_vehicle_1">
+        <field name="name">Demo vehicle 1</field>
+        <field name="maxoptra_name">DemoVehicle1</field>
+    </record>
+    <record model="shipment.vehicle" id="demo_vehicle_2">
+        <field name="name">Demo vehicle 2</field>
+        <field name="maxoptra_name">DemoVehicle2</field>
+    </record>
+    <record model="shipment.vehicle" id="demo_vehicle_3">
+        <field name="name">Demo vehicle 3</field>
+        <field name="maxoptra_name">DemoVehicle3</field>
+    </record>
+</odoo>

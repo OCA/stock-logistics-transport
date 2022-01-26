@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="shipment_planning_view_form_inherit" model="ir.ui.view">
+        <field name="name">shipment.planning.form.inherit</field>
+        <field name="model">shipment.planning</field>
+        <field name="inherit_id" ref="shipment_planning.shipment_planning_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='info2']" position="inside">
+                <field name="maxoptra_planning" />
+                <field
+                    name="maxoptra_to_import_file"
+                    widget="binary"
+                    filename="maxoptra_to_import_file_name"
+                    attrs="{'invisible': [('maxoptra_to_import_file_name', '=', False)]}"
+                />
+                <field name="maxoptra_to_import_file_name" invisible="1" />
+                <field name="maxoptra_exported_file" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@name='action_done']" position="attributes">
+                <attribute name="class">btn-secondary</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_in_progress']" position="attributes">
+                <attribute name="string">Generate CSV</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_in_progress']" position="after">
+                <button
+                    name="action_import_maxoptra_schedule"
+                    type="object"
+                    string="Import Schedule from MaxOptra"
+                    class="btn-primary"
+                    states="in_progress"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

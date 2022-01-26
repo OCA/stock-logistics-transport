@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="shipment_maxoptra_schedule_import_view_form" model="ir.ui.view">
+        <field name="name">shipment.maxoptra.schedule.import.form</field>
+        <field name="model">shipment.maxoptra.schedule.import</field>
+        <field name="arch" type="xml">
+            <form string="Import schedule from MaxOptra">
+                <p
+                >Loading the CSV planning exported from Maxoptra interface will create one batch picking per vehicles.</p>
+                <group>
+                    <group>
+                        <field name="shipment_planning_id" invisible="1" />
+                        <field
+                            name="maxoptra_schedule_file"
+                            widget="binary"
+                            filename="maxoptra_schedule_file_name"
+                        />
+                        <field name="maxoptra_schedule_file_name" invisible="1" />
+                        <field name="warehouse_delivery_steps" invisible="1" />
+                        <field name="tz" />
+                    </group>
+                </group>
+                <group>
+                    <group
+                        string="Pick"
+                        name="Pick"
+                        attrs="{'invisible': [('warehouse_delivery_steps', '!=', ('pick_ship'))]}"
+                    >
+                        <field name="regroup_pick_operations" />
+                        <field
+                            name="reverse_order_pick_operations"
+                            attrs="{'invisible': [('regroup_pick_operations', '=', False)]}"
+                        />
+                        <field name="pick_operations_start_time" />
+                        <field
+                            name="pick_operations_duration"
+                            widget="float_time"
+                            attrs="{'invisible': [('pick_operations_start_time', '=', False)]}"
+                        />
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        name="action_import_schedule"
+                        string="Import schedule"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

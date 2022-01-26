@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="res.partner" id="warehouse0_address">
+        <field name="name">Warehouse</field>
+        <field name="parent_id" ref="base.main_partner" />
+        <field name="type">other</field>
+        <field name="street">584 Eccles Ave</field>
+        <field name="city">South San Francisco</field>
+        <field name="state_id" ref='base.state_us_5' />
+        <field name="zip">94080</field>
+        <field name="country_id" ref="base.us" />
+    </record>
+    <record model="stock.warehouse" id="stock.warehouse0">
+        <field name="partner_id" ref="warehouse0_address" />
+        <field name="maxoptra_distribution_centre_name">San-Fransisco</field>
+    </record>
+</odoo>

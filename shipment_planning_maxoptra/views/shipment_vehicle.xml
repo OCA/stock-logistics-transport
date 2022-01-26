@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="shipment_vehicle_view_form" model="ir.ui.view">
+        <field name="name">shipment.vehicle.form</field>
+        <field name="model">shipment.vehicle</field>
+        <field name="arch" type="xml">
+            <form string="Shipment vehicle">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                        </group>
+                        <group>
+                            <field name="maxoptra_name" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="shipment_vehicle_view_tree" model="ir.ui.view">
+        <field name="name">shipment.vehicle.tree</field>
+        <field name="model">shipment.vehicle</field>
+        <field name="arch" type="xml">
+            <tree name="Shipment vehicles">
+                <field name="name" />
+                <field name="maxoptra_name" />
+            </tree>
+        </field>
+    </record>
+        <record id="shipment_vehicle_action" model="ir.actions.act_window">
+        <field name="name">Shipment Vehicles</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">shipment.vehicle</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="shipment_vehicle_menu"
+        parent="stock.menu_stock_config_settings"
+        action="shipment_vehicle_action"
+    />
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_shipment_maxoptra_schedule_import,access_shipment_maxoptra_schedule_import,model_shipment_maxoptra_schedule_import,base.group_user,1,1,1,1
+access_shipment_vehicle,access_shipment_vehicle,model_shipment_vehicle,base.group_user,1,1,1,1
