@@ -108,6 +108,9 @@ class ShipmentMaxoptraScheduleImport(models.TransientModel):
         for batch_picking in following_batch_pickings:
             cnt = 0
             new_batch = self.env["stock.picking.batch"].create({})
+            # FIXME: If previous_picking have different source location, the
+            #  assignation to the batch will fail, and we should either create
+            #  one batch per source location or ignore some.
             for picking in batch_picking.picking_ids.sorted(
                 "scheduled_date", reverse_order
             ):
