@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 import json
 
+import pytz
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.osv import expression
@@ -58,8 +60,8 @@ class ShipmentPlanning(models.Model):
         readonly=True,
         help="Use incoming to plan receptions, use outgoing for deliveries.",
     )
-    date_from = fields.Datetime()
-    date_to = fields.Datetime()
+    date_from = fields.Datetime(default=lambda self: self._default_date_from())
+    date_to = fields.Datetime(default=lambda self: self._default_date_to())
     picking_to_plan_ids = fields.One2many(
         comodel_name="stock.picking",
         inverse_name="shipment_planning_id",
@@ -73,6 +75,24 @@ class ShipmentPlanning(models.Model):
             "Reference must be unique per company!",
         ),
     ]
+
+    @api.model
+    def _default_date_from(self):
+        user_tz = pytz.timezone(self.env.context.get('tz') or 'UTC')
+        naive_date = fields.Datetime.now()
+        date_from = pytz.utc.localize(naive_date).astimezone(user_tz)
+        date_from = date_from.replace(hour=0, minute=0, second=1)
+        date_from = date_from.astimezone(pytz.utc).replace(tzinfo=None)
+        return date_from
+
+    @api.model
+    def _default_date_to(self):
+        user_tz = pytz.timezone(self.env.context.get('tz') or 'UTC')
+        naive_date = fields.Datetime.now()
+        date_to = pytz.utc.localize(naive_date).astimezone(user_tz)
+        date_to = date_to.replace(hour=23, minute=59, second=59)
+        date_to = date_to.astimezone(pytz.utc).replace(tzinfo=None)
+        return date_to
 
     def action_confirm(self):
         not_draft_shipments = self.filtered(lambda s: s.state != "draft")
