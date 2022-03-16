@@ -195,25 +195,24 @@ class ShipmentMaxoptraScheduleImport(models.TransientModel):
         reader = csv.DictReader(_reader(buff))
         for row in reader:
             # TODO: Allow to use different CSV column?
-            delivery_start = datetime.strptime(
-                row.get("Scheduled arrival time"), MAXOPTRA_DATETIME_FORMAT
-            )
-            if self.tz:
-                timezone = pytz.timezone(self.tz)
-                utc = pytz.utc
-                delivery_start = (
-                    timezone.localize(delivery_start)
-                    .astimezone(utc)
-                    .replace(tzinfo=None)
-                )
-            res.append(
-                {
-                    "picking_name": row.get("Order reference"),
-                    "picking_scheduled_seq": row.get("Scheduled sequence"),
-                    "driver": row.get("Performer name"),
-                    "vehicle": row.get("Vehicle name"),
-                    "scheduled_delivery_start_datetime": delivery_start,
-                }
-            )
+            res.append(self.read_row(row))
         buff.close()
         return res
+
+    def read_row(self, row):
+        delivery_start = datetime.strptime(
+            row.get("Scheduled arrival time"), MAXOPTRA_DATETIME_FORMAT
+        )
+        if self.tz:
+            timezone = pytz.timezone(self.tz)
+            utc = pytz.utc
+            delivery_start = (
+                timezone.localize(delivery_start).astimezone(utc).replace(tzinfo=None)
+            )
+        return {
+            "picking_name": row.get("Order reference"),
+            "picking_scheduled_seq": row.get("Scheduled sequence"),
+            "driver": row.get("Performer name"),
+            "vehicle": row.get("Vehicle name"),
+            "scheduled_delivery_start_datetime": delivery_start,
+        }

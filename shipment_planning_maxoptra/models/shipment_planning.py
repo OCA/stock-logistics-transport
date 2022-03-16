@@ -63,26 +63,34 @@ class ShipmentPlanning(models.Model):
         buff = io.BytesIO()
         writer = pycompat.csv_writer(buff, quoting=1)
 
-        writer.writerow(MAXOPTRA_COLUMN_NAMES)
+        writer.writerow(self.get_header_names())
 
         for pick in self.picking_to_plan_ids:
-            # TODO: prefetch warehouses before the loop to avoid calling this
-            #  search on each iteration?
-            wh = pick.location_id.get_warehouse()
-            if not wh.maxoptra_distribution_centre_name:
-                raise UserError(
-                    _("Please define MaxOptra Distribution Centre Name on Warehouse %s")
-                    % wh.name
-                )
-            partner_address = pick.partner_id._get_maxoptra_address()
-            row = [
-                pick.name,
-                pick.scheduled_date.strftime(MAXOPTRA_DATE_FORMAT),
-                wh.maxoptra_distribution_centre_name,
-                pick.partner_id.name,
-                partner_address,
-            ]
+            row = self.prepare_row(pick)
             writer.writerow(row)
         csv_value = buff.getvalue()
         buff.close()
         return csv_value
+
+    def prepare_row(self, pick):
+        # TODO: prefetch warehouses before the loop to avoid calling this
+        #  search on each iteration?
+        wh = pick.location_id.get_warehouse()
+        if not wh.maxoptra_distribution_centre_name:
+            raise UserError(
+                _("Please define MaxOptra Distribution Centre Name on Warehouse %s")
+                % wh.name
+            )
+        partner_address = pick.partner_id._get_maxoptra_address()
+        return [
+            pick.name,
+            pick.scheduled_date.strftime(MAXOPTRA_DATE_FORMAT),
+            wh.maxoptra_distribution_centre_name,
+            pick.partner_id.name,
+            pick.partner_id.phone,
+            pick.partner_id.email,
+            partner_address,
+        ]
+
+    def get_header_names(self):
+        return MAXOPTRA_COLUMN_NAMES
