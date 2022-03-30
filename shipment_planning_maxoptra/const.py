@@ -9,6 +9,8 @@ MAXOPTRA_COLUMN_NAMES = [
     "date",
     "distributionCentreName",
     "customerLocationName",
+    "contactNumber",
+    "contactEmail",
     "customerLocationAddress",
 ]
 
