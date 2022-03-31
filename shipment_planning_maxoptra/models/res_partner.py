@@ -1,6 +1,6 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo import models
+from odoo import fields, models
 
 from ..const import MAXOPTRA_ADDRESS_FORMAT
 
@@ -8,6 +8,12 @@ from ..const import MAXOPTRA_ADDRESS_FORMAT
 class ResPartner(models.Model):
 
     _inherit = "res.partner"
+
+    maxoptra_driver_name = fields.Char(
+        string="Driver External ID",
+        help="External ID of Driver in Maxoptra, used to target the right "
+        "partner to set on Batch pickings after import.",
+    )
 
     def _get_maxoptra_address(self):
         self.ensure_one()

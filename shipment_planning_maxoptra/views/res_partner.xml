@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_stock_form" model="ir.ui.view">
+        <field name="name">res.partner.stock.property.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="stock.view_partner_stock_form" />
+        <field name="arch" type="xml">
+            <group name="container_row_stock" position="after">
+                <group
+                    string="Maxoptra"
+                    name="maxoptra"
+                    groups="stock.group_stock_user"
+                >
+                    <group>
+                        <field name="maxoptra_driver_name" />
+                    </group>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

@@ -43,6 +43,10 @@ class TestMaxoptra(SavepointCase):
         cls.vehicle1 = cls.env.ref("shipment_planning_maxoptra.demo_vehicle_1")
         cls.vehicle2 = cls.env.ref("shipment_planning_maxoptra.demo_vehicle_2")
         cls.vehicle3 = cls.env.ref("shipment_planning_maxoptra.demo_vehicle_3")
+        # Drivers
+        cls.driver1 = cls._create_partner_driver("Driver 1", "Driver of Demo vehicle 1")
+        cls.driver2 = cls._create_partner_driver("Driver 2", "Driver of Demo vehicle 2")
+        cls.driver3 = cls._create_partner_driver("Driver 3", "Driver of Demo vehicle 3")
         # Product
         cls.product = cls.env.ref("stock.product_cable_management_box")
         cls.env["stock.quant"]._update_available_quantity(
@@ -56,6 +60,15 @@ class TestMaxoptra(SavepointCase):
         if decode:
             content = base64.b64decode(content)
         return csv.DictReader(_reader(io.BytesIO(content)))
+
+    @classmethod
+    def _create_partner_driver(cls, partner_name, driver_name):
+        return cls.env["res.partner"].create(
+            {
+                "name": partner_name,
+                "maxoptra_driver_name": driver_name,
+            }
+        )
 
     @classmethod
     def _create_delivery_order(cls, partner):
@@ -202,6 +215,8 @@ class TestMaxoptra(SavepointCase):
             self.assertEqual(
                 delivery.scheduled_date, self.delivery_scheduled_date.get(delivery.name)
             )
+            self.assertEqual(delivery.driver_id, self.driver1)
+        self.assertEqual(batch_vehicle_1.driver_id, self.driver1)
         # South bay area deliveries are grouped on Vehicle3
         batch_vehicle_3 = self.env["stock.picking.batch"].search(
             [
@@ -225,6 +240,8 @@ class TestMaxoptra(SavepointCase):
             self.assertEqual(
                 delivery.scheduled_date, self.delivery_scheduled_date.get(delivery.name)
             )
+            self.assertEqual(delivery.driver_id, self.driver3)
+        self.assertEqual(batch_vehicle_3.driver_id, self.driver3)
 
     @freeze_time("2022-01-25 08:00:00")
     def test_csv_import_pick_ship_grouped(self):
@@ -273,12 +290,16 @@ class TestMaxoptra(SavepointCase):
         self.assertEqual(self.delivery_jackson.batch_id, delivery_batch_vehicle_1)
         self.assertEqual(self.delivery_ready.batch_id, delivery_batch_vehicle_1)
         self.assertEqual(self.delivery_lumber.batch_id, delivery_batch_vehicle_1)
+        self.assertEqual(delivery_batch_vehicle_1.driver_id, self.driver1)
+        for delivery in delivery_batch_vehicle_1.picking_ids:
+            self.assertEqual(delivery.driver_id, self.driver1)
         # North bay area pick pickings
         pick_pickings_vehicle_1 = self._get_previous_pickings(
             delivery_batch_vehicle_1.picking_ids
         )
         pick_batch_vehicle_1 = pick_pickings_vehicle_1.mapped("batch_id")
         self.assertEqual(len(pick_batch_vehicle_1), 1)
+        self.assertFalse(pick_batch_vehicle_1.driver_id)
         self.assertEqual(
             self._get_previous_pickings(self.delivery_lumber).scheduled_date,
             pick_start_time,
@@ -304,12 +325,16 @@ class TestMaxoptra(SavepointCase):
         )
         self.assertEqual(self.delivery_gemini.batch_id, delivery_batch_vehicle_3)
         self.assertEqual(self.delivery_deco_addict.batch_id, delivery_batch_vehicle_3)
+        self.assertEqual(delivery_batch_vehicle_3.driver_id, self.driver3)
+        for delivery in delivery_batch_vehicle_3.picking_ids:
+            self.assertEqual(delivery.driver_id, self.driver3)
         # South bay area pick pickings
         pick_pickings_vehicle_3 = self._get_previous_pickings(
             delivery_batch_vehicle_3.picking_ids
         )
         pick_batch_vehicle_3 = pick_pickings_vehicle_3.mapped("batch_id")
         self.assertEqual(len(pick_batch_vehicle_3), 1)
+        self.assertFalse(pick_batch_vehicle_3.driver_id)
         self.assertEqual(
             self._get_previous_pickings(self.delivery_deco_addict).scheduled_date,
             pick_start_time,

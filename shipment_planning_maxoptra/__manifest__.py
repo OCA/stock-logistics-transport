@@ -14,6 +14,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "views/res_partner.xml",
         "views/shipment_planning.xml",
         "views/shipment_vehicle.xml",
         "views/stock_picking.xml",

@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <field name="origin" position="after">
                 <field name="vehicle_id" />
+                <field name="driver_id" />
             </field>
         </field>
     </record>

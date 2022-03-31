@@ -8,3 +8,4 @@ class StockPicking(models.Model):
     _inherit = "stock.picking"
 
     vehicle_id = fields.Many2one("shipment.vehicle")
+    driver_id = fields.Many2one("res.partner")

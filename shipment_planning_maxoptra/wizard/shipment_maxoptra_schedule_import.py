@@ -138,7 +138,9 @@ class ShipmentMaxoptraScheduleImport(models.TransientModel):
     def create_delivery_batch_picking_by_vehicle(self, schedule_by_vehicles):
         batch_ids = []
         for vehicle_name, maxoptra_deliveries in schedule_by_vehicles.items():
-            batch_picking_values = self._prepare_batch_picking_values(vehicle_name)
+            batch_picking_values = self._prepare_batch_picking_values(
+                vehicle_name, driver_name=maxoptra_deliveries[0].get("driver")
+            )
             batch_picking = self.env["stock.picking.batch"].create(batch_picking_values)
             batch_ids.append(batch_picking.id)
             for maxoptra_delivery in maxoptra_deliveries:
@@ -158,16 +160,23 @@ class ShipmentMaxoptraScheduleImport(models.TransientModel):
                             "scheduled_delivery_start_datetime"
                         ),
                         "vehicle_id": batch_picking.vehicle_id.id,
+                        "driver_id": batch_picking.driver_id.id,
                     }
                 )
         return self.env["stock.picking.batch"].browse(batch_ids)
 
-    def _prepare_batch_picking_values(self, vehicle_name):
+    def _prepare_batch_picking_values(self, vehicle_name, driver_name=None):
         vehicle = self.env["shipment.vehicle"].search([("name", "=", vehicle_name)])
         values = {
             "company_id": self.shipment_planning_id.company_id.id,
             "vehicle_id": vehicle.id,
         }
+        if driver_name:
+            driver = self.env["res.partner"].search(
+                [("maxoptra_driver_name", "=", driver_name)]
+            )
+            if driver:
+                values["driver_id"] = driver.id
         return values
 
     def group_schedule_by_vehicle(self, maxoptra_schedule):
