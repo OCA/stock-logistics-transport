@@ -202,7 +202,7 @@ class TestMaxoptra(SavepointCase):
             self.assertEqual(
                 delivery.scheduled_date, self.delivery_scheduled_date.get(delivery.name)
             )
-        # South bay area deliveries are grouped on Vehicle1
+        # South bay area deliveries are grouped on Vehicle3
         batch_vehicle_3 = self.env["stock.picking.batch"].search(
             [
                 ("vehicle_id", "=", self.vehicle3.id),
@@ -221,7 +221,7 @@ class TestMaxoptra(SavepointCase):
         )
         self.assertIn(self.delivery_gemini, batch_vehicle_3.picking_ids)
         self.assertIn(self.delivery_deco_addict, batch_vehicle_3.picking_ids)
-        for delivery in batch_vehicle_1.picking_ids:
+        for delivery in batch_vehicle_3.picking_ids:
             self.assertEqual(
                 delivery.scheduled_date, self.delivery_scheduled_date.get(delivery.name)
             )
@@ -295,21 +295,21 @@ class TestMaxoptra(SavepointCase):
             self._get_previous_pickings(self.delivery_azure).scheduled_date,
             pick_start_time + relativedelta(minutes=45),
         )
-        # South bay area deliveries are grouped on Vehicle1
-        batch_vehicle_3 = self.env["stock.picking.batch"].search(
+        # South bay area deliveries are grouped on Vehicle3
+        delivery_batch_vehicle_3 = self.env["stock.picking.batch"].search(
             [
                 ("vehicle_id", "=", self.vehicle3.id),
                 ("shipment_planning_id", "=", shipment_planning.id),
             ]
         )
-        self.assertEqual(self.delivery_gemini.batch_id, batch_vehicle_3)
-        self.assertEqual(self.delivery_deco_addict.batch_id, batch_vehicle_3)
+        self.assertEqual(self.delivery_gemini.batch_id, delivery_batch_vehicle_3)
+        self.assertEqual(self.delivery_deco_addict.batch_id, delivery_batch_vehicle_3)
         # South bay area pick pickings
-        pick_pickings_vehicle_1 = self._get_previous_pickings(
-            delivery_batch_vehicle_1.picking_ids
+        pick_pickings_vehicle_3 = self._get_previous_pickings(
+            delivery_batch_vehicle_3.picking_ids
         )
-        pick_batch_vehicle_1 = pick_pickings_vehicle_1.mapped("batch_id")
-        self.assertEqual(len(pick_batch_vehicle_1), 1)
+        pick_batch_vehicle_3 = pick_pickings_vehicle_3.mapped("batch_id")
+        self.assertEqual(len(pick_batch_vehicle_3), 1)
         self.assertEqual(
             self._get_previous_pickings(self.delivery_deco_addict).scheduled_date,
             pick_start_time,
