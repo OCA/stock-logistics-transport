@@ -191,7 +191,7 @@ class TestMaxoptra(SavepointCase):
             import_wiz_form.maxoptra_schedule_file = base64.b64encode(
                 maxoptra_file.read()
             )
-            # TODO: Test invisble conditions for two steps
+            # TODO: Test invisible conditions for two steps
         import_wiz = import_wiz_form.save()
         import_wiz.action_import_schedule()
         # North bay area deliveries are grouped on Vehicle1

@@ -87,8 +87,8 @@ class ShipmentPlanning(models.Model):
             pick.scheduled_date.strftime(MAXOPTRA_DATE_FORMAT),
             wh.maxoptra_distribution_centre_name,
             pick.partner_id.name,
-            pick.partner_id.phone,
-            pick.partner_id.email,
+            pick.partner_id.phone or "",
+            pick.partner_id.email or "",
             partner_address,
         ]
 
