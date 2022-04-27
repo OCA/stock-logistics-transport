@@ -5,7 +5,6 @@ import codecs
 import csv
 import io
 from datetime import datetime
-from itertools import groupby
 
 import pytz
 from dateutil.relativedelta import relativedelta
@@ -54,7 +53,7 @@ class ShipmentMaxoptraScheduleImport(models.TransientModel):
     pick_operations_start_time = fields.Datetime(
         help="Start time for the first planned pick operation. "
         "Leave empty to avoid rescheduling.",
-        default=lambda self: self._default_start_time()
+        default=lambda self: self._default_start_time(),
     )
     pick_operations_duration = fields.Float(help="Duration between each pick operation")
 
@@ -162,12 +161,17 @@ class ShipmentMaxoptraScheduleImport(models.TransientModel):
     def create_delivery_batch_picking_by_vehicle(self, schedule_by_vehicles):
         batch_ids = []
         for vehicle_name, maxoptra_deliveries in schedule_by_vehicles.items():
-            for _type, picks in self._group_pickings_by_type(maxoptra_deliveries):
+            for _type, pick_list in self._group_pickings_by_type(maxoptra_deliveries):
                 batch_picking_values = self._prepare_batch_picking_values(
                     vehicle_name, driver_name=maxoptra_deliveries[0].get("driver")
                 )
-                batch_picking = self.env["stock.picking.batch"].create(batch_picking_values)
+                batch_picking = self.env["stock.picking.batch"].create(
+                    batch_picking_values
+                )
                 batch_ids.append(batch_picking.id)
+                picks = self.env["stock.picking"].browse(
+                    [pick.id for pick in pick_list]
+                )
                 picks.write(
                     {
                         "batch_id": batch_picking.id,
@@ -184,14 +188,14 @@ class ShipmentMaxoptraScheduleImport(models.TransientModel):
             )
             picking.write(
                 {
-                    "scheduled_date": delivery.get(
-                        "scheduled_delivery_start_datetime"
-                    ),
+                    "scheduled_date": delivery.get("scheduled_delivery_start_datetime"),
                 }
             )
 
     def _group_pickings_by_type(self, maxoptra_deliveries):
-        picking_names = [delivery.get("picking_name") for delivery in maxoptra_deliveries]
+        picking_names = [
+            delivery.get("picking_name") for delivery in maxoptra_deliveries
+        ]
         pickings = self.env["stock.picking"].search(
             [("name", "in", picking_names)], order="picking_type_id"
         )
@@ -199,12 +203,10 @@ class ShipmentMaxoptraScheduleImport(models.TransientModel):
             p_names = set(pickings.mapped("name"))
             missing_names = set(picking_names) - p_names
             raise UserError(
-                _("No matching picking found for Order reference \n %s") %
-                ", ".join(list(missing_names))
+                _("No matching picking found for Order reference \n %s")
+                % ", ".join(list(missing_names))
             )
-        return groupby(
-            pickings, key=lambda m: m.picking_type_id
-        )
+        return groupby(pickings, key=lambda m: m.picking_type_id)
 
     def _prepare_batch_picking_values(self, vehicle_name, driver_name=None):
         vehicle = self.env["shipment.vehicle"].search([("name", "=", vehicle_name)])
