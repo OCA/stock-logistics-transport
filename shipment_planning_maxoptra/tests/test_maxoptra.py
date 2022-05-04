@@ -343,3 +343,4 @@ class TestMaxoptra(SavepointCase):
             self._get_previous_pickings(self.delivery_gemini).scheduled_date,
             pick_start_time + relativedelta(minutes=15),
         )
+        # TODO scheduled_date doesn't have impact on scheduled_date on batch

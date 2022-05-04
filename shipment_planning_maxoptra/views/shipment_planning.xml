@@ -5,6 +5,13 @@
         <field name="model">shipment.planning</field>
         <field name="inherit_id" ref="shipment_planning.shipment_planning_view_form" />
         <field name="arch" type="xml">
+
+            <xpath expr="//notebook" position="inside">
+                <page string="Related batches" name="batch">
+                    <field name="batch_picking_ids" readonly="1" />
+                </page>
+            </xpath>
+
             <xpath expr="//group[@name='info2']" position="inside">
                 <field name="maxoptra_planning" />
                 <field
