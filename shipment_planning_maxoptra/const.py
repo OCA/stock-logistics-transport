@@ -12,6 +12,7 @@ MAXOPTRA_COLUMN_NAMES = [
     "contactNumber",
     "contactEmail",
     "customerLocationAddress",
+    "partnerKey",
 ]
 
 MAXOPTRA_DATE_FORMAT = "%d/%m/%Y"

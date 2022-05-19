@@ -90,6 +90,7 @@ class ShipmentPlanning(models.Model):
             pick.partner_id.phone or "",
             pick.partner_id.email or "",
             partner_address,
+            pick.partner_id.maxoptra_partner_key or "",
         ]
 
     def get_header_names(self):
