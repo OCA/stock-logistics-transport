@@ -10,8 +10,8 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     maxoptra_driver_name = fields.Char(
-        string="Driver External ID",
-        help="External ID of Driver in Maxoptra, used to target the right "
+        string="Driver External Name",
+        help="External name of Driver in Maxoptra, used to target the right "
         "partner to set on Batch pickings after import.",
     )
 

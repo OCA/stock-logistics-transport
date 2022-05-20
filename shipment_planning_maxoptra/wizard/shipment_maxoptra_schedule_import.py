@@ -138,7 +138,11 @@ class ShipmentMaxoptraScheduleImport(models.TransientModel):
                 picks = self.env["stock.picking"].browse(
                     [pick.id for pick in pick_list]
                 )
-                new_batch = batch_obj.create({"picking_ids": [(6, 0, picks.ids)]})
+                new_batch = batch_obj.create({
+                    "vehicle_id": batch_picking.vehicle_id.id,
+                    "driver_id": batch_picking.driver_id.id,
+                    "picking_ids": [(6, 0, picks.ids)],
+                })
                 new_batch_picking_ids.append(new_batch.id)
                 if start_datetime and operation_duration:
                     picks = self.sort_on_outgoing_date(picks, reverse_order)
