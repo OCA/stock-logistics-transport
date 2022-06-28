@@ -23,7 +23,7 @@ class WizardPlanShipment(models.TransientModel):
         required=True,
         domain=[("state", "in", ("draft", "confirmed"))],
     )
-    warning = fields.Char(string="Warning", readonly=True)
+    warning = fields.Char(readonly=True)
 
     @api.model
     def default_get(self, fields_list):

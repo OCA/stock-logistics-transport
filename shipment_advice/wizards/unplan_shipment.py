@@ -17,7 +17,7 @@ class WizardUnplanShipment(models.TransientModel):
         comodel_name="stock.move",
         string="Moves to unplan",
     )
-    warning = fields.Char(string="Warning", readonly=True)
+    warning = fields.Char(readonly=True)
 
     @api.model
     def default_get(self, fields_list):
