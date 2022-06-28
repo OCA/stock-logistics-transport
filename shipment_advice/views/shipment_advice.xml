@@ -243,7 +243,6 @@
         <field name="model">shipment.advice</field>
         <field name="arch" type="xml">
             <tree
-                string="Shipment Advices"
                 decoration-info="state == 'draft'"
                 decoration-muted="state == 'cancel'"
                 decoration-danger="state not in ('draft', 'cancel', 'done') and arrival_date &lt; current_date"

@@ -60,9 +60,7 @@ class StockPicking(models.Model):
     loaded_move_lines_progress = fields.Char(
         "Bulk lines loaded/total", compute="_compute_shipment_loaded_progress"
     )
-    loaded_weight = fields.Integer(
-        "Loaded weight", compute="_compute_shipment_loaded_progress"
-    )
+    loaded_weight = fields.Integer(compute="_compute_shipment_loaded_progress")
     loaded_weight_progress = fields.Char(
         "Weight/total", compute="_compute_shipment_loaded_progress"
     )
@@ -138,17 +136,13 @@ class StockPicking(models.Model):
             if picking.shipping_weight:
                 # FIXME: not sure how to get the weight of bulk line?
                 picking.loaded_weight = sum(
-                    [
-                        ml.result_package_id.shipping_weight or ml.move_id.weight
-                        for ml in picking.move_line_ids_without_package
-                        if ml.shipment_advice_id and ml.qty_done > 0
-                    ]
+                    ml.result_package_id.shipping_weight or ml.move_id.weight
+                    for ml in picking.move_line_ids_without_package
+                    if ml.shipment_advice_id and ml.qty_done > 0
                 ) + sum(
-                    [
-                        pl.package_id.shipping_weight
-                        for pl in picking.package_level_ids
-                        if pl.shipment_advice_id and pl.is_done
-                    ]
+                    pl.package_id.shipping_weight
+                    for pl in picking.package_level_ids
+                    if pl.shipment_advice_id and pl.is_done
                 )
                 total_weight = float_round(
                     picking.shipping_weight,
