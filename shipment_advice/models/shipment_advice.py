@@ -65,7 +65,6 @@ class ShipmentAdvice(models.Model):
         index=True,
     )
     arrival_date = fields.Datetime(
-        string="Arrival date",
         states={"draft": [("readonly", False)], "confirmed": [("readonly", False)]},
         readonly=True,
         help=(
@@ -74,7 +73,6 @@ class ShipmentAdvice(models.Model):
         ),
     )
     departure_date = fields.Datetime(
-        string="Departure date",
         states={
             "draft": [("readonly", False)],
             "confirmed": [("readonly", False)],

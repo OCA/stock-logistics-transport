@@ -25,7 +25,7 @@ class WizardLoadInShipment(models.TransientModel):
         required=True,
         domain=[("state", "in", ("confirm", "in_progress"))],
     )
-    warning = fields.Char(string="Warning", readonly=True)
+    warning = fields.Char(readonly=True)
     open_shipment = fields.Boolean(default=True)
 
     @api.model
