@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import fields
-from odoo.tests.common import SavepointCase, new_test_user
+from odoo.tests.common import TransactionCase, new_test_user
 
 
-class Common(SavepointCase):
+class Common(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
