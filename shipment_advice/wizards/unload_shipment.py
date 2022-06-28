@@ -16,7 +16,7 @@ class WizardUnloadShipment(models.TransientModel):
     move_line_ids = fields.Many2many(
         comodel_name="stock.move.line", string="Products to unload"
     )
-    warning = fields.Char(string="Warning", readonly=True)
+    warning = fields.Char(readonly=True)
 
     @api.model
     def default_get(self, fields_list):
