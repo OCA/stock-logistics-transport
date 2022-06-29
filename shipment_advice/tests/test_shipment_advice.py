@@ -18,7 +18,10 @@ class TestShipmentAdvice(Common):
             self.shipment_advice_out.action_confirm()
         self.shipment_advice_out.arrival_date = fields.Datetime.now()
         self.shipment_advice_out.action_confirm()
+        # Check 2nd user error, which is thrown if state is not equal to draft
         self.assertEqual(self.shipment_advice_out.state, "confirmed")
+        with self.assertRaises(UserError):
+            self.shipment_advice_out.action_confirm()
 
     def test_shipment_advice_in_progress(self):
         self._confirm_shipment_advice(self.shipment_advice_out)
@@ -27,12 +30,16 @@ class TestShipmentAdvice(Common):
         self.shipment_advice_out.dock_id = self.dock
         self.shipment_advice_out.action_in_progress()
         self.assertEqual(self.shipment_advice_out.state, "in_progress")
+        with self.assertRaises(UserError):
+            self.shipment_advice_out.action_in_progress()
 
     def test_shipment_advice_incoming_done_full(self):
         """Validating an incoming shipment validates automatically planned
         transfers. Here the planned transfers have been fully received.
         """
         picking = self.move_product_in1.picking_id
+        with self.assertRaises(UserError):
+            self.shipment_advice_in.action_done()
         self._check_sequence(self.shipment_advice_in)
         self._plan_records_in_shipment(self.shipment_advice_in, picking)
         self._in_progress_shipment_advice(self.shipment_advice_in)
@@ -145,7 +152,14 @@ class TestShipmentAdvice(Common):
         self.shipment_advice_out.action_cancel()
         self.assertEqual(self.shipment_advice_out.state, "cancel")
 
+    def test_shipment_advice_cancel_error(self):
+        # Test error case for action_cancel
+        with self.assertRaises(UserError):
+            self.shipment_advice_out.action_cancel()
+
     def test_shipment_advice_draft(self):
+        with self.assertRaises(UserError):
+            self.shipment_advice_out.action_draft()
         self._cancel_shipment_advice(self.shipment_advice_out)
         self.shipment_advice_out.action_draft()
         self.assertEqual(self.shipment_advice_out.state, "draft")

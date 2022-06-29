@@ -143,8 +143,6 @@ class Common(TransactionCase):
 
     def _cancel_shipment_advice(self, shipment_advice, dock=None):
         self._confirm_shipment_advice(shipment_advice)
-        if shipment_advice.state != "confirmed":
-            return
         shipment_advice.action_cancel()
         self.assertEqual(shipment_advice.state, "cancel")
 
