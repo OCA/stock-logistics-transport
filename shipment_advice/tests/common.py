@@ -118,6 +118,12 @@ class Common(TransactionCase):
         move.picking_id.action_assign()
         return move
 
+    def _check_sequence(self, shipment_advice):
+        if shipment_advice.shipment_type == "outgoing":
+            self.assertIn("OUT", shipment_advice.name)
+        else:
+            self.assertIn("IN", shipment_advice.name)
+
     def _confirm_shipment_advice(self, shipment_advice, arrival_date=None):
         if shipment_advice.state != "draft":
             return
