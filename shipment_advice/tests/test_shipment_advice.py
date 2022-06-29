@@ -13,6 +13,7 @@ class TestShipmentAdvice(Common):
         super().setUpClass()
 
     def test_shipment_advice_confirm(self):
+        self._check_sequence(self.shipment_advice_out)
         with self.assertRaises(UserError):
             self.shipment_advice_out.action_confirm()
         self.shipment_advice_out.arrival_date = fields.Datetime.now()
@@ -32,6 +33,7 @@ class TestShipmentAdvice(Common):
         transfers. Here the planned transfers have been fully received.
         """
         picking = self.move_product_in1.picking_id
+        self._check_sequence(self.shipment_advice_in)
         self._plan_records_in_shipment(self.shipment_advice_in, picking)
         self._in_progress_shipment_advice(self.shipment_advice_in)
         for ml in picking.move_line_ids:
