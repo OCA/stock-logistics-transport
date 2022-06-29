@@ -50,6 +50,11 @@ class TestShipmentAdviceStockUser(Common):
         action = move_line.with_user(self.stock_user).button_load_in_shipment()
         self.assertEqual(action["name"], "Load in shipment")
 
+    def test_stock_move_line_button_load_in_shipment_different_pack(self):
+        move_lines = self.move_product_out1.move_line_ids
+        action = move_lines.with_user(self.stock_user).button_load_in_shipment()
+        self.assertEqual(action["name"], "Load in shipment")
+
     def test_stock_picking_button_load_in_shipment(self):
         move_line = self.move_product_out1.move_line_ids[0]
         picking = move_line.picking_id.with_user(self.stock_user)
