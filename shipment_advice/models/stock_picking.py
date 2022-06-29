@@ -72,8 +72,10 @@ class StockPicking(models.Model):
     @api.depends("move_line_ids.shipment_advice_id")
     def _compute_loaded_in_shipment(self):
         for picking in self:
+            # NOTE: Make overloading containers possible,
+            # otherwise overloaded container would be marked as partially loaded
             picking.is_fully_loaded_in_shipment = all(
-                line.shipment_advice_id and line.qty_done == line.product_uom_qty
+                line.shipment_advice_id and line.qty_done >= line.product_uom_qty
                 for line in picking.move_line_ids
             )
             picking.is_partially_loaded_in_shipment = (
