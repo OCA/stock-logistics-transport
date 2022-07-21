@@ -4,6 +4,7 @@ from odoo import fields
 
 from odoo.addons.purchase_stock.tests.common import PurchaseTestCommon
 
+
 class TestPurchaseBuyRule(PurchaseTestCommon):
     def test_no_destination(self):
         company = self.env.ref("base.main_company")
