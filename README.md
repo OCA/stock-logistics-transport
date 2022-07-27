@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [stock_location_address](stock_location_address/) | 15.0.1.0.0 |  | Adds an address on locations
-[stock_location_address_purchase](stock_location_address_purchase/) | 15.0.1.0.0 |  | Uses the location address on purchases
+[stock_location_address_purchase](stock_location_address_purchase/) | 15.0.1.0.1 |  | Uses the location address on purchases
 
 [//]: # (end addons)
 
