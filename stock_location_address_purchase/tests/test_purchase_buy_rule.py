@@ -23,7 +23,12 @@ class TestPurchaseBuyRule(PurchaseTestCommon):
         self.assertTrue(purchase)
         self.assertFalse(purchase.dest_address_id)
         # Test for TypeError when passing date as string
-        self.assertRaises(TypeError, self._create_make_procurement(self.product_1, 15.00, date_planned=date_planned_str))
+        self.assertRaises(
+            TypeError,
+            self._create_make_procurement(
+                self.product_1, 15.00, date_planned=date_planned_str
+            ),
+        )
 
     def test_destination(self):
         company = self.env.ref("base.main_company")
@@ -42,4 +47,9 @@ class TestPurchaseBuyRule(PurchaseTestCommon):
         self.assertTrue(purchase)
         self.assertTrue(purchase.dest_address_id)
         self.assertEqual(purchase.dest_address_id, partner)
-        self.assertRaises(TypeError, self._create_make_procurement(self.product_1, 15.00, date_planned=date_planned_str))
+        self.assertRaises(
+            TypeError,
+            self._create_make_procurement(
+                self.product_1, 15.00, date_planned=date_planned_str
+            ),
+        )
