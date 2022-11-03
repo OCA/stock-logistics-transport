@@ -236,7 +236,7 @@ class ShipmentAdvice(models.Model):
 
     @api.model
     def create(self, vals):
-        defaults = self.default_get(["name", "shipment_type"])
+        defaults = self.default_get(["name"])
         sequence = self.env.ref("shipment_advice.shipment_advice_outgoing_sequence")
         if vals["shipment_type"] == "incoming":
             sequence = self.env.ref("shipment_advice.shipment_advice_incoming_sequence")
