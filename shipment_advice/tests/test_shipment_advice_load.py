@@ -126,15 +126,12 @@ class TestShipmentAdviceLoad(Common):
 
     def test_shipment_advice_load_moves_different_pack(self):
         move = self.move_product_out1
-        move_package_ids = (
-            self.move_product_out2.move_line_ids.ids
-            + self.move_product_out3.move_line_ids.ids
-        )
+        move_package_ids = self.move_product_out2 + self.move_product_out3
         self._plan_records_in_shipment(self.shipment_advice_out, move)
         self._in_progress_shipment_advice(self.shipment_advice_out)
         wiz_model = self.env["wizard.load.shipment"].with_context(
             active_model=move.move_line_ids._name,
-            active_ids=move.move_line_ids.ids + move_package_ids,
+            active_ids=move.move_line_ids.ids + move_package_ids.move_line_ids.ids,
         )
         wiz = wiz_model.create({"shipment_advice_id": self.shipment_advice_out.id})
         with self.assertRaises(UserError):
