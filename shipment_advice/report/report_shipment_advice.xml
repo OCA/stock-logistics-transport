@@ -80,7 +80,7 @@
                         </thead>
                         <tbody>
                             <tr
-                                t-foreach="o.loaded_package_level_ids"
+                                t-foreach="o.loaded_package_level_ids.sorted(lambda r: r.picking_id.name)"
                                 t-as="package_level"
                             >
                                 <td>
