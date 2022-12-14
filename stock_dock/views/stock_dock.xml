@@ -24,6 +24,11 @@
                             groups="stock.group_stock_multi_warehouses"
                         />
                         <field name="company_id" groups="base.group_multi_company" />
+                        <field
+                            name="company_id"
+                            groups="!base.group_multi_company"
+                            invisible="1"
+                        />
                         <field name="barcode" />
                         <field name="active" invisible="1" />
                     </group>
