@@ -76,7 +76,7 @@
                 <filter
                     name="no_shipment_advice"
                     string="To plan in Shipment Advice"
-                    domain="['|', ('move_lines.shipment_advice_id', '=', False), ('move_line_ids.shipment_advice_id', '=', False)]"
+                    domain="['|', ('move_ids.shipment_advice_id', '=', False), ('move_ids.shipment_advice_id', '=', False)]"
                 />
             </group>
             <group position="inside">

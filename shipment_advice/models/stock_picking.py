@@ -10,7 +10,7 @@ class StockPicking(models.Model):
 
     planned_shipment_advice_id = fields.Many2one(
         comodel_name="shipment.advice",
-        related="move_lines.shipment_advice_id",
+        related="move_ids.shipment_advice_id",
         store=True,
         index=True,
     )
@@ -75,7 +75,7 @@ class StockPicking(models.Model):
             # NOTE: Make overloading containers possible,
             # otherwise overloaded container would be marked as partially loaded
             picking.is_fully_loaded_in_shipment = all(
-                line.shipment_advice_id and line.qty_done >= line.product_uom_qty
+                line.shipment_advice_id and line.qty_done >= line.reserved_uom_qty
                 for line in picking.move_line_ids
             )
             picking.is_partially_loaded_in_shipment = (
@@ -181,7 +181,7 @@ class StockPicking(models.Model):
 
     def _plan_in_shipment(self, shipment_advice):
         """Plan the whole transfers content into the given shipment advice."""
-        self.move_lines._plan_in_shipment(shipment_advice)
+        self.move_ids._plan_in_shipment(shipment_advice)
 
     def _load_in_shipment(self, shipment_advice):
         """Load the whole transfers content into the given shipment advice."""
