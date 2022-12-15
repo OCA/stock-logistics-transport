@@ -42,10 +42,10 @@ class WizardUnplanShipment(models.TransientModel):
         pickings_to_keep = pickings.filtered(
             lambda o: (
                 o.state not in ["cancel", "done"]
-                and o.move_lines.shipment_advice_id
+                and o.move_ids.shipment_advice_id
                 and all(
                     state in ("draft", "confirmed")
-                    for state in o.move_lines.shipment_advice_id.mapped("state")
+                    for state in o.move_ids.shipment_advice_id.mapped("state")
                 )
                 and o.picking_type_code in ("incoming", "outgoing")
             )
@@ -102,6 +102,6 @@ class WizardUnplanShipment(models.TransientModel):
     def action_unplan(self):
         """Unplan the selected records from their related shipment."""
         self.ensure_one()
-        self.picking_ids.move_lines.shipment_advice_id = False
+        self.picking_ids.move_ids.shipment_advice_id = False
         self.move_ids.shipment_advice_id = False
         return True

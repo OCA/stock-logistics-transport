@@ -28,7 +28,7 @@ class TestShipmentAdviceStockUser(Common):
     def test_shipment_advice_button_open_loaded_move_lines(self):
         shipment_advice = self.shipment_advice_out.with_user(self.stock_user)
         action = shipment_advice.button_open_loaded_move_lines()
-        self.assertEqual(action["name"], "Product Moves")
+        self.assertEqual(action["name"], "Moves History")
 
     def test_shipment_advice_button_open_loaded_packages(self):
         shipment_advice = self.shipment_advice_out.with_user(self.stock_user)

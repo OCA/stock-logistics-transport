@@ -166,8 +166,18 @@
                                 groups="stock.group_stock_multi_warehouses"
                             />
                             <field
+                                name="warehouse_id"
+                                groups="!stock.group_stock_multi_warehouses"
+                                invisible="1"
+                            />
+                            <field
                                 name="company_id"
                                 groups="base.group_multi_company"
+                            />
+                            <field
+                                name="company_id"
+                                groups="!base.group_multi_company"
+                                invisible="1"
                             />
                             <field name="shipment_type" />
                         </group>
@@ -200,7 +210,7 @@
                                     <field name="picking_id" />
                                     <field name="product_id" />
                                     <field name="lot_id" />
-                                    <field name="product_uom_qty" />
+                                    <field name="reserved_uom_qty" />
                                     <field name="qty_done" />
                                     <field name="product_uom_id" />
                                     <field name="state" />
@@ -258,7 +268,13 @@
                     name="warehouse_id"
                     groups="stock.group_stock_multi_warehouses"
                 />
+                <!-- pylint: disable=duplicate-xml-fields -->
                 <field name="company_id" groups="base.group_multi_company" />
+                <field
+                    name="company_id"
+                    groups="!base.group_multi_company"
+                    invisible="1"
+                />
                 <field name="state" />
             </tree>
         </field>

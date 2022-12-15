@@ -13,7 +13,7 @@ class TestShipmentAdvicePlan(Common):
         self.assertEqual(wiz.shipment_advice_id, self.shipment_advice_out)
         self.assertEqual(wiz.shipment_advice_id.planned_picking_ids, picking)
         self.assertEqual(wiz.shipment_advice_id.planned_pickings_count, 1)
-        self.assertEqual(wiz.shipment_advice_id.planned_move_ids, picking.move_lines)
+        self.assertEqual(wiz.shipment_advice_id.planned_move_ids, picking.move_ids)
         self.assertEqual(wiz.shipment_advice_id.planned_moves_count, 3)
 
     def test_shipment_advice_plan_move(self):
