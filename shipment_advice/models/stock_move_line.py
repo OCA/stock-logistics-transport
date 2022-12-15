@@ -64,7 +64,7 @@ class StockMoveLine(models.Model):
                     )
                 )
             move_line.shipment_advice_id = shipment_advice.id
-            move_line.qty_done = move_line.product_uom_qty
+            move_line.qty_done = move_line.reserved_uom_qty
 
     def _unload_from_shipment(self):
         """Unload the move lines from their related shipment advice."""

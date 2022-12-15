@@ -416,9 +416,9 @@ class ShipmentAdvice(models.Model):
             ]
             if self.planned_move_ids:
                 # and planned in the same shipment
-                domain.append(("move_lines.shipment_advice_id", "=", self.id))
+                domain.append(("move_ids.shipment_advice_id", "=", self.id))
             else:
-                domain.append(("move_lines.shipment_advice_id", "=", False))
+                domain.append(("move_ids.shipment_advice_id", "=", False))
             if self.carrier_ids:
                 domain.append(("carrier_id", "in", self.carrier_ids.ids))
         return domain

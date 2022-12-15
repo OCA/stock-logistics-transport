@@ -66,11 +66,11 @@ class WizardLoadInShipment(models.TransientModel):
             )
         # Prefill the shipment if any (we take the first one)
         res["shipment_advice_id"] = fields.first(
-            pickings_to_keep.move_lines.shipment_advice_id
+            pickings_to_keep.move_ids.shipment_advice_id
         ).id
         # Prefill the shipment with the planned one if any (we take the first one)
         res["shipment_advice_id"] = fields.first(
-            pickings_to_keep.move_lines.shipment_advice_id
+            pickings_to_keep.move_ids.shipment_advice_id
         ).id
         return res
 
