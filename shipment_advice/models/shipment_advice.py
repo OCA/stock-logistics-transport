@@ -234,15 +234,22 @@ class ShipmentAdvice(models.Model):
             else:
                 shipment.carrier_ids = shipment.loaded_picking_ids.carrier_id
 
-    @api.model
-    def create(self, vals):
+    @api.model_create_multi
+    def create(self, vals_list):
         defaults = self.default_get(["name"])
-        sequence = self.env.ref("shipment_advice.shipment_advice_outgoing_sequence")
-        if vals["shipment_type"] == "incoming":
-            sequence = self.env.ref("shipment_advice.shipment_advice_incoming_sequence")
-        if vals.get("name", "/") == "/" and defaults.get("name", "/") == "/":
-            vals["name"] = sequence.next_by_id()
-        return super().create(vals)
+        outgoing_sequence = self.env.ref(
+            "shipment_advice.shipment_advice_outgoing_sequence"
+        )
+        incomig_sequence = self.env.ref(
+            "shipment_advice.shipment_advice_incoming_sequence"
+        )
+        for vals in vals_list:
+            sequence = outgoing_sequence
+            if vals["shipment_type"] == "incoming":
+                sequence = incomig_sequence
+            if vals.get("name", "/") == "/" and defaults.get("name", "/") == "/":
+                vals["name"] = sequence.next_by_id()
+        return super().create(vals_list)
 
     def action_confirm(self):
         for shipment in self:
