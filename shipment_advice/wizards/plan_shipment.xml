@@ -7,46 +7,47 @@
         <field name="model">wizard.plan.shipment</field>
         <field name="arch" type="xml">
             <form string="Plan in Shipment Advice">
-                <strong style="color: red;">
-                    <field
-                        name="warning"
-                        attrs="{'invisible': [('warning', '=', False)]}"
-                    />
-                </strong>
-                <group
-                    name="pickings"
-                    attrs="{'invisible': [('picking_ids', '=', [])]}"
-                    string="Transfers to plan"
-                >
-                    <field
-                        name="picking_ids"
-                        nolabel="1"
-                        context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
-                    />
-                </group>
-                <group
-                    name="moves"
-                    attrs="{'invisible': [('move_ids', '=', [])]}"
-                    string="Moves to plan"
-                >
-                    <field name="move_ids" nolabel="1" />
-                </group>
-                <group
-                    name="shipment"
-                    attrs="{'invisible': [('picking_ids', '=', []), ('move_ids', '=', [])]}"
-                >
-                    <field name="shipment_advice_id" />
-                </group>
-                <footer>
-                    <button
-                        name="action_plan"
-                        type="object"
-                        string="Validate"
-                        class="btn-primary"
+                <sheet>
+                    <strong style="color: red;">
+                        <field
+                            name="warning"
+                            attrs="{'invisible': [('warning', '=', False)]}"
+                        />
+                    </strong>
+                    <group
+                        name="pickings"
+                        attrs="{'invisible': [('picking_ids', '=', [])]}"
+                        string="Transfers"
+                    >
+                        <field
+                            name="picking_ids"
+                            context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
+                        />
+                    </group>
+                    <group
+                        name="moves"
+                        attrs="{'invisible': [('move_ids', '=', [])]}"
+                        string="Moves"
+                    >
+                        <field name="move_ids" />
+                    </group>
+                    <group
+                        name="shipment"
                         attrs="{'invisible': [('picking_ids', '=', []), ('move_ids', '=', [])]}"
-                    />
-                    <button special="cancel" string="Cancel" class="btn-default" />
-                </footer>
+                    >
+                        <field name="shipment_advice_id" />
+                    </group>
+                    <footer>
+                        <button
+                            name="action_plan"
+                            type="object"
+                            string="Validate"
+                            class="btn-primary"
+                            attrs="{'invisible': [('picking_ids', '=', []), ('move_ids', '=', [])]}"
+                        />
+                        <button special="cancel" string="Cancel" class="btn-default" />
+                    </footer>
+                </sheet>
             </form>
         </field>
     </record>

@@ -16,11 +16,10 @@
                 <group
                     name="pickings"
                     attrs="{'invisible': [('picking_ids', '=', [])]}"
-                    string="Transfers to unload"
+                    string="Transfers"
                 >
                     <field
                         name="picking_ids"
-                        nolabel="1"
                         context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
                     />
                 </group>

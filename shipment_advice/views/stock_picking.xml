@@ -92,7 +92,7 @@
     <record id="stock_picking_limited_view_tree" model="ir.ui.view">
         <field name="name">stock.picking.limited.tree</field>
         <field name="model">stock.picking</field>
-        <field name="priority" eval="100" />
+        <field name="mode">primary</field>
         <field name="arch" type="xml">
             <tree create="0">
                 <field name="name" />
