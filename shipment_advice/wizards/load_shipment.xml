@@ -16,33 +16,30 @@
                 <group
                     name="pickings"
                     attrs="{'invisible': [('picking_ids', '=', [])]}"
-                    string="Transfers to load"
+                    string="Transfers"
                 >
                     <field
                         name="picking_ids"
-                        nolabel="1"
                         context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
                     />
                 </group>
                 <group
                     name="products"
                     attrs="{'invisible': [('move_line_ids', '=', [])]}"
-                    string="Products to load"
+                    string="Products"
                 >
                     <field
                         name="move_line_ids"
-                        nolabel="1"
                         context="{'tree_view_ref': 'shipment_advice.stock_move_line_limited_view_tree'}"
                     />
                 </group>
                 <group
                     name="packages"
                     attrs="{'invisible': [('package_level_ids', '=', [])]}"
-                    string="Packages to load"
+                    string="Packages"
                 >
                     <field
                         name="package_level_ids"
-                        nolabel="1"
                         context="{'tree_view_ref': 'shipment_advice.stock_package_level_limited_view_tree'}"
                     />
                 </group>
