@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="shipment_advice_planner_form_view">
+        <field name="model">shipment.advice.planner</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="shipment_planning_method" />
+                        <field name="warehouse_id" />
+                        <field
+                            name="dock_id"
+                            attrs="{'invisible': [('warehouse_id', '=', False)]}"
+                        />
+                    </group>
+                    <separator string="Pickings to plan" />
+                    <field name="picking_to_plan_ids" />
+                </sheet>
+                <footer>
+                    <button
+                        name="button_plan_shipments"
+                        string="Plan Shipments"
+                        type="object"
+                        class="oe_highlight"
+                        data-hotkey="q"
+                    />
+                    <button
+                        string="Cancel"
+                        class="btn-secondary"
+                        special="cancel"
+                        data-hotkey="z"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="shipment_advice_planner_act_window">
+        <field name="name">Shipment Advice Planner</field>
+        <field name="res_model">shipment.advice.planner</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+    <record id="shipment_advice_planner_act_multi" model="ir.actions.act_window">
+        <field name="name">Shipment Advice Planner</field>
+        <field name="res_model">shipment.advice.planner</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="shipment_advice_planner_form_view" />
+        <field name="target">new</field>
+        <field name="context">{}</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="binding_view_types">list</field>
+    </record>
+
+    <record model="ir.ui.menu" id="shipment_advice_planner_menu">
+        <field name="name">Shipment Advice Planner</field>
+        <field name="parent_id" ref="stock.menu_stock_warehouse_mgmt" />
+        <field name="action" ref="shipment_advice_planner_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+
+</odoo>
