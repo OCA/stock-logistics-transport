@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_move_line_tree" model="ir.ui.view">
+        <field name="name">stock.move.line.tree.inherit</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="location_dest_id" position="after">
+                <field name="shipment_advice_id" />
+            </field>
+        </field>
+    </record>
+    <record id="stock_move_line_view_search" model="ir.ui.view">
+        <field name="name">stock.move.line.search.inherit</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.stock_move_line_view_search" />
+        <field name="arch" type="xml">
+            <field name="owner_id" position="after">
+                <field name="shipment_advice_id" />
+            </field>
+            <group position="inside">
+                <filter
+                    name="shipment_advice"
+                    string="Shipment Advice"
+                    domain="[]"
+                    context="{'group_by': 'shipment_advice_id'}"
+                />
+            </group>
+        </field>
+    </record>
+    <record id="view_stock_move_line_detailed_operation_tree" model="ir.ui.view">
+        <field name="name">stock.move.line.detailed.operation.tree.inherit</field>
+        <field name="model">stock.move.line</field>
+        <field
+            name="inherit_id"
+            ref="stock.view_stock_move_line_detailed_operation_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="result_package_id" position="after">
+                <field
+                    name="shipment_advice_id"
+                    optional="show"
+                    attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'outgoing')]}"
+                />
+            </field>
+            <field name="product_uom_id" position="after">
+                <field name="picking_code" invisible="1" />
+                <button
+                    name="button_load_in_shipment"
+                    type="object"
+                    icon="fa-truck"
+                    title="Load in shipment"
+                    attrs="{'invisible': ['|', ('shipment_advice_id', '!=', False), ('picking_code', '!=', 'outgoing')]}"
+                    context="{'open_shipment': False}"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="stock_move_line_limited_view_tree" model="ir.ui.view">
+        <field name="name">stock.move.line.limited.tree</field>
+        <field name="model">stock.move.line</field>
+        <field name="priority" eval="100" />
+        <field name="arch" type="xml">
+            <!-- string="Products" -->
+            <tree create="0">
+                <field name="picking_id" />
+                <field name="product_id" />
+                <field name="lot_id" />
+                <field name="reserved_uom_qty" />
+                <field name="qty_done" />
+                <field name="product_uom_id" />
+            </tree>
+        </field>
+    </record>
+</odoo>

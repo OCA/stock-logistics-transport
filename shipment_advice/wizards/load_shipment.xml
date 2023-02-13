@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_load_shipment_form" model="ir.ui.view">
+        <field name="name">wizard.load.shipment.form</field>
+        <field name="model">wizard.load.shipment</field>
+        <field name="arch" type="xml">
+            <form string="Load in Shipment Advice">
+                <strong style="color: red;">
+                    <field
+                        name="warning"
+                        attrs="{'invisible': [('warning', '=', False)]}"
+                    />
+                </strong>
+                <group
+                    name="pickings"
+                    attrs="{'invisible': [('picking_ids', '=', [])]}"
+                    string="Transfers"
+                >
+                    <field
+                        name="picking_ids"
+                        context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
+                    />
+                </group>
+                <group
+                    name="products"
+                    attrs="{'invisible': [('move_line_ids', '=', [])]}"
+                    string="Products"
+                >
+                    <field
+                        name="move_line_ids"
+                        context="{'tree_view_ref': 'shipment_advice.stock_move_line_limited_view_tree'}"
+                    />
+                </group>
+                <group
+                    name="packages"
+                    attrs="{'invisible': [('package_level_ids', '=', [])]}"
+                    string="Packages"
+                >
+                    <field
+                        name="package_level_ids"
+                        context="{'tree_view_ref': 'shipment_advice.stock_package_level_limited_view_tree'}"
+                    />
+                </group>
+                <group
+                    name="shipment"
+                    attrs="{'invisible': [('picking_ids', '=', []), ('move_line_ids', '=', []), ('package_level_ids', '=', [])]}"
+                >
+                    <field name="shipment_advice_id" />
+                </group>
+                <footer>
+                    <button
+                        name="action_load"
+                        type="object"
+                        string="Validate"
+                        class="btn-primary"
+                        attrs="{'invisible': [('picking_ids', '=', []), ('move_line_ids', '=', []), ('package_level_ids', '=', [])]}"
+                    />
+                    <button special="cancel" string="Cancel" class="btn-default" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

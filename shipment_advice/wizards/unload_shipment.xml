@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_unload_shipment_form" model="ir.ui.view">
+        <field name="name">wizard.unload.shipment.form</field>
+        <field name="model">wizard.unload.shipment</field>
+        <field name="arch" type="xml">
+            <form string="Unload from Shipment Advice">
+                <strong style="color: red;">
+                    <field
+                        name="warning"
+                        attrs="{'invisible': [('warning', '=', False)]}"
+                    />
+                </strong>
+                <group
+                    name="pickings"
+                    attrs="{'invisible': [('picking_ids', '=', [])]}"
+                    string="Transfers"
+                >
+                    <field
+                        name="picking_ids"
+                        context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
+                    />
+                </group>
+                <footer>
+                    <button
+                        name="action_unload"
+                        type="object"
+                        string="Validate"
+                        class="btn-primary"
+                        attrs="{'invisible': [('picking_ids', '=', [])]}"
+                    />
+                    <button special="cancel" string="Cancel" class="btn-default" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

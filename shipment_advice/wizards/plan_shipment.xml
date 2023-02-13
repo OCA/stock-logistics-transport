@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_plan_shipment_form" model="ir.ui.view">
+        <field name="name">wizard.plan.shipment.form</field>
+        <field name="model">wizard.plan.shipment</field>
+        <field name="arch" type="xml">
+            <form string="Plan in Shipment Advice">
+                <sheet>
+                    <strong style="color: red;">
+                        <field
+                            name="warning"
+                            attrs="{'invisible': [('warning', '=', False)]}"
+                        />
+                    </strong>
+                    <group
+                        name="pickings"
+                        attrs="{'invisible': [('picking_ids', '=', [])]}"
+                        string="Transfers"
+                    >
+                        <field
+                            name="picking_ids"
+                            context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
+                        />
+                    </group>
+                    <group
+                        name="moves"
+                        attrs="{'invisible': [('move_ids', '=', [])]}"
+                        string="Moves"
+                    >
+                        <field name="move_ids" />
+                    </group>
+                    <group
+                        name="shipment"
+                        attrs="{'invisible': [('picking_ids', '=', []), ('move_ids', '=', [])]}"
+                    >
+                        <field name="shipment_advice_id" />
+                    </group>
+                    <footer>
+                        <button
+                            name="action_plan"
+                            type="object"
+                            string="Validate"
+                            class="btn-primary"
+                            attrs="{'invisible': [('picking_ids', '=', []), ('move_ids', '=', [])]}"
+                        />
+                        <button special="cancel" string="Cancel" class="btn-default" />
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

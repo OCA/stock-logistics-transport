@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.shipment.advice</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='group_stock_adv_location']/ancestor::div[hasclass('o_setting_box')]"
+                position="after"
+            >
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+          </div>
+                    <div class="o_setting_right_pane">
+                        <label for="shipment_advice_outgoing_backorder_policy" />
+                        <div class="text-muted">
+              If you want that closing an outgoing shipment advice marks as
+              done all related deliveries and create backorder in case of
+              partial choose 'Create backorder'.
+              If you want to mark deliveries as done only when they are all
+              loaded in a shipment advice choose 'Leave open'. This last option
+              is useful when your deliveries will be shipped by several trucks.
+            </div>
+                        <field name="shipment_advice_outgoing_backorder_policy" />
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
