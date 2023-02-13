@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -65,11 +65,16 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__arrival_date
+msgid "Arrival Date"
+msgstr ""
+
+#. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Arrival date"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Arrival date should be set on the shipment advice {}."
@@ -192,18 +197,16 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__departure_date
+msgid "Departure Date"
+msgstr ""
+
+#. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Departure date"
 msgstr ""
 
 #. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_res_company__display_name
-#: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__display_name
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_move__display_name
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_move_line__display_name
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__display_name
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__display_name
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__display_name
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__display_name
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__display_name
@@ -212,6 +215,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Dock should be set on the shipment advice {}."
@@ -238,11 +242,6 @@ msgid "Followers"
 msgstr ""
 
 #. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_channel_ids
-msgid "Followers (Channels)"
-msgstr ""
-
-#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_partner_ids
 msgid "Followers (Partners)"
 msgstr ""
@@ -258,13 +257,12 @@ msgid "Group By"
 msgstr ""
 
 #. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_res_company__id
-#: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__id
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__id
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_move__id
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_move_line__id
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__id
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__id
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__id
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__id
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__id
@@ -284,7 +282,6 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_needaction
-#: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
@@ -345,13 +342,7 @@ msgid "Lading"
 msgstr ""
 
 #. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_res_company____last_update
-#: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings____last_update
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice____last_update
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_move____last_update
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_move_line____last_update
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level____last_update
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_picking____last_update
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment____last_update
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment____last_update
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment____last_update
@@ -383,6 +374,7 @@ msgid "Leave open"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -435,6 +427,11 @@ msgid "Loaded Shipment Advice"
 msgstr ""
 
 #. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_weight
+msgid "Loaded Weight"
+msgstr ""
+
+#. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Loaded bulk"
 msgstr ""
@@ -457,11 +454,6 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_picking_ids
 msgid "Loaded transfers"
-msgstr ""
-
-#. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_weight
-msgid "Loaded weight"
 msgstr ""
 
 #. module: shipment_advice
@@ -507,6 +499,13 @@ msgid "Messages"
 msgstr ""
 
 #. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_plan_shipment_form
+#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
+msgid "Moves"
+msgstr ""
+
+#. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
@@ -514,6 +513,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
@@ -522,6 +522,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid ""
@@ -531,17 +532,16 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__move_ids
-#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_plan_shipment_form
 msgid "Moves to plan"
 msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__move_ids
-#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
 msgid "Moves to unplan"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid "Moves updated"
@@ -578,6 +578,7 @@ msgid "Next Activity Type"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
@@ -586,6 +587,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid ""
@@ -594,6 +596,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -602,6 +605,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -610,6 +614,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #, python-format
 msgid ""
@@ -618,6 +623,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -626,6 +632,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
@@ -634,6 +641,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #, python-format
 msgid ""
@@ -642,6 +650,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid ""
@@ -670,11 +679,6 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: shipment_advice
-#: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_unread_counter
-msgid "Number of unread messages"
-msgstr ""
-
-#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__open_shipment
 msgid "Open Shipment"
 msgstr ""
@@ -697,6 +701,7 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_package_ids
+#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Packages"
 msgstr ""
 
@@ -716,6 +721,7 @@ msgid "Packages loaded/total %"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -725,11 +731,11 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__package_level_ids
-#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Packages to load"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -737,6 +743,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid "Packages updated"
@@ -801,24 +808,28 @@ msgid "Planned transfers"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid "Please select at least one record to load in a shipment."
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid "Please select at least one record to plan in a shipment."
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #, python-format
 msgid "Please select at least one record to unload from shipment."
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid "Please select at least one record to unplan from shipment."
@@ -835,11 +846,12 @@ msgid "Product Moves (Stock Move Line)"
 msgstr ""
 
 #. module: shipment_advice
-#: model_terms:ir.ui.view,arch_db:shipment_advice.stock_move_line_limited_view_tree
+#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Products"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #, python-format
 msgid ""
@@ -849,11 +861,11 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__move_line_ids
-#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Products to load"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -866,6 +878,7 @@ msgid "Products to unload"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid "Products updated"
@@ -919,7 +932,6 @@ msgstr ""
 #: model:ir.ui.menu,name:shipment_advice.shipment_advice_menu
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_calendar
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
-#: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_tree
 msgid "Shipment Advices"
 msgstr ""
 
@@ -931,24 +943,28 @@ msgid "Shipment advice"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not canceled, operation aborted."
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not confirmed, operation aborted."
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not draft, operation aborted."
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
@@ -1038,12 +1054,15 @@ msgid "Transfer"
 msgstr ""
 
 #. module: shipment_advice
-#: model_terms:ir.ui.view,arch_db:shipment_advice.stock_picking_limited_view_tree
-#: model_terms:ir.ui.view,arch_db:shipment_advice.stock_picking_loading_progress_view_tree
+#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
+#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_plan_shipment_form
+#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unload_shipment_form
+#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
 msgid "Transfers"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
@@ -1051,6 +1070,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -1059,6 +1079,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
@@ -1067,6 +1088,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
@@ -1077,11 +1099,11 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__picking_ids
-#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Transfers to load"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -1090,23 +1112,21 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__picking_ids
-#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_plan_shipment_form
 msgid "Transfers to plan"
 msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__picking_ids
-#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unload_shipment_form
 msgid "Transfers to unload"
 msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__picking_ids
-#: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
 msgid "Transfers to unplan"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
@@ -1171,16 +1191,6 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_wizard_unplan_shipment
 msgid "Unplan shipment"
-msgstr ""
-
-#. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_unread
-msgid "Unread Messages"
-msgstr ""
-
-#. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_unread_counter
-msgid "Unread Messages Counter"
 msgstr ""
 
 #. module: shipment_advice
@@ -1255,6 +1265,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
@@ -1263,6 +1274,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
@@ -1271,6 +1283,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
@@ -1279,6 +1292,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
@@ -1287,6 +1301,7 @@ msgid ""
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
