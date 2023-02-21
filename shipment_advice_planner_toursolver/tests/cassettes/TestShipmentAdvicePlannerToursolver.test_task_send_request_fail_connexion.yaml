@@ -1,0 +1,66 @@
+interactions:
+  - request:
+      body:
+        '{"simulationName": "TST/00000027", "countryCode": "US", "beginDate":
+        "2023-02-20", "language": "en_US", "depots": [{"x": 0.0, "y": 0.0, "id":
+        "dep_1"}], "orders": [{"customerId": false, "fixedVisitDuration": "00:03:00",
+        "id": 9, "label": "Wood Corner", "phone": "(623)-853-7197", "type": 0, "x": 0.0,
+        "y": 0.0, "customDataMap": {"address": "Wood Corner\n1839 Arbor Way\n\nTurlock
+        CA 95380\nUnited States"}, "timeWindows": [{"beginTime": "08:00", "endTime":
+        "17:00"}]}, {"customerId": false, "fixedVisitDuration": "00:03:00", "id": 31,
+        "label": "Gemini Furniture, Oscar Morgan", "phone": "(561)-239-1744", "type": 0,
+        "x": 0.0, "y": 0.0, "customDataMap": {"address": "Gemini Furniture\n317
+        Fairchild Dr\n\nFairfield CA 94535\nUnited States"}, "timeWindows":
+        [{"beginTime": "08:00", "endTime": "17:00"}]}], "resources": [], "options":
+        {"vehicleCode": "deliveryIntermediateVehicle", "maxOptimDuration": "00:00:00",
+        "useForbiddenTransitAreas": false}}'
+      headers:
+        Accept:
+          - application/json
+        Accept-Encoding:
+          - gzip, deflate
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "946"
+        Content-Type:
+          - application/json
+        User-Agent:
+          - python-requests/2.28.2
+      method: POST
+      uri: https://geoservices.geoconcept.com/ToursolverCloud/api/ts/toursolver/optimize?tsCloudApiKey=fake_api_key
+    response:
+      body:
+        string: ""
+      headers:
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Headers:
+          - Accept,Upgrade-Insecure-Requests,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+        Access-Control-Allow-Methods:
+          - PUT, GET, POST, DELETE, PATCH, OPTIONS
+        Access-Control-Allow-Origin:
+          - "*"
+        Access-Control-Expose-Headers:
+          - "*,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+        Access-Control-Max-Age:
+          - "1728000"
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "0"
+        Date:
+          - Mon, 20 Feb 2023 01:52:37 GMT
+        Set-Cookie:
+          - INGRESSTSPRODCOOKIE=1676857958.202.7540.245719|526296c4243d90e279c23661c06665b2;
+            Path=/ToursolverCloud; Secure; HttpOnly; SameSite=None
+          - JSESSIONID=D228CB41D4409DF0A176463FC1EA30FA; Path=/ToursolverCloud;
+            HttpOnly; SameSite=None; Secure
+        Strict-Transport-Security:
+          - max-age=15724800; includeSubDomains
+        vary:
+          - origin
+      status:
+        code: 403
+        message: ""
+version: 1

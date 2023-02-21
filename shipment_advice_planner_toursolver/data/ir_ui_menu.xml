@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.menu" id="toursolver_setting_menu">
+        <field name="name">TourSolver</field>
+        <field name="parent_id" ref="stock.menu_stock_config_settings" />
+        <field name="sequence" eval="16" />
+    </record>
+
+</odoo>

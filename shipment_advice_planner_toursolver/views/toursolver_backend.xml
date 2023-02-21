@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="toursolver_backend_form_view">
+        <field name="model">toursolver.backend</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                        <field name="active" invisible="1" />
+
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <label for="name" class="oe_edit_only" />
+          <h1>
+            <field name="name" class="oe_inline" />
+          </h1>
+                    <group>
+                        <group>
+                        <field name="url" />
+                        <field name="delivery_window_disabled" />
+
+
+                        </group>
+                        <group>
+                        <field name="api_key" />
+                        <field name="delivery_duration" />
+
+
+                        </group>
+                        <group>
+                            <field
+                                name="partner_defaul_delivery_window_start"
+                                widget="float_time"
+                                attrs="{'invisible': [('delivery_window_disabled', '=', True)], 'required': [('delivery_window_disabled', '=', False)]}"
+                            />
+
+                            <label for="duration" />
+                            <div>
+                                <field name="duration" class="oe_inline" />
+                                <span>seconds</span>
+                            </div>
+                            <field name="resource_default_work_penalty" />
+                        </group>
+                        <group>
+                            <field
+                                name="partner_default_delivery_window_end"
+                                widget="float_time"
+                                attrs="{'invisible': [('delivery_window_disabled', '=', True)], 'required': [('delivery_window_disabled', '=', False)]}"
+                            />
+
+                            <label for="loading_duration" />
+                            <div>
+                                <field name="loading_duration" class="oe_inline" />
+                                <span>minutes</span>
+                            </div>
+                            <field name="resource_default_travel_penalty" />
+                        </group>
+                    </group>
+                    <separator string="Options" />
+                    <p
+                        style="width: 100%;color: grey;font-weight: bold;font-style: italic;"
+                    >
+                        Add the required options for route calculation by TourSolver.
+                        You can check the
+                        <a
+                            href="https://geoservices.geoconcept.com/ToursolverCloud/api-book.html#_json_tsoptions"
+                        >documentation</a>
+                        to learn more.<br />
+                    </p>
+                    <field name="backend_options" />
+                    <field name="definition_id" invisible="1" />
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="toursolver_backend_tree_view">
+        <field name="model">toursolver.backend</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="toursolver_backend_act_window">
+        <field name="name">TourSolver</field>
+        <field name="res_model">toursolver.backend</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="toursolver_backend_menu">
+        <field name="name">Backend</field>
+        <field name="parent_id" ref="toursolver_setting_menu" />
+        <field name="action" ref="toursolver_backend_act_window" />
+        <field name="sequence" eval="100" />
+    </record>
+
+</odoo>

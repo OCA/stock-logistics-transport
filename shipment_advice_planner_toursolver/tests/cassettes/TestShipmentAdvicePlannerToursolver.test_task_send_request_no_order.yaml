@@ -1,0 +1,58 @@
+interactions:
+  - request:
+      body:
+        '{"simulationName": 52, "countryCode": "BE", "beginDate": "2023-02-18",
+        "language": "en_US", "depots": [{"x": 0.0, "y": 0.0, "id": "dep_1"}], "orders":
+        [], "resources": [], "options": {}}'
+      headers:
+        Accept:
+          - application/json
+        Accept-Encoding:
+          - gzip, deflate
+        Connection:
+          - keep-alive
+        Content-Length:
+          - "186"
+        Content-Type:
+          - application/json
+        User-Agent:
+          - python-requests/2.28.2
+      method: POST
+      uri: https://geoservices.geoconcept.com/ToursolverCloud/api/ts/toursolver/optimize?tsCloudApiKey=fake_api_key
+    response:
+      body:
+        string: '{"message":"no orders found","status":"ERROR","taskId":null}'
+      headers:
+        Access-Control-Allow-Credentials:
+          - "true"
+        Access-Control-Allow-Headers:
+          - Accept,Upgrade-Insecure-Requests,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization
+        Access-Control-Allow-Methods:
+          - PUT, GET, POST, DELETE, PATCH, OPTIONS
+        Access-Control-Allow-Origin:
+          - "*"
+        Access-Control-Expose-Headers:
+          - "*,Origin,DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+        Access-Control-Max-Age:
+          - "1728000"
+        Connection:
+          - keep-alive
+        Content-Type:
+          - application/json;charset=UTF-8
+        Date:
+          - Sat, 18 Feb 2023 19:46:29 GMT
+        Set-Cookie:
+          - INGRESSTSPRODCOOKIE=1676749589.966.989.624966|526296c4243d90e279c23661c06665b2;
+            Path=/ToursolverCloud; Secure; HttpOnly; SameSite=None
+          - JSESSIONID=570C65F0964B9520C1151CCE00149A54; Path=/ToursolverCloud;
+            HttpOnly; SameSite=None; Secure
+        Strict-Transport-Security:
+          - max-age=15724800; includeSubDomains
+        Transfer-Encoding:
+          - chunked
+        vary:
+          - origin
+      status:
+        code: 200
+        message: ""
+version: 1

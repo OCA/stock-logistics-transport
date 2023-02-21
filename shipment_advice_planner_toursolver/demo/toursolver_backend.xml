@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record
+        model="toursolver.backend.option.definition"
+        id="toursolver_backend_definition_demo"
+    >
+        <field
+            name="backend_options_definition"
+            eval="[{'name': '1', 'type': 'char', 'string': 'vehicleCode', 'default': ''}, {'name': '2', 'type': 'boolean', 'string': 'useForbiddenTransitAreas', 'default': False}]"
+        />
+    </record>
+
+    <record model="toursolver.backend" id="toursolver_backend_default">
+        <field
+            name="url"
+        >https://geoservices.geoconcept.com/ToursolverCloud/api/ts/toursolver/</field>
+        <field name="api_key">fake_api_key</field>
+       <field
+            name="resource_properties_definition"
+            eval="[{'name': '2', 'type': 'char', 'string': 'mobileLogin', 'default': False}, {'name': '3', 'type': 'boolean', 'string': 'openStart', 'default': False}, {'name': '4', 'type': 'boolean', 'string': 'loadBeforeDeparture', 'default': True}, {'name': '5', 'type': 'boolean', 'string': 'noReload', 'default': True}, {'name': '6', 'type': 'integer', 'string': 'globalCapacity', 'default': 9999}, {'name': '7', 'type': 'boolean', 'string': 'useAllCapacities', 'default': False}]"
+        />
+        <field name="definition_id" ref="toursolver_backend_definition_demo" />
+        <field
+            name="backend_options"
+            eval="{'1': 'deliveryIntermediateVehicle', '2': False}"
+        />
+    </record>
+
+</odoo>

@@ -1,0 +1,642 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* shipment_advice_planner_toursolver
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-02 15:18+0000\n"
+"PO-Revision-Date: 2023-05-02 15:18+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
+msgid "<span>minutes</span>"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
+msgid "<span>seconds</span>"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__aborted
+msgid "Aborted"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__active
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__active
+msgid "Active"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
+msgid ""
+"Add the required options for route calculation by TourSolver.\n"
+"                        You can check the"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_resource_form_view
+msgid ""
+"Add the required properties for route calculation by TourSolver.\n"
+"                            You can check the"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__api_key
+msgid "Api Key"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_resource_form_view
+msgid "Archived"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.ui.menu,name:shipment_advice_planner_toursolver.toursolver_backend_menu
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.res_config_settings_form_view
+msgid "Backend"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__backend_options_definition
+msgid "Backend Options Definition"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_task_form_view
+msgid "Check Status"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_res_partner
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__partner_id
+msgid "Contact"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__create_uid
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__create_uid
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__create_uid
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__create_uid
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__create_date
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__create_date
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__create_date
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__create_date
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_task_form_view
+msgid "Data"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__date
+msgid "Date"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__resource_default_travel_penalty
+msgid ""
+"Default value for the The cost for a resource of driving for one distance "
+"unit. Can be specified on resource level using `workPenalty`option"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__resource_default_work_penalty
+msgid ""
+"Default value for the cost of a resource working for an hour. Can be "
+"specified on resource level using `travelPenalty`option"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__definition_id
+msgid "Definition"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__delivery_window_disabled
+msgid "Delivery Window Disabled"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice_planner__delivery_resource_ids
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__delivery_resource_ids
+msgid "Delivery resources"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_res_partner__toursolver_delivery_window_ids
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_res_users__toursolver_delivery_window_ids
+msgid "Delivery windows"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__display_name
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__display_name
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__display_name
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__display_name
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__dock_id
+msgid "Dock"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__done
+msgid "Done"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__draft
+msgid "Draft"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__duration
+msgid "Duration in seconds allowed to the computation of the optimization"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__delivery_duration
+msgid "Duration in seconds needed to deliver a customer"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__error
+msgid "Error"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__loading_duration
+msgid "Fixed initial loading time"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__delivery_duration
+msgid "Fixed time spent delivering a customer"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__time_window_start
+msgid "From"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_task_form_view
+msgid "Get Result"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_delivery_window_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__id
+msgid "ID"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_task__task_id
+msgid ""
+"Identifier of the task submitted to the TourSolver service to optimize the "
+"planning/path."
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__partner_defaul_delivery_window_start
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__partner_default_delivery_window_end
+msgid "If no delivery winodow specified on the partner this will be used"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_res_partner__toursolver_delivery_window_ids
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_res_users__toursolver_delivery_window_ids
+msgid ""
+"If specified, delivery is only possible into the specified time windows. "
+"(Leaves empty if no restriction)"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_resource__use_delivery_person_coordinates_as_end
+msgid ""
+"If true the computed delivery will end at the delivery person's address. "
+"Otherwise it will end at the warehouse address"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__in_progress
+msgid "In progress"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend____last_update
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition____last_update
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window____last_update
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource____last_update
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__write_uid
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__write_uid
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__write_uid
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__write_uid
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__write_date
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__write_date
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__write_date
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__write_date
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__loading_duration
+msgid "Loading time in minutes"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__name
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__name
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__name
+msgid "Name"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__duration
+msgid "Optimization process max duration"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__backend_options
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
+msgid "Options"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__partner_id
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_delivery_window_search_view
+msgid "Partner"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__partner_defaul_delivery_window_start
+msgid "Partner Defaul Delivery Window Start"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__partner_default_delivery_window_end
+msgid "Partner Default Delivery Window End"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.actions.act_window,name:shipment_advice_planner_toursolver.toursolver_delivery_window_act_window
+#: model:ir.ui.menu,name:shipment_advice_planner_toursolver.toursolver_delivery_window_menu
+msgid "Partner Delivery Windows"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__picking_ids
+msgid "Pickings"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_task_form_view
+msgid "Pickings to plan"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#. odoo-python
+#: code:addons/shipment_advice_planner_toursolver/models/toursolver_backend.py:0
+#, python-format
+msgid "Please configure your timezone in your user preferences"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__resource_properties
+msgid "Properties"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__request_data
+msgid "Request Data"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__request_data_filename
+msgid "Request Data Filename"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__resource_properties_definition
+msgid "Resource Properties"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__resource_default_travel_penalty
+msgid "Resource fixed cost travelling/hour"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__resource_default_work_penalty
+msgid "Resource fixed cost working/hour"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_resource_form_view
+msgid "Resource properties"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__resource_id
+msgid "ResourceId"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.actions.act_window,name:shipment_advice_planner_toursolver.toursolver_resource_act_window
+#: model:ir.ui.menu,name:shipment_advice_planner_toursolver.toursolver_resource_menu
+msgid "Resources"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__result_data
+msgid "Result Data"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__result_data_filename
+msgid "Result Data Filename"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__result_json
+msgid "Result Json"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_task_form_view
+msgid "Send Request"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#. odoo-python
+#: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_task_form_view
+#, python-format
+msgid "Shipment Advice"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_shipment_advice_planner
+msgid "Shipment Advice Planner"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__shipment_advice_ids
+msgid "Shipment Advices"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice_planner__shipment_planning_method
+msgid "Shipment Planning Method"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.res_config_settings_form_view
+msgid "Shipment advices planning by geo-optimization (TourSolver)"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__state
+msgid "State"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_task__toursolver_status
+msgid "Status of the optimization task provided by the TourSolver service."
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__success
+msgid "Success"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.actions.server,name:shipment_advice_planner_toursolver.ir_cron_sync_toursolver_task_ir_actions_server
+#: model:ir.cron,cron_name:shipment_advice_planner_toursolver.ir_cron_sync_toursolver_task
+msgid "Synchronize toursolver tasks"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.actions.act_window,name:shipment_advice_planner_toursolver.toursolver_task_act_window
+#: model:ir.ui.menu,name:shipment_advice_planner_toursolver.toursolver_task_menu
+msgid "Tasks"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.res_config_settings_form_view
+msgid ""
+"The backend used for TourSolver api call in the\n"
+"                                course of\n"
+"                                shipment advice planning based on delivery\n"
+"                                geo-localization"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#. odoo-python
+#: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
+#, python-format
+msgid ""
+"The following partner ids are not expected into the optimization result: "
+"%(names)s"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#. odoo-python
+#: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
+#, python-format
+msgid "The following partners are not found into the optimization result: %s"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
+msgid ""
+"The rank given by TourSolver to this picking in the set of planned stops of "
+"the related shipment advice"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#. odoo-python
+#: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
+#, python-format
+msgid "There is no active backend for TourSolver."
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__time_window_weekday_ids
+msgid "Time Window Weekday"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__time_window_end
+msgid "To"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.actions.act_window,name:shipment_advice_planner_toursolver.toursolver_backend_act_window
+#: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__shipment_advice_planner__shipment_planning_method__toursolver
+#: model:ir.ui.menu,name:shipment_advice_planner_toursolver.toursolver_setting_menu
+msgid "TourSolver"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_backend
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_res_company__toursolver_backend_id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_res_config_settings__toursolver_backend_id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__toursolver_backend_id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__toursolver_backend_id
+msgid "TourSolver Backend"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_delivery_window
+msgid "TourSolver Delivery Window"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_shipment_advice_planner__toursolver_resource_id
+msgid ""
+"TourSolver resource to be propgated to the shipment advice in simpleplanning"
+" method"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__toursolver_status
+msgid "TourSolver status"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_backend_option_definition
+msgid "Toursolver Backend Option Definition"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_res_partner__toursolver_delivery_duration
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_res_users__toursolver_delivery_duration
+msgid "Toursolver Delivery Duration"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__toursolver_error_message
+msgid "Toursolver Error Message"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_resource
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_resource_id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice_planner__toursolver_resource_id
+msgid "Toursolver Resource"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
+msgid "Toursolver Shipment Advice Rank"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_task
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_task_id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice_planner__toursolver_task_id
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_stock_picking__toursolver_task_id
+msgid "Toursolver Task"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__task_id
+msgid "Toursolver task id"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model,name:shipment_advice_planner_toursolver.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__url
+msgid "Url"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__use_delivery_person_coordinates_as_end
+msgid "Use Delivery Person Coordinates As End"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__warehouse_id
+msgid "Warehouse"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_shipment_advice_planner__delivery_resource_ids
+msgid "delivery resources to be considered in geo-optimazation"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_resource_form_view
+msgid "documentation"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
+msgid "to learn more.<br/>"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_resource_form_view
+msgid ""
+"to learn more.<br/>\n"
+"                            Note that it is not necessary to add the id property.\n"
+"                            The mandatory field resourceId will be used in the optimization request."
+msgstr ""
