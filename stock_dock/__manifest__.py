@@ -4,12 +4,13 @@
 {
     "name": "Loading Dock",
     "summary": "Manage the loading docks of your warehouse.",
-    "version": "14.0.1.1.0",
+    "version": "14.0.2.1.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "category": "Warehouse Management",
     "depends": ["stock"],
     "data": [
+        "data/data.xml",
         "security/ir.model.access.csv",
         "demo/stock_dock.xml",
         "views/stock_dock.xml",

@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record model="ir.rule" id="stock_dock">
+        <field name="name">stock.dock multi-company</field>
+        <field name="model_id" search="[('model','=','stock.dock')]" model="ir.model" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+    </record>
+</odoo>
