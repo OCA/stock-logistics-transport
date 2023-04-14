@@ -23,7 +23,7 @@ Stock Location address
     :target: https://runbot.odoo-community.org/runbot/168/15.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds an address on location so it can be used on purchases.
 
@@ -64,6 +64,7 @@ Contributors
 
 * Enric Tobella <etobella@creublanca.es>
 * Joan Mateu <joan.mateu@forgeflow.com>
+* Tien - Le Dinh <tien-ld@komit-consulting.com>
 
 Maintainers
 ~~~~~~~~~~~
@@ -78,6 +79,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/stock-logistics-transport <https://github.com/OCA/stock-logistics-transport/tree/15.0/stock_location_address>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-transport <https://github.com/OCA/stock-logistics-transport/tree/16.0/stock_location_address>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
