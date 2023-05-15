@@ -288,6 +288,8 @@ class ShipmentAdvice(models.Model):
 
     def _lock_records(self, records):
         """Lock records for the current SQL transaction."""
+        if not records:
+            return
         sql = "SELECT id FROM %s WHERE ID IN %%s FOR UPDATE" % records._table
         self.env.cr.execute(sql, (tuple(records.ids),), log_exceptions=False)
 
