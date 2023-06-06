@@ -147,6 +147,11 @@ class ShipmentAdvice(models.Model):
         compute="_compute_picking_ids",
         string="Loaded transfers",
     )
+    to_validate_picking_ids = fields.One2many(
+        comodel_name="stock.picking",
+        compute="_compute_picking_ids",
+        string="Transfers to validate",
+    )
     loaded_pickings_count = fields.Integer(compute="_compute_count")
     loaded_package_ids = fields.One2many(
         comodel_name="stock.quant.package",
@@ -192,11 +197,25 @@ class ShipmentAdvice(models.Model):
             packages = shipment.loaded_move_line_ids.result_package_id
             shipment.total_load = sum(packages.mapped("shipping_weight"))
 
-    @api.depends("planned_move_ids", "loaded_move_line_ids")
+    @api.depends(
+        "planned_move_ids", "loaded_move_line_ids.picking_id.loaded_shipment_advice_ids"
+    )
     def _compute_picking_ids(self):
         for shipment in self:
             shipment.planned_picking_ids = shipment.planned_move_ids.picking_id
             shipment.loaded_picking_ids = shipment.loaded_move_line_ids.picking_id
+            # Transfers to validate are those having only the current shipment
+            # advice to process
+            to_validate_picking_ids = []
+            for picking in shipment.loaded_move_line_ids.picking_id:
+                shipments_to_process = picking.loaded_shipment_advice_ids.filtered(
+                    lambda s: s.state not in ("done", "cancel")
+                )
+                if shipments_to_process == shipment:
+                    to_validate_picking_ids.append(picking.id)
+            shipment.to_validate_picking_ids = self.env["stock.picking"].browse(
+                to_validate_picking_ids
+            )
 
     @api.depends(
         "loaded_move_line_ids.package_level_id.package_id",
@@ -315,7 +334,7 @@ class ShipmentAdvice(models.Model):
                 )
                 self._lock_records(self.loaded_picking_ids)
                 if backorder_policy == "create_backorder":
-                    for picking in self.loaded_picking_ids:
+                    for picking in self.to_validate_picking_ids:
                         if picking.state in ("cancel", "done"):
                             continue
                         if picking._check_backorder():
@@ -327,7 +346,7 @@ class ShipmentAdvice(models.Model):
                         else:
                             picking._action_done()
                 else:
-                    for picking in self.loaded_picking_ids:
+                    for picking in self.to_validate_picking_ids:
                         if picking.state in ("cancel", "done"):
                             continue
                         if not picking._check_backorder():
