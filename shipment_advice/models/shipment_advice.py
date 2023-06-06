@@ -157,6 +157,11 @@ class ShipmentAdvice(models.Model):
         compute="_compute_picking_ids",
         string="Loaded transfers",
     )
+    to_validate_picking_ids = fields.One2many(
+        comodel_name="stock.picking",
+        compute="_compute_picking_ids",
+        string="Transfers to validate",
+    )
     loaded_pickings_count = fields.Integer(compute="_compute_count")
     loaded_package_ids = fields.One2many(
         comodel_name="stock.quant.package",
@@ -210,11 +215,25 @@ class ShipmentAdvice(models.Model):
             packages = shipment.loaded_move_line_ids.result_package_id
             shipment.total_load = sum(packages.mapped("shipping_weight"))
 
-    @api.depends("planned_move_ids", "loaded_move_line_ids")
+    @api.depends(
+        "planned_move_ids", "loaded_move_line_ids.picking_id.loaded_shipment_advice_ids"
+    )
     def _compute_picking_ids(self):
         for shipment in self:
             shipment.planned_picking_ids = shipment.planned_move_ids.picking_id
             shipment.loaded_picking_ids = shipment.loaded_move_line_ids.picking_id
+            # Transfers to validate are those having only the current shipment
+            # advice to process
+            to_validate_picking_ids = []
+            for picking in shipment.loaded_move_line_ids.picking_id:
+                shipments_to_process = picking.loaded_shipment_advice_ids.filtered(
+                    lambda s: s.state not in ("done", "cancel")
+                )
+                if shipments_to_process == shipment:
+                    to_validate_picking_ids.append(picking.id)
+            shipment.to_validate_picking_ids = self.env["stock.picking"].browse(
+                to_validate_picking_ids
+            )
 
     @api.depends(
         "loaded_move_line_ids.package_level_id.package_id",
@@ -325,7 +344,7 @@ class ShipmentAdvice(models.Model):
         self.ensure_one()
         if self.shipment_type == "incoming":
             return self.planned_picking_ids
-        return self.loaded_picking_ids
+        return self.to_validate_picking_ids
 
     def _action_done(self):
         # Validate transfers (create backorders for unprocessed lines)
@@ -355,13 +374,17 @@ class ShipmentAdvice(models.Model):
                     ]
                 ),
                 group(self.delayable(description=self.name)._unplan_undone_moves()),
-                group(self.delayable(description=self.name)._postprocess_action_done()),
+                group(
+                    self.delayable(description=self.name)._postprocess_action_done(
+                        backorder_policy
+                    )
+                ),
             ).delay()
             return
         for picking in pickings:
             self._validate_picking(picking, backorder_policy)
         self._unplan_undone_moves()
-        self._postprocess_action_done()
+        self._postprocess_action_done(backorder_policy)
 
     def _check_action_done_allowed(self):
         for shipment in self:
@@ -404,12 +427,13 @@ class ShipmentAdvice(models.Model):
         ).filtered(lambda m: m.state not in ("cancel", "done") and not m.quantity_done)
         moves_to_unplan.shipment_advice_id = False
 
-    def _postprocess_action_done(self):
+    def _postprocess_action_done(self, backorder_policy):
         self.ensure_one()
         if self.state != "in_process":
             return
         if self._get_picking_to_process().filtered(
             lambda p: p.state not in ("done", "cancel")
+            and backorder_policy != "leave_open"
         ):
             self.write(
                 {
