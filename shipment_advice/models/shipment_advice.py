@@ -164,6 +164,17 @@ class ShipmentAdvice(models.Model):
         string="Package Levels",
     )
     loaded_packages_count = fields.Integer(compute="_compute_count")
+    line_to_load_ids = fields.One2many(
+        comodel_name="stock.move.line",
+        compute="_compute_line_to_load_ids",
+        help=(
+            "Lines to load in priority.\n"
+            "If the shipment is planned, it'll return the planned lines.\n"
+            "If the shipment is not planned, it'll return lines from transfers "
+            "partially loaded."
+        ),
+    )
+    lines_to_load_count = fields.Integer(compute="_compute_count")
     carrier_ids = fields.Many2many(
         comodel_name="delivery.carrier",
         string="Related shipping methods",
@@ -183,6 +194,69 @@ class ShipmentAdvice(models.Model):
             "Reference must be unique per company!",
         ),
     ]
+
+    def _find_move_lines_domain(self, picking_type_ids=None):
+        """Returns the base domain to look for move lines for a given shipment."""
+        self.ensure_one()
+        domain = [
+            ("state", "in", ("assigned", "partially_available")),
+            ("picking_code", "=", self.shipment_type),
+            "|",
+            ("shipment_advice_id", "=", False),
+            ("shipment_advice_id", "=", self.id),
+        ]
+        # Restrict on picking types if provided
+        if picking_type_ids:
+            domain.insert(0, ("picking_id.picking_type_id", "in", picking_type_ids.ids))
+        else:
+            domain.insert(
+                0,
+                ("picking_id.picking_type_id.warehouse_id", "=", self.warehouse_id.id),
+            )
+        # Shipment with planned content, restrict the search to it
+        if self.planned_move_ids:
+            domain.append(("move_id.shipment_advice_id", "=", self.id))
+        # Shipment without planned content, search for all unplanned moves
+        else:
+            domain.append(("move_id.shipment_advice_id", "=", False))
+            # Restrict to shipment carrier delivery types (providers)
+            if self.carrier_ids:
+                domain.extend(
+                    [
+                        "|",
+                        (
+                            "picking_id.carrier_id.delivery_type",
+                            "in",
+                            self.carrier_ids.mapped("delivery_type"),
+                        ),
+                        ("picking_id.carrier_id", "=", False),
+                    ]
+                )
+        return domain
+
+    @api.depends("planned_move_ids")
+    @api.depends_context("shipment_picking_type_ids")
+    def _compute_line_to_load_ids(self):
+        picking_type_ids = self.env.context.get("shipment_picking_type_ids", [])
+        for shipment in self:
+            domain = shipment._find_move_lines_domain(picking_type_ids)
+            # Restrict to lines not loaded
+            domain.insert(0, ("shipment_advice_id", "=", False))
+            # Find lines to load from partially loaded transfers if the shipment
+            # is not planned.
+            if not shipment.planned_move_ids:
+                all_lines_to_load = self.env["stock.move.line"].search(domain)
+                all_pickings = all_lines_to_load.picking_id
+                loaded_lines = self.env["stock.move.line"].search(
+                    [
+                        ("picking_id", "in", all_pickings.ids),
+                        ("id", "not in", all_lines_to_load.ids),
+                        ("shipment_advice_id", "!=", False),
+                    ]
+                )
+                pickings_partially_loaded = loaded_lines.picking_id
+                domain += [("picking_id", "in", pickings_partially_loaded.ids)]
+            shipment.line_to_load_ids = self.env["stock.move.line"].search(domain)
 
     def _check_include_package_level(self, package_level):
         """Check if a package level should be listed in the shipment advice.
@@ -236,7 +310,7 @@ class ShipmentAdvice(models.Model):
                 package_ids
             )
 
-    @api.depends("planned_picking_ids", "planned_move_ids")
+    @api.depends("planned_picking_ids", "planned_move_ids", "line_to_load_ids")
     def _compute_count(self):
         for shipment in self:
             shipment.planned_pickings_count = len(shipment.planned_picking_ids)
@@ -246,6 +320,7 @@ class ShipmentAdvice(models.Model):
                 shipment.loaded_move_line_without_package_ids
             )
             shipment.loaded_packages_count = len(shipment.loaded_package_ids)
+            shipment.lines_to_load_count = len(shipment.line_to_load_ids)
 
     @api.depends("planned_picking_ids", "loaded_picking_ids")
     def _compute_carrier_ids(self):
@@ -415,6 +490,13 @@ class ShipmentAdvice(models.Model):
         action_xmlid = "stock.action_package_view"
         action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["domain"] = [("id", "in", self.loaded_package_ids.ids)]
+        return action
+
+    def button_open_to_load_move_lines(self):
+        action_xmlid = "stock.stock_move_line_action"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
+        action["domain"] = [("id", "in", self.line_to_load_ids.ids)]
+        action["context"] = {}  # Disable filters
         return action
 
     def _domain_open_deliveries_in_progress(self):
