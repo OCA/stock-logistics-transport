@@ -88,7 +88,7 @@
                                 </td>
                                 <td>
                                     <span
-                                        t-field="package_level.package_id.packaging_id.shipper_package_code"
+                                        t-field="package_level.package_id.package_type_id.shipper_package_code"
                                     />
                                 </td>
                                 <td>
