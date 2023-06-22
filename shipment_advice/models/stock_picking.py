@@ -70,6 +70,10 @@ class StockPicking(models.Model):
         "shipment.advice",
         compute="_compute_loaded_in_shipment",
     )
+    loaded_waiting_quantity = fields.Float(
+        "Waiting Quantity", compute="_compute_shipment_loaded_progress"
+    )
+
 
     @api.depends("move_line_ids.shipment_advice_id")
     def _compute_loaded_in_shipment(self):
@@ -157,6 +161,11 @@ class StockPicking(models.Model):
                 picking.loaded_weight_progress = (
                     f"{picking.loaded_weight} / {total_weight}"
                 )
+            waiting_moves = picking.move_lines.filtered(lambda ml: ml.state not in ["done", "cancel"])
+            picking.loaded_waiting_quantity = (
+                sum(waiting_moves.mapped("product_qty")) -
+                sum(waiting_moves.mapped("reserved_availability"))
+            )
             # Overall progress based on the operation type
             if picking.picking_type_id.show_entire_packs:
                 picking.loaded_progress_f = picking.loaded_packages_progress_f
