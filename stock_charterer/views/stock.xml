@@ -1,0 +1,22 @@
+<odoo>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="before">
+                <group name="chartering" string="Chartering" col="4">
+                    <field
+                        name="chartering_id"
+                        options="{'no_quick_create': True}"
+                        nolabel="1"
+                        colspan="4"
+                    />
+                    <field name="container_id" />
+                    <field name="container_note" string="Note" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

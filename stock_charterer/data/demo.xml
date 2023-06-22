@@ -1,0 +1,39 @@
+<odoo>
+
+    <record id="myship" model="transport.vehicle">
+        <field name="name">my funny ship</field>
+        <field name="type_">ship</field>
+        <field name="company_id">0</field>
+    </record>
+
+    <record id="shanghai_port" model="res.partner">
+        <field name="name">Shanghai port</field>
+        <field name="is_boarding">1</field>
+    </record>
+    <record id="lehavre_port" model="res.partner">
+        <field name="name">Le Havre port</field>
+        <field name="is_boarding">1</field>
+    </record>
+    <record id="my_charterer" model="res.partner">
+        <field name="name">My Charterer</field>
+        <field name="is_charterer">1</field>
+    </record>
+
+    <record id="container1" model="freight.container">
+        <field name="name">14526689#8</field>
+    </record>
+
+    <record id="cargo" model="chartering">
+        <field
+            name="boarding_date"
+            eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d')"
+        />
+        <field name="departure_id" ref="shanghai_port" />
+        <field name="arrival_id" ref="lehavre_port" />
+        <field name="vehicle_id" ref="myship" />
+        <field name="charterer_id" ref="my_charterer" />
+        <field name="company_id">0</field>
+        <field name="first_container_id" ref="container1" />
+    </record>
+
+</odoo>

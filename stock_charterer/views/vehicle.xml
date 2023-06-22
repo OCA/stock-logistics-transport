@@ -1,0 +1,64 @@
+<odoo>
+
+<record id="transport_vehicle_form" model="ir.ui.view">
+    <field name="model">transport.vehicle</field>
+    <field name="arch" type="xml">
+        <form>
+            <header>
+            </header>
+            <sheet>
+                <group name="main">
+                    <group name="left">
+                        <field name="name" />
+                        <field name="company_id" />
+                    </group>
+                    <group name="right">
+                        <field name="type_" />
+                        <field name="active" />
+                    </group>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers" />
+                <field name="message_ids" widget="mail_thread" />
+            </div>
+        </form>
+    </field>
+</record>
+
+<record id='transport_vehicle_tree' model='ir.ui.view'>
+    <field name='model'>transport.vehicle</field>
+    <field name='arch' type='xml'>
+        <tree>
+            <field name="sequence" widget="handle" />
+            <field name="name" />
+            <field name="type_" />
+            <field name="company_id" />
+        </tree>
+    </field>
+</record>
+
+<record id="transport_vehicle_search" model="ir.ui.view">
+    <field name="model">transport.vehicle</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="name" />
+            <filter name="type_" string="Type" context="{'group_by' : 'type_'}" />
+        </search>
+    </field>
+</record>
+
+<record id="transport_vehicle_action" model="ir.actions.act_window">
+    <field name="name">Transport Vehicles</field>
+    <field name="res_model">transport.vehicle</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem
+        id="transport_vehicle_menu"
+        parent="stock.menu_delivery"
+        sequence="50"
+        action="transport_vehicle_action"
+    />
+
+</odoo>
