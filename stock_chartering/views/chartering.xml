@@ -37,6 +37,7 @@
             <field name="boarding_date" />
             <field name="departure_id" />
             <field name="charterer_id" />
+            <field name="first_container_id" optional="show" />
             <field name="arrival_id" optional="show" />
             <field name="vehicle_id" optional="show" />
             <field name="state" />
