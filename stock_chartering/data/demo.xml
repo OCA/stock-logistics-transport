@@ -5,7 +5,16 @@
         <field name="type_">ship</field>
         <field name="company_id">0</field>
     </record>
+    <record id="myplane" model="transport.vehicle">
+        <field name="name">ça plane pour moi</field>
+        <field name="type_">plane</field>
+        <field name="company_id">0</field>
+    </record>
 
+    <record id="shenzen_port" model="res.partner">
+        <field name="name">Shenzen port</field>
+        <field name="is_boarding">1</field>
+    </record>
     <record id="shanghai_port" model="res.partner">
         <field name="name">Shanghai port</field>
         <field name="is_boarding">1</field>
@@ -14,16 +23,30 @@
         <field name="name">Le Havre port</field>
         <field name="is_boarding">1</field>
     </record>
+    <record id="dunkerque_port" model="res.partner">
+        <field name="name">Dunkerque port</field>
+        <field name="is_boarding">1</field>
+    </record>
     <record id="my_charterer" model="res.partner">
         <field name="name">My Charterer</field>
+        <field name="is_charterer">1</field>
+    </record>
+    <record id="my_charterer_spe" model="res.partner">
+        <field name="name">So Special Charterer</field>
         <field name="is_charterer">1</field>
     </record>
 
     <record id="container1" model="freight.container">
         <field name="name">14526689#8</field>
     </record>
+    <record id="container2" model="freight.container">
+        <field name="name">145ALLDS89</field>
+    </record>
+    <record id="container3" model="freight.container">
+        <field name="name">8855AMM</field>
+    </record>
 
-    <record id="cargo" model="chartering">
+    <record id="cargo1" model="chartering">
         <field
             name="boarding_date"
             eval="(DateTime.today() + relativedelta(months=1)).strftime('%Y-%m-%d')"
@@ -35,5 +58,104 @@
         <field name="company_id">0</field>
         <field name="first_container_id" ref="container1" />
     </record>
+
+    <record id="cargo2" model="chartering">
+        <field
+            name="boarding_date"
+            eval="(DateTime.today() + relativedelta(months=2)).strftime('%Y-%m-%d')"
+        />
+        <field name="departure_id" ref="shenzen_port" />
+        <field name="arrival_id" ref="dunkerque_port" />
+        <field name="vehicle_id" ref="myship" />
+        <field name="charterer_id" ref="my_charterer_spe" />
+        <field name="company_id">0</field>
+        <field name="first_container_id" ref="container2" />
+    </record>
+    <record id="unselectable_chartering" model="chartering">
+        <field
+            name="boarding_date"
+            eval="(DateTime.today() + relativedelta(months=2)).strftime('%Y-%m-%d')"
+        />
+        <field name="state">done</field>
+        <field name="departure_id" ref="shenzen_port" />
+        <field name="vehicle_id" ref="myship" />
+        <field name="charterer_id" ref="my_charterer_spe" />
+        <field name="company_id">0</field>
+    </record>
+
+    <record id="airplane" model="chartering">
+        <field
+            name="boarding_date"
+            eval="(DateTime.today() + relativedelta(months=3)).strftime('%Y-%m-%d')"
+        />
+        <field name="departure_id" ref="dunkerque_port" />
+        <field name="arrival_id" ref="shanghai_port" />
+        <field name="vehicle_id" ref="myplane" />
+        <field name="charterer_id" ref="my_charterer_spe" />
+        <field name="company_id">0</field>
+        <field name="first_container_id" ref="container3" />
+    </record>
+
+    <record id="pick1" model="stock.picking">
+        <field name="picking_type_id" ref="stock.picking_type_in" />
+        <field name="origin">with chartering ship 1</field>
+        <field name="chartering_id" ref="cargo1" />
+        <field name="location_id" ref="stock.stock_location_suppliers" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+        <field
+            name="move_ids"
+            model="stock.move"
+            eval="[(0, 0, {
+            'name': obj().env.ref('product.product_product_22').name,
+            'product_id': ref('product.product_product_22'),
+            'product_uom': ref('uom.product_uom_unit'),
+            'product_uom_qty': 125.0,
+            'picking_type_id': ref('stock.picking_type_in'),
+            'location_id': ref('stock.stock_location_suppliers'),
+            'location_dest_id': ref('stock.stock_location_stock'),
+        })]"
+        />
+    </record>
+    <record id="pick2" model="stock.picking">
+        <field name="picking_type_id" ref="stock.picking_type_in" />
+        <field name="chartering_id" ref="cargo2" />
+        <field name="origin">with chartering ship again</field>
+        <field name="location_id" ref="stock.stock_location_suppliers" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+        <field
+            name="move_ids"
+            model="stock.move"
+            eval="[(0, 0, {
+            'name': obj().env.ref('product.product_product_22').name,
+            'product_id': ref('product.product_product_22'),
+            'product_uom': ref('uom.product_uom_unit'),
+            'product_uom_qty': 10.0,
+            'picking_type_id': ref('stock.picking_type_in'),
+            'location_id': ref('stock.stock_location_suppliers'),
+            'location_dest_id': ref('stock.stock_location_stock'),
+        })]"
+        />
+    </record>
+    <record id="pick3" model="stock.picking">
+        <field name="picking_type_id" ref="stock.picking_type_in" />
+        <field name="chartering_id" ref="airplane" />
+        <field name="origin">with chartering airplane</field>
+        <field name="location_id" ref="stock.stock_location_suppliers" />
+        <field name="location_dest_id" ref="stock.stock_location_stock" />
+        <field
+            name="move_ids"
+            model="stock.move"
+            eval="[(0, 0, {
+            'name': obj().env.ref('product.product_product_22').name,
+            'product_id': ref('product.product_product_22'),
+            'product_uom': ref('uom.product_uom_unit'),
+            'product_uom_qty': 10.0,
+            'picking_type_id': ref('stock.picking_type_in'),
+            'location_id': ref('stock.stock_location_suppliers'),
+            'location_dest_id': ref('stock.stock_location_stock'),
+        })]"
+        />
+    </record>
+
 
 </odoo>

@@ -4,7 +4,9 @@ from odoo import api, fields, models
 class StockPicking(models.Model):
     _inherit = "stock.picking"
 
-    chartering_id = fields.Many2one(comodel_name="chartering")
+    chartering_id = fields.Many2one(
+        comodel_name="chartering", domain=[("state", "=", "pending")]
+    )
     container_id = fields.Many2one(
         comodel_name="freight.container",
         compute="_compute_freight_container",
