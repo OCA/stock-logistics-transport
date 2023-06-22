@@ -120,6 +120,7 @@
                 <field name="loaded_move_lines_progress" />
                 <field name="loaded_weight_progress" />
                 <field name="state" />
+                <field name="loaded_waiting_quantity" />
             </tree>
         </field>
     </record>
