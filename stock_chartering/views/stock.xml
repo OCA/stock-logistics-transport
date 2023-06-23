@@ -10,12 +10,56 @@
                         name="chartering_id"
                         options="{'no_quick_create': True}"
                         nolabel="1"
-                        colspan="4"
+                        colspan="2"
+                        attrs="{'readonly': [('state', 'in', ['cancel', 'done'])]}"
                     />
-                    <field name="container_id" />
-                    <field name="container_note" string="Note" />
+                    <field
+                        name="container"
+                        attrs="{'readonly': [('state', 'in', ['cancel', 'done'])], 'invisible': [('chartering_id', '=',False)]}"
+                    />
+                    <field
+                        name="carrier_id"
+                        attrs="{'readonly': [('state', 'in', ['cancel', 'done'])], 'invisible': [('chartering_id','=',False)]}"
+                    />
+                    <field
+                        name="container_lot"
+                        attrs="{'readonly': [('state','in', ['cancel', 'done'])], 'invisible': [('container','=',False)]}"
+                    />
                 </group>
             </xpath>
+        </field>
+    </record>
+
+    <record id="vpicktree" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.vpicktree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="chartering_id" context="{'short': 1}" optional="show" />
+                <field name="container" optional="hide" />
+                <field name="container_lot" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_picking_internal_search" model="ir.ui.view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_internal_search" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field
+                    name="container"
+                    string="Container"
+                    filter_domain="['|', ('container', 'ilike', self), ('container_lot', 'ilike', self)]"
+                />
+            </field>
+            <filter name="picking_type" position="after">
+                <filter
+                    string="Chartering Operations"
+                    name="chartering_id"
+                    context="{'group_by': 'chartering_id'}"
+                />
+            </filter>
         </field>
     </record>
 

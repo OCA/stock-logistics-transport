@@ -6,7 +6,6 @@
         <field name="arch" type="xml">
             <xpath expr="//group[@name='misc']" position="inside">
                 <field name="is_boarding" />
-                <field name="is_charterer" />
             </xpath>
         </field>
     </record>
@@ -20,11 +19,6 @@
                     name="boarding_place"
                     string="Is Boarding place"
                     domain="[('is_boarding', '=', True)]"
-                />
-                <filter
-                    name="is_charterer"
-                    string="Is Charterer"
-                    domain="[('is_charterer', '=', True)]"
                 />
             </filter>
         </field>

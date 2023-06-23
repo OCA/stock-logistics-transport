@@ -9,14 +9,16 @@
     "author": "Akretion, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "category": "Warehouse Management",
-    "maintainer": ["bealdav"],
+    "maintainer": [
+        "bealdav",
+    ],
     "depends": [
+        "delivery_carrier_partner",
         "stock",
     ],
     "data": [
         "security/ir.model.access.csv",
         "views/chartering.xml",
-        "views/freight_container.xml",
         "views/partner.xml",
         "views/stock.xml",
         "views/vehicle.xml",

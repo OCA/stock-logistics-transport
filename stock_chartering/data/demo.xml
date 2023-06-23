@@ -27,13 +27,19 @@
         <field name="name">Dunkerque port</field>
         <field name="is_boarding">1</field>
     </record>
-    <record id="my_charterer" model="res.partner">
+    <record id="my_charterer_part" model="res.partner">
         <field name="name">My Charterer</field>
-        <field name="is_charterer">1</field>
     </record>
-    <record id="my_charterer_spe" model="res.partner">
+    <record id="my_charterer_spe_part" model="res.partner">
         <field name="name">So Special Charterer</field>
-        <field name="is_charterer">1</field>
+    </record>
+    <record id="my_charterer" model="delivery.carrier">
+        <field name="name">My Charterer</field>
+        <field name="partner_id" ref="my_charterer_part" />
+    </record>
+    <record id="my_charterer_spe" model="delivery.carrier">
+        <field name="name">So Special Charterer</field>
+        <field name="partner_id" ref="my_charterer_spe_part" />
     </record>
 
     <record id="container1" model="freight.container">
@@ -54,9 +60,9 @@
         <field name="departure_id" ref="shanghai_port" />
         <field name="arrival_id" ref="lehavre_port" />
         <field name="vehicle_id" ref="myship" />
-        <field name="charterer_id" ref="my_charterer" />
+        <field name="carrier_id" ref="my_charterer" />
         <field name="company_id">0</field>
-        <field name="first_container_id" ref="container1" />
+        <field name="initial_container">container1</field>
     </record>
 
     <record id="cargo2" model="chartering">
@@ -67,9 +73,9 @@
         <field name="departure_id" ref="shenzen_port" />
         <field name="arrival_id" ref="dunkerque_port" />
         <field name="vehicle_id" ref="myship" />
-        <field name="charterer_id" ref="my_charterer_spe" />
+        <field name="carrier_id" ref="my_charterer_spe" />
         <field name="company_id">0</field>
-        <field name="first_container_id" ref="container2" />
+        <field name="initial_container">container2</field>
     </record>
     <record id="unselectable_chartering" model="chartering">
         <field
@@ -79,7 +85,7 @@
         <field name="state">done</field>
         <field name="departure_id" ref="shenzen_port" />
         <field name="vehicle_id" ref="myship" />
-        <field name="charterer_id" ref="my_charterer_spe" />
+        <field name="carrier_id" ref="my_charterer_spe" />
         <field name="company_id">0</field>
     </record>
 
@@ -91,9 +97,9 @@
         <field name="departure_id" ref="dunkerque_port" />
         <field name="arrival_id" ref="shanghai_port" />
         <field name="vehicle_id" ref="myplane" />
-        <field name="charterer_id" ref="my_charterer_spe" />
+        <field name="carrier_id" ref="my_charterer_spe" />
         <field name="company_id">0</field>
-        <field name="first_container_id" ref="container3" />
+        <field name="initial_container">container3</field>
     </record>
 
     <record id="pick1" model="stock.picking">

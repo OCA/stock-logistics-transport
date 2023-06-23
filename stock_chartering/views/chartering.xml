@@ -5,21 +5,36 @@
     <field name="arch" type="xml">
         <form>
             <header>
-                <field name="state" widget="statusbar" options="{'clickable': '1',}" />
+                <button name="ui_picking_action_done" string="Validate all tranfers" />
+                <field name="state" widget="statusbar" options="{'clickable': '1'}" />
             </header>
             <sheet>
                 <group name="main" cols="4">
                     <group name="left">
-                        <field name="charterer_id" />
+                        <field name="name" />
+                        <field name="carrier_id" />
                         <field name="departure_id" />
                         <field name="arrival_id" />
-                        <field name="first_container_id" />
                     </group>
                     <group name="right">
                         <field name="boarding_date" />
+                        <field name="arrival_date" />
                         <field name="vehicle_id" />
                         <field name="company_id" groups="base.group_multi_company" />
                     </group>
+                </group>
+                <separator />
+                <group name="stock_moves" string="Stock Moves" col="1" cols="1">
+                    <field name="stock_move_ids" nolabel="1">
+                        <tree default_order="container">
+                            <field name="picking_id" />
+                            <field name="origin" />
+                            <field name="container" />
+                            <field name="product_id" />
+                            <field name="product_uom_qty" />
+                            <field name="state" />
+                        </tree>
+                    </field>
                 </group>
             </sheet>
             <div class="oe_chatter">
@@ -34,10 +49,10 @@
     <field name='model'>chartering</field>
     <field name='arch' type='xml'>
         <tree>
+            <field name="name" />
             <field name="boarding_date" />
             <field name="departure_id" />
-            <field name="charterer_id" />
-            <field name="first_container_id" optional="show" />
+            <field name="carrier_id" />
             <field name="arrival_id" optional="show" />
             <field name="vehicle_id" optional="show" />
             <field name="state" />
@@ -55,7 +70,7 @@
     <field name="model">chartering</field>
     <field name="arch" type="xml">
         <search>
-            <field name="charterer_id" string="Charterer" />
+            <field name="carrier_id" string="Charterer" />
             <field name="departure_id" string="Departure" />
             <field name="arrival_id" string="Arrival" />
             <filter
@@ -69,9 +84,9 @@
                     context="{'group_by' : 'arrival_id'}"
                 />
             <filter
-                    name="charterer_id"
+                    name="carrier_id"
                     string="Charterer"
-                    context="{'group_by' : 'charterer_id'}"
+                    context="{'group_by' : 'carrier_id'}"
                 />
             <filter name="state" string="State" context="{'group_by' : 'state'}" />
              <filter

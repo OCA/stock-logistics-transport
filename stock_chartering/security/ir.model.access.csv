@@ -1,7 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 chartering_user,chartering_user,model_chartering,stock.group_stock_user,1,1,1,0
 chartering_mng,chartering_user,model_chartering,stock.group_stock_manager,1,1,1,1
-freight_container_user,freight_container_user,model_freight_container,stock.group_stock_user,1,1,1,0
-freight_container_mng,freight_container_user,model_freight_container,stock.group_stock_manager,1,1,1,1
 transport_vehicle_user,transport.vehicle,model_transport_vehicle,stock.group_stock_user,1,1,1,0
 transport_vehicle_mng,transport.vehicle,model_transport_vehicle,stock.group_stock_manager,1,1,1,1
