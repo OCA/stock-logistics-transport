@@ -12,6 +12,34 @@ class TestShipmentAdvice(Common):
     def setUpClass(cls):
         super().setUpClass()
 
+    def _prepare_picking_with_two_packages(self):
+        # Prepare packages & products
+        package2 = self.env["stock.quant.package"].create({"name": "PKG_OUT2"})
+        package3 = self.env["stock.quant.package"].create({"name": "PKG_OUT3"})
+        self.env["stock.quant"]._update_available_quantity(
+            self.product_out2,
+            self.picking_type_out.default_location_src_id,
+            5,
+            package_id=package2,
+        )
+        self.env["stock.quant"]._update_available_quantity(
+            self.product_out3,
+            self.picking_type_out.default_location_src_id,
+            5,
+            package_id=package3,
+        )
+        # Prepare moves (belonging to the same transfer)
+        group = self.env["procurement.group"].create({})
+        move_product_out2_2 = self._create_move(
+            self.picking_type_out, self.product_out2, 5, group
+        )
+        self.assertEqual(move_product_out2_2.move_line_ids.package_id, package2)
+        move_product_out3_2 = self._create_move(
+            self.picking_type_out, self.product_out3, 5, group
+        )
+        self.assertEqual(move_product_out3_2.move_line_ids.package_id, package3)
+        return move_product_out2_2.picking_id
+
     def test_shipment_advice_confirm(self):
         with self.assertRaises(UserError):
             self.shipment_advice_out.action_confirm()
@@ -69,8 +97,10 @@ class TestShipmentAdvice(Common):
         self.assertEqual(backorder.state, "assigned")
 
     def test_shipment_advice_done_full(self):
-        """Validating a shipment (whatever the backorder policy is) should
-        validate all fully loaded transfers.
+        """Validating a shipment validate all fully loaded related transfers.
+
+        Whatever the backorder policy is, and if the loaded transfers are linked
+        to only one in progress shipment.
         """
         picking = self.move_product_out1.picking_id
         self._in_progress_shipment_advice(self.shipment_advice_out)
@@ -109,6 +139,42 @@ class TestShipmentAdvice(Common):
         )
         self.assertEqual(picking.state, "assigned")
 
+    def test_multi_shipment_advice_done_backorder_policy_disabled(self):
+        """Load a transfer in multiple shipments and validate them with no BO policy.
+
+        The last shipment validated is then responsible of the the transfer validation.
+
+        1. Load first package in one shipment advice
+        2. Validate the first shipment advice: delivery order is not yet validated
+        3. Load second package in another shipment advice
+        4. Validate the second shipment advice: delivery order is now well validated
+        """
+        # Disable the backorder policy
+        company = self.shipment_advice_out.company_id
+        company.shipment_advice_outgoing_backorder_policy = "leave_open"
+        # Prepare a transfer to load in two shipment advices
+        shipment_advice_out2 = self.env["shipment.advice"].create(
+            {"shipment_type": "outgoing"}
+        )
+        picking = self._prepare_picking_with_two_packages()
+        line1, line2 = picking.move_line_ids
+        # Load first package in the first shipment advice
+        pl1 = line1.package_level_id
+        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self._load_records_in_shipment(self.shipment_advice_out, pl1)
+        # Validate the first shipment advice: delivery order hasn't been validated
+        self.shipment_advice_out.action_done()
+        self.assertEqual(self.shipment_advice_out.state, "done")
+        self.assertEqual(picking.state, "assigned")
+        # Load second package in the second shipment advice
+        pl2 = line2.package_level_id
+        self._in_progress_shipment_advice(shipment_advice_out2)
+        self._load_records_in_shipment(shipment_advice_out2, pl2)
+        # Validate the second shipment advice: delivery order has now been validated
+        shipment_advice_out2.action_done()
+        self.assertEqual(shipment_advice_out2.state, "done")
+        self.assertEqual(picking.state, "done")
+
     def test_shipment_advice_done_backorder_policy_enabled(self):
         """Validating a shipment with the backorder policy enabled should
         validate partial transfers and create a backorder.
@@ -137,6 +203,35 @@ class TestShipmentAdvice(Common):
             all(move_line.state == "assigned" for move_line in picking2.move_line_ids)
         )
         self.assertEqual(picking2.state, "assigned")
+
+    def test_assign_lines_to_multiple_shipment_advices(self):
+        """Assign lines of a transfer to different shipment advices.
+
+        1. Load two packages in two different shipment advices
+        2. Validate the first shipment advice: delivery order is not yet validated
+        3. Validate the second shipment advice: delivery order is now well validated
+        """
+        # Prepare a transfer to load in two shipment advices
+        shipment_advice_out2 = self.env["shipment.advice"].create(
+            {"shipment_type": "outgoing"}
+        )
+        picking = self._prepare_picking_with_two_packages()
+        line1, line2 = picking.move_line_ids
+        # Load packages in different shipment advices
+        pl1 = line1.package_level_id
+        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self._load_records_in_shipment(self.shipment_advice_out, pl1)
+        pl2 = line2.package_level_id
+        self._in_progress_shipment_advice(shipment_advice_out2)
+        self._load_records_in_shipment(shipment_advice_out2, pl2)
+        # Validate the first shipment advice: delivery order hasn't been validated
+        self.shipment_advice_out.action_done()
+        self.assertEqual(self.shipment_advice_out.state, "done")
+        self.assertEqual(picking.state, "assigned")
+        # Validate the second shipment advice: delivery order has now been validated
+        shipment_advice_out2.action_done()
+        self.assertEqual(shipment_advice_out2.state, "done")
+        self.assertEqual(picking.state, "done")
 
     def test_shipment_advice_cancel(self):
         self._in_progress_shipment_advice(self.shipment_advice_out)

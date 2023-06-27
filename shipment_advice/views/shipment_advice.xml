@@ -139,6 +139,20 @@
                             />
                         </button>
                         <button
+                            name="button_open_to_load_move_lines"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-list"
+                            states="in_progress"
+                            attrs="{'invisible': ['|', ('shipment_type', '!=', 'outgoing')]}"
+                        >
+                            <field
+                                string="To load"
+                                name="lines_to_load_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
                             name="button_open_deliveries_in_progress"
                             type="object"
                             string="Loading Progress"

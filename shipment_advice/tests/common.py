@@ -38,7 +38,7 @@ class Common(SavepointCase):
             cls.product_out1,
             20,
         )
-        cls.package = cls.env["stock.quant.package"].create({"name": "PKG_OUT2"})
+        cls.package = cls.env["stock.quant.package"].create({"name": "PKG_OUT"})
         cls._update_qty_in_location(
             cls.picking_type_out.default_location_src_id,
             cls.product_out2,
