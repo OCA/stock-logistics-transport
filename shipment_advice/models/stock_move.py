@@ -12,6 +12,7 @@ class StockMove(models.Model):
         ondelete="set null",
         string="Planned shipment",
         index=True,
+        copy=False,
     )
 
     def _plan_in_shipment(self, shipment_advice):
