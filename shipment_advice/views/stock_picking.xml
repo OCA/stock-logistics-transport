@@ -71,19 +71,18 @@
                 <filter
                     name="loaded_shipment_advice"
                     string="Loaded Shipment Advice"
-                    domain="[('move_line_ids.shipment_advice_id', '=', self)]"
+                    domain="[('move_line_ids.shipment_advice_id', '!=', False)]"
                 />
                 <filter
                     name="no_shipment_advice"
                     string="To plan in Shipment Advice"
-                    domain="['|', ('move_ids.shipment_advice_id', '=', False), ('move_ids.shipment_advice_id', '=', False)]"
+                    domain="[('move_ids.shipment_advice_id', '=', False)]"
                 />
             </group>
             <group position="inside">
                 <filter
                     name="planned_shipment_advice"
                     string="Planned Shipment Advice"
-                    domain="[]"
                     context="{'group_by': 'planned_shipment_advice_id'}"
                 />
             </group>
