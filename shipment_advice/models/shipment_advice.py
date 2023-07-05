@@ -342,7 +342,9 @@ class ShipmentAdvice(models.Model):
                             # set to fullfill the need => validate
                             picking._action_done()
                 # Unplan moves that were not loaded and validated
-                moves_to_unplan = self.loaded_move_line_ids.move_id.filtered(
+                moves_to_unplan = (
+                    self.loaded_move_line_ids.move_id | self.planned_move_ids
+                ).filtered(
                     lambda m: m.state not in ("cancel", "done") and not m.quantity_done
                 )
                 moves_to_unplan.shipment_advice_id = False
