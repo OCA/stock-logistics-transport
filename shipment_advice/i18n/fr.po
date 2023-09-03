@@ -301,8 +301,10 @@ msgid ""
 "              done all related deliveries and create backorder in case of\n"
 "              partial choose 'Create backorder'.\n"
 "              If you want to mark deliveries as done only when they are all\n"
-"              loaded in a shipment advice choose 'Leave open'. This last option\n"
-"              is useful when your deliveries will be shipped by several trucks."
+"              loaded in a shipment advice choose 'Leave open'. This last "
+"option\n"
+"              is useful when your deliveries will be shipped by several "
+"trucks."
 msgstr ""
 "Si vous voulez que la fermeture d'une note d'envoi sortante change l'état\n"
 "              à 'fait' toutes les livraisons liées et crée un reliquat en "
@@ -319,8 +321,12 @@ msgstr ""
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
 #: model:ir.model.fields,help:shipment_advice.field_res_config_settings__shipment_advice_outgoing_backorder_policy
 msgid ""
-"If you want that closing an outgoing shipment advice marks as done all related deliveries and creates backorder in case of partial choose 'Create backorder'.\n"
-"If you want to mark deliveries as done only when they are all loaded in a shipment advice choose 'Leave open'. This last option is useful when your deliveries will be shipped by several trucks."
+"If you want that closing an outgoing shipment advice marks as done all "
+"related deliveries and creates backorder in case of partial choose 'Create "
+"backorder'.\n"
+"If you want to mark deliveries as done only when they are all loaded in a "
+"shipment advice choose 'Leave open'. This last option is useful when your "
+"deliveries will be shipped by several trucks."
 msgstr ""
 "Si vous voulez que fermer une note d'envoi d'expédition marque comme terminé "
 "tous les transferts liés et crée un reliquat en cas de transfert partiel, "
@@ -398,8 +404,7 @@ msgstr "Laisser ouvert"
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
-"Lines to include have been updated, keeping only those qualified as "
-"delivery."
+"Lines to include have been updated, keeping only those qualified as delivery."
 msgstr ""
 "Les lignes à inclure ont été mises à jour en ne gardant que celles définies "
 "comme à livrer."
@@ -530,8 +535,7 @@ msgstr "Mouvements"
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
-msgid ""
-"Moves to include have been updated to match the selected shipment type."
+msgid "Moves to include have been updated to match the selected shipment type."
 msgstr ""
 "Les mouvements à inclure ont été mis à jour pour correspondre au type "
 "d'envoi sélectionné."
@@ -541,8 +545,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
-"Moves to include have been updated, keeping only those still in progress and"
-" related to a delivery/reception."
+"Moves to include have been updated, keeping only those still in progress and "
+"related to a delivery/reception."
 msgstr ""
 "Les mouvements à inclure ont été mis à jour en ne gardant que ceux en cours "
 "et liés à une livraison/réception."
@@ -552,8 +556,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid ""
-"Moves to include have been updated, keeping only those still in progress and"
-" related to a shipment."
+"Moves to include have been updated, keeping only those still in progress and "
+"related to a shipment."
 msgstr ""
 "Les mouvements à inclure ont été mis à jour en ne gardant que ceux qui sont "
 "en cours et liés à un envoi."
@@ -714,8 +718,8 @@ msgstr "Nombre d'erreurs"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "Nombre de messages qui nécessitent une action"
+msgid "Number of messages requiring action"
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_has_error_counter
@@ -784,8 +788,7 @@ msgstr "Packs à charger"
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
-msgid ""
-"Packages to load have been updated to match the selected shipment type."
+msgid "Packages to load have been updated to match the selected shipment type."
 msgstr ""
 "Les packs à charger ont été mis à jour pour correspondre au type d'envoi "
 "sélectionné."
@@ -920,8 +923,7 @@ msgstr "Produits à charger"
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
-msgid ""
-"Products to load have been updated to match the selected shipment type."
+msgid "Products to load have been updated to match the selected shipment type."
 msgstr ""
 "Les produits à charger ont été mis à jour pour correspondre au type d'envoi "
 "sélectionné."
@@ -1019,7 +1021,6 @@ msgstr "L'envoi {} n'est pas à l'état brouillon, l'opération est annulée."
 
 #. module: shipment_advice
 #. odoo-python
-#: code:addons/shipment_advice/models/shipment_advice.py:0
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not started, operation aborted."
@@ -1146,8 +1147,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
-"Transfers to include have been updated, keeping only those still in progress"
-" and qualified as delivery/reception."
+"Transfers to include have been updated, keeping only those still in progress "
+"and qualified as delivery/reception."
 msgstr ""
 "Les transferts à inclure ont été mis à jour en ne gardant que ceux qui sont "
 "en cours et de type 'livraison/réception'."
@@ -1158,8 +1159,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid ""
-"Transfers to include have been updated, keeping only those still in progress"
-" and related to a shipment."
+"Transfers to include have been updated, keeping only those still in progress "
+"and related to a shipment."
 msgstr ""
 "Les transferts à inclure ont été mis à jour en ne gardant que ceux qui sont "
 "en cours et liés à un envoi."
@@ -1376,8 +1377,11 @@ msgstr ""
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"You cannot unload this move line alone, you have to unload the whole package"
-" content."
+"You cannot unload this move line alone, you have to unload the whole package "
+"content."
 msgstr ""
 "Vous ne pouvez pas décharger ce mouvement seul, vous devez décharger le "
 "contenu du pack entier."
+
+#~ msgid "Number of messages which requires an action"
+#~ msgstr "Nombre de messages qui nécessitent une action"
