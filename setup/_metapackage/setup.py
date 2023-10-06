@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-shipment_advice>=16.0dev,<16.1dev',
+        'odoo-addon-shipment_advice_planner>=16.0dev,<16.1dev',
         'odoo-addon-stock_dock>=16.0dev,<16.1dev',
     ],
     classifiers=[
