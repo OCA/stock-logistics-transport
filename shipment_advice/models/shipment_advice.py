@@ -282,7 +282,8 @@ class ShipmentAdvice(models.Model):
                         shipment.name
                     )
                 )
-            shipment.arrival_date = fields.Datetime.now()
+            if not shipment.arrival_date:
+                shipment.arrival_date = fields.Datetime.now()
             shipment.state = "in_progress"
         return True
 
@@ -348,7 +349,8 @@ class ShipmentAdvice(models.Model):
                     lambda m: m.state not in ("cancel", "done") and not m.quantity_done
                 )
                 moves_to_unplan.shipment_advice_id = False
-            shipment.departure_date = fields.Datetime.now()
+            if not shipment.departure_date:
+                shipment.departure_date = fields.Datetime.now()
             shipment.state = "done"
         return True
 
