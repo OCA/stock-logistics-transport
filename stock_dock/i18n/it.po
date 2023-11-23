@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-23 10:33+0000\n"
+"PO-Revision-Date: 2023-11-23 15:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -61,7 +61,7 @@ msgstr "Baia"
 #. module: stock_dock
 #: model:ir.model,name:stock_dock.model_stock_dock
 msgid "Dock, used by trucks to load/unload goods"
-msgstr "Baia, utilizzata dai camion per caricare/scaricare la merce"
+msgstr "Baia, utilizzata dagli automezzi per caricare/scaricare la merce"
 
 #. module: stock_dock
 #: model:ir.actions.act_window,name:stock_dock.stock_dock_action
