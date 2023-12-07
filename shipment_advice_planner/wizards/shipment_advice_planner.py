@@ -142,6 +142,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
         self.ensure_one()
         vals = self._prepare_shipment_advice_common_vals(picking_type)
         vals["planned_move_ids"] = [Command.set(pickings_to_plan.move_ids.ids)]
+        vals["loaded_move_line_ids"] = [Command.set(pickings_to_plan.move_line_ids.ids)]
         return [vals]
 
     def _prepare_shipment_advice_common_vals(self, picking_type):
