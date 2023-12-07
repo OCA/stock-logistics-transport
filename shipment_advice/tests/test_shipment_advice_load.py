@@ -149,3 +149,8 @@ class TestShipmentAdviceLoad(Common):
                 self.shipment_advice_out,
                 package_level,
             )
+
+    def test_reload_the_same_pick(self):
+        self.move_product_out1.move_line_ids._load_in_shipment(self.shipment_advice_out)
+        self.move_product_out2._plan_in_shipment(self.shipment_advice_out)
+        self.move_product_out1.move_line_ids._load_in_shipment(self.shipment_advice_out)
