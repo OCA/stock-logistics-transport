@@ -151,6 +151,13 @@ class TestShipmentAdviceLoad(Common):
             )
 
     def test_reload_the_same_pick(self):
-        self.move_product_out1.move_line_ids._load_in_shipment(self.shipment_advice_out)
+        move1lines = self.move_product_out1.move_line_ids
+        move2lines = self.move_product_out2.move_line_ids
+        move1lines._load_in_shipment(self.shipment_advice_out)
+        self.assertEqual(self.shipment_advice_out.loaded_move_line_ids, move1lines)
         self.move_product_out2._plan_in_shipment(self.shipment_advice_out)
-        self.move_product_out1.move_line_ids._load_in_shipment(self.shipment_advice_out)
+        move1lines._load_in_shipment(self.shipment_advice_out)
+        move2lines._load_in_shipment(self.shipment_advice_out)
+        self.assertEqual(
+            self.shipment_advice_out.loaded_move_line_ids, move1lines | move2lines
+        )

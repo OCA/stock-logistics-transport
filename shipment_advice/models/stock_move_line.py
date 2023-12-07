@@ -45,6 +45,10 @@ class StockMoveLine(models.Model):
                 )
             )
         for move_line in self:
+            if move_line.shipment_advice_id == shipment_advice:
+                # move line is already loaded, only update the qty_done
+                move_line.qty_done = move_line.reserved_uom_qty
+                continue
             # Shipment has to be the planned one (if any)
             planned_shipment = move_line.move_id.shipment_advice_id
             if planned_shipment and planned_shipment != shipment_advice:
