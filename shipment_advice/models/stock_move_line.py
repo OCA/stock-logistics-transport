@@ -29,7 +29,9 @@ class StockMoveLine(models.Model):
         """Check that the lines represent whole packages (if applicable)."""
         for move_line in self:
             if move_line.package_level_id:
-                package_lines = move_line.package_level_id.move_line_ids
+                package_lines = move_line.package_level_id.move_line_ids.filtered(
+                    lambda l: l.state in ("partially_available", "assigned")
+                )
                 if not set(package_lines.ids).issubset(set(self.ids)):
                     return False
         return True
