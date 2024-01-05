@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-23 10:33+0000\n"
+"PO-Revision-Date: 2024-01-05 10:38+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -128,7 +128,7 @@ msgstr "I trasferimenti selezionai devono essere pronti e di tipo consegna."
 #: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
 #, python-format
 msgid "There is no implementation for the planning method '%s'"
-msgstr "Non c'è l'implementazine per il metodo di pianificazione '%s'"
+msgstr "Non c'è l'implementazione per il metodo di pianificazione '%s'"
 
 #. module: shipment_advice_planner
 #: model:ir.model,name:shipment_advice_planner.model_stock_picking
