@@ -1354,7 +1354,8 @@ msgstr ""
 #, python-format
 msgid ""
 "You cannot load this into this shipment because its content is planned "
-"already."
+"already.\n"
+"%(info)s"
 msgstr ""
 
 #. module: shipment_advice
@@ -1363,7 +1364,8 @@ msgstr ""
 #, python-format
 msgid ""
 "You cannot load this move line alone, you have to move the whole package "
-"content."
+"content.\n"
+"%(info)s"
 msgstr ""
 
 #. module: shipment_advice
