@@ -29,7 +29,9 @@ class StockMoveLine(models.Model):
         """Check that the lines represent whole packages (if applicable)."""
         for move_line in self:
             if move_line.package_level_id:
-                package_lines = move_line.package_level_id.move_line_ids
+                package_lines = move_line.package_level_id.move_line_ids.filtered(
+                    lambda l: l.state in ("partially_available", "assigned")
+                )
                 if not set(package_lines.ids).issubset(set(self.ids)):
                     return False
         return True
@@ -38,10 +40,21 @@ class StockMoveLine(models.Model):
         """Load the move lines into the given shipment advice."""
         # Entire package check
         if not self._check_entire_package():
+            move_lines = self.package_level_id.move_line_ids
+            pickings = move_lines.picking_id.mapped("name")
+            products = move_lines.product_id.mapped("display_name")
+            packages = move_lines.package_id.mapped("display_name")
             raise UserError(
                 _(
                     "You cannot load this move line alone, you have to "
-                    "move the whole package content."
+                    "move the whole package content.\n%(info)s",
+                    info="\n".join(
+                        [
+                            _("Transfers: %s", ", ".join(pickings)),
+                            _("Products: %s", ", ".join(products)),
+                            _("Packages: %s", ", ".join(packages)),
+                        ]
+                    ),
                 )
             )
         for move_line in self:
@@ -60,7 +73,13 @@ class StockMoveLine(models.Model):
                 raise UserError(
                     _(
                         "You cannot load this into this shipment because its "
-                        "content is planned already."
+                        "content is planned already.\n%(info)s",
+                        info="\n".join(
+                            [
+                                _("Transfer: %s", move_line.picking_id.name),
+                                _("Product: %s", move_line.product_id.display_name),
+                            ]
+                        ),
                     )
                 )
             move_line.shipment_advice_id = shipment_advice.id
