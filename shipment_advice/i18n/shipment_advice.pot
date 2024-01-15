@@ -1281,8 +1281,8 @@ msgstr ""
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"You cannot load this into this shipment because its content is planned "
-"already."
+"You cannot load this into this shipment because its content is planned already.\n"
+"%(info)s"
 msgstr ""
 
 #. module: shipment_advice
@@ -1290,8 +1290,8 @@ msgstr ""
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"You cannot load this move line alone, you have to move the whole package "
-"content."
+"You cannot load this move line alone, you have to move the whole package content.\n"
+"%(info)s"
 msgstr ""
 
 #. module: shipment_advice
