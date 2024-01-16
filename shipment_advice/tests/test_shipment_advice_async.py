@@ -12,7 +12,9 @@ class TestShipmentAdvice(Common):
     def setUpClass(cls):
         super().setUpClass()
         cls.env.user.company_id.shipment_advice_run_in_queue_job = True
-        cls.product_out4 = cls.env.ref("product.product_product_27")
+        cls.product_out4 = cls.env["product.product"].create(
+            {"name": "product_out4", "type": "product"}
+        )
         cls.group1 = cls.env["procurement.group"].create({})
         cls.group2 = cls.env["procurement.group"].create({})
         cls.group3 = cls.env["procurement.group"].create({})
@@ -53,6 +55,12 @@ class TestShipmentAdvice(Common):
         picking._action_done()
         with trap_jobs() as trap:
             self.shipment_advice_in.action_done()
+            self.assertEqual(self.shipment_advice_in.state, "in_process")
+            trap.assert_jobs_count(2)  # 0 picking + 1 for unplan + 1 for postprocess
+            jobs = trap.enqueued_jobs
+            picking_jobs = self._filter_jobs(jobs, "_validate_picking")
+            self.assertEqual(len(picking_jobs), 0)
+            self._asset_jobs_dependency(jobs)
             trap.perform_enqueued_jobs()
         self.assertEqual(self.shipment_advice_in.state, "done")
         self.assertTrue(
@@ -78,6 +86,12 @@ class TestShipmentAdvice(Common):
         # When validating the shipment, a backorder is created for unprocessed moves
         with trap_jobs() as trap:
             self.shipment_advice_in.action_done()
+            self.assertEqual(self.shipment_advice_in.state, "in_process")
+            trap.assert_jobs_count(3)  # 1 picking + 1 for unplan + 1 for postprocess
+            jobs = trap.enqueued_jobs
+            picking_jobs = self._filter_jobs(jobs, "_validate_picking")
+            self.assertEqual(len(picking_jobs), 1)
+            self._asset_jobs_dependency(jobs)
             trap.perform_enqueued_jobs()
         backorder = self.move_product_in2.picking_id
         self.assertNotEqual(picking, backorder)
@@ -124,6 +138,12 @@ class TestShipmentAdvice(Common):
         # Validate the shipment => the transfer is still open
         with trap_jobs() as trap:
             self.shipment_advice_out.action_done()
+            self.assertEqual(self.shipment_advice_out.state, "in_process")
+            trap.assert_jobs_count(3)  # 1 picking + 1 for unplan + 1 for postprocess
+            jobs = trap.enqueued_jobs
+            picking_jobs = self._filter_jobs(jobs, "_validate_picking")
+            self.assertEqual(len(picking_jobs), 1)
+            self._asset_jobs_dependency(jobs)
             trap.perform_enqueued_jobs()
         picking = package_level.picking_id
         self.assertEqual(self.shipment_advice_out.state, "done")
@@ -151,6 +171,12 @@ class TestShipmentAdvice(Common):
         # Validate the shipment => the transfer is validated, creating a backorder
         with trap_jobs() as trap:
             self.shipment_advice_out.action_done()
+            self.assertEqual(self.shipment_advice_out.state, "in_process")
+            trap.assert_jobs_count(3)  # 1 picking + 1 for unplan + 1 for postprocess
+            jobs = trap.enqueued_jobs
+            picking_jobs = self._filter_jobs(jobs, "_validate_picking")
+            self.assertEqual(len(picking_jobs), 1)
+            self._asset_jobs_dependency(jobs)
             trap.perform_enqueued_jobs()
         self.assertEqual(self.shipment_advice_out.state, "done")
         # Check the transfer validated
@@ -166,3 +192,79 @@ class TestShipmentAdvice(Common):
             all(move_line.state == "assigned" for move_line in picking2.move_line_ids)
         )
         self.assertEqual(picking2.state, "assigned")
+
+    def test_shipment_advice_error(self):
+        """
+        provoke and error in one picking during validation, expected:
+            - only the picking with the error remains assigned
+            - the shipment advice moves to the "error" state
+        """
+        pickings = self.move1.picking_id | self.move2.picking_id | self.move3.picking_id
+        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self._load_records_in_shipment(self.shipment_advice_out, pickings)
+        # provoke validation error by setting internal package as destination
+        pickings[0].move_line_ids.result_package_id = self.package
+        with trap_jobs() as trap:
+            self.shipment_advice_out.action_done()
+            self.assertEqual(self.shipment_advice_out.state, "in_process")
+            trap.assert_jobs_count(5)  # 3 pickings + 1 for unplan + 1 for postprocess
+            jobs = trap.enqueued_jobs
+            picking_jobs = self._filter_jobs(jobs, "_validate_picking")
+            self.assertEqual(len(picking_jobs), 3)
+            self._asset_jobs_dependency(jobs)
+            trap.perform_enqueued_jobs()
+        self.assertEqual(self.shipment_advice_out.state, "error")
+        self.assertIn(
+            "You cannot move the same package content more than once",
+            self.shipment_advice_out.error_message,
+        )
+        self.assertEqual(pickings[0].state, "assigned")
+        self.assertEqual(pickings[1].state, "done")
+        self.assertEqual(pickings[2].state, "done")
+        return pickings[0]
+
+    def test_shipment_advice_error_fix_and_retry(self):
+        """
+        fix the picking error and retry
+            - picking state = done
+            - SA state = done
+        """
+        picking = self.test_shipment_advice_error()
+        picking.move_line_ids.result_package_id = False
+        with trap_jobs() as trap:
+            self.shipment_advice_out.action_done()
+            self.assertEqual(self.shipment_advice_out.state, "in_process")
+            trap.assert_jobs_count(
+                3
+            )  # 1 picking remaining + 1 for unplan + 1 for postprocess
+            jobs = trap.enqueued_jobs
+            picking_jobs = self._filter_jobs(jobs, "_validate_picking")
+            self.assertEqual(len(picking_jobs), 1)
+            self._asset_jobs_dependency(jobs)
+            trap.perform_enqueued_jobs()
+        self.assertEqual(self.shipment_advice_out.state, "done")
+        self.assertFalse(self.shipment_advice_out.error_message)
+        self.assertEqual(picking.state, "done")
+
+    def test_shipment_advice_error_unload_and_retry(self):
+        """
+        unload the picking and retry
+            - picking state = assigned
+            - SA state = done
+        """
+        picking = self.test_shipment_advice_error()
+        picking._unload_from_shipment()
+        with trap_jobs() as trap:
+            self.shipment_advice_out.action_done()
+            self.assertEqual(self.shipment_advice_out.state, "in_process")
+            trap.assert_jobs_count(
+                2
+            )  # 0 picking remaining + 1 for unplan + 1 for postprocess
+            jobs = trap.enqueued_jobs
+            picking_jobs = self._filter_jobs(jobs, "_validate_picking")
+            self.assertEqual(len(picking_jobs), 0)
+            self._asset_jobs_dependency(jobs)
+            trap.perform_enqueued_jobs()
+        self.assertEqual(self.shipment_advice_out.state, "done")
+        self.assertFalse(self.shipment_advice_out.error_message)
+        self.assertEqual(picking.state, "assigned")
