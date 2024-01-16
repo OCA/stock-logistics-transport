@@ -23,3 +23,9 @@ class ResCompany(models.Model):
             "deliveries will be shipped by several trucks."
         ),
     )
+    shipment_advice_run_in_queue_job = fields.Boolean(
+        string="Run shipment advice in queue job",
+        help="To prevent timeouts for large shipments, enable this option to execute "
+        "shipment advice validation through a queued jobs. Each picking will be "
+        "validated in a separate job.",
+    )
