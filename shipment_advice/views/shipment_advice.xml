@@ -44,7 +44,7 @@
                         type="object"
                         string="Mark as done"
                         class="btn-primary"
-                        states="in_progress"
+                        states="in_progress,error"
                     />
                     <button
                         name="action_cancel"
@@ -66,6 +66,13 @@
                         statusbar_visible="draft,confirmed,in_progress,done"
                     />
                 </header>
+                <div
+                    class="alert alert-danger mb-0"
+                    role="alert"
+                    attrs="{'invisible': [('state', '!=', 'error')]}"
+                >
+                    <field name="error_message" />
+                    </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
