@@ -268,3 +268,32 @@ class TestShipmentAdvice(Common):
         self.assertEqual(self.shipment_advice_out.state, "done")
         self.assertFalse(self.shipment_advice_out.error_message)
         self.assertEqual(picking.state, "assigned")
+
+    def test_shipment_advice_done_unplan_undone(self):
+        """check that undone move are unplaned after validation"""
+        # Enable the backorder policy
+        company = self.shipment_advice_out.company_id
+        company.shipment_advice_outgoing_backorder_policy = "create_backorder"
+        # Load a transfer partially (here a package)
+        package_level = self.move_product_out2.move_line_ids.package_level_id
+        picking = package_level.picking_id
+        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self._plan_records_in_shipment(self.shipment_advice_out, picking)
+        self.assertEqual(len(self.shipment_advice_out.planned_move_ids), 3)
+        self._load_records_in_shipment(self.shipment_advice_out, package_level)
+        self.assertEqual(len(package_level.move_line_ids.move_id), 2)
+        # Validate the shipment => the transfer is validated, creating a backorder
+        with trap_jobs() as trap:
+            self.shipment_advice_out.action_done()
+            self.assertEqual(self.shipment_advice_out.state, "in_process")
+            trap.assert_jobs_count(3)  # 1 picking + 1 for unplan + 1 for postprocess
+            jobs = trap.enqueued_jobs
+            picking_jobs = self._filter_jobs(jobs, "_validate_picking")
+            self.assertEqual(len(picking_jobs), 1)
+            self._asset_jobs_dependency(jobs)
+            trap.perform_enqueued_jobs()
+        self.assertEqual(self.shipment_advice_out.state, "done")
+        self.assertEqual(picking.state, "done")
+        self.assertEqual(len(self.shipment_advice_out.planned_move_ids), 2)
+        self.assertTrue(picking.backorder_ids)
+        self.assertFalse(picking.backorder_ids.move_ids.shipment_advice_id)
