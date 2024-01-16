@@ -10,3 +10,6 @@ class ResConfigSettings(models.TransientModel):
     shipment_advice_outgoing_backorder_policy = fields.Selection(
         related="company_id.shipment_advice_outgoing_backorder_policy", readonly=False
     )
+    shipment_advice_run_in_queue_job = fields.Boolean(
+        related="company_id.shipment_advice_run_in_queue_job", readonly=False
+    )
