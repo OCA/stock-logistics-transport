@@ -11,6 +11,8 @@
     "depends": [
         "stock",
         "delivery",
+        # OCA/queue
+        "queue_job",
         # OCA/stock-logistics-transport
         "stock_dock",
     ],
