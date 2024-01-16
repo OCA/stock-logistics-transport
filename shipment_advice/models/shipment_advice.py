@@ -4,6 +4,8 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
+from odoo.addons.queue_job.delay import chain, group
+
 
 class ShipmentAdvice(models.Model):
     _name = "shipment.advice"
@@ -168,6 +170,9 @@ class ShipmentAdvice(models.Model):
             "(e.g. through the shopfloor application)."
         ),
     )
+    run_in_queue_job = fields.Boolean(
+        related="company_id.shipment_advice_run_in_queue_job"
+    )
 
     _sql_constraints = [
         (
@@ -309,10 +314,21 @@ class ShipmentAdvice(models.Model):
         else:
             pickings = self.loaded_picking_ids
             backorder_policy = self.company_id.shipment_advice_outgoing_backorder_policy
+        if self.run_in_queue_job:
+            chain(
+                group(
+                    *[
+                        self.delayable()._validate_picking(picking, backorder_policy)
+                        for picking in pickings
+                    ]
+                ),
+                group(self.delayable()._unplan_undone_moves()),
+                group(self.delayable()._postprocess_action_done()),
+            ).delay()
+            return
         for picking in pickings:
             self._validate_picking(picking, backorder_policy)
-        if self.shipment_type == "outgoing":
-            self._unplan_undone_moves()
+        self._unplan_undone_moves()
         self._postprocess_action_done()
 
     def _check_action_done_allowed(self):
@@ -338,10 +354,13 @@ class ShipmentAdvice(models.Model):
     def _unplan_undone_moves(self):
         """Unplan moves that were not loaded and validated"""
         self.ensure_one()
-        moves_to_unplan = (
-            self.loaded_move_line_ids.move_id | self.planned_move_ids
-        ).filtered(lambda m: m.state not in ("cancel", "done") and not m.quantity_done)
-        moves_to_unplan.shipment_advice_id = False
+        if self.shipment_type == "outgoing":
+            moves_to_unplan = (
+                self.loaded_move_line_ids.move_id | self.planned_move_ids
+            ).filtered(
+                lambda m: m.state not in ("cancel", "done") and not m.quantity_done
+            )
+            moves_to_unplan.shipment_advice_id = False
 
     def _postprocess_action_done(self):
         self.ensure_one()
