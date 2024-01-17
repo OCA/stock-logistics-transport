@@ -23,7 +23,7 @@ class WizardLoadInShipment(models.TransientModel):
         comodel_name="shipment.advice",
         string="Shipment Advice",
         required=True,
-        domain=[("state", "in", ("confirm", "in_progress"))],
+        domain=[("state", "in", ("confirm", "in_progress", "error"))],
     )
     warning = fields.Char(readonly=True)
     open_shipment = fields.Boolean(default=True)
