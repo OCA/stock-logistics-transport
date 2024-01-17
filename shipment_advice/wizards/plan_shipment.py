@@ -21,7 +21,7 @@ class WizardPlanShipment(models.TransientModel):
         comodel_name="shipment.advice",
         string="Shipment Advice",
         required=True,
-        domain=[("state", "in", ("draft", "confirmed"))],
+        domain=[("state", "in", ("draft", "confirmed", "error"))],
     )
     warning = fields.Char(readonly=True)
 
