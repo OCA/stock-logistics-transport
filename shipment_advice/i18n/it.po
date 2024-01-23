@@ -712,6 +712,15 @@ msgstr ""
 "non collegati a spedizione)."
 
 #. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"Nothing to load for %(product)s.\n"
+"Picking: %(picking)s"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_needaction_counter
 msgid "Number of Actions"
 msgstr "Numero di azioni"
@@ -1072,6 +1081,16 @@ msgstr "L'azienda è impostata automaticamente in base alle preferenze utente."
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "This Week"
 msgstr "Questa settimana"
+
+#. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/stock_move_line.py:0
+#, python-format
+msgid ""
+"This move is already loaded  in another shipment.\n"
+"Product: %(product)s.\n"
+"Picking: %(picking)s"
+msgstr ""
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
