@@ -3,6 +3,7 @@
 
 from odoo import _, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_is_zero
 
 
 class StockMoveLine(models.Model):
@@ -82,8 +83,32 @@ class StockMoveLine(models.Model):
                         ),
                     )
                 )
-            move_line.shipment_advice_id = shipment_advice.id
-            move_line.qty_done = move_line.reserved_uom_qty
+            if (
+                move_line.shipment_advice_id
+                and move_line.shipment_advice_id != shipment_advice
+            ):
+                raise UserError(
+                    _(
+                        "This move is already loaded  in another shipment."
+                        "\nProduct: %(product)s.\nPicking: %(picking)s",
+                        product=move_line.product_id.display_name,
+                        picking=move_line.picking_id.name,
+                    )
+                )
+            move_line.shipment_advice_id = shipment_advice
+            uom = move_line.product_uom_id or move_line.product_id.uom_id
+            if float_is_zero(
+                move_line.reserved_uom_qty, precision_rounding=uom.rounding
+            ):
+                raise UserError(
+                    _(
+                        "Nothing to load for %(product)s.\nPicking: %(picking)s",
+                        product=move_line.product_id.display_name,
+                        picking=move_line.picking_id.name,
+                    )
+                )
+            if move_line.state in ("partially_available", "assigned"):
+                move_line.qty_done = move_line.reserved_uom_qty
 
     def _unload_from_shipment(self):
         """Unload the move lines from their related shipment advice."""
