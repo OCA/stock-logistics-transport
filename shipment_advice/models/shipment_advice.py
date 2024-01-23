@@ -4,6 +4,8 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
+from odoo.addons.queue_job.delay import chain, group
+
 
 class ShipmentAdvice(models.Model):
     _name = "shipment.advice"
@@ -23,11 +25,14 @@ class ShipmentAdvice(models.Model):
             ("draft", "Draft"),
             ("confirmed", "Confirmed"),
             ("in_progress", "In progress"),
+            ("in_process", "In process"),
+            ("error", "Error"),
             ("done", "Done"),
             ("cancel", "Cancelled"),
         ],
         string="Status",
         default="draft",
+        tracking=True,
     )
     warehouse_id = fields.Many2one(
         comodel_name="stock.warehouse",
@@ -168,6 +173,10 @@ class ShipmentAdvice(models.Model):
             "(e.g. through the shopfloor application)."
         ),
     )
+    run_in_queue_job = fields.Boolean(
+        related="company_id.shipment_advice_run_in_queue_job"
+    )
+    error_message = fields.Text(tracking=True)
 
     _sql_constraints = [
         (
@@ -295,64 +304,96 @@ class ShipmentAdvice(models.Model):
         self.env.cr.execute(sql, (tuple(records.ids),), log_exceptions=False)
 
     def action_done(self):
-        wiz_model = self.env["stock.backorder.confirmation"]
+        self._check_action_done_allowed()
         for shipment in self:
-            if shipment.state != "in_progress":
+            shipment._action_done()
+        return True
+
+    def _action_done(self):
+        # Validate transfers (create backorders for unprocessed lines)
+        self.ensure_one()
+        self.write({"state": "in_process", "error_message": False})
+
+        if self.shipment_type == "incoming":
+            pickings = self.planned_picking_ids
+            backorder_policy = "create_backorder"
+        else:
+            pickings = self.loaded_picking_ids
+            backorder_policy = self.company_id.shipment_advice_outgoing_backorder_policy
+        pickings = pickings.filtered(lambda p: p.state not in ("cancel", "done"))
+        if self.run_in_queue_job:
+            chain(
+                group(
+                    *[
+                        self.delayable()._validate_picking(picking, backorder_policy)
+                        for picking in pickings
+                    ]
+                ),
+                group(self.delayable()._unplan_undone_moves()),
+                group(self.delayable()._postprocess_action_done()),
+            ).delay()
+            return
+        for picking in pickings:
+            self._validate_picking(picking, backorder_policy)
+        self._unplan_undone_moves()
+        self._postprocess_action_done()
+
+    def _check_action_done_allowed(self):
+        for shipment in self:
+            if shipment.state not in ("in_progress", "error"):
                 raise UserError(
                     _("Shipment {} is not started, operation aborted.").format(
                         shipment.name
                     )
                 )
-            # Validate transfers (create backorders for unprocessed lines)
-            if shipment.shipment_type == "incoming":
-                self._lock_records(self.planned_picking_ids)
-                for picking in self.planned_picking_ids:
-                    if picking.state in ("cancel", "done"):
-                        continue
-                    if picking._check_backorder():
-                        wiz = wiz_model.create({})
-                        wiz.pick_ids = picking
-                        wiz.with_context(
-                            button_validate_picking_ids=picking.ids
-                        ).process()
-                    else:
-                        picking._action_done()
-            else:
-                backorder_policy = (
-                    shipment.company_id.shipment_advice_outgoing_backorder_policy
-                )
-                self._lock_records(self.loaded_picking_ids)
-                if backorder_policy == "create_backorder":
-                    for picking in self.loaded_picking_ids:
-                        if picking.state in ("cancel", "done"):
-                            continue
-                        if picking._check_backorder():
-                            wiz = wiz_model.create({})
-                            wiz.pick_ids = picking
-                            wiz.with_context(
-                                button_validate_picking_ids=picking.ids
-                            ).process()
-                        else:
-                            picking._action_done()
-                else:
-                    for picking in self.loaded_picking_ids:
-                        if picking.state in ("cancel", "done"):
-                            continue
-                        if not picking._check_backorder():
-                            # no backorder needed means that all qty_done are
-                            # set to fullfill the need => validate
-                            picking._action_done()
-                # Unplan moves that were not loaded and validated
-                moves_to_unplan = (
-                    self.loaded_move_line_ids.move_id | self.planned_move_ids
-                ).filtered(
-                    lambda m: m.state not in ("cancel", "done") and not m.quantity_done
-                )
-                moves_to_unplan.shipment_advice_id = False
-            if not shipment.departure_date:
-                shipment.departure_date = fields.Datetime.now()
-            shipment.state = "done"
-        return True
+
+    def _validate_picking(self, picking, backorder_policy="create_backorder"):
+        self.ensure_one()
+        self._lock_records(picking)
+        try:
+            with self.env.cr.savepoint():
+                if (
+                    picking._check_backorder()
+                    and backorder_policy == "create_backorder"
+                ):
+                    wiz = self.env["stock.backorder.confirmation"].create({})
+                    wiz.pick_ids = picking
+                    wiz.with_context(button_validate_picking_ids=picking.ids).process()
+                elif not picking._check_backorder():
+                    picking._action_done()
+        except UserError as error:
+            self.write(
+                {
+                    "state": "error",
+                    "error_message": self._get_error_message(error, picking),
+                }
+            )
+
+    def _unplan_undone_moves(self):
+        """Unplan moves that were not loaded and validated"""
+        self.ensure_one()
+        if self.state != "in_process" or self.shipment_type != "outgoing":
+            return
+        moves_to_unplan = (
+            self.loaded_move_line_ids.move_id | self.planned_move_ids
+        ).filtered(lambda m: m.state not in ("cancel", "done") and not m.quantity_done)
+        moves_to_unplan.shipment_advice_id = False
+
+    def _postprocess_action_done(self):
+        self.ensure_one()
+        if self.state != "in_process":
+            return
+        if not self.departure_date:
+            self.departure_date = fields.Datetime.now()
+        self.write({"state": "done", "error_message": False})
+
+    @api.model
+    def _get_error_message(self, error, related_object):
+        return _(
+            "An error occurred while processing:\n- %(related_object_name)s: %(error)s",
+            related_object_name=related_object.display_name,
+            error=str(error),
+        )
 
     def action_cancel(self):
         for shipment in self:

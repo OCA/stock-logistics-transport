@@ -43,7 +43,7 @@ class WizardUnloadShipment(models.TransientModel):
                 o.state not in ["cancel", "done"]
                 and o.move_line_ids.shipment_advice_id
                 and all(
-                    state == "in_progress"
+                    state in ("in_progress", "error")
                     for state in o.move_line_ids.shipment_advice_id.mapped("state")
                 )
                 and o.picking_type_code == "outgoing"
@@ -71,7 +71,7 @@ class WizardUnloadShipment(models.TransientModel):
                 o.state not in ["cancel", "done"]
                 and o.shipment_advice_id
                 and all(
-                    state == "in_progress"
+                    state in ("in_progress", "error")
                     for state in o.shipment_advice_id.mapped("state")
                 )
                 and o.picking_code == "outgoing"

@@ -27,6 +27,23 @@
                         <field name="shipment_advice_outgoing_backorder_policy" />
                     </div>
                 </div>
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="shipment_advice_run_in_queue_job"
+                    title="shipment_advice_run_in_queue_job"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="shipment_advice_run_in_queue_job" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="shipment_advice_run_in_queue_job" />
+                        <div class="text-muted">
+                            To prevent timeouts for large shipments, enable this option to execute
+                            shipment advice validation through a queued job. Each picking will be
+                            validated in a separate jobs.
+                        </div>
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>
