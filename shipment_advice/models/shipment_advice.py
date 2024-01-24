@@ -5,6 +5,7 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 from odoo.addons.queue_job.delay import chain, group
+from odoo.addons.queue_job.job import identity_exact
 
 
 class ShipmentAdvice(models.Model):
@@ -331,12 +332,19 @@ class ShipmentAdvice(models.Model):
             chain(
                 group(
                     *[
-                        self.delayable()._validate_picking(picking, backorder_policy)
+                        self.delayable(
+                            identity_key=identity_exact,
+                            description=_(
+                                "%(sa)s: %(pick)s background validation",
+                                sa=self.name,
+                                pick=picking.name,
+                            ),
+                        )._validate_picking(picking, backorder_policy)
                         for picking in pickings
                     ]
                 ),
-                group(self.delayable()._unplan_undone_moves()),
-                group(self.delayable()._postprocess_action_done()),
+                group(self.delayable(description=self.name)._unplan_undone_moves()),
+                group(self.delayable(description=self.name)._postprocess_action_done()),
             ).delay()
             return
         for picking in pickings:
