@@ -146,7 +146,7 @@ class TestShipmentAdvice(Common):
             self._asset_jobs_dependency(jobs)
             trap.perform_enqueued_jobs()
         picking = package_level.picking_id
-        self.assertEqual(self.shipment_advice_out.state, "done")
+        self.assertEqual(self.shipment_advice_out.state, "error")
         # Check the transfer
         self.assertTrue(
             all(

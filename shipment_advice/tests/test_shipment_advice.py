@@ -108,7 +108,7 @@ class TestShipmentAdvice(Common):
         # Validate the shipment => the transfer is still open
         self.shipment_advice_out.action_done()
         picking = package_level.picking_id
-        self.assertEqual(self.shipment_advice_out.state, "done")
+        self.assertEqual(self.shipment_advice_out.state, "error")
         # Check the transfer
         self.assertTrue(
             all(

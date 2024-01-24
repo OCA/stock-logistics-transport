@@ -309,18 +309,24 @@ class ShipmentAdvice(models.Model):
             shipment._action_done()
         return True
 
+    def _get_picking_to_process(self):
+        self.ensure_one()
+        if self.shipment_type == "incoming":
+            return self.planned_picking_ids
+        return self.loaded_picking_ids
+
     def _action_done(self):
         # Validate transfers (create backorders for unprocessed lines)
         self.ensure_one()
         self.write({"state": "in_process", "error_message": False})
 
         if self.shipment_type == "incoming":
-            pickings = self.planned_picking_ids
             backorder_policy = "create_backorder"
         else:
-            pickings = self.loaded_picking_ids
             backorder_policy = self.company_id.shipment_advice_outgoing_backorder_policy
-        pickings = pickings.filtered(lambda p: p.state not in ("cancel", "done"))
+        pickings = self._get_picking_to_process().filtered(
+            lambda p: p.state not in ("cancel", "done")
+        )
         if self.run_in_queue_job:
             chain(
                 group(
@@ -382,6 +388,18 @@ class ShipmentAdvice(models.Model):
     def _postprocess_action_done(self):
         self.ensure_one()
         if self.state != "in_process":
+            return
+        if self._get_picking_to_process().filtered(
+            lambda p: p.state not in ("done", "cancel")
+        ):
+            self.write(
+                {
+                    "state": "error",
+                    "error_message": _(
+                        "One of the pickings to process failed to validate"
+                    ),
+                }
+            )
             return
         if not self.departure_date:
             self.departure_date = fields.Datetime.now()
