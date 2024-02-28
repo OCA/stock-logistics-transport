@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-02 15:18+0000\n"
-"PO-Revision-Date: 2023-05-02 15:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -70,6 +68,16 @@ msgstr ""
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__backend_options_definition
 msgid "Backend Options Definition"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_task_form_view
+msgid "Cancel Task"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__cancelled
+msgid "Cancelled"
 msgstr ""
 
 #. module: shipment_advice_planner_toursolver
@@ -510,6 +518,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
 #, python-format
+msgid "The tousolver backend is not configured."
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#. odoo-python
+#: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
+#, python-format
 msgid "There is no active backend for TourSolver."
 msgstr ""
 
@@ -573,15 +588,15 @@ msgid "Toursolver Error Message"
 msgstr ""
 
 #. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
+msgid "Toursolver Rank"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
 #: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_resource
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_resource_id
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice_planner__toursolver_resource_id
 msgid "Toursolver Resource"
-msgstr ""
-
-#. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
-msgid "Toursolver Shipment Advice Rank"
 msgstr ""
 
 #. module: shipment_advice_planner_toursolver
