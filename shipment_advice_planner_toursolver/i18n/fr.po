@@ -10,6 +10,7 @@ msgstr ""
 "PO-Revision-Date: 2023-05-02 15:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -78,6 +79,16 @@ msgstr "Options de définition du backend"
 
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_task_form_view
+msgid "Cancel Task"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_task_form_view
 msgid "Check Status"
 msgstr "Vérifiez le statut"
 
@@ -131,8 +142,9 @@ msgid ""
 "Default value for the The cost for a resource of driving for one distance "
 "unit. Can be specified on resource level using `workPenalty`option"
 msgstr ""
-"Valeur par défaut du coût d'une ressource conducteur pour une unité de distance. "
-"Peut être spécifiée au niveau de la ressource à l'aide de l'option 'workPenalty'."
+"Valeur par défaut du coût d'une ressource conducteur pour une unité de "
+"distance. Peut être spécifiée au niveau de la ressource à l'aide de l'option "
+"'workPenalty'."
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__resource_default_work_penalty
@@ -140,8 +152,9 @@ msgid ""
 "Default value for the cost of a resource working for an hour. Can be "
 "specified on resource level using `travelPenalty`option"
 msgstr ""
-"Valeur par défaut du coût d'une ressource travaillant pendant une heure. Peut "
-"être spécifiée au niveau de la ressource à l'aide de l'option 'travelPenalty'."
+"Valeur par défaut du coût d'une ressource travaillant pendant une heure. "
+"Peut être spécifiée au niveau de la ressource à l'aide de l'option "
+"'travelPenalty'."
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__definition_id
@@ -246,11 +259,14 @@ msgid ""
 msgstr ""
 "Identifiant de la tâche soumise au service TourSolver pour optimiser le "
 "planning/chemin."
+
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__partner_defaul_delivery_window_start
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__partner_default_delivery_window_end
 msgid "If no delivery winodow specified on the partner this will be used"
-msgstr "Si aucun fenêtre de livraison n'est spécifiée sur le partenaire, ceci sera utilisé"
+msgstr ""
+"Si aucun fenêtre de livraison n'est spécifiée sur le partenaire, ceci sera "
+"utilisé"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_res_partner__toursolver_delivery_window_ids
@@ -259,8 +275,8 @@ msgid ""
 "If specified, delivery is only possible into the specified time windows. "
 "(Leaves empty if no restriction)"
 msgstr ""
-"Si indiqué, la livraison ne sera possible que dans les fenêtres temporelles spécifiées. "
-"(laissez vide si aucune restriction)"
+"Si indiqué, la livraison ne sera possible que dans les fenêtres temporelles "
+"spécifiées. (laissez vide si aucune restriction)"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_resource__use_delivery_person_coordinates_as_end
@@ -268,8 +284,8 @@ msgid ""
 "If true the computed delivery will end at the delivery person's address. "
 "Otherwise it will end at the warehouse address"
 msgstr ""
-"Si coché, la livraison calculée se terminera à l'adresse du contact de livraison. "
-"Sinon, ce sera à l'adresse de l'entrepôt."
+"Si coché, la livraison calculée se terminera à l'adresse du contact de "
+"livraison. Sinon, ce sera à l'adresse de l'entrepôt."
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__in_progress
@@ -363,7 +379,8 @@ msgstr "Transferts à planifier"
 #: code:addons/shipment_advice_planner_toursolver/models/toursolver_backend.py:0
 #, python-format
 msgid "Please configure your timezone in your user preferences"
-msgstr "Veuillez configurer votre fuseau horaire dans vos préférences utilisateur"
+msgstr ""
+"Veuillez configurer votre fuseau horaire dans vos préférences utilisateur"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__resource_properties
@@ -508,15 +525,16 @@ msgid ""
 "The following partner ids are not expected into the optimization result: "
 "%(names)s"
 msgstr ""
-"Les partenaires suivants ne sont pas censés apparaître dans le résultat de l'optimisation: "
-"%(names)s"
+"Les partenaires suivants ne sont pas censés apparaître dans le résultat de "
+"l'optimisation: %(names)s"
 
 #. module: shipment_advice_planner_toursolver
 #. odoo-python
 #: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
 #, python-format
 msgid "The following partners are not found into the optimization result: %s"
-msgstr "Les partenaires suivants sont absents du résultat de l'optimisation: %s"
+msgstr ""
+"Les partenaires suivants sont absents du résultat de l'optimisation: %s"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
@@ -524,8 +542,15 @@ msgid ""
 "The rank given by TourSolver to this picking in the set of planned stops of "
 "the related shipment advice"
 msgstr ""
-"Le rang attribué à ce transfert par TourSolver dans l'ensemble des arrêts prévus du "
-"avis d'expédition lié"
+"Le rang attribué à ce transfert par TourSolver dans l'ensemble des arrêts "
+"prévus du avis d'expédition lié"
+
+#. module: shipment_advice_planner_toursolver
+#. odoo-python
+#: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
+#, python-format
+msgid "The tousolver backend is not configured."
+msgstr ""
 
 #. module: shipment_advice_planner_toursolver
 #. odoo-python
@@ -568,8 +593,8 @@ msgstr "Fenêtre de livraison TourSolver"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_shipment_advice_planner__toursolver_resource_id
 msgid ""
-"TourSolver resource to be propgated to the shipment advice in simpleplanning"
-" method"
+"TourSolver resource to be propgated to the shipment advice in simpleplanning "
+"method"
 msgstr "Méthode"
 
 #. module: shipment_advice_planner_toursolver
@@ -594,16 +619,16 @@ msgid "Toursolver Error Message"
 msgstr "Messages d'erreur TourSolver"
 
 #. module: shipment_advice_planner_toursolver
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
+msgid "Toursolver Rank"
+msgstr ""
+
+#. module: shipment_advice_planner_toursolver
 #: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_resource
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_resource_id
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice_planner__toursolver_resource_id
 msgid "Toursolver Resource"
 msgstr "Ressource TourSolver"
-
-#. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
-msgid "Toursolver Shipment Advice Rank"
-msgstr ""
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_task
@@ -658,9 +683,13 @@ msgstr "pour en savoir plus.<br/>"
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_resource_form_view
 msgid ""
 "to learn more.<br/>\n"
-"                            Note that it is not necessary to add the id property.\n"
-"                            The mandatory field resourceId will be used in the optimization request."
+"                            Note that it is not necessary to add the id "
+"property.\n"
+"                            The mandatory field resourceId will be used in "
+"the optimization request."
 msgstr ""
 "pour en savoir plus.<br/>\n"
-"                            Notez qu'il n'est pas nécessaire d'ajouter la propriété id.\n"
-"                            Le champ obligatoire resourceId sera utilisé pour la requête d'optimisation."
+"                            Notez qu'il n'est pas nécessaire d'ajouter la "
+"propriété id.\n"
+"                            Le champ obligatoire resourceId sera utilisé "
+"pour la requête d'optimisation."
