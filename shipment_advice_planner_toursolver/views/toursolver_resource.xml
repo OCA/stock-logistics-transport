@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="toursolver_resource_form_view">
+        <field name="model">toursolver.resource</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <label for="name" class="oe_edit_only" />
+                      <h1>
+                        <field name="name" class="oe_inline" />
+                      </h1>
+                    <group>
+                        <field name="toursolver_backend_id" />
+
+                    </group>
+                    <group>
+
+                        <group>
+                        <field name="resource_id" />
+                        <field name="use_delivery_person_coordinates_as_end" />
+
+                        </group>
+                        <group>
+                        <field
+                                name="partner_id"
+                                attrs="{'required': [('use_delivery_person_coordinates_as_end', '=', True)]}"
+                            />
+
+                        </group>
+                        <field name="active" invisible="1" />
+                    </group>
+                    <separator string="Resource properties" />
+                    <p
+                        style="width: 100%;color: grey;font-weight: bold;font-style: italic;"
+                    >
+                            Add the required properties for route calculation by TourSolver.
+                            You can check the
+                            <a
+                            href="https://geoservices.geoconcept.com/ToursolverCloud/api-book.html#_json_tsresource"
+                        >documentation</a>
+                            to learn more.<br />
+                            Note that it is not necessary to add the id property.
+                            The mandatory field resourceId will be used in the optimization request.
+                    </p>
+                    <field name="resource_properties" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="toursolver_resource_search_view">
+        <field name="model">toursolver.resource</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="toursolver_resource_tree_view">
+        <field name="model">toursolver.resource</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="toursolver_resource_act_window">
+        <field name="name">Resources</field>
+        <field name="res_model">toursolver.resource</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="toursolver_resource_menu">
+        <field name="name">Resources</field>
+        <field name="parent_id" ref="toursolver_setting_menu" />
+        <field name="action" ref="toursolver_resource_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+
+</odoo>

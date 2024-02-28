@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="toursolver_delivery_window_search_view">
+    <field name="model">toursolver.delivery.window</field>
+    <field name="arch" type="xml">
+      <search>
+        <field name="partner_id" />
+        <field name="time_window_weekday_ids" />
+        <group expand="0" string="Group By" name="group_by">
+          <filter
+                        name="group_by_partner_id"
+                        string="Partner"
+                        context="{'group_by':'partner_id'}"
+                    />
+        </group>
+      </search>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="toursolver_delivery_window_tree_view">
+    <field name="model">toursolver.delivery.window</field>
+    <field name="arch" type="xml">
+      <tree editable="top">
+        <field name="partner_id" />
+        <field name="time_window_start" widget="float_time" />
+        <field name="time_window_end" widget="float_time" />
+        <field name="time_window_weekday_ids" widget="many2many_tags" />
+      </tree>
+    </field>
+  </record>
+  <record model="ir.actions.act_window" id="toursolver_delivery_window_act_window">
+    <field name="name">Partner Delivery Windows</field>
+    <field name="res_model">toursolver.delivery.window</field>
+    <field name="view_mode">tree</field>
+    <field name="domain">[]</field>
+    <field name="context">{}</field>
+  </record>
+  <record model="ir.ui.menu" id="toursolver_delivery_window_menu">
+    <field name="name">Partner Delivery Windows</field>
+        <field name="parent_id" ref="toursolver_setting_menu" />
+    <field name="action" ref="toursolver_delivery_window_act_window" />
+    <field name="sequence" eval="8" />
+  </record>
+</odoo>

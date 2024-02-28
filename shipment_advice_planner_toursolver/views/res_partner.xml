@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="res_partner_form_view">
+    <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+    <field name="arch" type="xml">
+      <group name="sale" position="inside">
+        <field name="toursolver_delivery_window_ids">
+          <tree editable="bottom">
+            <field name="time_window_start" widget="float_time" />
+            <field name="time_window_end" widget="float_time" />
+            <field name="time_window_weekday_ids" widget="many2many_tags" />
+          </tree>
+        </field>
+        <field name="toursolver_delivery_duration" />
+      </group>
+    </field>
+  </record>
+</odoo>

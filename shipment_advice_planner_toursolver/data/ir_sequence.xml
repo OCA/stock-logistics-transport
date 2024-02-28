@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <record id="seq_toursolver_task" model="ir.sequence">
+    <field name="name">TourSolver Task</field>
+    <field name="code">toursolver.task</field>
+    <field name="prefix">TST/</field>
+    <field name="padding">8</field>
+    <field name="company_id" eval="False" />
+  </record>
+</odoo>

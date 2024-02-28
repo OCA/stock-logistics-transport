@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="stock_picking_form_view">
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="shipment_advice.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='planned_shipment_advice_id']" position="after">
+                <field name="toursolver_task_id" />
+                <field name="toursolver_shipment_advice_rank" />
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>

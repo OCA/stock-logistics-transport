@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record model="toursolver.resource" id="toursolver_resource_r1_demo">
+       <field name="name">R1</field>
+       <field name="resource_id">D1</field>
+       <field name="toursolver_backend_id" ref="toursolver_backend_default" />
+        <field
+            name="resource_properties"
+            eval="{'2': 'd1@email.com', '3': False, '4': True, '5': True, '6': 9999, '7': False}"
+        />
+    </record>
+
+
+    <record model="toursolver.resource" id="toursolver_resource_r2_demo">
+       <field name="name">R2</field>
+       <field name="resource_id">D2</field>
+       <field name="toursolver_backend_id" ref="toursolver_backend_default" />
+        <field
+            name="resource_properties"
+            eval="{'2': 'd2@email.com', '3': False, '4': True, '5': True, '6': 9999, '7': False}"
+        />
+    </record>
+</odoo>

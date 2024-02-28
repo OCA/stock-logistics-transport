@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="job_function_toursolver_send_request" model="queue.job.function">
+    <field
+            name="model_id"
+            ref="shipment_advice_planner_toursolver.model_toursolver_task"
+        />
+    <field name="method">_toursolver_send_request</field>
+    <field name="channel_id" ref="toursolver_channel" />
+    </record>
+
+    <record id="job_function_toursolver_check_status" model="queue.job.function">
+    <field
+            name="model_id"
+            ref="shipment_advice_planner_toursolver.model_toursolver_task"
+        />
+    <field name="method">_toursolver_check_status</field>
+    <field name="channel_id" ref="toursolver_channel" />
+    </record>
+
+    <record id="job_function_toursolver_get_result" model="queue.job.function">
+    <field
+            name="model_id"
+            ref="shipment_advice_planner_toursolver.model_toursolver_task"
+        />
+    <field name="method">_toursolver_get_result</field>
+    <field name="channel_id" ref="toursolver_channel" />
+    </record>
+
+</odoo>
