@@ -21,6 +21,7 @@
         "data/ir_sequence.xml",
         "data/queue_job_channel.xml",
         "data/queue_job_function.xml",
+        "report/reports.xml",
         "views/res_config_settings.xml",
         "views/shipment_advice.xml",
         "views/stock_picking.xml",
