@@ -852,11 +852,6 @@ msgid "Product Moves (Stock Move Line)"
 msgstr ""
 
 #. module: shipment_advice
-#: model_terms:ir.ui.view,arch_db:shipment_advice.stock_move_line_limited_view_tree
-msgid "Products"
-msgstr ""
-
-#. module: shipment_advice
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #, python-format
 msgid ""
@@ -931,7 +926,6 @@ msgstr ""
 #: model:ir.ui.menu,name:shipment_advice.shipment_advice_menu
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_calendar
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
-#: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_tree
 msgid "Shipment Advices"
 msgstr ""
 
@@ -1052,12 +1046,6 @@ msgstr ""
 #: model:ir.model,name:shipment_advice.model_stock_picking
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Transfer"
-msgstr ""
-
-#. module: shipment_advice
-#: model_terms:ir.ui.view,arch_db:shipment_advice.stock_picking_limited_view_tree
-#: model_terms:ir.ui.view,arch_db:shipment_advice.stock_picking_loading_progress_view_tree
-msgid "Transfers"
 msgstr ""
 
 #. module: shipment_advice
