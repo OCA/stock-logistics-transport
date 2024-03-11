@@ -35,7 +35,7 @@
         <field name="name">stock.dock.tree</field>
         <field name="model">stock.dock</field>
         <field name="arch" type="xml">
-            <tree string="Docks">
+            <tree name="docks">
                 <field name="name" />
                 <field name="barcode" />
                 <field
