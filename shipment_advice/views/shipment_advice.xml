@@ -186,7 +186,10 @@
                                 groups="!base.group_multi_company"
                                 invisible="1"
                             />
-                            <field name="shipment_type" />
+                            <field
+                                name="shipment_type"
+                                attrs="{'readonly': [('name', '!=', '/')]}"
+                            />
                         </group>
                         <group name="info2">
                             <field
