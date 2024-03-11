@@ -94,7 +94,7 @@
         <field name="model">stock.picking</field>
         <field name="priority" eval="100" />
         <field name="arch" type="xml">
-            <tree string="Transfers" create="0">
+            <tree name="transfers" create="0">
                 <field name="name" />
                 <field name="partner_id" />
                 <field name="scheduled_date" />
@@ -109,7 +109,7 @@
         <field name="priority" eval="110" />
         <field name="arch" type="xml">
             <tree
-                string="Transfers"
+                name="transfers"
                 create="0"
                 decoration-success="is_fully_loaded_in_shipment"
                 decoration-warning="is_partially_loaded_in_shipment"
