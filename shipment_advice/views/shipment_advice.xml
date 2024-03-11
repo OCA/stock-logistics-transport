@@ -357,4 +357,13 @@
         parent="stock.menu_stock_warehouse_mgmt"
         action="shipment_advice_action"
     />
+    <!-- Shipment Advice - Print Delivery Slip -->
+    <record id="action_print_batch_delivery_slip" model="ir.actions.server">
+        <field name="name">Print Delivery Slip</field>
+        <field name="model_id" ref="shipment_advice.model_shipment_advice" />
+        <field name="binding_model_id" ref="shipment_advice.model_shipment_advice" />
+        <field name="state">code</field>
+        <field name="code">action = records.print_all_deliveryslip()
+        </field>
+    </record>
 </odoo>
