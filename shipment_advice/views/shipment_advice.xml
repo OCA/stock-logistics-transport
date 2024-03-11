@@ -60,6 +60,20 @@
                         class="btn-secondary"
                         states="cancel"
                     />
+                    <button
+                        name="%(action_report_shipment_advice)d"
+                        type="action"
+                        string="Print Shipment Advice"
+                        class="btn-secondary"
+                        states="in_progress,done"
+                    />
+                    <button
+                        name="print_all_deliveryslip"
+                        type="object"
+                        string="Print Delivery Slip"
+                        class="btn-secondary"
+                        states="in_progress,done"
+                    />
                     <field
                         name="state"
                         widget="statusbar"
@@ -364,4 +378,13 @@
         parent="stock.menu_stock_warehouse_mgmt"
         action="shipment_advice_action"
     />
+    <!-- Shipment Advice - Print Delivery Slip -->
+    <record id="action_print_batch_delivery_slip" model="ir.actions.server">
+        <field name="name">Print Delivery Slip</field>
+        <field name="model_id" ref="shipment_advice.model_shipment_advice" />
+        <field name="binding_model_id" ref="shipment_advice.model_shipment_advice" />
+        <field name="state">code</field>
+        <field name="code">action = records.print_all_deliveryslip()
+        </field>
+    </record>
 </odoo>
