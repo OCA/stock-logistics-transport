@@ -291,7 +291,6 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_has_error
-#: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -302,16 +301,22 @@ msgid ""
 "              done all related deliveries and create backorder in case of\n"
 "              partial choose 'Create backorder'.\n"
 "              If you want to mark deliveries as done only when they are all\n"
-"              loaded in a shipment advice choose 'Leave open'. This last option\n"
-"              is useful when your deliveries will be shipped by several trucks."
+"              loaded in a shipment advice choose 'Leave open'. This last "
+"option\n"
+"              is useful when your deliveries will be shipped by several "
+"trucks."
 msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
 #: model:ir.model.fields,help:shipment_advice.field_res_config_settings__shipment_advice_outgoing_backorder_policy
 msgid ""
-"If you want that closing an outgoing shipment advice marks as done all related deliveries and creates backorder in case of partial choose 'Create backorder'.\n"
-"If you want to mark deliveries as done only when they are all loaded in a shipment advice choose 'Leave open'. This last option is useful when your deliveries will be shipped by several trucks."
+"If you want that closing an outgoing shipment advice marks as done all "
+"related deliveries and creates backorder in case of partial choose 'Create "
+"backorder'.\n"
+"If you want to mark deliveries as done only when they are all loaded in a "
+"shipment advice choose 'Leave open'. This last option is useful when your "
+"deliveries will be shipped by several trucks."
 msgstr ""
 
 #. module: shipment_advice
@@ -397,8 +402,7 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
-"Lines to include have been updated, keeping only those qualified as "
-"delivery."
+"Lines to include have been updated, keeping only those qualified as delivery."
 msgstr ""
 
 #. module: shipment_advice
@@ -406,7 +410,8 @@ msgstr ""
 msgid ""
 "Lines to load in priority.\n"
 "If the shipment is planned, it'll return the planned lines.\n"
-"If the shipment is not planned, it'll return lines from transfers partially loaded."
+"If the shipment is not planned, it'll return lines from transfers partially "
+"loaded."
 msgstr ""
 
 #. module: shipment_advice
@@ -528,24 +533,23 @@ msgstr ""
 #. module: shipment_advice
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
-msgid ""
-"Moves to include have been updated to match the selected shipment type."
+msgid "Moves to include have been updated to match the selected shipment type."
 msgstr ""
 
 #. module: shipment_advice
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
-"Moves to include have been updated, keeping only those still in progress and"
-" related to a delivery/reception."
+"Moves to include have been updated, keeping only those still in progress and "
+"related to a delivery/reception."
 msgstr ""
 
 #. module: shipment_advice
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid ""
-"Moves to include have been updated, keeping only those still in progress and"
-" related to a shipment."
+"Moves to include have been updated, keeping only those still in progress and "
+"related to a shipment."
 msgstr ""
 
 #. module: shipment_advice
@@ -751,8 +755,7 @@ msgstr ""
 #. module: shipment_advice
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
-msgid ""
-"Packages to load have been updated to match the selected shipment type."
+msgid "Packages to load have been updated to match the selected shipment type."
 msgstr ""
 
 #. module: shipment_advice
@@ -854,11 +857,6 @@ msgid "Product Moves (Stock Move Line)"
 msgstr ""
 
 #. module: shipment_advice
-#: model_terms:ir.ui.view,arch_db:shipment_advice.stock_move_line_limited_view_tree
-msgid "Products"
-msgstr ""
-
-#. module: shipment_advice
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #, python-format
 msgid ""
@@ -875,8 +873,7 @@ msgstr ""
 #. module: shipment_advice
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
-msgid ""
-"Products to load have been updated to match the selected shipment type."
+msgid "Products to load have been updated to match the selected shipment type."
 msgstr ""
 
 #. module: shipment_advice
@@ -912,11 +909,6 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: shipment_advice
 #: model:ir.actions.report,name:shipment_advice.action_report_shipment_advice
 #: model:ir.model,name:shipment_advice.model_shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__shipment_advice_id
@@ -938,7 +930,6 @@ msgstr ""
 #: model:ir.ui.menu,name:shipment_advice.shipment_advice_menu
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_calendar
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
-#: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_tree
 msgid "Shipment Advices"
 msgstr ""
 
@@ -968,7 +959,6 @@ msgid "Shipment {} is not draft, operation aborted."
 msgstr ""
 
 #. module: shipment_advice
-#: code:addons/shipment_advice/models/shipment_advice.py:0
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not started, operation aborted."
@@ -1062,12 +1052,6 @@ msgid "Transfer"
 msgstr ""
 
 #. module: shipment_advice
-#: model_terms:ir.ui.view,arch_db:shipment_advice.stock_picking_limited_view_tree
-#: model_terms:ir.ui.view,arch_db:shipment_advice.stock_picking_loading_progress_view_tree
-msgid "Transfers"
-msgstr ""
-
-#. module: shipment_advice
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
@@ -1086,8 +1070,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
-"Transfers to include have been updated, keeping only those still in progress"
-" and qualified as delivery/reception."
+"Transfers to include have been updated, keeping only those still in progress "
+"and qualified as delivery/reception."
 msgstr ""
 
 #. module: shipment_advice
@@ -1095,8 +1079,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid ""
-"Transfers to include have been updated, keeping only those still in progress"
-" and related to a shipment."
+"Transfers to include have been updated, keeping only those still in progress "
+"and related to a shipment."
 msgstr ""
 
 #. module: shipment_advice
@@ -1319,6 +1303,6 @@ msgstr ""
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"You cannot unload this move line alone, you have to unload the whole package"
-" content."
+"You cannot unload this move line alone, you have to unload the whole package "
+"content."
 msgstr ""
