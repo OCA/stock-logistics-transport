@@ -1,0 +1,1 @@
+from . import test_shipment_advice_invoice_auto_complete
