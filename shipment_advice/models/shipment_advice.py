@@ -52,7 +52,6 @@ class ShipmentAdvice(models.Model):
         string="Type",
         default="outgoing",
         required=True,
-        states={"draft": [("readonly", False)]},
         readonly=True,
         help="Use incoming to plan receptions, use outgoing for deliveries.",
     )
@@ -334,7 +333,7 @@ class ShipmentAdvice(models.Model):
     def create(self, vals):
         defaults = self.default_get(["name", "shipment_type"])
         sequence = self.env.ref("shipment_advice.shipment_advice_outgoing_sequence")
-        if defaults["shipment_type"] == "incoming":
+        if vals.get("shipment_type", defaults["shipment_type"]) == "incoming":
             sequence = self.env.ref("shipment_advice.shipment_advice_incoming_sequence")
         if vals.get("name", "/") == "/" and defaults.get("name", "/") == "/":
             vals["name"] = sequence.next_by_id()
