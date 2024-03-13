@@ -1,7 +1,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import Command, _, api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -86,7 +86,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
             ]
         )
 
-        return self.update({"picking_to_plan_ids": [Command.set(pickings_to_plan.ids)]})
+        return self.update({"picking_to_plan_ids": [(6, 0, pickings_to_plan.ids)]})
 
     def button_plan_shipments(self):
         self.ensure_one()
@@ -141,7 +141,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
     def _prepare_shipment_advice_simple_vals_list(self, picking_type, pickings_to_plan):
         self.ensure_one()
         vals = self._prepare_shipment_advice_common_vals(picking_type)
-        vals["planned_move_ids"] = [Command.set(pickings_to_plan.move_ids.ids)]
+        vals["planned_move_ids"] = [(6, 0, pickings_to_plan.move_ids.ids)]
         return [vals]
 
     def _prepare_shipment_advice_common_vals(self, picking_type):
