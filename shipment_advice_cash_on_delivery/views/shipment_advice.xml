@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Shipment Advice - Print Cash Invoices -->
+    <record id="action_print_batch_delivery_slip" model="ir.actions.server">
+        <field name="name">Print COD Invoice</field>
+        <field name="model_id" ref="shipment_advice.model_shipment_advice" />
+        <field name="binding_model_id" ref="shipment_advice.model_shipment_advice" />
+        <field name="state">code</field>
+        <field name="code">action = records.print_cash_on_delivery_invoices()
+        </field>
+    </record>
+</odoo>
