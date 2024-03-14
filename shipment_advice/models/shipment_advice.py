@@ -526,9 +526,8 @@ class ShipmentAdvice(models.Model):
         return action
 
     def print_all_deliveryslip(self):
-        picking_type = self.env.ref("stock.picking_type_out")
         pickings = self.mapped("loaded_picking_ids").filtered(
-            lambda p: p.picking_type_id == picking_type and p.state != "cancel"
+            lambda p: p.picking_type_code == "outgoing" and p.state != "cancel"
         )
         if pickings:
             return self.env.ref("stock.action_report_delivery").report_action(pickings)
