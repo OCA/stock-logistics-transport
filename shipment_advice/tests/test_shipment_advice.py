@@ -242,3 +242,7 @@ class TestShipmentAdvice(Common):
         self._cancel_shipment_advice(self.shipment_advice_out)
         self.shipment_advice_out.action_draft()
         self.assertEqual(self.shipment_advice_out.state, "draft")
+
+    def test_shipment_name(self):
+        self.assertTrue("OUT" in self.shipment_advice_out.name)
+        self.assertTrue("IN" in self.shipment_advice_in.name)
