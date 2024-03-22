@@ -59,6 +59,11 @@ class TestCosanumAccountInvoiceAutoComplete(Common):
             line.qty_done = line.product_uom_qty
         pickings._action_done()
 
+    def _get_vendor_bill_form(self):
+        return Form(
+            self.env["account.move"].with_context(default_move_type="in_invoice")
+        )
+
     def _check_invoiced_lines(self, invoice, pickings):
         """Check invoice lines are correctcly created from shipment moves."""
         invoice_lines = invoice.line_ids.filtered(lambda line: line.shipment_advice_id)
@@ -72,6 +77,21 @@ class TestCosanumAccountInvoiceAutoComplete(Common):
             self.assertEqual(invoice_line.quantity, move.product_qty)
             self.assertEqual(invoice_line.shipment_advice_id, move.shipment_advice_id)
 
+    def test_select_shipment_with_different_supplier(self):
+        """Check shipment selected has not the same supplier than the invoice."""
+        self._plan_records_in_shipment(self.shipment, self.purchase_1.picking_ids)
+        self._in_progress_shipment_advice(self.shipment)
+        self._receive_goods(self.purchase_1.picking_ids)
+        self.shipment.action_done()
+        # Invoice the shipment
+        vendor_bill = self._get_vendor_bill_form()
+        vendor_bill.partner_id = self.purchase_2.partner_id
+        vendor_bill.shipment_vendor_bill_id = self.shipment
+        invoice = vendor_bill.save()
+        # Supplier on vendor bill has not changed
+        self.assertEqual(invoice.partner_id, self.purchase_2.partner_id)
+        self.assertFalse(invoice.line_ids)
+
     def test_select_shipment_with_two_suppliers(self):
         """Check invoicing shipment with multiple suppliers."""
         # Shipment with two different suppliers
@@ -81,20 +101,19 @@ class TestCosanumAccountInvoiceAutoComplete(Common):
         self._receive_goods(self.purchase_1.picking_ids)
         self._receive_goods(self.purchase_2.picking_ids)
         self.shipment.action_done()
-        # No supplier set on invoice, no lines added
-        invoice_form = Form(
-            self.env["account.move"].with_context(default_move_type="in_invoice")
-        )
-        invoice_form.shipment_vendor_bill_id = self.shipment
-        invoice = invoice_form.save()
+        # No supplier set on the invoice, no lines are added
+        # Because there is multiple suppliers in the shipment
+        vendor_bill = self._get_vendor_bill_form()
+        vendor_bill.shipment_vendor_bill_id = self.shipment
+        invoice = vendor_bill.save()
         self.assertFalse(invoice.line_ids)
         # Supplier set, lines added
-        invoice_form = Form(
+        vendor_bill = Form(
             self.env["account.move"].with_context(default_move_type="in_invoice")
         )
-        invoice_form.partner_id = self.purchase_1.partner_id
-        invoice_form.shipment_vendor_bill_id = self.shipment
-        invoice = invoice_form.save()
+        vendor_bill.partner_id = self.purchase_1.partner_id
+        vendor_bill.shipment_vendor_bill_id = self.shipment
+        invoice = vendor_bill.save()
         self._check_invoiced_lines(invoice, self.purchase_1.picking_ids)
         # Only one purchase order has been invoiced
         self.assertFalse(self.shipment.is_invoiced)
@@ -106,11 +125,9 @@ class TestCosanumAccountInvoiceAutoComplete(Common):
         self._receive_goods(self.purchase_1.picking_ids)
         self.shipment.action_done()
         # Invoice the shipment
-        invoice_form = Form(
-            self.env["account.move"].with_context(default_move_type="in_invoice")
-        )
-        invoice_form.shipment_vendor_bill_id = self.shipment
-        invoice = invoice_form.save()
+        vendor_bill = self._get_vendor_bill_form()
+        vendor_bill.shipment_vendor_bill_id = self.shipment
+        invoice = vendor_bill.save()
         # Supplier automatically selected
         self.assertEqual(invoice.partner_id, self.purchase_1.partner_id)
         self._check_invoiced_lines(invoice, self.purchase_1.picking_ids)
@@ -131,9 +148,7 @@ class TestCosanumAccountInvoiceAutoComplete(Common):
         wizard.process()
         self.shipment.action_done()
         # Invoice the shipment
-        invoice_form = Form(
-            self.env["account.move"].with_context(default_move_type="in_invoice")
-        )
-        invoice_form.shipment_vendor_bill_id = self.shipment
-        invoice = invoice_form.save()
+        vendor_bill = self._get_vendor_bill_form()
+        vendor_bill.shipment_vendor_bill_id = self.shipment
+        invoice = vendor_bill.save()
         self._check_invoiced_lines(invoice, pickings)
