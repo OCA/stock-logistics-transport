@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2024-03-25 09:18+0000\n"
-"Last-Translator: Joel Kassim <joelkasmor16@gmail.com>\n"
+"Last-Translator: \"Juanma B.O.\" <tyrantbit@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr "Actividades"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Decoración de excepción de actividad"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_state
@@ -64,7 +64,7 @@ msgstr "Estado de actividad"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Tipo de icono de actividad"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__arrival_date
@@ -81,12 +81,12 @@ msgstr "Fecha de llegada"
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Arrival date should be set on the shipment advice {}."
-msgstr ""
+msgstr "La fecha de llegada debería ser añadida en el aviso de envío {}."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Contador de archivos adjuntos"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -96,17 +96,17 @@ msgstr "Restablecer borrador"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_count
 msgid "Bulk lines loaded"
-msgstr ""
+msgstr "Líneas a granel cargadas"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_progress
 msgid "Bulk lines loaded/total"
-msgstr ""
+msgstr "Líneas a granel cargadas/total"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_progress_f
 msgid "Bulk lines loaded/total %"
-msgstr ""
+msgstr "Líneas a granel cargadas/total %"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -144,11 +144,15 @@ msgid ""
 "determine what are the eligible deliveries to load in the shipment when you "
 "don't have planned content (e.g. through the shopfloor application)."
 msgstr ""
+"Método de envío en cuestión para este aviso de envío. Se puede utilizar para "
+"determinar cuáles son las entregas aptas para cargar en el envío cuando no "
+"tiene contenido planificado (por ejemplo, a través de la aplicación de la "
+"tienda)."
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes de la configuración"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -163,12 +167,12 @@ msgstr "Confirmado"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__ref
 msgid "Consignment/Truck Ref."
-msgstr ""
+msgstr "Consignación/Camión Ref."
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__res_company__shipment_advice_outgoing_backorder_policy__create_backorder
 msgid "Create backorder"
-msgstr ""
+msgstr "Crear pedido pendiente"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__create_uid
@@ -215,7 +219,7 @@ msgstr "Fecha de salida"
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__display_name
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre a mostrar"
 
 #. module: shipment_advice
 #. odoo-python
