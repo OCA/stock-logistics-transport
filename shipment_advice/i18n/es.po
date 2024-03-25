@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-25 09:09+0000\n"
-"Last-Translator: \"Juanma B.O.\" <tyrantbit@gmail.com>\n"
+"PO-Revision-Date: 2024-03-25 09:18+0000\n"
+"Last-Translator: Joel Kassim <joelkasmor16@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -222,32 +222,32 @@ msgstr ""
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Dock should be set on the shipment advice {}."
-msgstr ""
+msgstr "El muelle debe establecerse en el aviso de envío {}."
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__done
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__draft
 msgid "Draft"
-msgstr ""
+msgstr "Borrador"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Driver signature"
-msgstr ""
+msgstr "Firma del conductor"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguidores"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Seguidores (Contactos)"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__activity_type_icon
@@ -257,12 +257,12 @@ msgstr ""
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Tiene un mensaje"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__id
@@ -287,11 +287,12 @@ msgstr ""
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr ""
+"Si se encuentra seleccionado, hay nuevos mensajes que requieren tu atención."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Si se encuentra seleccionado, algunos mensajes tienen error de envío."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
@@ -315,7 +316,7 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_progress
 msgid "In progress"
-msgstr ""
+msgstr "En progreso"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__shipment_type__incoming
@@ -326,7 +327,7 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Es un seguidor"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__is_fully_loaded_in_shipment
@@ -350,7 +351,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment____last_update
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación el"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__write_uid
