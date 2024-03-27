@@ -11,12 +11,16 @@
     "depends": [
         "stock",
         "delivery",
+        # OCA/queue
+        "queue_job",
         # OCA/stock-logistics-transport
         "stock_dock",
     ],
     "data": [
         "security/ir.model.access.csv",
         "data/ir_sequence.xml",
+        "data/queue_job_channel.xml",
+        "data/queue_job_function.xml",
         "views/res_config_settings.xml",
         "views/shipment_advice.xml",
         "views/stock_picking.xml",

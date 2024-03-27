@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="job_function_shipment_advice_validate_picking" model="queue.job.function">
+    <field name="model_id" ref="shipment_advice.model_shipment_advice" />
+    <field name="method">_validate_picking</field>
+    <field name="channel_id" ref="shipment_advice.shipment_advice_queue_channel" />
+  </record>
+  <record
+        id="job_function_shipment_advice_unplan_undone_moves"
+        model="queue.job.function"
+    >
+    <field name="model_id" ref="shipment_advice.model_shipment_advice" />
+    <field name="method">_unplan_undone_moves</field>
+    <field name="channel_id" ref="shipment_advice.shipment_advice_queue_channel" />
+  </record>
+  <record
+        id="job_function_shipment_advice_postprocess_action_done"
+        model="queue.job.function"
+    >
+    <field name="model_id" ref="shipment_advice.model_shipment_advice" />
+    <field name="method">_postprocess_action_done</field>
+    <field name="channel_id" ref="shipment_advice.shipment_advice_queue_channel" />
+  </record>
+</odoo>
