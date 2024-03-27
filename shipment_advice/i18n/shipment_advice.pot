@@ -14,6 +14,13 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
+msgid "%(sa)s: %(pick)s background validation"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.actions.report,print_report_name:shipment_advice.action_report_shipment_advice
 msgid "'Shipment Advice - %s' % (object.name)"
 msgstr ""
@@ -61,6 +68,15 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_type_icon
 msgid "Activity Type Icon"
+msgstr ""
+
+#. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
+msgid ""
+"An error occurred while processing:\n"
+"- %(related_object_name)s: %(error)s"
 msgstr ""
 
 #. module: shipment_advice
@@ -237,6 +253,16 @@ msgid "Driver signature"
 msgstr ""
 
 #. module: shipment_advice
+#: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__error
+msgid "Error"
+msgstr ""
+
+#. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__error_message
+msgid "Error Message"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_follower_ids
 msgid "Followers"
 msgstr ""
@@ -307,6 +333,11 @@ msgstr ""
 msgid ""
 "If you want that closing an outgoing shipment advice marks as done all related deliveries and creates backorder in case of partial choose 'Create backorder'.\n"
 "If you want to mark deliveries as done only when they are all loaded in a shipment advice choose 'Leave open'. This last option is useful when your deliveries will be shipped by several trucks."
+msgstr ""
+
+#. module: shipment_advice
+#: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_process
+msgid "In process"
 msgstr ""
 
 #. module: shipment_advice
@@ -687,6 +718,13 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
+msgid "One of the pickings to process failed to validate"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__open_shipment
 msgid "Open Shipment"
 msgstr ""
@@ -914,6 +952,13 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
+#: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__run_in_queue_job
+msgid "Run shipment advice in queue job"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.actions.report,name:shipment_advice.action_report_shipment_advice
 #: model:ir.model,name:shipment_advice.model_shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__shipment_advice_id
@@ -1032,6 +1077,24 @@ msgstr ""
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
 msgid "To plan in Shipment Advice"
+msgstr ""
+
+#. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid ""
+"To prevent timeouts for large shipments, enable this option to execute\n"
+"                            shipment advice validation through a queued job. Each picking will be\n"
+"                            validated in a separate jobs."
+msgstr ""
+
+#. module: shipment_advice
+#: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
+#: model:ir.model.fields,help:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
+#: model:ir.model.fields,help:shipment_advice.field_shipment_advice__run_in_queue_job
+msgid ""
+"To prevent timeouts for large shipments, enable this option to execute "
+"shipment advice validation through a queued jobs. Each picking will be "
+"validated in a separate job."
 msgstr ""
 
 #. module: shipment_advice
@@ -1320,4 +1383,9 @@ msgstr ""
 msgid ""
 "You cannot unload this move line alone, you have to unload the whole package"
 " content."
+msgstr ""
+
+#. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid "shipment_advice_run_in_queue_job"
 msgstr ""
