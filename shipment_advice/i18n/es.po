@@ -17,6 +17,13 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
+msgid "%(sa)s: %(pick)s background validation"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.actions.report,print_report_name:shipment_advice.action_report_shipment_advice
 msgid "'Shipment Advice - %s' % (object.name)"
 msgstr "'Aviso de Envío - %s' % (object.name)"
@@ -65,6 +72,15 @@ msgstr "Estado de actividad"
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_type_icon
 msgid "Activity Type Icon"
 msgstr "Tipo de icono de actividad"
+
+#. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
+msgid ""
+"An error occurred while processing:\n"
+"- %(related_object_name)s: %(error)s"
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__arrival_date
@@ -244,6 +260,16 @@ msgid "Driver signature"
 msgstr "Firma del conductor"
 
 #. module: shipment_advice
+#: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__error
+msgid "Error"
+msgstr ""
+
+#. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__error_message
+msgid "Error Message"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_follower_ids
 msgid "Followers"
 msgstr "Seguidores"
@@ -305,8 +331,10 @@ msgid ""
 "              done all related deliveries and create backorder in case of\n"
 "              partial choose 'Create backorder'.\n"
 "              If you want to mark deliveries as done only when they are all\n"
-"              loaded in a shipment advice choose 'Leave open'. This last option\n"
-"              is useful when your deliveries will be shipped by several trucks."
+"              loaded in a shipment advice choose 'Leave open'. This last "
+"option\n"
+"              is useful when your deliveries will be shipped by several "
+"trucks."
 msgstr ""
 "Si desea que el cierre de un aviso de envío saliente marque como\n"
 "              hecho todas las entregas relacionadas y cree un pedido "
@@ -322,8 +350,12 @@ msgstr ""
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
 #: model:ir.model.fields,help:shipment_advice.field_res_config_settings__shipment_advice_outgoing_backorder_policy
 msgid ""
-"If you want that closing an outgoing shipment advice marks as done all related deliveries and creates backorder in case of partial choose 'Create backorder'.\n"
-"If you want to mark deliveries as done only when they are all loaded in a shipment advice choose 'Leave open'. This last option is useful when your deliveries will be shipped by several trucks."
+"If you want that closing an outgoing shipment advice marks as done all "
+"related deliveries and creates backorder in case of partial choose 'Create "
+"backorder'.\n"
+"If you want to mark deliveries as done only when they are all loaded in a "
+"shipment advice choose 'Leave open'. This last option is useful when your "
+"deliveries will be shipped by several trucks."
 msgstr ""
 "Si desea que el cierre de un aviso de envío saliente marque como realizadas "
 "y cree un pedido pendiente en caso de parcial, seleccione 'Crear pedido "
@@ -331,6 +363,11 @@ msgstr ""
 "Si desea marcar las entregas como realizadas solo cuando estén todas "
 "cargadas en un aviso de envío, seleccione \"Dejar abierto\". Esta última "
 "opción es útil cuando sus entregas serán enviadas por varios camiones."
+
+#. module: shipment_advice
+#: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_process
+msgid "In process"
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_progress
@@ -400,8 +437,7 @@ msgstr "Dejar abierto"
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid ""
-"Lines to include have been updated, keeping only those qualified as "
-"delivery."
+"Lines to include have been updated, keeping only those qualified as delivery."
 msgstr ""
 "Se actualizaron las líneas a incluir, manteniendo solo aquellas calificadas "
 "como entrega."
@@ -532,8 +568,7 @@ msgstr "Movimientos"
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
-msgid ""
-"Moves to include have been updated to match the selected shipment type."
+msgid "Moves to include have been updated to match the selected shipment type."
 msgstr ""
 "Los movimientos a incluir se han actualizado para que coincidan con el tipo "
 "de envío seleccionado."
@@ -543,8 +578,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
-"Moves to include have been updated, keeping only those still in progress and"
-" related to a delivery/reception."
+"Moves to include have been updated, keeping only those still in progress and "
+"related to a delivery/reception."
 msgstr ""
 "Los movimientos a incluir se han actualizado, manteniendo solo aquellos que "
 "aún están en progreso y están relacionados con una entrega/recepción."
@@ -554,8 +589,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid ""
-"Moves to include have been updated, keeping only those still in progress and"
-" related to a shipment."
+"Moves to include have been updated, keeping only those still in progress and "
+"related to a shipment."
 msgstr ""
 "Se actualizaron los movimientos a incluir, manteniendo solo aquellos que aún "
 "están en progreso y están relacionados con un envío."
@@ -740,6 +775,13 @@ msgid "Number of messages with delivery error"
 msgstr "Número de mensajes con error de envío"
 
 #. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
+msgid "One of the pickings to process failed to validate"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__open_shipment
 msgid "Open Shipment"
 msgstr "Envío abierto"
@@ -801,8 +843,7 @@ msgstr "Paquetes a cargar"
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
-msgid ""
-"Packages to load have been updated to match the selected shipment type."
+msgid "Packages to load have been updated to match the selected shipment type."
 msgstr ""
 "Los paquetes a cargar se han actualizado para que coincidan con el tipo de "
 "envío seleccionado."
@@ -937,8 +978,7 @@ msgstr "Productos a cargar"
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
-msgid ""
-"Products to load have been updated to match the selected shipment type."
+msgid "Products to load have been updated to match the selected shipment type."
 msgstr ""
 "Se han actualizado los productos a cargar para que coincidan con el tipo de "
 "envío seleccionado."
@@ -975,6 +1015,13 @@ msgstr "Métodos de envío relacionados"
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_user_id
 msgid "Responsible User"
 msgstr "Usuario responsable"
+
+#. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
+#: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__run_in_queue_job
+msgid "Run shipment advice in queue job"
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.actions.report,name:shipment_advice.action_report_shipment_advice
@@ -1031,7 +1078,6 @@ msgstr "El envío {} no es un borrador, operación abortada."
 
 #. module: shipment_advice
 #. odoo-python
-#: code:addons/shipment_advice/models/shipment_advice.py:0
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not started, operation aborted."
@@ -1107,6 +1153,25 @@ msgid "To plan in Shipment Advice"
 msgstr "A planificar en Aviso de envío"
 
 #. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid ""
+"To prevent timeouts for large shipments, enable this option to execute\n"
+"                            shipment advice validation through a queued job. "
+"Each picking will be\n"
+"                            validated in a separate jobs."
+msgstr ""
+
+#. module: shipment_advice
+#: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
+#: model:ir.model.fields,help:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
+#: model:ir.model.fields,help:shipment_advice.field_shipment_advice__run_in_queue_job
+msgid ""
+"To prevent timeouts for large shipments, enable this option to execute "
+"shipment advice validation through a queued jobs. Each picking will be "
+"validated in a separate job."
+msgstr ""
+
+#. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Today"
 msgstr "Hoy"
@@ -1172,8 +1237,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid ""
-"Transfers to include have been updated, keeping only those still in progress"
-" and qualified as delivery/reception."
+"Transfers to include have been updated, keeping only those still in progress "
+"and qualified as delivery/reception."
 msgstr ""
 "Se han actualizado las transferencias a incluir, manteniéndose únicamente "
 "aquellas en progreso y calificadas como entrega/recepción."
@@ -1184,8 +1249,8 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 #, python-format
 msgid ""
-"Transfers to include have been updated, keeping only those still in progress"
-" and related to a shipment."
+"Transfers to include have been updated, keeping only those still in progress "
+"and related to a shipment."
 msgstr ""
 "Se han actualizado las transferencias a incluir, manteniéndose únicamente "
 "aquellas en progreso y que están relacionadas con un envío."
@@ -1389,11 +1454,12 @@ msgstr "No puede cargar esto en este envío, ya que se planificó cargarlo el {}
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"You cannot load this into this shipment because its content is planned already.\n"
+"You cannot load this into this shipment because its content is planned "
+"already.\n"
 "%(info)s"
 msgstr ""
-"No puedes cargar esto en este envío porque su contenido ya está planificado."
-"\n"
+"No puedes cargar esto en este envío porque su contenido ya está "
+"planificado.\n"
 "%(info)s"
 
 #. module: shipment_advice
@@ -1401,7 +1467,8 @@ msgstr ""
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"You cannot load this move line alone, you have to move the whole package content.\n"
+"You cannot load this move line alone, you have to move the whole package "
+"content.\n"
 "%(info)s"
 msgstr ""
 "No puedes cargar solo este movimiento, debes mover todo el contenido del "
@@ -1413,8 +1480,13 @@ msgstr ""
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"You cannot unload this move line alone, you have to unload the whole package"
-" content."
+"You cannot unload this move line alone, you have to unload the whole package "
+"content."
 msgstr ""
 "No puedes descargar solo este movimiento, debes descargar todo el contenido "
 "del paquete."
+
+#. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid "shipment_advice_run_in_queue_job"
+msgstr ""
