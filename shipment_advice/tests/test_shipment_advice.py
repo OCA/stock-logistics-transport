@@ -93,6 +93,17 @@ class TestShipmentAdvice(Common):
             )
         )
         self.assertEqual(picking.state, "done")
+        # Print deliveryslip
+        action = self.shipment_advice_out.with_context(
+            discard_logo_check=True
+        ).print_all_deliveryslip()
+        self.assertEqual(action.get("type"), "ir.actions.report")
+        self.assertEqual(action.get("report_name"), "stock.report_deliveryslip")
+        self.assertEqual(action.get("report_type"), "qweb-pdf")
+        self.assertEqual(
+            action.get("context").get("active_ids"),
+            picking.ids,
+        )
 
     def test_shipment_advice_done_backorder_policy_disabled(self):
         """Validating a shipment with no backorder policy should let partial
