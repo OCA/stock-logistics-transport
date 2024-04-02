@@ -175,8 +175,9 @@ class ShipmentAdvice(models.Model):
         ),
     )
     run_in_queue_job = fields.Boolean(
-        related="company_id.shipment_advice_run_in_queue_job"
+        default=lambda self: self._default_run_in_queue_job()
     )
+
     error_message = fields.Text(tracking=True)
 
     _sql_constraints = [
@@ -186,6 +187,9 @@ class ShipmentAdvice(models.Model):
             "Reference must be unique per company!",
         ),
     ]
+
+    def _default_run_in_queue_job(self):
+        return self.env.user.company_id.shipment_advice_run_in_queue_job
 
     def _check_include_package_level(self, package_level):
         """Check if a package level should be listed in the shipment advice.
