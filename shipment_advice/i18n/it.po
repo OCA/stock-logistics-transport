@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-24 17:33+0000\n"
+"PO-Revision-Date: 2024-04-02 12:39+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "%(sa)s: %(pick)s background validation"
-msgstr ""
+msgstr "%(sa)s: validazione %(pick)s in background"
 
 #. module: shipment_advice
 #: model:ir.actions.report,print_report_name:shipment_advice.action_report_shipment_advice
@@ -81,6 +81,8 @@ msgid ""
 "An error occurred while processing:\n"
 "- %(related_object_name)s: %(error)s"
 msgstr ""
+"Si è verificato un errore nell'eleborazione:\n"
+"- %(related_object_name)s: %(error)s"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__arrival_date
@@ -262,12 +264,12 @@ msgstr "Firma del conducente"
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__error
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__error_message
 msgid "Error Message"
-msgstr ""
+msgstr "Messaggio di errore"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_follower_ids
@@ -367,7 +369,7 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_process
 msgid "In process"
-msgstr ""
+msgstr "In corso"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_progress
@@ -778,7 +780,7 @@ msgstr "Numero di messaggi con errore di consegna"
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "One of the pickings to process failed to validate"
-msgstr ""
+msgstr "Uno dei prelievi in elaborazione ha fallito la validazione"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__open_shipment
@@ -1018,7 +1020,7 @@ msgstr "Utente responsabile"
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__run_in_queue_job
 msgid "Run shipment advice in queue job"
-msgstr ""
+msgstr "Esegue l'avviso di spedizione nella coda lavoro"
 
 #. module: shipment_advice
 #: model:ir.actions.report,name:shipment_advice.action_report_shipment_advice
@@ -1155,6 +1157,11 @@ msgid ""
 "Each picking will be\n"
 "                            validated in a separate jobs."
 msgstr ""
+"Per prevenire i timeout nelle grandi spedizioni, abilitare questa opzione "
+"per eseguire\n"
+"                            l'avviso di spedizione attraverso un lavoro "
+"accodato. Ogni prelievo verrà\n"
+"                            validato in un lavoro separato."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
@@ -1165,6 +1172,9 @@ msgid ""
 "shipment advice validation through a queued jobs. Each picking will be "
 "validated in a separate job."
 msgstr ""
+"Per prevenire i timeout nelle grandi spedizioni, abilitare questa opzione "
+"per eseguire l'avviso di spedizione attraverso un lavoro accodato. Ogni "
+"prelievo verrà validato in un lavoro separato."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
@@ -1486,7 +1496,7 @@ msgstr ""
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "shipment_advice_run_in_queue_job"
-msgstr ""
+msgstr "shipment_advice_run_in_queue_job"
 
 #, python-format
 #~ msgid ""
