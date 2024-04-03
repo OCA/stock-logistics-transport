@@ -1008,9 +1008,13 @@ msgid "Responsible User"
 msgstr "Utilisateur responsable"
 
 #. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__run_in_queue_job
+msgid "Run In Queue Job"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
-#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__run_in_queue_job
 msgid "Run shipment advice in queue job"
 msgstr ""
 
@@ -1151,7 +1155,6 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
 #: model:ir.model.fields,help:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
-#: model:ir.model.fields,help:shipment_advice.field_shipment_advice__run_in_queue_job
 msgid ""
 "To prevent timeouts for large shipments, enable this option to execute "
 "shipment advice validation through a queued jobs. Each picking will be "
