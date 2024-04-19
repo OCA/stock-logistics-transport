@@ -157,6 +157,17 @@ class Common(TransactionCase):
         wiz.action_plan()
         return wiz
 
+    def _unplan_records_from_shipment(self, records, user=None):
+        wiz_model = self.env["wizard.unplan.shipment"].with_context(
+            active_model=records._name,
+            active_ids=records.ids,
+        )
+        wiz = wiz_model.create({})
+        if user:
+            wiz = wiz.with_user(user)
+        wiz.action_unplan()
+        return wiz
+
     def _load_records_in_shipment(self, shipment_advice, records, user=None):
         """Load pickings, move lines or package levels in the givent shipment."""
         wiz_model = self.env["wizard.load.shipment"].with_context(
