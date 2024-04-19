@@ -18,3 +18,9 @@ class StockMove(models.Model):
     def _plan_in_shipment(self, shipment_advice):
         """Plan the moves into the given shipment advice."""
         self.shipment_advice_id = shipment_advice
+
+    def _prepare_merge_moves_distinct_fields(self):
+        res = super()._prepare_merge_moves_distinct_fields()
+        # Avoid having stock move assign to different shipment merged together
+        res.append("shipment_advice_id")
+        return res
