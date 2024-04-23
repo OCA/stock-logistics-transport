@@ -13,6 +13,7 @@ class StockMoveLine(models.Model):
         ondelete="set null",
         string="Shipment advice",
         index=True,
+        copy=False,
     )
 
     def button_load_in_shipment(self):
