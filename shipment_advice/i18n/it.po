@@ -1210,6 +1210,11 @@ msgid "Validate"
 msgstr ""
 
 #. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_waiting_quantity
+msgid "Waiting Quantity"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__warehouse_id
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Warehouse"
