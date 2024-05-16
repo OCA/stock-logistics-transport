@@ -8,12 +8,8 @@
     "author": "Creu Blanca, " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "category": "Warehouse Management",
-    "depends": [
-        "stock"
-    ],
-    "data": [
-        "views/stock_location_views.xml"
-    ],
+    "depends": ["stock"],
+    "data": ["views/stock_location_views.xml"],
     "license": "AGPL-3",
     "installable": True,
     "application": False,
