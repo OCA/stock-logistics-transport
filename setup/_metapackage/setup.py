@@ -9,6 +9,8 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-shipment_advice',
+        'odoo14-addon-shipment_advice_bill_auto_complete',
+        'odoo14-addon-shipment_advice_bill_auto_complete_mrp',
         'odoo14-addon-stock_dock',
         'odoo14-addon-stock_location_address',
         'odoo14-addon-stock_location_address_purchase',
