@@ -1,0 +1,105 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* shipment_advice_bill_auto_complete
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_shipment_advice__account_move_id
+msgid "Account Move"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model_terms:ir.ui.view,arch_db:shipment_advice_bill_auto_complete.view_move_form_inherit_purchase
+msgid "Auto-Complete Shipment"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_shipment_advice__invoice_line_ids
+msgid "Bill Lines"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_move__display_name
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_shipment_advice__display_name
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_stock_move__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_move__id
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_move_line__id
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_shipment_advice__id
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_stock_move__id
+msgid "ID"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model,name:shipment_advice_bill_auto_complete.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model,name:shipment_advice_bill_auto_complete.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_move____last_update
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_shipment_advice____last_update
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_stock_move____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model_terms:ir.ui.view,arch_db:shipment_advice_bill_auto_complete.view_move_form_inherit_purchase
+msgid "Select a shipment advice"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model,name:shipment_advice_bill_auto_complete.model_shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_move_line__shipment_advice_id
+msgid "Shipment Advice"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_bank_statement_line__shipment_advice_auto_complete_id
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_move__shipment_advice_auto_complete_id
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_account_payment__shipment_advice_auto_complete_id
+msgid "Shipment Advice Auto Complete"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: code:addons/shipment_advice_bill_auto_complete/models/account_move.py:0
+#, python-format
+msgid "Shipment with multiple suppliers"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model,name:shipment_advice_bill_auto_complete.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: model:ir.model.fields,field_description:shipment_advice_bill_auto_complete.field_shipment_advice__supplier_ids
+msgid "Supplier"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: code:addons/shipment_advice_bill_auto_complete/models/account_move.py:0
+#, python-format
+msgid ""
+"There are multiple suppliers on the shipment advice.It can not be used to "
+"generate the vendor bill."
+msgstr ""
