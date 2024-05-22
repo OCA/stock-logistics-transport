@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_move_form_inherit_purchase" model="ir.ui.view">
+        <field name="name">account.move.inherit.auto.complete.shipment</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="purchase.view_move_form_inherit_purchase" />
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]" />
+        <field name="arch" type="xml">
+
+            <field name="purchase_vendor_bill_id" position="after">
+                <label
+                    for="shipment_advice_auto_complete_id"
+                    string="Auto-Complete Shipment"
+                    class="oe_edit_only"
+                    attrs="{'invisible': ['|', ('state','!=','draft'), ('move_type', '!=', 'in_invoice')]}"
+                />
+                <field
+                    name="shipment_advice_auto_complete_id"
+                    nolabel="1"
+                    attrs="{'invisible': ['|', ('state','!=','draft'), ('move_type', '!=', 'in_invoice')]}"
+                    class="oe_edit_only"
+                    domain="partner_id and [('shipment_type', '=', 'incoming'), ('state', '=', 'done'), ('account_move_id', '=', False), ('supplier_ids', 'in', partner_id)] or [('shipment_type', '=', 'incoming'), ('state', '=', 'done'), ('account_move_id', '=', False)]"
+                    placeholder="Select a shipment advice"
+                    options="{'no_create': True, 'no_open': True}"
+                />
+            </field>
+            <!-- shipment_advice_id needs to be added in both tree so the value is not lost during on changes -->
+            <xpath
+                expr="//field[@name='line_ids']/tree/field[@name='company_id']"
+                position="after"
+            >
+                <field name="shipment_advice_id" invisible="1" />
+            </xpath>
+            <xpath
+                expr="//field[@name='invoice_line_ids']/tree/field[@name='company_id']"
+                position="after"
+            >
+                <field name="shipment_advice_id" invisible="1" />
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
