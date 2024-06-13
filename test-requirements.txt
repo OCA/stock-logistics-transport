@@ -1,1 +1,2 @@
 vcrpy-unittest
+odoo-addon-partner-invoicing-mode-cash-on-delivery @ git+https://github.com/OCA/account-invoicing@refs/pull/1736/head#subdirectory=setup/partner_invoicing_mode_cash_on_delivery
