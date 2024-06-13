@@ -11,14 +11,8 @@
     "license": "AGPL-3",
     "author": "BCIM, ACSONE SA/NV, Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
-    "depends": [
-        "account_payment_sale",
-        "shipment_advice",
-        "partner_invoicing_mode_at_shipping",
-    ],
+    "depends": ["shipment_advice", "partner_invoicing_mode_cash_on_delivery"],
     "data": [
-        "views/account_payment_mode_views.xml",
         "views/shipment_advice.xml",
-        "views/stock_picking_views.xml",
     ],
 }
