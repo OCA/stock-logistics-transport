@@ -51,7 +51,7 @@ class TestShipmentAdviceLoad(Common):
         self.assertEqual(wiz.shipment_advice_id, self.shipment_advice_out)
         self.assertEqual(wiz.shipment_advice_id.planned_picking_ids, picking)
         self.assertEqual(wiz.shipment_advice_id.planned_pickings_count, 1)
-        self.assertEqual(wiz.shipment_advice_id.planned_move_ids, picking.move_ids)
+        self.assertEqual(wiz.shipment_advice_id.planned_move_ids, picking.move_lines)
         self.assertEqual(wiz.shipment_advice_id.planned_moves_count, 3)
         # Check loaded entries
         self.assertEqual(wiz.shipment_advice_id.loaded_picking_ids, picking)
@@ -124,19 +124,6 @@ class TestShipmentAdviceLoad(Common):
             wiz.shipment_advice_id.loaded_move_lines_without_package_count, 1
         )
 
-    def test_shipment_advice_load_moves_different_pack(self):
-        move = self.move_product_out1
-        move_package_ids = self.move_product_out2 + self.move_product_out3
-        self._plan_records_in_shipment(self.shipment_advice_out, move)
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        wiz_model = self.env["wizard.load.shipment"].with_context(
-            active_model=move.move_line_ids._name,
-            active_ids=move.move_line_ids.ids + move_package_ids.move_line_ids.ids,
-        )
-        wiz = wiz_model.create({"shipment_advice_id": self.shipment_advice_out.id})
-        with self.assertRaises(UserError):
-            wiz.action_load()
-
     def test_shipment_advice_already_planned_load_move_line_not_planned(self):
         # Plan the first move
         move1 = self.move_product_out1
@@ -149,12 +136,3 @@ class TestShipmentAdviceLoad(Common):
                 self.shipment_advice_out,
                 package_level,
             )
-
-    def test_load_check_package(self):
-        """load should ignore done and cancelled lines"""
-        move1lines = self.move_product_out1.move_line_ids
-        move2lines = self.move_product_out2.move_line_ids
-        picking = self.move_product_out1.picking_id
-        picking._put_in_pack(move1lines | move2lines)
-        self.move_product_out2._action_done()
-        move1lines._load_in_shipment(self.shipment_advice_out)

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="shipment_advice_view_form" model="ir.ui.view">
+        <field name="name">shipment.advice.form</field>
+        <field name="model">shipment.advice</field>
+        <field name="inherit_id" ref="shipment_advice.shipment_advice_view_form" />
+        <field name="arch" type="xml">
+            <button name="button_open_planned_moves" position="after">
+                <button
+                    name="button_plan_reception"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-plus-circle"
+                    attrs="{'invisible': ['|', ('shipment_type', '!=', 'incoming'), ('state', '!=', 'draft')]}"
+                >
+                  <div class="o_field_widget o_stat_info">
+                    <span class="o_stat_text">Plan</span>
+                    <span class="o_stat_text">Reception</span>
+                  </div>
+              </button>
+          </button>
+        </field>
+    </record>
+
+    <record id="wizard_plan_reception_shipment_action" model="ir.actions.act_window">
+        <field name="name">Plan Reception Shipment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">wizard.plan.reception.shipment</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
+    </record>
+
+</odoo>

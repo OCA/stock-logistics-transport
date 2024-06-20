@@ -4,9 +4,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from odoo.addons.queue_job.delay import chain, group
-from odoo.addons.queue_job.job import identity_exact
-
 
 class ShipmentAdvice(models.Model):
     _name = "shipment.advice"
@@ -26,14 +23,11 @@ class ShipmentAdvice(models.Model):
             ("draft", "Draft"),
             ("confirmed", "Confirmed"),
             ("in_progress", "In progress"),
-            ("in_process", "In process"),
-            ("error", "Error"),
             ("done", "Done"),
             ("cancel", "Cancelled"),
         ],
         string="Status",
         default="draft",
-        tracking=True,
     )
     warehouse_id = fields.Many2one(
         comodel_name="stock.warehouse",
@@ -58,7 +52,6 @@ class ShipmentAdvice(models.Model):
         string="Type",
         default="outgoing",
         required=True,
-        states={"draft": [("readonly", False)]},
         readonly=True,
         help="Use incoming to plan receptions, use outgoing for deliveries.",
     )
@@ -71,6 +64,7 @@ class ShipmentAdvice(models.Model):
         index=True,
     )
     arrival_date = fields.Datetime(
+        string="Arrival date",
         states={"draft": [("readonly", False)], "confirmed": [("readonly", False)]},
         readonly=True,
         help=(
@@ -79,6 +73,7 @@ class ShipmentAdvice(models.Model):
         ),
     )
     departure_date = fields.Datetime(
+        string="Departure date",
         states={
             "draft": [("readonly", False)],
             "confirmed": [("readonly", False)],
@@ -151,6 +146,11 @@ class ShipmentAdvice(models.Model):
         compute="_compute_picking_ids",
         string="Loaded transfers",
     )
+    to_validate_picking_ids = fields.One2many(
+        comodel_name="stock.picking",
+        compute="_compute_picking_ids",
+        string="Transfers to validate",
+    )
     loaded_pickings_count = fields.Integer(compute="_compute_count")
     loaded_package_ids = fields.One2many(
         comodel_name="stock.quant.package",
@@ -163,6 +163,17 @@ class ShipmentAdvice(models.Model):
         string="Package Levels",
     )
     loaded_packages_count = fields.Integer(compute="_compute_count")
+    line_to_load_ids = fields.One2many(
+        comodel_name="stock.move.line",
+        compute="_compute_line_to_load_ids",
+        help=(
+            "Lines to load in priority.\n"
+            "If the shipment is planned, it'll return the planned lines.\n"
+            "If the shipment is not planned, it'll return lines from transfers "
+            "partially loaded."
+        ),
+    )
+    lines_to_load_count = fields.Integer(compute="_compute_count")
     carrier_ids = fields.Many2many(
         comodel_name="delivery.carrier",
         string="Related shipping methods",
@@ -174,11 +185,6 @@ class ShipmentAdvice(models.Model):
             "(e.g. through the shopfloor application)."
         ),
     )
-    run_in_queue_job = fields.Boolean(
-        default=lambda self: self._default_run_in_queue_job()
-    )
-
-    error_message = fields.Text(tracking=True)
 
     _sql_constraints = [
         (
@@ -188,8 +194,68 @@ class ShipmentAdvice(models.Model):
         ),
     ]
 
-    def _default_run_in_queue_job(self):
-        return self.env.user.company_id.shipment_advice_run_in_queue_job
+    def _find_move_lines_domain(self, picking_type_ids=None):
+        """Returns the base domain to look for move lines for a given shipment."""
+        self.ensure_one()
+        domain = [
+            ("state", "in", ("assigned", "partially_available")),
+            ("picking_code", "=", self.shipment_type),
+            "|",
+            ("shipment_advice_id", "=", False),
+            ("shipment_advice_id", "=", self.id),
+        ]
+        # Restrict on picking types if provided
+        if picking_type_ids:
+            domain.insert(0, ("picking_id.picking_type_id", "in", picking_type_ids.ids))
+        else:
+            domain.insert(
+                0,
+                ("picking_id.picking_type_id.warehouse_id", "=", self.warehouse_id.id),
+            )
+        # Shipment with planned content, restrict the search to it
+        if self.planned_move_ids:
+            domain.append(("move_id.shipment_advice_id", "=", self.id))
+        # Shipment without planned content, search for all unplanned moves
+        else:
+            domain.append(("move_id.shipment_advice_id", "=", False))
+            # Restrict to shipment carrier delivery types (providers)
+            if self.carrier_ids:
+                domain.extend(
+                    [
+                        "|",
+                        (
+                            "picking_id.carrier_id.delivery_type",
+                            "in",
+                            self.carrier_ids.mapped("delivery_type"),
+                        ),
+                        ("picking_id.carrier_id", "=", False),
+                    ]
+                )
+        return domain
+
+    @api.depends("planned_move_ids")
+    @api.depends_context("shipment_picking_type_ids")
+    def _compute_line_to_load_ids(self):
+        picking_type_ids = self.env.context.get("shipment_picking_type_ids", [])
+        for shipment in self:
+            domain = shipment._find_move_lines_domain(picking_type_ids)
+            # Restrict to lines not loaded
+            domain.insert(0, ("shipment_advice_id", "=", False))
+            # Find lines to load from partially loaded transfers if the shipment
+            # is not planned.
+            if not shipment.planned_move_ids:
+                all_lines_to_load = self.env["stock.move.line"].search(domain)
+                all_pickings = all_lines_to_load.picking_id
+                loaded_lines = self.env["stock.move.line"].search(
+                    [
+                        ("picking_id", "in", all_pickings.ids),
+                        ("id", "not in", all_lines_to_load.ids),
+                        ("shipment_advice_id", "!=", False),
+                    ]
+                )
+                pickings_partially_loaded = loaded_lines.picking_id
+                domain += [("picking_id", "in", pickings_partially_loaded.ids)]
+            shipment.line_to_load_ids = self.env["stock.move.line"].search(domain)
 
     def _check_include_package_level(self, package_level):
         """Check if a package level should be listed in the shipment advice.
@@ -204,11 +270,25 @@ class ShipmentAdvice(models.Model):
             packages = shipment.loaded_move_line_ids.result_package_id
             shipment.total_load = sum(packages.mapped("shipping_weight"))
 
-    @api.depends("planned_move_ids", "loaded_move_line_ids")
+    @api.depends(
+        "planned_move_ids", "loaded_move_line_ids.picking_id.loaded_shipment_advice_ids"
+    )
     def _compute_picking_ids(self):
         for shipment in self:
             shipment.planned_picking_ids = shipment.planned_move_ids.picking_id
             shipment.loaded_picking_ids = shipment.loaded_move_line_ids.picking_id
+            # Transfers to validate are those having only the current shipment
+            # advice to process
+            to_validate_picking_ids = []
+            for picking in shipment.loaded_move_line_ids.picking_id:
+                shipments_to_process = picking.loaded_shipment_advice_ids.filtered(
+                    lambda s: s.state not in ("done", "cancel")
+                )
+                if shipments_to_process == shipment:
+                    to_validate_picking_ids.append(picking.id)
+            shipment.to_validate_picking_ids = self.env["stock.picking"].browse(
+                to_validate_picking_ids
+            )
 
     @api.depends(
         "loaded_move_line_ids.package_level_id.package_id",
@@ -229,7 +309,7 @@ class ShipmentAdvice(models.Model):
                 package_ids
             )
 
-    @api.depends("planned_picking_ids", "planned_move_ids")
+    @api.depends("planned_picking_ids", "planned_move_ids", "line_to_load_ids")
     def _compute_count(self):
         for shipment in self:
             shipment.planned_pickings_count = len(shipment.planned_picking_ids)
@@ -239,6 +319,7 @@ class ShipmentAdvice(models.Model):
                 shipment.loaded_move_line_without_package_ids
             )
             shipment.loaded_packages_count = len(shipment.loaded_package_ids)
+            shipment.lines_to_load_count = len(shipment.line_to_load_ids)
 
     @api.depends("planned_picking_ids", "loaded_picking_ids")
     def _compute_carrier_ids(self):
@@ -248,22 +329,15 @@ class ShipmentAdvice(models.Model):
             else:
                 shipment.carrier_ids = shipment.loaded_picking_ids.carrier_id
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        defaults = self.default_get(["name"])
-        outgoing_sequence = self.env.ref(
-            "shipment_advice.shipment_advice_outgoing_sequence"
-        )
-        incomig_sequence = self.env.ref(
-            "shipment_advice.shipment_advice_incoming_sequence"
-        )
-        for vals in vals_list:
-            sequence = outgoing_sequence
-            if vals["shipment_type"] == "incoming":
-                sequence = incomig_sequence
-            if vals.get("name", "/") == "/" and defaults.get("name", "/") == "/":
-                vals["name"] = sequence.next_by_id()
-        return super().create(vals_list)
+    @api.model
+    def create(self, vals):
+        defaults = self.default_get(["name", "shipment_type"])
+        sequence = self.env.ref("shipment_advice.shipment_advice_outgoing_sequence")
+        if vals.get("shipment_type", defaults["shipment_type"]) == "incoming":
+            sequence = self.env.ref("shipment_advice.shipment_advice_incoming_sequence")
+        if vals.get("name", "/") == "/" and defaults.get("name", "/") == "/":
+            vals["name"] = sequence.next_by_id()
+        return super().create(vals)
 
     def action_confirm(self):
         for shipment in self:
@@ -296,134 +370,88 @@ class ShipmentAdvice(models.Model):
                         shipment.name
                     )
                 )
-            if not shipment.arrival_date:
-                shipment.arrival_date = fields.Datetime.now()
+            shipment.arrival_date = fields.Datetime.now()
             shipment.state = "in_progress"
         return True
 
     def _lock_records(self, records):
         """Lock records for the current SQL transaction."""
-        if not records:
-            return
         sql = "SELECT id FROM %s WHERE ID IN %%s FOR UPDATE" % records._table
         self.env.cr.execute(sql, (tuple(records.ids),), log_exceptions=False)
 
     def action_done(self):
-        self._check_action_done_allowed()
+        wiz_model = self.env["stock.backorder.confirmation"]
         for shipment in self:
-            shipment._action_done()
-        return True
-
-    def _get_picking_to_process(self):
-        self.ensure_one()
-        if self.shipment_type == "incoming":
-            return self.planned_picking_ids
-        return self.loaded_picking_ids
-
-    def _action_done(self):
-        # Validate transfers (create backorders for unprocessed lines)
-        self.ensure_one()
-        self.write({"state": "in_process", "error_message": False})
-
-        if self.shipment_type == "incoming":
-            backorder_policy = "create_backorder"
-        else:
-            backorder_policy = self.company_id.shipment_advice_outgoing_backorder_policy
-        pickings = self._get_picking_to_process().filtered(
-            lambda p: p.state not in ("cancel", "done")
-        )
-        if self.run_in_queue_job:
-            chain(
-                group(
-                    *[
-                        self.delayable(
-                            identity_key=identity_exact,
-                            description=_(
-                                "%(sa)s: %(pick)s background validation",
-                                sa=self.name,
-                                pick=picking.name,
-                            ),
-                        )._validate_picking(picking, backorder_policy)
-                        for picking in pickings
-                    ]
-                ),
-                group(self.delayable(description=self.name)._unplan_undone_moves()),
-                group(self.delayable(description=self.name)._postprocess_action_done()),
-            ).delay()
-            return
-        for picking in pickings:
-            self._validate_picking(picking, backorder_policy)
-        self._unplan_undone_moves()
-        self._postprocess_action_done()
-
-    def _check_action_done_allowed(self):
-        for shipment in self:
-            if shipment.state not in ("in_progress", "error"):
+            if shipment.state != "in_progress":
                 raise UserError(
                     _("Shipment {} is not started, operation aborted.").format(
                         shipment.name
                     )
                 )
+            # Validate transfers (create backorders for unprocessed lines)
+            if shipment.shipment_type == "incoming":
+                self._lock_records(self.planned_picking_ids)
+                for picking in self.planned_picking_ids:
+                    if picking.state in ("cancel", "done"):
+                        continue
+                    if picking._check_backorder():
+                        wiz = wiz_model.create({})
+                        wiz.pick_ids = picking
+                        wiz.with_context(
+                            button_validate_picking_ids=picking.ids
+                        ).process()
+                    else:
+                        picking._action_done()
+            else:
+                backorder_policy = (
+                    shipment.company_id.shipment_advice_outgoing_backorder_policy
+                )
+                self._lock_records(self.loaded_picking_ids)
+                if backorder_policy == "create_backorder":
+                    for picking in self.to_validate_picking_ids:
+                        if picking.state in ("cancel", "done"):
+                            continue
+                        if picking._check_backorder():
+                            wiz = wiz_model.create({})
+                            wiz.pick_ids = picking
+                            wiz.with_context(
+                                button_validate_picking_ids=picking.ids
+                            ).process()
+                        else:
+                            picking._action_done()
+                else:
+                    for picking in self.to_validate_picking_ids:
+                        if picking.state in ("cancel", "done"):
+                            continue
+                        if not picking._check_backorder():
+                            # no backorder needed means that all qty_done are
+                            # set to fullfill the need => validate
+                            picking._action_done()
+                # Unplan moves that were not loaded and validated
+                moves_to_unplan = self.loaded_move_line_ids.move_id.filtered(
+                    lambda m: m.state not in ("cancel", "done") and not m.quantity_done
+                )
+                moves_to_unplan.shipment_advice_id = False
+            shipment._action_done()
+        return True
 
-    def _validate_picking(self, picking, backorder_policy="create_backorder"):
+    def _action_done(self):
         self.ensure_one()
-        self._lock_records(picking)
-        try:
-            with self.env.cr.savepoint():
-                if (
-                    picking._check_backorder()
-                    and backorder_policy == "create_backorder"
-                ):
-                    wiz = self.env["stock.backorder.confirmation"].create({})
-                    wiz.pick_ids = picking
-                    wiz.with_context(button_validate_picking_ids=picking.ids).process()
-                elif not picking._check_backorder():
-                    picking._action_done()
-        except UserError as error:
-            self.write(
-                {
-                    "state": "error",
-                    "error_message": self._get_error_message(error, picking),
-                }
-            )
+        self.write({"departure_date": fields.Datetime.now(), "state": "done"})
 
-    def _unplan_undone_moves(self):
-        """Unplan moves that were not loaded and validated"""
+    def _is_fully_done(self):
         self.ensure_one()
-        if self.state != "in_process" or self.shipment_type != "outgoing":
-            return
-        moves_to_unplan = (
-            self.loaded_move_line_ids.move_id | self.planned_move_ids
-        ).filtered(lambda m: m.state not in ("cancel", "done") and not m.quantity_done)
-        moves_to_unplan.shipment_advice_id = False
+        for move in self.planned_move_ids:
+            if move.state not in ["cancel", "done"]:
+                return False
+        return True
 
-    def _postprocess_action_done(self):
-        self.ensure_one()
-        if self.state != "in_process":
-            return
-        if self._get_picking_to_process().filtered(
-            lambda p: p.state not in ("done", "cancel")
-        ):
-            self.write(
-                {
-                    "state": "error",
-                    "error_message": _(
-                        "One of the pickings to process failed to validate"
-                    ),
-                }
-            )
-            return
-        if not self.departure_date:
-            self.departure_date = fields.Datetime.now()
-        self.write({"state": "done", "error_message": False})
-
-    @api.model
-    def _get_error_message(self, error, related_object):
-        return _(
-            "An error occurred while processing:\n- %(related_object_name)s: %(error)s",
-            related_object_name=related_object.display_name,
-            error=str(error),
-        )
+    def validate_when_fully_done(self):
+        """set the shipment advice to done if all the planned_move_ids
+        are done or cancel"""
+        for shipment in self:
+            if shipment._is_fully_done():
+                shipment._action_done()
 
     def action_cancel(self):
         for shipment in self:
@@ -480,6 +508,13 @@ class ShipmentAdvice(models.Model):
         action["domain"] = [("id", "in", self.loaded_package_ids.ids)]
         return action
 
+    def button_open_to_load_move_lines(self):
+        action_xmlid = "stock.stock_move_line_action"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
+        action["domain"] = [("id", "in", self.line_to_load_ids.ids)]
+        action["context"] = {}  # Disable filters
+        return action
+
     def _domain_open_deliveries_in_progress(self):
         self.ensure_one()
         domain = []
@@ -500,9 +535,9 @@ class ShipmentAdvice(models.Model):
             ]
             if self.planned_move_ids:
                 # and planned in the same shipment
-                domain.append(("move_ids.shipment_advice_id", "=", self.id))
+                domain.append(("move_lines.shipment_advice_id", "=", self.id))
             else:
-                domain.append(("move_ids.shipment_advice_id", "=", False))
+                domain.append(("move_lines.shipment_advice_id", "=", False))
             if self.carrier_ids:
                 domain.append(("carrier_id", "in", self.carrier_ids.ids))
         return domain

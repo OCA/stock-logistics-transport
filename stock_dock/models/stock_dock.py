@@ -10,7 +10,7 @@ class StockDock(models.Model):
 
     name = fields.Char(required=True)
     barcode = fields.Char()
-    active = fields.Boolean(default=True)
+    active = fields.Boolean(string="Active", default=True)
     warehouse_id = fields.Many2one(
         comodel_name="stock.warehouse",
         ondelete="cascade",

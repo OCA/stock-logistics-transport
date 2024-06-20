@@ -3,7 +3,6 @@
 
 from odoo import _, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_is_zero
 
 
 class StockMoveLine(models.Model):
@@ -30,9 +29,7 @@ class StockMoveLine(models.Model):
         """Check that the lines represent whole packages (if applicable)."""
         for move_line in self:
             if move_line.package_level_id:
-                package_lines = move_line.package_level_id.move_line_ids.filtered(
-                    lambda l: l.state in ("partially_available", "assigned")
-                )
+                package_lines = move_line.package_level_id.move_line_ids
                 if not set(package_lines.ids).issubset(set(self.ids)):
                     return False
         return True
@@ -41,21 +38,10 @@ class StockMoveLine(models.Model):
         """Load the move lines into the given shipment advice."""
         # Entire package check
         if not self._check_entire_package():
-            move_lines = self.package_level_id.move_line_ids
-            pickings = move_lines.picking_id.mapped("name")
-            products = move_lines.product_id.mapped("display_name")
-            packages = move_lines.package_id.mapped("display_name")
             raise UserError(
                 _(
                     "You cannot load this move line alone, you have to "
-                    "move the whole package content.\n%(info)s",
-                    info="\n".join(
-                        [
-                            _("Transfers: %s", ", ".join(pickings)),
-                            _("Products: %s", ", ".join(products)),
-                            _("Packages: %s", ", ".join(packages)),
-                        ]
-                    ),
+                    "move the whole package content."
                 )
             )
         for move_line in self:
@@ -74,41 +60,11 @@ class StockMoveLine(models.Model):
                 raise UserError(
                     _(
                         "You cannot load this into this shipment because its "
-                        "content is planned already.\n%(info)s",
-                        info="\n".join(
-                            [
-                                _("Transfer: %s", move_line.picking_id.name),
-                                _("Product: %s", move_line.product_id.display_name),
-                            ]
-                        ),
+                        "content is planned already."
                     )
                 )
-            if (
-                move_line.shipment_advice_id
-                and move_line.shipment_advice_id != shipment_advice
-            ):
-                raise UserError(
-                    _(
-                        "This move is already loaded  in another shipment."
-                        "\nProduct: %(product)s.\nPicking: %(picking)s",
-                        product=move_line.product_id.display_name,
-                        picking=move_line.picking_id.name,
-                    )
-                )
-            move_line.shipment_advice_id = shipment_advice
-            uom = move_line.product_uom_id or move_line.product_id.uom_id
-            if float_is_zero(
-                move_line.reserved_uom_qty, precision_rounding=uom.rounding
-            ):
-                raise UserError(
-                    _(
-                        "Nothing to load for %(product)s.\nPicking: %(picking)s",
-                        product=move_line.product_id.display_name,
-                        picking=move_line.picking_id.name,
-                    )
-                )
-            if move_line.state in ("partially_available", "assigned"):
-                move_line.qty_done = move_line.reserved_uom_qty
+            move_line.shipment_advice_id = shipment_advice.id
+            move_line.qty_done = move_line.product_uom_qty
 
     def _unload_from_shipment(self):
         """Unload the move lines from their related shipment advice."""

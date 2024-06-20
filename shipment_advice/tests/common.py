@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import fields
-from odoo.tests.common import TransactionCase, new_test_user
+from odoo.tests.common import SavepointCase, new_test_user
 
 
-class Common(TransactionCase):
+class Common(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -38,7 +38,7 @@ class Common(TransactionCase):
             cls.product_out1,
             20,
         )
-        cls.package = cls.env["stock.quant.package"].create({"name": "PKG_OUT2"})
+        cls.package = cls.env["stock.quant.package"].create({"name": "PKG_OUT"})
         cls._update_qty_in_location(
             cls.picking_type_out.default_location_src_id,
             cls.product_out2,
@@ -118,12 +118,6 @@ class Common(TransactionCase):
         move.picking_id.action_assign()
         return move
 
-    def _check_sequence(self, shipment_advice):
-        if shipment_advice.shipment_type == "outgoing":
-            self.assertIn("OUT", shipment_advice.name)
-        else:
-            self.assertIn("IN", shipment_advice.name)
-
     def _confirm_shipment_advice(self, shipment_advice, arrival_date=None):
         if shipment_advice.state != "draft":
             return
@@ -143,6 +137,8 @@ class Common(TransactionCase):
 
     def _cancel_shipment_advice(self, shipment_advice, dock=None):
         self._confirm_shipment_advice(shipment_advice)
+        if shipment_advice.state != "confirmed":
+            return
         shipment_advice.action_cancel()
         self.assertEqual(shipment_advice.state, "cancel")
 
@@ -157,8 +153,19 @@ class Common(TransactionCase):
         wiz.action_plan()
         return wiz
 
+    def _unplan_records_from_shipment(self, records, user=None):
+        wiz_model = self.env["wizard.unplan.shipment"].with_context(
+            active_model=records._name,
+            active_ids=records.ids,
+        )
+        wiz = wiz_model.create({})
+        if user:
+            wiz = wiz.with_user(user)
+        wiz.action_unplan()
+        return wiz
+
     def _load_records_in_shipment(self, shipment_advice, records, user=None):
-        """Load pickings, move lines or package levels in the givent shipment."""
+        """Load pickings, move lines or package levels in the given shipment."""
         wiz_model = self.env["wizard.load.shipment"].with_context(
             active_model=records._name,
             active_ids=records.ids,

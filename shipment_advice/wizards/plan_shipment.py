@@ -21,9 +21,9 @@ class WizardPlanShipment(models.TransientModel):
         comodel_name="shipment.advice",
         string="Shipment Advice",
         required=True,
-        domain=[("state", "in", ("draft", "confirmed", "error"))],
+        domain=[("state", "in", ("draft", "confirmed"))],
     )
-    warning = fields.Char(readonly=True)
+    warning = fields.Char(string="Warning", readonly=True)
 
     @api.model
     def default_get(self, fields_list):

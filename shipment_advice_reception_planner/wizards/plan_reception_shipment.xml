@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_plan_reception_shipment_form" model="ir.ui.view">
+        <field name="name">wizard.plan.reception.shipment.form</field>
+        <field name="model">wizard.plan.reception.shipment</field>
+        <field name="arch" type="xml">
+            <form string="Plan Reception in Shipment Advice">
+                <group name="shipment">
+                    <field name="shipment_advice_id" readonly="1" />
+                    <field name="warehouse_id" />
+                    <field name="partner_id" />
+                </group>
+                <group
+                    name="moves"
+                    string="Selected stock moves to be planned in shipment"
+                >
+                <field
+                        name="move_ids"
+                        nolabel="1"
+                        context="{'tree_view_ref': 'shipment_advice_reception_planner.stock_move_view_tree', 'wizard_hide_on_search': True}"
+                        domain="partner_id and [('picking_code', '=', 'incoming'), ('state', '=', 'assigned'), ('shipment_advice_id', '=', False), ('warehouse_id', '=', warehouse_id), ('picking_id.partner_id', '=', partner_id)] or [('picking_code', '=', 'incoming'), ('state', '=', 'assigned'), ('shipment_advice_id', '=', False), ('warehouse_id', '=', warehouse_id)]"
+                    />
+                </group>
+                <field name="move_to_split_ids" invisible="1">
+                  <tree field="move_to_split_ids">
+                    <field name="move_id" />
+                    <field name="quantity_to_split" />
+                  </tree>
+                </field>
+                <footer>
+                    <button
+                        name="action_plan_reception"
+                        type="object"
+                        string="Validate"
+                        class="btn-primary"
+                    />
+                    <button special="cancel" string="Cancel" class="btn-default" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

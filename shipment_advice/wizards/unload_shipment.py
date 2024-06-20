@@ -16,7 +16,7 @@ class WizardUnloadShipment(models.TransientModel):
     move_line_ids = fields.Many2many(
         comodel_name="stock.move.line", string="Products to unload"
     )
-    warning = fields.Char(readonly=True)
+    warning = fields.Char(string="Warning", readonly=True)
 
     @api.model
     def default_get(self, fields_list):
@@ -43,7 +43,7 @@ class WizardUnloadShipment(models.TransientModel):
                 o.state not in ["cancel", "done"]
                 and o.move_line_ids.shipment_advice_id
                 and all(
-                    state in ("in_progress", "error")
+                    state == "in_progress"
                     for state in o.move_line_ids.shipment_advice_id.mapped("state")
                 )
                 and o.picking_type_code == "outgoing"
@@ -71,7 +71,7 @@ class WizardUnloadShipment(models.TransientModel):
                 o.state not in ["cancel", "done"]
                 and o.shipment_advice_id
                 and all(
-                    state in ("in_progress", "error")
+                    state == "in_progress"
                     for state in o.shipment_advice_id.mapped("state")
                 )
                 and o.picking_code == "outgoing"

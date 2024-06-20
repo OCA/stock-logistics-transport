@@ -71,18 +71,19 @@
                 <filter
                     name="loaded_shipment_advice"
                     string="Loaded Shipment Advice"
-                    domain="[('move_line_ids.shipment_advice_id', '!=', False)]"
+                    domain="[('move_line_ids.shipment_advice_id', '=', self)]"
                 />
                 <filter
                     name="no_shipment_advice"
                     string="To plan in Shipment Advice"
-                    domain="[('move_ids.shipment_advice_id', '=', False), ('state', 'not in', ('cancel', 'done'))]"
+                    domain="['|', ('move_lines.shipment_advice_id', '=', False), ('move_line_ids.shipment_advice_id', '=', False)]"
                 />
             </group>
             <group position="inside">
                 <filter
                     name="planned_shipment_advice"
                     string="Planned Shipment Advice"
+                    domain="[]"
                     context="{'group_by': 'planned_shipment_advice_id'}"
                 />
             </group>
@@ -91,9 +92,9 @@
     <record id="stock_picking_limited_view_tree" model="ir.ui.view">
         <field name="name">stock.picking.limited.tree</field>
         <field name="model">stock.picking</field>
-        <field name="priority">1000</field>
+        <field name="priority" eval="100" />
         <field name="arch" type="xml">
-            <tree create="0">
+            <tree name="transfers" create="0">
                 <field name="name" />
                 <field name="partner_id" />
                 <field name="scheduled_date" />
@@ -108,6 +109,7 @@
         <field name="priority" eval="110" />
         <field name="arch" type="xml">
             <tree
+                name="transfers"
                 create="0"
                 decoration-success="is_fully_loaded_in_shipment"
                 decoration-warning="is_partially_loaded_in_shipment"
@@ -120,6 +122,7 @@
                 <field name="loaded_move_lines_progress" />
                 <field name="loaded_weight_progress" />
                 <field name="state" />
+                <field name="loaded_waiting_quantity" />
             </tree>
         </field>
     </record>

@@ -44,7 +44,7 @@
                         type="object"
                         string="Mark as done"
                         class="btn-primary"
-                        states="in_progress,error"
+                        states="in_progress"
                     />
                     <button
                         name="action_cancel"
@@ -66,13 +66,6 @@
                         statusbar_visible="draft,confirmed,in_progress,done"
                     />
                 </header>
-                <div
-                    class="alert alert-danger mb-0"
-                    role="alert"
-                    attrs="{'invisible': [('state', '!=', 'error')]}"
-                >
-                    <field name="error_message" />
-                    </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
@@ -146,6 +139,20 @@
                             />
                         </button>
                         <button
+                            name="button_open_to_load_move_lines"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-list"
+                            states="in_progress"
+                            attrs="{'invisible': ['|', ('shipment_type', '!=', 'outgoing')]}"
+                        >
+                            <field
+                                string="To load"
+                                name="lines_to_load_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
                             name="button_open_deliveries_in_progress"
                             type="object"
                             string="Loading Progress"
@@ -173,20 +180,13 @@
                                 groups="stock.group_stock_multi_warehouses"
                             />
                             <field
-                                name="warehouse_id"
-                                groups="!stock.group_stock_multi_warehouses"
-                                invisible="1"
-                            />
-                            <field
                                 name="company_id"
                                 groups="base.group_multi_company"
                             />
                             <field
-                                name="company_id"
-                                groups="!base.group_multi_company"
-                                invisible="1"
+                                name="shipment_type"
+                                attrs="{'readonly': [('name', '!=', '/')]}"
                             />
-                            <field name="shipment_type" />
                         </group>
                         <group name="info2">
                             <field
@@ -217,7 +217,7 @@
                                     <field name="picking_id" />
                                     <field name="product_id" />
                                     <field name="lot_id" />
-                                    <field name="reserved_uom_qty" />
+                                    <field name="product_uom_qty" />
                                     <field name="qty_done" />
                                     <field name="product_uom_id" />
                                     <field name="state" />
@@ -260,6 +260,7 @@
         <field name="model">shipment.advice</field>
         <field name="arch" type="xml">
             <tree
+                name="shipment-advices"
                 decoration-info="state == 'draft'"
                 decoration-muted="state == 'cancel'"
                 decoration-danger="state not in ('draft', 'cancel', 'done') and arrival_date &lt; current_date"
@@ -275,13 +276,7 @@
                     name="warehouse_id"
                     groups="stock.group_stock_multi_warehouses"
                 />
-                <!-- pylint: disable=duplicate-xml-fields -->
                 <field name="company_id" groups="base.group_multi_company" />
-                <field
-                    name="company_id"
-                    groups="!base.group_multi_company"
-                    invisible="1"
-                />
                 <field name="state" />
             </tree>
         </field>

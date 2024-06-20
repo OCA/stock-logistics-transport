@@ -4,23 +4,19 @@
 {
     "name": "Shipment Advice",
     "summary": "Manage your (un)loading process through shipment advices.",
-    "version": "16.0.1.4.1",
+    "version": "14.0.2.4.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "category": "Warehouse Management",
     "depends": [
         "stock",
         "delivery",
-        # OCA/queue
-        "queue_job",
         # OCA/stock-logistics-transport
         "stock_dock",
     ],
     "data": [
         "security/ir.model.access.csv",
         "data/ir_sequence.xml",
-        "data/queue_job_channel.xml",
-        "data/queue_job_function.xml",
         "views/res_config_settings.xml",
         "views/shipment_advice.xml",
         "views/stock_picking.xml",

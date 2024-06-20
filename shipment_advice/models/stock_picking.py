@@ -10,7 +10,7 @@ class StockPicking(models.Model):
 
     planned_shipment_advice_id = fields.Many2one(
         comodel_name="shipment.advice",
-        related="move_ids.shipment_advice_id",
+        related="move_lines.shipment_advice_id",
         store=True,
         index=True,
     )
@@ -60,7 +60,9 @@ class StockPicking(models.Model):
     loaded_move_lines_progress = fields.Char(
         "Bulk lines loaded/total", compute="_compute_shipment_loaded_progress"
     )
-    loaded_weight = fields.Integer(compute="_compute_shipment_loaded_progress")
+    loaded_weight = fields.Integer(
+        "Loaded weight", compute="_compute_shipment_loaded_progress"
+    )
     loaded_weight_progress = fields.Char(
         "Weight/total", compute="_compute_shipment_loaded_progress"
     )
@@ -68,14 +70,15 @@ class StockPicking(models.Model):
         "shipment.advice",
         compute="_compute_loaded_in_shipment",
     )
+    loaded_waiting_quantity = fields.Float(
+        "Waiting Quantity", compute="_compute_shipment_loaded_progress"
+    )
 
     @api.depends("move_line_ids.shipment_advice_id")
     def _compute_loaded_in_shipment(self):
         for picking in self:
-            # NOTE: Make overloading containers possible,
-            # otherwise overloaded container would be marked as partially loaded
             picking.is_fully_loaded_in_shipment = all(
-                line.shipment_advice_id and line.qty_done >= line.reserved_uom_qty
+                line.shipment_advice_id and line.qty_done == line.product_uom_qty
                 for line in picking.move_line_ids
             )
             picking.is_partially_loaded_in_shipment = (
@@ -138,13 +141,17 @@ class StockPicking(models.Model):
             if picking.shipping_weight:
                 # FIXME: not sure how to get the weight of bulk line?
                 picking.loaded_weight = sum(
-                    ml.result_package_id.shipping_weight or ml.move_id.weight
-                    for ml in picking.move_line_ids_without_package
-                    if ml.shipment_advice_id and ml.qty_done > 0
+                    [
+                        ml.result_package_id.shipping_weight or ml.move_id.weight
+                        for ml in picking.move_line_ids_without_package
+                        if ml.shipment_advice_id and ml.qty_done > 0
+                    ]
                 ) + sum(
-                    pl.package_id.shipping_weight
-                    for pl in picking.package_level_ids
-                    if pl.shipment_advice_id and pl.is_done
+                    [
+                        pl.package_id.shipping_weight
+                        for pl in picking.package_level_ids
+                        if pl.shipment_advice_id and pl.is_done
+                    ]
                 )
                 total_weight = float_round(
                     picking.shipping_weight,
@@ -153,6 +160,12 @@ class StockPicking(models.Model):
                 picking.loaded_weight_progress = (
                     f"{picking.loaded_weight} / {total_weight}"
                 )
+            waiting_moves = picking.move_lines.filtered(
+                lambda ml: ml.state not in ["done", "cancel"]
+            )
+            picking.loaded_waiting_quantity = sum(
+                waiting_moves.mapped("product_qty")
+            ) - sum(waiting_moves.mapped("reserved_availability"))
             # Overall progress based on the operation type
             if picking.picking_type_id.show_entire_packs:
                 picking.loaded_progress_f = picking.loaded_packages_progress_f
@@ -181,7 +194,7 @@ class StockPicking(models.Model):
 
     def _plan_in_shipment(self, shipment_advice):
         """Plan the whole transfers content into the given shipment advice."""
-        self.move_ids._plan_in_shipment(shipment_advice)
+        self.move_lines._plan_in_shipment(shipment_advice)
 
     def _load_in_shipment(self, shipment_advice):
         """Load the whole transfers content into the given shipment advice."""
