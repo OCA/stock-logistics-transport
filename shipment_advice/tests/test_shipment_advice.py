@@ -246,3 +246,41 @@ class TestShipmentAdvice(Common):
     def test_shipment_name(self):
         self.assertTrue("OUT" in self.shipment_advice_out.name)
         self.assertTrue("IN" in self.shipment_advice_in.name)
+
+    def test_auto_validate_shipment_advice(self):
+        # Creating two pickings with two move lines
+        picking1 = self._prepare_picking_with_two_packages()
+        picking2 = self._prepare_picking_with_two_packages()
+        picking1_line1, picking1_line2 = picking1.move_line_ids
+        picking2_line1, picking2_line2 = picking2.move_line_ids
+        move_ids = (picking1.move_line_ids + picking2.move_line_ids).move_id
+        package_levels = (
+            picking1.move_line_ids + picking2.move_line_ids
+        ).package_level_id
+        # Load packages from both pickings into shipment advice
+        self._in_progress_shipment_advice(self.shipment_advice_in)
+        self._load_records_in_shipment(self.shipment_advice_in, package_levels)
+        # Assign planned move_ids that are assigned to test function
+        self.shipment_advice_in.planned_move_ids = move_ids
+        self.assertEqual(picking1_line1.move_id.state, "assigned")
+        self.assertEqual(picking1_line2.move_id.state, "assigned")
+        self.assertEqual(picking2_line1.move_id.state, "assigned")
+        self.assertEqual(picking2_line2.move_id.state, "assigned")
+        self.assertEqual(self.shipment_advice_in.state, "in_progress")
+        # Setting autovalidate shipment advice company
+        self.shipment_advice_in.company_id.shipment_advice_auto_validate = True
+        # Assigning picking1
+        picking1.action_assign()
+        self.assertEqual(picking1.state, "assigned")
+        # Completing picking, advice should still be in progress because of second picking
+        picking1._action_done()
+        self.assertEqual(picking2.state, "assigned")
+        self.assertEqual(picking1.state, "done")
+        self.assertEqual(self.shipment_advice_in.state, "in_progress")
+        # Assigning picking2
+        picking2.action_assign()
+        self.assertEqual(picking2.state, "assigned")
+        # Completing picking2, advice should be done because all moves are done
+        picking2._action_done()
+        self.assertEqual(picking2.state, "done")
+        self.assertEqual(self.shipment_advice_in.state, "done")

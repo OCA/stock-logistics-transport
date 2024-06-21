@@ -432,9 +432,26 @@ class ShipmentAdvice(models.Model):
                     lambda m: m.state not in ("cancel", "done") and not m.quantity_done
                 )
                 moves_to_unplan.shipment_advice_id = False
-            shipment.departure_date = fields.Datetime.now()
-            shipment.state = "done"
+            shipment._action_done()
         return True
+
+    def _action_done(self):
+        self.ensure_one()
+        self.write({"departure_date": fields.Datetime.now(), "state": "done"})
+
+    def _is_fully_done(self):
+        self.ensure_one()
+        for move in self.planned_move_ids:
+            if move.state not in ["cancel", "done"]:
+                return False
+        return True
+
+    def validate_when_fully_done(self):
+        """set the shipment advice to done if all the planned_move_ids
+        are done or cancel"""
+        for shipment in self:
+            if shipment._is_fully_done():
+                shipment._action_done()
 
     def action_cancel(self):
         for shipment in self:

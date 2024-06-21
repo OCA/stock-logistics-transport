@@ -27,6 +27,17 @@
                         <field name="shipment_advice_outgoing_backorder_policy" />
                     </div>
                 </div>
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="shipment_advice_auto_validate" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="shipment_advice_auto_validate" />
+                        <div class="text-muted">
+                            Validates shipment advice automatically whenever stock move is done
+                        </div>
+                    </div>
+                </div>
             </xpath>
         </field>
     </record>

@@ -165,7 +165,7 @@ class Common(SavepointCase):
         return wiz
 
     def _load_records_in_shipment(self, shipment_advice, records, user=None):
-        """Load pickings, move lines or package levels in the givent shipment."""
+        """Load pickings, move lines or package levels in the given shipment."""
         wiz_model = self.env["wizard.load.shipment"].with_context(
             active_model=records._name,
             active_ids=records.ids,

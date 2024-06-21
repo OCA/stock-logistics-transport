@@ -23,3 +23,6 @@ class ResCompany(models.Model):
             "deliveries will be shipped by several trucks."
         ),
     )
+    shipment_advice_auto_validate = fields.Boolean(
+        string="Shipment Advice: Auto Validate"
+    )
