@@ -1,0 +1,3 @@
+- Santiago Rodriguez <srodriguez@opensourceintegrators.com>
+- Edgar Martinez <emartinez@opensourceintegrators.com>
+- Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
