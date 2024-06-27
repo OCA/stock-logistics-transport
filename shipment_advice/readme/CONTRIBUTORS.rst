@@ -6,6 +6,8 @@
 * Michael Tietz (MT Software) <mtietz@mt-software.de>
 * Jacques-Etienne Baudoux <je@bcim.be>
 
+  * Tuan Tran <anhtuan@trobz.com>
+  * Tri Doan <tridm@trobz.com>
 Design
 ~~~~~~
 
