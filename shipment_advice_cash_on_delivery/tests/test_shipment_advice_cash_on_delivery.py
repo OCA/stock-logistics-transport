@@ -4,6 +4,7 @@
 
 from odoo import Command
 
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
 from odoo.addons.queue_job.tests.common import trap_jobs
 from odoo.addons.shipment_advice.tests.common import Common
 
@@ -12,6 +13,7 @@ class TestShipmentAdviceCashOnDelivery(Common):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env["base"].with_context(**DISABLED_MAIL_CONTEXT).env
         cls.uom_kg = cls.env.ref("uom.product_uom_kgm")
         cls.product = cls.env["product.product"].create(
             {
