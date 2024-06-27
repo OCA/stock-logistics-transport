@@ -1,0 +1,27 @@
+<odoo noupdate="1">
+        <record id="expense_trip_fuel" model="product.product">
+            <field name="name">Toll</field>
+            <field name="description">Toll expenses for transportation trips</field>
+            <field name="standard_price">0.0</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="uom.product_uom_unit" />
+            <field name="uom_po_id" ref="uom.product_uom_unit" />
+            <field name="default_code">TOLL</field>
+            <field name="can_be_expensed" eval="True" />
+            <field name="sale_ok" eval="False" />
+            <field name="purchase_ok" eval="False" />
+        </record>
+
+        <record id="expense_trip_toll" model="product.product">
+            <field name="name">Fuel</field>
+            <field name="description">Fuel expenses for transportation trips</field>
+            <field name="standard_price">0.0</field>
+            <field name="type">service</field>
+            <field name="uom_id" ref="uom.product_uom_unit" />
+            <field name="uom_po_id" ref="uom.product_uom_unit" />
+            <field name="default_code">FUEL</field>
+            <field name="can_be_expensed" eval="True" />
+            <field name="sale_ok" eval="False" />
+            <field name="purchase_ok" eval="False" />
+        </record>
+</odoo>
