@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_stock_depot_form" model="ir.ui.view">
+        <field name="name">stock depot</field>
+        <field name="model">stock.depot</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <label for="name" class="oe_edit_only" />
+                    <h1>
+                        <field name="name" />
+                    </h1>
+                    <group>
+                        <field name="partner_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="stock_depot_view_tree" model="ir.ui.view">
+        <field name="name">stock.depot.tree</field>
+        <field name="model">stock.depot</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="partner_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="stock_depot_action" model="ir.actions.act_window">
+        <field name="name">Depots</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">stock.depot</field>
+        <field name="view_id" ref="stock_depot_view_tree" />
+    </record>
+    <menuitem
+        id="stock_depot_menu"
+        parent="stock.menu_warehouse_config"
+        action="stock_depot_action"
+    />
+</odoo>
