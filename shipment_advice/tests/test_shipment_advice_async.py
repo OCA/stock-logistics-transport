@@ -50,8 +50,8 @@ class TestShipmentAdvice(Common):
         transfers. Here the planned transfers have been fully received.
         """
         picking = self.move_product_in1.picking_id
-        self._plan_records_in_shipment(self.shipment_advice_in, picking)
-        self._in_progress_shipment_advice(self.shipment_advice_in)
+        self.plan_records_in_shipment(self.shipment_advice_in, picking)
+        self.progress_shipment_advice(self.shipment_advice_in)
         for ml in picking.move_line_ids:
             ml.qty_done = ml.reserved_uom_qty
         picking._action_done()
@@ -79,8 +79,8 @@ class TestShipmentAdvice(Common):
         """
         picking = self.move_product_in1.picking_id
         # Plan a move
-        self._plan_records_in_shipment(self.shipment_advice_in, self.move_product_in1)
-        self._in_progress_shipment_advice(self.shipment_advice_in)
+        self.plan_records_in_shipment(self.shipment_advice_in, self.move_product_in1)
+        self.progress_shipment_advice(self.shipment_advice_in)
         # Receive it (making its related transfer partially received)
         for ml in self.move_product_in1.move_line_ids:
             ml.qty_done = ml.reserved_uom_qty
@@ -107,8 +107,8 @@ class TestShipmentAdvice(Common):
         validate all fully loaded transfers.
         """
         pickings = self.move1.picking_id | self.move2.picking_id | self.move3.picking_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._load_records_in_shipment(self.shipment_advice_out, pickings)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, pickings)
         with trap_jobs() as trap:
             self.shipment_advice_out.action_done()
             trap.assert_jobs_count(5)  # 3 pickings + 1 for unplan + 1 for postprocess
@@ -135,8 +135,8 @@ class TestShipmentAdvice(Common):
         company.shipment_advice_outgoing_backorder_policy = "leave_open"
         # Load a transfer partially (here a package)
         package_level = self.move_product_out2.move_line_ids.package_level_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._load_records_in_shipment(self.shipment_advice_out, package_level)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, package_level)
         # Validate the shipment => the transfer is still open
         with trap_jobs() as trap:
             self.shipment_advice_out.action_done()
@@ -167,8 +167,8 @@ class TestShipmentAdvice(Common):
         company.shipment_advice_outgoing_backorder_policy = "create_backorder"
         # Load a transfer partially (here a package)
         package_level = self.move_product_out2.move_line_ids.package_level_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._load_records_in_shipment(self.shipment_advice_out, package_level)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, package_level)
         self.assertEqual(package_level.picking_id, self.move_product_out1.picking_id)
         # Validate the shipment => the transfer is validated, creating a backorder
         with trap_jobs() as trap:
@@ -202,8 +202,8 @@ class TestShipmentAdvice(Common):
             - the shipment advice moves to the "error" state
         """
         pickings = self.move1.picking_id | self.move2.picking_id | self.move3.picking_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._load_records_in_shipment(self.shipment_advice_out, pickings)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, pickings)
         # provoke validation error by setting internal package as destination
         pickings[0].move_line_ids.result_package_id = self.package
         with trap_jobs() as trap:
@@ -279,10 +279,10 @@ class TestShipmentAdvice(Common):
         # Load a transfer partially (here a package)
         package_level = self.move_product_out2.move_line_ids.package_level_id
         picking = package_level.picking_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._plan_records_in_shipment(self.shipment_advice_out, picking)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.plan_records_in_shipment(self.shipment_advice_out, picking)
         self.assertEqual(len(self.shipment_advice_out.planned_move_ids), 3)
-        self._load_records_in_shipment(self.shipment_advice_out, package_level)
+        self.load_records_in_shipment(self.shipment_advice_out, package_level)
         self.assertEqual(len(package_level.move_line_ids.move_id), 2)
         # Validate the shipment => the transfer is validated, creating a backorder
         with trap_jobs() as trap:
