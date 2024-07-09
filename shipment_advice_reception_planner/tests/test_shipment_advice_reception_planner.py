@@ -98,7 +98,7 @@ class TestShipmentAdviceReceptionPlanner(Common):
         self.assertEqual(new_split_move.state, "assigned")
 
         # Unplanning the previously planned move, should merge them back.
-        self._unplan_records_from_shipment(new_split_move)
+        self.unplan_records_from_shipment(new_split_move)
         move = self.picking.move_lines.filtered(
             lambda move: move.product_id == self.product1
         )

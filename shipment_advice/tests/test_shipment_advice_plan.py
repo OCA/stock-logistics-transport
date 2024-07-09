@@ -7,7 +7,7 @@ from .common import Common
 class TestShipmentAdvicePlan(Common):
     def test_shipment_advice_plan_picking(self):
         picking = self.move_product_out1.picking_id
-        wiz = self._plan_records_in_shipment(self.shipment_advice_out, picking)
+        wiz = self.plan_records_in_shipment(self.shipment_advice_out, picking)
         self.assertEqual(wiz.picking_ids, picking)
         self.assertFalse(wiz.move_ids)
         self.assertEqual(wiz.shipment_advice_id, self.shipment_advice_out)
@@ -18,7 +18,7 @@ class TestShipmentAdvicePlan(Common):
 
     def test_shipment_advice_plan_move(self):
         picking = self.move_product_out1.picking_id
-        wiz = self._plan_records_in_shipment(
+        wiz = self.plan_records_in_shipment(
             self.shipment_advice_out, self.move_product_out1
         )
         self.assertEqual(wiz.move_ids, self.move_product_out1)

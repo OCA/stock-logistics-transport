@@ -75,13 +75,13 @@ class TestShipmentAdviceStockUser(Common):
 
     def test_wizard_plan_and_load_shipment(self):
         move = self.move_product_out1
-        self._plan_records_in_shipment(
+        self.plan_records_in_shipment(
             self.shipment_advice_out,
             move,
             user=self.stock_user,
         )
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        wiz = self._load_records_in_shipment(
+        self.progress_shipment_advice(self.shipment_advice_out)
+        wiz = self.load_records_in_shipment(
             self.shipment_advice_out,
             move.move_line_ids,
             user=self.stock_user,

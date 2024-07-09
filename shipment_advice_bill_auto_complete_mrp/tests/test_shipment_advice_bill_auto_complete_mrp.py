@@ -37,8 +37,8 @@ class TestCosanumAccountInvoiceAutoCompleteMrp(Common):
 
     def test_select_shipment_with_one_supplier(self):
         """"""
-        self._plan_records_in_shipment(self.shipment, self.purchase.picking_ids)
-        self._in_progress_shipment_advice(self.shipment)
+        self.plan_records_in_shipment(self.shipment, self.purchase.picking_ids)
+        self.progress_shipment_advice(self.shipment)
         self._receive_goods(self.purchase.picking_ids)
         self.shipment.action_done()
         # Invoice the shipment
@@ -56,8 +56,8 @@ class TestCosanumAccountInvoiceAutoCompleteMrp(Common):
 
     def test_select_shipment_with_goods_partially_received(self):
         pickings = self.purchase.picking_ids
-        self._plan_records_in_shipment(self.shipment, pickings)
-        self._in_progress_shipment_advice(self.shipment)
+        self.plan_records_in_shipment(self.shipment, pickings)
+        self.progress_shipment_advice(self.shipment)
         # Partially receive the goods
         for line in pickings.move_line_ids:
             line.qty_done = line.product_uom_qty - 1

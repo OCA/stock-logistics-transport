@@ -7,9 +7,9 @@ from .common import Common
 
 class TestShipmentAdviceToLoad(Common):
     def test_shipment_advice_not_planned_lines_to_load(self):
-        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self.progress_shipment_advice(self.shipment_advice_out)
         # Load a transfer partially
-        self._load_records_in_shipment(
+        self.load_records_in_shipment(
             self.shipment_advice_out, self.move_product_out1.move_line_ids
         )
         self.assertEqual(
@@ -24,17 +24,17 @@ class TestShipmentAdviceToLoad(Common):
         self.assertEqual(self.shipment_advice_out.line_to_load_ids, lines_to_load)
 
     def test_shipment_advice_planned_lines_to_load(self):
-        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self.progress_shipment_advice(self.shipment_advice_out)
         # Plan a transfer in the shipment advice
         picking = self.move_product_out2.picking_id
-        self._plan_records_in_shipment(self.shipment_advice_out, picking)
+        self.plan_records_in_shipment(self.shipment_advice_out, picking)
         # Check the lines computed by the shipment advice that could be loaded
         # (= all the lines of the planned transfer)
         lines_to_load = picking.move_line_ids
         self.assertFalse(lines_to_load.shipment_advice_id)
         self.assertEqual(self.shipment_advice_out.line_to_load_ids, lines_to_load)
         # Load some goods from the planned transfer
-        self._load_records_in_shipment(
+        self.load_records_in_shipment(
             self.shipment_advice_out, self.move_product_out1.move_line_ids
         )
         self.assertEqual(

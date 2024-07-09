@@ -48,7 +48,7 @@ class TestShipmentAdvice(Common):
         self.assertEqual(self.shipment_advice_out.state, "confirmed")
 
     def test_shipment_advice_in_progress(self):
-        self._confirm_shipment_advice(self.shipment_advice_out)
+        self.confirm_shipment_advice(self.shipment_advice_out)
         with self.assertRaises(UserError):
             self.shipment_advice_out.action_in_progress()
         self.shipment_advice_out.dock_id = self.dock
@@ -60,8 +60,8 @@ class TestShipmentAdvice(Common):
         transfers. Here the planned transfers have been fully received.
         """
         picking = self.move_product_in1.picking_id
-        self._plan_records_in_shipment(self.shipment_advice_in, picking)
-        self._in_progress_shipment_advice(self.shipment_advice_in)
+        self.plan_records_in_shipment(self.shipment_advice_in, picking)
+        self.progress_shipment_advice(self.shipment_advice_in)
         for ml in picking.move_line_ids:
             ml.qty_done = ml.product_uom_qty
         picking._action_done()
@@ -81,8 +81,8 @@ class TestShipmentAdvice(Common):
         """
         picking = self.move_product_in1.picking_id
         # Plan a move
-        self._plan_records_in_shipment(self.shipment_advice_in, self.move_product_in1)
-        self._in_progress_shipment_advice(self.shipment_advice_in)
+        self.plan_records_in_shipment(self.shipment_advice_in, self.move_product_in1)
+        self.progress_shipment_advice(self.shipment_advice_in)
         # Receive it (making its related transfer partially received)
         for ml in self.move_product_in1.move_line_ids:
             ml.qty_done = ml.product_uom_qty
@@ -103,8 +103,8 @@ class TestShipmentAdvice(Common):
         to only one in progress shipment.
         """
         picking = self.move_product_out1.picking_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._load_records_in_shipment(self.shipment_advice_out, picking)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, picking)
         self.shipment_advice_out.action_done()
         self.assertEqual(self.shipment_advice_out.state, "done")
         self.assertTrue(
@@ -124,8 +124,8 @@ class TestShipmentAdvice(Common):
         company.shipment_advice_outgoing_backorder_policy = "leave_open"
         # Load a transfer partially (here a package)
         package_level = self.move_product_out2.move_line_ids.package_level_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._load_records_in_shipment(self.shipment_advice_out, package_level)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, package_level)
         # Validate the shipment => the transfer is still open
         self.shipment_advice_out.action_done()
         picking = package_level.picking_id
@@ -160,16 +160,16 @@ class TestShipmentAdvice(Common):
         line1, line2 = picking.move_line_ids
         # Load first package in the first shipment advice
         pl1 = line1.package_level_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._load_records_in_shipment(self.shipment_advice_out, pl1)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, pl1)
         # Validate the first shipment advice: delivery order hasn't been validated
         self.shipment_advice_out.action_done()
         self.assertEqual(self.shipment_advice_out.state, "done")
         self.assertEqual(picking.state, "assigned")
         # Load second package in the second shipment advice
         pl2 = line2.package_level_id
-        self._in_progress_shipment_advice(shipment_advice_out2)
-        self._load_records_in_shipment(shipment_advice_out2, pl2)
+        self.progress_shipment_advice(shipment_advice_out2)
+        self.load_records_in_shipment(shipment_advice_out2, pl2)
         # Validate the second shipment advice: delivery order has now been validated
         shipment_advice_out2.action_done()
         self.assertEqual(shipment_advice_out2.state, "done")
@@ -184,8 +184,8 @@ class TestShipmentAdvice(Common):
         company.shipment_advice_outgoing_backorder_policy = "create_backorder"
         # Load a transfer partially (here a package)
         package_level = self.move_product_out2.move_line_ids.package_level_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._load_records_in_shipment(self.shipment_advice_out, package_level)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, package_level)
         self.assertEqual(package_level.picking_id, self.move_product_out1.picking_id)
         # Validate the shipment => the transfer is validated, creating a backorder
         self.shipment_advice_out.action_done()
@@ -219,11 +219,11 @@ class TestShipmentAdvice(Common):
         line1, line2 = picking.move_line_ids
         # Load packages in different shipment advices
         pl1 = line1.package_level_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        self._load_records_in_shipment(self.shipment_advice_out, pl1)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, pl1)
         pl2 = line2.package_level_id
-        self._in_progress_shipment_advice(shipment_advice_out2)
-        self._load_records_in_shipment(shipment_advice_out2, pl2)
+        self.progress_shipment_advice(shipment_advice_out2)
+        self.load_records_in_shipment(shipment_advice_out2, pl2)
         # Validate the first shipment advice: delivery order hasn't been validated
         self.shipment_advice_out.action_done()
         self.assertEqual(self.shipment_advice_out.state, "done")
@@ -234,12 +234,12 @@ class TestShipmentAdvice(Common):
         self.assertEqual(picking.state, "done")
 
     def test_shipment_advice_cancel(self):
-        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self.progress_shipment_advice(self.shipment_advice_out)
         self.shipment_advice_out.action_cancel()
         self.assertEqual(self.shipment_advice_out.state, "cancel")
 
     def test_shipment_advice_draft(self):
-        self._cancel_shipment_advice(self.shipment_advice_out)
+        self.cancel_shipment_advice(self.shipment_advice_out)
         self.shipment_advice_out.action_draft()
         self.assertEqual(self.shipment_advice_out.state, "draft")
 
