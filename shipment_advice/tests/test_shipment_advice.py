@@ -266,3 +266,17 @@ class TestShipmentAdvice(Common):
             [("backorder_id", "=", picking.id)]
         )
         self.assertFalse(backorder_picking.move_lines.shipment_advice_id)
+
+    def test_move_split_propagation(self):
+        """Check the use of conext key to propagate the shipment id on move split."""
+        move = self.move_product_in1
+        self._plan_records_in_shipment(self.shipment_advice_in, move)
+        self.assertTrue(move.shipment_advice_id)
+        # Without the context key the shipment advice id is not copied
+        vals = move._prepare_move_split_vals(1)
+        self.assertTrue("shipemnt_advice_id" not in vals.keys())
+        # But it is with the context key
+        vals = move.with_context(
+            shipment_advice__propagate_on_split=True
+        )._prepare_move_split_vals(1)
+        self.assertTrue("shipment_advice_id" in vals.keys())
