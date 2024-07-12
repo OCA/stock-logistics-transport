@@ -1,4 +1,5 @@
 # Copyright 2021 Camptocamp SA
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import _, api, fields, models
@@ -313,6 +314,7 @@ class ShipmentAdvice(models.Model):
 
     def action_done(self):
         self._check_action_done_allowed()
+        self = self.with_context(shipment_advice_ignore_auto_close=True)
         for shipment in self:
             shipment._action_done()
         return True
@@ -416,8 +418,12 @@ class ShipmentAdvice(models.Model):
                 }
             )
             return
-        if not self.departure_date:
-            self.departure_date = fields.Datetime.now()
+        self._close_shipments()
+
+    def _close_shipments(self):
+        for shipment in self:
+            if not shipment.departure_date:
+                shipment.departure_date = fields.Datetime.now()
         self.write({"state": "done", "error_message": False})
 
     @api.model
@@ -427,6 +433,25 @@ class ShipmentAdvice(models.Model):
             related_object_name=related_object.display_name,
             error=str(error),
         )
+
+    def auto_close_incoming_shipment_advices(self):
+        """Set incoming shipment advice to done when all planned moves are processed"""
+        if self.env.context.get("shipment_advice_ignore_auto_close"):
+            return
+        shipment_ids_to_close = []
+        for shipment in self:
+            if (
+                shipment.shipment_type != "incoming"
+                or not shipment.company_id.shipment_advice_auto_close_incoming
+                or any(
+                    move.state not in ("cancel", "done")
+                    for move in shipment.planned_move_ids
+                )
+            ):
+                continue
+            shipment_ids_to_close.append(shipment.id)
+        if shipment_ids_to_close:
+            self.browse(shipment_ids_to_close)._close_shipments()
 
     def action_cancel(self):
         for shipment in self:

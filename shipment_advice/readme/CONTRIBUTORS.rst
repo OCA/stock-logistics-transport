@@ -3,6 +3,7 @@
 * Simone Orsi <simahawk@gmail.com>
 * `Trobz <https://trobz.com>`_:
   * Dung Tran <dungtd@trobz.com>
+* Michael Tietz (MT Software) <mtietz@mt-software.de>
 
 Design
 ~~~~~~
