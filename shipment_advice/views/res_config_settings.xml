@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2021 Camptocamp SA
+     Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record id="res_config_settings_view_form" model="ir.ui.view">
@@ -41,6 +42,23 @@
                             To prevent timeouts for large shipments, enable this option to execute
                             shipment advice validation through a queued job. Each picking will be
                             validated in a separate jobs.
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="shipment_advice_auto_close_incoming"
+                    title="shipment_advice_auto_close_incoming"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="shipment_advice_auto_close_incoming" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="shipment_advice_auto_close_incoming" />
+                        <div class="text-muted">
+                            This flag indicates if an incoming shipment advice
+                            will be automatically set to done
+                            if all related moves are done or canceled
                         </div>
                     </div>
                 </div>
