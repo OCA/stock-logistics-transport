@@ -1,8 +1,9 @@
 # Copyright 2021 Camptocamp SA
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import fields
-from odoo.tests.common import SavepointCase, new_test_user
+from odoo.tests.common import Form, SavepointCase, new_test_user
 
 
 class Common(SavepointCase):
@@ -118,32 +119,33 @@ class Common(SavepointCase):
         move.picking_id.action_assign()
         return move
 
-    def _confirm_shipment_advice(self, shipment_advice, arrival_date=None):
+    @classmethod
+    def confirm_shipment_advice(cls, shipment_advice, arrival_date=None):
         if shipment_advice.state != "draft":
             return
         if arrival_date is None:
             arrival_date = fields.Datetime.now()
         shipment_advice.arrival_date = arrival_date
         shipment_advice.action_confirm()
-        self.assertEqual(shipment_advice.state, "confirmed")
 
-    def _in_progress_shipment_advice(self, shipment_advice, dock=None):
-        self._confirm_shipment_advice(shipment_advice)
+    @classmethod
+    def progress_shipment_advice(cls, shipment_advice, dock=None):
+        cls.confirm_shipment_advice(shipment_advice)
         if shipment_advice.state != "confirmed":
             return
-        shipment_advice.dock_id = dock or self.dock
+        shipment_advice.dock_id = dock or cls.dock
         shipment_advice.action_in_progress()
-        self.assertEqual(shipment_advice.state, "in_progress")
 
-    def _cancel_shipment_advice(self, shipment_advice, dock=None):
-        self._confirm_shipment_advice(shipment_advice)
+    @classmethod
+    def cancel_shipment_advice(cls, shipment_advice, dock=None):
+        cls.confirm_shipment_advice(shipment_advice)
         if shipment_advice.state != "confirmed":
             return
         shipment_advice.action_cancel()
-        self.assertEqual(shipment_advice.state, "cancel")
 
-    def _plan_records_in_shipment(self, shipment_advice, records, user=None):
-        wiz_model = self.env["wizard.plan.shipment"].with_context(
+    @classmethod
+    def plan_records_in_shipment(cls, shipment_advice, records, user=None):
+        wiz_model = cls.env["wizard.plan.shipment"].with_context(
             active_model=records._name,
             active_ids=records.ids,
         )
@@ -153,8 +155,9 @@ class Common(SavepointCase):
         wiz.action_plan()
         return wiz
 
-    def _unplan_records_from_shipment(self, records, user=None):
-        wiz_model = self.env["wizard.unplan.shipment"].with_context(
+    @classmethod
+    def unplan_records_from_shipment(cls, records, user=None):
+        wiz_model = cls.env["wizard.unplan.shipment"].with_context(
             active_model=records._name,
             active_ids=records.ids,
         )
@@ -164,9 +167,10 @@ class Common(SavepointCase):
         wiz.action_unplan()
         return wiz
 
-    def _load_records_in_shipment(self, shipment_advice, records, user=None):
+    @classmethod
+    def load_records_in_shipment(cls, shipment_advice, records, user=None):
         """Load pickings, move lines or package levels in the givent shipment."""
-        wiz_model = self.env["wizard.load.shipment"].with_context(
+        wiz_model = cls.env["wizard.load.shipment"].with_context(
             active_model=records._name,
             active_ids=records.ids,
         )
@@ -176,12 +180,27 @@ class Common(SavepointCase):
         wiz.action_load()
         return wiz
 
-    def _unload_records_from_shipment(self, shipment_advice, records):
+    @classmethod
+    def unload_records_from_shipment(cls, shipment_advice, records):
         """Unload pickings, move lines or package levels from the givent shipment."""
-        wiz_model = self.env["wizard.unload.shipment"].with_context(
+        wiz_model = cls.env["wizard.unload.shipment"].with_context(
             active_model=records._name,
             active_ids=records.ids,
         )
         wiz = wiz_model.create({})
         wiz.action_unload()
         return wiz
+
+    @classmethod
+    def validate_picking(cls, picking, qty_done=None):
+        picking.ensure_one()
+        for ml in picking.move_line_ids:
+            ml.qty_done = qty_done or ml.product_uom_qty
+        action_data = picking.button_validate()
+        if action_data is True:
+            return cls.env["stock.picking"]
+        backorder_wizard = Form(
+            cls.env["stock.backorder.confirmation"].with_context(action_data["context"])
+        ).save()
+        backorder_wizard.process()
+        return cls.env["stock.picking"].search([("backorder_id", "=", picking.id)])

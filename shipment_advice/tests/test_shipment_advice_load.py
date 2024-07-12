@@ -8,7 +8,7 @@ from .common import Common
 
 class TestShipmentAdviceLoad(Common):
     def test_shipment_advice_load_picking_not_planned(self):
-        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self.progress_shipment_advice(self.shipment_advice_out)
         picking = self.move_product_out1.picking_id
         wiz_model = self.env["wizard.load.shipment"].with_context(
             active_model=picking._name,
@@ -42,9 +42,9 @@ class TestShipmentAdviceLoad(Common):
 
     def test_shipment_advice_load_picking_already_planned(self):
         picking = self.move_product_out1.picking_id
-        self._plan_records_in_shipment(self.shipment_advice_out, picking)
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        wiz = self._load_records_in_shipment(self.shipment_advice_out, picking)
+        self.plan_records_in_shipment(self.shipment_advice_out, picking)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        wiz = self.load_records_in_shipment(self.shipment_advice_out, picking)
         self.assertEqual(wiz.picking_ids, picking)
         self.assertFalse(wiz.move_line_ids)
         # Check planned entries
@@ -73,7 +73,7 @@ class TestShipmentAdviceLoad(Common):
         self.assertEqual(wiz.shipment_advice_id.loaded_package_ids, self.package)
 
     def test_shipment_advice_load_move_line_not_planned(self):
-        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self.progress_shipment_advice(self.shipment_advice_out)
         move = self.move_product_out1
         wiz_model = self.env["wizard.load.shipment"].with_context(
             active_model=move.move_line_ids._name,
@@ -101,9 +101,9 @@ class TestShipmentAdviceLoad(Common):
 
     def test_shipment_advice_load_move_line_already_planned(self):
         move = self.move_product_out1
-        self._plan_records_in_shipment(self.shipment_advice_out, move)
-        self._in_progress_shipment_advice(self.shipment_advice_out)
-        wiz = self._load_records_in_shipment(
+        self.plan_records_in_shipment(self.shipment_advice_out, move)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        wiz = self.load_records_in_shipment(
             self.shipment_advice_out, move.move_line_ids
         )
         self.assertEqual(wiz.move_line_ids, move.move_line_ids)
@@ -127,12 +127,12 @@ class TestShipmentAdviceLoad(Common):
     def test_shipment_advice_already_planned_load_move_line_not_planned(self):
         # Plan the first move
         move1 = self.move_product_out1
-        self._plan_records_in_shipment(self.shipment_advice_out, move1)
+        self.plan_records_in_shipment(self.shipment_advice_out, move1)
         # But load something else => error
         package_level = self.move_product_out2.move_line_ids.package_level_id
-        self._in_progress_shipment_advice(self.shipment_advice_out)
+        self.progress_shipment_advice(self.shipment_advice_out)
         with self.assertRaisesRegex(UserError, "planned already"):
-            self._load_records_in_shipment(
+            self.load_records_in_shipment(
                 self.shipment_advice_out,
                 package_level,
             )

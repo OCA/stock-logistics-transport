@@ -1,4 +1,5 @@
 # Copyright 2021 Camptocamp SA
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import _, api, fields, models
@@ -379,8 +380,44 @@ class ShipmentAdvice(models.Model):
         sql = "SELECT id FROM %s WHERE ID IN %%s FOR UPDATE" % records._table
         self.env.cr.execute(sql, (tuple(records.ids),), log_exceptions=False)
 
-    def action_done(self):
+    def _close_pickings(self):
+        """Validate transfers (create backorders for unprocessed lines)"""
+        self.ensure_one()
         wiz_model = self.env["stock.backorder.confirmation"]
+        pickings = self.env["stock.picking"]
+        create_backorder = True
+        if self.shipment_type == "incoming":
+            self._lock_records(self.planned_picking_ids)
+            pickings = self.planned_picking_ids
+        else:
+            self._lock_records(self.loaded_picking_ids)
+            pickings = self.to_validate_picking_ids
+            create_backorder = (
+                self.company_id.shipment_advice_outgoing_backorder_policy
+                == "create_backorder"
+            )
+        for picking in pickings:
+            if picking.state in ("cancel", "done"):
+                continue
+            if picking._check_backorder():
+                if not create_backorder:
+                    continue
+                wiz = wiz_model.create({})
+                wiz.pick_ids = picking
+                wiz.with_context(button_validate_picking_ids=picking.ids).process()
+            else:
+                picking._action_done()
+
+    def _unplan_loaded_moves(self):
+        """Unplan moves that were not loaded and validated"""
+        moves_to_unplan = self.loaded_move_line_ids.move_id.filtered(
+            lambda m: m.state not in ("cancel", "done") and not m.quantity_done
+        )
+        moves_to_unplan.shipment_advice_id = False
+
+    def action_done(self):
+        shipment_advice_ids_to_validate = []
+        self = self.with_context(shipment_advice_ignore_auto_close=True)
         for shipment in self:
             if shipment.state != "in_progress":
                 raise UserError(
@@ -388,53 +425,35 @@ class ShipmentAdvice(models.Model):
                         shipment.name
                     )
                 )
-            # Validate transfers (create backorders for unprocessed lines)
-            if shipment.shipment_type == "incoming":
-                self._lock_records(self.planned_picking_ids)
-                for picking in self.planned_picking_ids:
-                    if picking.state in ("cancel", "done"):
-                        continue
-                    if picking._check_backorder():
-                        wiz = wiz_model.create({})
-                        wiz.pick_ids = picking
-                        wiz.with_context(
-                            button_validate_picking_ids=picking.ids
-                        ).process()
-                    else:
-                        picking._action_done()
-            else:
-                backorder_policy = (
-                    shipment.company_id.shipment_advice_outgoing_backorder_policy
-                )
-                self._lock_records(self.loaded_picking_ids)
-                if backorder_policy == "create_backorder":
-                    for picking in self.to_validate_picking_ids:
-                        if picking.state in ("cancel", "done"):
-                            continue
-                        if picking._check_backorder():
-                            wiz = wiz_model.create({})
-                            wiz.pick_ids = picking
-                            wiz.with_context(
-                                button_validate_picking_ids=picking.ids
-                            ).process()
-                        else:
-                            picking._action_done()
-                else:
-                    for picking in self.to_validate_picking_ids:
-                        if picking.state in ("cancel", "done"):
-                            continue
-                        if not picking._check_backorder():
-                            # no backorder needed means that all qty_done are
-                            # set to fullfill the need => validate
-                            picking._action_done()
-                # Unplan moves that were not loaded and validated
-                moves_to_unplan = self.loaded_move_line_ids.move_id.filtered(
-                    lambda m: m.state not in ("cancel", "done") and not m.quantity_done
-                )
-                moves_to_unplan.shipment_advice_id = False
-            shipment.departure_date = fields.Datetime.now()
-            shipment.state = "done"
+            shipment._close_pickings()
+            if shipment.shipment_type == "outgoing":
+                shipment._unplan_loaded_moves()
+            shipment_advice_ids_to_validate.append(shipment.id)
+        if shipment_advice_ids_to_validate:
+            self.browse(shipment_advice_ids_to_validate)._action_done()
         return True
+
+    def _action_done(self):
+        self.write({"departure_date": fields.Datetime.now(), "state": "done"})
+
+    def auto_close_incoming_shipment_advices(self):
+        """Set incoming shipment advice to done when all planned moves are processed"""
+        if self.env.context.get("shipment_advice_ignore_auto_close"):
+            return
+        shipment_ids_to_close = []
+        for shipment in self:
+            if (
+                shipment.shipment_type != "incoming"
+                or not shipment.company_id.shipment_advice_auto_close_incoming
+                or any(
+                    move.state not in ("cancel", "done")
+                    for move in shipment.planned_move_ids
+                )
+            ):
+                continue
+            shipment_ids_to_close.append(shipment.id)
+        if shipment_ids_to_close:
+            self.browse(shipment_ids_to_close)._action_done()
 
     def action_cancel(self):
         for shipment in self:
