@@ -4,7 +4,7 @@
 {
     "name": "Shipment Advice Bill Auto Complete MRP",
     "summary": "Glue module between Shipment Advice Bill Auto Complete and MRP",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.1.0",
     "category": "Invoicing Management",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "maintainers": ["TDu"],

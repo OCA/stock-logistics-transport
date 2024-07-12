@@ -4,7 +4,7 @@
 {
     "name": "Shipment Advice Reception Planner",
     "summary": "Plan your reception into shipment advices.",
-    "version": "14.0.0.1.0",
+    "version": "14.0.0.2.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "category": "Warehouse Management",
