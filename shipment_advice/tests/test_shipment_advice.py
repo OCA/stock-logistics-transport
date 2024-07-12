@@ -246,3 +246,37 @@ class TestShipmentAdvice(Common):
     def test_shipment_name(self):
         self.assertTrue("OUT" in self.shipment_advice_out.name)
         self.assertTrue("IN" in self.shipment_advice_in.name)
+
+    def test_shipment_advice_receive_partial_move_backorder(self):
+        picking = self.move_product_in1.picking_id
+        # Plan a move
+        self._plan_records_in_shipment(self.shipment_advice_in, self.move_product_in1)
+        self._in_progress_shipment_advice(self.shipment_advice_in)
+        # Partially receive the move and create a backorder
+        for ml in self.move_product_in1.move_line_ids:
+            ml.qty_done = ml.product_uom_qty - 2
+        wizard = (
+            self.env["stock.backorder.confirmation"]
+            .with_context(button_validate_picking_ids=picking.ids)
+            .create({"pick_ids": [(6, 0, picking.ids)]})
+        )
+        wizard.process()
+        # New move created should not be included in the processing shipment
+        backorder_picking = self.env["stock.picking"].search(
+            [("backorder_id", "=", picking.id)]
+        )
+        self.assertFalse(backorder_picking.move_lines.shipment_advice_id)
+
+    def test_move_split_propagation(self):
+        """Check the use of conext key to propagate the shipment id on move split."""
+        move = self.move_product_in1
+        self._plan_records_in_shipment(self.shipment_advice_in, move)
+        self.assertTrue(move.shipment_advice_id)
+        # Without the context key the shipment advice id is not copied
+        vals = move._prepare_move_split_vals(1)
+        self.assertTrue("shipemnt_advice_id" not in vals.keys())
+        # But it is with the context key
+        vals = move.with_context(
+            shipment_advice__propagate_on_split=True
+        )._prepare_move_split_vals(1)
+        self.assertTrue("shipment_advice_id" in vals.keys())
