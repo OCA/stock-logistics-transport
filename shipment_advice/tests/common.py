@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import fields
-from odoo.tests.common import SavepointCase, new_test_user
+from odoo.tests.common import Form, SavepointCase, new_test_user
 
 
 class Common(SavepointCase):
@@ -190,3 +190,17 @@ class Common(SavepointCase):
         wiz = wiz_model.create({})
         wiz.action_unload()
         return wiz
+
+    @classmethod
+    def validate_picking(cls, picking, qty_done=None):
+        picking.ensure_one()
+        for ml in picking.move_line_ids:
+            ml.qty_done = qty_done or ml.product_uom_qty
+        action_data = picking.button_validate()
+        if action_data is True:
+            return cls.env["stock.picking"]
+        backorder_wizard = Form(
+            cls.env["stock.backorder.confirmation"].with_context(action_data["context"])
+        ).save()
+        backorder_wizard.process()
+        return cls.env["stock.picking"].search([("backorder_id", "=", picking.id)])
