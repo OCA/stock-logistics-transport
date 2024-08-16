@@ -7,8 +7,8 @@
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
                 <app
-                    data-string="Transport Management System"
-                    string="Transport Management System"
+                    data-string="Transport"
+                    string="Transport"
                     name="tms"
                     groups="tms.group_tms_admin"
                 >
@@ -85,7 +85,7 @@
                             </div>
                         </setting>
                         <setting
-                            string="Manage Depreciation"
+                            string="Manage depreciations"
                             help="Manage vehicles as accounting assets"
                         >
                          <field name="module_tms_account_asset" />
@@ -126,7 +126,7 @@
                     </block>
                     <block title="Trips" name="trips_settings_container">
                         <setting
-                            string="Routes"
+                            string="Manage pre-defined routes"
                             help="Allow the use of predefined routes in trips"
                         >
                             <field name="group_tms_route" />
@@ -139,13 +139,13 @@
                             <field name="group_tms_route_stop" />
                         </setting>
                         <setting
-                            string="Invoice your TMS Orders"
+                            string="Invoice your trips"
                             help="Create vendor bills and customer invoices when completing TMS orders."
                         >
                             <field name="module_tms_account" />
                         </setting>
                         <setting
-                            string="Sale Trips"
+                            string="Sell trips or tickets"
                             help="Create Trip Orders with Sale Orders"
                         >
                             <field name="module_tms_sale" />

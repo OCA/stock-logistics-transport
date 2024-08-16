@@ -21,7 +21,6 @@
         <field name="fold">True</field>
         <field name="stage_type">order</field>
         <field name="is_default">True</field>
-        <field name="is_completed">True</field>
         <field name="custom_color">#1C2833</field>
     </record>
     <record id="tms_stage_order_cancelled" model="tms.stage">
