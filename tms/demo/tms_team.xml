@@ -1,0 +1,24 @@
+<odoo noupdate="1">
+
+    <record id="demo_team_1" model="tms.team">
+        <field name="name">Team Mexico</field>
+        <field
+            name="vehicle_ids"
+            eval="[(6, 0, [ref('fleet.vehicle_1'), ref('fleet.vehicle_2'), ref('fleet.vehicle_4')])]"
+        />
+        <field
+            name="driver_ids"
+            eval="[(6, 0, [ref('demo_driver_1'), ref('demo_driver_2'), ref('demo_driver_3'), ref('demo_driver_6')])]"
+        />
+    </record>
+
+    <record id="demo_team_2" model="tms.team">
+        <field name="name">Team USA</field>
+        <field name="vehicle_ids" eval="[(6, 0, [ref('fleet.vehicle_3')])]" />
+        <field
+            name="driver_ids"
+            eval="[(6, 0, [ref('demo_driver_4'), ref('demo_driver_5'), ref('demo_driver_7')])]"
+        />
+    </record>
+
+</odoo>

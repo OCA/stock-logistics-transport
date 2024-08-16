@@ -1,0 +1,9 @@
+<odoo>
+        <!-- Add the Transport Admin group to the Fleet menu -->
+        <record id="fleet.menu_root" model="ir.ui.menu">
+            <field
+            name="groups_id"
+            eval="[(4, ref('tms.group_tms_admin')), (3, ref('fleet.fleet_group_user'))]"
+        />
+        </record>
+</odoo>
