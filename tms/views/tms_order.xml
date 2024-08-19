@@ -434,7 +434,7 @@
     <record id="action_tms_order_kanban" model="ir.actions.act_window">
         <field name="name">Trips Kanban</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">kanban,form</field>
+        <field name="view_mode">kanban,tree,form</field>
         <field name="domain">[('tms_team_id', '=', active_id)]</field>
     </record>
 
