@@ -43,13 +43,13 @@ class TestTMSTeam(TransactionCase):
         )
 
         self.driver = self.env["res.partner"].create(
-            {"name": "Test Driver", "tms_type": "driver", "team_id": False}
+            {"name": "Test Driver", "tms_type": "driver", "tms_team_id": False}
         )
 
         self.order = self.env["tms.order"].create(
             {
                 "name": "Test Order",
-                "team_id": False,
+                "tms_team_id": False,
                 "stage_id": self.stage1.id,
             }
         )

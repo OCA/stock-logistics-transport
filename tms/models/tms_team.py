@@ -14,23 +14,29 @@ class TMSTeam(models.Model):
     def _compute_order_count(self):
         order_data = self.env["tms.order"].read_group(
             [
-                ("team_id", "in", self.ids),
+                ("tms_team_id", "in", self.ids),
                 ("stage_id.is_completed", "!=", True),
             ],
-            ["team_id"],
-            ["team_id"],
+            ["tms_team_id"],
+            ["tms_team_id"],
         )
-        result = {data["team_id"][0]: int(data["team_id_count"]) for data in order_data}
+        result = {
+            data["tms_team_id"][0]: int(data["tms_team_id_count"])
+            for data in order_data
+        }
         for team in self:
             team.order_count = result.get(team.id, 0)
 
     def _compute_driver_count(self):
         order_data = self.env["res.partner"].read_group(
-            [("team_id", "in", self.ids)],
-            ["team_id"],
-            ["team_id"],
+            [("tms_team_id", "in", self.ids)],
+            ["tms_team_id"],
+            ["tms_team_id"],
         )
-        result = {data["team_id"][0]: int(data["team_id_count"]) for data in order_data}
+        result = {
+            data["tms_team_id"][0]: int(data["tms_team_id_count"])
+            for data in order_data
+        }
         for team in self:
             team.driver_count = result.get(team.id, 0)
 
@@ -45,28 +51,28 @@ class TMSTeam(models.Model):
     stage_ids = fields.Many2many(
         "tms.stage",
         "tms_order_team_stage_rel",
-        "team_id",
+        "tms_team_id",
         "stage_id",
         string="Stages",
         default=_default_stages,
     )
     order_ids = fields.One2many(
         "tms.order",
-        "team_id",
+        "tms_team_id",
         string="Orders",
         domain=[("stage_id.is_completed", "!=", True)],
     )
     order_count = fields.Integer(compute="_compute_order_count", string="Orders Count")
     sequence = fields.Integer(default=1, help="Used to sort teams. Lower is better.")
 
-    vehicle_ids = fields.One2many("fleet.vehicle", "team_id")
+    vehicle_ids = fields.One2many("fleet.vehicle", "tms_team_id")
     vehicle_count = fields.Integer(
         compute="_compute_vehicle_count", string="Vehicles Count"
     )
 
     driver_ids = fields.One2many(
         "res.partner",
-        "team_id",
+        "tms_team_id",
         domain=[("tms_type", "=", "driver")],
         context={"default_tms_type": "driver"},
     )
@@ -74,7 +80,7 @@ class TMSTeam(models.Model):
         compute="_compute_driver_count", string="Drivers Count"
     )
 
-    crew_ids = fields.One2many("tms.crew", "team_id")
+    crew_ids = fields.One2many("tms.crew", "tms_team_id")
 
     company_id = fields.Many2one(
         "res.company",
@@ -94,7 +100,7 @@ class TMSTeam(models.Model):
         for team in self:
             team.order_ids = self.env["tms.order"].search(
                 [
-                    ("team_id", "=", team.id),
+                    ("tms_team_id", "=", team.id),
                     (
                         "stage_id.is_completed",
                         "!=",
@@ -104,7 +110,7 @@ class TMSTeam(models.Model):
             )
             data = self.env["tms.order"].read_group(
                 [
-                    ("team_id", "=", team.id),
+                    ("tms_team_id", "=", team.id),
                     (
                         "stage_id.is_completed",
                         "!=",

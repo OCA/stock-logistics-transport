@@ -38,6 +38,6 @@ class TMSCrew(models.Model):
         help="Company related to this order",
     )
 
-    team_id = fields.Many2one("tms.team")
+    tms_team_id = fields.Many2one("tms.team")
 
     _sql_constraints = [("name_uniq", "unique (name)", "Crew name already exists!")]

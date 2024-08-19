@@ -7,7 +7,7 @@ from odoo import fields, models
 class FleetVehicle(models.Model):
     _inherit = "fleet.vehicle"
 
-    team_id = fields.Many2one("tms.team")
+    tms_team_id = fields.Many2one("tms.team")
 
     # Operation
     operation = fields.Selection([("cargo", "Cargo"), ("passenger", "Passenger")])

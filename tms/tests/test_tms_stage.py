@@ -44,12 +44,14 @@ class TestTMSStage(TransactionCase):
                 "name": "Default Team Stage",
                 "stage_type": "order",
                 "sequence": 4,
-                "team_ids": [(6, 0, [self.team.id])],
+                "tms_team_ids": [(6, 0, [self.team.id])],
             }
         )
 
         self.assertIn(
-            self.team, stage.team_ids, "Stage should be associated with the test team"
+            self.team,
+            stage.tms_team_ids,
+            "Stage should be associated with the test team",
         )
 
     def test_stage_deletion(self):

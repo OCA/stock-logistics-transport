@@ -95,7 +95,7 @@
                     </div>
                     <group>
                         <group>
-                            <field name="team_id" groups="tms.group_tms_team" />
+                            <field name="tms_team_id" groups="tms.group_tms_team" />
 
                             <field
                                 name="crew_id"
@@ -205,7 +205,7 @@
                 <field name="route_destination" />
                 <field name="origin_id" />
                 <field name="destination_id" />
-                <field name="team_id" />
+                <field name="tms_team_id" />
                 <field name="crew_id" />
                 <field name="driver_id" />
                 <templates>
@@ -327,18 +327,18 @@
                             <div class="o_kanban_record_bottom mt-3">
                                 <div class="oe_kanban_bottom_left">
                                     <div
-                                        t-if="record.team_id.raw_value or record.crew_id.raw_value"
+                                        t-if="record.tms_team_id.raw_value or record.crew_id.raw_value"
                                         groups="tms.group_tms_team"
                                         class="text-muted o_row"
                                     >
                                         <i>
                                             <t
-                                                t-if="record.team_id.raw_value"
-                                                t-esc="record.team_id.value"
+                                                t-if="record.tms_team_id.raw_value"
+                                                t-esc="record.tms_team_id.value"
                                                 groups="tms.group_tms_team"
                                             />
                                             <span
-                                                t-if="record.team_id.raw_value and record.crew_id.raw_value"
+                                                t-if="record.tms_team_id.raw_value and record.crew_id.raw_value"
                                                 groups="tms.group_tms_crew"
                                             >&#032;/&#032;
                                             </span>
@@ -376,7 +376,7 @@
                     string="Archived"
                     domain="[('active', '=', 'False')]"
                 />
-                <field name="team_id" string="Team" />
+                <field name="tms_team_id" string="Team" />
                 <field name="stage_id" string="Stage" />
             </search>
         </field>
@@ -435,7 +435,7 @@
         <field name="name">Trips Kanban</field>
         <field name="res_model">tms.order</field>
         <field name="view_mode">kanban,form</field>
-        <field name="domain">[('team_id', '=', active_id)]</field>
+        <field name="domain">[('tms_team_id', '=', active_id)]</field>
     </record>
 
 </odoo>

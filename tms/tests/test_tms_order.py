@@ -322,10 +322,10 @@ class TestTMSOrder(TransactionCase):
             {
                 "name": _("New"),
                 "company_id": self.env.company.id,
-                "team_id": team.id,
+                "tms_team_id": team.id,
             }
         )
         order._compute_active_crew()
         self.assertEqual(
-            order.team_id, team, "Team wasn't assigned successfully to order"
+            order.tms_team_id, team, "Team wasn't assigned successfully to order"
         )

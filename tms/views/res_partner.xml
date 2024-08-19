@@ -11,7 +11,7 @@
                     <group>
                         <field name="tms_type" string="Type" />
                         <field
-                            name="team_id"
+                            name="tms_team_id"
                             string="Team"
                             groups="tms.group_tms_team"
                         />
@@ -123,7 +123,7 @@
                 group_edit="False"
             >
                 <field name="display_name" />
-                <field name="team_id" />
+                <field name="tms_team_id" />
                 <field name="crew_ids" />
                 <field name="mobile" />
                 <field name="avatar_128" />
@@ -167,14 +167,16 @@
                                             <p style="margin-bottom: 0.5rem;">
                                                 <span
                                                     class="o_text_overflow text-muted"
-                                                    t-if="record.team_id.value"
+                                                    t-if="record.tms_team_id.value"
                                                 >
                                                     <span
                                                         class="fa fa-users me-2"
                                                         aria-label="Team"
                                                         title="Team"
                                                     />
-                                                    <t t-esc="record.team_id.value" />
+                                                    <t
+                                                        t-esc="record.tms_team_id.value"
+                                                    />
                                                 </span>
                                             </p>
                                             <p style="margin-bottom: 0.5rem;">

@@ -61,7 +61,7 @@ class TMSOrder(models.Model):
         context={"default_tms_type": "driver"},
     )
     vehicle_id = fields.Many2one("fleet.vehicle", string="Vehicle")
-    team_id = fields.Many2one("tms.team", string="Team")
+    tms_team_id = fields.Many2one("tms.team", string="Team")
     crew_id = fields.Many2one("tms.crew", string="Crew")
 
     stage_id = fields.Many2one(
@@ -178,14 +178,14 @@ class TMSOrder(models.Model):
         if self.date_start:
             self.date_end = self.date_start + timedelta(hours=self.duration)
 
-    @api.depends("team_id.driver_ids", "crew_id.driver_ids")
+    @api.depends("tms_team_id.driver_ids", "crew_id.driver_ids")
     def _compute_driver_ids_domain(self):
         all_drivers = self.env["res.partner"].search([("tms_type", "=", "driver")])
         all_driver_ids = all_drivers.ids
         for order in self:
             order.driver_ids_domain = [(6, 0, all_driver_ids)]
-            if order.team_id:
-                order.driver_ids_domain = [(6, 0, order.team_id.driver_ids.ids)]
+            if order.tms_team_id:
+                order.driver_ids_domain = [(6, 0, order.tms_team_id.driver_ids.ids)]
             if order.crew_id:
                 order.driver_ids_domain = [(6, 0, order.crew_id.driver_ids.ids)]
 
@@ -198,14 +198,14 @@ class TMSOrder(models.Model):
         .ids,
     )
 
-    @api.depends("team_id")
+    @api.depends("tms_team_id")
     def _compute_vehicle_ids_domain(self):
         all_vehicles = self.env["fleet.vehicle"].search([])
         all_vehicles_ids = all_vehicles.ids
         for order in self:
             order.vehicle_ids_domain = [(6, 0, all_vehicles_ids)]
-            if order.team_id:
-                order.vehicle_ids_domain = [(6, 0, order.team_id.vehicle_ids.ids)]
+            if order.tms_team_id:
+                order.vehicle_ids_domain = [(6, 0, order.tms_team_id.vehicle_ids.ids)]
 
     vehicle_ids_domain = fields.Many2many(
         "fleet.vehicle",
@@ -214,13 +214,13 @@ class TMSOrder(models.Model):
         default=lambda self: self.env["fleet.vehicle"].search([]).ids,
     )
 
-    @api.depends("team_id")
+    @api.depends("tms_team_id")
     def _compute_crew_ids_domain(self):
         all_crews = self.env["tms.crew"].search([])
         all_crews_ids = all_crews.ids
 
-        if self.team_id:
-            self.crew_ids_domain = [(6, 0, self.team_id.crew_ids.ids)]
+        if self.tms_team_id:
+            self.crew_ids_domain = [(6, 0, self.tms_team_id.crew_ids.ids)]
         else:
             self.crew_ids_domain = [(6, 0, all_crews_ids)]
 

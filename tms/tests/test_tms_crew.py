@@ -69,7 +69,7 @@ class TestTMSCrew(TransactionCase):
                 "personnel_ids": [(6, 0, [self.personnel1.id, self.personnel2.id])],
                 "default_vehicle_id": self.vehicle.id,
                 "company_id": self.company.id,
-                "team_id": self.team.id,
+                "tms_team_id": self.team.id,
             }
         )
 
@@ -107,5 +107,7 @@ class TestTMSCrew(TransactionCase):
             "Crew should belong to the correct company",
         )
         self.assertEqual(
-            self.crew.team_id, self.team, "Crew should be assigned to the correct team"
+            self.crew.tms_team_id,
+            self.team,
+            "Crew should be assigned to the correct team",
         )

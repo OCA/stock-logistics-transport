@@ -10,9 +10,9 @@ class TMSStage(models.Model):
     _description = "Transport Management System Stage"
     _order = "sequence, name, id"
 
-    def _default_team_ids(self):
-        default_team_id = self.env.context.get("default_team_id")
-        return [default_team_id] if default_team_id else None
+    def _default_tms_team_ids(self):
+        default_tms_team_id = self.env.context.get("default_tms_team_id")
+        return [default_tms_team_id] if default_tms_team_id else None
 
     active = fields.Boolean(default=True)
     name = fields.Char(required=True)
@@ -52,13 +52,13 @@ class TMSStage(models.Model):
         default=lambda self: self.env.user.company_id.id,
     )
 
-    team_ids = fields.Many2many(
+    tms_team_ids = fields.Many2many(
         "tms.team",
         "tms_order_team_stage_rel",
         "stage_id",
-        "team_id",
+        "tms_team_id",
         string="Teams",
-        default=lambda self: self._default_team_ids(),
+        default=lambda self: self._default_tms_team_ids(),
     )
 
     def get_color_information(self):

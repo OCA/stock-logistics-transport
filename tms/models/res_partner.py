@@ -40,7 +40,7 @@ class ResPartner(models.Model):
     )
 
     # Driver - Relations
-    team_id = fields.Many2one("tms.team")
+    tms_team_id = fields.Many2one("tms.team")
     crew_ids = fields.Many2many(
         "tms.crew",
         "tms_crew_drivers_rel",
