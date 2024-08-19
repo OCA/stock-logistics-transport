@@ -42,7 +42,7 @@
                     <group>
                         <group string="Route Details">
                             <label for="distance">Distance</label>
-                            <div class="d-flex w-25">
+                            <div class="d-flex w-75">
                                 <field name="distance" class="w-75" />
                                 <span class="w-75" groups="!tms.group_tms_uom">km</span>
                                 <field
@@ -53,7 +53,7 @@
                                 />
                             </div>
                             <label for="estimated_time">Estimated Time</label>
-                            <div class="d-flex w-25">
+                            <div class="d-flex w-75">
                                 <field name="estimated_time" class="w-75" />
                                 <span
                                     class="w-75"
