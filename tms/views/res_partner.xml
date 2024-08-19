@@ -183,7 +183,7 @@
                                                 <span
                                                     groups="tms.group_tms_crew"
                                                     class="o_text_overflow text-muted"
-                                                    t-if="record.crew_ids.raw_value"
+                                                    t-if="record.crew_ids.raw_value != 0"
                                                 >
                                                     <t>Crews:</t>
                                                     <span
