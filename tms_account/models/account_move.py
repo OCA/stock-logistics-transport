@@ -6,7 +6,7 @@ from odoo import api, fields, models
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    has_tms_order = fields.Boolean(readonly="True", compute="_compute_has_trip")
+    has_tms_order = fields.Boolean(readonly=True, compute="_compute_has_trip")
 
     @api.depends("line_ids")
     def _compute_has_trip(self):
