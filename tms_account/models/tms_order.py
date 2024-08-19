@@ -30,9 +30,13 @@ class TMSOrder(models.Model):
             )
             if stage.is_completed and self.create_invoice:
                 if self.sale_id:
+                    all_completed = True
                     for line in self.sale_id.order_line:
-                        line.qty_delivered = line.product_uom_qty
-                    if not self.sale_id.invoice_ids:
+                        if line.tms_order_id.id == self.id:
+                            line.qty_delivered = line.product_uom_qty
+                        if not line.tms_order_id.stage_id.is_completed:
+                            all_completed = False
+                    if not self.sale_id.invoice_ids and all_completed:
                         self.sale_id._create_invoices()
                 if self.purchase_ids:
                     for purchase in self.purchase_ids:
