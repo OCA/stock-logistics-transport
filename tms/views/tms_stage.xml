@@ -21,14 +21,14 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="is_default" invisible="1" />
                             <field name="active" invisible="1" />
                             <field name="name" readonly="is_default" />
-                            <field name="sequence" />
                             <field name="stage_type" />
+                            <field name="sequence" />
+                            <field name="custom_color" />
                         </group>
                         <group>
-                            <field name="custom_color" />
+                            <field name="is_default" />
                             <field name="fold" />
                             <field name="is_completed" />
                             <field
@@ -37,10 +37,10 @@
                             />
                         </group>
                     </group>
-                    <group string="Stage Description and Tooltips">
+                    <group string="Stage Description">
                         <p class="text-muted" colspan="2">
-                            You can add a description to help your coworkers understand the meaning and purpose of the
-                            stage.
+                            You can add a description to help your coworkers
+                            understand the meaning and purpose of the stage.
                         </p>
                         <field
                             name="description"
@@ -76,7 +76,6 @@
     </record>
 
     <!-- Actions -->
-
     <record id="action_tms_stage" model="ir.actions.act_window">
         <field name="name">Stages</field>
         <field name="res_model">tms.stage</field>

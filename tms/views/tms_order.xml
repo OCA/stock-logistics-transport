@@ -176,6 +176,13 @@
                     </notebook>
 
                 </sheet>
+
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
             </form>
         </field>
     </record>
@@ -387,6 +394,18 @@
         </field>
     </record>
 
+    <!-- TMS Order Pivot View-->
+    <record id="tms_order_view_pivot" model="ir.ui.view">
+        <field name="name">tms.order.view.pivot</field>
+        <field name="model">tms.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Trips">
+                <field name="stage_id" type="col" />
+                <field name="name" type="row" />
+            </pivot>
+        </field>
+    </record>
+
     <!-- Actions -->
     <record id="action_tms_operation_trip" model="ir.actions.act_window">
         <field name="name">Trips</field>
@@ -397,12 +416,7 @@
     <record id="action_tms_report_order" model="ir.actions.act_window">
         <field name="name">Trips</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">graph</field>
-        <field name="help" type="html">
-            <p>
-                Trips Reports.
-            </p>
-        </field>
+        <field name="view_mode">graph,pivot</field>
     </record>
 
     <record id="action_tms_config_stage_travel" model="ir.actions.act_window">
@@ -414,7 +428,7 @@
     <record id="action_tms_dash_order" model="ir.actions.act_window">
         <field name="name">Trips</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">kanban,form</field>
+        <field name="view_mode">kanban,tree,form</field>
     </record>
 
     <record id="action_tms_order_kanban" model="ir.actions.act_window">

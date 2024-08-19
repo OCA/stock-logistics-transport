@@ -31,7 +31,7 @@
         name="Trips"
         action="action_tms_dash_order"
         parent="dashboard"
-        sequence="10"
+        sequence="20"
     />
 
     <!-- Operations Menu -->
