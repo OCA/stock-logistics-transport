@@ -74,9 +74,13 @@ class StockPicking(models.Model):
         for picking in self:
             # NOTE: Make overloading containers possible,
             # otherwise overloaded container would be marked as partially loaded
-            picking.is_fully_loaded_in_shipment = all(
-                line.shipment_advice_id and line.qty_done >= line.reserved_uom_qty
-                for line in picking.move_line_ids
+            picking.is_fully_loaded_in_shipment = (
+                all(
+                    line.shipment_advice_id and line.qty_done >= line.reserved_uom_qty
+                    for line in picking.move_line_ids
+                )
+                if picking.move_line_ids
+                else False
             )
             picking.is_partially_loaded_in_shipment = (
                 not picking.is_fully_loaded_in_shipment
