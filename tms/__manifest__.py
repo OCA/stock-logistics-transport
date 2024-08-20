@@ -1,7 +1,7 @@
 # Copyright (C) 2018 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    "name": "Transportation Management System",
+    "name": "Transport",
     "summary": "Manage Vehicles, Drivers, Routes and Trips",
     "version": "17.0.1.0.0",
     "license": "AGPL-3",
