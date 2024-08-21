@@ -16,7 +16,7 @@
                     <field string="Expenses" name="expense_count" widget="statinfo" />
                 </button>
             </xpath>
-            <xpath expr="//notebook" position="inside">
+            <xpath expr="//page[@name='tracking_page']" position="before">
                 <page string="Expenses">
                     <field name="employee_id" invisible="1" />
                     <field

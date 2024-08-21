@@ -40,6 +40,7 @@ class TMSOrder(models.Model):
                 for expense in self.expense_ids:
                     if expense.state != "reported":
                         expense.action_submit_expenses()
+                        expense.sheet_id.action_submit_sheet()
         return result
 
     @api.depends("expense_ids")
