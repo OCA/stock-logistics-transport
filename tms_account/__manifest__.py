@@ -8,7 +8,7 @@
     "category": "Field Service",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
-    "depends": ["tms", "account", "tms_sale", "tms_purchase"],
+    "depends": ["tms", "tms_sale", "tms_purchase", "account_usability"],
     "data": [
         "views/account_move.xml",
         "views/tms_order.xml",
