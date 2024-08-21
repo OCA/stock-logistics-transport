@@ -106,6 +106,8 @@ class ResConfigSettings(models.TransientModel):
         default=lambda self: self.env.ref("uom.product_uom_hour").id,
     )
 
+    tms_analytic_plan = fields.Selection([("trip", "Trip"), ("route", "Route")])
+
     # Modules
     module_tms_purchase = fields.Boolean(string="Manage trip purchases")
     module_tms_sale = fields.Boolean(string="Manage trip sales")
