@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[shipment_advice](shipment_advice/) | 16.0.1.4.1 |  | Manage your (un)loading process through shipment advices.
+[shipment_advice](shipment_advice/) | 16.0.1.4.2 |  | Manage your (un)loading process through shipment advices.
 [shipment_advice_planner](shipment_advice_planner/) | 16.0.1.1.0 | [![jbaudoux](https://github.com/jbaudoux.png?size=30px)](https://github.com/jbaudoux) | This module is used to plan ready transfers in shipment advices.
 [shipment_advice_planner_toursolver](shipment_advice_planner_toursolver/) | 16.0.1.0.0 |  | Shipment advices planning by geo-optimization (TourSolver)
 [shipment_advice_planner_toursolver_queue_job](shipment_advice_planner_toursolver_queue_job/) | 16.0.1.0.0 |  | Run TourSolver queries in queue jobs
