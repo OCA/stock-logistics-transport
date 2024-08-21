@@ -33,7 +33,7 @@ class ResConfigSettings(models.TransientModel):
     )
 
     group_tms_uom = fields.Boolean(
-        string="Units of Measure", implied_group="tms.group_tms_uom"
+        string="Units of Measure", implied_group="uom.group_uom"
     )
 
     # Custom Fields
