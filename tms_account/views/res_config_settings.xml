@@ -5,12 +5,25 @@
         <field name="priority" eval="40" />
         <field name="inherit_id" ref="account.res_config_settings_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//block[@name='trips_settings_container']" position="inside">
+            <xpath expr="//setting[@name='tms_sale_setting']" position="after">
                 <setting
                     help="Manage analytic account for trips or routes"
                     invisible="not module_tms_account"
                 >
                     <field name="group_analytic_accounting" />
+                    <span />
+                    <field
+                        name="tms_analytic_plan"
+                        invisible="not group_analytic_accounting"
+                        widget="many2many_checkboxes"
+                    />
+                </setting>
+                <setting
+                    help="Hello there"
+                    string="Hello there"
+                    invisible="not module_tms_account"
+                >
+                    <field name="group_tms_route_analytic_plan" />
                 </setting>
             </xpath>
         </field>
