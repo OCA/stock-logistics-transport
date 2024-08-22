@@ -88,7 +88,7 @@
                             string="Manage depreciations"
                             help="Manage vehicles as accounting assets"
                         >
-                         <field name="module_tms_account_asset" />
+                            <field name="module_tms_account_asset" />
                         </setting>
                     </block>
                     <block title="Drivers" name="drivers_settings_container">
@@ -158,15 +158,9 @@
                         <setting help="Manage expenses of a trip: hotel, tolls, fuel">
                             <field name="module_tms_expense" />
                         </setting>
-                        <setting
-                            help="Manage analytic account for trips or routes"
-                            invisible="not module_tms_account"
-                        >
-                            <field name="group_analytic_account" />
-                        </setting>
                     </block>
                 </app>
-            </xpath>Z
+            </xpath>
         </field>
     </record>
 
