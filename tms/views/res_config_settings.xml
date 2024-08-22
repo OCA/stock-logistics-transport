@@ -146,6 +146,7 @@
                         </setting>
                         <setting
                             string="Sell trips or tickets"
+                            name="tms_sale_setting"
                             help="Create Trip Orders with Sale Orders"
                         >
                             <field name="module_tms_sale" />
