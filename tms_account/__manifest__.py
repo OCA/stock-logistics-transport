@@ -10,6 +10,7 @@
     "website": "https://github.com/OCA/stock-logistics-transport",
     "depends": ["tms", "tms_sale", "tms_purchase", "account_usability"],
     "data": [
+        "views/res_config_settings.xml",
         "views/account_move.xml",
         "views/tms_order.xml",
     ],
