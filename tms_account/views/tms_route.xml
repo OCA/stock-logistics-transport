@@ -1,7 +1,7 @@
 <odoo>
 
     <record id="view_tms_route_form" model="ir.ui.view">
-        <field name="name">tms.route.form.inherit.tms.account</field>
+        <field name="name">tms.route.view.form.inherit.tms.account</field>
         <field name="model">tms.route</field>
         <field name="inherit_id" ref="tms.view_tms_route_form" />
         <field name="arch" type="xml">
@@ -14,6 +14,17 @@
                         />
                     </group>
                 </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tms_route_view_tree" model="ir.ui.view">
+        <field name="name">tms.route.view.tree.inherit.tms.account</field>
+        <field name="model">tms.route</field>
+        <field name="inherit_id" ref="tms.tms_route_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="analytic_account_id" />
             </xpath>
         </field>
     </record>
