@@ -6,6 +6,7 @@
         <field name="inherit_id" ref="account.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//setting[@name='tms_sale_setting']" position="after">
+                <field name="tms_analytic_plan_domain" invisible="1" />
                 <setting
                     help="Manage analytic account for trips or routes"
                     invisible="not module_tms_account"
@@ -15,6 +16,7 @@
                     <field
                         name="tms_analytic_plan"
                         invisible="not group_analytic_accounting"
+                        domain="tms_analytic_plan_domain"
                         widget="many2many_checkboxes"
                     />
                 </setting>

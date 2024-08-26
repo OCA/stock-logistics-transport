@@ -18,13 +18,22 @@ class ResConfigSettings(models.TransientModel):
         compute="_compute_tms_analytic_groups",
     )
 
-    @api.model
-    def _domain_tms_analytic_plan(self):
-        return [("tms_flag", "=", True)]
-
     tms_analytic_plan = fields.Many2many(
-        "account.analytic.plan", domain=_domain_tms_analytic_plan
+        "account.analytic.plan",
     )
+
+    tms_analytic_plan_domain = fields.Char(default="[]")
+
+    @api.onchange("tms_analytic_plan", "group_tms_route", "group_analytic_accounting")
+    def _onchange_tms_analytic_plan_domain(self):
+        if not self.group_tms_route:
+            domain = [
+                ("tms_flag", "=", True),
+                ("id", "!=", self.env.ref("tms_account.tms_route_analytic_plan").id),
+            ]
+        else:
+            domain = [("tms_flag", "=", True)]
+        self.tms_analytic_plan_domain = domain
 
     @api.model
     def get_values(self):
