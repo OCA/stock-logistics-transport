@@ -1,8 +1,8 @@
 <odoo>
 
     <!-- TMS Route Tree View -->
-    <record id="tms_vehicle_route_view" model="ir.ui.view">
-        <field name="name">tms.route.tree</field>
+    <record id="tms_route_view_tree" model="ir.ui.view">
+        <field name="name">tms.route.view.tree</field>
         <field name="model">tms.route</field>
         <field name="arch" type="xml">
             <tree>
