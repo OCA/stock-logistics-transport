@@ -139,8 +139,8 @@
                             <field name="group_tms_route_stop" />
                         </setting>
                         <setting
-                            string="Invoice your trips"
-                            help="Create vendor bills and customer invoices when completing TMS orders."
+                            string="Manage Trips Accounting"
+                            help="Create vendor bills and customer invoices when completing trip orders."
                         >
                             <field name="module_tms_account" />
                         </setting>
