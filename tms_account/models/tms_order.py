@@ -19,6 +19,24 @@ class TMSOrder(models.Model):
 
     create_invoice = fields.Boolean(string="Create invoices and bills when completed?")
 
+    analytic_account_id = fields.Many2one("account.analytic.account")
+
+    @api.model
+    def create(self, vals):
+        order = super().create(vals)
+        if self.env.user.has_group(
+            "analytic.group_analytic_accounting"
+        ) and self.env.user.has_group("tms_account.group_tms_order_analytic_plan"):
+            analytic_account = self.env["account.analytic.account"].create(
+                {
+                    "name": vals.get("name"),
+                    "plan_id": self.env.ref("tms_account.tms_order_analytic_plan").id,
+                    "trip_id": order,
+                }
+            )
+            order.analytic_account_id = analytic_account
+        return order
+
     @api.model
     def write(self, vals):
         super().write(vals)
@@ -69,3 +87,18 @@ class TMSOrder(models.Model):
             ],
             "name": _("Bills for Trip %s") % self.name,
         }
+
+    def action_view_analytic_account(self):
+        self.ensure_one()
+        analytic_account = self.env["account.analytic.account"].search(
+            [("trip_id", "=", self.id)], limit=1
+        )
+
+        if analytic_account:
+            return {
+                "type": "ir.actions.act_window",
+                "res_model": "account.analytic.account",
+                "view_mode": "form",
+                "res_id": analytic_account.id,
+                "name": _("Analytic Account for Trip %s") % self.name,
+            }
