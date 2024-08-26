@@ -1,0 +1,21 @@
+<odoo>
+
+    <record id="view_tms_route_form" model="ir.ui.view">
+        <field name="name">tms.route.form.inherit.tms.account</field>
+        <field name="model">tms.route</field>
+        <field name="inherit_id" ref="tms.view_tms_route_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="accounting" string="Accounting">
+                    <group name="accounting_group">
+                        <field
+                            name="analytic_account_id"
+                            context="{'default_plan_id': %(tms_account.tms_route_analytic_plan)d}"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

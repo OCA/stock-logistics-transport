@@ -18,13 +18,6 @@
                         widget="many2many_checkboxes"
                     />
                 </setting>
-                <setting
-                    help="Hello there"
-                    string="Hello there"
-                    invisible="not module_tms_account"
-                >
-                    <field name="group_tms_route_analytic_plan" />
-                </setting>
             </xpath>
         </field>
     </record>

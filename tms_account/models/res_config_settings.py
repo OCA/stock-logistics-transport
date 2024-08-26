@@ -18,7 +18,13 @@ class ResConfigSettings(models.TransientModel):
         compute="_compute_tms_analytic_groups",
     )
 
-    tms_analytic_plan = fields.Many2many("account.analytic.plan")
+    @api.model
+    def _domain_tms_analytic_plan(self):
+        return [("tms_flag", "=", True)]
+
+    tms_analytic_plan = fields.Many2many(
+        "account.analytic.plan", domain=_domain_tms_analytic_plan
+    )
 
     @api.model
     def get_values(self):
