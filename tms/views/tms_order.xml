@@ -106,13 +106,11 @@
                             <field
                                 name="vehicle_id"
                                 domain="[('id', 'in', vehicle_ids_domain)]"
-                                required="not crew_active"
                             />
 
                             <field
                                 name="driver_id"
                                 domain="[('id', 'in', driver_ids_domain)]"
-                                required="not crew_active"
                             />
 
                         </group>
