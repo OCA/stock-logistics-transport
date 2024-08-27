@@ -4,3 +4,7 @@ from . import tms_order
 from . import analytic_account
 from . import tms_route
 from . import account_move
+from . import account_move_line
+from . import purchase_order_line
+from . import hr_expense
+from . import sale_order_line

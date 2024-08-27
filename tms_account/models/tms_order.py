@@ -19,7 +19,7 @@ class TMSOrder(models.Model):
 
     create_invoice = fields.Boolean(string="Create invoices and bills when completed?")
 
-    analytic_account_id = fields.Many2one("account.analytic.account")
+    analytic_account_id = fields.Many2one("account.analytic.account", copy=False)
 
     @api.model
     def create(self, vals):
@@ -39,26 +39,88 @@ class TMSOrder(models.Model):
 
     @api.model
     def write(self, vals):
-        super().write(vals)
+        order = super().write(vals)
         if "stage_id" in vals:
-            stage = self.env["tms.stage"].search(
-                [
-                    ("id", "=", vals["stage_id"]),
-                ]
-            )
+            stage = self.env["tms.stage"].search([("id", "=", vals["stage_id"])])
             if stage.is_completed and self.create_invoice:
                 if self.sale_id:
-                    all_completed = True
-                    for line in self.sale_id.order_line:
-                        if line.tms_order_id.id == self.id:
-                            line.qty_delivered = line.product_uom_qty
-                        if not line.tms_order_id.stage_id.is_completed:
-                            all_completed = False
-                    if not self.sale_id.invoice_ids and all_completed:
-                        self.sale_id._create_invoices()
+                    self._handle_invoices()
                 if self.purchase_ids:
-                    for purchase in self.purchase_ids:
-                        purchase.action_create_invoice()
+                    self._handle_bills()
+        return order
+
+    def _handle_invoices(self):
+        all_completed = True
+        for line in self.sale_id.order_line:
+            if line.tms_order_id.id == self.id:
+                line.qty_delivered = line.product_uom_qty
+            if not line.tms_order_id.stage_id.is_completed:
+                all_completed = False
+
+        if not self.sale_id.invoice_ids and all_completed:
+            invoice = self.sale_id._create_invoices()
+
+            # Check if analytic accounting is enabled
+            if self.env.user.has_group("analytic.group_analytic_accounting"):
+                self._assign_analytic_accounts(invoice)
+
+    def _assign_analytic_accounts(self, invoice):
+        # Fetch the analytic distribution
+        distribution = self._default_analytic_distribution()
+
+        # If distribution is not empty, assign it to the invoice lines
+        if distribution:
+            for line in invoice.invoice_line_ids:
+                line.analytic_distribution = distribution
+
+    def _default_analytic_distribution(self):
+        # Ensure there are tms_order_ids to work with
+        if not self.sale_id.tms_order_ids:
+            return {}
+
+        # Initialize distribution dictionary
+        distribution = {}
+
+        # Fetch the analytic accounts based on group names
+        route_analytic_plan_group = self.env.ref(
+            "tms_account.group_tms_route_analytic_plan"
+        )
+        order_analytic_plan_group = self.env.ref(
+            "tms_account.group_tms_order_analytic_plan"
+        )
+
+        analytic_account_ids = []
+
+        # Iterate over tms_order_ids to determine analytic accounts
+        for tms_order in self.sale_id.tms_order_ids:
+            if tms_order.route_id and route_analytic_plan_group:
+                analytic_account_id = tms_order.route_id.analytic_account_id.id
+                analytic_accounts = self.env["account.analytic.account"].search(
+                    [("id", "=", analytic_account_id)]
+                )
+                account_id = str(analytic_accounts.id)
+                if account_id:
+                    analytic_account_ids.append(account_id)
+
+            if order_analytic_plan_group:
+                analytic_account_id = tms_order.analytic_account_id.id
+                analytic_accounts = self.env["account.analytic.account"].search(
+                    [("id", "=", analytic_account_id)]
+                )
+                account_id = str(analytic_accounts.id)
+                if account_id:
+                    analytic_account_ids.append(account_id)
+
+        # Ensure distribution is provided with unique analytic accounts
+        analytic_account_ids = list(set(analytic_account_ids))
+        if analytic_account_ids:
+            distribution[", ".join(analytic_account_ids)] = 100
+
+        return distribution
+
+    def _handle_bills(self):
+        for purchase in self.purchase_ids:
+            purchase.action_create_invoice()
         return
 
     @api.depends("stage_id")
@@ -67,9 +129,7 @@ class TMSOrder(models.Model):
             trip.bill_count = 0
             trip.invoice_count = trip.sale_id.invoice_count
 
-            for purchase in trip.purchase_ids:
-                for line in purchase.order_line:
-                    trip.bill_count += line.qty_invoiced
+            trip.bill_count = len(trip.purchase_ids)
 
     def action_view_invoices(self):
         action = self.sale_id.action_view_invoice()

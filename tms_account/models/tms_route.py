@@ -10,6 +10,7 @@ class TMSRoute(models.Model):
     analytic_account_id = fields.Many2one(
         "account.analytic.account",
         domain=[("plan_id", "=", "%(tms_account.tms_route_analytic_plan)d")],
+        copy=False,
     )
 
     @api.model

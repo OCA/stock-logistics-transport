@@ -16,6 +16,18 @@
                     invisible="not has_tms_order"
                 />
             </div>
+            <xpath expr="//tree//field[@name='name']" position="after">
+                <field
+                    name="tms_factor"
+                    string="Factor"
+                    column_invisible="not parent.has_tms_order"
+                />
+                <field
+                    name="tms_factor_uom"
+                    string="Factor UoM"
+                    column_invisible="not parent.has_tms_order"
+                />
+            </xpath>
         </field>
     </record>
 
