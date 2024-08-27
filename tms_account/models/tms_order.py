@@ -129,7 +129,13 @@ class TMSOrder(models.Model):
             trip.bill_count = 0
             trip.invoice_count = trip.sale_id.invoice_count
 
-            trip.bill_count = len(trip.purchase_ids)
+            # Filter purchases that have at least one bill
+            purchase_with_bills = self.env["purchase.order"].search(
+                [("id", "in", trip.purchase_ids.ids), ("invoice_ids", "!=", False)]
+            )
+
+            # Count the number of such purchases
+            trip.bill_count = len(purchase_with_bills)
 
     def action_view_invoices(self):
         action = self.sale_id.action_view_invoice()
