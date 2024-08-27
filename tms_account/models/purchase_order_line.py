@@ -1,10 +1,8 @@
-from odoo import api, fields, models
+from odoo import api, models
 
 
 class PurchaseOrderLine(models.Model):
     _inherit = "purchase.order.line"
-
-    analytic_distribution = fields.Json()
 
     @api.onchange("order_id", "trip_id")
     def _onchange_trip_id(self):

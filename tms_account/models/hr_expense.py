@@ -1,27 +1,18 @@
-from odoo import api, fields, models
+from odoo import api, models
 
 
 class HrExpense(models.Model):
     _inherit = "hr.expense"
 
-    analytic_distribution = fields.Json()
-
-    @api.onchange("id", "trip_id")
+    @api.onchange("analytic_distribution", "trip_id")
     def _onchange_trip_id(self):
         # Update analytic_distribution when trip_id changes
         if self.trip_id:
+            self.trip_id = self.trip_id
             self.analytic_distribution = self._default_analytic_distribution()
 
-    @api.model
-    def default_get(self, fields):
-        # Ensure default values are set when creating a new record
-        res = super().default_get(fields)
-        if "analytic_distribution" in fields:
-            res["analytic_distribution"] = self._default_analytic_distribution()
-        return res
-
     def _default_analytic_distribution(self):
-        trip = self.env.context.get("default_trip_id")
+        trip = self.env.context.get("default_trip_id") or self.trip_id.id
         if not trip:
             return {}
 
@@ -56,7 +47,7 @@ class HrExpense(models.Model):
 
         # Set distribution with concatenated account IDs as key and percentage as value
         if analytic_account_ids:
-            distribution[",".join(analytic_account_ids)] = 100.0
+            distribution[",".join(analytic_account_ids)] = 100
 
         self.analytic_distribution = distribution
 
