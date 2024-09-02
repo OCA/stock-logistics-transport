@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-09-02 15:06+0000\n"
+"PO-Revision-Date: 2024-09-02 18:06+0000\n"
 "Last-Translator: Sergio Ariel Ameghino <ariel.ameghino@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -111,7 +111,7 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
 msgid "<span>Reporting</span>"
-msgstr "<span>Reporte</span>"
+msgstr "<span>Informes</span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
@@ -168,7 +168,7 @@ msgstr "Tipos de actividad"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Add a description for the order..."
-msgstr "Añada una descripción para el pedido..."
+msgstr "Añada una descripción para la órden..."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
@@ -227,8 +227,8 @@ msgid ""
 "Cannot create TMS Stage because it has the same Type and Sequence of an "
 "existing TMS Stage."
 msgstr ""
-"No se puede crear una etapa TMS porque tiene el mismo tipo y secuencia que "
-"una etapa TMS existente."
+"No se puede crear una etapa SGT porque tiene el mismo tipo y secuencia que "
+"una etapa SGT existente."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__capacity
@@ -244,7 +244,7 @@ msgstr "Carga"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__cargo_uom_id
 msgid "Cargo Uom"
-msgstr "Unidad de medida de Carga"
+msgstr "UdM de Carga"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models_categories
@@ -395,12 +395,12 @@ msgstr "¡El nombre de la cuadrilla ya existe!"
 #: model:ir.ui.menu,name:tms.menu_tms_config_crew
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
 msgid "Crews"
-msgstr "Cuadrilla"
+msgstr "Cuadrillas"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_res_partner_kanban_tms_driver
 msgid "Crews:"
-msgstr "Cuadrilla:"
+msgstr "Cuadrillas:"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__res_partner__driver_license_type__d
@@ -430,22 +430,22 @@ msgstr "Días antes del vencimiento"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Default Distance UoM"
-msgstr "Unidad de medida de Distancia por defecto"
+msgstr "UdM de Distancia por defecto"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Default Length UoM"
-msgstr "Unidad de medida de Longitud por defecto"
+msgstr "UdM de Longitud por defecto"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Default Speed UoM"
-msgstr "Unidad de medida de Velocidad por defecto"
+msgstr "UdM de Velocidad por defecto"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Default Time UoM"
-msgstr "Unidad de medida de Tiempo por defecto"
+msgstr "UdM de Tiempo por defecto"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__default_vehicle_id
@@ -455,7 +455,7 @@ msgstr "Vehículo por defecto"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Default Weight UoM"
-msgstr "Unidad de medida de Peso por defecto"
+msgstr "UdM de Peso por defecto"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
@@ -511,12 +511,12 @@ msgstr "Distancia recorrida"
 #: model:ir.model.fields,field_description:tms.field_res_partner__distance_traveled_uom
 #: model:ir.model.fields,field_description:tms.field_res_users__distance_traveled_uom
 msgid "Distance Traveled Uom"
-msgstr "Unidad de medida de Distancia recorrida"
+msgstr "UdM de Distancia recorrida"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_route__distance_uom
 msgid "Distance Uom"
-msgstr "Unidad de medida de Distancia"
+msgstr "UdM de Distancia"
 
 #. module: tms
 #. odoo-python
@@ -635,7 +635,7 @@ msgstr "Tiempo estimado"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_route__estimated_time_uom
 msgid "Estimated Time Uom"
-msgstr "Unidad de medida de Tiempo estimado"
+msgstr "UdM de Tiempo estimado"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__expired
@@ -887,32 +887,32 @@ msgstr "Gestionar rutas"
 #. module: tms
 #: model:res.groups,name:tms.group_tms_crew
 msgid "Manage TMS Crew"
-msgstr "Gestionar la Cuadrilla de TMS"
+msgstr "Gestionar la Cuadrilla de SGT"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_driver_license
 msgid "Manage TMS Driver License"
-msgstr "Gestionar la licencia de conducir de TMS"
+msgstr "Gestionar la licencia de conducir de SGT"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_route_stop
 msgid "Manage TMS Route Stops"
-msgstr "Gestionar paradas de ruta TMS"
+msgstr "Gestionar paradas de ruta SGT"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_route
 msgid "Manage TMS Routes"
-msgstr "Gestión de rutas TMS"
+msgstr "Gestión de rutas SGT"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_team
 msgid "Manage TMS Teams"
-msgstr "Gestionar equipos TMS"
+msgstr "Gestionar equipos SGT"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_vehicle_insurance
 msgid "Manage TMS Vehicle Insurance"
-msgstr "Gestionar el seguro de vehículos de TMS"
+msgstr "Gestionar el seguro de vehículos de SGT"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_team
@@ -1183,7 +1183,7 @@ msgstr "Refrescar"
 #. module: tms
 #: model:ir.ui.menu,name:tms.reporting
 msgid "Reporting"
-msgstr "Reportes"
+msgstr "Informes"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__activity_user_id
@@ -1248,7 +1248,7 @@ msgstr "Duración prevista de la obra en horas"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Sell trips or tickets"
-msgstr "Vender viajes o billetes"
+msgstr "Vender viajes o boletos"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__sequence
@@ -1434,22 +1434,22 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__time_uom
 msgid "Time Uom"
-msgstr "Unidad de medida de Tiempo"
+msgstr "UdM de Tiempo"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_distance_uom
 msgid "Tms Distance Uom"
-msgstr "Unidad de medida de Distancia TMS"
+msgstr "UdM de Distancia SGT"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_length_uom
 msgid "Tms Length Uom"
-msgstr "Unidad de medida de Longitud TMS"
+msgstr "UdM de Longitud SGT"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_speed_uom
 msgid "Tms Speed Uom"
-msgstr "Unidad de medida de Velocidad TMS"
+msgstr "UdM de Velocidad SGT"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__tms_team_id
@@ -1457,17 +1457,17 @@ msgstr "Unidad de medida de Velocidad TMS"
 #: model:ir.model.fields,field_description:tms.field_res_users__tms_team_id
 #: model:ir.model.fields,field_description:tms.field_tms_crew__tms_team_id
 msgid "Tms Team"
-msgstr "Equipo de TMS"
+msgstr "Equipo de SGT"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_time_uom
 msgid "Tms Time Uom"
-msgstr "Unidad de medida de Tiempo TMS"
+msgstr "UdM de Tiempo SGT"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_weight_uom
 msgid "Tms Weight Uom"
-msgstr "Unidad de medida de Peso TMS"
+msgstr "UdM de Peso SGT"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.root
@@ -1485,57 +1485,57 @@ msgstr "Sistema de Gestión del Transporte (SGT)"
 #. module: tms
 #: model:ir.model,name:tms.model_tms_crew
 msgid "Transport Management System Crew"
-msgstr "Sistema de gestión de transporte de la cuadrilla"
+msgstr "Cuadrilla del Sistema de Gestión del Transporte"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_order
 msgid "Transport Management System Order"
-msgstr ""
+msgstr "Orden del Sistema de Gestión del Transporte"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_route
 msgid "Transport Management System Route"
-msgstr ""
+msgstr "Ruta del Sistema de Gestión de Transporte"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_stage
 msgid "Transport Management System Stage"
-msgstr ""
+msgstr "Etapa del Sistema de Gestión del Transporte"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_team
 msgid "Transport Management System Team"
-msgstr ""
+msgstr "Equipo del Sistema de Gestión del Transporte"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__order
 msgid "Trip"
-msgstr ""
+msgstr "Viaje"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__duration
 msgid "Trip Duration"
-msgstr ""
+msgstr "Duración del viaje"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Trip Name"
-msgstr ""
+msgstr "Nombre del viaje"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_report_view_graph
 msgid "Trip Reports"
-msgstr ""
+msgstr "Informes de viaje"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Trip Tracking"
-msgstr ""
+msgstr "Seguimiento de viajes"
 
 #. module: tms
 #: model:ir.model.constraint,message:tms.constraint_tms_order_name_uniq
 msgid "Trip name already exists!"
-msgstr ""
+msgstr "¡El nombre del viaje ya existe!"
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_dash_order
@@ -1549,12 +1549,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_pivot
 msgid "Trips"
-msgstr ""
+msgstr "Viajes"
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_order_kanban
 msgid "Trips Kanban"
-msgstr ""
+msgstr "Viajes Kanban"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_partner__driver_type
@@ -1565,63 +1565,63 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tms.view_res_partner_form_inherit_tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_stage_search
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_order__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo de actividad de excepción registrada."
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_services_types
 msgid "Types"
-msgstr ""
+msgstr "Tipos"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Units"
-msgstr ""
+msgstr "Unidades"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Units Of Measure"
-msgstr ""
+msgstr "Unidades de medida"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_uom
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Units of Measure"
-msgstr ""
+msgstr "Unidades de medida"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
 msgid "UoM"
-msgstr ""
+msgstr "UdM"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__custom_color
 msgid "Use Hex Code only Ex:-#FFFFFF"
-msgstr ""
+msgstr "Utilice solo código hexadecimal. Ej.: #FFFFFF"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__route
 msgid "Use predefined route"
-msgstr ""
+msgstr "Utilice una ruta predefinida"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__sequence
 msgid "Used to order stages. Lower is first."
-msgstr ""
+msgstr "Se utiliza para ordenar etapas. La inferior es la primera."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_team__sequence
 msgid "Used to sort teams. Lower is better."
-msgstr ""
+msgstr "Se utiliza para ordenar equipos. Cuanto más bajo, mejor."
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_user
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 #. module: tms
 #: model:ir.model,name:tms.model_fleet_vehicle
@@ -1630,17 +1630,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms.field_tms_team__vehicle_ids
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
 msgid "Vehicle"
-msgstr ""
+msgstr "Vehículo"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__vehicle_ids_domain
 msgid "Vehicle Ids Domain"
-msgstr ""
+msgstr "Dominio de ID de vehículos"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__vehicle_insurance_security_days
 msgid "Vehicle Insurance security days"
-msgstr ""
+msgstr "Días de seguridad del seguro del vehículo"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_partner__vehicles_ids
@@ -1650,12 +1650,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tms.tms_insurance_view_form
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
 msgid "Vehicles"
-msgstr ""
+msgstr "Vehículos"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_team__vehicle_count
 msgid "Vehicles Count"
-msgstr ""
+msgstr "Cantidad de vehículos"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
@@ -1663,67 +1663,69 @@ msgid ""
 "You can add a description to help your coworkers\n"
 "                            understand the meaning and purpose of the stage."
 msgstr ""
+"Puede agregar una descripción para ayudar a sus compañeros de trabajo\n"
+"a comprender el significado y el propósito de la etapa."
 
 #. module: tms
 #. odoo-python
 #: code:addons/tms/models/tms_stage.py:0
 #, python-format
 msgid "You cannot delete default stages."
-msgstr ""
+msgstr "No se pueden eliminar las etapas predeterminadas."
 
 #. module: tms
 #. odoo-python
 #: code:addons/tms/models/tms_order.py:0
 #, python-format
 msgid "You must create an TMS order stage first."
-msgstr ""
+msgstr "Primero debes crear una etapa de pedido SGT."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "e.g. Hours"
-msgstr ""
+msgstr "p.ej. Horas"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "e.g. kg"
-msgstr ""
+msgstr "p.ej. kg"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "e.g. km"
-msgstr ""
+msgstr "p. ej. km"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "e.g. km/h"
-msgstr ""
+msgstr "p.ej. km/h"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "e.g. m"
-msgstr ""
+msgstr "p. ej. m"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__res_partner__distance_traveled_uom__km
 msgid "km"
-msgstr ""
+msgstr "km"
 
 #. module: tms
 #: model:uom.uom,name:tms.uom_kmh
 msgid "km/h"
-msgstr ""
+msgstr "km/h"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__res_partner__distance_traveled_uom__mi
 msgid "mi"
-msgstr ""
+msgstr "mi"
 
 #. module: tms
 #: model:uom.uom,name:tms.uom_mph
 msgid "mph"
-msgstr ""
+msgstr "mph"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_insurance
 msgid "tms.insurance"
-msgstr ""
+msgstr "tms.insurance"
