@@ -12,6 +12,24 @@ class TMSRoute(models.Model):
         domain=[("plan_id", "=", "%(tms_account.tms_route_analytic_plan)d")],
         copy=False,
     )
+    total_revenue = fields.Float(
+        default=0,
+        readonly=True,
+        compute="_compute_total_revenue",
+        store=True,
+        groups="analytic.group_analytic_accounting",
+    )
+    total_expenses = fields.Float(
+        default=0, readonly=True, groups="analytic.group_analytic_accounting"
+    )
+    total_income = fields.Float(
+        default=0, readonly=True, groups="analytic.group_analytic_accounting"
+    )
+
+    @api.depends("total_expenses", "total_income")
+    def _compute_total_revenue(self):
+        for record in self:
+            record.total_revenue = record.total_income - record.total_expenses
 
     @api.model
     def create(self, vals_list):

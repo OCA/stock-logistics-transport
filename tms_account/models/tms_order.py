@@ -21,6 +21,25 @@ class TMSOrder(models.Model):
 
     analytic_account_id = fields.Many2one("account.analytic.account", copy=False)
 
+    total_revenue = fields.Float(
+        default=0,
+        readonly=True,
+        compute="_compute_total_revenue",
+        store=True,
+        groups="analytic.group_analytic_accounting",
+    )
+    total_expenses = fields.Float(
+        default=0, readonly=True, groups="analytic.group_analytic_accounting"
+    )
+    total_income = fields.Float(
+        default=0, readonly=True, groups="analytic.group_analytic_accounting"
+    )
+
+    @api.depends("total_expenses", "total_income")
+    def _compute_total_revenue(self):
+        for record in self:
+            record.total_revenue = record.total_income - record.total_expenses
+
     @api.model
     def create(self, vals):
         order = super().create(vals)
@@ -52,9 +71,9 @@ class TMSOrder(models.Model):
     def _handle_invoices(self):
         all_completed = True
         for line in self.sale_id.order_line:
-            if line.tms_order_id.id == self.id:
+            if line.tms_order_ids.id == self.id:
                 line.qty_delivered = line.product_uom_qty
-            if not line.tms_order_id.stage_id.is_completed:
+            if not line.tms_order_ids.stage_id.is_completed:
                 all_completed = False
 
         if not self.sale_id.invoice_ids and all_completed:

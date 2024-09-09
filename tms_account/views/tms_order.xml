@@ -47,4 +47,29 @@
             </xpath>
         </field>
     </record>
+
+    <record id="tms_order_report_view_graph_inherit" model="ir.ui.view">
+        <field name="name">tms.order.report.view.graph.inherit</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_report_view_graph" />
+        <field name="arch" type="xml">
+            <xpath expr="//graph" position="inside">
+                <field name="total_revenue" string="Revenues" type="measure" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tms_order_view_pivot_inherit" model="ir.ui.view">
+        <field name="name">tms.order.view.pivot.inherit</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_pivot" />
+        <field name="arch" type="xml">
+            <xpath expr="//pivot" position="inside">
+                <field name="total_expenses" type="measure" string="Total Expenses" />
+                <field name="total_income" type="measure" string="Total Income" />
+                <field name="total_revenue" type="measure" string="Total Revenue" />
+            </xpath>
+        </field>
+    </record>
+
 </odoo>
