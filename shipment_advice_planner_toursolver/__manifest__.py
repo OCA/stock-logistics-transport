@@ -22,6 +22,7 @@
         "security/toursolver_delivery_window.xml",
         "security/toursolver_backend_option_definition.xml",
         # views
+        "views/shipment_advice.xml",
         "views/toursolver_backend.xml",
         "views/res_config_settings.xml",
         "views/toursolver_resource.xml",

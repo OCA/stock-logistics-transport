@@ -116,6 +116,22 @@ class TestShipmentAdvicePlannerToursolver(
         ).partner_id
         self.assertEqual(first_stop, planned_partners[1])
         self.assertEqual(second_stop, planned_partners[0])
+        self.assertEqual(shipment.toursolver_nbr_tours, 1)
+        self.assertEqual(shipment.toursolver_nbr_visits, 2)
+        self.assertEqual(shipment.toursolver_delivery_cost, 12345.0)
+        self.assertEqual(shipment.toursolver_additional_cost, 12345.0)
+        self.assertEqual(shipment.toursolver_total_cost, 12345.0)
+        self.assertEqual(shipment.toursolver_travel_distance, 12.345)
+        self.assertEqual(shipment.toursolver_travel_duration, 5.5)
+        self.assertEqual(
+            shipment.toursolver_travel_start_dt,
+            shipment._stop_start_time_to_dt("17:07", "1"),
+        )
+        self.assertEqual(
+            shipment.toursolver_travel_end_dt,
+            shipment._stop_start_time_to_dt("17:13", "1"),
+        )
+        self.assertEqual(shipment.toursolver_travel_total_time, 6.0 / 60)
 
     def test_get_result_ko(self):
         task = self._create_task()
