@@ -1,5 +1,5 @@
 <odoo noupdate="1">
-        <record id="expense_trip_fuel" model="product.product">
+        <record id="expense_trip_toll" model="product.product">
             <field name="name">Toll</field>
             <field name="description">Toll expenses for transportation trips</field>
             <field name="standard_price">0.0</field>
@@ -12,7 +12,7 @@
             <field name="purchase_ok" eval="False" />
         </record>
 
-        <record id="expense_trip_toll" model="product.product">
+        <record id="expense_trip_fuel" model="product.product">
             <field name="name">Fuel</field>
             <field name="description">Fuel expenses for transportation trips</field>
             <field name="standard_price">0.0</field>
