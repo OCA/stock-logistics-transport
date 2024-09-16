@@ -59,6 +59,13 @@ class TourSolverBackend(models.Model):
         copy=True,
         definition="definition_id.backend_options_definition",
     )
+    organization = fields.Char(
+        help="Organization identifier as specified in the Toursolver interface. If set, "
+        "it's used to define how see the results in the Toursolver interface and to "
+        "determine the time zone of the optimization. If not provided, the server will "
+        "guess the time zone from the first visit coordinates which will add extra time "
+        "to the optimization process."
+    )
 
     @api.model_create_multi
     def create(self, vals_list):

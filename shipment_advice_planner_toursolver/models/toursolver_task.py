@@ -214,12 +214,15 @@ class ToursolverTask(models.Model):
         return ret
 
     def _toursolver_json_request_metas(self):
-        return {
+        data = {
             "simulationName": self.name,
             "countryCode": self.env.company.country_id.code,
             "beginDate": self._toursolver_format_date(self.date),
             "language": self.env.user.lang,
         }
+        if self.toursolver_backend_id.organization:
+            data["organization"] = self.toursolver_backend_id.organization
+        return data
 
     @api.model
     def _toursolver_format_date(self, date):

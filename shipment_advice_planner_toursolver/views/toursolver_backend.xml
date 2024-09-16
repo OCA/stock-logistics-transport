@@ -24,6 +24,7 @@
                         <group>
                         <field name="url" />
                         <field name="delivery_window_disabled" />
+                        <field name="organization" />
 
 
                         </group>
