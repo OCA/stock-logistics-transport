@@ -4,7 +4,7 @@
 {
     "name": "Shipment Advice Planner Toursolver",
     "summary": """Shipment advices planning by geo-optimization (TourSolver)""",
-    "version": "16.0.1.0.0",
+    "version": "16.0.2.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
@@ -20,7 +20,7 @@
         "security/toursolver_resource.xml",
         "security/toursolver_task.xml",
         "security/toursolver_delivery_window.xml",
-        "security/toursolver_backend_option_definition.xml",
+        "security/toursolver_request_props_definition.xml",
         # views
         "views/shipment_advice.xml",
         "views/toursolver_backend.xml",

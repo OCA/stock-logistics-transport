@@ -63,18 +63,40 @@
                             <field name="resource_default_travel_penalty" />
                         </group>
                     </group>
-                    <separator string="Options" />
-                    <p
-                        style="width: 100%;color: grey;font-weight: bold;font-style: italic;"
-                    >
-                        Add the required options for route calculation by TourSolver.
-                        You can check the
-                        <a
-                            href="https://geoservices.geoconcept.com/ToursolverCloud/api-book.html#_json_tsoptions"
-                        >documentation</a>
-                        to learn more.<br />
-                    </p>
-                    <field name="backend_options" />
+                    <notebook>
+                       <page
+                            string="Request Options Properties"
+                            name="rqst_options_properties"
+                        >
+                            <p
+                                style="width: 100%;color: grey;font-weight: bold;font-style: italic;"
+                            >
+                                Add additional properties to the options field of the optimization request for route calculation by TourSolver.
+                                You can check the
+                                <a
+                                    href="https://geoservices.geoconcept.com/ToursolverCloud/api-book.html#_json_tsoptions"
+                                >documentation</a>
+                                to learn more.<br />
+                            </p>
+                            <field name="rqst_options_properties" />
+                        </page>
+                        <page
+                            string="Request Orders Properties"
+                            name="rqst_orders_properties"
+                        >
+                            <p
+                                style="width: 100%;color: grey;font-weight: bold;font-style: italic;"
+                            >
+                                Add additional properties added to each item of the orders field of the optimization request for route calculation by TourSolver.
+                                You can check the
+                                <a
+                                    href="https://geoservices.geoconcept.com/ToursolverCloud/api-book.html#_xml_ns0_tsorder"
+                                >documentation</a>
+                                to learn more.<br />
+                            </p>
+                            <field name="rqst_orders_properties" />
+                        </page>
+                    </notebook>
                     <field name="definition_id" invisible="1" />
 
                 </sheet>

@@ -3,12 +3,16 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
     <record
-        model="toursolver.backend.option.definition"
+        model="toursolver.request.props.definition"
         id="toursolver_backend_definition_demo"
     >
         <field
-            name="backend_options_definition"
+            name="options_definition"
             eval="[{'name': '1', 'type': 'char', 'string': 'vehicleCode', 'default': ''}, {'name': '2', 'type': 'boolean', 'string': 'useForbiddenTransitAreas', 'default': False}]"
+        />
+        <field
+            name="orders_definition"
+            eval="[{'name': '1', 'type': 'char', 'string': 'maxDelayTime', 'default': '00:30'}, {'name': '2', 'type': 'integer', 'string': 'delayPenaltyPerHour', 'default': 10}]"
         />
     </record>
 
@@ -23,9 +27,10 @@
         />
         <field name="definition_id" ref="toursolver_backend_definition_demo" />
         <field
-            name="backend_options"
+            name="rqst_options_properties"
             eval="{'1': 'deliveryIntermediateVehicle', '2': False}"
         />
+        <field name="rqst_orders_properties" eval="{'1': '00:40', '2': 20}" />
     </record>
 
 </odoo>

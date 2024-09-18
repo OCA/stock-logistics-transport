@@ -264,7 +264,7 @@ class ToursolverTask(models.Model):
         backend = self.toursolver_backend_id
         phones = filter(None, (partner.mobile or None, partner.phone or None))
         delivery_duration = backend._get_partner_delivery_duration(partner)
-        return {
+        data = {
             "customerId": partner.ref,
             "fixedVisitDuration": seconds_to_duration(delivery_duration),
             "id": partner.id,
@@ -273,7 +273,12 @@ class ToursolverTask(models.Model):
             "type": 0,  # delivery,
             "x": partner.partner_longitude,
             "y": partner.partner_latitude,
+            "possibleVisitDays": ["1"],
         }
+        order_properties = backend._get_rqst_orders_properties()
+        if order_properties:
+            data.update(order_properties)
+        return data
 
     @api.model
     def _toursolver_json_request_order_custom_data_map(self, partner):
@@ -349,7 +354,7 @@ class ToursolverTask(models.Model):
 
     def _toursolver_json_request_options(self):
         self.ensure_one()
-        res = self.toursolver_backend_id._get_backend_options()
+        res = self.toursolver_backend_id._get_rqst_options_properties()
         res.update(
             {
                 "maxOptimDuration": seconds_to_duration(
