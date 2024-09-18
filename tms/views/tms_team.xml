@@ -1,0 +1,162 @@
+<odoo>
+
+    <!-- TMS Team Kanban View -->
+    <record id="tms_team_view_kanban" model="ir.ui.view">
+        <field name="name">tms.team.kanban</field>
+        <field name="model">tms.team</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_dashboard">
+                <field name="name" />
+                <field name="driver_ids" />
+                <field name="driver_count" />
+                <field name="vehicle_ids" />
+                <field name="vehicle_count" />
+                <field name="crew_ids" />
+                <field name="trips_todo_count" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="oe_kanban_global_click o_has_icon oe_kanban_content oe_kanban_card"
+                        >
+                            <div
+                                class="o_project_kanban_main d-flex align-items-baseline gap-1"
+                            >
+                                <div class="o_kanban_card_content mw-100">
+                                    <div class="o_kanban_primary_left">
+                                        <div class="o_primary me-5">
+                                            <!-- Name -->
+                                            <span
+                                                class="o_text_overflow mb-2"
+                                                t-att-title="record.name.value"
+                                            >
+                                                <t t-esc="record.name.value" />
+                                            </span>
+                                            <!-- Drivers -->
+                                            <div
+                                                class="o_row text-muted"
+                                                t-if="record.driver_ids.value"
+                                            >
+                                                <span
+                                                    class="fa fa-users me-2"
+                                                    aria-label="Driver"
+                                                    title="Drivers"
+                                                />
+                                                <span>Drivers:&#032;</span>
+                                                <t t-esc="record.driver_count.value" />
+                                            </div>
+                                            <!-- Vehicles -->
+                                            <div
+                                                class="o_row text-muted"
+                                                t-if="record.vehicle_ids.value"
+                                            >
+                                                <span
+                                                    class="fa fa-bus me-2"
+                                                    aria-label="Vehicle"
+                                                    title="Vehicles"
+                                                />
+                                                <span>Vehicles:&#032;</span>
+                                                <t t-esc="record.vehicle_count.value" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom mt-3">
+                                <div class="oe_kanban_bottom_left">
+                                    <button
+                                        class="btn btn-primary"
+                                        name="%(tms.action_tms_order_kanban)d"
+                                        type="action"
+                                    >
+                                        <t t-esc="record.trips_todo_count.value" />
+                                        TRIPS
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- TMS Team Form View -->
+    <record id="tms_team_view_form" model="ir.ui.view">
+        <field name="name">tms.team.view.form</field>
+        <field name="model">tms.team</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Team Name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="description" colspan="2" />
+                            <field name="sequence" />
+                        </group>
+                        <group>
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Personnel">
+                            <field
+                                name="driver_ids"
+                                widget="many2many_tags"
+                                string="Drivers"
+                            />
+                            <field
+                                name="crew_ids"
+                                widget="many2many_tags"
+                                groups="tms.group_tms_crew"
+                                string="Crews"
+                            />
+                        </group>
+                        <group string="Vehicles">
+                            <field
+                                name="vehicle_ids"
+                                widget="many2many_tags"
+                                string="Vehicles"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TMS Team Search View -->
+    <record id="view_tms_team_search" model="ir.ui.view">
+        <field name="name">tms.team.search</field>
+        <field name="model">tms.team</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+                    name="is_active"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_tms_dash_team" model="ir.actions.act_window">
+        <field name="name">Teams</field>
+        <field name="res_model">tms.team</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="action_tms_config_team" model="ir.actions.act_window">
+        <field name="name">Teams</field>
+        <field name="res_model">tms.team</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

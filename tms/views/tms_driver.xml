@@ -1,0 +1,217 @@
+<odoo>
+    <!-- Drivers -->
+    <record id="view_tms_driver_tree" model="ir.ui.view">
+        <field name="name">tms.driver.tree</field>
+        <field name="model">tms.driver</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="display_name" string="Name" />
+                <field name="phone" />
+                <field name="stage_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_tms_driver_form_inherit" model="ir.ui.view">
+        <field name="name">tms.driver.form.inherit</field>
+        <field name="model">tms.driver</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        domain="[('stage_type', '=', 'driver')]"
+                        options="{'clickable':True}, {'fold_field':'fold'}"
+                    />
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='company_type']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='type']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <xpath expr="//span[@name='address_name']//b" position="attributes">
+                <attribute name="invisible">False</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='function']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <xpath expr="//group" position="after">
+                <group>
+                    <group string="Driver Status">
+                        <field name="is_external" />
+                        <field name="is_training" />
+                    </group>
+                    <group string="Driver Type">
+                        <field name="driver_type" />
+                        <field
+                            name="driver_license_type"
+                            string="Licence Type"
+                            invisible="not driver_type == 'terrestrial'"
+                        />
+                        <field
+                            name="driver_license_number"
+                            string="Licence No."
+                            invisible="not driver_type == 'terrestrial'"
+                        />
+                        <field
+                            name="driver_license_expiration_date"
+                            string="Licence Expiration Date"
+                            invisible="not driver_type == 'terrestrial'"
+                        />
+                        <field
+                            name="driver_license_file"
+                            string="License File"
+                            invisible="not driver_type == 'terrestrial'"
+                        />
+                    </group>
+                    <group
+                        string="Driver Experience"
+                        invisible="not driver_type == 'terrestrial'"
+                    >
+                        <label for="distance_traveled">Distance Traveled</label>
+                        <div class="d-flex w-25">
+                            <field name="distance_traveled" class="w-25" />
+                            <field name="distance_traveled_uom" class="w-50" />
+                        </div>
+                        <field name="driving_experience_years" />
+                    </group>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_tms_driver_kanban" model="ir.ui.view">
+        <field name="name">tms.driver.view.kanban</field>
+        <field name="model">tms.driver</field>
+        <field name="arch" type="xml">
+            <kanban
+                class="o_kanban_dashboard o_emphasize_colors"
+                default_group_by="stage_id"
+                group_create="False"
+                group_edit="False"
+            >
+                <field name="display_name" />
+                <field name="tms_team_id" />
+                <field name="crew_ids" />
+                <field name="mobile" />
+                <field name="avatar_128" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="oe_kanban_global_click o_has_icon oe_kanban_content oe_kanban_card"
+                        >
+                            <div
+                                class="o_project_kanban_main d-flex align-items-baseline gap-1"
+                            >
+                                <div class="o_kanban_card_content mw-100">
+                                    <div class="o_kanban_image o_kanban_image_top_left">
+                                        <img
+                                            t-attf-src="#{kanban_image('tms.driver', 'avatar_128', record.id.raw_value)}"
+                                            t-att-alt="record.id.value"
+                                            class="img-fluid rounded-circle"
+                                        />
+                                    </div>
+                                    <div class="o_kanban_primary_left">
+                                        <div class="o_primary me-5">
+                                            <span
+                                                class="o_text_overflow mb-2"
+                                                t-att-title="record.display_name.value"
+                                            >
+                                                <t t-esc="record.display_name.value" />
+                                            </span>
+                                            <p style="margin-bottom: 0.5rem;">
+                                                <span
+                                                    class="o_text_overflow text-muted"
+                                                    t-if="record.mobile.value"
+                                                >
+                                                    <span
+                                                        class="fa fa-phone me-2"
+                                                        aria-label="Mobile"
+                                                        title="Mobile"
+                                                    />
+                                                    <t t-esc="record.mobile.value" />
+                                                </span>
+                                            </p>
+                                            <p style="margin-bottom: 0.5rem;">
+                                                <span
+                                                    class="o_text_overflow text-muted"
+                                                    t-if="record.tms_team_id.value"
+                                                >
+                                                    <span
+                                                        class="fa fa-users me-2"
+                                                        aria-label="Team"
+                                                        title="Team"
+                                                    />
+                                                    <t
+                                                        t-esc="record.tms_team_id.value"
+                                                    />
+                                                </span>
+                                            </p>
+                                            <p style="margin-bottom: 0.5rem;">
+                                                <span
+                                                    groups="tms.group_tms_crew"
+                                                    class="o_text_overflow text-muted"
+                                                    t-if="record.crew_ids.raw_value != 0"
+                                                >
+                                                    <t>Crews:</t>
+                                                    <span
+                                                        class="oe_kanban_list_many2many"
+                                                    >
+                                                        <field name="crew_ids" />
+                                                    </span>
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom mt-3">
+                                <div class="oe_kanban_bottom_left">
+                                    <label for="is_active">
+                                        <span t-if="record.is_active.raw_value">Active
+                                        </span>
+                                        <span t-else="">Inactive</span>
+                                    </label>
+                                    <field name="is_active" widget="boolean_toggle" />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_tms_driver" model="ir.actions.act_window">
+        <field name="name">Drivers</field>
+        <field name="res_model">tms.driver</field>
+        <field name="domain">[('is_company', '=', False)]</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field
+            name="view_ids"
+            eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_tms_driver_kanban')}),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tms_driver_tree')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_tms_driver_form_inherit')}),
+            ]"
+        />
+    </record>
+
+    <record id="action_tms_config_stage_driver" model="ir.actions.act_window">
+        <field name="name">Drivers</field>
+        <field name="res_model">tms.driver</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

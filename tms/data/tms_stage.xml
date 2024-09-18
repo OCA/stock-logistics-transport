@@ -1,0 +1,57 @@
+<odoo noupdate="1">
+
+    <!-- TMS Default Order Stages -->
+    <record id="tms_stage_order_draft" model="tms.stage">
+        <field name="name">Draft</field>
+        <field name="sequence">10</field>
+        <field name="is_default">True</field>
+        <field name="stage_type">order</field>
+        <field name="custom_color">#ECF0F1</field>
+    </record>
+    <record id="tms_stage_order_confirmed" model="tms.stage">
+        <field name="name">Confirmed</field>
+        <field name="sequence">20</field>
+        <field name="is_default">True</field>
+        <field name="stage_type">order</field>
+        <field name="custom_color">#ECF0F1</field>
+    </record>
+    <record id="tms_stage_order_completed" model="tms.stage">
+        <field name="name">Completed</field>
+        <field name="sequence">30</field>
+        <field name="is_completed">True</field>
+        <field name="stage_type">order</field>
+        <field name="is_default">True</field>
+        <field name="custom_color">#1C2833</field>
+    </record>
+    <record id="tms_stage_order_cancelled" model="tms.stage">
+        <field name="name">Cancelled</field>
+        <field name="sequence">40</field>
+        <field name="fold">True</field>
+        <field name="stage_type">order</field>
+        <field name="is_default">True</field>
+        <field name="custom_color">#1C2833</field>
+    </record>
+
+
+    <!-- TMS Default Driver Stages -->
+    <record id="tms_stage_driver_in_base" model="tms.stage">
+        <field name="name">In Base</field>
+        <field name="sequence">10</field>
+        <field name="stage_type">driver</field>
+        <field name="is_default">True</field>
+        <field name="custom_color">#1C2833</field>
+    </record>
+    <record id="tms_stage_driver_in_trip" model="tms.stage">
+        <field name="name">In Trip</field>
+        <field name="sequence">20</field>
+        <field name="stage_type">driver</field>
+        <field name="custom_color">#1C2833</field>
+    </record>
+    <record id="tms_stage_driver_not_available" model="tms.stage">
+        <field name="name">Not Available</field>
+        <field name="sequence">30</field>
+        <field name="stage_type">driver</field>
+        <field name="custom_color">#1C2833</field>
+    </record>
+
+</odoo>

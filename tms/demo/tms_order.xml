@@ -1,0 +1,31 @@
+<odoo noupdate="1">
+
+    <record id="demo_order_1" model="tms.order">
+        <field name="name">TMS/DEMO1</field>
+        <field name="route">False</field>
+        <field name="origin_id" ref="demo_location_3" />
+        <field name="destination_id" ref="demo_location_4" />
+        <field name="driver_id" ref="demo_driver_3" />
+        <field name="vehicle_id" ref="fleet.vehicle_1" />
+    </record>
+
+    <record id="demo_order_2" model="tms.order">
+        <field name="name">TMS/DEMO2</field>
+        <field name="route">False</field>
+        <field name="origin_id" ref="demo_location_6" />
+        <field name="destination_id" ref="demo_location_1" />
+        <field name="driver_id" ref="demo_driver_1" />
+        <field name="vehicle_id" ref="fleet.vehicle_2" />
+    </record>
+
+    <record id="demo_order_3" model="tms.order">
+        <field name="name">TMS/DEMO3</field>
+        <field name="route">False</field>
+        <field name="origin_id" ref="demo_location_10" />
+        <field name="destination_id" ref="demo_location_8" />
+        <field name="stage_id" ref="tms_stage_order_confirmed" />
+        <field name="driver_id" ref="demo_driver_4" />
+        <field name="vehicle_id" ref="fleet.vehicle_1" />
+    </record>
+
+</odoo>

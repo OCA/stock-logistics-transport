@@ -1,0 +1,80 @@
+<odoo>
+
+    <!-- Locations -->
+    <record id="view_res_partner_tree_tms_location" model="ir.ui.view">
+        <field name="name">res.partner.tree.tms.location</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="display_name" string="Location" />
+                <field name="country_id" />
+                <field name="state_id" />
+                <field name="city" />
+                <field name="street" />
+                <field name="zip" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_res_partner_form_inherit_tms_location" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.tms.location</field>
+        <field name="model">res.partner</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//span[@name='address_name']" position="before">
+                <field name="tms_location" widget="boolean_button" />
+            </xpath>
+            <xpath expr="//field[@name='type']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <xpath expr="//span[@name='address_name']//b" position="attributes">
+                <attribute name="invisible">False</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='vat']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='function']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='title']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search -->
+    <record id="view_res_partner_search_inherit" model="ir.ui.view">
+        <field name="name">res.partner.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="tms_location" />
+            </search>
+        </field>
+    </record>
+
+
+    <record id="action_tms_location" model="ir.actions.act_window">
+        <field name="name">Locations</field>
+        <field name="res_model">res.partner</field>
+        <field
+            name="context"
+        >{"search_default_tms_location": True, "default_tms_location": True}
+        </field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="view_ids"
+            eval="[
+            (5, 0, 0),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_res_partner_tree_tms_location')}),
+            (0, 0, {'view_mode': 'form', 'view_id': ref('view_res_partner_form_inherit_tms_location')})
+            ]"
+        />
+    </record>
+
+</odoo>
