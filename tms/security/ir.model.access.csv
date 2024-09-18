@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_order_tms_user,tms.order.user,model_tms_order,tms.group_tms_user,1,0,0,0
+access_tms_order_tms_admin,tms.order.admin,model_tms_order,tms.group_tms_admin,1,1,1,1
+access_tms_driver_tms_user,tms.driver.user,model_tms_driver,tms.group_tms_user,1,0,0,0
+access_tms_driver_tms_admin,tms.driver.admin,model_tms_driver,tms.group_tms_admin,1,1,1,1
+access_tms_route_tms_user,tms.route.user,model_tms_route,tms.group_tms_user,1,0,0,0
+access_tms_route_tms_admin,tms.route.admin,model_tms_route,tms.group_tms_admin,1,1,1,1
+access_tms_stage_tms_user,tms.stage.user,model_tms_stage,tms.group_tms_user,1,0,0,0
+access_tms_stage_tms_admin,tms.stage.admin,model_tms_stage,tms.group_tms_admin,1,1,1,1
+access_tms_team_tms_user,tms.team.user,model_tms_team,tms.group_tms_user,1,0,0,0
+access_tms_team_tms_admin,tms.team.admin,model_tms_team,tms.group_tms_admin,1,1,1,1
+access_tms_crew_tms_user,tms.crew.user,model_tms_crew,tms.group_tms_user,1,0,0,0
+access_tms_crew_tms_admin,tms.crew.admin,model_tms_crew,tms.group_tms_admin,1,1,1,1
+access_tms_insurance_tms_user,tms.insurance.user,model_tms_insurance,tms.group_tms_user,1,0,0,0
+access_tms_insurance_tms_admin,tms.insurance.admin,model_tms_insurance,tms.group_tms_admin,1,1,1,1

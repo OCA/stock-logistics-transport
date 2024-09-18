@@ -1,0 +1,31 @@
+<!--
+Copyright (C) 2019 Open Source Integrators
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="tms_order_comp_rule" model="ir.rule">
+        <field name="name">TMS Orders Entry</field>
+        <field name="model_id" ref="model_tms_order" />
+        <field name="global" eval="True" />
+    </record>
+
+    <record id="tms_route_comp_rule" model="ir.rule">
+        <field name="name">TMS Routes Entry</field>
+        <field name="model_id" ref="model_tms_route" />
+        <field name="global" eval="True" />
+    </record>
+
+    <record id="tms_stage_comp_rule" model="ir.rule">
+        <field name="name">TMS Stages Entry</field>
+        <field name="model_id" ref="model_tms_stage" />
+        <field name="global" eval="True" />
+    </record>
+
+    <record id="tms_team_comp_rule" model="ir.rule">
+        <field name="name">TMS Teams Entry</field>
+        <field name="model_id" ref="model_tms_team" />
+        <field name="global" eval="True" />
+    </record>
+
+</odoo>

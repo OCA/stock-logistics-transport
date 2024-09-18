@@ -1,0 +1,135 @@
+<odoo>
+
+    <!-- TMS Route Tree View -->
+    <record id="tms_route_view_tree" model="ir.ui.view">
+        <field name="name">tms.route.view.tree</field>
+        <field name="model">tms.route</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="origin_location_id" />
+                <field name="destination_location_id" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- TMS route Form View -->
+    <record id="view_tms_route_form" model="ir.ui.view">
+        <field name="name">tms.route.form</field>
+        <field name="model">tms.route</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <!-- Invisible Fields -->
+
+
+                <!-- Header -->
+
+                <!-- Smart Buttons -->
+                <div name="button_box">
+
+                </div>
+
+
+                <!-- Sheet -->
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Route Name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Route Details">
+                            <label for="distance">Distance</label>
+                            <div class="d-flex w-75">
+                                <field name="distance" class="w-75" />
+                                <span class="w-75" groups="!tms.group_tms_uom">km</span>
+                                <field
+                                    name="distance_uom"
+                                    placeholder="UoM"
+                                    groups="tms.group_tms_uom"
+                                    class="w-75"
+                                />
+                            </div>
+                            <label for="estimated_time">Estimated Time</label>
+                            <div class="d-flex w-75">
+                                <field name="estimated_time" class="w-75" />
+                                <span class="w-75" groups="!tms.group_tms_uom">Hours
+                                </span>
+                                <field
+                                    name="estimated_time_uom"
+                                    placeholder="UoM"
+                                    groups="tms.group_tms_uom"
+                                    class="w-75"
+                                />
+                            </div>
+                            <field
+                                name="stop_locations"
+                                groups="tms.group_tms_route_stop"
+                            />
+                        </group>
+                    </group>
+
+                    <!-- Notebook -->
+                    <notebook>
+                        <page string="Route">
+                            <group>
+                                <field
+                                    name="origin_location_id"
+                                    domain="[('tms_location', '=', 'True')]"
+                                />
+                                <field
+                                    name="destination_location_id"
+                                    domain="[('tms_location', '=', 'True')]"
+                                />
+                            </group>
+                        </page>
+                        <page
+                            string="Stop Locations"
+                            invisible="not stop_locations"
+                            groups="tms.group_tms_route_stop"
+                        >
+                            <field
+                                name="stop_location_ids"
+                                widget="many2many"
+                                domain="[('tms_location', '=', 'True')]"
+                            >
+                                <tree>
+                                    <field name="display_name" string="Location" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Notes">
+                            <group>
+                                <field name="notes" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- TMS Route Search View -->
+    <record id="view_tms_route_search" model="ir.ui.view">
+        <field name="name">tms.route.search</field>
+        <field name="model">tms.route</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+                    name="is_active"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_tms_route" model="ir.actions.act_window">
+        <field name="name">Routes</field>
+        <field name="res_model">tms.route</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
