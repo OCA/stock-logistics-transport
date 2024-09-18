@@ -1,0 +1,23 @@
+<odoo noupdate="1">
+    <record id="uom_category_speed" model="uom.category">
+        <field name="name">Speed</field>
+    </record>
+
+        <!-- UoM for kilometers per hour (km/h) -->
+    <record id="uom_kmh" model="uom.uom">
+        <field name="name">km/h</field>
+        <field name="category_id" ref="uom_category_speed" />
+        <field name="uom_type">reference</field>
+        <field name="factor">1</field>
+        <field name="rounding">0.01000</field>
+    </record>
+
+    <!-- UoM for miles per hour (mph) -->
+    <record id="uom_mph" model="uom.uom">
+        <field name="name">mph</field>
+        <field name="uom_type">bigger</field>
+        <field name="category_id" ref="uom_category_speed" />
+        <field name="factor">1.60934</field>
+        <field name="rounding">0.01000</field>
+    </record>
+</odoo>

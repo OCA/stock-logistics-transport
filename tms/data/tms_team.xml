@@ -1,0 +1,7 @@
+<odoo noupdate="1">
+
+    <record id="tms_team_default" model="tms.team">
+        <field name="name">Default Team</field>
+    </record>
+
+</odoo>
