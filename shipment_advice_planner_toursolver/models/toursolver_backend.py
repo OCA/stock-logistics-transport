@@ -52,12 +52,19 @@ class TourSolverBackend(models.Model):
         " unit. Can be specified on resource level using `workPenalty`option",
     )
     definition_id = fields.Many2one(
-        comodel_name="toursolver.backend.option.definition", readonly=True
+        comodel_name="toursolver.request.props.definition", readonly=True
     )
-    backend_options = fields.Properties(
+    rqst_options_properties = fields.Properties(
         string="Options",
         copy=True,
-        definition="definition_id.backend_options_definition",
+        definition="definition_id.options_definition",
+    )
+    rqst_orders_properties = fields.Properties(
+        string="Orders Properties",
+        copy=True,
+        help="Properties to be used in the definition of each order into the optimization "
+        "request",
+        definition="definition_id.orders_definition",
     )
     organization = fields.Char(
         help="Organization identifier as specified in the Toursolver interface. If set, "
@@ -108,8 +115,15 @@ class TourSolverBackend(models.Model):
     def _get_backend_default_options(self):
         return {"maxOptimDuration": seconds_to_duration(self.duration)}
 
-    def _get_backend_options(self):
+    def _get_rqst_options_properties(self):
         self.ensure_one()
         result = self._get_backend_default_options()
-        result.update({p.get("string"): p.get("value") for p in self.backend_options})
+        result.update(self._properties_to_dict(self.rqst_options_properties))
         return result
+
+    def _get_rqst_orders_properties(self):
+        self.ensure_one()
+        return self._properties_to_dict(self.rqst_orders_properties)
+
+    def _properties_to_dict(self, properties):
+        return {p.get("string"): p.get("value") for p in properties}

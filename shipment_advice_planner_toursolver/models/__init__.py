@@ -1,4 +1,4 @@
-from . import toursolver_backend_option_definition
+from . import toursolver_request_props_definition
 from . import toursolver_backend
 from . import res_company
 from . import res_config_settings
