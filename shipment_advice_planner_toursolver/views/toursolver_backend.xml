@@ -36,9 +36,9 @@
                         </group>
                         <group>
                             <field
-                                name="partner_defaul_delivery_window_start"
+                                name="partner_default_delivery_window_start"
                                 widget="float_time"
-                                attrs="{'invisible': [('delivery_window_disabled', '=', True)], 'required': [('delivery_window_disabled', '=', False)]}"
+                                attrs="{'invisible': [('delivery_window_disabled', '=', True)]}"
                             />
 
                             <label for="duration" />
@@ -52,7 +52,7 @@
                             <field
                                 name="partner_default_delivery_window_end"
                                 widget="float_time"
-                                attrs="{'invisible': [('delivery_window_disabled', '=', True)], 'required': [('delivery_window_disabled', '=', False)]}"
+                                attrs="{'invisible': [('delivery_window_disabled', '=', True)]}"
                             />
 
                             <label for="loading_duration" />

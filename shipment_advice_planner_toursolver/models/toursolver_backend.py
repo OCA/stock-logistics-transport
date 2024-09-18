@@ -21,7 +21,7 @@ class TourSolverBackend(models.Model):
     url = fields.Char()
     api_key = fields.Char()
     delivery_window_disabled = fields.Boolean()
-    partner_defaul_delivery_window_start = fields.Float(
+    partner_default_delivery_window_start = fields.Float(
         default=8.0,
         help="If no delivery winodow specified on the partner this will be used",
     )

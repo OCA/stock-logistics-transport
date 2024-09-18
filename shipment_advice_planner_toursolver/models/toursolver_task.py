@@ -254,9 +254,9 @@ class ToursolverTask(models.Model):
         if custom_data_map:
             order["customDataMap"] = custom_data_map
         if not backend.delivery_window_disabled:
-            order["timeWindows"] = self._toursolver_json_request_order_time_window(
-                partner
-            )
+            time_windows = self._toursolver_json_request_order_time_window(partner)
+            if time_windows:
+                order["timeWindows"] = time_windows
         return order
 
     def _toursolver_json_request_order_common(self, partner):
@@ -308,16 +308,23 @@ class ToursolverTask(models.Model):
                     }
                 )
         else:
-            time_windows.append(self._toursolver_default_delivery_window())
+            default_window = self._toursolver_default_delivery_window()
+            if default_window:
+                time_windows.append(default_window)
         return time_windows
 
     def _toursolver_default_delivery_window(self):
         self.ensure_one()
         delivery_window_model = self.env["toursolver.delivery.window"]
         backend = self.toursolver_backend_id
+        if (
+            not backend.partner_default_delivery_window_start
+            or not backend.partner_default_delivery_window_end
+        ):
+            return None
         return {
             "beginTime": delivery_window_model.float_to_time_repr(
-                backend.partner_defaul_delivery_window_start
+                backend.partner_default_delivery_window_start
             ),
             "endTime": delivery_window_model.float_to_time_repr(
                 backend.partner_default_delivery_window_end
