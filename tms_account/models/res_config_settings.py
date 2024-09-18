@@ -22,7 +22,12 @@ class ResConfigSettings(models.TransientModel):
         "account.analytic.plan",
     )
 
-    tms_analytic_plan_domain = fields.Char(default="[]", store=True, compute="_compute_tms_analytic_plan_domain", readonly=False)
+    tms_analytic_plan_domain = fields.Char(
+        default="[]",
+        store=True,
+        compute="_compute_tms_analytic_plan_domain",
+        readonly=False,
+    )
 
     @api.depends("tms_analytic_plan", "group_tms_route", "group_analytic_accounting")
     def _compute_tms_analytic_plan_domain(self):
