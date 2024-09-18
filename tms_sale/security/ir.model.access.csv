@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_order_tms_user,sale.order.tms.user,model_sale_order,tms.group_tms_user,1,0,0,0
+access_sale_order_tms_admin,sale.order.tms.admin,model_sale_order,tms.group_tms_admin,1,1,
+access_sale_order_line_trip_tms_user,sale.order.line.trip.tms.user,model_sale_order_line_trip,tms.group_tms_user,1,0,0,0
+access_sale_order_line_trip_tms_admin,sale.order.line.trip.tms.admin,model_sale_order_line_trip,tms.group_tms_admin,1,1,1,1
+access_seat_ticket_tms_user,seat.ticket.tms.user,model_seat_ticket,tms.group_tms_user,1,0,0,0
+access_seat_ticket_tms_admin,seat.ticket.tms.admin,model_seat_ticket,tms.group_tms_admin,1,1,1,1
+access_sale_order_line_seat_ticket_tms_user,sale.order.line.seat.ticket.tms.user,model_seat_ticket_line,tms.group_tms_user,1,0,0,0
+access_sale_order_line_seat_ticket_tms_admin,sale.order.line.seat.ticket.tms.admin,model_seat_ticket_line,tms.group_tms_admin,1,1,1,1
