@@ -1,0 +1,439 @@
+<odoo>
+
+
+    <!-- TMS Order Tree View -->
+    <record id="tms_order_view_tree" model="ir.ui.view">
+        <field name="name">tms.order.view.tree</field>
+        <field name="model">tms.order</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="start_trip" column_invisible="1" />
+                <field name="end_trip" column_invisible="1" />
+                <field name="date_end" column_invisible="1" />
+                <field name="name" />
+                <field name="driver_id" />
+                <field name="route_id" groups="tms.group_tms_route" />
+                <field name="stage_id" />
+                <button
+                    name="button_start_order"
+                    type="object"
+                    string="Start"
+                    class="btn btn-primary text-uppercase"
+                    invisible="start_trip or end_trip or date_end"
+                />
+                <button
+                    name="button_end_order"
+                    type="object"
+                    string="End"
+                    class="btn btn-primary text-uppercase"
+                    invisible="not start_trip or end_trip"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <!-- TMS Order Form View -->
+    <record id="tms_order_view_form" model="ir.ui.view">
+        <field name="name">tms.order.view.form</field>
+        <field name="model">tms.order</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <!-- Invisible Fields -->
+                <field name="active" invisible="1" />
+                <field name="crew_active" invisible="1" />
+                <field name="crew_ids_domain" invisible="1" />
+                <field name="driver_ids_domain" invisible="1" />
+                <field name="vehicle_ids_domain" invisible="1" />
+                <field name="start_trip" invisible="1" />
+                <field name="end_trip" invisible="1" />
+
+                <!-- Header -->
+                <header>
+                    <button
+                        name="button_start_order"
+                        type="object"
+                        string="Start"
+                        class="btn btn-primary text-uppercase"
+                        invisible="start_trip or end_trip or date_end"
+                    />
+                    <button
+                        name="button_refresh_duration"
+                        type="object"
+                        string="Refresh"
+                        class="btn btn-secondary text-uppercase"
+                        invisible="not start_trip or end_trip"
+                    />
+                    <button
+                        name="button_end_order"
+                        type="object"
+                        string="End"
+                        class="btn btn-primary text-uppercase"
+                        invisible="not start_trip or end_trip"
+                    />
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        domain="[('stage_type', '=', 'order')]"
+                        options="{'clickable':True}, {'fold_field':'fold'}"
+                    />
+                </header>
+
+
+                <!-- Sheet -->
+                <sheet>
+                    <!-- Smart Buttons -->
+                    <div class="oe_button_box" name="button_box">
+
+                    </div>
+
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Trip Name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="tms_team_id" groups="tms.group_tms_team" />
+
+                            <field
+                                name="crew_id"
+                                groups="tms.group_tms_crew"
+                                domain="[('id', 'in', crew_ids_domain)]"
+                            />
+
+                            <field
+                                name="vehicle_id"
+                                domain="[('id', 'in', vehicle_ids_domain)]"
+                            />
+
+                            <field
+                                name="driver_id"
+                                domain="[('id', 'in', driver_ids_domain)]"
+                            />
+
+                        </group>
+                        <group groups="tms.group_tms_route">
+                            <field name="route" />
+                            <field
+                                name="route_id"
+                                invisible="not route"
+                                required="route"
+                            />
+                            <field
+                                name="origin_id"
+                                invisible="route"
+                                required="not route"
+                            />
+                            <field
+                                name="destination_id"
+                                invisible="route"
+                                required="not route"
+                            />
+                        </group>
+                        <group groups="!tms.group_tms_route">
+                            <field name="origin_id" required="True" />
+                            <field name="destination_id" required="True" />
+                        </group>
+                    </group>
+                    <group string="Description" name="description_grp">
+                        <field
+                            name="description"
+                            nolabel="1"
+                            colspan="2"
+                            placeholder="Add a description for the order..."
+                        />
+                    </group>
+
+                    <!-- Notebook -->
+                    <notebook>
+                        <page string="Planning" name="planning_page">
+                            <group>
+                                <field name="scheduled_date_start" />
+                                <label for="scheduled_duration">Scheduled Duration
+                                </label>
+                                <div class="d-flex w-25">
+                                    <field name="scheduled_duration" class="w-25" />
+                                    <span class="w-75">Hours</span>
+                                </div>
+                                <field name="scheduled_date_end" />
+                            </group>
+                        </page>
+                        <page string="Trip Tracking" name="tracking_page">
+                            <group>
+                                <field name="date_start" />
+                                <field name="date_end" />
+                                <label for="duration">Duration</label>
+                                <div class="d-flex w-25">
+                                    <field name="duration" class="w-25" />
+                                    <span class="w-75">Hours</span>
+                                </div>
+                            </group>
+                        </page>
+                    </notebook>
+
+                </sheet>
+
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" />
+                    <field name="activity_ids" widget="mail_activity" />
+                    <field name="message_ids" widget="mail_thread" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <!-- TMS Order Kanban View -->
+    <record id="tms_order_view_kanban" model="ir.ui.view">
+        <field name="name">tms.order.view.kanban</field>
+        <field name="model">tms.order</field>
+        <field name="arch" type="xml">
+            <kanban
+                class="o_kanban_dashboard o_emphasize_colors"
+                default_group_by="stage_id"
+                group_create="False"
+                group_edit="False"
+            >
+                <field name="name" />
+                <field name="vehicle_id" />
+                <field name="route_id" />
+                <field name="route_origin" />
+                <field name="route_destination" />
+                <field name="origin_id" />
+                <field name="destination_id" />
+                <field name="tms_team_id" />
+                <field name="crew_id" />
+                <field name="driver_id" />
+                <templates>
+                    <t t-name="kanban-menu" groups="base.group_user">
+                        <div class="container">
+                            <div class="row">
+                                <!-- TODO: All Views -->
+                                <div
+                                    class="col-6 o_kanban_card_manage_section o_kanban_manage_view"
+                                >
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >
+                                        <span>View</span>
+                                    </h5>
+                                    <div role="menuitem" groups="tms.group_tms_route">
+                                        <a type="object">Route
+                                        </a> <!-- TODO: Action view route -> map view (name="action_view_route") -->
+                                    </div>
+                                </div>
+                                <!-- TODO: Reporting -->
+                                <div
+                                    class="col-6 o_kanban_card_manage_section o_kanban_manage_reporting"
+                                >
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >
+                                        <span>Reporting</span>
+                                    </h5>
+                                    <!-- TODO: Actions (name="action_...")  -->
+                                    <div role="menuitem" class="o_kanban_task_analysis">
+                                        <a type="object">Tasks Analysis</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_card_manage_settings row">
+                                <!-- TODO: Color picker -->
+                                <!-- <div role="menuitem" aria-haspopup="true" class="col-6">-->
+                                <!-- <ul class="oe_kanban_colorpicker" data-field="color" role="popup"/>-->
+                                <!-- </div>-->
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="oe_kanban_global_click o_has_icon oe_kanban_content oe_kanban_card"
+                        >
+                            <div
+                                class="o_project_kanban_main d-flex align-items-baseline gap-1"
+                            >
+                                <div class="o_kanban_card_content mw-100">
+                                    <div class="o_kanban_primary_left">
+                                        <div class="o_primary me-5">
+                                            <span
+                                                class="o_text_overflow mb-2"
+                                                t-att-title="record.name.value"
+                                            >
+                                                <t t-esc="record.name.value" />
+                                            </span>
+                                            <!-- VEHICLE -->
+                                            <span
+                                                class="o_text_overflow text-muted"
+                                                t-if="record.vehicle_id.value"
+                                            >
+                                                <span
+                                                    class="fa fa-car me-2"
+                                                    aria-label="Vehicle"
+                                                    title="Vehicle"
+                                                />
+                                                <t t-esc="record.vehicle_id.value" />
+                                            </span>
+                                            <!-- ROUTES -->
+                                            <div
+                                                t-if="record.route_id.raw_value"
+                                                class="text-muted o_row"
+                                            >
+                                                <span
+                                                    groups="tms.group_tms_route"
+                                                    class="fa fa-map-o me-2"
+                                                    title="Route"
+                                                />
+                                                <t
+                                                    t-esc="record.route_origin.value"
+                                                    groups="tms.group_tms_route"
+                                                />
+                                                <i
+                                                    groups="tms.group_tms_route"
+                                                    class="fa fa-long-arrow-right mx-2 oe_read_only"
+                                                    aria-label="Arrow icon"
+                                                    title="Arrow"
+                                                />
+                                                <t
+                                                    groups="tms.group_tms_route"
+                                                    t-esc="record.route_destination.value"
+                                                />
+                                            </div>
+                                            <!-- NOT ROUTES -->
+                                            <div t-else="" class="text-muted o_row">
+                                                <span
+                                                    class="fa fa-map-o me-2"
+                                                    title="Route"
+                                                />
+                                                <t t-esc="record.origin_id.value" />
+                                                <i
+                                                    class="fa fa-long-arrow-right mx-2 oe_read_only"
+                                                    aria-label="Arrow icon"
+                                                    title="Arrow"
+                                                />
+                                                <t
+                                                    t-esc="record.destination_id.value"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="o_kanban_record_bottom mt-3">
+                                <div class="oe_kanban_bottom_left">
+                                    <div
+                                        t-if="record.tms_team_id.raw_value or record.crew_id.raw_value"
+                                        groups="tms.group_tms_team"
+                                        class="text-muted o_row"
+                                    >
+                                        <i>
+                                            <t
+                                                t-if="record.tms_team_id.raw_value"
+                                                t-esc="record.tms_team_id.value"
+                                                groups="tms.group_tms_team"
+                                            />
+                                            <span
+                                                t-if="record.tms_team_id.raw_value and record.crew_id.raw_value"
+                                                groups="tms.group_tms_crew"
+                                            >&#032;/&#032;
+                                            </span>
+                                            <t
+                                                t-if="record.crew_id.raw_value"
+                                                t-esc="record.crew_id.value"
+                                                groups="tms.group_tms_crew"
+                                            />
+                                        </i>
+                                    </div>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <field
+                                        name="driver_id"
+                                        widget="many2one_avatar_user"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+
+            </kanban>
+        </field>
+    </record>
+
+    <!-- TMS Order Search View -->
+    <record id="view_tms_order_search" model="ir.ui.view">
+        <field name="name">tms.order.search</field>
+        <field name="model">tms.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter
+                    name="is_active"
+                    string="Archived"
+                    domain="[('active', '=', 'False')]"
+                />
+                <field name="tms_team_id" string="Team" />
+                <field name="stage_id" string="Stage" />
+            </search>
+        </field>
+    </record>
+
+    <!-- TMS Order Graph View -->
+    <record id="tms_order_report_view_graph" model="ir.ui.view">
+        <field name="name">tms.order.report.view.graph</field>
+        <field name="model">tms.order</field>
+        <field name="arch" type="xml">
+            <graph string="Trip Reports" type="bar">
+                <field name="name" type="row" />
+                <field name="duration" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- TMS Order Pivot View-->
+    <record id="tms_order_view_pivot" model="ir.ui.view">
+        <field name="name">tms.order.view.pivot</field>
+        <field name="model">tms.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Trips">
+                <field name="stage_id" type="col" />
+                <field name="name" type="row" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_tms_operation_trip" model="ir.actions.act_window">
+        <field name="name">Trips</field>
+        <field name="res_model">tms.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_tms_report_order" model="ir.actions.act_window">
+        <field name="name">Trips</field>
+        <field name="res_model">tms.order</field>
+        <field name="view_mode">graph,pivot</field>
+    </record>
+
+    <record id="action_tms_config_stage_travel" model="ir.actions.act_window">
+        <field name="name">Stages</field>
+        <field name="res_model">tms.order</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_tms_dash_order" model="ir.actions.act_window">
+        <field name="name">Trips</field>
+        <field name="res_model">tms.order</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record id="action_tms_order_kanban" model="ir.actions.act_window">
+        <field name="name">Trips Kanban</field>
+        <field name="res_model">tms.order</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('tms_team_id', '=', active_id)]</field>
+    </record>
+
+</odoo>

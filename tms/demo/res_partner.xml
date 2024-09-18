@@ -1,0 +1,106 @@
+<odoo noupdate="1">
+
+    <!-- Locations -->
+
+    <record id="demo_location_1" model="res.partner">
+        <field name="name">Auditorio Nacional</field>
+        <field name="tms_location">True</field>
+        <field name="street">Av. P.º de la Reforma 50</field>
+        <field name="city">Mexico City</field>
+        <field name="state_id" ref="base.state_mx_df" />
+        <field name="zip">76100</field>
+        <field name="country_id" ref="base.mx" />
+    </record>
+
+    <record id="demo_location_2" model="res.partner">
+        <field name="name">Tec de Monterrey, Campus Monterrey</field>
+        <field name="tms_location">True</field>
+        <field name="street">Av. Eugenio Garza Sada 2501 Sur, Tecnológico</field>
+        <field name="city">Monterrey</field>
+        <field name="state_id" ref="base.state_mx_nl" />
+        <field name="zip">64849</field>
+        <field name="country_id" ref="base.mx" />
+    </record>
+
+    <record id="demo_location_3" model="res.partner">
+        <field name="name">Querétaro Centro de Congresos y Teatro Metropolitano</field>
+        <field name="tms_location">True</field>
+        <field name="street">Paseo de las Artes 1531-B</field>
+        <field name="city">Querétaro</field>
+        <field name="state_id" ref="base.state_mx_qro" />
+        <field name="zip">76090</field>
+        <field name="country_id" ref="base.mx" />
+    </record>
+
+    <record id="demo_location_4" model="res.partner">
+        <field name="name">Los Arcos de Querétaro</field>
+        <field name="tms_location">True</field>
+        <field name="street">Av. Constituyentes</field>
+        <field name="city">Querétaro</field>
+        <field name="state_id" ref="base.state_mx_qro" />
+        <field name="zip">76000</field>
+        <field name="country_id" ref="base.mx" />
+    </record>
+
+    <record id="demo_location_5" model="res.partner">
+        <field name="name">Teatro de la República</field>
+        <field name="tms_location">True</field>
+        <field name="street">Calle Venustiano Carranza</field>
+        <field name="city">Querétaro</field>
+        <field name="state_id" ref="base.state_mx_qro" />
+        <field name="zip">76000</field>
+        <field name="country_id" ref="base.mx" />
+    </record>
+
+    <record id="demo_location_6" model="res.partner">
+        <field name="name">Cerro de las Campanas</field>
+        <field name="tms_location">True</field>
+        <field name="street">Av. Constituyentes</field>
+        <field name="city">Querétaro</field>
+        <field name="state_id" ref="base.state_mx_qro" />
+        <field name="zip">76000</field>
+        <field name="country_id" ref="base.mx" />
+    </record>
+
+    <record id="demo_location_7" model="res.partner">
+        <field name="name">Museo de Arte de Querétaro</field>
+        <field name="tms_location">True</field>
+        <field name="street">Allende Sur</field>
+        <field name="city">Querétaro</field>
+        <field name="state_id" ref="base.state_mx_qro" />
+        <field name="zip">76000</field>
+        <field name="country_id" ref="base.mx" />
+    </record>
+
+    <record id="demo_location_8" model="res.partner">
+        <field name="name">Plaza de Armas</field>
+        <field name="tms_location">True</field>
+        <field name="street">Centro Histórico</field>
+        <field name="city">Querétaro</field>
+        <field name="state_id" ref="base.state_mx_qro" />
+        <field name="zip">76000</field>
+        <field name="country_id" ref="base.mx" />
+    </record>
+
+    <record id="demo_location_9" model="res.partner">
+        <field name="name">The Alamo</field>
+        <field name="tms_location">True</field>
+        <field name="street">300 Alamo Plaza</field>
+        <field name="city">San Antonio</field>
+        <field name="state_id" ref="base.state_us_44" />
+        <field name="zip">78205</field>
+        <field name="country_id" ref="base.us" />
+    </record>
+
+    <record id="demo_location_10" model="res.partner">
+        <field name="name">Space Center Houston</field>
+        <field name="tms_location">True</field>
+        <field name="street">1601 NASA Parkway</field>
+        <field name="city">Houston</field>
+        <field name="state_id" ref="base.state_us_44" />
+        <field name="zip">77058</field>
+        <field name="country_id" ref="base.us" />
+    </record>
+
+
+</odoo>
