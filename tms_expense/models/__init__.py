@@ -1,3 +1,3 @@
 from . import hr_expense
-from . import res_partner
+from . import tms_driver
 from . import tms_order
