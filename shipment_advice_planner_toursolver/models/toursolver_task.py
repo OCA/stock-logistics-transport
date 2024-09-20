@@ -145,7 +145,10 @@ class ToursolverTask(models.Model):
             url,
             json=json_request,
             headers={"Accept": "application/json"},
-            timeout=(3, 5),
+            timeout=(
+                self.toursolver_backend_id.connection_timeout,
+                self.toursolver_backend_id.read_timeout,
+            ),
         )
         return self._toursolver_check_response(response)
 
@@ -155,7 +158,10 @@ class ToursolverTask(models.Model):
         response = requests.get(
             url,
             headers={"Accept": "application/json"},
-            timeout=(3, 5),
+            timeout=(
+                self.toursolver_backend_id.connection_timeout,
+                self.toursolver_backend_id.read_timeout,
+            ),
         )
         return self._toursolver_check_response(response)
 

@@ -73,6 +73,16 @@ class TourSolverBackend(models.Model):
         "guess the time zone from the first visit coordinates which will add extra time "
         "to the optimization process."
     )
+    connection_timeout = fields.Integer(
+        help="Timeout in seconds for the connection to the Toursolver API",
+        default=10,
+        required=True,
+    )
+    read_timeout = fields.Integer(
+        help="Timeout in seconds for the read operation to the Toursolver API",
+        default=10,
+        required=True,
+    )
 
     @api.model_create_multi
     def create(self, vals_list):

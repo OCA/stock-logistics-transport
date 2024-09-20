@@ -22,17 +22,15 @@
           </h1>
                     <group>
                         <group>
-                        <field name="url" />
-                        <field name="delivery_window_disabled" />
-                        <field name="organization" />
-
-
+                            <field name="url" />
+                            <field name="connection_timeout" />
+                            <field name="delivery_window_disabled" />
+                            <field name="organization" />
                         </group>
                         <group>
-                        <field name="api_key" />
-                        <field name="delivery_duration" />
-
-
+                            <field name="api_key" />"
+                            <field name="read_timeout" />
+                            <field name="delivery_duration" />
                         </group>
                         <group>
                             <field
