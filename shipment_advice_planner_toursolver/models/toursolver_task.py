@@ -214,12 +214,15 @@ class ToursolverTask(models.Model):
         return ret
 
     def _toursolver_json_request_metas(self):
-        return {
+        data = {
             "simulationName": self.name,
             "countryCode": self.env.company.country_id.code,
             "beginDate": self._toursolver_format_date(self.date),
             "language": self.env.user.lang,
         }
+        if self.toursolver_backend_id.organization:
+            data["organization"] = self.toursolver_backend_id.organization
+        return data
 
     @api.model
     def _toursolver_format_date(self, date):
@@ -375,7 +378,7 @@ class ToursolverTask(models.Model):
 
     def _toursolver_get_result(self):
         self.ensure_one()
-        result = self._toursolver_get(action="result", taskId=self.task_id)
+        result = self._toursolver_get(action="toursResult", taskId=self.task_id)
         if not result:
             return
         self.result_data = base64.b64encode(json.dumps(result).encode())
@@ -422,14 +425,15 @@ class ToursolverTask(models.Model):
 
     def _toursolver_planned_partner_ids_by_resource_id(self):
         result = defaultdict(list)
-        for order in self.result_json["plannedOrders"]:
-            if (
-                order.get("resourceId")
-                and order.get("stopId")
-                and order.get("stopId").isdigit()
-                and order.get("stopType", 0) == 0
-            ):
-                result[order.get("resourceId")].append(int(order.get("stopId")))
+        for tour in self.result_json["tours"]:
+            for order in tour["plannedOrders"]:
+                if (
+                    order.get("resourceId")
+                    and order.get("stopId")
+                    and order.get("stopId").isdigit()
+                    and order.get("stopType", 0) == 0
+                ):
+                    result[order.get("resourceId")].append(int(order.get("stopId")))
         return result
 
     def _toursolver_planned_partner_ids(self):
@@ -511,14 +515,15 @@ class ToursolverTask(models.Model):
                 rank += 1
 
     def _toursolver_planned_partner_ids_sorted(self, resource_id):
-        for order in self.result_json["plannedOrders"]:
-            if (
-                order.get("resourceId") == resource_id
-                and order.get("stopId")
-                and order.get("stopId").isdigit()
-                and order.get("stopType", 0) == 0
-            ):
-                yield int(order.get("stopId"))
+        for tour in self.result_json["tours"]:
+            for order in tour["plannedOrders"]:
+                if (
+                    order.get("resourceId") == resource_id
+                    and order.get("stopId")
+                    and order.get("stopId").isdigit()
+                    and order.get("stopType", 0) == 0
+                ):
+                    yield int(order.get("stopId"))
 
     def button_cancel(self):
         self.write({"toursolver_status": "aborted"})

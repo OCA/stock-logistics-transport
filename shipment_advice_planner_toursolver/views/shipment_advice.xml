@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="shipment_advice_view_form" model="ir.ui.view">
+        <field name="name">shipment.advice.form</field>
+        <field name="model">shipment.advice</field>
+        <field name="inherit_id" ref="shipment_advice.shipment_advice_view_form" />
+        <field name="arch" type="xml">
+            <page name="carriers" position="after">
+                <page name="toursolver" string="Toursolver">
+                    <group>
+                        <field name="toursolver_resource_id" />
+                        <field name="toursolver_task_id" />
+                    </group>
+                    <group name="torusolver_stats" string="Stats">
+                        <group name="stats right">
+                            <field name="toursolver_nbr_tours" />
+                            <field name="toursolver_nbr_visits" />
+                            <label for="toursolver_travel_distance" />
+                            <div class="o_row" name="toursolver_travel_distance">
+                                <field
+                                    name="toursolver_travel_distance"
+                                    class="oe_inline"
+                                />
+                                <field name="toursolver_travel_distance_uom_name" />
+                            </div>
+                            <field
+                                name="toursolver_travel_duration"
+                                widget="float_time"
+                            />
+                            <field name="toursolver_travel_start_dt" />
+                            <field name="toursolver_travel_end_dt" />
+                            <field
+                                name="toursolver_travel_total_time"
+                                widget="float_time"
+                            />
+                        </group>
+                        <group name="stats left">
+                            <field name="toursolver_delivery_cost" />
+                            <field name="toursolver_additional_cost" />
+                            <field name="toursolver_total_cost" />
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <record id="shipment_advice_view_tree" model="ir.ui.view">
+        <field name="name">shipment.advice.tree</field>
+        <field name="model">shipment.advice</field>
+        <field name="inherit_id" ref="shipment_advice.shipment_advice_view_tree" />
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="toursolver_resource_id" optional="hide" />
+                <field name="toursolver_task_id" optional="hide" />
+                <field name="toursolver_nbr_tours" optional="hide" />
+                <field name="toursolver_nbr_visits" optional="hide" />
+                <field name="toursolver_travel_distance" optional="hide" />
+                <field
+                    name="toursolver_travel_duration"
+                    optional="hide"
+                    widget="float_time"
+                />
+                <field name="toursolver_delivery_cost" optional="hide" />
+                <field name="toursolver_additional_cost" optional="hide" />
+                <field name="toursolver_total_cost" optional="hide" />
+                <field name="toursolver_travel_start_dt" optional="hide" />
+                <field name="toursolver_travel_end_dt" optional="hide" />
+                <field
+                    name="toursolver_travel_total_time"
+                    optional="hide"
+                    widget="float_time"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
