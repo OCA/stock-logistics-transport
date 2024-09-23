@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-05 17:36+0000\n"
+"PO-Revision-Date: 2024-09-23 15:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
@@ -191,17 +191,17 @@ msgstr "Nome visualizzato"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_travel_distance_uom
 msgid "Distance UoM"
-msgstr ""
+msgstr "UdM distanza"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_travel_distance
 msgid "Distance to travel for the delivery in Km"
-msgstr ""
+msgstr "Distanza in km da percorrere per la consegna"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_travel_distance_uom_name
 msgid "Distance unit of measure label"
-msgstr ""
+msgstr "Etichetta unità di misura distanza"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__dock_id
@@ -221,7 +221,7 @@ msgstr "Bozza"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_travel_duration
 msgid "Driving time for the travel, excluding the time spent at each stop"
-msgstr ""
+msgstr "Tempo di guida per il viaggio, escluso tempo per le pause"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__duration
@@ -354,17 +354,17 @@ msgstr "Nome"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_nbr_tours
 msgid "Number of Tours"
-msgstr ""
+msgstr "Numero di viaggi"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_nbr_visits
 msgid "Number of delivery stops in the tours"
-msgstr ""
+msgstr "Numero di fermate per la consegna nei viaggi"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_nbr_visits
 msgid "Number of visits"
-msgstr ""
+msgstr "Numero di visite"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__duration
@@ -380,7 +380,7 @@ msgstr "Opzioni"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__organization
 msgid "Organization"
-msgstr ""
+msgstr "Organizzazione"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__organization
@@ -391,6 +391,12 @@ msgid ""
 "will guess the time zone from the first visit coordinates which will add "
 "extra time to the optimization process."
 msgstr ""
+"Identificatore dell'organizzazione come specificato nell'interfaccia "
+"Toursolver. Se impostato, viene utilizzato per definire come visualizzare i "
+"risultati nell'interfaccia Toursolver e per determinare il fuso orario "
+"dell'ottimizzazione. Se non fornito, il server dedurrà il fuso orario dalle "
+"coordinate della prima visita, il che aggiungerà tempo extra al processo di "
+"ottimizzazione."
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__partner_id
@@ -535,7 +541,7 @@ msgstr "Stato"
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.shipment_advice_view_form
 msgid "Stats"
-msgstr ""
+msgstr "Statistiche"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_task__toursolver_status
@@ -631,6 +637,8 @@ msgid ""
 "Total time for the travel, including the time spent at each stop and "
 "reloading time"
 msgstr ""
+"Tempo totale del viaggio, incluso il tempo trascorso in ogni fermata e il "
+"tempo di ricarica"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.actions.act_window,name:shipment_advice_planner_toursolver.toursolver_backend_act_window
@@ -670,12 +678,12 @@ msgstr "Stato TourSolver"
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.shipment_advice_view_form
 msgid "Toursolver"
-msgstr ""
+msgstr "TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_additional_cost
 msgid "Toursolver Additional Cost"
-msgstr ""
+msgstr "Costo aggiuntivo TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_backend_option_definition
@@ -685,7 +693,7 @@ msgstr "Definizione opzione backend TourSolver"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_delivery_cost
 msgid "Toursolver Delivery Cost"
-msgstr ""
+msgstr "Costo consegna TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_res_partner__toursolver_delivery_duration
@@ -721,22 +729,22 @@ msgstr "Lavoro TourSolver"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_total_cost
 msgid "Toursolver Total Cost"
-msgstr ""
+msgstr "Costo totale TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_travel_distance
 msgid "Toursolver Travel Distance"
-msgstr ""
+msgstr "Distanza viaggio TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_travel_duration
 msgid "Toursolver Travel Duration"
-msgstr ""
+msgstr "Durata viaggio TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_travel_total_time
 msgid "Toursolver Travel Total Time"
-msgstr ""
+msgstr "Tempo totale viaggio TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__task_id
@@ -751,12 +759,12 @@ msgstr "Trasferimento"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_travel_end_dt
 msgid "Travel End Time"
-msgstr ""
+msgstr "Ora fine viaggio"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_shipment_advice__toursolver_travel_start_dt
 msgid "Travel Start Time"
-msgstr ""
+msgstr "Ora inizio viaggio"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__url
