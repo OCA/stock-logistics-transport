@@ -21,5 +21,6 @@ class FleetVehicle(models.Model):
 
     @api.depends("operation")
     def _compute_cargo_type(self):
-        if self.operation == "passenger":
-            self.cargo_type = False
+        for record in self:
+            if record.operation == "passenger":
+                record.cargo_type = False
