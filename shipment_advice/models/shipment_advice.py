@@ -69,6 +69,7 @@ class ShipmentAdvice(models.Model):
         states={"draft": [("readonly", False)], "confirmed": [("readonly", False)]},
         readonly=True,
         index=True,
+        domain="[('warehouse_id', '=', warehouse_id)]",
     )
     arrival_date = fields.Datetime(
         states={"draft": [("readonly", False)], "confirmed": [("readonly", False)]},
@@ -114,6 +115,7 @@ class ShipmentAdvice(models.Model):
             "in_progress": [("readonly", False)],
         },
         readonly=True,
+        check_company=True,
     )
     planned_moves_count = fields.Integer(compute="_compute_count")
     planned_picking_ids = fields.One2many(
@@ -132,6 +134,7 @@ class ShipmentAdvice(models.Model):
             "in_progress": [("readonly", False)],
         },
         readonly=True,
+        check_company=True,
     )
     loaded_move_line_without_package_ids = fields.One2many(
         comodel_name="stock.move.line",
@@ -144,6 +147,7 @@ class ShipmentAdvice(models.Model):
         },
         domain=[("package_level_id", "=", False)],
         readonly=True,
+        check_company=True,
     )
     loaded_move_lines_without_package_count = fields.Integer(compute="_compute_count")
     loaded_picking_ids = fields.One2many(
