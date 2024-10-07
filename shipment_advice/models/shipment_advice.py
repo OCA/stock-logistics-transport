@@ -408,9 +408,9 @@ class ShipmentAdvice(models.Model):
             else:
                 picking._action_done()
 
-    def _unplan_loaded_moves(self):
+    def _unplan_planned_moves(self):
         """Unplan moves that were not loaded and validated"""
-        moves_to_unplan = self.loaded_move_line_ids.move_id.filtered(
+        moves_to_unplan = self.planned_move_ids.filtered(
             lambda m: m.state not in ("cancel", "done") and not m.quantity_done
         )
         moves_to_unplan.shipment_advice_id = False
@@ -426,8 +426,7 @@ class ShipmentAdvice(models.Model):
                     )
                 )
             shipment._close_pickings()
-            if shipment.shipment_type == "outgoing":
-                shipment._unplan_loaded_moves()
+            shipment._unplan_planned_moves()
             shipment_advice_ids_to_validate.append(shipment.id)
         if shipment_advice_ids_to_validate:
             self.browse(shipment_advice_ids_to_validate)._action_done()

@@ -1,4 +1,5 @@
 # Copyright 2024 Camptocamp SA
+# Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
 from odoo import api, fields, models
@@ -27,17 +28,13 @@ class ShipmentAdvice(models.Model):
         copy=False,
     )
 
-    @api.depends("planned_move_ids.purchase_line_id.order_id.partner_id")
+    @api.depends("planned_move_ids.picking_id.partner_id", "state", "shipment_type")
     def _compute_supplier_ids(self):
         for shipment in self:
-            if shipment.shipment_type != "incoming":
-                shipment.supplier_ids = False
-            elif shipment.state == "done":
-                shipment.supplier_ids = (
-                    shipment.loaded_move_line_ids.picking_id.partner_id
-                )
-            else:
-                shipment.supplier_ids = shipment.planned_move_ids.picking_id.partner_id
+            supplier_ids = False
+            if shipment.shipment_type == "incoming":
+                supplier_ids = shipment.planned_move_ids.picking_id.partner_id
+            shipment.supplier_ids = supplier_ids
 
     @api.depends("invoice_line_ids")
     def _compute_account_move_id(self):
