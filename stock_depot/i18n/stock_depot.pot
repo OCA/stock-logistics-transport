@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_depot
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.actions.act_window,name:stock_depot.stock_depot_action
+#: model:ir.ui.menu,name:stock_depot.stock_depot_menu
+msgid "Depots"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__name
+msgid "Name"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: stock_depot
+#: model:ir.model,name:stock_depot.model_stock_depot
+msgid "Partner depot"
+msgstr ""
