@@ -145,7 +145,10 @@ class ToursolverTask(models.Model):
             url,
             json=json_request,
             headers={"Accept": "application/json"},
-            timeout=(3, 5),
+            timeout=(
+                self.toursolver_backend_id.connection_timeout,
+                self.toursolver_backend_id.read_timeout,
+            ),
         )
         return self._toursolver_check_response(response)
 
@@ -155,7 +158,10 @@ class ToursolverTask(models.Model):
         response = requests.get(
             url,
             headers={"Accept": "application/json"},
-            timeout=(3, 5),
+            timeout=(
+                self.toursolver_backend_id.connection_timeout,
+                self.toursolver_backend_id.read_timeout,
+            ),
         )
         return self._toursolver_check_response(response)
 
@@ -254,9 +260,9 @@ class ToursolverTask(models.Model):
         if custom_data_map:
             order["customDataMap"] = custom_data_map
         if not backend.delivery_window_disabled:
-            order["timeWindows"] = self._toursolver_json_request_order_time_window(
-                partner
-            )
+            time_windows = self._toursolver_json_request_order_time_window(partner)
+            if time_windows:
+                order["timeWindows"] = time_windows
         return order
 
     def _toursolver_json_request_order_common(self, partner):
@@ -264,7 +270,7 @@ class ToursolverTask(models.Model):
         backend = self.toursolver_backend_id
         phones = filter(None, (partner.mobile or None, partner.phone or None))
         delivery_duration = backend._get_partner_delivery_duration(partner)
-        return {
+        data = {
             "customerId": partner.ref,
             "fixedVisitDuration": seconds_to_duration(delivery_duration),
             "id": partner.id,
@@ -273,7 +279,12 @@ class ToursolverTask(models.Model):
             "type": 0,  # delivery,
             "x": partner.partner_longitude,
             "y": partner.partner_latitude,
+            "possibleVisitDays": ["1"],
         }
+        order_properties = backend._get_rqst_orders_properties()
+        if order_properties:
+            data.update(order_properties)
+        return data
 
     @api.model
     def _toursolver_json_request_order_custom_data_map(self, partner):
@@ -303,16 +314,23 @@ class ToursolverTask(models.Model):
                     }
                 )
         else:
-            time_windows.append(self._toursolver_default_delivery_window())
+            default_window = self._toursolver_default_delivery_window()
+            if default_window:
+                time_windows.append(default_window)
         return time_windows
 
     def _toursolver_default_delivery_window(self):
         self.ensure_one()
         delivery_window_model = self.env["toursolver.delivery.window"]
         backend = self.toursolver_backend_id
+        if (
+            not backend.partner_default_delivery_window_start
+            or not backend.partner_default_delivery_window_end
+        ):
+            return None
         return {
             "beginTime": delivery_window_model.float_to_time_repr(
-                backend.partner_defaul_delivery_window_start
+                backend.partner_default_delivery_window_start
             ),
             "endTime": delivery_window_model.float_to_time_repr(
                 backend.partner_default_delivery_window_end
@@ -349,7 +367,7 @@ class ToursolverTask(models.Model):
 
     def _toursolver_json_request_options(self):
         self.ensure_one()
-        res = self.toursolver_backend_id._get_backend_options()
+        res = self.toursolver_backend_id._get_rqst_options_properties()
         res.update(
             {
                 "maxOptimDuration": seconds_to_duration(

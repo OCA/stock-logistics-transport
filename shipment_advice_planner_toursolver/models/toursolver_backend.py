@@ -21,7 +21,7 @@ class TourSolverBackend(models.Model):
     url = fields.Char()
     api_key = fields.Char()
     delivery_window_disabled = fields.Boolean()
-    partner_defaul_delivery_window_start = fields.Float(
+    partner_default_delivery_window_start = fields.Float(
         default=8.0,
         help="If no delivery winodow specified on the partner this will be used",
     )
@@ -52,12 +52,19 @@ class TourSolverBackend(models.Model):
         " unit. Can be specified on resource level using `workPenalty`option",
     )
     definition_id = fields.Many2one(
-        comodel_name="toursolver.backend.option.definition", readonly=True
+        comodel_name="toursolver.request.props.definition", readonly=True
     )
-    backend_options = fields.Properties(
+    rqst_options_properties = fields.Properties(
         string="Options",
         copy=True,
-        definition="definition_id.backend_options_definition",
+        definition="definition_id.options_definition",
+    )
+    rqst_orders_properties = fields.Properties(
+        string="Orders Properties",
+        copy=True,
+        help="Properties to be used in the definition of each order into the optimization "
+        "request",
+        definition="definition_id.orders_definition",
     )
     organization = fields.Char(
         help="Organization identifier as specified in the Toursolver interface. If set, "
@@ -65,6 +72,16 @@ class TourSolverBackend(models.Model):
         "determine the time zone of the optimization. If not provided, the server will "
         "guess the time zone from the first visit coordinates which will add extra time "
         "to the optimization process."
+    )
+    connection_timeout = fields.Integer(
+        help="Timeout in seconds for the connection to the Toursolver API",
+        default=10,
+        required=True,
+    )
+    read_timeout = fields.Integer(
+        help="Timeout in seconds for the read operation to the Toursolver API",
+        default=10,
+        required=True,
     )
 
     @api.model_create_multi
@@ -108,8 +125,15 @@ class TourSolverBackend(models.Model):
     def _get_backend_default_options(self):
         return {"maxOptimDuration": seconds_to_duration(self.duration)}
 
-    def _get_backend_options(self):
+    def _get_rqst_options_properties(self):
         self.ensure_one()
         result = self._get_backend_default_options()
-        result.update({p.get("string"): p.get("value") for p in self.backend_options})
+        result.update(self._properties_to_dict(self.rqst_options_properties))
         return result
+
+    def _get_rqst_orders_properties(self):
+        self.ensure_one()
+        return self._properties_to_dict(self.rqst_orders_properties)
+
+    def _properties_to_dict(self, properties):
+        return {p.get("string"): p.get("value") for p in properties}

@@ -75,7 +75,7 @@ msgid "Backend"
 msgstr "Backend"
 
 #. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__backend_options_definition
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend_option_definition__options_definition
 msgid "Backend Options Definition"
 msgstr "Definizione operazione backend"
 
@@ -282,7 +282,7 @@ msgstr ""
 "pianificazione/percorso."
 
 #. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__partner_defaul_delivery_window_start
+#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__partner_default_delivery_window_start
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__partner_default_delivery_window_end
 msgid "If no delivery winodow specified on the partner this will be used"
 msgstr ""
@@ -372,7 +372,7 @@ msgid "Optimization process max duration"
 msgstr "Durata massima ottimizzazione processo"
 
 #. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__backend_options
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__rqst_options_properties
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
 msgid "Options"
 msgstr "Opzioni"
@@ -405,8 +405,8 @@ msgid "Partner"
 msgstr "Partner"
 
 #. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__partner_defaul_delivery_window_start
-msgid "Partner Defaul Delivery Window Start"
+#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__partner_default_delivery_window_start
+msgid "Partner DefaultDelivery Window Start"
 msgstr "Inizio predefinito intervallo consegna partner"
 
 #. module: shipment_advice_planner_toursolver

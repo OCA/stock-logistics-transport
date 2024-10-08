@@ -22,23 +22,21 @@
           </h1>
                     <group>
                         <group>
-                        <field name="url" />
-                        <field name="delivery_window_disabled" />
-                        <field name="organization" />
-
-
+                            <field name="url" />
+                            <field name="connection_timeout" />
+                            <field name="delivery_window_disabled" />
+                            <field name="organization" />
                         </group>
                         <group>
-                        <field name="api_key" />
-                        <field name="delivery_duration" />
-
-
+                            <field name="api_key" />"
+                            <field name="read_timeout" />
+                            <field name="delivery_duration" />
                         </group>
                         <group>
                             <field
-                                name="partner_defaul_delivery_window_start"
+                                name="partner_default_delivery_window_start"
                                 widget="float_time"
-                                attrs="{'invisible': [('delivery_window_disabled', '=', True)], 'required': [('delivery_window_disabled', '=', False)]}"
+                                attrs="{'invisible': [('delivery_window_disabled', '=', True)]}"
                             />
 
                             <label for="duration" />
@@ -52,7 +50,7 @@
                             <field
                                 name="partner_default_delivery_window_end"
                                 widget="float_time"
-                                attrs="{'invisible': [('delivery_window_disabled', '=', True)], 'required': [('delivery_window_disabled', '=', False)]}"
+                                attrs="{'invisible': [('delivery_window_disabled', '=', True)]}"
                             />
 
                             <label for="loading_duration" />
@@ -63,18 +61,40 @@
                             <field name="resource_default_travel_penalty" />
                         </group>
                     </group>
-                    <separator string="Options" />
-                    <p
-                        style="width: 100%;color: grey;font-weight: bold;font-style: italic;"
-                    >
-                        Add the required options for route calculation by TourSolver.
-                        You can check the
-                        <a
-                            href="https://geoservices.geoconcept.com/ToursolverCloud/api-book.html#_json_tsoptions"
-                        >documentation</a>
-                        to learn more.<br />
-                    </p>
-                    <field name="backend_options" />
+                    <notebook>
+                       <page
+                            string="Request Options Properties"
+                            name="rqst_options_properties"
+                        >
+                            <p
+                                style="width: 100%;color: grey;font-weight: bold;font-style: italic;"
+                            >
+                                Add additional properties to the options field of the optimization request for route calculation by TourSolver.
+                                You can check the
+                                <a
+                                    href="https://geoservices.geoconcept.com/ToursolverCloud/api-book.html#_json_tsoptions"
+                                >documentation</a>
+                                to learn more.<br />
+                            </p>
+                            <field name="rqst_options_properties" />
+                        </page>
+                        <page
+                            string="Request Orders Properties"
+                            name="rqst_orders_properties"
+                        >
+                            <p
+                                style="width: 100%;color: grey;font-weight: bold;font-style: italic;"
+                            >
+                                Add additional properties added to each item of the orders field of the optimization request for route calculation by TourSolver.
+                                You can check the
+                                <a
+                                    href="https://geoservices.geoconcept.com/ToursolverCloud/api-book.html#_xml_ns0_tsorder"
+                                >documentation</a>
+                                to learn more.<br />
+                            </p>
+                            <field name="rqst_orders_properties" />
+                        </page>
+                    </notebook>
                     <field name="definition_id" invisible="1" />
 
                 </sheet>
