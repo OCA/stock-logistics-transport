@@ -1,5 +1,4 @@
 <odoo>
-
     <!-- Main Menu -->
     <menuitem
         id="root"
@@ -234,6 +233,4 @@
         sequence="70"
         groups="fleet.fleet_group_manager"
     />
-
-
 </odoo>

@@ -3,7 +3,7 @@
         <field name="name">Speed</field>
     </record>
 
-        <!-- UoM for kilometers per hour (km/h) -->
+    <!-- UoM for kilometers per hour (km/h) -->
     <record id="uom_kmh" model="uom.uom">
         <field name="name">km/h</field>
         <field name="category_id" ref="uom_category_speed" />

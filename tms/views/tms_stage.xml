@@ -1,14 +1,14 @@
 <odoo>
-    <!-- TMS Stage Tree View -->
-    <record id="tms_stage_tree_view" model="ir.ui.view">
-        <field name="name">tms.stage.tree</field>
+    <!-- TMS Stage list View -->
+    <record id="tms_stage_list_view" model="ir.ui.view">
+        <field name="name">tms.stage.list</field>
         <field name="model">tms.stage</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="sequence" widget="handle" groups="base.group_no_one" />
                 <field name="name" />
                 <field name="stage_type" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -65,7 +65,7 @@
                     string="Archived"
                     domain="[('active', '=', False)]"
                 />
-                 <filter
+                <filter
                     name="group_stage_type"
                     string="Type"
                     domain="[]"
@@ -79,7 +79,7 @@
     <record id="action_tms_stage" model="ir.actions.act_window">
         <field name="name">Stages</field>
         <field name="res_model">tms.stage</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{'search_default_group_stage_type': 1}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -87,5 +87,4 @@
             </p>
         </field>
     </record>
-
 </odoo>

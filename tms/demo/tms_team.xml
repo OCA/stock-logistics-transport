@@ -1,5 +1,4 @@
 <odoo noupdate="1">
-
     <record id="demo_team_1" model="tms.team">
         <field name="name">Team Mexico</field>
         <field
@@ -20,5 +19,4 @@
             eval="[(6, 0, [ref('demo_driver_4'), ref('demo_driver_5'), ref('demo_driver_7')])]"
         />
     </record>
-
 </odoo>
