@@ -1,15 +1,15 @@
 <odoo>
 
-    <!-- TMS Route Tree View -->
-    <record id="tms_route_view_tree" model="ir.ui.view">
-        <field name="name">tms.route.view.tree</field>
+    <!-- TMS Route list View -->
+    <record id="tms_route_view_list" model="ir.ui.view">
+        <field name="name">tms.route.view.list</field>
         <field name="model">tms.route</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="origin_location_id" />
                 <field name="destination_location_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -95,9 +95,9 @@
                                 widget="many2many"
                                 domain="[('tms_location', '=', 'True')]"
                             >
-                                <tree>
+                                <list>
                                     <field name="display_name" string="Location" />
-                                </tree>
+                                </list>
                             </field>
                         </page>
                         <page string="Notes">
@@ -129,7 +129,7 @@
     <record id="action_tms_route" model="ir.actions.act_window">
         <field name="name">Routes</field>
         <field name="res_model">tms.route</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
 </odoo>

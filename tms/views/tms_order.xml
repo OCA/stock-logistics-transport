@@ -1,12 +1,12 @@
 <odoo>
 
 
-    <!-- TMS Order Tree View -->
-    <record id="tms_order_view_tree" model="ir.ui.view">
-        <field name="name">tms.order.view.tree</field>
+    <!-- TMS Order list View -->
+    <record id="tms_order_view_list" model="ir.ui.view">
+        <field name="name">tms.order.view.list</field>
         <field name="model">tms.order</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="start_trip" column_invisible="1" />
                 <field name="end_trip" column_invisible="1" />
                 <field name="date_end" column_invisible="1" />
@@ -28,7 +28,7 @@
                     class="btn btn-primary text-uppercase"
                     invisible="not start_trip or end_trip"
                 />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -75,7 +75,7 @@
                         name="stage_id"
                         widget="statusbar"
                         domain="[('stage_type', '=', 'order')]"
-                        options="{'clickable':True}, {'fold_field':'fold'}"
+                        options="{'clickable':True, 'fold_field':'fold'}"
                     />
                 </header>
 
@@ -408,7 +408,7 @@
     <record id="action_tms_operation_trip" model="ir.actions.act_window">
         <field name="name">Trips</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="action_tms_report_order" model="ir.actions.act_window">
@@ -420,19 +420,19 @@
     <record id="action_tms_config_stage_travel" model="ir.actions.act_window">
         <field name="name">Stages</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 
     <record id="action_tms_dash_order" model="ir.actions.act_window">
         <field name="name">Trips</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
     </record>
 
     <record id="action_tms_order_kanban" model="ir.actions.act_window">
         <field name="name">Trips Kanban</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="domain">[('tms_team_id', '=', active_id)]</field>
     </record>
 

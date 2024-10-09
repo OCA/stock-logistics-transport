@@ -9,7 +9,7 @@ class FleetVehicle(models.Model):
 
     tms_team_id = fields.Many2one("tms.team")
 
-    tms_driver_id = fields.Many2one("tms.driver", string="Driver")
+    tms_driver_id = fields.Many2one("tms.driver", string="Driver Id")
 
     # Operation
     operation = fields.Selection([("cargo", "Cargo"), ("passenger", "Passenger")])
