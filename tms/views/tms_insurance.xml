@@ -1,15 +1,14 @@
 <odoo>
-
-    <record id="tms_insurance_view_tree" model="ir.ui.view">
-        <field name="name">tms.insurance.view.tree</field>
+    <record id="tms_insurance_view_list" model="ir.ui.view">
+        <field name="name">tms.insurance.view.list</field>
         <field name="model">tms.insurance</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="policy_number" />
                 <field name="insurer_id" />
                 <field name="end_date" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -55,7 +54,6 @@
     <record id="action_tms_insurance" model="ir.actions.act_window">
         <field name="name">Insurance Policies</field>
         <field name="res_model">tms.insurance</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
-
 </odoo>

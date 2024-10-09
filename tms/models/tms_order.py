@@ -38,9 +38,12 @@ class TMSOrder(models.Model):
     route_id = fields.Many2one(
         "tms.route", compute="_compute_route_id", store=True, readonly=False
     )
-    route_origin = fields.Char(related="route_id.origin_location_id.display_name")
+    route_origin = fields.Char(
+        related="route_id.origin_location_id.display_name", string="Route origin"
+    )
     route_destination = fields.Char(
-        related="route_id.destination_location_id.display_name"
+        related="route_id.destination_location_id.display_name",
+        string="Route destination",
     )
 
     origin_id = fields.Many2one(
@@ -60,8 +63,8 @@ class TMSOrder(models.Model):
         readonly=False,
     )
 
-    origin_location = fields.Char(string="Origin")
-    destination_location = fields.Char(string="Destination")
+    origin_location = fields.Char()
+    destination_location = fields.Char()
 
     driver_id = fields.Many2one(
         "tms.driver",
@@ -270,7 +273,8 @@ class TMSOrder(models.Model):
     ]
 
     @api.model
-    def _read_group_stage_ids(self, stages, domain, order):
+    def _read_group_stage_ids(self, stages, domain, order=None):
+        order = order or "sequence, id"
         return self.env["tms.stage"].search([("stage_type", "=", "order")], order=order)
 
     def button_start_order(self):

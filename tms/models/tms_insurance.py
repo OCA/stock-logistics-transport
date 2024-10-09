@@ -7,6 +7,7 @@ from odoo import _, api, fields, models
 
 class TMSInsurance(models.Model):
     _name = "tms.insurance"
+    _description = "Model for TMS insurances"
 
     active = fields.Boolean(default=True)
     company_id = fields.Many2one(

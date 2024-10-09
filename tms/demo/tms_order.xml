@@ -1,5 +1,4 @@
 <odoo noupdate="1">
-
     <record id="demo_order_1" model="tms.order">
         <field name="name">TMS/DEMO1</field>
         <field name="route">False</field>
@@ -27,5 +26,4 @@
         <field name="driver_id" ref="demo_driver_4" />
         <field name="vehicle_id" ref="fleet.vehicle_1" />
     </record>
-
 </odoo>

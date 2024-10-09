@@ -1,14 +1,14 @@
 <odoo>
     <!-- Drivers -->
-    <record id="view_tms_driver_tree" model="ir.ui.view">
-        <field name="name">tms.driver.tree</field>
+    <record id="view_tms_driver_list" model="ir.ui.view">
+        <field name="name">tms.driver.list</field>
         <field name="model">tms.driver</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="display_name" string="Name" />
                 <field name="phone" />
                 <field name="stage_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -24,7 +24,7 @@
                         name="stage_id"
                         widget="statusbar"
                         domain="[('stage_type', '=', 'driver')]"
-                        options="{'clickable':True}, {'fold_field':'fold'}"
+                        options="{'clickable':True, 'fold_field':'fold'}"
                     />
                 </header>
             </xpath>
@@ -36,7 +36,7 @@
                 <attribute name="invisible">True</attribute>
             </xpath>
 
-            <xpath expr="//span[@name='address_name']//b" position="attributes">
+            <xpath expr="//span[@name='address_name']" position="attributes">
                 <attribute name="invisible">False</attribute>
             </xpath>
 
@@ -86,7 +86,6 @@
                     </group>
                 </group>
             </xpath>
-
         </field>
     </record>
 
@@ -197,13 +196,13 @@
         <field name="name">Drivers</field>
         <field name="res_model">tms.driver</field>
         <field name="domain">[('is_company', '=', False)]</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field
             name="view_ids"
             eval="[
             (5, 0, 0),
             (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_tms_driver_kanban')}),
-            (0, 0, {'view_mode': 'tree', 'view_id': ref('view_tms_driver_tree')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_tms_driver_list')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('view_tms_driver_form_inherit')}),
             ]"
         />
@@ -212,6 +211,6 @@
     <record id="action_tms_config_stage_driver" model="ir.actions.act_window">
         <field name="name">Drivers</field>
         <field name="res_model">tms.driver</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
 </odoo>
