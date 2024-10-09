@@ -1,5 +1,4 @@
 <odoo noupdate="1">
-
     <!-- Drivers -->
     <record id="demo_driver_1" model="tms.driver">
         <field name="name">Sergio Perez</field>

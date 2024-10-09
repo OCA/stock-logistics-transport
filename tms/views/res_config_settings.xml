@@ -173,6 +173,4 @@
         <field name="target">inline</field>
         <field name="context">{'module': 'tms'}</field>
     </record>
-
-
 </odoo>

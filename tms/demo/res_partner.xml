@@ -1,5 +1,4 @@
 <odoo noupdate="1">
-
     <!-- Locations -->
 
     <record id="demo_location_1" model="res.partner">
@@ -101,6 +100,4 @@
         <field name="zip">77058</field>
         <field name="country_id" ref="base.us" />
     </record>
-
-
 </odoo>
