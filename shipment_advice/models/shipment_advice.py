@@ -532,3 +532,11 @@ class ShipmentAdvice(models.Model):
         action["views"][tree_view_index] = (view_tree.id, "tree")
         action["domain"] = [("id", "in", self.planned_picking_ids.ids)]
         return action
+
+    def print_all_deliveryslip(self):
+        pickings = self.mapped("loaded_picking_ids").filtered(
+            lambda p: p.picking_type_code == "outgoing" and p.state != "cancel"
+        )
+        if pickings:
+            return self.env.ref("stock.action_report_delivery").report_action(pickings)
+        return {}

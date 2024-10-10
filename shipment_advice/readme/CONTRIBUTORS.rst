@@ -3,7 +3,8 @@
 * Simone Orsi <simahawk@gmail.com>
 * `Trobz <https://trobz.com>`_:
   * Dung Tran <dungtd@trobz.com>
-
+  * Tuan Tran <anhtuan@trobz.com>
+  * Tri Doan <tridm@trobz.com>
 Design
 ~~~~~~
 
