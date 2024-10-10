@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-09-23 15:06+0000\n"
+"PO-Revision-Date: 2024-10-10 13:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -44,6 +44,10 @@ msgid ""
 "optimization request for route calculation by TourSolver.\n"
 "                                You can check the"
 msgstr ""
+"Aggiungere proprietà aggiuntive ad ogni elemento del campo ordini della "
+"richiesta di ottimizzazione per il calcolo del percorso da parte di "
+"TourSolver.\n"
+"                                Si può controllare il"
 
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
@@ -52,6 +56,9 @@ msgid ""
 "for route calculation by TourSolver.\n"
 "                                You can check the"
 msgstr ""
+"Aggiungere proprietà aggiuntive al campo opzioni della richiesta di "
+"ottimizzazione per il calcolo del percorso da parte di TourSolver.\n"
+"                                È possibile controllare"
 
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_resource_form_view
@@ -108,7 +115,7 @@ msgstr "Impostazioni configurazione"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__connection_timeout
 msgid "Connection Timeout"
-msgstr ""
+msgstr "Timeout connessione"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model,name:shipment_advice_planner_toursolver.model_res_partner
@@ -385,17 +392,17 @@ msgstr "Opzioni"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_request_props_definition__options_definition
 msgid "Options Definition"
-msgstr ""
+msgstr "Definizione opzioni"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_request_props_definition__orders_definition
 msgid "Orders Definition"
-msgstr ""
+msgstr "Definizione ordini"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__rqst_orders_properties
 msgid "Orders Properties"
-msgstr ""
+msgstr "Proprietà ordini"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__organization
@@ -432,7 +439,7 @@ msgstr "Fine predefinita intervallo consegna partner"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__partner_default_delivery_window_start
 msgid "Partner Default Delivery Window Start"
-msgstr ""
+msgstr "Inizio finestra consegna predefinita partner"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.actions.act_window,name:shipment_advice_planner_toursolver.toursolver_delivery_window_act_window
@@ -469,11 +476,13 @@ msgid ""
 "Properties to be used in the definition of each order into the optimization "
 "request"
 msgstr ""
+"Proprietà da utilizzare nella definizione di ogni ordine nella richiesta di "
+"ottimizzazione"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__read_timeout
 msgid "Read Timeout"
-msgstr ""
+msgstr "Timeout lettura"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__request_data
@@ -488,12 +497,12 @@ msgstr "Richiesta nome file dati"
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
 msgid "Request Options Properties"
-msgstr ""
+msgstr "Proprietà opzioni richiesta"
 
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
 msgid "Request Orders Properties"
-msgstr ""
+msgstr "Proprietà ordini richiesta"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_backend__resource_properties_definition
@@ -671,12 +680,12 @@ msgstr "Intervallo orario giorno della settimana"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__connection_timeout
 msgid "Timeout in seconds for the connection to the Toursolver API"
-msgstr ""
+msgstr "Timeout in secondi per la connessione alla API TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_backend__read_timeout
 msgid "Timeout in seconds for the read operation to the Toursolver API"
-msgstr ""
+msgstr "Timeout in secondi per la operazione di lettura all'API TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_delivery_window__time_window_end
@@ -796,7 +805,7 @@ msgstr "Tempo totale viaggio TourSolver"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_request_props_definition
 msgid "Toursolver request properties definition"
-msgstr ""
+msgstr "Definizione proprietà richiesta TourSolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__task_id
