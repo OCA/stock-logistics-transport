@@ -100,3 +100,45 @@ class AccountMove(models.Model):
         if move_lines.product_id == po_line.product_id:
             quantity_done = sum(move_lines.mapped("qty_done"))
         return quantity_done
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        moves = super().create(vals_list)
+        for move in moves:
+            if move.move_type not in ("in_invoice", "out_refund"):
+                continue
+            shipment = move.line_ids.mapped("shipment_advice_id")
+            if not shipment:
+                continue
+            refs = [
+                "<a href=# data-oe-model=shipment.advice data-oe-id=%s>%s</a>"
+                % tuple(name_get)
+                for name_get in shipment.name_get()
+            ]
+            message = _("This vendor bill has been created from: %s") % ",".join(refs)
+            move.message_post(body=message)
+        return moves
+
+    def write(self, vals):
+        old_shipment = {
+            move.id: move.mapped("line_ids.shipment_advice_id") for move in self
+        }
+        res = super().write(vals)
+        for move in self:
+            if move.move_type not in ("in_invoice", "out_refund"):
+                continue
+            new_shipment = move.mapped("line_ids.shipment_advice_id")
+            if not new_shipment:
+                continue
+            diff_shipments = new_shipment - old_shipment[move.id]
+            if diff_shipments:
+                refs = [
+                    "<a href=# data-oe-model=shipment.advice data-oe-id=%s>%s</a>"
+                    % tuple(name_get)
+                    for name_get in diff_shipments.name_get()
+                ]
+                message = _("This vendor bill has been modified from: %s") % ",".join(
+                    refs
+                )
+                move.message_post(body=message)
+        return res
