@@ -1,0 +1,16 @@
+<odoo noupdate="1">
+
+    <record id="demo_crew_1" model="tms.crew">
+        <field name="name">Crew Mexico 1</field>
+        <field name="default_vehicle_id" ref="fleet.vehicle_1" />
+        <field
+            name="driver_ids"
+            eval="[(6, 0, [
+                ref('demo_driver_1'),
+                ref('demo_driver_2'),
+
+                ])]"
+        />
+    </record>
+
+</odoo>

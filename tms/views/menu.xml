@@ -1,0 +1,239 @@
+<odoo>
+
+    <!-- Main Menu -->
+    <menuitem
+        id="root"
+        name="Transport"
+        sequence="10"
+        web_icon="tms,static/description/icon.png"
+    />
+
+    <!-- Menus -->
+    <menuitem id="dashboard" name="Dashboard" parent="root" />
+    <menuitem id="operations" name="Operations" parent="root" />
+    <menuitem id="data" name="Master Data" parent="root" />
+    <menuitem id="reporting" name="Reporting" parent="root" />
+    <menuitem id="config" name="Configuration" parent="root" />
+
+    <!-- Dashboard Menu -->
+
+    <menuitem
+        id="menu_tms_dash_team"
+        name="Teams"
+        action="action_tms_dash_team"
+        parent="dashboard"
+        sequence="10"
+        groups="tms.group_tms_team"
+    />
+
+    <menuitem
+        id="menu_tms_dash_order"
+        name="Trips"
+        action="action_tms_dash_order"
+        parent="dashboard"
+        sequence="20"
+    />
+
+    <!-- Operations Menu -->
+    <menuitem
+        id="menu_tms_operation_trip"
+        name="All Trips"
+        action="action_tms_operation_trip"
+        parent="operations"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_fleet_odometers"
+        name="Odometers"
+        action="fleet.fleet_vehicle_odometer_action"
+        parent="operations"
+        sequence="20"
+    />
+
+    <!-- Master Data Menu -->
+    <menuitem
+        id="menu_fleet_vehicle"
+        name="Vehicles"
+        action="fleet.fleet_vehicle_action"
+        parent="data"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_tms_insurance"
+        name="Insurance Policies"
+        action="action_tms_insurance"
+        parent="data"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_fleet_contracts"
+        name="Contracts"
+        action="fleet.fleet_vehicle_log_contract_action"
+        parent="data"
+        sequence="30"
+        groups="fleet.fleet_group_user"
+    />
+    <menuitem
+        id="menu_fleet_services"
+        name="Services"
+        action="fleet.fleet_vehicle_service_types_action"
+        parent="data"
+        sequence="40"
+        groups="fleet.fleet_group_user"
+    />
+    <menuitem
+        id="menu_tms_driver"
+        name="Drivers"
+        action="action_tms_driver"
+        parent="data"
+        sequence="50"
+    />
+    <menuitem
+        id="menu_tms_location"
+        name="Locations"
+        action="action_tms_location"
+        parent="data"
+        sequence="60"
+    />
+    <menuitem
+        id="menu_tms_route"
+        name="Routes"
+        action="action_tms_route"
+        parent="data"
+        sequence="70"
+        groups="tms.group_tms_route"
+    />
+
+    <!-- Reporting Menu -->
+    <menuitem
+        id="menu_tms_report_trip"
+        name="Trips"
+        action="action_tms_report_order"
+        parent="reporting"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_fleet_reporting_cost"
+        name="Costs"
+        action="fleet.fleet_costs_reporting_action"
+        parent="reporting"
+        sequence="20"
+        groups="fleet.fleet_group_manager"
+    />
+
+    <!-- Configuration Menu -->
+    <menuitem
+        id="settings"
+        name="Settings"
+        action="action_tms_config"
+        parent="config"
+        sequence="10"
+        groups="base.group_system"
+    />
+    <menuitem
+        id="menu_tms_config_stage"
+        name="Stages"
+        action="action_tms_stage"
+        parent="config"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_tms_config_driver"
+        name="Drivers"
+        parent="config"
+        sequence="30"
+    />
+    <menuitem
+        id="menu_tms_config_team"
+        name="Teams"
+        action="action_tms_config_team"
+        parent="menu_tms_config_driver"
+        sequence="10"
+        groups="tms.group_tms_team"
+    />
+    <menuitem
+        id="menu_tms_config_crew"
+        name="Crews"
+        action="action_tms_config_crew"
+        parent="menu_tms_config_driver"
+        sequence="20"
+        groups="tms.group_tms_crew"
+    />
+
+    <menuitem
+        id="menu_config_fleet_models"
+        name="Fleet Models"
+        parent="config"
+        sequence="40"
+        groups="fleet.fleet_group_manager"
+    />
+    <menuitem
+        name="Manufacturers"
+        action="fleet.fleet_vehicle_model_brand_action"
+        parent="menu_config_fleet_models"
+        id="menu_config_fleet_models_Manufacturers"
+        sequence="10"
+    />
+    <menuitem
+        name="Models"
+        action="fleet.fleet_vehicle_model_action"
+        parent="menu_config_fleet_models"
+        id="menu_config_fleet_models_models"
+        sequence="20"
+    />
+    <menuitem
+        name="Categories"
+        action="fleet.fleet_vehicle_model_category_action"
+        parent="menu_config_fleet_models"
+        id="menu_config_fleet_models_categories"
+        sequence="30"
+    />
+
+    <menuitem
+        id="menu_config_fleet_services"
+        name="Fleet Services"
+        parent="config"
+        sequence="50"
+        groups="fleet.fleet_group_manager"
+    />
+    <menuitem
+        id="menu_config_fleet_services_types"
+        name="Types"
+        action="fleet.fleet_vehicle_service_types_action"
+        parent="menu_config_fleet_services"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_config_fleet_vehicles"
+        name="Fleet Vehicles"
+        parent="config"
+        sequence="60"
+        groups="fleet.fleet_group_manager"
+    />
+    <menuitem
+        id="menu_config_fleet_vehicles_status"
+        name="Status"
+        action="fleet.fleet_vehicle_state_action"
+        parent="menu_config_fleet_vehicles"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_config_fleet_vehicles_tags"
+        name="Tags"
+        action="fleet.fleet_vehicle_tag_action"
+        parent="menu_config_fleet_vehicles"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_fleet_activity_types"
+        name="Activity Types"
+        action="fleet.mail_activity_type_action_config_fleet"
+        parent="config"
+        sequence="70"
+        groups="fleet.fleet_group_manager"
+    />
+
+
+</odoo>

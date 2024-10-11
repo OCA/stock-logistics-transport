@@ -1,0 +1,53 @@
+<odoo noupdate="1">
+
+    <!-- Drivers -->
+    <record id="demo_driver_1" model="tms.driver">
+        <field name="name">Sergio Perez</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+
+    <record id="demo_driver_2" model="tms.driver">
+        <field name="name">Esteban Gutierréz</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+
+    <record id="demo_driver_3" model="tms.driver">
+        <field name="name">Luisa Fernandez</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+
+    <record id="demo_driver_4" model="tms.driver">
+        <field name="name">James Johnson</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+
+    <record id="demo_driver_5" model="tms.driver">
+        <field name="name">Sophie Martinez</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+
+    <record id="demo_driver_6" model="tms.driver">
+        <field name="name">Daniel Lee</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+
+    <record id="demo_driver_7" model="tms.driver">
+        <field name="name">Emily Garcia</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+
+    <record id="demo_driver_8" model="tms.driver">
+        <field name="name">Michael Brown</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+
+    <record id="demo_driver_9" model="tms.driver">
+        <field name="name">Isabella Rossi</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+
+    <record id="demo_driver_10" model="tms.driver">
+        <field name="name">David Smith</field>
+        <field name="driver_type">terrestrial</field>
+    </record>
+</odoo>

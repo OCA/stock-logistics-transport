@@ -1,0 +1,50 @@
+<odoo>
+
+    <record id="fleet_vehicle_inherit_view_form" model="ir.ui.view">
+        <field name="name">fleet.vehicle.inherit.view.form</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form//notebook" position="inside">
+                <page string="Transport">
+                    <group>
+                        <group name="operation" string="Operation">
+                        <field
+                                name="operation"
+                                widget="radio"
+                                options="{'horizontal': True}"
+                            />
+                        <label for="capacity" invisible="not operation">Capacity</label>
+                        <div class="d-flex w-50" invisible="not operation">
+                            <field name="capacity" class="w-50" />
+                            <field
+                                    name="cargo_uom_id"
+                                    invisible="operation != 'cargo'"
+                                    class="w-50"
+                                />
+                            <span
+                                    invisible="operation != 'passenger'"
+                                    class="w-50"
+                                >Passengers</span>
+                        </div>
+                    </group>
+                        <group name="insurance" string="Insurance">
+                            <field
+                                name="insurance_id"
+                                string="Insurance Policy"
+                                widget="many2many_tags"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='driver_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='driver_id']" position="after">
+                <field name="tms_driver_id" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

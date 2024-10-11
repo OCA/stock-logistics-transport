@@ -1,0 +1,20 @@
+<odoo noupdate="1">
+
+    <record id="demo_route_1" model="tms.route">
+        <field name="name">US Route</field>
+        <field name="origin_location_id" ref="demo_location_9" />
+        <field name="destination_location_id" ref="demo_location_10" />
+    </record>
+
+    <record id="demo_route_2" model="tms.route">
+        <field name="name">QRO Route</field>
+        <field name="stop_locations">True</field>
+        <field
+            name="stop_location_ids"
+            eval="[(6, 0, [ref('demo_location_5'), ref('demo_location_6'), ref('demo_location_7')])]"
+        />
+        <field name="origin_location_id" ref="demo_location_4" />
+        <field name="destination_location_id" ref="demo_location_8" />
+    </record>
+
+</odoo>
