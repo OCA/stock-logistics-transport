@@ -103,3 +103,15 @@ msgid ""
 "There are multiple suppliers on the shipment advice.It can not be used to "
 "generate the vendor bill."
 msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: code:addons/shipment_advice_bill_auto_complete/models/account_move.py:0
+#, python-format
+msgid "This vendor bill has been created from: %s"
+msgstr ""
+
+#. module: shipment_advice_bill_auto_complete
+#: code:addons/shipment_advice_bill_auto_complete/models/account_move.py:0
+#, python-format
+msgid "This vendor bill has been modified from: %s"
+msgstr ""
