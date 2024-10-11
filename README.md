@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [shipment_advice](shipment_advice/) | 14.0.2.6.0 |  | Manage your (un)loading process through shipment advices.
-[shipment_advice_bill_auto_complete](shipment_advice_bill_auto_complete/) | 14.0.1.2.0 | [![TDu](https://github.com/TDu.png?size=30px)](https://github.com/TDu) [![jbaudoux](https://github.com/jbaudoux.png?size=30px)](https://github.com/jbaudoux) | Generate vendor bill lines for incoming shipment advice
+[shipment_advice_bill_auto_complete](shipment_advice_bill_auto_complete/) | 14.0.1.3.0 | [![TDu](https://github.com/TDu.png?size=30px)](https://github.com/TDu) [![jbaudoux](https://github.com/jbaudoux.png?size=30px)](https://github.com/jbaudoux) | Generate vendor bill lines for incoming shipment advice
 [shipment_advice_bill_auto_complete_mrp](shipment_advice_bill_auto_complete_mrp/) | 14.0.1.1.0 | [![TDu](https://github.com/TDu.png?size=30px)](https://github.com/TDu) | Glue module between Shipment Advice Bill Auto Complete and MRP
 [shipment_advice_reception_planner](shipment_advice_reception_planner/) | 14.0.0.2.0 |  | Plan your reception into shipment advices.
 [stock_dock](stock_dock/) | 14.0.1.2.0 |  | Manage the loading docks of your warehouse.
