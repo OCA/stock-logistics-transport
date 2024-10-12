@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 - TODAY, Marcel Savegnago <marcel.savegnago@escodoo.com.br>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="fleet_vehicle_view_form">
+        <field name="name">fleet.vehicle.form.inherit.tms.product</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operation']" position="after">
+                <field
+                    name="cargo_type"
+                    invisible="operation != 'cargo'"
+                    widget="radio"
+                    options="{'horizontal': True}"
+                />
+
+            </xpath>
+            <xpath expr="//group[@name='insurance']" position="after">
+                <field
+                    name="transportable_product_ids"
+                    invisible="operation != 'cargo' or cargo_type != 'products'"
+                />
+            </xpath>
+            <xpath expr="//field[@name='cargo_uom_id']" position="attributes">
+                <attribute
+                    name="invisible"
+                >cargo_type == 'products' or operation != 'cargo'</attribute>
+            </xpath>
+            <xpath expr="//field[@name='capacity']" position="attributes">
+                <attribute
+                    name="invisible"
+                >not operation or cargo_type == 'products'</attribute>
+            </xpath>
+
+            <xpath expr="//notebook" position="inside">
+                <page name="inventory" string="Inventory">
+                    <group name="product_info">
+                        <field
+                            name="product_id"
+                            readonly="True"
+                            invisible="not product_id"
+                        />
+                        <field name="lot_id" readonly="True" invisible="not lot_id" />
+                        <field
+                            name="stock_picking_id"
+                            readonly="True"
+                            string="Receiving"
+                            invisible="not stock_picking_id"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="fleet_vehicle_search_view">
+        <field name="name">fleet.vehicle.search.inherit.tms.product</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_search" />
+        <field name="arch" type="xml">
+            <field name="state_id" position="before">
+                <field name="product_id" />
+                <field name="lot_id" />
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_transportable_product_user,transportable.product.user,model_transportable_product,tms.group_tms_user,1,0,0,0
+access_transportable_product_admin,transportable.product.admin,model_transportable_product,tms.group_tms_admin,1,1,1,1
