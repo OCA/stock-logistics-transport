@@ -1,10 +1,11 @@
 [project]
 name = "odoo-addons-oca-stock-logistics-transport"
-version = "17.0.20241016.0"
+version = "17.0.20241016.1"
 dependencies = [
     "odoo-addon-tms>=17.0dev,<17.1dev",
     "odoo-addon-tms_account_asset>=17.0dev,<17.1dev",
     "odoo-addon-tms_product>=17.0dev,<17.1dev",
+    "odoo-addon-tms_purchase>=17.0dev,<17.1dev",
 ]
 classifiers=[
     "Programming Language :: Python",
