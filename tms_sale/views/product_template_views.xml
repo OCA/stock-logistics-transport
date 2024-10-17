@@ -1,0 +1,36 @@
+<odoo>
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.common.form.inherit.tms.product</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='invoice_policy']" position="after">
+                <field name="tms_trip" invisible="1" />
+                <field
+                    name="trip_product_type"
+                    string="Transport product type"
+                    invisible="not tms_trip"
+                    required="tms_trip"
+                />
+                <field
+                    name="tms_factor_type"
+                    string="Factor Type"
+                    invisible="not tms_trip or trip_product_type != 'trip'"
+                    required="trip_product_type == 'trip'"
+                />
+                <field
+                    name="tms_factor_distance_uom"
+                    string="Distance UoM"
+                    invisible="not tms_trip or tms_factor_type != 'distance' or trip_product_type != 'trip'"
+                    required="tms_factor_type"
+                />
+                <field
+                    name="tms_factor_weight_uom"
+                    string="Weight UoM"
+                    invisible="not tms_trip or tms_factor_type != 'weight' or trip_product_type != 'trip'"
+                    required="tms_factor_type"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
