@@ -1,0 +1,40 @@
+<odoo>
+    <record id="sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale.order.view.form.tms.sale</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_invoice']" position="before">
+                <button
+                    type="object"
+                    name="action_view_tms_order"
+                    class="oe_stat_button"
+                    icon="fa-truck"
+                    invisible="tms_order_count == 0"
+                    groups="tms.group_tms_user"
+                >
+                    <field
+                        name="tms_order_count"
+                        widget="statinfo"
+                        string="Transport Orders"
+                    />
+                </button>
+            </xpath>
+            <xpath expr="//tree//field[@name='name']" position="after">
+                <field name="tms_factor" string="Factor" />
+                <field name="tms_factor_uom" string="Factor UoM" />
+                <field name="has_trip_product" column_invisible="1" />
+                <field name="seat_ticket" column_invisible="1" />
+                <field name="tms_trip_ticket_id" column_invisible="1" />
+                <field name="tms_ticket_ids" column_invisible="1" />
+                <field name="tms_origin_id" column_invisible="1" />
+                <field name="tms_destination_id" column_invisible="1" />
+                <field name="tms_scheduled_date_start" column_invisible="1" />
+                <field name="tms_scheduled_date_end" column_invisible="1" />
+                <field name="tms_route_id" column_invisible="1" />
+                <field name="tms_route_flag" column_invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
