@@ -212,6 +212,8 @@
                             <field
                                 name="loaded_move_line_without_package_ids"
                                 widget="many2many"
+                                context="{'search_default_incoming': True if shipment_type == 'incoming' else False,
+                                'search_default_outgoing': True if shipment_type == 'outgoing' else False}"
                             >
                                 <tree create="0">
                                     <field name="picking_id" />
