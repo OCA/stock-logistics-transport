@@ -7,6 +7,15 @@
         <field name="model">shipment.advice</field>
         <field name="inherit_id" ref="shipment_advice.shipment_advice_view_form" />
         <field name="arch" type="xml">
+            <header position="inside">
+                <field name="is_create_toursolver_task_allowed" invisible="1" />
+                    <button
+                    name="create_toursolver_task"
+                    type="object"
+                    string="Create TourSolver Task"
+                    attrs="{'invisible': [('is_create_toursolver_task_allowed', '=', False)]}"
+                />
+            </header>
             <page name="carriers" position="after">
                 <page name="toursolver" string="Toursolver">
                     <group>

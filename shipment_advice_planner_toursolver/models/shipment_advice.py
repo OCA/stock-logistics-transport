@@ -4,7 +4,7 @@ from datetime import datetime, timedelta
 
 import pytz
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -13,7 +13,10 @@ class ShipmentAdvice(models.Model):
     _inherit = "shipment.advice"
 
     toursolver_resource_id = fields.Many2one(
-        comodel_name="toursolver.resource", string="Toursolver Resource", readonly=True
+        comodel_name="toursolver.resource",
+        string="Toursolver Resource",
+        readonly=True,
+        states={"draft": [("readonly", False)]},
     )
     toursolver_task_id = fields.Many2one(
         comodel_name="toursolver.task", string="Toursolver Task", readonly=True
@@ -71,6 +74,34 @@ class ShipmentAdvice(models.Model):
         help="Total time for the travel, including the time spent at each stop and "
         "reloading time",
     )
+    is_create_toursolver_task_allowed = fields.Boolean(
+        compute="_compute_is_create_toursolver_task_allowed"
+    )
+
+    @api.depends("state", "toursolver_task_id")
+    def _compute_is_create_toursolver_task_allowed(self):
+        for rec in self:
+            rec.is_create_toursolver_task_allowed = (
+                rec.state not in ("draft", "done", "cancel")
+                and not rec.toursolver_task_id
+            )
+
+    def create_toursolver_task(self):
+        self.ensure_one()
+        if not self.is_create_toursolver_task_allowed:
+            raise UserError(_("You can't recreate the toursolver task."))
+        task_model = self.env["toursolver.task"]
+        backend = task_model._get_default_toursolver_backend()
+        task_model.sudo().create(
+            {
+                "shipment_advice_ids": [Command.set(self.ids)],
+                "toursolver_backend_id": backend.id,
+                "warehouse_id": self.warehouse_id.id,
+                "dock_id": self.dock_id.id,
+                "picking_ids": [Command.set(self.planned_picking_ids.ids)],
+                "delivery_resource_ids": [Command.set(self.toursolver_resource_id.ids)],
+            }
+        )
 
     @api.depends(
         "toursolver_task_id",
