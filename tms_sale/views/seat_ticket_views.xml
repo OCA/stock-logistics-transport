@@ -1,0 +1,18 @@
+<odoo>
+    <record id="seat_ticket_view_form" model="ir.ui.view">
+        <field name="name">seat.ticket.view.form.tms.sale</field>
+        <field name="model">seat.ticket</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="price" />
+                        <field name="sale_order_id" />
+                        <field name="customer_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
