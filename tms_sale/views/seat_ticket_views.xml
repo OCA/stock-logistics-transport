@@ -6,10 +6,10 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="price"/>
-                        <field name="sale_order_id"/>
-                        <field name="customer_id"/>
+                        <field name="name" />
+                        <field name="price" />
+                        <field name="sale_order_id" />
+                        <field name="customer_id" />
                     </group>
                 </sheet>
             </form>
