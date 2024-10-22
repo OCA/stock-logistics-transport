@@ -23,6 +23,23 @@ class TMSOrder(models.Model):
         }
 
     @api.model
+    def create(self, vals):
+        res = super().create(vals)
+        if "vehicle_id" in vals:
+            vehicle = self.env["fleet.vehicle"].browse(vals.get("vehicle_id"))
+            if vehicle.operation == "passenger":
+                self.seat_ticket_ids.unlink()
+                for i in range(int(vehicle.capacity)):
+                    name = vals.get("name") + "-" + str(i + 1)
+                    self.env["seat.ticket"].create(
+                        {
+                            "name": name,
+                            "tms_order_id": res.id,
+                        }
+                    )
+        return res
+
+    @api.model
     def write(self, vals):
         for order in self:
             if "stage_id" in vals:
