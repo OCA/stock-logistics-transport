@@ -37,4 +37,15 @@ class TMSOrder(models.Model):
                     if tickets[i][0] == 2:
                         self.env["seat.ticket"].browse(tickets[i][1]).unlink()
 
+            if "vehicle_id" in vals:
+                vehicle = self.env["fleet.vehicle"].browse(vals.get("vehicle_id"))
+                if vehicle.operation == 'passenger':
+                    order.seat_ticket_ids.unlink()
+                    for i in range(int(vehicle.capacity)):
+                        name = order.name + "-" + str(i + 1)
+                        self.env["seat.ticket"].create({
+                            "name": name,
+                            "tms_order_id": order.id,
+                        })
+
         return super().write(vals)

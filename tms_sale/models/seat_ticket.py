@@ -15,7 +15,8 @@ class SeatTicket(models.Model):
     )
     tms_order_id = fields.Many2one("tms.order", store=True)
     sale_line_id = fields.Many2one("sale.order.line")
-    section = fields.Char()
+    sale_order_id = fields.Many2one("sale.order", related="sale_line_id.order_id")
+    customer_id = fields.Many2one("res.partner", related="sale_line_id.order_id.partner_id")
     price = fields.Float()
     available = fields.Selection(
         [("available", "Available"), ("not_available", "Not available")],

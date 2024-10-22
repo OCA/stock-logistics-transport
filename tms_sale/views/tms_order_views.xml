@@ -23,8 +23,9 @@
                     <field name="seat_ticket_ids">
                         <tree>
                             <field name="name" />
-                            <field name="section" />
                             <field name="price" />
+                            <field name="sale_order_id" />
+                            <field name="customer_id" />
                             <field
                                 name="available"
                                 widget="badge"

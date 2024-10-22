@@ -15,6 +15,7 @@
         "views/sale_order_views.xml",
         "views/tms_order_views.xml",
         "views/product_template_views.xml",
+        "views/seat_ticket_views.xml",
     ],
     "assets": {
         "web.assets_backend": [
