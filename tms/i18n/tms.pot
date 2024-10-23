@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,15 +12,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__type
-msgid ""
-"- Contact: Use this to organize the contact details of employees of a given company (e.g. CEO, CFO, ...).\n"
-"- Invoice Address: Preferred address for all invoices. Selected by default when you invoice an order that belongs to this company.\n"
-"- Delivery Address: Preferred address for all deliveries. Selected by default when you deliver an order that belongs to this company.\n"
-"- Other: Other address for the company (e.g. subsidiary, ...)"
-msgstr ""
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
@@ -99,7 +90,9 @@ msgstr ""
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
-msgid "<span invisible=\"operation != 'passenger'\" class=\"w-50\">Passengers</span>"
+msgid ""
+"<span invisible=\"operation != 'passenger'\" class=\"w-50\">Passengers\n"
+"                                </span>"
 msgstr ""
 
 #. module: tms
@@ -178,6 +171,11 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
 msgid "Add a description..."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__additional_info
+msgid "Additional info"
 msgstr ""
 
 #. module: tms
@@ -268,6 +266,16 @@ msgid "Blacklist"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__mobile_blacklisted
+msgid "Blacklisted Phone Is Mobile"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_blacklisted
+msgid "Blacklisted Phone is Phone"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_bounce
 msgid "Bounce"
 msgstr ""
@@ -285,7 +293,6 @@ msgstr ""
 #. module: tms
 #. odoo-python
 #: code:addons/tms/models/tms_stage.py:0
-#, python-format
 msgid ""
 "Cannot create TMS Stage because it has the same Type and Sequence of an "
 "existing TMS Stage."
@@ -346,7 +353,6 @@ msgstr ""
 #. module: tms
 #. odoo-python
 #: code:addons/tms/models/tms_stage.py:0
-#, python-format
 msgid "Color code should be Hex Code. Ex:-#FFFFFF"
 msgstr ""
 
@@ -383,6 +389,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__company_type
 msgid "Company Type"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_gid
+msgid "Company database ID"
 msgstr ""
 
 #. module: tms
@@ -546,11 +557,6 @@ msgid "Dashboard"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__date
-msgid "Date"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__date_end
 msgid "Date End"
 msgstr ""
@@ -611,11 +617,11 @@ msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__destination_id
-#: model:ir.model.fields,field_description:tms.field_tms_order__destination_location
 msgid "Destination"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__destination_location
 #: model:ir.model.fields,field_description:tms.field_tms_route__destination_location_id
 msgid "Destination Location"
 msgstr ""
@@ -625,8 +631,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms.field_tms_driver__display_name
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__display_name
 #: model:ir.model.fields,field_description:tms.field_tms_order__display_name
-#: model:ir.model.fields,field_description:tms.field_tms_order__route_destination
-#: model:ir.model.fields,field_description:tms.field_tms_order__route_origin
 #: model:ir.model.fields,field_description:tms.field_tms_route__display_name
 #: model:ir.model.fields,field_description:tms.field_tms_stage__display_name
 #: model:ir.model.fields,field_description:tms.field_tms_team__display_name
@@ -659,12 +663,10 @@ msgstr ""
 #. odoo-python
 #: code:addons/tms/models/tms_insurance.py:0
 #: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__draft
-#, python-format
 msgid "Draft"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__tms_driver_id
 #: model:ir.model.fields,field_description:tms.field_tms_order__driver_id
 #: model:ir.model.fields,field_description:tms.field_tms_team__driver_ids
 #: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__driver
@@ -675,6 +677,11 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
 msgid "Driver Experience"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__tms_driver_id
+msgid "Driver Id"
 msgstr ""
 
 #. module: tms
@@ -763,7 +770,7 @@ msgstr ""
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
-#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_tree
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_list
 msgid "End"
 msgstr ""
 
@@ -803,6 +810,13 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_external
 msgid "External Driver"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__phone_sanitized
+msgid ""
+"Field used to store sanitized phone number. Helps speeding up searches and "
+"comparisons."
 msgstr ""
 
 #. module: tms
@@ -910,7 +924,9 @@ msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__message_has_error
+#: model:ir.model.fields,help:tms.field_tms_driver__message_has_sms_error
 #: model:ir.model.fields,help:tms.field_tms_order__message_has_error
+#: model:ir.model.fields,help:tms.field_tms_order__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -919,6 +935,13 @@ msgstr ""
 msgid ""
 "If the email address is on the blacklist, the contact won't receive mass "
 "mailing anymore, from any list"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__phone_sanitized_blacklisted
+msgid ""
+"If the sanitized phone number is on the blacklist, the contact won't receive"
+" mass mailing sms anymore, from any list"
 msgstr ""
 
 #. module: tms
@@ -954,6 +977,22 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "Inactive"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__mobile_blacklisted
+msgid ""
+"Indicates if a blacklisted sanitized phone number is a mobile number. Helps "
+"distinguish which number is blacklisted             when there is both a "
+"mobile and phone field in a model."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__phone_blacklisted
+msgid ""
+"Indicates if a blacklisted sanitized phone number is a phone number. Helps "
+"distinguish which number is blacklisted             when there is both a "
+"mobile and phone field in a model."
 msgstr ""
 
 #. module: tms
@@ -1082,7 +1121,7 @@ msgid "License type"
 msgstr ""
 
 #. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_res_partner_tree_tms_location
+#: model_terms:ir.ui.view,arch_db:tms.view_res_partner_list_tms_location
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
 msgid "Location"
 msgstr ""
@@ -1139,6 +1178,11 @@ msgstr ""
 #. module: tms
 #: model:res.groups,name:tms.group_tms_driver_license
 msgid "Manage TMS Driver License"
+msgstr ""
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_uom
+msgid "Manage TMS Oum"
 msgstr ""
 
 #. module: tms
@@ -1275,6 +1319,16 @@ msgid "Mobile"
 msgstr ""
 
 #. module: tms
+#: model:ir.model,name:tms.model_tms_driver
+msgid "Model for TMS drivers"
+msgstr ""
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_insurance
+msgid "Model for TMS insurances"
+msgstr ""
+
+#. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models_models
 msgid "Models"
 msgstr ""
@@ -1292,7 +1346,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms.field_tms_order__name
 #: model:ir.model.fields,field_description:tms.field_tms_stage__name
 #: model:ir.model.fields,field_description:tms.field_tms_team__name
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_tree
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_list
 msgid "Name"
 msgstr ""
 
@@ -1300,8 +1354,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/tms/models/tms_order.py:0
 #: code:addons/tms/tests/test_tms_order.py:0
-#: code:addons/tms/tests/test_tms_order.py:0
-#, python-format
 msgid "New"
 msgstr ""
 
@@ -1396,11 +1448,11 @@ msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__origin_id
-#: model:ir.model.fields,field_description:tms.field_tms_order__origin_location
 msgid "Origin"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__origin_location
 #: model:ir.model.fields,field_description:tms.field_tms_route__origin_location_id
 msgid "Origin Location"
 msgstr ""
@@ -1444,6 +1496,16 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__phone
 msgid "Phone"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_sanitized_blacklisted
+msgid "Phone Blacklisted"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_mobile_search
+msgid "Phone/Mobile"
 msgstr ""
 
 #. module: tms
@@ -1521,14 +1583,35 @@ msgid "Route Name"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route_destination
+msgid "Route destination"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route_origin
+msgid "Route origin"
+msgstr ""
+
+#. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_route
 #: model:ir.ui.menu,name:tms.menu_tms_route
 msgid "Routes"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_sms_error
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__user_id
 msgid "Salesperson"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_sanitized
+msgid "Sanitized Number"
 msgstr ""
 
 #. module: tms
@@ -1610,28 +1693,8 @@ msgid "Share Partner"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__signup_expiration
-msgid "Signup Expiration"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__signup_token
-msgid "Signup Token"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__signup_type
 msgid "Signup Token Type"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__signup_valid
-msgid "Signup Token is Valid"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__signup_url
-msgid "Signup URL"
 msgstr ""
 
 #. module: tms
@@ -1667,7 +1730,7 @@ msgstr ""
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
-#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_tree
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_list
 msgid "Start"
 msgstr ""
 
@@ -2100,14 +2163,12 @@ msgstr ""
 #. module: tms
 #. odoo-python
 #: code:addons/tms/models/tms_stage.py:0
-#, python-format
 msgid "You cannot delete default stages."
 msgstr ""
 
 #. module: tms
 #. odoo-python
 #: code:addons/tms/models/tms_order.py:0
-#, python-format
 msgid "You must create an TMS order stage first."
 msgstr ""
 
@@ -2159,14 +2220,4 @@ msgstr ""
 #. module: tms
 #: model:uom.uom,name:tms.uom_mph
 msgid "mph"
-msgstr ""
-
-#. module: tms
-#: model:ir.model,name:tms.model_tms_driver
-msgid "tms.driver"
-msgstr ""
-
-#. module: tms
-#: model:ir.model,name:tms.model_tms_insurance
-msgid "tms.insurance"
 msgstr ""
