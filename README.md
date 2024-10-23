@@ -17,7 +17,11 @@ stock-logistics-transport
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[tms](tms/) | 18.0.1.0.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) [![santiagordz](https://github.com/santiagordz.png?size=30px)](https://github.com/santiagordz) [![EdgarRetes](https://github.com/EdgarRetes.png?size=30px)](https://github.com/EdgarRetes) | Manage Vehicles, Drivers, Routes and Trips
 
 [//]: # (end addons)
 
