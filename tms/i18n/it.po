@@ -1,0 +1,2295 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-10-24 09:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid ""
+"<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow "
+"icon\" title=\"Arrow\"/>"
+msgstr ""
+"<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow "
+"icon\" title=\"Freccia\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid ""
+"<i groups=\"tms.group_tms_route\" class=\"fa fa-long-arrow-right mx-2 "
+"oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\"/>"
+msgstr ""
+"<i groups=\"tms.group_tms_route\" class=\"fa fa-long-arrow-right mx-2 "
+"oe_read_only\" aria-label=\"Arrow icon\" title=\"Freccia\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
+msgid "<span class=\"badge badge-primary\">Crew</span>"
+msgstr "<span class=\"badge badge-primary\">Equipaggio</span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
+msgid ""
+"<span class=\"fa fa-bus me-2\" aria-label=\"Vehicle\" title=\"Vehicles\"/>\n"
+"                                                <span>Vehicles: </span>"
+msgstr ""
+"<span class=\"fa fa-bus me-2\" aria-label=\"Vehicle\" title=\"Veicoli\"/>\n"
+"                                                <span>Veicoli: </span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "<span class=\"fa fa-car me-2\" aria-label=\"Vehicle\" title=\"Vehicle\"/>"
+msgstr ""
+"<span class=\"fa fa-car me-2\" aria-label=\"Vehicle\" title=\"Veicoli\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "<span class=\"fa fa-map-o me-2\" title=\"Route\"/>"
+msgstr "<span class=\"fa fa-map-o me-2\" title=\"Percorso\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<span class=\"fa fa-phone me-2\" aria-label=\"Mobile\" title=\"Mobile\"/>"
+msgstr ""
+"<span class=\"fa fa-phone me-2\" aria-label=\"Mobile\" title=\"Cellulare\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
+msgid ""
+"<span class=\"fa fa-users me-2\" aria-label=\"Driver\" title=\"Drivers\"/>\n"
+"                                                <span>Drivers: </span>"
+msgstr ""
+"<span class=\"fa fa-users me-2\" aria-label=\"Driver\" title=\"Autisti\"/>\n"
+"                                                <span>Autisti: </span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Team\"/>"
+msgstr ""
+"<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Squadra\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid ""
+"<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Hours\n"
+"                                </span>"
+msgstr ""
+"<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Ore\n"
+"                                </span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "<span class=\"w-75\" groups=\"!tms.group_tms_uom\">km</span>"
+msgstr "<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Km</span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "<span class=\"w-75\">Hours</span>"
+msgstr "<span class=\"w-75\">Ore</span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "<span groups=\"tms.group_tms_route\" class=\"fa fa-map-o me-2\" title=\"Route\"/>"
+msgstr ""
+"<span groups=\"tms.group_tms_route\" class=\"fa fa-map-o me-2\" title="
+"\"Percorso\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid ""
+"<span invisible=\"operation != 'passenger'\" class=\"w-50\">Passengers\n"
+"                                </span>"
+msgstr ""
+"<span invisible=\"operation != 'passenger'\" class=\"w-50\">Passeggeri\n"
+"                                </span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "<span>Reporting</span>"
+msgstr "<span>Rendicontazione</span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "<span>View</span>"
+msgstr "<span>Vista</span>"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__a
+msgid "A - Motorcycles"
+msgstr "A - Moto"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_needaction
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_needaction
+msgid "Action Needed"
+msgstr "Azione richiesta"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__active
+#: model:ir.model.fields,field_description:tms.field_tms_driver__active
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__active
+#: model:ir.model.fields,field_description:tms.field_tms_order__active
+#: model:ir.model.fields,field_description:tms.field_tms_route__active
+#: model:ir.model.fields,field_description:tms.field_tms_stage__active
+#: model:ir.model.fields,field_description:tms.field_tms_team__active
+#: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__active
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "Active"
+msgstr "Attivo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__active_lang_count
+msgid "Active Lang Count"
+msgstr "Numero lingue attive"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_ids
+msgid "Activities"
+msgstr "Attività"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_exception_decoration
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decorazione eccezione attività"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_state
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_state
+msgid "Activity State"
+msgstr "Stato attività"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_type_icon
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icona tipo attività"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_activity_types
+msgid "Activity Types"
+msgstr "Tipi attività"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Add a description for the order..."
+msgstr "Aggiungere una descrizione per l'ordine..."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
+msgid "Add a description..."
+msgstr "Aggiungere una descrizione..."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__additional_info
+msgid "Additional info"
+msgstr "Informazioni aggiuntive"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__type
+msgid "Address Type"
+msgstr "Tipo indirizzo"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_admin
+msgid "Administrator"
+msgstr "Amministratore"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_operation_trip
+msgid "All Trips"
+msgstr "Tutti i viaggi"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__lang
+msgid ""
+"All the emails and documents sent to this contact will be translated in this"
+" language."
+msgstr ""
+"Tutte le email e i documenti inviati a questo contatto verranno tradotti in "
+"questa lingua."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Allow the use of predefined routes in trips"
+msgstr "Consentire l'utilizzo di percorsi predefiniti nei viaggi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_crew_search
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_order_search
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_search
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_stage_search
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_team_search
+msgid "Archived"
+msgstr "In archivio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_attachment_count
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_attachment_count
+msgid "Attachment Count"
+msgstr "Conteggio allegati"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
+msgid "Avatar"
+msgstr "Avatar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1024
+msgid "Avatar 1024"
+msgstr "Avatar 1024"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_128
+msgid "Avatar 128"
+msgstr "Avatar 128"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_256
+msgid "Avatar 256"
+msgstr "Avatar 256"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_512
+msgid "Avatar 512"
+msgstr "Avatar 512"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__b
+msgid "B - Automobiles"
+msgstr "B - Automobili"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__bank_ids
+msgid "Banks"
+msgstr "Banche"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__barcode
+msgid "Barcode"
+msgstr "Codice a barre"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_blacklisted
+msgid "Blacklist"
+msgstr "Blacklist"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__mobile_blacklisted
+msgid "Blacklisted Phone Is Mobile"
+msgstr "Il numero in blacklist è un cellulare"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_blacklisted
+msgid "Blacklisted Phone is Phone"
+msgstr "Il numero in blacklist è un telefono fisso"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_bounce
+msgid "Bounce"
+msgstr "Respingi"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__c
+msgid "C - Truck"
+msgstr "C - Camion"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__cancelled
+msgid "Cancelled"
+msgstr "Annullata"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_stage.py:0
+msgid ""
+"Cannot create TMS Stage because it has the same Type and Sequence of an "
+"existing TMS Stage."
+msgstr ""
+"Non si può creare la fase TMS perché ne esiste una dello stesso tipo e "
+"sequenza."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__capacity
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid "Capacity"
+msgstr "Capacità"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__fleet_vehicle__operation__cargo
+msgid "Cargo"
+msgstr "Carico"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__cargo_uom_id
+msgid "Cargo Uom"
+msgstr "UdM carico"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_models_categories
+msgid "Categories"
+msgstr "Categorie"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__channel_ids
+msgid "Channels"
+msgstr "Canali"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__is_company
+msgid "Check if the contact is a company, otherwise it is a person"
+msgstr "Controlla se il contatto è un'azienda, altrimenti è una persona"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__employee
+msgid "Check this box if this contact is an Employee."
+msgstr "Seleziona questa casella se questo contatto è un dipendente."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__city
+msgid "City"
+msgstr "Città"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__custom_color
+msgid "Color Code"
+msgstr "Codice colore"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__color
+#: model:ir.model.fields,field_description:tms.field_tms_team__color
+msgid "Color Index"
+msgstr "Indice colore"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_stage.py:0
+msgid "Color code should be Hex Code. Ex:-#FFFFFF"
+msgstr "Il codice colore deve essere esadecimale. Es:-#FFFFFF"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__commercial_partner_id
+msgid "Commercial Entity"
+msgstr "Entità commerciale"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_order__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_stage__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_team__company_id
+msgid "Company"
+msgstr "Azienda"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_registry
+msgid "Company ID"
+msgstr "ID azienda"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_name
+msgid "Company Name"
+msgstr "Nome azienda"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__commercial_company_name
+msgid "Company Name Entity"
+msgstr "Entità nome azienda"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_type
+msgid "Company Type"
+msgstr "Tipo azienda"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_gid
+msgid "Company database ID"
+msgstr "ID database azienda"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_insurance__company_id
+msgid "Company related to this insurance"
+msgstr "Azienda relativa a questa assicurazione"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_crew__company_id
+#: model:ir.model.fields,help:tms.field_tms_order__company_id
+#: model:ir.model.fields,help:tms.field_tms_team__company_id
+msgid "Company related to this order"
+msgstr "Azienda collegata a questo ordine"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__contact_address
+msgid "Complete Address"
+msgstr "Indirizzo completo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__complete_name
+msgid "Complete Name"
+msgstr "Nome completo"
+
+#. module: tms
+#: model:ir.model,name:tms.model_res_config_settings
+msgid "Config Settings"
+msgstr "Impostazioni configurazione"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.config
+msgid "Configuration"
+msgstr "Configurazione"
+
+#. module: tms
+#: model:ir.model,name:tms.model_res_partner
+#: model:ir.model.fields,field_description:tms.field_tms_driver__child_ids
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_contracts
+msgid "Contracts"
+msgstr "Contratti"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_reporting_cost
+msgid "Costs"
+msgstr "Costi"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_bounce
+msgid "Counter of the number of bounced emails for this contact"
+msgstr "Contatore del numero di e-mail respinte per questo contatto"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__country_id
+msgid "Country"
+msgstr "Nazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__country_code
+msgid "Country Code"
+msgstr "Codice nazione"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_insurance_view_form
+msgid "Coverage"
+msgstr "Copertura"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__coverage_details
+msgid "Coverage Details"
+msgstr "Dettagli copertura"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Create Trip Orders with Sale Orders"
+msgstr "Crea ordini di viaggio con ordini di vendita"
+
+#. module: tms
+#: model_terms:ir.actions.act_window,help:tms.action_tms_stage
+msgid "Create a Stage."
+msgstr "Crea una fase."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Create vendor bills and customer invoices when completing trip orders."
+msgstr ""
+"Crea il conto fornitore e la fattura cliente al completamento degli ordini "
+"di viaggio."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_driver__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_order__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_route__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_stage__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_team__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_driver__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_order__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_route__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_stage__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_team__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__crew_id
+#: model:ir.model.fields,field_description:tms.field_tms_team__crew_ids
+msgid "Crew"
+msgstr "Equipaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__crew_active
+msgid "Crew Active"
+msgstr "Equipaggio attivo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__crew_ids_domain
+msgid "Crew Ids Domain"
+msgstr "Dominio IDs equipaggio"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
+msgid "Crew Name"
+msgstr "Nome equipaggio"
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_crew_name_uniq
+msgid "Crew name already exists!"
+msgstr "Il nome equipaggio esiste già!"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config_crew
+#: model:ir.actions.act_window,name:tms.action_tms_dash_crew
+#: model:ir.model.fields,field_description:tms.field_tms_driver__crew_ids
+#: model:ir.ui.menu,name:tms.menu_tms_config_crew
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Crews"
+msgstr "Equipaggi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "Crews:"
+msgstr "Equipaggi:"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__d
+msgid "D - Bus"
+msgstr "D - Corriera"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.dashboard
+msgid "Dashboard"
+msgstr "Bacheca"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__date_end
+msgid "Date End"
+msgstr "Data fine"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__date_start
+msgid "Date Start"
+msgstr "Data inizio"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Days before expiration"
+msgstr "Giorni prima della scadenza"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Distance UoM"
+msgstr "UdM predefinita distanza"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Length UoM"
+msgstr "UdM predefinita lunghezza"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Speed UoM"
+msgstr "UdM predefinita velocità"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Time UoM"
+msgstr "UdM ora predefinita"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__default_vehicle_id
+msgid "Default Vehicle"
+msgstr "Veicolo predefinito"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Weight UoM"
+msgstr "UdM predefinita peso"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__is_completed
+msgid "Defines how this stage is evaluated as completed stage"
+msgstr "Definisce come questa fase viene valutata come completata"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__description
+#: model:ir.model.fields,field_description:tms.field_tms_order__description
+#: model:ir.model.fields,field_description:tms.field_tms_stage__description
+#: model:ir.model.fields,field_description:tms.field_tms_team__description
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Description"
+msgstr "Descrizione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__destination_id
+msgid "Destination"
+msgstr "Destinazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__destination_location
+#: model:ir.model.fields,field_description:tms.field_tms_route__destination_location_id
+msgid "Destination Location"
+msgstr "Ubicazione di destinazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_driver__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_order__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_route__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_stage__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_team__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__distance
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Distance"
+msgstr "Distanza"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__distance_traveled
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Distance Traveled"
+msgstr "Distanza percorsa"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__distance_traveled_uom
+msgid "Distance Traveled Uom"
+msgstr "UdM distanza percorsa"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__distance_uom
+msgid "Distance Uom"
+msgstr "UdM distanza"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_insurance.py:0
+#: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__draft
+msgid "Draft"
+msgstr "Bozza"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__driver_id
+#: model:ir.model.fields,field_description:tms.field_tms_team__driver_ids
+#: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__driver
+#: model:res.groups,name:tms.group_tms_driver
+msgid "Driver"
+msgstr "Autista"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Driver Experience"
+msgstr "Esperienza autista"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__tms_driver_id
+msgid "Driver Id"
+msgstr "ID autista"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__driver_ids_domain
+msgid "Driver Ids Domain"
+msgstr "Dominio IDs autista"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_expiration_date
+msgid "Driver License Expiration Date"
+msgstr "Data scadenza patente autista"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_file
+msgid "Driver License File"
+msgstr "File patente autista"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_number
+msgid "Driver License Number"
+msgstr "Numero patente autista"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Driver Status"
+msgstr "Stato autista"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Driver Type"
+msgstr "Tipo autista"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__driver_license_security_days
+msgid "Driver license security days"
+msgstr "Giorni assicurati patente autista"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config_stage_driver
+#: model:ir.actions.act_window,name:tms.action_tms_driver
+#: model:ir.model.fields,field_description:tms.field_tms_crew__driver_ids
+#: model:ir.ui.menu,name:tms.menu_tms_config_driver
+#: model:ir.ui.menu,name:tms.menu_tms_driver
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Drivers"
+msgstr "Autisti"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__driver_count
+msgid "Drivers Count"
+msgstr "Conteggio autisti"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driving_experience_years
+msgid "Driving Experience Years"
+msgstr "Anni esperienza autista"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Duration"
+msgstr "Durata"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__partner_share
+msgid ""
+"Either customer (not a user), either shared user. Indicated the current "
+"partner is a customer without access or with a limited access created for "
+"sharing data."
+msgstr ""
+"O cliente (non un utente) o utente condiviso. Indicato che l'attuale partner "
+"è un cliente senza accesso o con un accesso limitato creato per la "
+"condivisione dei dati."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__email
+msgid "Email"
+msgstr "E-mail"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__employee
+msgid "Employee"
+msgstr "Dipendente"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Enable the creation of stops in a route"
+msgstr "Abilita la creazione di fermate in un percorso"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_list
+msgid "End"
+msgstr "Fine"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__end_date
+msgid "End Date"
+msgstr "Data fine"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__end_trip
+msgid "End Trip"
+msgstr "Fine viaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__estimated_time
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Estimated Time"
+msgstr "Tempo stimato"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__estimated_time_uom
+msgid "Estimated Time Uom"
+msgstr "UdM tempo stimato"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__expired
+msgid "Expired"
+msgstr "Scaduta"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__legend_priority
+msgid ""
+"Explanation text to help users using the star and priority mechanism on "
+"stages or orders that are in this stage."
+msgstr ""
+"Testo esplicativo per aiutare gli utenti a utilizzare la stella e il "
+"meccanismo di priorità nelle fasi o ordini che si trovano in questa fase."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_external
+msgid "External Driver"
+msgstr "Autista esterno"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__phone_sanitized
+msgid ""
+"Field used to store sanitized phone number. Helps speeding up searches and "
+"comparisons."
+msgstr ""
+"Campo utilizzato per salvare il numero di telefono ripulito. Aiuta ad "
+"accelerare ricerche e comparazioni."
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_models
+msgid "Fleet Models"
+msgstr "Modelli flotta"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_services
+msgid "Fleet Services"
+msgstr "Servizi flotta"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles
+msgid "Fleet Vehicles"
+msgstr "Veicoli flotta"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__fold
+msgid "Folded in Kanban"
+msgstr "Minimizzato in Kanban"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_follower_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_follower_ids
+msgid "Followers"
+msgstr "Seguito da"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_partner_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguito da (partner)"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__activity_type_icon
+#: model:ir.model.fields,help:tms.field_tms_order__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icona Font Awesome es. fa-tasks"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__email_formatted
+msgid "Format email address \"Name <email@domain>\""
+msgstr "Formattazione indirizzo email \"Nome <email@domain>\""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__email_formatted
+msgid "Formatted Email"
+msgstr "Email formattata"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_latitude
+msgid "Geo Latitude"
+msgstr "Latitudine geografica"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_longitude
+msgid "Geo Longitude"
+msgstr "Longitudine geografica"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__date_localization
+msgid "Geolocation Date"
+msgstr "Data geolocalizzazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__has_message
+#: model:ir.model.fields,field_description:tms.field_tms_order__has_message
+msgid "Has Message"
+msgstr "Ha un messaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__id
+#: model:ir.model.fields,field_description:tms.field_tms_driver__id
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__id
+#: model:ir.model.fields,field_description:tms.field_tms_order__id
+#: model:ir.model.fields,field_description:tms.field_tms_route__id
+#: model:ir.model.fields,field_description:tms.field_tms_stage__id
+#: model:ir.model.fields,field_description:tms.field_tms_team__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__im_status
+msgid "IM Status"
+msgstr "Stato IM"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_exception_icon
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_exception_icon
+msgid "Icon"
+msgstr "Icona"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__activity_exception_icon
+#: model:ir.model.fields,help:tms.field_tms_order__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icona per indicare un'attività eccezione."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_needaction
+#: model:ir.model.fields,help:tms.field_tms_order__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_has_error
+#: model:ir.model.fields,help:tms.field_tms_driver__message_has_sms_error
+#: model:ir.model.fields,help:tms.field_tms_order__message_has_error
+#: model:ir.model.fields,help:tms.field_tms_order__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se selezionata, alcuni messaggi hanno un errore di consegna."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__is_blacklisted
+msgid ""
+"If the email address is on the blacklist, the contact won't receive mass "
+"mailing anymore, from any list"
+msgstr ""
+"Se l'indirizzo e-mail è sulla lista nera, il contatto non riceverà più la "
+"posta di massa, da qualsiasi lista"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__phone_sanitized_blacklisted
+msgid ""
+"If the sanitized phone number is on the blacklist, the contact won't receive"
+" mass mailing sms anymore, from any list"
+msgstr ""
+"Se il numero di telefono ripulito è nella blacklist, il contatto non "
+"riceverà più SMS di massa, da qualsiasi lista"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_1920
+msgid "Image"
+msgstr "Immagine"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_1024
+msgid "Image 1024"
+msgstr "Immagine 1024"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_128
+msgid "Image 128"
+msgstr "Immagine 128"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_256
+msgid "Image 256"
+msgstr "Immagine 256"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_512
+msgid "Image 512"
+msgstr "Immagine 512"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_training
+msgid "In Training"
+msgstr "In addestramento"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "Inactive"
+msgstr "Non attivo"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__mobile_blacklisted
+msgid ""
+"Indicates if a blacklisted sanitized phone number is a mobile number. Helps "
+"distinguish which number is blacklisted             when there is both a "
+"mobile and phone field in a model."
+msgstr ""
+"Indica se un numero di telefono ripulito della blacklist è di un cellulare. "
+"Aiuta a distinguere quali numeri sono in blacklist           quando ci sono "
+"campi telefono per il fisso e il cellulare nel modello."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__phone_blacklisted
+msgid ""
+"Indicates if a blacklisted sanitized phone number is a phone number. Helps "
+"distinguish which number is blacklisted             when there is both a "
+"mobile and phone field in a model."
+msgstr ""
+"Indica se un numero di telefono ripulito è un numero di telefono. Aiuta a "
+"distinguere quale numero è in blacklist             quando ci sono campi "
+"telefono per il fisso e il cellulare nel modello."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__industry_id
+msgid "Industry"
+msgstr "Settore"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_insurance_view_form
+msgid "Information"
+msgstr "Informazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__contact_address_inline
+msgid "Inlined Complete Address"
+msgstr "Indirizzi completi allineati"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__insurance_id
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid "Insurance"
+msgstr "Assicurazione"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_insurance
+#: model:ir.ui.menu,name:tms.menu_tms_insurance
+msgid "Insurance Policies"
+msgstr "Politiche assicurazione"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid "Insurance Policy"
+msgstr "Polizza assicurazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__insurer_id
+msgid "Insurer"
+msgstr "Assicuratore"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_active
+msgid "Is Active"
+msgstr "È attivo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__is_completed
+msgid "Is Completed"
+msgstr "È completato"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__is_default
+msgid "Is Default"
+msgstr "È predefinito"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_is_follower
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_is_follower
+msgid "Is Follower"
+msgstr "Segue"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_public
+msgid "Is Public"
+msgstr "È pubblico"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_company
+msgid "Is a Company"
+msgstr "È un'azienda"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__function
+msgid "Job Position"
+msgstr "Posizione lavorativa"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__lang
+msgid "Language"
+msgstr "Lingua"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_driver__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_order__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_route__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_stage__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_team__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_driver__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_order__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_route__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_stage__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_team__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Licence Expiration Date"
+msgstr "Data scadenza patente"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Licence No."
+msgstr "Patente nr."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Licence Type"
+msgstr "Tipo patente"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "License File"
+msgstr "File patente"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_type
+msgid "License type"
+msgstr "Tipo patente"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_res_partner_list_tms_location
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Location"
+msgstr "Ubicazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_partner__location_type
+#: model:ir.model.fields,field_description:tms.field_res_users__location_type
+#: model:ir.model.fields,field_description:tms.field_tms_driver__location_type
+msgid "Location Type"
+msgstr "Tipo ubicazione"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_location
+#: model:ir.ui.menu,name:tms.menu_tms_location
+msgid "Locations"
+msgstr "Ubicazioni"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_crew
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Crews"
+msgstr "Gestione equipaggi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_driver_license
+msgid "Manage Driver License"
+msgstr "Gestione patente autista"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Driver License Expiration"
+msgstr "Gestione scadenza patente autista"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Driver License Expiration Date Before A Trip"
+msgstr "Gestione data scadenza patente autista prima di un viaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_route_stop
+msgid "Manage Route Stops"
+msgstr "Gestione fermate viaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_route
+msgid "Manage Routes"
+msgstr "Gestione percorsi"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_crew
+msgid "Manage TMS Crew"
+msgstr "Gestione equipaggio TMS"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_driver_license
+msgid "Manage TMS Driver License"
+msgstr "Gestione licenza autista TMS"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_uom
+msgid "Manage TMS Oum"
+msgstr "Gestione udm TMS"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_route_stop
+msgid "Manage TMS Route Stops"
+msgstr "Gestione fermate viaggio TMS"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_route
+msgid "Manage TMS Routes"
+msgstr "Gestione percorsi TMS"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_team
+msgid "Manage TMS Teams"
+msgstr "Gestione squadre TMS"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_vehicle_insurance
+msgid "Manage TMS Vehicle Insurance"
+msgstr "Gestione assicurazione veicolo TMS"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_team
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Teams"
+msgstr "Gestione squadre"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Trips Accounting"
+msgstr "Gestione contabilità viaggi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_vehicle_insurance
+msgid "Manage Vehicle Insurance"
+msgstr "Gestione assicurazione veicolo"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Vehicle Insurance Expiration"
+msgstr "Gestione scadenza assicurazione veicolo"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Vehicle Insurance Expiration Date Before A Trip"
+msgstr "Gestione data scadenza assicurazione veicolo prima di un viaggio"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage crews that share the same vehicle"
+msgstr "Gestione equipaggi che gestiscono lo stesso veicolo"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage depreciations"
+msgstr "Gestione svalutazioni"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage expenses of a trip: hotel, tolls, fuel"
+msgstr "Gestione spese viaggio: hotel, pedaggi, carburante"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage pre-defined routes"
+msgstr "Gestione percorsi predefiniti"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage purchase requests for drivers and other suppliers"
+msgstr "Gestione richieste acquisto per autisti e altri fornitori"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage teams that share the same process/stages"
+msgstr "Gestione squadre che condividono gli stessi processi/fasi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_expense
+msgid "Manage trip expenses"
+msgstr "Gestione spese viaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_account
+msgid "Manage trip invoicing"
+msgstr "Gestione fatturazione viaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_purchase
+msgid "Manage trip purchases"
+msgstr "Gestione acquisti viaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_sale
+msgid "Manage trip sales"
+msgstr "Gestione vendite viaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_account_asset
+msgid "Manage vehicle as accounting assets"
+msgstr "Gestione veicolo come cespite"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage vehicles as accounting assets"
+msgstr "Gestione veicoli come cespiti"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_models_Manufacturers
+msgid "Manufacturers"
+msgstr "Produttori"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.data
+msgid "Master Data"
+msgstr "Dati principali"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_error
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_has_error
+msgid "Message Delivery error"
+msgstr "Errore di consegna messaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_ids
+msgid "Messages"
+msgstr "Messaggi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__mobile
+msgid "Mobile"
+msgstr "Cellulare"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_driver
+msgid "Model for TMS drivers"
+msgstr "Modello per autisti TMS"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_insurance
+msgid "Model for TMS insurances"
+msgstr "Modello per assicurazioni TMS"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_models_models
+msgid "Models"
+msgstr "Modelli"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__my_activity_date_deadline
+#: model:ir.model.fields,field_description:tms.field_tms_order__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Scadenza mia attività"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__name
+#: model:ir.model.fields,field_description:tms.field_tms_driver__name
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__name
+#: model:ir.model.fields,field_description:tms.field_tms_order__name
+#: model:ir.model.fields,field_description:tms.field_tms_stage__name
+#: model:ir.model.fields,field_description:tms.field_tms_team__name
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_list
+msgid "Name"
+msgstr "Nome"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_order.py:0
+#: code:addons/tms/tests/test_tms_order.py:0
+msgid "New"
+msgstr "Nuovo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_date_deadline
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Scadenza prossima attività"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_summary
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_summary
+msgid "Next Activity Summary"
+msgstr "Riepilogo prossima attività"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_type_id
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo prossima attività"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__email_normalized
+msgid "Normalized Email"
+msgstr "E-mail normalizzata"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__comment
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Notes"
+msgstr "Note"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__notes
+msgid "Notes/Comments"
+msgstr "Note/commenti"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_needaction_counter
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Numero di azioni"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__trips_todo_count
+msgid "Number of Trips"
+msgstr "Numero di viaggi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_error_counter
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_has_error_counter
+msgid "Number of errors"
+msgstr "Numero di errori"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_needaction_counter
+#: model:ir.model.fields,help:tms.field_tms_order__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Numero di messaggi che richiedono un'azione"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_has_error_counter
+#: model:ir.model.fields,help:tms.field_tms_order__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Numero di messaggi con errore di consegna"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_odometers
+msgid "Odometers"
+msgstr "Contachilometri"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__operation
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid "Operation"
+msgstr "Operazione"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.operations
+msgid "Operations"
+msgstr "Operazioni"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__order_ids
+msgid "Orders"
+msgstr "Ordini"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__order_count
+msgid "Orders Count"
+msgstr "Conteggio ordini"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__origin_id
+msgid "Origin"
+msgstr "Origine"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__origin_location
+#: model:ir.model.fields,field_description:tms.field_tms_route__origin_location_id
+msgid "Origin Location"
+msgstr "Ubicazione di origine"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__personnel_ids
+msgid "Other Personnel"
+msgstr "Altro personale"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__parent_name
+msgid "Parent name"
+msgstr "Nome padre"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__same_company_registry_partner_id
+msgid "Partner with same Company Registry"
+msgstr "Partner con lo stesso registro azienda"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__same_vat_partner_id
+msgid "Partner with same Tax ID"
+msgstr "Fornitori con la stessa partita IVA"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__fleet_vehicle__operation__passenger
+msgid "Passenger"
+msgstr "Passeggeri"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Personnel"
+msgstr "Personale"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone
+msgid "Phone"
+msgstr "Telefono"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_sanitized_blacklisted
+msgid "Phone Blacklisted"
+msgstr "Telefoni in blacklist"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_mobile_search
+msgid "Phone/Mobile"
+msgstr "Telefono/cellulare"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__plan_to_change_bike
+msgid "Plan To Change Bike"
+msgstr "Pianifica sostituzione bicicletta"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__plan_to_change_car
+msgid "Plan To Change Car"
+msgstr "Pianifica sostituzione auto"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Planning"
+msgstr "Pianificazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__policy_number
+msgid "Policy Number"
+msgstr "Numero polizza"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__premium_amount
+msgid "Premium Amount"
+msgstr "Valore premio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__legend_priority
+msgid "Priority Management Explanation"
+msgstr "Spiegazione della gestione delle priorità"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__ref
+msgid "Reference"
+msgstr "Riferimento"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Refresh"
+msgstr "Aggiorna"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__parent_id
+msgid "Related Company"
+msgstr "Azienda collegata"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.reporting
+msgid "Reporting"
+msgstr "Rendicontazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_user_id
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_user_id
+msgid "Responsible User"
+msgstr "Utente responsabile"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route_id
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Route"
+msgstr "Percorso"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Route Details"
+msgstr "Dettagli percorso"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__name
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Route Name"
+msgstr "Nome percorso"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route_destination
+msgid "Route destination"
+msgstr "Destinazione percorso"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route_origin
+msgid "Route origin"
+msgstr "Origine percorso"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_route
+#: model:ir.ui.menu,name:tms.menu_tms_route
+msgid "Routes"
+msgstr "Percorsi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_sms_error
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Errore consegna SMS"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__user_id
+msgid "Salesperson"
+msgstr "Addetto vendite"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_sanitized
+msgid "Sanitized Number"
+msgstr "Numero ripulito"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__scheduled_duration
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Scheduled Duration"
+msgstr "Durata schedulata"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__diff_duration
+msgid "Scheduled Duration - Actual Duration"
+msgstr "Durata schedulata - Durata attuale"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__scheduled_date_end
+msgid "Scheduled End"
+msgstr "Fine schedulata"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__scheduled_date_start
+msgid "Scheduled Start"
+msgstr "Inizio schedulato"
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_order_duration_ge_zero
+msgid "Scheduled duration must be greater than or equal to zero!"
+msgstr "La durata schedulata deve essere maggiore o uguale a zero!"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_order__scheduled_duration
+msgid "Scheduled duration of the work in hours"
+msgstr "Durata schedulata del lavoro in ore"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__self
+msgid "Self"
+msgstr "Se stesso"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Sell trips or tickets"
+msgstr "Vendita viaggi o biglietti"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__sequence
+#: model:ir.model.fields,field_description:tms.field_tms_stage__sequence
+#: model:ir.model.fields,field_description:tms.field_tms_team__sequence
+msgid "Sequence"
+msgstr "Sequenza"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_services
+msgid "Services"
+msgstr "Servizi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid ""
+"Set the number of days before the expiration date of the driver license to show a\n"
+"                                warning."
+msgstr ""
+"Imposta il numero di giorni prima la data di scadenza della patente autista "
+"per visualizzare\n"
+"                                un avviso."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid ""
+"Set the number of days before the expiration date of the vehicle insurance to show a\n"
+"                                warning."
+msgstr ""
+"Imposta il numero di giorni prima della scadenza dell'assicurazione del "
+"veicolo per visualizzare\n"
+"                                un avviso."
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config
+#: model:ir.ui.menu,name:tms.settings
+msgid "Settings"
+msgstr "Impostazioni"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_share
+msgid "Share Partner"
+msgstr "Condividi partner"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__signup_type
+msgid "Signup Token Type"
+msgstr "Tipo token iscrizione"
+
+#. module: tms
+#: model:uom.category,name:tms.uom_category_speed
+msgid "Speed"
+msgstr "Velocità"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__stage_id
+#: model:ir.model.fields,field_description:tms.field_tms_order__stage_id
+#: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_order_search
+msgid "Stage"
+msgstr "Fase"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
+msgid "Stage Description"
+msgstr "Descrizione fase"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config_stage_travel
+#: model:ir.actions.act_window,name:tms.action_tms_stage
+#: model:ir.model.fields,field_description:tms.field_tms_team__stage_ids
+#: model:ir.ui.menu,name:tms.menu_tms_config_stage
+msgid "Stages"
+msgstr "Fasi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__starred_message_ids
+msgid "Starred Message"
+msgstr "Messaggio in evidenza"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_list
+msgid "Start"
+msgstr "Inizio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__start_date
+msgid "Start Date"
+msgstr "Data inizio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__start_trip
+msgid "Start Trip"
+msgstr "Inizia viaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__state_id
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__state
+msgid "State"
+msgstr "Stato"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles_status
+msgid "Status"
+msgstr "Stato"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__activity_state
+#: model:ir.model.fields,help:tms.field_tms_order__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Stato in base alle attività\n"
+"Scaduto: la data richiesta è trascorsa\n"
+"Oggi: la data attività è oggi\n"
+"Pianificato: attività future."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__stop_location_ids
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Stop Locations"
+msgstr "Località fermata"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Stops"
+msgstr "Fermate"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__stop_locations
+msgid "Stops locations in route"
+msgstr "Località fermate in un percorso"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__street
+msgid "Street"
+msgstr "Indirizzo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__street2
+msgid "Street2"
+msgstr "Indirizzo2"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
+msgid "TRIPS"
+msgstr "VIAGGI"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__category_id
+#: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles_tags
+msgid "Tags"
+msgstr "Etichette"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "Tasks Analysis"
+msgstr "Analisi lavori"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__vat
+msgid "Tax ID"
+msgstr "Partita IVA"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__tms_team_id
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_order_search
+msgid "Team"
+msgstr "Squadra"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Team Name"
+msgstr "Nome squadra"
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_team_name_uniq
+msgid "Team name already exists!"
+msgstr "Nome della squadra già esistente!"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config_team
+#: model:ir.actions.act_window,name:tms.action_tms_dash_team
+#: model:ir.model.fields,field_description:tms.field_tms_stage__tms_team_ids
+#: model:ir.ui.menu,name:tms.menu_tms_config_team
+#: model:ir.ui.menu,name:tms.menu_tms_dash_team
+msgid "Teams"
+msgstr "Squadre"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__res_partner__location_type__terrestrial
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_type__terrestrial
+msgid "Terrestrial"
+msgstr "Terrestre"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr ""
+"Il codice ISO nazione in due caratteri. \n"
+"Si può utilizzare per ricerche rapide."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__vat
+msgid ""
+"The Tax Identification Number. Values here will be validated based on the "
+"country format. You can use '/' to indicate that the partner is not subject "
+"to tax."
+msgstr ""
+"Il numero identificazione imposta. I valori verranno validati nel formato "
+"della nazione. Si può utilizzare '/' per indicare che il partner non è "
+"soggetto all'imposta."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__user_id
+msgid "The internal user in charge of this contact."
+msgstr "L'utente interno responsabile di questo contatto."
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_insurance_unique_policy_number_per_insurer
+msgid "The policy number must be unique for each insurer!"
+msgstr "Il numero polizza deve essere univoco per ogni assicuratore!"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__company_registry
+msgid ""
+"The registry number of the company. Use it if it is different from the Tax "
+"ID. It must be unique across all partners of a same country"
+msgstr ""
+"Il numero registro dell'azienda. Utilizzare se è diverso dall'ID fiscale. "
+"Deve essere univoco tra tutti i partner della stessa nazione"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__email_normalized
+msgid ""
+"This field is used to search on email address as the primary email field can"
+" contain more than strictly an email address."
+msgstr ""
+"Questo campo viene utilizzato per la ricerca degli indirizzi e-mail, come "
+"campo principale dell'e-mail può contenere più indirizzi."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__fold
+msgid ""
+"This stage is folded in the kanban view when there are no record in that "
+"stage to display."
+msgstr ""
+"Questa fase è minimizzata nella vista Kanban quando non ci sono record da "
+"mostrare nella fase stessa."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__time_uom
+msgid "Time Uom"
+msgstr "UdM orario"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__tz
+msgid "Timezone"
+msgstr "Fuso orario"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__tz_offset
+msgid "Timezone offset"
+msgstr "Offset fuso orario"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__title
+msgid "Title"
+msgstr "Titolo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_distance_uom
+msgid "Tms Distance Uom"
+msgstr "UdM distanza TMS"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_length_uom
+msgid "Tms Length Uom"
+msgstr "UdM lunghezza TMS"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_speed_uom
+msgid "Tms Speed Uom"
+msgstr "UdM velocità TMS"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__tms_team_id
+#: model:ir.model.fields,field_description:tms.field_tms_crew__tms_team_id
+#: model:ir.model.fields,field_description:tms.field_tms_driver__tms_team_id
+msgid "Tms Team"
+msgstr "Squadra TMS"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_time_uom
+msgid "Tms Time Uom"
+msgstr "UdM tempo TMS"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_weight_uom
+msgid "Tms Weight Uom"
+msgstr "UdM peso TMS"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.root
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Transport"
+msgstr "Trasporto"
+
+#. module: tms
+#: model:ir.module.category,name:tms.tms
+msgid "Transport Management System"
+msgstr "Sistema gestione trasporto"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_crew
+msgid "Transport Management System Crew"
+msgstr "Equipaggio sistema gestione trasporto"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_order
+msgid "Transport Management System Order"
+msgstr "Ordine sistema gestione trasporto"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_route
+msgid "Transport Management System Route"
+msgstr "Percorso sistema gestione trasporto"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_stage
+msgid "Transport Management System Stage"
+msgstr "Fase sistema gestione trasporto"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_team
+msgid "Transport Management System Team"
+msgstr "Squadra sistema gestione trasporto"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_partner__tms_location
+#: model:ir.model.fields,field_description:tms.field_res_users__tms_location
+#: model:ir.model.fields,field_description:tms.field_tms_driver__tms_location
+msgid "Transport location"
+msgstr "Località trasporto"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__order
+msgid "Trip"
+msgstr "Viaggio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__duration
+msgid "Trip Duration"
+msgstr "Durata viaggio"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Trip Name"
+msgstr "Nome viaggio"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_report_view_graph
+msgid "Trip Reports"
+msgstr "Resoconti viaggio"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Trip Tracking"
+msgstr "Tracciamento viaggio"
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_order_name_uniq
+msgid "Trip name already exists!"
+msgstr "Il nome viaggio esiste già!"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_dash_order
+#: model:ir.actions.act_window,name:tms.action_tms_operation_trip
+#: model:ir.actions.act_window,name:tms.action_tms_report_order
+#: model:ir.model.fields,field_description:tms.field_tms_driver__trips_ids
+#: model:ir.ui.menu,name:tms.menu_tms_dash_order
+#: model:ir.ui.menu,name:tms.menu_tms_report_trip
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_pivot
+msgid "Trips"
+msgstr "Viaggi"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_order_kanban
+msgid "Trips Kanban"
+msgstr "Kanban viaggi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_type
+#: model:ir.model.fields,field_description:tms.field_tms_stage__stage_type
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_stage_search
+msgid "Type"
+msgstr "Tipo"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__activity_exception_decoration
+#: model:ir.model.fields,help:tms.field_tms_order__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo di attività eccezione sul record."
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_services_types
+msgid "Types"
+msgstr "Tipi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Units"
+msgstr "Unità"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Units Of Measure"
+msgstr "Unità di misura"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_uom
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Units of Measure"
+msgstr "Unità di misura"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "UoM"
+msgstr "UdM"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__custom_color
+msgid "Use Hex Code only Ex:-#FFFFFF"
+msgstr "Usare solo codice esadecimale es:-#FFFFFF"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__barcode
+msgid "Use a barcode to identify this contact."
+msgstr "Utilizza un codice a barre per identificare questo contatto."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route
+msgid "Use predefined route"
+msgstr "Utilizzare percorso predefinito"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__sequence
+msgid "Used to order stages. Lower is first."
+msgstr "Utilizzato per ordinare le fasi. Inferiori per prime."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_team__sequence
+msgid "Used to sort teams. Lower is better."
+msgstr "Utilizzato per ordinare le squadre. Inferiore per prima."
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_user
+msgid "User"
+msgstr "Utente"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__user_ids
+msgid "Users"
+msgstr "Utenti"
+
+#. module: tms
+#: model:ir.model,name:tms.model_fleet_vehicle
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__vehicle_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__vehicle_id
+#: model:ir.model.fields,field_description:tms.field_tms_team__vehicle_ids
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
+msgid "Vehicle"
+msgstr "Veicolo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__vehicle_ids_domain
+msgid "Vehicle Ids Domain"
+msgstr "Dominio IDs veicolo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__vehicle_insurance_security_days
+msgid "Vehicle Insurance security days"
+msgstr "Giorni coperti da assicurazione veicolo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__vehicles_ids
+#: model:ir.ui.menu,name:tms.menu_fleet_vehicle
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_insurance_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Vehicles"
+msgstr "Veicoli"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__vehicle_count
+msgid "Vehicles Count"
+msgstr "Conteggio veicoli"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__website
+msgid "Website Link"
+msgstr "Link al sito web"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__tz
+msgid ""
+"When printing documents and exporting/importing data, time values are computed according to this timezone.\n"
+"If the timezone is not set, UTC (Coordinated Universal Time) is used.\n"
+"Anywhere else, time values are computed according to the time offset of your web client."
+msgstr ""
+"Quando si stampano i documenti e si esportano/importano dati, gli orari sono "
+"calcolati in base a questo fuso orario.\n"
+"Se questo non è impostato, viene usato l'UTC (Coordinated Universal Time).\n"
+"In qualunque altra parte, l'orario è calcolato in base regolazione dell'ora "
+"del client web."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
+msgid ""
+"You can add a description to help your coworkers\n"
+"                            understand the meaning and purpose of the stage."
+msgstr ""
+"Puoi aggiungere una descrizione per aiutare i tuoi colleghi \n"
+"                            a comprendere il significato e lo scopo della "
+"fase."
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_stage.py:0
+msgid "You cannot delete default stages."
+msgstr "Non si possono cancellare le fasi predefinite."
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_order.py:0
+msgid "You must create an TMS order stage first."
+msgstr "Bisogna prima creare una fase ordine TMS."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__zip
+msgid "Zip"
+msgstr "CAP"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. Hours"
+msgstr "es. ore"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. kg"
+msgstr "es. Kg"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. km"
+msgstr "es. Km"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. km/h"
+msgstr "es. Km/h"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. m"
+msgstr "es. m"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__distance_traveled_uom__km
+msgid "km"
+msgstr "Km"
+
+#. module: tms
+#: model:uom.uom,name:tms.uom_kmh
+msgid "km/h"
+msgstr "Km/h"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__distance_traveled_uom__mi
+msgid "mi"
+msgstr "mi"
+
+#. module: tms
+#: model:uom.uom,name:tms.uom_mph
+msgid "mph"
+msgstr "mph"
