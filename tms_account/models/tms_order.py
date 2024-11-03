@@ -43,17 +43,13 @@ class TMSOrder(models.Model):
     @api.model
     def create(self, vals):
         order = super().create(vals)
-        if self.env.user.has_group(
-            "analytic.group_analytic_accounting"
-        ) and self.env.user.has_group("tms_account.group_tms_order_analytic_plan"):
-            analytic_account = self.env["account.analytic.account"].create(
-                {
-                    "name": vals.get("name"),
-                    "plan_id": self.env.ref("tms_account.tms_order_analytic_plan").id,
-                    "trip_id": order,
-                }
-            )
-            order.analytic_account_id = analytic_account
+        analytic_account = self.env["account.analytic.account"].create(
+            {
+                "name": vals.get("name"),
+                "plan_id": self.env.ref("tms_account.tms_order_analytic_plan").id,
+            }
+        )
+        order.analytic_account_id = analytic_account.id
         return order
 
     @api.model
@@ -100,41 +96,19 @@ class TMSOrder(models.Model):
         # Initialize distribution dictionary
         distribution = {}
 
-        # Fetch the analytic accounts based on group names
-        route_analytic_plan_group = self.env.ref(
-            "tms_account.group_tms_route_analytic_plan"
-        )
-        order_analytic_plan_group = self.env.ref(
-            "tms_account.group_tms_order_analytic_plan"
-        )
-
         analytic_account_ids = []
 
         # Iterate over tms_order_ids to determine analytic accounts
         for tms_order in self.sale_id.tms_order_ids:
-            if tms_order.route_id and route_analytic_plan_group:
-                analytic_account_id = tms_order.route_id.analytic_account_id.id
-                analytic_accounts = self.env["account.analytic.account"].search(
-                    [("id", "=", analytic_account_id)]
-                )
-                account_id = str(analytic_accounts.id)
-                if account_id:
-                    analytic_account_ids.append(account_id)
-
-            if order_analytic_plan_group:
-                analytic_account_id = tms_order.analytic_account_id.id
-                analytic_accounts = self.env["account.analytic.account"].search(
-                    [("id", "=", analytic_account_id)]
-                )
-                account_id = str(analytic_accounts.id)
-                if account_id:
-                    analytic_account_ids.append(account_id)
+            if tms_order.route_id and tms_order.route_id.analytic_account_id:
+                analytic_account_ids.append(tms_order.route_id.analytic_account_id.id)
+            if tms_order.analytic_account_id:
+                analytic_account_ids.append(tms_order.analytic_account_id.id)
 
         # Ensure distribution is provided with unique analytic accounts
         analytic_account_ids = list(set(analytic_account_ids))
         if analytic_account_ids:
             distribution[", ".join(analytic_account_ids)] = 100
-
         return distribution
 
     def _handle_bills(self):

@@ -7,11 +7,14 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
                 <page name="accounting" string="Accounting">
-                    <group name="accounting_group">
-                        <field
-                            name="analytic_account_id"
-                            context="{'default_plan_id': %(tms_account.tms_route_analytic_plan)d}"
-                        />
+                    <group id="account_main">
+                        <group id="account_left">
+                            <field
+                                name="analytic_account_id"
+                                context="{'default_plan_id': %(tms_account.tms_route_analytic_plan)d}"
+                            />
+                        </group>
+                        <group id="account_right" />
                     </group>
                 </page>
             </xpath>

@@ -45,6 +45,16 @@
                     invisible="not sale_id and not purchase_ids"
                 />
             </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Accounting">
+                    <group id="account_main">
+                        <group id="account_left">
+                            <field name="analytic_account_id" />
+                        </group>
+                        <group id="account_right" />
+                    </group>
+                </page>
+            </xpath>
         </field>
     </record>
 
