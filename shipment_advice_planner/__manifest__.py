@@ -4,7 +4,7 @@
 {
     "name": "Shipment Advice Planner",
     "summary": """This module is used to plan ready transfers in shipment advices.""",
-    "version": "16.0.1.1.0",
+    "version": "16.0.1.1.1",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,BCIM,Odoo Community Association (OCA)",
     "maintainers": ["jbaudoux"],
@@ -15,5 +15,4 @@
         "wizards/shipment_advice_planner.xml",
     ],
     "demo": [],
-    "pre_init_hook": "pre_init_hook",
 }

@@ -51,13 +51,3 @@ class StockPicking(models.Model):
             ("state", "!=", "assigned"),
             ("picking_type_code", "!=", "outgoing"),
         ]
-
-    def init(self):
-        self.env.cr.execute(
-            """
-                CREATE INDEX IF NOT EXISTS
-                stock_picking_can_be_planned_in_shipment_advice_index
-                ON stock_picking(can_be_planned_in_shipment_advice)
-                WHERE can_be_planned_in_shipment_advice is true;
-            """
-        )
