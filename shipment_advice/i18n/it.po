@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-07 13:38+0000\n"
+"PO-Revision-Date: 2024-11-08 11:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1041,7 +1041,7 @@ msgstr "Avviso spedizione"
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_auto_close_incoming
 msgid "Shipment Advice: Auto Close Incoming Advices"
-msgstr ""
+msgstr "Avviso di spedizione. Chiudi automaticamente avvisi in arrivo"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
@@ -1148,6 +1148,10 @@ msgid ""
 "                            will be automatically set to done\n"
 "                            if all related moves are done or canceled"
 msgstr ""
+"Questo flag indica se un avviso di spedizione in arrivo\n"
+"                            verrà automaticamente impostato su completato\n"
+"                            se tutti i movimenti correlati sono completati o "
+"annullati"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
@@ -1156,6 +1160,9 @@ msgid ""
 "This flag indicates if an incoming shipment advice will be automatically set "
 "to done if all related moves are done or canceled"
 msgstr ""
+"Questo flag indica se un avviso di spedizione in arrivo verrà "
+"automaticamente impostato su eseguito se tutti i mvimenti correlati vengono "
+"eseguiti o annullati"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1400,7 +1407,7 @@ msgstr "Valida"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_waiting_quantity
 msgid "Waiting Quantity"
-msgstr ""
+msgstr "In attesa della quantità"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__warehouse_id
@@ -1526,7 +1533,7 @@ msgstr ""
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "shipment_advice_auto_close_incoming"
-msgstr ""
+msgstr "shipment_advice_auto_close_incoming"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
