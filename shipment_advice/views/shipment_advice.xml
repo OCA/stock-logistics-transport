@@ -222,8 +222,11 @@
                                     <field name="picking_id" />
                                     <field name="product_id" />
                                     <field name="lot_id" />
-                                    <field name="reserved_uom_qty" />
-                                    <field name="qty_done" />
+                                    <field
+                                        name="reserved_uom_qty"
+                                        sum="Total reserved"
+                                    />
+                                    <field name="qty_done" sum="Total done" />
                                     <field name="product_uom_id" />
                                     <field name="state" />
                                 </tree>
@@ -250,7 +253,20 @@
                                 class="oe_subtotal_footer_separator"
                             />
                         </strong>
+                            <div
+                            class="oe_subtotal_footer_separator oe_inline o_td_label"
+                        >
+                                <label for="total_volume" />
+                            </div>
+                            <strong>
+                                <field
+                                name="total_volume"
+                                nolabel="1"
+                                class="oe_subtotal_footer_separator"
+                            />
+                            </strong>
                     </group>
+
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" />
@@ -276,6 +292,7 @@
                 <field name="departure_date" />
                 <field name="ref" />
                 <field name="total_load" />
+                <field name="total_volume" />
                 <field
                     name="warehouse_id"
                     groups="stock.group_stock_multi_warehouses"
