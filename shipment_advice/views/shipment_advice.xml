@@ -299,6 +299,7 @@
             <search string="Shipment Advices">
                 <field name="name" />
                 <field name="ref" />
+                <field name="loaded_move_line_ids" />
                 <filter
                     name="incoming"
                     string="Incoming"

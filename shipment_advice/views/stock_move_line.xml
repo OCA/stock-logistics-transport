@@ -74,4 +74,15 @@
             </tree>
         </field>
     </record>
+
+    <record id="view_move_line_tree_detailed" model="ir.ui.view">
+        <field name="name">stock.move.line.tree.inherit</field>
+        <field name="model">stock.move.line</field>
+        <field name="inherit_id" ref="stock.view_move_line_tree_detailed" />
+        <field name="arch" type="xml">
+            <field name="location_dest_id" position="after">
+                <field name="shipment_advice_id" widget="many2one" optional="hide" />
+            </field>
+        </field>
+    </record>
 </odoo>
