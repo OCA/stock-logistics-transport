@@ -12,7 +12,7 @@
                         name="web_ribbon"
                         title="Archived"
                         bg_color="bg-danger"
-                        attrs="{'invisible': [('active', '=', True)]}"
+                        invisible="active"
                     />
                     <label for="name" class="oe_edit_only" />
                     <h1>
@@ -30,17 +30,16 @@
                             invisible="1"
                         />
                         <field name="barcode" />
-                        <field name="active" invisible="1" />
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
     <record id="stock_dock_view_tree" model="ir.ui.view">
-        <field name="name">stock.dock.tree</field>
+        <field name="name">stock.dock.list</field>
         <field name="model">stock.dock</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="barcode" />
                 <field
@@ -48,7 +47,7 @@
                     groups="stock.group_stock_multi_warehouses"
                 />
                 <field name="company_id" groups="base.group_multi_company" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="stock_dock_view_search" model="ir.ui.view">
