@@ -23,7 +23,6 @@ class StockDock(models.Model):
         comodel_name="res.company",
         string="Company",
         related="warehouse_id.company_id",
-        readonly=True,
         store=True,
         index=True,
     )
