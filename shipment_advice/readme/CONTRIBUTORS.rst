@@ -4,6 +4,7 @@
 * `Trobz <https://trobz.com>`_:
   * Dung Tran <dungtd@trobz.com>
 * Michael Tietz (MT Software) <mtietz@mt-software.de>
+* Jacques-Etienne Baudoux <je@bcim.be>
 
 Design
 ~~~~~~
