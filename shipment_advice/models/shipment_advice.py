@@ -1,5 +1,6 @@
 # Copyright 2021 Camptocamp SA
 # Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
+# Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import _, api, fields, models
@@ -383,7 +384,7 @@ class ShipmentAdvice(models.Model):
                     wiz.pick_ids = picking
                     wiz.with_context(button_validate_picking_ids=picking.ids).process()
                 elif not picking._check_backorder():
-                    picking._action_done()
+                    picking.with_context(skip_backorder=True).button_validate()
         except UserError as error:
             self.write(
                 {
