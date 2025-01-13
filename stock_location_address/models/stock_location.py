@@ -12,22 +12,27 @@ class StockLocation(models.Model):
         comodel_name="res.partner",
         string="Real Address",
         compute="_compute_real_address_id",
+        recursive=True,
     )
 
     def _get_parent_address(self):
+        """Recursively fetches the address from parent locations."""
         if self.location_id and self.location_id.address_id:
             return self.location_id.address_id
         elif self.location_id:
             return self.location_id._get_parent_address()
         else:
-            return self.env["res.partner"]
+            return self.env["res.partner"].browse()
 
-    @api.depends("address_id", "location_id")
+    @api.depends("address_id", "location_id", "location_id.address_id")
     def _compute_real_address_id(self):
+        """
+        Computes the real_address_id field.
+        If the current location has an address, use it.
+        Otherwise, inherit from the nearest parent location.
+        """
         for record in self:
             if record.address_id:
                 record.real_address_id = record.address_id
-            elif record.location_id:
-                record.real_address_id = record._get_parent_address()
             else:
-                record.real_address_id = False
+                record.real_address_id = record._get_parent_address()
