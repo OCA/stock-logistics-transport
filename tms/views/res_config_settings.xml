@@ -14,14 +14,14 @@
                 >
                     <block title="Units" name="general_settings_container">
                         <setting id="tms_uom">
-                            <field name="group_tms_uom" string="Units of Measure" />
+                            <field name="group_tms_uom" string="TMS Units of Measure" />
                             <div class="content-group">
                                 <div class="mt8" invisible="not group_tms_uom">
                                     <button
                                         name="%(uom.product_uom_categ_form_action)d"
                                         icon="oi-arrow-right"
                                         type="action"
-                                        string="Units Of Measure"
+                                        string="TMS Units of Measure"
                                         class="btn-link"
                                     />
                                 </div>
