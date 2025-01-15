@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-10-24 09:06+0000\n"
+"PO-Revision-Date: 2025-01-15 12:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -1523,7 +1523,7 @@ msgstr "Partner con lo stesso registro azienda"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__same_vat_partner_id
 msgid "Partner with same Tax ID"
-msgstr "Fornitori con la stessa partita IVA"
+msgstr "Fornitore con la stessa partita IVA"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__fleet_vehicle__operation__passenger
@@ -1932,7 +1932,7 @@ msgid ""
 "The registry number of the company. Use it if it is different from the Tax "
 "ID. It must be unique across all partners of a same country"
 msgstr ""
-"Il numero registro dell'azienda. Utilizzare se è diverso dall'ID fiscale. "
+"Il numero registro dell'azienda. Utilizzare se è diverso dalla partita IVA. "
 "Deve essere univoco tra tutti i partner della stessa nazione"
 
 #. module: tms
