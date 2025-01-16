@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <kanban class="o_kanban_mobile" sample="1">
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div t-attf-class="oe_kanban_global_click card my-3">
                             <div class="card-body">
                                 <div class="d-flex align-items-center mb-2">
