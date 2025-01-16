@@ -377,6 +377,11 @@ msgid "Company ID"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_registry_label
+msgid "Company ID Label"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__company_name
 msgid "Company Name"
 msgstr ""
@@ -1792,6 +1797,12 @@ msgid "Street2"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_uom
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "TMS Units of Measure"
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
 msgid "TRIPS"
 msgstr ""
@@ -1810,6 +1821,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__vat
 msgid "Tax ID"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__vat_label
+msgid "Tax ID Label"
 msgstr ""
 
 #. module: tms
@@ -2054,17 +2070,6 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Units"
-msgstr ""
-
-#. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
-msgid "Units Of Measure"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_uom
-#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
-msgid "Units of Measure"
 msgstr ""
 
 #. module: tms
