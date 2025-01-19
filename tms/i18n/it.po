@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-15 12:06+0000\n"
+"PO-Revision-Date: 2025-01-19 14:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -407,7 +407,7 @@ msgstr "ID azienda"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__company_registry_label
 msgid "Company ID Label"
-msgstr ""
+msgstr "Etichetta ID azienda"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__company_name
@@ -1859,7 +1859,7 @@ msgstr "Indirizzo2"
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_uom
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "TMS Units of Measure"
-msgstr ""
+msgstr "Unità di misura TMS"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
@@ -1885,7 +1885,7 @@ msgstr "Partita IVA"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__vat_label
 msgid "Tax ID Label"
-msgstr ""
+msgstr "Etichetta ID imposta"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__tms_team_id
