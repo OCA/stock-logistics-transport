@@ -7,13 +7,15 @@ from odoo import api, models
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
-    @api.onchange("picking_type_id")
-    def _onchange_picking_type_id(self):
-        location = self.picking_type_id.default_location_dest_id
-        if location.usage == "internal":
-            self.dest_address_id = location.real_address_id
-            return
-        super()._onchange_picking_type_id()
+    @api.depends("picking_type_id")
+    def _compute_dest_address_id(self):
+        res = super()._compute_dest_address_id()
+        for po in self:
+            if po.picking_type_id.default_location_dest_id.usage == "internal":
+                po.dest_address_id = (
+                    po.picking_type_id.default_location_dest_id.real_address_id
+                )
+        return res
 
     def _get_destination_location(self):
         self.ensure_one()
