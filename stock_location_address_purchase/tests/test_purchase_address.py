@@ -54,10 +54,8 @@ class TestPickingAddress(TransactionCase):
         purchase = self.env["purchase.order"].new(
             {"partner_id": self.partner.id, "picking_type_id": self.picking_01.id}
         )
-        purchase._onchange_picking_type_id()
         self.assertEqual(self.location_partner, purchase.dest_address_id)
         purchase.update({"picking_type_id": self.picking_02.id})
-        purchase._onchange_picking_type_id()
         self.assertFalse(purchase.dest_address_id)
 
     def test_purchase_with_destination(self):
@@ -81,7 +79,6 @@ class TestPickingAddress(TransactionCase):
                 ],
             }
         )
-        purchase._onchange_picking_type_id()
         self.assertEqual(self.location.address_id, purchase.dest_address_id)
         purchase.button_confirm()
         self.assertEqual(purchase.picking_ids.location_dest_id, self.location)
@@ -107,6 +104,5 @@ class TestPickingAddress(TransactionCase):
                 ],
             }
         )
-        purchase._onchange_picking_type_id()
         purchase.button_confirm()
         self.assertFalse(purchase.dest_address_id)
