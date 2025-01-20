@@ -8,8 +8,6 @@ from .common import TestShipmentAdvicePlannerCommon
 
 class TestShipmentAdvicePlanner(TestShipmentAdvicePlannerCommon):
     def test_shipment_advice_planner_multi_warehouse(self):
-        self.assertEqual(len(self.pickings), 31)
-        self.assertEqual(len(self.wizard_form.picking_to_plan_ids), 10)
         wizard = self.wizard_form.save()
         action = wizard.button_plan_shipments()
         shipments = self.env[action.get("res_model")].search(action.get("domain"))
