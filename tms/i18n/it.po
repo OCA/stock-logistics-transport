@@ -582,6 +582,11 @@ msgid "Crews:"
 msgstr "Equipaggi:"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_customer
+msgid "Customer Location"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__d
 msgid "D - Bus"
 msgstr "D - Corriera"
@@ -1360,6 +1365,11 @@ msgid "Message Delivery error"
 msgstr "Errore di consegna messaggio"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn_msg
+msgid "Message for Stock Picking"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_ids
 #: model:ir.model.fields,field_description:tms.field_tms_order__message_ids
 msgid "Messages"
@@ -1586,6 +1596,11 @@ msgid "Premium Amount"
 msgstr "Valore premio"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_product_pricelist
+msgid "Pricelist"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__legend_priority
 msgid "Priority Management Explanation"
 msgstr "Spiegazione della gestione delle priorità"
@@ -1698,6 +1713,14 @@ msgid "Scheduled duration of the work in hours"
 msgstr "Durata schedulata del lavoro in ore"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__picking_warn
+msgid ""
+"Selecting the \"Warning\" option will notify user with the message, "
+"Selecting \"Blocking Message\" will throw an exception with the message and "
+"block the flow. The Message has to be written in the next field."
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__self
 msgid "Self"
 msgstr "Se stesso"
@@ -1756,6 +1779,11 @@ msgstr "Condividi partner"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__signup_type
 msgid "Signup Token Type"
 msgstr "Tipo token iscrizione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__specific_property_product_pricelist
+msgid "Specific Property Product Pricelist"
+msgstr ""
 
 #. module: tms
 #: model:uom.category,name:tms.uom_category_speed
@@ -1828,6 +1856,11 @@ msgstr ""
 "Scaduto: la data richiesta è trascorsa\n"
 "Oggi: la data attività è oggi\n"
 "Pianificato: attività future."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn
+msgid "Stock Picking"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_route__stop_location_ids
@@ -1958,6 +1991,18 @@ msgstr ""
 "Deve essere univoco tra tutti i partner della stessa nazione"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_stock_customer
+msgid ""
+"The stock location used as destination when sending goods to this contact."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_stock_supplier
+msgid ""
+"The stock location used as source when receiving goods from this contact."
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__email_normalized
 msgid ""
 "This field is used to search on email address as the primary email field can "
@@ -1965,6 +2010,13 @@ msgid ""
 msgstr ""
 "Questo campo viene utilizzato per la ricerca degli indirizzi e-mail, come "
 "campo principale dell'e-mail può contenere più indirizzi."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_product_pricelist
+msgid ""
+"This pricelist will be used, instead of the default one, for sales to the "
+"current partner"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__fold
@@ -2216,9 +2268,26 @@ msgid "Vehicles Count"
 msgstr "Conteggio veicoli"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_supplier
+msgid "Vendor Location"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__website
 msgid "Website Link"
 msgstr "Link al sito web"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__website_message_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__website_message_ids
+#: model:ir.model.fields,help:tms.field_tms_order__website_message_ids
+msgid "Website communication history"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__tz
