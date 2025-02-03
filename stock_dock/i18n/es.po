@@ -81,11 +81,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: stock_dock
-#: model:ir.model.fields,field_description:stock_dock.field_stock_dock____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
-
-#. module: stock_dock
 #: model:ir.model.fields,field_description:stock_dock.field_stock_dock__write_uid
 msgid "Last Updated by"
 msgstr "Ultima actualización por"
@@ -112,3 +107,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
 msgid "Warehouse"
 msgstr "Almacén"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"
