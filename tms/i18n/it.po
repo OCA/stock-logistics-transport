@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-01-28 10:06+0000\n"
+"PO-Revision-Date: 2025-02-03 19:52+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -584,7 +584,7 @@ msgstr "Equipaggi:"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_customer
 msgid "Customer Location"
-msgstr ""
+msgstr "Località cliente"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__d
@@ -1367,7 +1367,7 @@ msgstr "Errore di consegna messaggio"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn_msg
 msgid "Message for Stock Picking"
-msgstr ""
+msgstr "Messaggio per prelievo di magazzino"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_ids
@@ -1598,7 +1598,7 @@ msgstr "Valore premio"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_product_pricelist
 msgid "Pricelist"
-msgstr ""
+msgstr "Listino prezzi"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__legend_priority
@@ -1719,6 +1719,10 @@ msgid ""
 "Selecting \"Blocking Message\" will throw an exception with the message and "
 "block the flow. The Message has to be written in the next field."
 msgstr ""
+"Selezionando l'opzione \"Attenzione\" l'utente verrà avvisato con il "
+"messaggio. Selezionando \"Ferma messaggi\" genererà un'eccezione con il "
+"messaggio e fermerà il flusso. Il messaggio deve essere scritto nel campo "
+"successivo."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__self
@@ -1783,7 +1787,7 @@ msgstr "Tipo token iscrizione"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__specific_property_product_pricelist
 msgid "Specific Property Product Pricelist"
-msgstr ""
+msgstr "Listino prodotto proprietà specifico"
 
 #. module: tms
 #: model:uom.category,name:tms.uom_category_speed
@@ -1860,7 +1864,7 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn
 msgid "Stock Picking"
-msgstr ""
+msgstr "Prelievo di magazzino"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_route__stop_location_ids
@@ -1995,12 +1999,16 @@ msgstr ""
 msgid ""
 "The stock location used as destination when sending goods to this contact."
 msgstr ""
+"L'ubicazione di magazzino utilizzata come destinazione quando si spedisce "
+"merce a questo contatto."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_stock_supplier
 msgid ""
 "The stock location used as source when receiving goods from this contact."
 msgstr ""
+"L'ubicazione di magazzino utilizzata quando si riceve merce da questo "
+"contatto."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__email_normalized
@@ -2017,6 +2025,8 @@ msgid ""
 "This pricelist will be used, instead of the default one, for sales to the "
 "current partner"
 msgstr ""
+"Questo listino verrà utilizzato, al posto di quello predefinito, per le "
+"vendite al partner corrente"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__fold
@@ -2270,7 +2280,7 @@ msgstr "Conteggio veicoli"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_supplier
 msgid "Vendor Location"
-msgstr ""
+msgstr "Località fornitore"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__website
@@ -2281,13 +2291,13 @@ msgstr "Link al sito web"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__website_message_ids
 #: model:ir.model.fields,field_description:tms.field_tms_order__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messaggi sito web"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__website_message_ids
 #: model:ir.model.fields,help:tms.field_tms_order__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Cronologia comunicazioni sito web"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__tz
