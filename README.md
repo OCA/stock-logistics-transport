@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [stock_depot](stock_depot/) | 16.0.1.0.0 |  | This module allows users to manage partners stock depots.
 [stock_dock](stock_dock/) | 16.0.1.0.1 |  | Manage the loading docks of your warehouse.
 [stock_location_address](stock_location_address/) | 16.0.1.0.0 |  | Adds an address on locations
+[stock_location_address_purchase](stock_location_address_purchase/) | 16.0.1.0.0 |  | Uses the location address on purchases
 
 [//]: # (end addons)
 
