@@ -81,10 +81,7 @@ class ShipmentAdvice(models.Model):
     @api.depends("state", "toursolver_task_id")
     def _compute_is_create_toursolver_task_allowed(self):
         for rec in self:
-            rec.is_create_toursolver_task_allowed = (
-                rec.state not in ("draft", "done", "cancel")
-                and not rec.toursolver_task_id
-            )
+            rec.is_create_toursolver_task_allowed = not rec.toursolver_task_id
 
     def create_toursolver_task(self):
         self.ensure_one()
