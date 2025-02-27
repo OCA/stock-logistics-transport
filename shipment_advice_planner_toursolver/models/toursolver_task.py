@@ -372,7 +372,12 @@ class ToursolverTask(models.Model):
             {
                 "maxOptimDuration": seconds_to_duration(
                     self.toursolver_backend_id.duration
-                )
+                ),
+                "advancedSettings": [
+                    "BalancingCost=1",
+                    "CostsWeights=balancing:5",
+                    "BalancingValue=WORKTIME",
+                ],
             }
         )
         return res
