@@ -66,7 +66,8 @@ class TMSOrder(models.Model):
     driver_id = fields.Many2one(
         "tms.driver",
         string="Driver",
-        compute="_compute_vehicle_id_set_driver",
+        # compute="_compute_vehicle_id_set_driver",
+        # inverse="_inverse_driver_id",
         store=True,
         readonly=False,
     )
@@ -196,7 +197,7 @@ class TMSOrder(models.Model):
                 difference = record.date_end - record.date_start
                 record.duration = difference.total_seconds() / 3600
 
-    @api.depends("tms_team_id.driver_ids", "crew_id.driver_ids")
+    @api.depends("driver_id", "tms_team_id.driver_ids", "crew_id.driver_ids")
     def _compute_driver_ids_domain(self):
         all_drivers = self.env["tms.driver"].search([])
         all_driver_ids = all_drivers.ids
@@ -337,11 +338,17 @@ class TMSOrder(models.Model):
 
         return super().create(vals_list)
 
-    @api.depends("vehicle_id")
-    def _compute_vehicle_id_set_driver(self):
-        for record in self:
-            vehicle = record.vehicle_id
-            if vehicle and vehicle.tms_driver_id:
-                record.driver_id = vehicle.tms_driver_id
-            else:
-                record.driver_id = False
+    # @api.depends("vehicle_id")
+    # def _compute_vehicle_id_set_driver(self):
+    #     for record in self:
+    #         vehicle = record.vehicle_id
+    #         if vehicle and vehicle.tms_driver_id:
+    #             record.driver_id = vehicle.tms_driver_id
+    #         else:
+    #             record.driver_id = False
+    #
+    # def _inverse_driver_id(self):
+    #     # This method allows manually setting the driver_id
+    #     # We don't need to do anything here as the ORM will handle storing the value
+    #     # This method simply exists to tell Odoo that the field can be modified
+    #     pass
