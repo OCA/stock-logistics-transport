@@ -37,10 +37,10 @@ class WizardUnloadShipment(models.TransientModel):
     @api.model
     def _default_get_from_stock_picking(self, res, ids):
         pickings = self.env["stock.picking"].browse(ids)
-        # We keep only deliveries not canceled/done
+        # We keep only deliveries not done
         pickings_to_keep = pickings.filtered(
             lambda o: (
-                o.state not in ["cancel", "done"]
+                o.state != "done"
                 and o.move_line_ids.shipment_advice_id
                 and all(
                     state in ("in_progress", "error")

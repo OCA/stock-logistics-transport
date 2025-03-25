@@ -28,7 +28,7 @@
                     type="object"
                     string="Unload from shipment"
                     class="btn-primary"
-                    attrs="{'invisible': ['|', '|', ('is_fully_loaded_in_shipment', '=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ('cancel', 'done'))]}"
+                    attrs="{'invisible': ['|', '|', ('is_fully_loaded_in_shipment', '=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ('done'))]}"
                 />
             </header>
             <xpath

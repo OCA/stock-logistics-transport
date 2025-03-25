@@ -22,6 +22,18 @@ class TestShipmentAdviceUnload(Common):
         self.assertFalse(self.shipment_advice_out.loaded_picking_ids)
         self.assertFalse(self.shipment_advice_out.loaded_move_line_ids)
 
+    def test_shipment_advice_unload_canceled_picking(self):
+        self.progress_shipment_advice(self.shipment_advice_out)
+        # Load picking
+        picking = self.move_product_out1.picking_id
+        self.load_records_in_shipment(self.shipment_advice_out, picking)
+        self.assertEqual(self.shipment_advice_out.loaded_picking_ids, picking)
+        picking.action_cancel()
+        # Unload it
+        self.unload_records_from_shipment(self.shipment_advice_out, picking)
+        self.assertFalse(self.shipment_advice_out.loaded_picking_ids)
+        self.assertFalse(self.shipment_advice_out.loaded_move_line_ids)
+
     def test_shipment_advice_unload_move_line(self):
         self.progress_shipment_advice(self.shipment_advice_out)
         # Load move line
