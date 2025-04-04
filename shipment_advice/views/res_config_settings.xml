@@ -41,7 +41,7 @@
                         <div class="text-muted">
                             To prevent timeouts for large shipments, enable this option to execute
                             shipment advice validation through a queued job. Each picking will be
-                            validated in a separate jobs.
+                            validated in a separate job.
                         </div>
                     </div>
                 </div>
