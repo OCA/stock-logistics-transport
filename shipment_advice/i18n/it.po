@@ -158,7 +158,7 @@ msgstr "Azienda"
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__carrier_ids
 msgid ""
-"Concerned shipping method  for this shipment advice. It can be used to "
+"Concerned shipping method for this shipment advice. It can be used to "
 "determine what are the eligible deliveries to load in the shipment when you "
 "don't have planned content (e.g. through the shopfloor application)."
 msgstr ""
@@ -1169,7 +1169,7 @@ msgstr ""
 #: code:addons/shipment_advice/models/stock_move_line.py:0
 #, python-format
 msgid ""
-"This move is already loaded  in another shipment.\n"
+"This move is already loaded in another shipment.\n"
 "Product: %(product)s.\n"
 "Picking: %(picking)s"
 msgstr ""
