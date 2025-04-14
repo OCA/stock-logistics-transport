@@ -1,10 +1,10 @@
 #  Copyright 2018 Creu Blanca
 #  License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestLocationAddress(TransactionCase):
+class TestLocationAddress(BaseCommon):
     def test_inheritance(self):
         partner_1 = self.env["res.partner"].create({"name": "Partner1"})
         partner_2 = self.env["res.partner"].create({"name": "Partner2"})
