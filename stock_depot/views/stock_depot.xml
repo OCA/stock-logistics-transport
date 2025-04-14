@@ -21,10 +21,10 @@
         <field name="name">stock.depot.tree</field>
         <field name="model">stock.depot</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="partner_id" />
-            </tree>
+            </list>
         </field>
     </record>
 
