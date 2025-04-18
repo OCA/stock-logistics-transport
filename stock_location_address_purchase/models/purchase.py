@@ -10,11 +10,13 @@ class PurchaseOrder(models.Model):
     @api.depends("picking_type_id")
     def _compute_dest_address_id(self):
         res = super()._compute_dest_address_id()
-        for po in self:
-            if po.picking_type_id.default_location_dest_id.usage == "internal":
-                po.dest_address_id = (
-                    po.picking_type_id.default_location_dest_id.real_address_id
-                )
+        internal_pos = self.filtered(
+            lambda po: po.picking_type_id.default_location_dest_id.usage == "internal"
+        )
+        for po in internal_pos:
+            po.dest_address_id = (
+                po.picking_type_id.default_location_dest_id.real_address_id
+            )
         return res
 
     def _get_destination_location(self):

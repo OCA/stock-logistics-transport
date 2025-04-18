@@ -1,52 +1,54 @@
 # Copyright 2018 Creu Blanca
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import fields
-from odoo.tests import TransactionCase
+from odoo import Command, fields
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestPickingAddress(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.warehouse = self.env["stock.warehouse"].create(
+class TestPickingAddress(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.warehouse = cls.env["stock.warehouse"].create(
             {"name": "Test Warehouse", "code": "TEST_WH"}
         )
-        self.sequence = self.env["ir.sequence"].create(
+        cls.sequence = cls.env["ir.sequence"].create(
             {"name": "Picking test sequence", "company_id": False}
         )
-        self.partner = self.env["res.partner"].create({"name": "Partner"})
-        self.location_partner = self.env["res.partner"].create(
+        cls.partner = cls.env["res.partner"].create({"name": "Partner"})
+        cls.location_partner = cls.env["res.partner"].create(
             {"name": "Location_address"}
         )
-        self.location = self.env["stock.location"].create(
+        cls.location = cls.env["stock.location"].create(
             {
                 "name": "Location",
-                "location_id": self.warehouse.view_location_id.id,
+                "location_id": cls.warehouse.view_location_id.id,
                 "usage": "internal",
-                "address_id": self.location_partner.id,
+                "address_id": cls.location_partner.id,
             }
         )
-        self.picking_01 = self.env["stock.picking.type"].create(
+        cls.picking_01 = cls.env["stock.picking.type"].create(
             {
                 "code": "incoming",
                 "name": "Picking 01",
-                "sequence_id": self.sequence.id,
+                "sequence_id": cls.sequence.id,
                 "sequence_code": "IN",
-                "warehouse_id": self.warehouse.id,
-                "default_location_dest_id": self.location.id,
+                "warehouse_id": cls.warehouse.id,
+                "default_location_dest_id": cls.location.id,
             }
         )
-        self.picking_02 = self.env["stock.picking.type"].create(
+        cls.picking_02 = cls.env["stock.picking.type"].create(
             {
                 "code": "incoming",
                 "name": "Picking 02",
-                "sequence_id": self.sequence.id,
+                "sequence_id": cls.sequence.id,
                 "sequence_code": "IN",
-                "warehouse_id": self.warehouse.id,
-                "default_location_dest_id": self.warehouse.lot_stock_id.id,
+                "warehouse_id": cls.warehouse.id,
+                "default_location_dest_id": cls.warehouse.lot_stock_id.id,
             }
         )
-        self.product = self.env["product.product"].create(
+        cls.product = cls.env["product.product"].create(
             {"name": "Product", "type": "product", "purchase_ok": True}
         )
 
@@ -64,9 +66,7 @@ class TestPickingAddress(TransactionCase):
                 "partner_id": self.partner.id,
                 "picking_type_id": self.picking_01.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": self.product.id,
                             "product_qty": 1,
@@ -89,9 +89,7 @@ class TestPickingAddress(TransactionCase):
                 "partner_id": self.partner.id,
                 "picking_type_id": self.picking_02.id,
                 "order_line": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": self.product.id,
                             "name": self.product.name,
