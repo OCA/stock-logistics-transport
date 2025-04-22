@@ -72,7 +72,7 @@
                     attrs="{'invisible': [('state', '!=', 'error')]}"
                 >
                     <field name="error_message" />
-                    </div>
+                </div>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
