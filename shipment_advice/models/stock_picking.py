@@ -79,7 +79,7 @@ class StockPicking(models.Model):
             # otherwise overloaded container would be marked as partially loaded
             picking.is_fully_loaded_in_shipment = (
                 all(
-                    line.shipment_advice_id and line.qty_done >= line.reserved_uom_qty
+                    line.shipment_advice_id and line.picked
                     for line in picking.move_line_ids
                 )
                 if picking.move_line_ids
@@ -88,7 +88,7 @@ class StockPicking(models.Model):
             picking.is_partially_loaded_in_shipment = (
                 not picking.is_fully_loaded_in_shipment
                 and any(
-                    line.shipment_advice_id and line.qty_done > 0
+                    line.shipment_advice_id and line.picked
                     for line in picking.move_line_ids
                 )
             )
@@ -131,7 +131,7 @@ class StockPicking(models.Model):
                     [
                         ml
                         for ml in picking.move_line_ids_without_package
-                        if ml.shipment_advice_id and ml.qty_done > 0
+                        if ml.shipment_advice_id and ml.picked
                     ]
                 )
                 picking.loaded_move_lines_progress_f = (
@@ -147,7 +147,7 @@ class StockPicking(models.Model):
                 picking.loaded_weight = sum(
                     ml.result_package_id.shipping_weight or ml.move_id.weight
                     for ml in picking.move_line_ids_without_package
-                    if ml.shipment_advice_id and ml.qty_done > 0
+                    if ml.shipment_advice_id and ml.picked
                 ) + sum(
                     pl.package_id.shipping_weight
                     for pl in picking.package_level_ids
@@ -163,9 +163,11 @@ class StockPicking(models.Model):
             waiting_moves = picking.move_ids.filtered(
                 lambda ml: ml.state not in ["done", "cancel"]
             )
+
             picking.loaded_waiting_quantity = sum(
                 waiting_moves.mapped("product_qty")
-            ) - sum(waiting_moves.mapped("reserved_availability"))
+            ) - sum(waiting_moves.mapped("quantity"))
+
             # Overall progress based on the operation type
             if picking.picking_type_id.show_entire_packs:
                 picking.loaded_progress_f = picking.loaded_packages_progress_f

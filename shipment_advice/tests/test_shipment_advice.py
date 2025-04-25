@@ -44,7 +44,7 @@ class TestShipmentAdvice(Common):
         self.plan_records_in_shipment(self.shipment_advice_in, picking)
         self.progress_shipment_advice(self.shipment_advice_in)
         for ml in picking.move_line_ids:
-            ml.qty_done = ml.reserved_uom_qty
+            ml.picked = True
         picking._action_done()
         self.shipment_advice_in.action_done()
         self.assertEqual(self.shipment_advice_in.state, "done")
@@ -66,7 +66,7 @@ class TestShipmentAdvice(Common):
         self.progress_shipment_advice(self.shipment_advice_in)
         # Receive it (making its related transfer partially received)
         for ml in self.move_product_in1.move_line_ids:
-            ml.qty_done = ml.reserved_uom_qty
+            ml.picked = True
         self.assertEqual(picking, self.move_product_in2.picking_id)
         # When validating the shipment, a backorder is created for unprocessed moves
         self.shipment_advice_in.action_done()

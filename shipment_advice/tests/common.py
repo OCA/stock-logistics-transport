@@ -3,14 +3,15 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import fields
-from odoo.tests.common import Form, TransactionCase, new_test_user
+from odoo.tests import Form, new_test_user
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class Common(TransactionCase):
+class Common(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         # Configuration
         cls.dock = cls.env.ref("shipment_advice.stock_dock_demo")
         cls.picking_type_out = cls.env.ref("stock.picking_type_out")
@@ -110,8 +111,6 @@ class Common(TransactionCase):
                 "warehouse_id": picking_type.warehouse_id.id,
                 "picking_type_id": picking_type.id,
                 "group_id": group and group.id or False,
-                # "procure_method": "make_to_order",
-                # "state": "draft",
             }
         )
         move._assign_picking()
@@ -198,10 +197,10 @@ class Common(TransactionCase):
         return wiz
 
     @classmethod
-    def validate_picking(cls, picking, qty_done=None):
+    def validate_picking(cls, picking):
         picking.ensure_one()
         for ml in picking.move_line_ids:
-            ml.qty_done = qty_done or ml.reserved_uom_qty
+            ml.picked = True
         action_data = picking.button_validate()
         if action_data is True:
             return cls.env["stock.picking"]

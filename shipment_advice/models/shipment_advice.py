@@ -3,7 +3,7 @@
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from odoo.addons.queue_job.delay import chain, group
@@ -42,8 +42,6 @@ class ShipmentAdvice(models.Model):
         ondelete="cascade",
         string="Warehouse",
         required=True,
-        states={"draft": [("readonly", False)]},
-        readonly=True,
         check_company=True,
         default=_default_warehouse_id,
     )
@@ -67,26 +65,16 @@ class ShipmentAdvice(models.Model):
         comodel_name="stock.dock",
         ondelete="restrict",
         string="Loading dock",
-        states={"draft": [("readonly", False)], "confirmed": [("readonly", False)]},
-        readonly=True,
         index=True,
         domain="[('warehouse_id', '=', warehouse_id)]",
     )
     arrival_date = fields.Datetime(
-        states={"draft": [("readonly", False)], "confirmed": [("readonly", False)]},
-        readonly=True,
         help=(
             "When will the shipment arrive at the (un)loading dock. It is a "
             "planned date until in progress, then it represents the real one."
         ),
     )
     departure_date = fields.Datetime(
-        states={
-            "draft": [("readonly", False)],
-            "confirmed": [("readonly", False)],
-            "in_progress": [("readonly", False)],
-        },
-        readonly=True,
         help=(
             "When will the shipment leave the (un)loading dock. It is a "
             "planned date until in progress, then it represents the real one."
@@ -94,12 +82,6 @@ class ShipmentAdvice(models.Model):
     )
     ref = fields.Char(
         string="Consignment/Truck Ref.",
-        states={
-            "draft": [("readonly", False)],
-            "confirmed": [("readonly", False)],
-            "in_progress": [("readonly", False)],
-        },
-        readonly=True,
     )
     total_load = fields.Float(
         string="Total load (kg)",
@@ -110,12 +92,6 @@ class ShipmentAdvice(models.Model):
         comodel_name="stock.move",
         inverse_name="shipment_advice_id",
         string="Planned content list",
-        states={
-            "draft": [("readonly", False)],
-            "confirmed": [("readonly", False)],
-            "in_progress": [("readonly", False)],
-        },
-        readonly=True,
         check_company=True,
     )
     planned_moves_count = fields.Integer(compute="_compute_count")
@@ -129,25 +105,13 @@ class ShipmentAdvice(models.Model):
         comodel_name="stock.move.line",
         inverse_name="shipment_advice_id",
         string="Loaded content list",
-        states={
-            "draft": [("readonly", False)],
-            "confirmed": [("readonly", False)],
-            "in_progress": [("readonly", False)],
-        },
-        readonly=True,
         check_company=True,
     )
     loaded_move_line_without_package_ids = fields.One2many(
         comodel_name="stock.move.line",
         inverse_name="shipment_advice_id",
         string="Loaded content list (w/o packages)",
-        states={
-            "draft": [("readonly", False)],
-            "confirmed": [("readonly", False)],
-            "in_progress": [("readonly", False)],
-        },
         domain=[("package_level_id", "=", False)],
-        readonly=True,
         check_company=True,
     )
     loaded_move_lines_without_package_count = fields.Integer(compute="_compute_count")
@@ -274,14 +238,15 @@ class ShipmentAdvice(models.Model):
         for shipment in self:
             if shipment.state != "draft":
                 raise UserError(
-                    _("Shipment {} is not draft, operation aborted.").format(
-                        shipment.name
+                    self.env._(
+                        "Shipment %s is not draft, operation aborted.", shipment.name
                     )
                 )
             if not shipment.arrival_date:
                 raise UserError(
-                    _("Arrival date should be set on the shipment advice {}.").format(
-                        shipment.name
+                    self.env._(
+                        "Arrival date should be set on the shipment advice %s.",
+                        shipment.name,
                     )
                 )
             shipment.state = "confirmed"
@@ -291,14 +256,15 @@ class ShipmentAdvice(models.Model):
         for shipment in self:
             if shipment.state != "confirmed":
                 raise UserError(
-                    _("Shipment {} is not confirmed, operation aborted.").format(
-                        shipment.name
+                    self.env._(
+                        "Shipment %s is not confirmed, operation aborted.",
+                        shipment.name,
                     )
                 )
             if not shipment.dock_id:
                 raise UserError(
-                    _("Dock should be set on the shipment advice {}.").format(
-                        shipment.name
+                    self.env._(
+                        "Dock should be set on the shipment advice %s.", shipment.name
                     )
                 )
             if not shipment.arrival_date:
@@ -310,7 +276,7 @@ class ShipmentAdvice(models.Model):
         """Lock records for the current SQL transaction."""
         if not records:
             return
-        sql = "SELECT id FROM %s WHERE ID IN %%s FOR UPDATE" % records._table
+        sql = f"SELECT id FROM {records._table} WHERE ID IN %s FOR UPDATE"
         self.env.cr.execute(sql, (tuple(records.ids),), log_exceptions=False)
 
     def action_done(self):
@@ -344,7 +310,7 @@ class ShipmentAdvice(models.Model):
                     *[
                         self.delayable(
                             identity_key=identity_exact,
-                            description=_(
+                            description=self.env._(
                                 "%(sa)s: %(pick)s background validation",
                                 sa=self.name,
                                 pick=picking.name,
@@ -366,8 +332,8 @@ class ShipmentAdvice(models.Model):
         for shipment in self:
             if shipment.state not in ("in_progress", "error"):
                 raise UserError(
-                    _("Shipment {} is not started, operation aborted.").format(
-                        shipment.name
+                    self.env._(
+                        "Shipment %s is not started, operation aborted.", shipment.name
                     )
                 )
 
@@ -400,7 +366,7 @@ class ShipmentAdvice(models.Model):
             return
         moves_to_unplan = (
             self.loaded_move_line_ids.move_id | self.planned_move_ids
-        ).filtered(lambda m: m.state not in ("cancel", "done") and not m.quantity_done)
+        ).filtered(lambda m: m.state not in ("cancel", "done") and not m.picked)
         moves_to_unplan.shipment_advice_id = False
 
     def _postprocess_action_done(self):
@@ -413,7 +379,7 @@ class ShipmentAdvice(models.Model):
             self.write(
                 {
                     "state": "error",
-                    "error_message": _(
+                    "error_message": self.env._(
                         "One of the pickings to process failed to validate"
                     ),
                 }
@@ -429,7 +395,7 @@ class ShipmentAdvice(models.Model):
 
     @api.model
     def _get_error_message(self, error, related_object):
-        return _(
+        return self.env._(
             "An error occurred while processing:\n- %(related_object_name)s: %(error)s",
             related_object_name=related_object.display_name,
             error=str(error),
@@ -458,8 +424,8 @@ class ShipmentAdvice(models.Model):
         for shipment in self:
             if shipment.state not in ("confirmed", "in_progress"):
                 raise UserError(
-                    _("Shipment {} is not started, operation aborted.").format(
-                        shipment.name
+                    self.env._(
+                        "Shipment %s is not started, operation aborted.", shipment.name
                     )
                 )
             shipment.state = "cancel"
@@ -468,8 +434,8 @@ class ShipmentAdvice(models.Model):
         for shipment in self:
             if shipment.state != "cancel":
                 raise UserError(
-                    _("Shipment {} is not canceled, operation aborted.").format(
-                        shipment.name
+                    self.env._(
+                        "Shipment %s is not canceled, operation aborted.", shipment.name
                     )
                 )
             shipment.state = "draft"
@@ -484,7 +450,7 @@ class ShipmentAdvice(models.Model):
         action_xmlid = "stock.stock_move_action"
         action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["views"] = [
-            (self.env.ref("stock.view_picking_move_tree").id, "tree"),
+            (self.env.ref("stock.view_picking_move_tree").id, "list"),
         ]
         action["domain"] = [("id", "in", self.planned_move_ids.ids)]
         action["context"] = {}  # Disable filters
@@ -539,21 +505,21 @@ class ShipmentAdvice(models.Model):
     def button_open_deliveries_in_progress(self):
         action_xmlid = "stock.action_picking_tree_all"
         action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
-        view_tree = self.env.ref(
+        view_list = self.env.ref(
             "shipment_advice.stock_picking_loading_progress_view_tree"
         )
-        tree_view_index = action["views"].index((False, "tree"))
-        action["views"][tree_view_index] = (view_tree.id, "tree")
+        list_view_index = action["views"].index((False, "list"))
+        action["views"][list_view_index] = (view_list.id, "list")
         action["domain"] = self._domain_open_deliveries_in_progress()
         return action
 
     def button_open_receptions_in_progress(self):
         action_xmlid = "stock.action_picking_tree_all"
         action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
-        view_tree = self.env.ref(
+        view_list = self.env.ref(
             "shipment_advice.stock_picking_loading_progress_view_tree"
         )
-        tree_view_index = action["views"].index((False, "tree"))
-        action["views"][tree_view_index] = (view_tree.id, "tree")
+        list_view_index = action["views"].index((False, "list"))
+        action["views"][list_view_index] = (view_list.id, "list")
         action["domain"] = [("id", "in", self.planned_picking_ids.ids)]
         return action
