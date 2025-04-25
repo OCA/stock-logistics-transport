@@ -8,7 +8,10 @@
         <field name="inherit_id" ref="stock.view_move_line_tree" />
         <field name="arch" type="xml">
             <field name="location_dest_id" position="after">
-                <field name="shipment_advice_id" />
+                <field
+                    name="shipment_advice_id"
+                    readonly="shipment_advice_id.state not in ('draft', 'in_progress', 'confirmed')"
+                />
             </field>
         </field>
     </record>
@@ -41,18 +44,17 @@
             <field name="result_package_id" position="after">
                 <field
                     name="shipment_advice_id"
+                    column_invisible="parent.picking_type_code != 'outgoing'"
                     optional="show"
-                    attrs="{'column_invisible': [('parent.picking_type_code', '!=', 'outgoing')]}"
                 />
             </field>
             <field name="product_uom_id" position="after">
-                <field name="picking_code" invisible="1" />
                 <button
                     name="button_load_in_shipment"
                     type="object"
                     icon="fa-truck"
                     title="Load in shipment"
-                    attrs="{'invisible': ['|', ('shipment_advice_id', '!=', False), ('picking_code', '!=', 'outgoing')]}"
+                    invisible="shipment_advice_id or picking_code != 'outgoing'"
                     context="{'open_shipment': False}"
                 />
             </field>
@@ -64,14 +66,13 @@
         <field name="priority" eval="100" />
         <field name="arch" type="xml">
             <!-- string="Products" -->
-            <tree create="0">
+            <list create="0">
                 <field name="picking_id" />
                 <field name="product_id" />
                 <field name="lot_id" />
-                <field name="reserved_uom_qty" />
-                <field name="qty_done" />
+                <field name="picked" />
                 <field name="product_uom_id" />
-            </tree>
+            </list>
         </field>
     </record>
 </odoo>

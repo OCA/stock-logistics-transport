@@ -8,36 +8,32 @@
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
             <header position="inside">
-                <field name="is_fully_loaded_in_shipment" invisible="1" />
                 <button
                     name="button_plan_in_shipment"
                     type="object"
                     string="Plan in shipment"
                     class="btn-primary"
-                    attrs="{'invisible': ['|', '|', ('planned_shipment_advice_id', '!=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ('cancel', 'done'))]}"
+                    invisible="planned_shipment_advice_id or picking_type_code != 'outgoing' or state in ('cancel', 'done')"
                 />
                 <button
                     name="button_load_in_shipment"
                     type="object"
                     string="Load in shipment"
                     class="btn-primary"
-                    attrs="{'invisible': ['|', '|', ('is_fully_loaded_in_shipment', '=', True), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ('cancel', 'done'))]}"
+                    invisible="is_fully_loaded_in_shipment or picking_type_code != 'outgoing' or state in ('cancel', 'done')"
                 />
                 <button
                     name="button_unload_from_shipment"
                     type="object"
                     string="Unload from shipment"
                     class="btn-primary"
-                    attrs="{'invisible': ['|', '|', ('is_fully_loaded_in_shipment', '=', False), ('picking_type_code', '!=', 'outgoing'), ('state', 'in', ('cancel', 'done'))]}"
+                    invisible="not is_fully_loaded_in_shipment or picking_type_code != 'outgoing' or state in ('cancel', 'done')"
                 />
             </header>
-            <xpath
-                expr="//field[@name='move_ids_without_package']/tree/button[@name='action_show_details']"
-                position="before"
-            >
+            <xpath expr="//field[@name='lot_ids']" position="after">
                 <field
                     name="shipment_advice_id"
-                    attrs="{'column_invisible': [('parent.picking_type_code', 'not in', ['incoming', 'outgoing'])]}"
+                    column_invisible="parent.picking_type_code not in ['incoming', 'outgoing']"
                     optional="show"
                 />
             </xpath>
@@ -93,13 +89,13 @@
         <field name="model">stock.picking</field>
         <field name="priority">1000</field>
         <field name="arch" type="xml">
-            <tree create="0">
+            <list create="0">
                 <field name="name" />
                 <field name="partner_id" />
                 <field name="scheduled_date" />
                 <field name="origin" />
                 <field name="state" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="stock_picking_loading_progress_view_tree" model="ir.ui.view">
@@ -107,21 +103,18 @@
         <field name="model">stock.picking</field>
         <field name="priority" eval="110" />
         <field name="arch" type="xml">
-            <tree
+            <list
                 create="0"
                 decoration-success="is_fully_loaded_in_shipment"
                 decoration-warning="is_partially_loaded_in_shipment"
             >
-                <field name="is_fully_loaded_in_shipment" invisible="1" />
-                <field name="is_partially_loaded_in_shipment" invisible="1" />
                 <field name="name" />
-                <field name="picking_type_code" invisible="1" />
                 <field name="loaded_packages_progress" />
                 <field name="loaded_move_lines_progress" />
                 <field name="loaded_weight_progress" />
                 <field name="state" />
                 <field name="loaded_waiting_quantity" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="wizard_plan_shipment_picking_action" model="ir.actions.act_window">

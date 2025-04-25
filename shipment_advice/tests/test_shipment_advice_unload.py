@@ -27,13 +27,13 @@ class TestShipmentAdviceUnload(Common):
         # Load move line
         move_line = self.move_product_out1.move_line_ids
         self.load_records_in_shipment(self.shipment_advice_out, move_line)
-        self.assertEqual(move_line.qty_done, 20)
+        self.assertTrue(move_line.picked)
         self.assertEqual(
             self.shipment_advice_out.loaded_move_line_without_package_ids, move_line
         )
         # Unload it
         self.unload_records_from_shipment(self.shipment_advice_out, move_line)
-        self.assertFalse(move_line.qty_done)
+        self.assertFalse(move_line.picked)
         self.assertFalse(self.shipment_advice_out.loaded_move_line_without_package_ids)
 
     def test_shipment_advice_unload_package_level(self):
@@ -42,8 +42,8 @@ class TestShipmentAdviceUnload(Common):
         package_level = self.move_product_out2.move_line_ids.package_level_id
         self.load_records_in_shipment(self.shipment_advice_out, package_level)
         self.assertTrue(package_level.is_done)
-        self.assertEqual(self.move_product_out2.move_line_ids.qty_done, 10)
-        self.assertEqual(self.move_product_out3.move_line_ids.qty_done, 10)
+        self.assertTrue(self.move_product_out2.move_line_ids.picked)
+        self.assertTrue(self.move_product_out3.move_line_ids.picked)
         self.assertFalse(self.shipment_advice_out.loaded_move_line_without_package_ids)
         self.assertEqual(
             self.shipment_advice_out.loaded_package_ids, package_level.package_id
@@ -51,6 +51,6 @@ class TestShipmentAdviceUnload(Common):
         # Unload it
         package_level._unload_from_shipment()
         self.assertFalse(package_level.is_done)
-        self.assertFalse(self.move_product_out2.move_line_ids.qty_done)
-        self.assertFalse(self.move_product_out3.move_line_ids.qty_done)
+        self.assertFalse(self.move_product_out2.move_line_ids.picked)
+        self.assertFalse(self.move_product_out3.move_line_ids.picked)
         self.assertFalse(self.shipment_advice_out.loaded_package_ids)

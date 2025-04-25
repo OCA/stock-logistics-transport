@@ -1,7 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -26,7 +26,7 @@ class WizardUnloadShipment(models.TransientModel):
         active_ids = self.env.context.get("active_ids")
         if not active_ids:
             raise UserError(
-                _("Please select at least one record to unload from shipment.")
+                self.env._("Please select at least one record to unload from shipment.")
             )
         if active_model == "stock.picking" and active_ids:
             res = self._default_get_from_stock_picking(res, active_ids)
@@ -51,12 +51,12 @@ class WizardUnloadShipment(models.TransientModel):
         )
         res["picking_ids"] = [(6, False, pickings_to_keep.ids)]
         if not pickings_to_keep:
-            res["warning"] = _(
+            res["warning"] = self.env._(
                 "No transfer to unload among selected ones (already done or "
                 "not related to a shipment)."
             )
         elif pickings != pickings_to_keep:
-            res["warning"] = _(
+            res["warning"] = self.env._(
                 "Transfers to include have been updated, keeping only those "
                 "still in progress and related to a shipment."
             )
@@ -79,12 +79,12 @@ class WizardUnloadShipment(models.TransientModel):
         )
         res["move_line_ids"] = [(6, False, lines_to_keep.ids)]
         if not lines_to_keep:
-            res["warning"] = _(
+            res["warning"] = self.env._(
                 "No product to unload among selected ones (already done or "
                 "not related to a shipment)."
             )
         elif lines != lines_to_keep:
-            res["warning"] = _(
+            res["warning"] = self.env._(
                 "Products to include have been updated, keeping only those "
                 "still in progress and related to a shipment."
             )

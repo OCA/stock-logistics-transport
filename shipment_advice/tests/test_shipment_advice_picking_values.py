@@ -14,7 +14,7 @@ class TestShipmentPickingValues(Common):
     def test_picking_loaded_waiting_quantity_yes(self):
         move = self.move_product_out1
         picking = move.picking_id
-        quantity = move.product_qty
-        move.move_line_ids.reserved_uom_qty = quantity - 3
+        quantity = move.product_uom_qty
+        move.quantity = quantity - 3
         self.load_records_in_shipment(self.shipment_advice_out, picking)
         self.assertEqual(picking.loaded_waiting_quantity, 3)

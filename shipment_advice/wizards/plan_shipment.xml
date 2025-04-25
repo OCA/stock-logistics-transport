@@ -9,32 +9,22 @@
             <form string="Plan in Shipment Advice">
                 <sheet>
                     <strong style="color: red;">
-                        <field
-                            name="warning"
-                            attrs="{'invisible': [('warning', '=', False)]}"
-                        />
+                        <field name="warning" invisible="not warning" />
                     </strong>
                     <group
                         name="pickings"
-                        attrs="{'invisible': [('picking_ids', '=', [])]}"
+                        invisible="not picking_ids"
                         string="Transfers"
                     >
                         <field
                             name="picking_ids"
-                            context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
+                            context="{'list_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
                         />
                     </group>
-                    <group
-                        name="moves"
-                        attrs="{'invisible': [('move_ids', '=', [])]}"
-                        string="Moves"
-                    >
+                    <group name="moves" invisible="not move_ids" string="Moves">
                         <field name="move_ids" />
                     </group>
-                    <group
-                        name="shipment"
-                        attrs="{'invisible': [('picking_ids', '=', []), ('move_ids', '=', [])]}"
-                    >
+                    <group name="shipment" invisible="not picking_ids and not move_ids">
                         <field name="shipment_advice_id" />
                     </group>
                     <footer>
@@ -43,7 +33,7 @@
                             type="object"
                             string="Validate"
                             class="btn-primary"
-                            attrs="{'invisible': [('picking_ids', '=', []), ('move_ids', '=', [])]}"
+                            invisible="not picking_ids and not move_ids"
                         />
                         <button special="cancel" string="Cancel" class="btn-default" />
                     </footer>

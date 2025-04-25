@@ -1,7 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_is_zero
 
@@ -31,8 +31,9 @@ class StockMoveLine(models.Model):
         for move_line in self:
             if move_line.package_level_id:
                 package_lines = move_line.package_level_id.move_line_ids.filtered(
-                    lambda l: l.state in ("partially_available", "assigned")
+                    lambda ml: ml.state in ("partially_available", "assigned")
                 )
+
                 if not set(package_lines.ids).issubset(set(self.ids)):
                     return False
         return True
@@ -46,14 +47,14 @@ class StockMoveLine(models.Model):
             products = move_lines.product_id.mapped("display_name")
             packages = move_lines.package_id.mapped("display_name")
             raise UserError(
-                _(
+                self.env._(
                     "You cannot load this move line alone, you have to "
                     "move the whole package content.\n%(info)s",
                     info="\n".join(
                         [
-                            _("Transfers: %s", ", ".join(pickings)),
-                            _("Products: %s", ", ".join(products)),
-                            _("Packages: %s", ", ".join(packages)),
+                            self.env._("Transfers: %s", ", ".join(pickings)),
+                            self.env._("Products: %s", ", ".join(products)),
+                            self.env._("Packages: %s", ", ".join(packages)),
                         ]
                     ),
                 )
@@ -63,22 +64,25 @@ class StockMoveLine(models.Model):
             planned_shipment = move_line.move_id.shipment_advice_id
             if planned_shipment and planned_shipment != shipment_advice:
                 raise UserError(
-                    _(
+                    self.env._(
                         "You cannot load this into this shipment as it has been "
-                        "planned to be loaded in {}"
-                    ).format(planned_shipment.name)
+                        "planned to be loaded in %s",
+                        planned_shipment.name,
+                    )
                 )
             # If no planned shipment, allow the loading only if the shipment
             # is not a planned one
             elif not planned_shipment and shipment_advice.planned_move_ids:
                 raise UserError(
-                    _(
+                    self.env._(
                         "You cannot load this into this shipment because its "
                         "content is planned already.\n%(info)s",
                         info="\n".join(
                             [
-                                _("Transfer: %s", move_line.picking_id.name),
-                                _("Product: %s", move_line.product_id.display_name),
+                                self.env._("Transfer: %s", move_line.picking_id.name),
+                                self.env._(
+                                    "Product: %s", move_line.product_id.display_name
+                                ),
                             ]
                         ),
                     )
@@ -88,7 +92,7 @@ class StockMoveLine(models.Model):
                 and move_line.shipment_advice_id != shipment_advice
             ):
                 raise UserError(
-                    _(
+                    self.env._(
                         "This move is already loaded  in another shipment."
                         "\nProduct: %(product)s.\nPicking: %(picking)s",
                         product=move_line.product_id.display_name,
@@ -97,31 +101,29 @@ class StockMoveLine(models.Model):
                 )
             move_line.shipment_advice_id = shipment_advice
             uom = move_line.product_uom_id or move_line.product_id.uom_id
-            if float_is_zero(
-                move_line.reserved_uom_qty, precision_rounding=uom.rounding
-            ):
+            if float_is_zero(move_line.quantity, precision_rounding=uom.rounding):
                 raise UserError(
-                    _(
+                    self.env._(
                         "Nothing to load for %(product)s.\nPicking: %(picking)s",
                         product=move_line.product_id.display_name,
                         picking=move_line.picking_id.name,
                     )
                 )
             if move_line.state in ("partially_available", "assigned"):
-                move_line.qty_done = move_line.reserved_uom_qty
+                move_line.picked = True
 
     def _unload_from_shipment(self):
         """Unload the move lines from their related shipment advice."""
         if not self._check_entire_package():
             raise UserError(
-                _(
+                self.env._(
                     "You cannot unload this move line alone, you have to "
                     "unload the whole package content."
                 )
             )
         self.shipment_advice_id = False
-        self.qty_done = 0
+        self.picked = False
 
     def _is_loaded_in_shipment(self):
         """Return `True` if the move lines are loaded in a shipment."""
-        return all([line.qty_done and line.shipment_advice_id for line in self])
+        return all([line.picked and line.shipment_advice_id for line in self])

@@ -150,11 +150,19 @@ class TestShipmentAdviceLoad(Common):
                 package_level,
             )
 
-    def test_load_check_package(self):
-        """load should ignore done and cancelled lines"""
+    def test_load_check_package_partial_loading(self):
+        """
+        Test that loading only part of a package fails with UserError.
+        When a package contains multiple move lines, attempting to load only
+        some of those move lines should fail with a UserError.
+        """
         move1lines = self.move_product_out1.move_line_ids
         move2lines = self.move_product_out2.move_line_ids
         picking = self.move_product_out1.picking_id
+
+        self.move_product_out2.picking_id = picking
+        picking.action_assign()
+        move2lines = self.move_product_out2.move_line_ids
         picking._put_in_pack(move1lines | move2lines)
-        self.move_product_out2._action_done()
-        move1lines._load_in_shipment(self.shipment_advice_out)
+        with self.assertRaisesRegex(UserError, "You cannot load this move line alone"):
+            move1lines._load_in_shipment(self.shipment_advice_out)

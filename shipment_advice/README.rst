@@ -52,6 +52,7 @@ Authors
 -------
 
 * Camptocamp
+* BCIM
 
 Contributors
 ------------
@@ -72,17 +73,6 @@ Design
 - Joël Grand-Guillaume <joel.grandguillaume@camptocamp.com>
 - Jacques-Etienne Baudoux <je@bcim.be>
 
-Other credits
--------------
-
-**Financial support**
-
-- Cosanum
-- Camptocamp R&D
-
-The migration of this module from 13.0 to 14.0 was financially supported
-by Camptocamp
-
 Maintainers
 -----------
 
@@ -95,6 +85,14 @@ This module is maintained by the OCA.
 OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
+
+.. |maintainer-jbaudoux| image:: https://github.com/jbaudoux.png?size=40px
+    :target: https://github.com/jbaudoux
+    :alt: jbaudoux
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-jbaudoux| 
 
 This module is part of the `OCA/stock-logistics-transport <https://github.com/OCA/stock-logistics-transport/tree/18.0/shipment_advice>`_ project on GitHub.
 

@@ -1,7 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -33,7 +33,7 @@ class WizardPlanShipment(models.TransientModel):
         active_ids = self.env.context.get("active_ids")
         if not active_ids:
             raise UserError(
-                _("Please select at least one record to plan in a shipment.")
+                self.env._("Please select at least one record to plan in a shipment.")
             )
         if active_model == "stock.picking" and active_ids:
             res = self._default_get_from_stock_picking(res, active_ids)
@@ -53,12 +53,12 @@ class WizardPlanShipment(models.TransientModel):
         )
         res["picking_ids"] = [(6, False, pickings_to_keep.ids)]
         if not pickings_to_keep:
-            res["warning"] = _(
+            res["warning"] = self.env._(
                 "No transfer to plan among selected ones (already done or "
                 "not qualified as deliveries/receptions)."
             )
         elif pickings != pickings_to_keep:
-            res["warning"] = _(
+            res["warning"] = self.env._(
                 "Transfers to include have been updated, keeping only those "
                 "still in progress and qualified as delivery/reception."
             )
@@ -87,13 +87,13 @@ class WizardPlanShipment(models.TransientModel):
         )
         res["move_ids"] = [(6, False, moves_to_keep.ids)]
         if not moves_to_keep:
-            res["warning"] = _(
+            res["warning"] = self.env._(
                 "No move to plan among selected ones (already done, "
                 "linked to other moves through a package, or not related "
                 "to a delivery/reception)."
             )
         elif moves != moves_to_keep:
-            res["warning"] = _(
+            res["warning"] = self.env._(
                 "Moves to include have been updated, keeping only those "
                 "still in progress and related to a delivery/reception."
             )
@@ -113,8 +113,8 @@ class WizardPlanShipment(models.TransientModel):
         if self.picking_ids != pickings:
             res.update(
                 warning={
-                    "title": _("Transfers updated"),
-                    "message": _(
+                    "title": self.env._("Transfers updated"),
+                    "message": self.env._(
                         "Transfers to include have been updated "
                         "to match the selected shipment type."
                     ),
@@ -123,8 +123,8 @@ class WizardPlanShipment(models.TransientModel):
         if self.move_ids != moves:
             res.update(
                 warning={
-                    "title": _("Moves updated"),
-                    "message": _(
+                    "title": self.env._("Moves updated"),
+                    "message": self.env._(
                         "Moves to include have been updated "
                         "to match the selected shipment type."
                     ),
