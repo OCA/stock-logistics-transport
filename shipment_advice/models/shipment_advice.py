@@ -17,8 +17,9 @@ class ShipmentAdvice(models.Model):
     _order = "arrival_date DESC, id DESC"
 
     def _default_warehouse_id(self):
-        wh = self.env.ref("stock.warehouse0", raise_if_not_found=False)
-        return wh.id or False
+        company = self.env.context.get("default_company_id") or self.env.company.id
+        wh = self.env["stock.warehouse"].search([("company_id", "=", company)], limit=1)
+        return wh.id
 
     name = fields.Char(
         default="/", copy=False, index=True, required=True, readonly=True
@@ -44,7 +45,7 @@ class ShipmentAdvice(models.Model):
         required=True,
         states={"draft": [("readonly", False)]},
         readonly=True,
-        check_company=True,
+        check_company=False,
         default=_default_warehouse_id,
     )
     company_id = fields.Many2one(
