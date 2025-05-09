@@ -9,9 +9,15 @@ class StockPackageLevel(models.Model):
 
     shipment_advice_id = fields.Many2one(related="move_line_ids.shipment_advice_id")
     package_shipping_weight = fields.Float(related="package_id.shipping_weight")
-    package_weight_uom_name = fields.Char(
-        related="package_id.package_type_id.weight_uom_name"
+    package_shipping_weight_uom_name = fields.Char(
+        compute="_compute_package_shipping_weight_uom_name", store=False
     )
+
+    def _compute_package_shipping_weight_uom_name(self):
+        for package_level in self:
+            package_level.package_shipping_weight_uom_name = self.env[
+                "product.template"
+            ]._get_weight_uom_name_from_ir_config_parameter()
 
     def button_load_in_shipment(self):
         action_xmlid = "shipment_advice.wizard_load_shipment_picking_action"
