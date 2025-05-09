@@ -41,7 +41,7 @@
                 <field name="state" />
                 <field name="is_done" />
                 <field name="package_shipping_weight" />
-                <field name="package_weight_uom_name" string=" " />
+                <field name="package_shipping_weight_uom_name" string=" " />
             </list>
         </field>
     </record>
