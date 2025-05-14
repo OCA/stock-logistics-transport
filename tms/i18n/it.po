@@ -17,6 +17,11 @@ msgstr ""
 "X-Generator: Weblate 5.6.2\n"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_invoice_count
+msgid "# Vendor Bills"
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
 msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow "
@@ -135,6 +140,16 @@ msgid "A - Motorcycles"
 msgstr "A - Moto"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_payable_id
+msgid "Account Payable"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_receivable_id
+msgid "Account Receivable"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_needaction
 #: model:ir.model.fields,field_description:tms.field_tms_order__message_needaction
 msgid "Action Needed"
@@ -247,6 +262,16 @@ msgid "Attachment Count"
 msgstr "Conteggio allegati"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__autopost_bills
+msgid "Auto-post bills"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__autopost_bills
+msgid "Automatically post bills for this trusted partner"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
 msgid "Avatar"
 msgstr "Avatar"
@@ -275,6 +300,11 @@ msgstr "Avatar 512"
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__b
 msgid "B - Automobiles"
 msgstr "B - Automobili"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__bank_account_count
+msgid "Bank"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__bank_ids
@@ -368,6 +398,14 @@ msgid "City"
 msgstr "Città"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__peppol_eas
+msgid ""
+"Code used to identify the Endpoint for BIS Billing 3.0 and its derivatives.\n"
+"             List available at https://docs.peppol.eu/poacc/billing/3.0/"
+"codelist/eas/"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__custom_color
 msgid "Color Code"
 msgstr "Codice colore"
@@ -388,6 +426,11 @@ msgstr "Il codice colore deve essere esadecimale. Es:-#FFFFFF"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__commercial_partner_id
 msgid "Commercial Entity"
 msgstr "Entità commerciale"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__ref_company_ids
+msgid "Companies that refers to partner"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__company_id
@@ -542,6 +585,21 @@ msgid "Created on"
 msgstr "Creato il"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__credit_limit
+msgid "Credit Limit"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__credit_to_invoice
+msgid "Credit To Invoice"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__credit_limit
+msgid "Credit limit specific to this partner."
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__crew_id
 #: model:ir.model.fields,field_description:tms.field_tms_team__crew_ids
 msgid "Crew"
@@ -582,9 +640,24 @@ msgid "Crews:"
 msgstr "Equipaggi:"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_customer
 msgid "Customer Location"
 msgstr "Località cliente"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_payment_term_id
+msgid "Customer Payment Terms"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__customer_rank
+msgid "Customer Rank"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__d
@@ -605,6 +678,11 @@ msgstr "Data fine"
 #: model:ir.model.fields,field_description:tms.field_tms_order__date_start
 msgid "Date Start"
 msgstr "Data inizio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__days_sales_outstanding
+msgid "Days Sales Outstanding (DSO)"
+msgstr ""
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -642,9 +720,24 @@ msgid "Default Weight UoM"
 msgstr "UdM predefinita peso"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_delivery_carrier_id
+msgid "Default delivery method used in sales orders."
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
 msgid "Defines how this stage is evaluated as completed stage"
 msgstr "Definisce come questa fase viene valutata come completata"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__trust
+msgid "Degree of trust you have in this debtor"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_delivery_carrier_id
+msgid "Delivery Method"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__description
@@ -665,6 +758,16 @@ msgstr "Destinazione"
 #: model:ir.model.fields,field_description:tms.field_tms_route__destination_location_id
 msgid "Destination Location"
 msgstr "Ubicazione di destinazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__display_invoice_edi_format
+msgid "Display Invoice Edi Format"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__display_invoice_template_pdf_report_id
+msgid "Display Invoice Template Pdf Report"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__display_name
@@ -781,6 +884,11 @@ msgid "Driving Experience Years"
 msgstr "Anni esperienza autista"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__duplicated_bank_account_partners_count
+msgid "Duplicated Bank Account Partners Count"
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Duration"
 msgstr "Durata"
@@ -865,6 +973,16 @@ msgid ""
 msgstr ""
 "Campo utilizzato per salvare il numero di telefono ripulito. Aiuta ad "
 "accelerare ricerche e comparazioni."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__fiscal_country_codes
+msgid "Fiscal Country Codes"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_position_id
+msgid "Fiscal Position"
+msgstr ""
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models
@@ -996,6 +1114,16 @@ msgstr ""
 "riceverà più SMS di massa, da qualsiasi lista"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__ignore_abnormal_invoice_amount
+msgid "Ignore Abnormal Invoice Amount"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__ignore_abnormal_invoice_date
+msgid "Ignore Abnormal Invoice Date"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__image_1920
 msgid "Image"
 msgstr "Immagine"
@@ -1090,9 +1218,39 @@ msgid "Insurer"
 msgstr "Assicuratore"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_warn
+msgid "Invoice"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_edi_format_store
+msgid "Invoice Edi Format Store"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_sending_method
+msgid "Invoice sending"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_template_pdf_report_id
+msgid "Invoice template"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_ids
+msgid "Invoices"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_active
 msgid "Is Active"
 msgstr "È attivo"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_coa_installed
+msgid "Is Coa Installed"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__is_completed
@@ -1111,9 +1269,19 @@ msgid "Is Follower"
 msgstr "Segue"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_peppol_edi_format
+msgid "Is Peppol Edi Format"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_public
 msgid "Is Public"
 msgstr "È pubblico"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_ubl_format
+msgid "Is Ubl Format"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_company
@@ -1124,6 +1292,11 @@ msgstr "È un'azienda"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__function
 msgid "Job Position"
 msgstr "Posizione lavorativa"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__journal_item_count
+msgid "Journal Items"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__lang
@@ -1365,6 +1538,16 @@ msgid "Message Delivery error"
 msgstr "Errore di consegna messaggio"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_warn_msg
+msgid "Message for Invoice"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn_msg
+msgid "Message for Sales Order"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn_msg
 msgid "Message for Stock Picking"
 msgstr "Messaggio per prelievo di magazzino"
@@ -1535,6 +1718,26 @@ msgid "Partner"
 msgstr "Partner"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_company_registry_placeholder
+msgid "Partner Company Registry Placeholder"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__contract_ids
+msgid "Partner Contracts"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__use_partner_credit_limit
+msgid "Partner Limit"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_vat_placeholder
+msgid "Partner Vat Placeholder"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__same_company_registry_partner_id
 msgid "Partner with same Company Registry"
 msgstr "Partner con lo stesso registro azienda"
@@ -1548,6 +1751,31 @@ msgstr "Fornitore con la stessa partita IVA"
 #: model:ir.model.fields.selection,name:tms.selection__fleet_vehicle__operation__passenger
 msgid "Passenger"
 msgstr "Passeggeri"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__debit_limit
+msgid "Payable Limit"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_count
+msgid "Payment Token Count"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_ids
+msgid "Payment Tokens"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_endpoint
+msgid "Peppol Endpoint"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_eas
+msgid "Peppol e-address (EAS)"
+msgstr ""
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
@@ -1591,6 +1819,20 @@ msgid "Policy Number"
 msgstr "Numero polizza"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_outbound_payment_method_line_id
+msgid ""
+"Preferred payment method when buying from this vendor. This will be set by "
+"default on all outgoing payments created for this vendor"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_inbound_payment_method_line_id
+msgid ""
+"Preferred payment method when selling to this customer. This will be set by "
+"default on all incoming payments created for this customer"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__premium_amount
 msgid "Premium Amount"
 msgstr "Valore premio"
@@ -1604,6 +1846,16 @@ msgstr "Listino prezzi"
 #: model:ir.model.fields,field_description:tms.field_tms_stage__legend_priority
 msgid "Priority Management Explanation"
 msgstr "Spiegazione della gestione delle priorità"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_inbound_payment_method_line_id
+msgid "Property Inbound Payment Method Line"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_outbound_payment_method_line_id
+msgid "Property Outbound Payment Method Line"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__ref
@@ -1672,6 +1924,21 @@ msgid "SMS Delivery error"
 msgstr "Errore consegna SMS"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_count
+msgid "Sale Order Count"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_ids
+msgid "Sales Order"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn
+msgid "Sales Warnings"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__user_id
 msgid "Salesperson"
 msgstr "Addetto vendite"
@@ -1713,7 +1980,9 @@ msgid "Scheduled duration of the work in hours"
 msgstr "Durata schedulata del lavoro in ore"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__invoice_warn
 #: model:ir.model.fields,help:tms.field_tms_driver__picking_warn
+#: model:ir.model.fields,help:tms.field_tms_driver__sale_warn
 msgid ""
 "Selecting the \"Warning\" option will notify user with the message, "
 "Selecting \"Blocking Message\" will throw an exception with the message and "
@@ -1747,6 +2016,11 @@ msgid "Services"
 msgstr "Servizi"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__use_partner_credit_limit
+msgid "Set a value greater than 0.0 to activate a credit limit check"
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid ""
 "Set the number of days before the expiration date of the driver license to "
@@ -1778,6 +2052,11 @@ msgstr "Impostazioni"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__partner_share
 msgid "Share Partner"
 msgstr "Condividi partner"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__show_credit_limit
+msgid "Show Credit Limit"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__signup_type
@@ -1893,6 +2172,11 @@ msgid "Street2"
 msgstr "Indirizzo2"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_rank
+msgid "Supplier Rank"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_uom
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "TMS Units of Measure"
@@ -1976,6 +2260,12 @@ msgstr ""
 "soggetto all'imposta."
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_account_position_id
+msgid ""
+"The fiscal position determines the taxes/accounts used for this contact."
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__user_id
 msgid "The internal user in charge of this contact."
 msgstr "L'utente interno responsabile di questo contatto."
@@ -2011,6 +2301,20 @@ msgstr ""
 "contatto."
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_account_payable_id
+msgid ""
+"This account will be used instead of the default one as the payable account "
+"for the current partner"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_account_receivable_id
+msgid ""
+"This account will be used instead of the default one as the receivable "
+"account for the current partner"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__email_normalized
 msgid ""
 "This field is used to search on email address as the primary email field can "
@@ -2018,6 +2322,20 @@ msgid ""
 msgstr ""
 "Questo campo viene utilizzato per la ricerca degli indirizzi e-mail, come "
 "campo principale dell'e-mail può contenere più indirizzi."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_supplier_payment_term_id
+msgid ""
+"This payment term will be used instead of the default one for purchase "
+"orders and vendor bills"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_payment_term_id
+msgid ""
+"This payment term will be used instead of the default one for sales orders "
+"and customer invoices"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_product_pricelist
@@ -2088,6 +2406,31 @@ msgstr "UdM tempo TMS"
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_weight_uom
 msgid "Tms Weight Uom"
 msgstr "UdM peso TMS"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__total_invoiced
+msgid "Total Invoiced"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__debit
+msgid "Total Payable"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__credit
+msgid "Total Receivable"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__credit
+msgid "Total amount this customer owes you."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__debit
+msgid "Total amount you have to pay to this vendor."
+msgstr ""
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.root
@@ -2200,6 +2543,13 @@ msgid "Types"
 msgstr "Tipi"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__peppol_endpoint
+msgid ""
+"Unique identifier used by the BIS Billing 3.0 and its derivatives, also "
+"known as 'Endpoint ID'."
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Units"
 msgstr "Unità"
@@ -2283,6 +2633,11 @@ msgid "Vendor Location"
 msgstr "Località fornitore"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_supplier_payment_term_id
+msgid "Vendor Payment Terms"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__website
 msgid "Website Link"
 msgstr "Link al sito web"
@@ -2342,6 +2697,13 @@ msgid "Zip"
 msgstr "CAP"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__days_sales_outstanding
+msgid ""
+"[(Total Receivable/Total Revenue) * number of days since the first invoice] "
+"for this customer"
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "e.g. Hours"
 msgstr "es. ore"
@@ -2365,6 +2727,11 @@ msgstr "es. Km/h"
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "e.g. m"
 msgstr "es. m"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_edi_format
+msgid "eInvoice format"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__distance_traveled_uom__km
