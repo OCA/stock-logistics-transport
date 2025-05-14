@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_shipment_advice_user,stock.picking user,model_shipment_advice,stock.group_stock_user,1,1,1,1
+access_wizard_plan_shipment_user,wizard.plan.shipment user,model_wizard_plan_shipment,stock.group_stock_user,1,1,1,0
+access_wizard_unplan_shipment_user,wizard.unplan.shipment user,model_wizard_unplan_shipment,stock.group_stock_user,1,1,1,0
+access_wizard_load_shipment_user,wizard.load.shipment user,model_wizard_load_shipment,stock.group_stock_user,1,1,1,0
+access_wizard_unload_shipment_user,wizard.unload.shipment user,model_wizard_unload_shipment,stock.group_stock_user,1,1,1,0
