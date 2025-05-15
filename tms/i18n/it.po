@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-02-03 19:52+0000\n"
+"PO-Revision-Date: 2025-05-15 17:24+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_invoice_count
 msgid "# Vendor Bills"
-msgstr ""
+msgstr "N. fatture fornitore"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
@@ -142,12 +142,12 @@ msgstr "A - Moto"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_payable_id
 msgid "Account Payable"
-msgstr ""
+msgstr "Conto di debito"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_receivable_id
 msgid "Account Receivable"
-msgstr ""
+msgstr "Conto di credito"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_needaction
@@ -264,12 +264,12 @@ msgstr "Conteggio allegati"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__autopost_bills
 msgid "Auto-post bills"
-msgstr ""
+msgstr "Auto invia fattura"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__autopost_bills
 msgid "Automatically post bills for this trusted partner"
-msgstr ""
+msgstr "Invia automaticamente le fatture per questo partner affidabile"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
@@ -304,7 +304,7 @@ msgstr "B - Automobili"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__bank_account_count
 msgid "Bank"
-msgstr ""
+msgstr "Banca"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__bank_ids
@@ -404,6 +404,10 @@ msgid ""
 "             List available at https://docs.peppol.eu/poacc/billing/3.0/"
 "codelist/eas/"
 msgstr ""
+"Codice utilizzato per identificare l'endpoint per BIS Billing 3.0 e suoi "
+"derivati.\n"
+"             Elenco disponibile a https://docs.peppol.eu/poacc/billing/3.0/"
+"codelist/eas/"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__custom_color
@@ -430,7 +434,7 @@ msgstr "Entità commerciale"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__ref_company_ids
 msgid "Companies that refers to partner"
-msgstr ""
+msgstr "Aziende che si riferiscono al fornitore"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__company_id
@@ -587,17 +591,17 @@ msgstr "Creato il"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__credit_limit
 msgid "Credit Limit"
-msgstr ""
+msgstr "Fido"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__credit_to_invoice
 msgid "Credit To Invoice"
-msgstr ""
+msgstr "Accredito in fattura"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__credit_limit
 msgid "Credit limit specific to this partner."
-msgstr ""
+msgstr "Fido specifico di questo partner."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__crew_id
@@ -642,7 +646,7 @@ msgstr "Equipaggi:"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_customer
@@ -652,12 +656,12 @@ msgstr "Località cliente"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_payment_term_id
 msgid "Customer Payment Terms"
-msgstr ""
+msgstr "Termini pagamento cliente"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__customer_rank
 msgid "Customer Rank"
-msgstr ""
+msgstr "Classe cliente"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__d
@@ -682,7 +686,7 @@ msgstr "Data inizio"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__days_sales_outstanding
 msgid "Days Sales Outstanding (DSO)"
-msgstr ""
+msgstr "Giorni medi di accredito vendite (DSO)"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -722,7 +726,7 @@ msgstr "UdM predefinita peso"
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_delivery_carrier_id
 msgid "Default delivery method used in sales orders."
-msgstr ""
+msgstr "Metodo di consegna predefinito utilizzato negli ordini di vendita."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
@@ -732,12 +736,12 @@ msgstr "Definisce come questa fase viene valutata come completata"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__trust
 msgid "Degree of trust you have in this debtor"
-msgstr ""
+msgstr "Grado di affidabilità che ha questo debitore"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_delivery_carrier_id
 msgid "Delivery Method"
-msgstr ""
+msgstr "Metodo di consegna"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__description
@@ -762,12 +766,12 @@ msgstr "Ubicazione di destinazione"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__display_invoice_edi_format
 msgid "Display Invoice Edi Format"
-msgstr ""
+msgstr "Visualizza formato EDI fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__display_invoice_template_pdf_report_id
 msgid "Display Invoice Template Pdf Report"
-msgstr ""
+msgstr "Visualizza resoconto PDF modello fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__display_name
@@ -886,7 +890,7 @@ msgstr "Anni esperienza autista"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__duplicated_bank_account_partners_count
 msgid "Duplicated Bank Account Partners Count"
-msgstr ""
+msgstr "Conteggio conti banca partner duplicati"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
@@ -977,12 +981,12 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__fiscal_country_codes
 msgid "Fiscal Country Codes"
-msgstr ""
+msgstr "Codici fiscali nazione"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_position_id
 msgid "Fiscal Position"
-msgstr ""
+msgstr "Posizione fiscale"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models
@@ -1116,12 +1120,12 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__ignore_abnormal_invoice_amount
 msgid "Ignore Abnormal Invoice Amount"
-msgstr ""
+msgstr "Ignora valore anormale fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__ignore_abnormal_invoice_date
 msgid "Ignore Abnormal Invoice Date"
-msgstr ""
+msgstr "Ignora data anormale fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__image_1920
@@ -1220,27 +1224,27 @@ msgstr "Assicuratore"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_warn
 msgid "Invoice"
-msgstr ""
+msgstr "Fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_edi_format_store
 msgid "Invoice Edi Format Store"
-msgstr ""
+msgstr "Deposito formato EDI fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_sending_method
 msgid "Invoice sending"
-msgstr ""
+msgstr "Invio fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_template_pdf_report_id
 msgid "Invoice template"
-msgstr ""
+msgstr "Modello fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_ids
 msgid "Invoices"
-msgstr ""
+msgstr "Fatture"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_active
@@ -1250,7 +1254,7 @@ msgstr "È attivo"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_coa_installed
 msgid "Is Coa Installed"
-msgstr ""
+msgstr "Coa è installato"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__is_completed
@@ -1271,7 +1275,7 @@ msgstr "Segue"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_peppol_edi_format
 msgid "Is Peppol Edi Format"
-msgstr ""
+msgstr "È un formato EDI Peppol"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_public
@@ -1281,7 +1285,7 @@ msgstr "È pubblico"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_ubl_format
 msgid "Is Ubl Format"
-msgstr ""
+msgstr "È formato UBI"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_company
@@ -1296,7 +1300,7 @@ msgstr "Posizione lavorativa"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__journal_item_count
 msgid "Journal Items"
-msgstr ""
+msgstr "Movimenti contabili"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__lang
@@ -1540,12 +1544,12 @@ msgstr "Errore di consegna messaggio"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_warn_msg
 msgid "Message for Invoice"
-msgstr ""
+msgstr "Messaggio per fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn_msg
 msgid "Message for Sales Order"
-msgstr ""
+msgstr "Messaggio per ordine di vendita"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn_msg
@@ -1720,22 +1724,22 @@ msgstr "Partner"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__partner_company_registry_placeholder
 msgid "Partner Company Registry Placeholder"
-msgstr ""
+msgstr "Segnaposto registro azienda partner"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__contract_ids
 msgid "Partner Contracts"
-msgstr ""
+msgstr "Contratti fornitori"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__use_partner_credit_limit
 msgid "Partner Limit"
-msgstr ""
+msgstr "Limite partner"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__partner_vat_placeholder
 msgid "Partner Vat Placeholder"
-msgstr ""
+msgstr "Segnaposto P.IVA partner"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__same_company_registry_partner_id
@@ -1755,27 +1759,27 @@ msgstr "Passeggeri"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__debit_limit
 msgid "Payable Limit"
-msgstr ""
+msgstr "Limite pagabile"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_count
 msgid "Payment Token Count"
-msgstr ""
+msgstr "Conteggio token pagamento"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_ids
 msgid "Payment Tokens"
-msgstr ""
+msgstr "Token pagamenti"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_endpoint
 msgid "Peppol Endpoint"
-msgstr ""
+msgstr "Endpoint Peppol"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_eas
 msgid "Peppol e-address (EAS)"
-msgstr ""
+msgstr "E-address (EAS) Peppol"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
@@ -1824,6 +1828,9 @@ msgid ""
 "Preferred payment method when buying from this vendor. This will be set by "
 "default on all outgoing payments created for this vendor"
 msgstr ""
+"Metodo di pagamento preferito per l'acquisto da questo fornitore. Verrà "
+"impostato di default su tutti i pagamenti in uscita creati per questo "
+"fornitore"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_inbound_payment_method_line_id
@@ -1831,6 +1838,9 @@ msgid ""
 "Preferred payment method when selling to this customer. This will be set by "
 "default on all incoming payments created for this customer"
 msgstr ""
+"Metodo di pagamento preferito per la vendita a questo cliente. Verrà "
+"impostato di default su tutti i pagamenti in entrata creati per questo "
+"cliente"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__premium_amount
@@ -1850,12 +1860,12 @@ msgstr "Spiegazione della gestione delle priorità"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_inbound_payment_method_line_id
 msgid "Property Inbound Payment Method Line"
-msgstr ""
+msgstr "Riga del metodo di pagamento in entrata della proprietà"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_outbound_payment_method_line_id
 msgid "Property Outbound Payment Method Line"
-msgstr ""
+msgstr "Riga del metodo di pagamento in uscita della proprietà"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__ref
@@ -1926,17 +1936,17 @@ msgstr "Errore consegna SMS"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_count
 msgid "Sale Order Count"
-msgstr ""
+msgstr "Conteggio ordini di vendita"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_ids
 msgid "Sales Order"
-msgstr ""
+msgstr "Ordine di vendita"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn
 msgid "Sales Warnings"
-msgstr ""
+msgstr "Allerte vendite"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__user_id
@@ -2018,7 +2028,7 @@ msgstr "Servizi"
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__use_partner_credit_limit
 msgid "Set a value greater than 0.0 to activate a credit limit check"
-msgstr ""
+msgstr "Impostare un valore superiore a 0,0 per attivare un controllo fido"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -2056,7 +2066,7 @@ msgstr "Condividi partner"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__show_credit_limit
 msgid "Show Credit Limit"
-msgstr ""
+msgstr "Visualizza fido"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__signup_type
@@ -2174,7 +2184,7 @@ msgstr "Indirizzo2"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_rank
 msgid "Supplier Rank"
-msgstr ""
+msgstr "Classe fornitore"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_uom
@@ -2264,6 +2274,7 @@ msgstr ""
 msgid ""
 "The fiscal position determines the taxes/accounts used for this contact."
 msgstr ""
+"La posizione fiscale determina le tasse/conti utilizzati per questo contatto."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__user_id
@@ -2306,6 +2317,8 @@ msgid ""
 "This account will be used instead of the default one as the payable account "
 "for the current partner"
 msgstr ""
+"Questo conto verrà utilizzato al posto del predefinito come conto di "
+"pagamento per il fornitore corrente"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_account_receivable_id
@@ -2313,6 +2326,8 @@ msgid ""
 "This account will be used instead of the default one as the receivable "
 "account for the current partner"
 msgstr ""
+"Questo conto verrà utilizzato al posto del predefinito come conto crediti "
+"per il cliente corrente"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__email_normalized
@@ -2329,6 +2344,8 @@ msgid ""
 "This payment term will be used instead of the default one for purchase "
 "orders and vendor bills"
 msgstr ""
+"Questi termini di pagamento verranno utilizzati come predefiniti per gli "
+"ordini di acquisto e le fatture dei fornitori"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_payment_term_id
@@ -2336,6 +2353,8 @@ msgid ""
 "This payment term will be used instead of the default one for sales orders "
 "and customer invoices"
 msgstr ""
+"Questi termini di pagamento verranno utilizzati come predefiniti per gli "
+"ordini di vendita e le fatture clienti"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_product_pricelist
@@ -2410,27 +2429,27 @@ msgstr "UdM peso TMS"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__total_invoiced
 msgid "Total Invoiced"
-msgstr ""
+msgstr "Totale fatturato"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__debit
 msgid "Total Payable"
-msgstr ""
+msgstr "Debito totale"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__credit
 msgid "Total Receivable"
-msgstr ""
+msgstr "Totale credito"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__credit
 msgid "Total amount this customer owes you."
-msgstr ""
+msgstr "Ammontare totale dovuto da questo cliente."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__debit
 msgid "Total amount you have to pay to this vendor."
-msgstr ""
+msgstr "Ammontare totale dovuto a questo fornitore."
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.root
@@ -2548,6 +2567,8 @@ msgid ""
 "Unique identifier used by the BIS Billing 3.0 and its derivatives, also "
 "known as 'Endpoint ID'."
 msgstr ""
+"Identificatore univoco utilizzato da BIS Billing 3.0 e suoi derivati, "
+"conosciuto anche come 'ID endpoint'."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -2635,7 +2656,7 @@ msgstr "Località fornitore"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_supplier_payment_term_id
 msgid "Vendor Payment Terms"
-msgstr ""
+msgstr "Termini pagamento fornitore"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__website
@@ -2702,6 +2723,8 @@ msgid ""
 "[(Total Receivable/Total Revenue) * number of days since the first invoice] "
 "for this customer"
 msgstr ""
+"[(Totale esigibile/Totale entrate) * numero di giorni dalla prima fattura] "
+"per questo cliente"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -2731,7 +2754,7 @@ msgstr "es. m"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_edi_format
 msgid "eInvoice format"
-msgstr ""
+msgstr "Formato fattura elettronica"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__distance_traveled_uom__km
