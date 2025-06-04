@@ -1004,6 +1004,11 @@ msgid "Has Unreconciled Entries"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__hide_peppol_fields
+msgid "Hide Peppol Fields"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__id
 #: model:ir.model.fields,field_description:tms.field_tms_driver__id
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__id
@@ -1142,6 +1147,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_active
 msgid "Is Active"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_coa_installed
+msgid "Is Coa Installed"
 msgstr ""
 
 #. module: tms
@@ -1893,6 +1903,11 @@ msgstr ""
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_fleet_services
 msgid "Services"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__use_partner_credit_limit
+msgid "Set a value greater than 0.0 to activate a credit limit check"
 msgstr ""
 
 #. module: tms
