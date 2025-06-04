@@ -26,9 +26,9 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[shipment_advice](shipment_advice/) | 18.0.1.0.0 | [![jbaudoux](https://github.com/jbaudoux.png?size=30px)](https://github.com/jbaudoux) | Manage your (un)loading process through shipment advices.
+[shipment_advice](shipment_advice/) | 18.0.1.0.0 | <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | Manage your (un)loading process through shipment advices.
 [stock_dock](stock_dock/) | 18.0.1.0.0 |  | Manage the loading docks of your warehouse.
-[tms](tms/) | 18.0.1.1.0 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) [![santiagordz](https://github.com/santiagordz.png?size=30px)](https://github.com/santiagordz) [![EdgarRetes](https://github.com/EdgarRetes.png?size=30px)](https://github.com/EdgarRetes) | Manage Vehicles, Drivers, Routes and Trips
+[tms](tms/) | 18.0.1.1.0 | <a href='https://github.com/max3903'><img src='https://github.com/max3903.png' width='32' height='32' style='border-radius:50%;' alt='max3903'/></a> <a href='https://github.com/santiagordz'><img src='https://github.com/santiagordz.png' width='32' height='32' style='border-radius:50%;' alt='santiagordz'/></a> <a href='https://github.com/EdgarRetes'><img src='https://github.com/EdgarRetes.png' width='32' height='32' style='border-radius:50%;' alt='EdgarRetes'/></a> | Manage Vehicles, Drivers, Routes and Trips
 
 [//]: # (end addons)
 
