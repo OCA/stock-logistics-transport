@@ -16,7 +16,7 @@ class StockDock(models.Model):
         ondelete="cascade",
         string="Warehouse",
         required=True,
-        check_company=True,
+        check_company=False,
         default=lambda self: self._default_warehouse_id(),
     )
     company_id = fields.Many2one(
@@ -29,5 +29,6 @@ class StockDock(models.Model):
     )
 
     def _default_warehouse_id(self):
-        wh = self.env.ref("stock.warehouse0", raise_if_not_found=False)
-        return wh.id or False
+        company = self.env.context.get("default_company_id") or self.env.company.id
+        wh = self.env["stock.warehouse"].search([("company_id", "=", company)], limit=1)
+        return wh.id

@@ -11,6 +11,7 @@
     "depends": ["stock"],
     "data": [
         "security/ir.model.access.csv",
+        "security/rules.xml",
         "demo/stock_dock.xml",
         "views/stock_dock.xml",
     ],
