@@ -18,6 +18,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "security/rules.xml",
         "data/ir_sequence.xml",
         "data/queue_job_channel.xml",
         "data/queue_job_function.xml",
