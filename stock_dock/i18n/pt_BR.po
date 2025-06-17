@@ -1,0 +1,105 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_dock
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__active
+msgid "Active"
+msgstr ""
+
+#. module: stock_dock
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_form
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
+msgid "Archived"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__barcode
+msgid "Barcode"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__company_id
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
+msgid "Company"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_dock
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_form
+msgid "Dock"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model,name:stock_dock.model_stock_dock
+msgid "Dock, used by trucks to load/unload goods"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.actions.act_window,name:stock_dock.stock_dock_action
+#: model:ir.ui.menu,name:stock_dock.stock_dock_menu
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
+msgid "Docks"
+msgstr ""
+
+#. module: stock_dock
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
+msgid "Group By"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__name
+msgid "Name"
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,help:stock_dock.field_stock_dock__company_id
+msgid "The company is automatically set from your user preferences."
+msgstr ""
+
+#. module: stock_dock
+#: model:ir.model.fields,field_description:stock_dock.field_stock_dock__warehouse_id
+#: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
+msgid "Warehouse"
+msgstr ""
