@@ -19,7 +19,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
-#, python-format
 msgid "%(sa)s: %(pick)s background validation"
 msgstr "%(sa)s: %(pick)s achtergrondvalidatie"
 
@@ -76,7 +75,6 @@ msgstr "Icoon Activiteitstype"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
-#, python-format
 msgid ""
 "An error occurred while processing:\n"
 "- %(related_object_name)s: %(error)s"
@@ -97,9 +95,8 @@ msgstr "Aankomstdatum"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
-#, python-format
-msgid "Arrival date should be set on the shipment advice {}."
-msgstr "De aankomstdatum moet ingesteld zijn op het verzendadvies {}."
+msgid "Arrival date should be set on the shipment advice %s."
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_attachment_count
@@ -107,9 +104,25 @@ msgid "Attachment Count"
 msgstr "Aantal Bijlagen"
 
 #. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid "Auto-close Incoming Shipments"
+msgstr ""
+
+#. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid ""
+"Automatically close incoming shipment advice when all moves are completed"
+msgstr ""
+
+#. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Back to draft"
 msgstr "Terug naar concept"
+
+#. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid "Backorder Policy for Outgoing Shipments"
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_count
@@ -171,6 +184,12 @@ msgstr ""
 #: model:ir.model,name:shipment_advice.model_res_config_settings
 msgid "Config Settings"
 msgstr "Configuratie-instellingen"
+
+#. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid ""
+"Configure how outgoing shipment advice handles backorders for deliveries"
+msgstr ""
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -242,9 +261,8 @@ msgstr "Weergavenaam"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
-#, python-format
-msgid "Dock should be set on the shipment advice {}."
-msgstr "Het dock moet ingesteld zijn op het verzendadvies {}."
+msgid "Dock should be set on the shipment advice %s."
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__done
@@ -329,32 +347,27 @@ msgstr "Indien aangevinkt, bevatten sommige berichten een leveringsfout."
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid ""
 "If you want that closing an outgoing shipment advice marks as\n"
-"              done all related deliveries and create backorder in case of\n"
-"              partial choose 'Create backorder'.\n"
-"              If you want to mark deliveries as done only when they are all\n"
-"              loaded in a shipment advice choose 'Leave open'. This last option\n"
-"              is useful when your deliveries will be shipped by several trucks."
+"                            done all related deliveries and create backorder "
+"in case of\n"
+"                            partial choose 'Create backorder'.\n"
+"                            If you want to mark deliveries as done only when "
+"they are all\n"
+"                            loaded in a shipment advice choose 'Leave open'. "
+"This last option\n"
+"                            is useful when your deliveries will be shipped "
+"by several trucks."
 msgstr ""
-"Als u wilt dat het sluiten van een uitgaand verzendadvies alle "
-"gerelateerde\\n"
-"\n"
-"leveringen als gedaan markeert en een nalevering aanmaakt in geval van\\n"
-"\n"
-"gedeeltelijke levering, kies dan 'Nalevering aanmaken'.\\n"
-"\n"
-"Als u leveringen pas als gedaan wilt markeren wanneer ze allemaal in een\\n"
-"\n"
-"verzendadvies zijn geladen, kies dan 'Open laten'. Deze laatste optie is\\n"
-"\n"
-"handig wanneer uw leveringen door verschillende vrachtwagens worden "
-"verzonden."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
 #: model:ir.model.fields,help:shipment_advice.field_res_config_settings__shipment_advice_outgoing_backorder_policy
 msgid ""
-"If you want that closing an outgoing shipment advice marks as done all related deliveries and creates backorder in case of partial choose 'Create backorder'.\n"
-"If you want to mark deliveries as done only when they are all loaded in a shipment advice choose 'Leave open'. This last option is useful when your deliveries will be shipped by several trucks."
+"If you want that closing an outgoing shipment advice marks as done all "
+"related deliveries and creates backorder in case of partial choose 'Create "
+"backorder'.\n"
+"If you want to mark deliveries as done only when they are all loaded in a "
+"shipment advice choose 'Leave open'. This last option is useful when your "
+"deliveries will be shipped by several trucks."
 msgstr ""
 "Als u wilt dat het sluiten van een uitgaand verzendadvies alle gerelateerde "
 "leveringen als gedaan markeert en een nalevering aanmaakt in geval van "
@@ -401,15 +414,6 @@ msgid "Lading"
 msgstr "Lading"
 
 #. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice____last_update
-#: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment____last_update
-#: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment____last_update
-#: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment____last_update
-#: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment____last_update
-msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
-
-#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__write_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__write_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__write_uid
@@ -435,10 +439,8 @@ msgstr "Open laten"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid ""
-"Lines to include have been updated, keeping only those qualified as "
-"delivery."
+"Lines to include have been updated, keeping only those qualified as delivery."
 msgstr ""
 "De te includeren regels zijn bijgewerkt, waarbij alleen de regels die als "
 "levering zijn gekwalificeerd, behouden zijn."
@@ -540,11 +542,6 @@ msgid "Loading dock"
 msgstr "Laadperron"
 
 #. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Hoofdbijlage"
-
-#. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Mark as done"
 msgstr "Markeren als gedaan"
@@ -568,9 +565,7 @@ msgstr "Verplaatsingen"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
-#, python-format
-msgid ""
-"Moves to include have been updated to match the selected shipment type."
+msgid "Moves to include have been updated to match the selected shipment type."
 msgstr ""
 "De te includeren verplaatsingen zijn bijgewerkt om overeen te komen met het "
 "geselecteerde zendingstype."
@@ -578,10 +573,9 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
-#, python-format
 msgid ""
-"Moves to include have been updated, keeping only those still in progress and"
-" related to a delivery/reception."
+"Moves to include have been updated, keeping only those still in progress and "
+"related to a delivery/reception."
 msgstr ""
 "De te includeren verplaatsingen zijn bijgewerkt, waarbij alleen de "
 "verplaatsingen die nog in behandeling zijn en gerelateerd zijn aan een "
@@ -590,10 +584,9 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
-#, python-format
 msgid ""
-"Moves to include have been updated, keeping only those still in progress and"
-" related to a shipment."
+"Moves to include have been updated, keeping only those still in progress and "
+"related to a shipment."
 msgstr ""
 "De te includeren verplaatsingen zijn bijgewerkt, waarbij alleen de "
 "verplaatsingen die nog in behandeling zijn en gerelateerd zijn aan een "
@@ -612,7 +605,6 @@ msgstr "Te de-plannen verplaatsingen"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
-#, python-format
 msgid "Moves updated"
 msgstr "Verplaatsingen bijgewerkt"
 
@@ -649,7 +641,6 @@ msgstr "Volgende Activiteit Type"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
-#, python-format
 msgid ""
 "No move to plan among selected ones (already done, linked to other moves "
 "through a package, or not related to a delivery/reception)."
@@ -661,7 +652,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
-#, python-format
 msgid ""
 "No move to unplan among selected ones (already done, linked to other moves "
 "through a package, or not related to a shipment)."
@@ -673,7 +663,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid ""
 "No package to load among selected ones (already done or not qualified as "
 "delivery)."
@@ -684,7 +673,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid ""
 "No product to load among selected ones (already done or not qualified as "
 "delivery)."
@@ -695,7 +683,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
-#, python-format
 msgid ""
 "No product to unload among selected ones (already done or not related to a "
 "shipment)."
@@ -706,7 +693,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid ""
 "No transfer to load among selected ones (already done or not qualified as "
 "delivery)."
@@ -717,7 +703,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
-#, python-format
 msgid ""
 "No transfer to plan among selected ones (already done or not qualified as "
 "deliveries/receptions)."
@@ -728,7 +713,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
-#, python-format
 msgid ""
 "No transfer to unload among selected ones (already done or not related to a "
 "shipment)."
@@ -739,7 +723,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
-#, python-format
 msgid ""
 "No transfer to unplan among selected ones (already done or not related to a "
 "shipment)."
@@ -750,7 +733,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
-#, python-format
 msgid ""
 "Nothing to load for %(product)s.\n"
 "Picking: %(picking)s"
@@ -781,7 +763,6 @@ msgstr "Aantal berichten met een leveringsfout"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
-#, python-format
 msgid "One of the pickings to process failed to validate"
 msgstr "Een van de te verwerken pickings kon niet worden gevalideerd"
 
@@ -807,6 +788,11 @@ msgid "Package Levels"
 msgstr "Pakketniveaus"
 
 #. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_shipping_weight_uom_name
+msgid "Package Shipping Weight Uom Name"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_package_ids
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Packages"
@@ -830,7 +816,6 @@ msgstr "Pakketten geladen/totaal %"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid ""
 "Packages to include have been updated, keeping only those qualified as "
 "delivery."
@@ -846,9 +831,7 @@ msgstr "Te laden pakketten"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
-msgid ""
-"Packages to load have been updated to match the selected shipment type."
+msgid "Packages to load have been updated to match the selected shipment type."
 msgstr ""
 "De te laden pakketten zijn bijgewerkt om overeen te komen met het "
 "geselecteerde zendingstype."
@@ -856,7 +839,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid "Packages updated"
 msgstr "Pakketten bijgewerkt"
 
@@ -921,30 +903,33 @@ msgstr "Geplande overdrachten"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid "Please select at least one record to load in a shipment."
 msgstr "Selecteer ten minste één record om in een zending te laden."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
-#, python-format
 msgid "Please select at least one record to plan in a shipment."
 msgstr "Selecteer ten minste één record om in een zending te plannen."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
-#, python-format
 msgid "Please select at least one record to unload from shipment."
 msgstr "Selecteer ten minste één record om uit de zending te lossen."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
-#, python-format
 msgid "Please select at least one record to unplan from shipment."
 msgstr "Selecteer ten minste één record om uit de zending te de-plannen."
+
+#. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid ""
+"Process shipment advice validation through queued jobs to handle large "
+"shipments"
+msgstr ""
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
@@ -964,7 +949,6 @@ msgstr "Producten"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
-#, python-format
 msgid ""
 "Products to include have been updated, keeping only those still in progress "
 "and related to a shipment."
@@ -980,9 +964,7 @@ msgstr "Te laden producten"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
-msgid ""
-"Products to load have been updated to match the selected shipment type."
+msgid "Products to load have been updated to match the selected shipment type."
 msgstr ""
 "De te laden producten zijn bijgewerkt om overeen te komen met het "
 "geselecteerde zendingstype."
@@ -995,7 +977,6 @@ msgstr "Te lossen producten"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid "Products updated"
 msgstr "Producten bijgewerkt"
 
@@ -1030,6 +1011,30 @@ msgstr "Uitvoeren als Wachtrijtaak"
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
 msgid "Run shipment advice in queue job"
 msgstr "Verzendadvies uitvoeren als wachtrijtaak"
+
+#. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+msgid "Shipment %s is not canceled, operation aborted."
+msgstr ""
+
+#. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+msgid "Shipment %s is not confirmed, operation aborted."
+msgstr ""
+
+#. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+msgid "Shipment %s is not draft, operation aborted."
+msgstr ""
+
+#. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+msgid "Shipment %s is not started, operation aborted."
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.actions.report,name:shipment_advice.action_report_shipment_advice
@@ -1068,35 +1073,6 @@ msgstr "Verzendadviezen"
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Shipment advice"
 msgstr "Verzendadvies"
-
-#. module: shipment_advice
-#. odoo-python
-#: code:addons/shipment_advice/models/shipment_advice.py:0
-#, python-format
-msgid "Shipment {} is not canceled, operation aborted."
-msgstr "Zending {} is niet geannuleerd, bewerking afgebroken."
-
-#. module: shipment_advice
-#. odoo-python
-#: code:addons/shipment_advice/models/shipment_advice.py:0
-#, python-format
-msgid "Shipment {} is not confirmed, operation aborted."
-msgstr "Zending {} is niet bevestigd, bewerking afgebroken."
-
-#. module: shipment_advice
-#. odoo-python
-#: code:addons/shipment_advice/models/shipment_advice.py:0
-#, python-format
-msgid "Shipment {} is not draft, operation aborted."
-msgstr "Zending {} is geen concept, bewerking afgebroken."
-
-#. module: shipment_advice
-#. odoo-python
-#: code:addons/shipment_advice/models/shipment_advice.py:0
-#: code:addons/shipment_advice/models/shipment_advice.py:0
-#, python-format
-msgid "Shipment {} is not started, operation aborted."
-msgstr "Zending {} is niet gestart, bewerking afgebroken."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_shipping_weight
@@ -1140,7 +1116,8 @@ msgstr "Voorraad Pakketniveau"
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__company_id
 msgid "The company is automatically set from your user preferences."
-msgstr "Het bedrijf wordt automatisch ingesteld vanuit uw gebruikersvoorkeuren."
+msgstr ""
+"Het bedrijf wordt automatisch ingesteld vanuit uw gebruikersvoorkeuren."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
@@ -1162,8 +1139,8 @@ msgstr ""
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
 #: model:ir.model.fields,help:shipment_advice.field_res_config_settings__shipment_advice_auto_close_incoming
 msgid ""
-"This flag indicates if an incoming shipment advice will be automatically set"
-" to done if all related moves are done or canceled"
+"This flag indicates if an incoming shipment advice will be automatically set "
+"to done if all related moves are done or canceled"
 msgstr ""
 "Deze vlag geeft aan of een inkomend verzendadvies automatisch op 'Gedaan' "
 "wordt gezet als alle gerelateerde verplaatsingen zijn voltooid of "
@@ -1172,7 +1149,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
-#, python-format
 msgid ""
 "This move is already loaded  in another shipment.\n"
 "Product: %(product)s.\n"
@@ -1191,7 +1167,8 @@ msgstr "Te plannen in Verzendadvies"
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid ""
 "To prevent timeouts for large shipments, enable this option to execute\n"
-"                            shipment advice validation through a queued job. Each picking will be\n"
+"                            shipment advice validation through a queued job. "
+"Each picking will be\n"
 "                            validated in a separate jobs."
 msgstr ""
 "Om time-outs voor grote zendingen te voorkomen, schakelt u deze optie in om\n"
@@ -1253,7 +1230,6 @@ msgstr "Overdrachten"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
-#, python-format
 msgid ""
 "Transfers to include have been updated to match the selected shipment type."
 msgstr ""
@@ -1263,7 +1239,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid ""
 "Transfers to include have been updated, keeping only those assigned and "
 "qualified as delivery."
@@ -1274,10 +1249,9 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
-#, python-format
 msgid ""
-"Transfers to include have been updated, keeping only those still in progress"
-" and qualified as delivery/reception."
+"Transfers to include have been updated, keeping only those still in progress "
+"and qualified as delivery/reception."
 msgstr ""
 "De te includeren overdrachten zijn bijgewerkt, waarbij alleen de "
 "overdrachten die nog in behandeling zijn en gekwalificeerd zijn als levering/"
@@ -1287,10 +1261,9 @@ msgstr ""
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
-#, python-format
 msgid ""
-"Transfers to include have been updated, keeping only those still in progress"
-" and related to a shipment."
+"Transfers to include have been updated, keeping only those still in progress "
+"and related to a shipment."
 msgstr ""
 "De te includeren overdrachten zijn bijgewerkt, waarbij alleen de "
 "overdrachten die nog in behandeling zijn en gerelateerd zijn aan een "
@@ -1304,7 +1277,6 @@ msgstr "Te laden overdrachten"
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid ""
 "Transfers to load have been updated to match the selected shipment type."
 msgstr ""
@@ -1330,7 +1302,6 @@ msgstr "Te de-plannen overdrachten"
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
-#, python-format
 msgid "Transfers updated"
 msgstr "Overdrachten bijgewerkt"
 
@@ -1395,6 +1366,11 @@ msgid "Unplan shipment"
 msgstr "Zending de-plannen"
 
 #. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
+msgid "Use Queue Jobs for Shipment Advice"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__shipment_type
 msgid "Use incoming to plan receptions, use outgoing for deliveries."
 msgstr ""
@@ -1448,11 +1424,6 @@ msgid "Weight"
 msgstr "Gewicht"
 
 #. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_weight_uom_name
-msgid "Weight unit of measure label"
-msgstr "Gewichtseenheid label"
-
-#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_weight_progress
 msgid "Weight/total"
 msgstr "Gewicht/totaal"
@@ -1478,7 +1449,6 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
-#, python-format
 msgid ""
 "You cannot load move lines which are part of a package, unless you select "
 "all the move lines related to this package."
@@ -1490,32 +1460,29 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
-#, python-format
 msgid ""
 "You cannot load this into this shipment as it has been planned to be loaded "
-"in {}"
+"in %s"
 msgstr ""
-"U kunt dit niet in deze zending laden, omdat het gepland is om in {} te "
-"worden geladen"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
-#, python-format
 msgid ""
-"You cannot load this into this shipment because its content is planned already.\n"
+"You cannot load this into this shipment because its content is planned "
+"already.\n"
 "%(info)s"
 msgstr ""
-"U kunt dit niet in deze zending laden omdat de inhoud ervan reeds gepland is."
-"\n"
+"U kunt dit niet in deze zending laden omdat de inhoud ervan reeds gepland "
+"is.\n"
 "%(info)s"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
-#, python-format
 msgid ""
-"You cannot load this move line alone, you have to move the whole package content.\n"
+"You cannot load this move line alone, you have to move the whole package "
+"content.\n"
 "%(info)s"
 msgstr ""
 "U kunt deze verplaatsingslijn niet alleen laden, u moet de volledige "
@@ -1525,20 +1492,80 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
-#, python-format
 msgid ""
-"You cannot unload this move line alone, you have to unload the whole package"
-" content."
+"You cannot unload this move line alone, you have to unload the whole package "
+"content."
 msgstr ""
 "U kunt deze verplaatsingslijn niet alleen lossen, u moet de volledige "
 "pakketinhoud lossen."
 
-#. module: shipment_advice
-#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
-msgid "shipment_advice_auto_close_incoming"
-msgstr "shipment_advice_auto_close_incoming"
+#, python-format
+#~ msgid "Arrival date should be set on the shipment advice {}."
+#~ msgstr "De aankomstdatum moet ingesteld zijn op het verzendadvies {}."
 
-#. module: shipment_advice
-#: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
-msgid "shipment_advice_run_in_queue_job"
-msgstr "shipment_advice_run_in_queue_job"
+#, python-format
+#~ msgid "Dock should be set on the shipment advice {}."
+#~ msgstr "Het dock moet ingesteld zijn op het verzendadvies {}."
+
+#~ msgid ""
+#~ "If you want that closing an outgoing shipment advice marks as\n"
+#~ "              done all related deliveries and create backorder in case "
+#~ "of\n"
+#~ "              partial choose 'Create backorder'.\n"
+#~ "              If you want to mark deliveries as done only when they are "
+#~ "all\n"
+#~ "              loaded in a shipment advice choose 'Leave open'. This last "
+#~ "option\n"
+#~ "              is useful when your deliveries will be shipped by several "
+#~ "trucks."
+#~ msgstr ""
+#~ "Als u wilt dat het sluiten van een uitgaand verzendadvies alle "
+#~ "gerelateerde\\n\n"
+#~ "leveringen als gedaan markeert en een nalevering aanmaakt in geval "
+#~ "van\\n\n"
+#~ "gedeeltelijke levering, kies dan 'Nalevering aanmaken'.\\n\n"
+#~ "Als u leveringen pas als gedaan wilt markeren wanneer ze allemaal in "
+#~ "een\\n\n"
+#~ "verzendadvies zijn geladen, kies dan 'Open laten'. Deze laatste optie "
+#~ "is\\n\n"
+#~ "handig wanneer uw leveringen door verschillende vrachtwagens worden "
+#~ "verzonden."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst gewijzigd op"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Hoofdbijlage"
+
+#, python-format
+#~ msgid "Shipment {} is not canceled, operation aborted."
+#~ msgstr "Zending {} is niet geannuleerd, bewerking afgebroken."
+
+#, python-format
+#~ msgid "Shipment {} is not confirmed, operation aborted."
+#~ msgstr "Zending {} is niet bevestigd, bewerking afgebroken."
+
+#, python-format
+#~ msgid "Shipment {} is not draft, operation aborted."
+#~ msgstr "Zending {} is geen concept, bewerking afgebroken."
+
+#, python-format
+#~ msgid "Shipment {} is not started, operation aborted."
+#~ msgstr "Zending {} is niet gestart, bewerking afgebroken."
+
+#~ msgid "Weight unit of measure label"
+#~ msgstr "Gewichtseenheid label"
+
+#, python-format
+#~ msgid ""
+#~ "You cannot load this into this shipment as it has been planned to be "
+#~ "loaded in {}"
+#~ msgstr ""
+#~ "U kunt dit niet in deze zending laden, omdat het gepland is om in {} te "
+#~ "worden geladen"
+
+#~ msgid "shipment_advice_auto_close_incoming"
+#~ msgstr "shipment_advice_auto_close_incoming"
+
+#~ msgid "shipment_advice_run_in_queue_job"
+#~ msgstr "shipment_advice_run_in_queue_job"
