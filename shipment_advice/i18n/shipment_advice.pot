@@ -331,7 +331,6 @@ msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_has_error
-#: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -951,11 +950,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
 msgid "Run shipment advice in queue job"
-msgstr ""
-
-#. module: shipment_advice
-#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: shipment_advice
