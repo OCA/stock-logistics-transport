@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-06-04 09:26+0000\n"
+"PO-Revision-Date: 2025-06-20 10:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -97,6 +97,7 @@ msgstr "Data arrivo"
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Arrival date should be set on the shipment advice %s."
 msgstr ""
+"La data di arrivo dovrebbe essere impostata nell'avviso di spedizione %s."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_attachment_count
@@ -106,13 +107,15 @@ msgstr "Conteggio allegati"
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "Auto-close Incoming Shipments"
-msgstr ""
+msgstr "Chiudi automaticamente le spedizioni in entrata"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid ""
 "Automatically close incoming shipment advice when all moves are completed"
 msgstr ""
+"Chiudi automaticamente l'avviso di spedizione quando tutti i movimenti sono "
+"completati"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -122,7 +125,7 @@ msgstr "Ritorna a bozza"
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "Backorder Policy for Outgoing Shipments"
-msgstr ""
+msgstr "Politica ordine residuo per spedizioni in uscita"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_count
@@ -190,6 +193,8 @@ msgstr "Impostazioni configurazione"
 msgid ""
 "Configure how outgoing shipment advice handles backorders for deliveries"
 msgstr ""
+"Configurare come gli avvisi di spedizioni in uscita gestiscono gli ordini "
+"residui per le consegne"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -262,7 +267,7 @@ msgstr "Nome visualizzato"
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Dock should be set on the shipment advice %s."
-msgstr ""
+msgstr "La baia dovrebbe essere impostata nell'avviso di spedizione %s."
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__done
@@ -357,6 +362,17 @@ msgid ""
 "                            is useful when your deliveries will be shipped "
 "by several trucks."
 msgstr ""
+"Se si vuole che la chiusura di un avviso di spedizione in partenza imposti "
+"come\n"
+"                            evase tutte le consegne e crei un ordine residuo "
+"nel caso di\n"
+"                            parziali, scegliere 'Crea ordine residuo'.\n"
+"                            Se si vuole impostare le consegne come evase "
+"solo quando sono tutte caricate\n"
+"                            in una spedizione in un avviso di spedizione, "
+"scegliere 'Lascia aperte'. Quest'ultima opzione\n"
+"                            è utile quando le consegne vengono spedite da "
+"diversi automezzi."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
@@ -787,7 +803,7 @@ msgstr "Livelli collo"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_shipping_weight_uom_name
 msgid "Package Shipping Weight Uom Name"
-msgstr ""
+msgstr "Nome imballaggio UdM del peso spedizione"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_package_ids
@@ -927,6 +943,8 @@ msgid ""
 "Process shipment advice validation through queued jobs to handle large "
 "shipments"
 msgstr ""
+"Elaborare la validazione dell'avviso di spedizione attraverso lavori "
+"accodati per gestire grandi spedizioni"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
@@ -1013,25 +1031,25 @@ msgstr "Esegue l'avviso di spedizione nella coda lavoro"
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Shipment %s is not canceled, operation aborted."
-msgstr ""
+msgstr "La spedizione %s non è annullata, operazione abortita."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Shipment %s is not confirmed, operation aborted."
-msgstr ""
+msgstr "La spedizione %s non è confermata, operazione abortita."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Shipment %s is not draft, operation aborted."
-msgstr ""
+msgstr "La spedizione %s non è in bozza, operazione abortita."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Shipment %s is not started, operation aborted."
-msgstr ""
+msgstr "La spedizione % non è partita, operazione abortita."
 
 #. module: shipment_advice
 #: model:ir.actions.report,name:shipment_advice.action_report_shipment_advice
@@ -1365,7 +1383,7 @@ msgstr "Depianifica spedizione"
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "Use Queue Jobs for Shipment Advice"
-msgstr ""
+msgstr "Usare coda lavori per avviso spedizione"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__shipment_type
@@ -1460,6 +1478,8 @@ msgid ""
 "You cannot load this into this shipment as it has been planned to be loaded "
 "in %s"
 msgstr ""
+"Non si può caricare in questa spedizione perché è stato panificato il carico "
+"in %s"
 
 #. module: shipment_advice
 #. odoo-python
