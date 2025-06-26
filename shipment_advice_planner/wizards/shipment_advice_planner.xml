@@ -10,10 +10,7 @@
                     <group>
                         <field name="shipment_planning_method" />
                         <field name="warehouse_id" />
-                        <field
-                            name="dock_id"
-                            attrs="{'invisible': [('warehouse_id', '=', False)]}"
-                        />
+                        <field name="dock_id" invisible="not warehouse_id" />
                     </group>
                     <separator string="Pickings to plan" />
                     <field name="picking_to_plan_ids" />

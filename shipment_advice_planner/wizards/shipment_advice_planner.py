@@ -1,7 +1,7 @@
 # Copyright 2023 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -34,7 +34,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
                 continue
             if rec.dock_id and rec.dock_id.warehouse_id != rec.warehouse_id:
                 raise ValidationError(
-                    _("The dock doesn't belong to the selected warehouse.")
+                    self.env._("The dock doesn't belong to the selected warehouse.")
                 )
             if (
                 rec.picking_to_plan_ids
@@ -42,7 +42,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
                 != rec.warehouse_id
             ):
                 raise ValidationError(
-                    _("The transfers don't belong to the selected warehouse.")
+                    self.env._("The transfers don't belong to the selected warehouse.")
                 )
 
     @api.onchange("warehouse_id", "dock_id", "picking_to_plan_ids")
@@ -57,7 +57,9 @@ class ShipmentAdvicePlanner(models.TransientModel):
                 lambda p: not p.can_be_planned_in_shipment_advice
             ):
                 raise ValidationError(
-                    _("The transfers selected must be ready and of the delivery type.")
+                    self.env._(
+                        "The transfers selected must be ready and of the delivery type."
+                    )
                 )
 
     @api.onchange("picking_to_plan_ids")
@@ -95,8 +97,8 @@ class ShipmentAdvicePlanner(models.TransientModel):
             return {}
         return {
             "type": "ir.actions.act_window",
-            "name": _("Shipment Advice"),
-            "view_mode": "tree,form",
+            "name": self.env._("Shipment Advice"),
+            "view_mode": "list,form",
             "res_model": shipment_advices._name,
             "domain": [("id", "in", shipment_advices.ids)],
             "context": self.env.context,
@@ -107,7 +109,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
         prepare_method_name = self._get_prepare_method_name()
         if not hasattr(self, prepare_method_name):
             raise NotImplementedError(
-                _("There is no implementation for the planning method '%s'")
+                self.env._("There is no implementation for the planning method '%s'")
                 % self.shipment_planning_method
             )
         prepare_method = getattr(self, prepare_method_name)
