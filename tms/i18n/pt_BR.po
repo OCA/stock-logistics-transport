@@ -839,6 +839,11 @@ msgid "Driving Experience Years"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__duplicate_bank_partner_ids
+msgid "Duplicate Bank Partner"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__duplicated_bank_account_partners_count
 msgid "Duplicated Bank Account Partners Count"
 msgstr ""
