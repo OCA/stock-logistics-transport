@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-06-19 14:25+0000\n"
+"PO-Revision-Date: 2025-06-30 09:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -870,7 +870,7 @@ msgstr "Anni esperienza autista"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__duplicate_bank_partner_ids
 msgid "Duplicate Bank Partner"
-msgstr ""
+msgstr "Duplica banca partner"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__duplicated_bank_account_partners_count
