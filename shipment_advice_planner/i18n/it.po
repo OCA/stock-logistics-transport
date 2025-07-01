@@ -1,0 +1,141 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* shipment_advice_planner
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-01-05 10:38+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_stock_picking__can_be_planned_in_shipment_advice
+msgid "Can Be Planned In Shipment Advice"
+msgstr "Può essere pianificato nell'avviso spedizione"
+
+#. module: shipment_advice_planner
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner.shipment_advice_planner_form_view
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__dock_id
+msgid "Dock"
+msgstr "Baia"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__id
+msgid "ID"
+msgstr "ID"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__picking_to_plan_ids
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner.shipment_advice_planner_form_view
+msgid "Pickings to plan"
+msgstr "Prelievi da piano"
+
+#. module: shipment_advice_planner
+#: model_terms:ir.ui.view,arch_db:shipment_advice_planner.shipment_advice_planner_form_view
+msgid "Plan Shipments"
+msgstr "Pianifica spedizioni"
+
+#. module: shipment_advice_planner
+#. odoo-python
+#: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
+#, python-format
+msgid "Shipment Advice"
+msgstr "Avviso spedizione"
+
+#. module: shipment_advice_planner
+#: model:ir.actions.act_window,name:shipment_advice_planner.shipment_advice_planner_act_multi
+#: model:ir.actions.act_window,name:shipment_advice_planner.shipment_advice_planner_act_window
+#: model:ir.model,name:shipment_advice_planner.model_shipment_advice_planner
+#: model:ir.ui.menu,name:shipment_advice_planner.shipment_advice_planner_menu
+msgid "Shipment Advice Planner"
+msgstr "Pianificatore avviso spedizione"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__shipment_planning_method
+msgid "Shipment Planning Method"
+msgstr "Metodo pianificazione spedizione"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields.selection,name:shipment_advice_planner.selection__shipment_advice_planner__shipment_planning_method__simple
+msgid "Simple"
+msgstr "Semplice"
+
+#. module: shipment_advice_planner
+#. odoo-python
+#: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
+#, python-format
+msgid "The dock doesn't belong to the selected warehouse."
+msgstr "La baia non appartiene al magazzino selezionato."
+
+#. module: shipment_advice_planner
+#. odoo-python
+#: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
+#, python-format
+msgid "The transfers don't belong to the selected warehouse."
+msgstr "I trasferimenti non appartengono al magazzino selezionato."
+
+#. module: shipment_advice_planner
+#. odoo-python
+#: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
+#, python-format
+msgid "The transfers selected must be ready and of the delivery type."
+msgstr "I trasferimenti selezionai devono essere pronti e di tipo consegna."
+
+#. module: shipment_advice_planner
+#. odoo-python
+#: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
+#, python-format
+msgid "There is no implementation for the planning method '%s'"
+msgstr "Non c'è l'implementazione per il metodo di pianificazione '%s'"
+
+#. module: shipment_advice_planner
+#: model:ir.model,name:shipment_advice_planner.model_stock_picking
+msgid "Transfer"
+msgstr "Trasferimento"
+
+#. module: shipment_advice_planner
+#: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__warehouse_id
+msgid "Warehouse"
+msgstr "Magazzino"
