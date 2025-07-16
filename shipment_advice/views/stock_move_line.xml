@@ -44,7 +44,7 @@
             <field name="result_package_id" position="after">
                 <field
                     name="shipment_advice_id"
-                    column_invisible="parent.picking_type_code != 'outgoing'"
+                    column_invisible="picking_code != 'outgoing'"
                     optional="show"
                 />
             </field>
