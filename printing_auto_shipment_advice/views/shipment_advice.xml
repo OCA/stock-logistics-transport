@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_shipment_advice_form" model="ir.ui.view">
+        <field name="name">printing.auto.shipment.advice</field>
+        <field name="model">shipment.advice</field>
+        <field name="inherit_id" ref="shipment_advice.shipment_advice_view_form" />
+        <field name="arch" type="xml">
+            <header position="after">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    style="margin-bottom:0px;"
+                    invisible="not printing_auto_error"
+                >
+            Unable to print the documents: the CUPS server is maybe not available, or printers are not configured properly. Error:
+            <field name="printing_auto_error" nolabel="1" />
+                </div>
+            </header>
+
+            <header position="inside">
+                <button
+                    name="handle_print_auto"
+                    type="object"
+                    string="Print documents"
+                    invisible="state != 'done'"
+                />
+            </header>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,19 @@
+<odoo>
+    <record id="view_warehouse_form_inherit" model="ir.ui.view">
+        <field name="name">printing.auto.stock.warehouse</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse" />
+        <field name="arch" type="xml">
+            <page name="technical_info" position="inside">
+                <separator
+                    string="Shipment Advice - Auto Printing Configuration"
+                    colspan="4"
+                />
+                <field
+                    name="shipment_advice_auto_printing_ids"
+                    context="{'default_model': 'shipment.advice'}"
+                />
+            </page>
+        </field>
+    </record>
+</odoo>
