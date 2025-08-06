@@ -365,13 +365,6 @@ msgid "City"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__peppol_eas
-msgid ""
-"Code used to identify the Endpoint for BIS Billing 3.0 and its derivatives.\n"
-"             List available at https://docs.peppol.eu/poacc/billing/3.0/codelist/eas/"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__custom_color
 msgid "Color Code"
 msgstr ""
@@ -963,11 +956,6 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__ubl_cii_format
-msgid "Format"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__email_formatted
 msgid "Format email address \"Name <email@domain>\""
 msgstr ""
@@ -1001,11 +989,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__has_unreconciled_entries
 msgid "Has Unreconciled Entries"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__hide_peppol_fields
-msgid "Hide Peppol Fields"
 msgstr ""
 
 #. module: tms
@@ -1675,16 +1658,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_ids
 msgid "Payment Tokens"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_endpoint
-msgid "Peppol Endpoint"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_eas
-msgid "Peppol e-address (EAS)"
 msgstr ""
 
 #. module: tms
@@ -2434,13 +2407,6 @@ msgstr ""
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_services_types
 msgid "Types"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__peppol_endpoint
-msgid ""
-"Unique identifier used by the BIS Billing 3.0 and its derivatives, also "
-"known as 'Endpoint ID'."
 msgstr ""
 
 #. module: tms
