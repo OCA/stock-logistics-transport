@@ -241,6 +241,11 @@ msgid "Automatically post bills for this trusted partner"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__available_peppol_eas
+msgid "Available Peppol Eas"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
 msgid "Avatar"
 msgstr ""
