@@ -19,9 +19,9 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "tms_sale/static/src/js/line_trip_wizard_controller.js",
-            "tms_sale/static/src/js/line_ticket_wizard_controller.js",
-            "tms_sale/static/src/js/sale_order_line_product_field.js",
+            "tms_sale/static/src/js/line_trip_wizard_controller.esm.js",
+            "tms_sale/static/src/js/line_ticket_wizard_controller.esm.js",
+            "tms_sale/static/src/js/sale_order_line_product_field.esm.js",
         ],
     },
     "license": "AGPL-3",
