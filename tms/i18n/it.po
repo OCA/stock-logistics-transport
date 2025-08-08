@@ -267,11 +267,6 @@ msgid "Automatically post bills for this trusted partner"
 msgstr "Invia automaticamente le fatture per questo partner affidabile"
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__available_peppol_eas
-msgid "Available Peppol Eas"
-msgstr "EAS Peppol disponibile"
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
 msgid "Avatar"
 msgstr "Avatar"
@@ -386,18 +381,6 @@ msgstr "Seleziona questa casella se questo contatto è un dipendente."
 #: model:ir.model.fields,field_description:tms.field_tms_driver__city
 msgid "City"
 msgstr "Città"
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__peppol_eas
-msgid ""
-"Code used to identify the Endpoint for BIS Billing 3.0 and its derivatives.\n"
-"             List available at https://docs.peppol.eu/poacc/billing/3.0/"
-"codelist/eas/"
-msgstr ""
-"Codice utilizzato per identificare l'endpoint per BIS Billing 3.0 e suoi "
-"derivati.\n"
-"             Elenco disponibile a https://docs.peppol.eu/poacc/billing/3.0/"
-"codelist/eas/"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__custom_color
@@ -1221,19 +1204,9 @@ msgid "Is Follower"
 msgstr "Segue"
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__is_peppol_edi_format
-msgid "Is Peppol Edi Format"
-msgstr "È un formato EDI Peppol"
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_public
 msgid "Is Public"
 msgstr "È pubblico"
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__is_ubl_format
-msgid "Is Ubl Format"
-msgstr "È formato UBI"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_company
@@ -1718,16 +1691,6 @@ msgstr "Conteggio token pagamento"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_ids
 msgid "Payment Tokens"
 msgstr "Token pagamenti"
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_endpoint
-msgid "Peppol Endpoint"
-msgstr "Endpoint Peppol"
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_eas
-msgid "Peppol e-address (EAS)"
-msgstr "E-address (EAS) Peppol"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
@@ -2489,15 +2452,6 @@ msgid "Types"
 msgstr "Tipi"
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__peppol_endpoint
-msgid ""
-"Unique identifier used by the BIS Billing 3.0 and its derivatives, also "
-"known as 'Endpoint ID'."
-msgstr ""
-"Identificatore univoco utilizzato da BIS Billing 3.0 e suoi derivati, "
-"conosciuto anche come 'ID endpoint'."
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Units"
 msgstr "Unità"
@@ -2702,6 +2656,39 @@ msgstr "mi"
 #: model:uom.uom,name:tms.uom_mph
 msgid "mph"
 msgstr "mph"
+
+#~ msgid "Available Peppol Eas"
+#~ msgstr "EAS Peppol disponibile"
+
+#~ msgid ""
+#~ "Code used to identify the Endpoint for BIS Billing 3.0 and its "
+#~ "derivatives.\n"
+#~ "             List available at https://docs.peppol.eu/poacc/billing/3.0/"
+#~ "codelist/eas/"
+#~ msgstr ""
+#~ "Codice utilizzato per identificare l'endpoint per BIS Billing 3.0 e suoi "
+#~ "derivati.\n"
+#~ "             Elenco disponibile a https://docs.peppol.eu/poacc/"
+#~ "billing/3.0/codelist/eas/"
+
+#~ msgid "Is Peppol Edi Format"
+#~ msgstr "È un formato EDI Peppol"
+
+#~ msgid "Is Ubl Format"
+#~ msgstr "È formato UBI"
+
+#~ msgid "Peppol Endpoint"
+#~ msgstr "Endpoint Peppol"
+
+#~ msgid "Peppol e-address (EAS)"
+#~ msgstr "E-address (EAS) Peppol"
+
+#~ msgid ""
+#~ "Unique identifier used by the BIS Billing 3.0 and its derivatives, also "
+#~ "known as 'Endpoint ID'."
+#~ msgstr ""
+#~ "Identificatore univoco utilizzato da BIS Billing 3.0 e suoi derivati, "
+#~ "conosciuto anche come 'ID endpoint'."
 
 #~ msgid "Additional info"
 #~ msgstr "Informazioni aggiuntive"
