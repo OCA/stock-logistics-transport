@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-06-30 09:25+0000\n"
+"PO-Revision-Date: 2025-08-08 14:26+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -269,7 +269,7 @@ msgstr "Invia automaticamente le fatture per questo partner affidabile"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__available_peppol_eas
 msgid "Available Peppol Eas"
-msgstr ""
+msgstr "EAS Peppol disponibile"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
