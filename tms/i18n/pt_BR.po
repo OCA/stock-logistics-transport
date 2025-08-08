@@ -246,11 +246,6 @@ msgid "Automatically post bills for this trusted partner"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__available_peppol_eas
-msgid "Available Peppol Eas"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
 msgid "Avatar"
 msgstr ""
@@ -362,14 +357,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__city
 msgid "City"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__peppol_eas
-msgid ""
-"Code used to identify the Endpoint for BIS Billing 3.0 and its derivatives.\n"
-"             List available at https://docs.peppol.eu/poacc/billing/3.0/"
-"codelist/eas/"
 msgstr ""
 
 #. module: tms
@@ -1185,18 +1172,8 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__is_peppol_edi_format
-msgid "Is Peppol Edi Format"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_public
 msgid "Is Public"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__is_ubl_format
-msgid "Is Ubl Format"
 msgstr ""
 
 #. module: tms
@@ -1681,16 +1658,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_ids
 msgid "Payment Tokens"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_endpoint
-msgid "Peppol Endpoint"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__peppol_eas
-msgid "Peppol e-address (EAS)"
 msgstr ""
 
 #. module: tms
@@ -2404,13 +2371,6 @@ msgstr ""
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_services_types
 msgid "Types"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__peppol_endpoint
-msgid ""
-"Unique identifier used by the BIS Billing 3.0 and its derivatives, also "
-"known as 'Endpoint ID'."
 msgstr ""
 
 #. module: tms
