@@ -26,7 +26,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[shipment_advice](shipment_advice/) | 18.0.1.0.1 | <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | Manage your (un)loading process through shipment advices.
+[shipment_advice](shipment_advice/) | 18.0.1.1.0 | <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | Manage your (un)loading process through shipment advices.
 [shipment_advice_planner](shipment_advice_planner/) | 18.0.1.0.0 | <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | This module is used to plan ready transfers in shipment advices.
 [stock_depot](stock_depot/) | 18.0.1.0.0 |  | This module allows users to manage partners stock depots.
 [stock_dock](stock_dock/) | 18.0.1.0.0 |  | Manage the loading docks of your warehouse.
