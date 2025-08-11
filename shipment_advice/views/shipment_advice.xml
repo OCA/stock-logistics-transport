@@ -150,8 +150,7 @@
                             type="object"
                             class="oe_stat_button"
                             icon="fa-list"
-                            states="in_progress"
-                            attrs="{'invisible': ['|', ('shipment_type', '!=', 'outgoing')]}"
+                            invisible="shipment_type != 'outgoing' or state != 'in_progress'"
                         >
                             <field
                                 string="To load"
