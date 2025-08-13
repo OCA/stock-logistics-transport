@@ -1,0 +1,52 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* printing_auto_shipment_advice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: printing_auto_shipment_advice
+#: model:ir.model.fields,field_description:printing_auto_shipment_advice.field_shipment_advice__auto_printing_ids
+#: model:ir.model.fields,field_description:printing_auto_shipment_advice.field_stock_warehouse__shipment_advice_auto_printing_ids
+msgid "Auto Printing Configuration"
+msgstr ""
+
+#. module: printing_auto_shipment_advice
+#: model_terms:ir.ui.view,arch_db:printing_auto_shipment_advice.view_shipment_advice_form
+msgid "Print documents"
+msgstr ""
+
+#. module: printing_auto_shipment_advice
+#: model:ir.model.fields,field_description:printing_auto_shipment_advice.field_shipment_advice__printing_auto_error
+msgid "Printing error"
+msgstr ""
+
+#. module: printing_auto_shipment_advice
+#: model:ir.model,name:printing_auto_shipment_advice.model_shipment_advice
+msgid "Shipment Advice"
+msgstr ""
+
+#. module: printing_auto_shipment_advice
+#: model_terms:ir.ui.view,arch_db:printing_auto_shipment_advice.view_warehouse_form_inherit
+msgid "Shipment Advice - Auto Printing Configuration"
+msgstr ""
+
+#. module: printing_auto_shipment_advice
+#: model_terms:ir.ui.view,arch_db:printing_auto_shipment_advice.view_shipment_advice_form
+msgid ""
+"Unable to print the documents: the CUPS server is maybe not available, or "
+"printers are not configured properly. Error:"
+msgstr ""
+
+#. module: printing_auto_shipment_advice
+#: model:ir.model,name:printing_auto_shipment_advice.model_stock_warehouse
+msgid "Warehouse"
+msgstr ""
