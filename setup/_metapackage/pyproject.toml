@@ -1,7 +1,8 @@
 [project]
 name = "odoo-addons-oca-stock-logistics-transport"
-version = "18.0.20250806.0"
+version = "18.0.20250813.0"
 dependencies = [
+    "odoo-addon-printing_auto_shipment_advice==18.0.*",
     "odoo-addon-shipment_advice==18.0.*",
     "odoo-addon-shipment_advice_planner==18.0.*",
     "odoo-addon-stock_depot==18.0.*",
