@@ -1,0 +1,3 @@
+- Camptocamp
+- Florent Xicluna \<florent.xicluna@camptocamp.com\>
+- Jacques-Etienne Baudoux \<jacques-etienne.baudoux@camptocamp.com\>
