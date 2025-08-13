@@ -1,3 +1,2 @@
-- Camptocamp
 - Florent Xicluna \<florent.xicluna@camptocamp.com\>
-- Jacques-Etienne Baudoux \<jacques-etienne.baudoux@camptocamp.com\>
+- Jacques-Etienne Baudoux (BCIM) \<je@bcim.be\>
