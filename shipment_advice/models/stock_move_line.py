@@ -89,7 +89,7 @@ class StockMoveLine(models.Model):
             ):
                 raise UserError(
                     _(
-                        "This move is already loaded  in another shipment."
+                        "This move is already loaded in another shipment."
                         "\nProduct: %(product)s.\nPicking: %(picking)s",
                         product=move_line.product_id.display_name,
                         picking=move_line.picking_id.name,

@@ -174,7 +174,7 @@ class ShipmentAdvice(models.Model):
         string="Related shipping methods",
         compute="_compute_carrier_ids",
         help=(
-            "Concerned shipping method  for this shipment advice. It can be "
+            "Concerned shipping method for this shipment advice. It can be "
             "used to determine what are the eligible deliveries to load in "
             "the shipment when you don't have planned content "
             "(e.g. through the shopfloor application)."
