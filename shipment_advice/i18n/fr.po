@@ -1171,7 +1171,7 @@ msgid ""
 "To prevent timeouts for large shipments, enable this option to execute\n"
 "                            shipment advice validation through a queued job. "
 "Each picking will be\n"
-"                            validated in a separate jobs."
+"                            validated in a separate job."
 msgstr ""
 
 #. module: shipment_advice

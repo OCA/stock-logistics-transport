@@ -1189,13 +1189,8 @@ msgid ""
 "To prevent timeouts for large shipments, enable this option to execute\n"
 "                            shipment advice validation through a queued job. "
 "Each picking will be\n"
-"                            validated in a separate jobs."
+"                            validated in a separate job."
 msgstr ""
-"Per prevenire i timeout nelle grandi spedizioni, abilitare questa opzione "
-"per eseguire\n"
-"                            l'avviso di spedizione attraverso un lavoro "
-"accodato. Ogni prelievo verrà\n"
-"                            validato in un lavoro separato."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
@@ -1540,6 +1535,18 @@ msgstr "shipment_advice_auto_close_incoming"
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "shipment_advice_run_in_queue_job"
 msgstr "shipment_advice_run_in_queue_job"
+
+#~ msgid ""
+#~ "To prevent timeouts for large shipments, enable this option to execute\n"
+#~ "                            shipment advice validation through a queued "
+#~ "job. Each picking will be\n"
+#~ "                            validated in a separate jobs."
+#~ msgstr ""
+#~ "Per prevenire i timeout nelle grandi spedizioni, abilitare questa opzione "
+#~ "per eseguire\n"
+#~ "                            l'avviso di spedizione attraverso un lavoro "
+#~ "accodato. Ogni prelievo verrà\n"
+#~ "                            validato in un lavoro separato."
 
 #, python-format
 #~ msgid ""
