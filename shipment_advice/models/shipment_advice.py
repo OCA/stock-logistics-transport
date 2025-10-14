@@ -395,13 +395,17 @@ class ShipmentAdvice(models.Model):
                     ]
                 ),
                 group(self.delayable(description=self.name)._unplan_undone_moves()),
-                group(self.delayable(description=self.name)._postprocess_action_done()),
+                group(
+                    self.delayable(description=self.name)._postprocess_action_done(
+                        backorder_policy
+                    )
+                ),
             ).delay()
             return
         for picking in pickings:
             self._validate_picking(picking, backorder_policy)
         self._unplan_undone_moves()
-        self._postprocess_action_done()
+        self._postprocess_action_done(backorder_policy)
 
     def _check_action_done_allowed(self):
         for shipment in self:
@@ -417,15 +421,13 @@ class ShipmentAdvice(models.Model):
         self._lock_records(picking)
         try:
             with self.env.cr.savepoint():
-                if (
-                    picking._check_backorder()
-                    and backorder_policy == "create_backorder"
-                ):
+                if not picking._check_backorder():
+                    picking.with_context(skip_backorder=True).button_validate()
+                elif backorder_policy == "create_backorder":
                     wiz = self.env["stock.backorder.confirmation"].create({})
                     wiz.pick_ids = picking
                     wiz.with_context(button_validate_picking_ids=picking.ids).process()
-                elif not picking._check_backorder():
-                    picking.with_context(skip_backorder=True).button_validate()
+
         except UserError as error:
             self.write(
                 {
@@ -444,18 +446,25 @@ class ShipmentAdvice(models.Model):
         ).filtered(lambda m: m.state not in ("cancel", "done") and not m.picked)
         moves_to_unplan.shipment_advice_id = False
 
-    def _postprocess_action_done(self):
+    def _postprocess_action_done(self, backorder_policy):
         self.ensure_one()
         if self.state != "in_process":
             return
-        if self._get_picking_to_process().filtered(
+        in_process_pickings = self._get_picking_to_process().filtered(
             lambda p: p.state not in ("done", "cancel")
-        ):
+        )
+        should_write_an_error = backorder_policy != "leave_open"
+        if in_process_pickings and should_write_an_error:
+            # This is normal to have pickings that aren't 100% processed if
+            # backorder_policy is leave open.
+            # This should never happen, as we have either created a backorder
+            # for the unprocessed moves, or we allow shipments with partial pickings.
             self.write(
                 {
                     "state": "error",
                     "error_message": self.env._(
-                        "One of the pickings to process failed to validate"
+                        "The following pickings failed to validate\n%s",
+                        ", ".join(in_process_pickings.mapped("name")),
                     ),
                 }
             )
