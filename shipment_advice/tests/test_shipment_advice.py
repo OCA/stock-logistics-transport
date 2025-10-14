@@ -108,13 +108,16 @@ class TestShipmentAdvice(Common):
         # Validate the shipment => the transfer is still open
         self.shipment_advice_out.action_done()
         picking = package_level.picking_id
-        self.assertEqual(self.shipment_advice_out.state, "error")
+        # We allow to process shipment advices with partial pickings,
+        # this shouldn't raise an error.
+        self.assertEqual(self.shipment_advice_out.state, "done")
         # Check the transfer
         self.assertTrue(
-            all(
-                move_line.state == "assigned"
-                for move_line in package_level.move_line_ids
-            )
+            all(move_line.picked for move_line in package_level.move_line_ids)
+        )
+        # move 1 is still on the dock
+        self.assertFalse(
+            any(move_line.picked for move_line in self.move_product_out1.move_line_ids)
         )
         self.assertEqual(picking.state, "assigned")
 
