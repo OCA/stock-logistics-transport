@@ -267,6 +267,13 @@ msgid "Automatically post bills for this trusted partner"
 msgstr "Invia automaticamente le fatture per questo partner affidabile"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__receipt_reminder_email
+msgid ""
+"Automatically send a confirmation email to the vendor X days before the "
+"expected receipt date, asking him to confirm the exact date."
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
 msgid "Avatar"
 msgstr "Avatar"
@@ -320,6 +327,11 @@ msgstr "Blacklist"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_bounce
 msgid "Bounce"
 msgstr "Respingi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__buyer_id
+msgid "Buyer"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__c
@@ -650,6 +662,11 @@ msgstr "Data fine"
 #: model:ir.model.fields,field_description:tms.field_tms_order__date_start
 msgid "Date Start"
 msgstr "Data inizio"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__reminder_date_before_receipt
+msgid "Days Before Receipt"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__days_sales_outstanding
@@ -1468,6 +1485,11 @@ msgid "Message for Invoice"
 msgstr "Messaggio per fattura"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_warn_msg
+msgid "Message for Purchase Order"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn_msg
 msgid "Message for Sales Order"
 msgstr "Messaggio per ordine di vendita"
@@ -1573,6 +1595,11 @@ msgid "Number of Trips"
 msgstr "Numero di viaggi"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__reminder_date_before_receipt
+msgid "Number of days to send reminder email before the promised receipt date"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_error_counter
 #: model:ir.model.fields,field_description:tms.field_tms_order__message_has_error_counter
 msgid "Number of errors"
@@ -1594,6 +1621,11 @@ msgstr "Numero di messaggi con errore di consegna"
 #: model:ir.ui.menu,name:tms.menu_fleet_odometers
 msgid "Odometers"
 msgstr "Contachilometri"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__on_time_rate
+msgid "On-Time Delivery Rate"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__operation
@@ -1631,6 +1663,14 @@ msgstr "Ubicazione di origine"
 #: model:ir.model.fields,field_description:tms.field_tms_crew__personnel_ids
 msgid "Other Personnel"
 msgstr "Altro personale"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__on_time_rate
+msgid ""
+"Over the past x days; the number of products received on time divided by the "
+"number of ordered products.x is either the System Parameter purchase_stock."
+"on_time_delivery_days or the default 365"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__parent_name
@@ -1769,6 +1809,26 @@ msgid "Property Outbound Payment Method Line"
 msgstr "Riga del metodo di pagamento in uscita della proprietà"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_line_ids
+msgid "Purchase Lines"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_order_count
+msgid "Purchase Order Count"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_warn
+msgid "Purchase Order Warning"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__receipt_reminder_email
+msgid "Receipt Reminder"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__ref
 msgid "Reference"
 msgstr "Riferimento"
@@ -1882,6 +1942,7 @@ msgstr "Durata schedulata del lavoro in ore"
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__invoice_warn
 #: model:ir.model.fields,help:tms.field_tms_driver__picking_warn
+#: model:ir.model.fields,help:tms.field_tms_driver__purchase_warn
 #: model:ir.model.fields,help:tms.field_tms_driver__sale_warn
 msgid ""
 "Selecting the \"Warning\" option will notify user with the message, "
@@ -2072,6 +2133,11 @@ msgid "Street2"
 msgstr "Indirizzo2"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_purchase_currency_id
+msgid "Supplier Currency"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_rank
 msgid "Supplier Rank"
 msgstr "Classe fornitore"
@@ -2218,6 +2284,13 @@ msgid ""
 msgstr ""
 "Questo conto verrà utilizzato al posto del predefinito come conto crediti "
 "per il cliente corrente"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_purchase_currency_id
+msgid ""
+"This currency will be used, instead of the default one, for purchases from "
+"the current partner"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__email_normalized
