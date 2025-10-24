@@ -66,6 +66,7 @@ msgstr "Quai, utilisé par les camions pour charger/décharger des marchandises"
 #. module: stock_dock
 #: model:ir.actions.act_window,name:stock_dock.stock_dock_action
 #: model:ir.ui.menu,name:stock_dock.stock_dock_menu
+#: model:ir.ui.menu,name:stock_dock.stock_master_data_dock_menu
 #: model_terms:ir.ui.view,arch_db:stock_dock.stock_dock_view_search
 msgid "Docks"
 msgstr "Quais"
