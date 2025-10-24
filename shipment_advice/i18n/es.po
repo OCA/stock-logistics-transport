@@ -1092,6 +1092,11 @@ msgid "Shipment advice"
 msgstr "Aviso de envío"
 
 #. module: shipment_advice
+#: model:ir.ui.menu,name:shipment_advice.shipment_advice_menu_section
+msgid "Shipments"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_shipping_weight
 msgid "Shipping Weight"
 msgstr "Peso de envío"
