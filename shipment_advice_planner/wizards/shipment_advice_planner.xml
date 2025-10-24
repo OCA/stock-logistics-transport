@@ -55,7 +55,7 @@
 
     <record model="ir.ui.menu" id="shipment_advice_planner_menu">
         <field name="name">Shipment Advice Planner</field>
-        <field name="parent_id" ref="stock.menu_stock_warehouse_mgmt" />
+        <field name="parent_id" ref="shipment_advice.shipment_advice_menu_section" />
         <field name="action" ref="shipment_advice_planner_act_window" />
         <field name="sequence" eval="16" />
     </record>

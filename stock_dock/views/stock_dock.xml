@@ -89,6 +89,11 @@
         <field name="view_id" ref="stock_dock_view_tree" />
     </record>
     <menuitem
+        id="stock_master_data_dock_menu"
+        parent="stock.menu_stock_inventory_control"
+        action="stock_dock_action"
+    />
+    <menuitem
         id="stock_dock_menu"
         parent="stock.menu_warehouse_config"
         action="stock_dock_action"
