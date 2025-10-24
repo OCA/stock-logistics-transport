@@ -356,8 +356,14 @@
         <field name="act_window_id" ref="shipment_advice_action" />
     </record>
     <menuitem
-        id="shipment_advice_menu"
+        id="shipment_advice_menu_section"
+        name="Shipments"
         parent="stock.menu_stock_warehouse_mgmt"
+        sequence="10"
+    />
+    <menuitem
+        id="shipment_advice_menu"
+        parent="shipment_advice_menu_section"
         action="shipment_advice_action"
     />
 </odoo>
