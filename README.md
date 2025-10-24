@@ -27,10 +27,10 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [printing_auto_shipment_advice](printing_auto_shipment_advice/) | 18.0.1.0.2 |  | Printing Auto Shipment Advice
-[shipment_advice](shipment_advice/) | 18.0.1.1.0 | <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | Manage your (un)loading process through shipment advices.
-[shipment_advice_planner](shipment_advice_planner/) | 18.0.1.0.0 | <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | This module is used to plan ready transfers in shipment advices.
+[shipment_advice](shipment_advice/) | 18.0.1.2.0 | <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | Manage your (un)loading process through shipment advices.
+[shipment_advice_planner](shipment_advice_planner/) | 18.0.1.1.0 | <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | This module is used to plan ready transfers in shipment advices.
 [stock_depot](stock_depot/) | 18.0.1.0.0 |  | This module allows users to manage partners stock depots.
-[stock_dock](stock_dock/) | 18.0.1.0.0 |  | Manage the loading docks of your warehouse.
+[stock_dock](stock_dock/) | 18.0.1.1.0 |  | Manage the loading docks of your warehouse.
 [stock_location_address](stock_location_address/) | 18.0.1.0.0 |  | Adds an address on locations
 [stock_location_address_purchase](stock_location_address_purchase/) | 18.0.1.0.0 |  | Uses the location address on purchases
 [tms](tms/) | 18.0.1.1.0 | <a href='https://github.com/max3903'><img src='https://github.com/max3903.png' width='32' height='32' style='border-radius:50%;' alt='max3903'/></a> <a href='https://github.com/santiagordz'><img src='https://github.com/santiagordz.png' width='32' height='32' style='border-radius:50%;' alt='santiagordz'/></a> <a href='https://github.com/EdgarRetes'><img src='https://github.com/EdgarRetes.png' width='32' height='32' style='border-radius:50%;' alt='EdgarRetes'/></a> | Manage Vehicles, Drivers, Routes and Trips
