@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-08-16 12:25+0000\n"
+"PO-Revision-Date: 2025-10-27 10:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -1115,7 +1115,7 @@ msgstr "Avviso spedizione"
 #. module: shipment_advice
 #: model:ir.ui.menu,name:shipment_advice.shipment_advice_menu_section
 msgid "Shipments"
-msgstr ""
+msgstr "Spedizioni"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_shipping_weight
