@@ -6,22 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-25 12:36+0000\n"
-"Last-Translator: \"Juanma B.O.\" <tyrantbit@gmail.com>\n"
+"PO-Revision-Date: 2025-11-05 04:42+0000\n"
+"Last-Translator: Julio Santa Cruz <bartacruz@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "%(sa)s: %(pick)s background validation"
-msgstr ""
+msgstr "%(sa)s: %(pick)s validación de antecedentes"
 
 #. module: shipment_advice
 #: model:ir.actions.report,print_report_name:shipment_advice.action_report_shipment_advice
@@ -81,6 +81,8 @@ msgid ""
 "An error occurred while processing:\n"
 "- %(related_object_name)s: %(error)s"
 msgstr ""
+"Ha ocurrido un error al procesar:\n"
+"- %(related_object_name)s: %(error)s"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__arrival_date
@@ -262,12 +264,12 @@ msgstr "Firma del conductor"
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__error
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__error_message
 msgid "Error Message"
-msgstr ""
+msgstr "Mensaje de Error"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_follower_ids
@@ -367,7 +369,7 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_process
 msgid "In process"
-msgstr ""
+msgstr "En proceso"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_progress
@@ -779,7 +781,7 @@ msgstr "Número de mensajes con error de envío"
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "One of the pickings to process failed to validate"
-msgstr ""
+msgstr "Ha fallado la validación de uno de los albaranes a procesar"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__open_shipment
@@ -1019,13 +1021,13 @@ msgstr "Usuario responsable"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__run_in_queue_job
 msgid "Run In Queue Job"
-msgstr ""
+msgstr "Ejecutar En Cola de Trabajo"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
 msgid "Run shipment advice in queue job"
-msgstr ""
+msgstr "Ejecuta el aviso de envío en la cola de trabajo"
 
 #. module: shipment_advice
 #: model:ir.actions.report,name:shipment_advice.action_report_shipment_advice
@@ -1042,7 +1044,7 @@ msgstr "Aviso de envío"
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_auto_close_incoming
 msgid "Shipment Advice: Auto Close Incoming Advices"
-msgstr ""
+msgstr "Aviso de Envío: Cerrar Automáticamente Avisos Entrantes"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
@@ -1151,6 +1153,10 @@ msgid ""
 "                            will be automatically set to done\n"
 "                            if all related moves are done or canceled"
 msgstr ""
+"Este marcador indica si un aviso de envío\n"
+"                            será marcado automáticamente como hecho\n"
+"                            si todos los documentos relacionados están "
+"hechos o cancelados"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
@@ -1159,6 +1165,8 @@ msgid ""
 "This flag indicates if an incoming shipment advice will be automatically set "
 "to done if all related moves are done or canceled"
 msgstr ""
+"Este marcador indica si un aviso de envío será marcado automáticamente como "
+"hecho si todos los documentos relacionados están hechos o cancelados"
 
 #. module: shipment_advice
 #. odoo-python
