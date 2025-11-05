@@ -10,7 +10,8 @@ class TmsDriver(models.Model):
     @api.model
     def create(self, vals):
         driver = super().create(vals)
-        self.create_driver_employee(driver)
+        if not vals["is_external"]:
+            self.create_driver_employee(driver)
         return driver
 
     @api.model
