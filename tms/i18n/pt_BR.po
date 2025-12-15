@@ -988,6 +988,11 @@ msgid "Formatted Email"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__global_location_number
+msgid "GLN"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__partner_latitude
 msgid "Geo Latitude"
 msgstr ""
@@ -1000,6 +1005,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__date_localization
 msgid "Geolocation Date"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__global_location_number
+msgid "Global Location Number"
 msgstr ""
 
 #. module: tms
