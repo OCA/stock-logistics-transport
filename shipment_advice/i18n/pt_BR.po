@@ -733,12 +733,6 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: shipment_advice
-#. odoo-python
-#: code:addons/shipment_advice/models/shipment_advice.py:0
-msgid "One of the pickings to process failed to validate"
-msgstr ""
-
-#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__open_shipment
 msgid "Open Shipment"
 msgstr ""
@@ -1081,6 +1075,14 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__company_id
 msgid "The company is automatically set from your user preferences."
+msgstr ""
+
+#. module: shipment_advice
+#. odoo-python
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+msgid ""
+"The following pickings failed to validate\n"
+"%s"
 msgstr ""
 
 #. module: shipment_advice
