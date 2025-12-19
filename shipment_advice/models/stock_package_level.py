@@ -23,7 +23,6 @@ class StockPackageLevel(models.Model):
 
     def _load_in_shipment(self, shipment_advice):
         """Load the package levels into the given shipment advice."""
-        self.is_done = True
         self.move_line_ids._load_in_shipment(shipment_advice)
 
     def _unload_from_shipment(self):
