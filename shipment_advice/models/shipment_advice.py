@@ -671,6 +671,32 @@ class ShipmentAdvice(models.Model):
         action["domain"] = [("id", "in", self.planned_picking_ids.ids)]
         return action
 
+    def _get_mail_template(self):
+        """Return the xmlid of the email template used for shipment advices."""
+        return "shipment_advice.email_template_shipment_advice"
+
+    def action_send_email(self):
+        """Open the composer with the shipment advice email template loaded."""
+        self.ensure_one()
+        mail_template = self.env.ref(
+            self._get_mail_template(), raise_if_not_found=False
+        )
+        ctx = {
+            "default_model": self._name,
+            "default_res_ids": self.ids,
+            "default_template_id": mail_template.id,
+            "default_composition_mode": "comment",
+            "force_email": True,
+        }
+        return {
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "res_model": "mail.compose.message",
+            "views": [(False, "form")],
+            "target": "new",
+            "context": ctx,
+        }
+
 
 class ShipmentAdvicePlannedPickingOrder(models.Model):
     _name = "shipment.advice.planned.picking.order"
