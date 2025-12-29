@@ -33,6 +33,13 @@
                         states="draft"
                     />
                     <button
+                        name="action_send_email"
+                        type="object"
+                        string="Send by Email"
+                        class="btn-secondary"
+                        states="confirmed,in_progress"
+                    />
+                    <button
                         name="action_in_progress"
                         type="object"
                         string="Start"
