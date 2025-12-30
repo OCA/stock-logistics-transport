@@ -169,6 +169,7 @@ class ShipmentAdvice(models.Model):
     )
 
     error_message = fields.Text(tracking=True)
+    notes = fields.Text()
 
     _sql_constraints = [
         (
