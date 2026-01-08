@@ -42,4 +42,10 @@ class StockPackageLevel(models.Model):
 
     def _is_loaded_in_shipment(self):
         """Return `True` if the package levels are loaded in a shipment."""
-        return all([pl.is_done and pl.shipment_advice_id for pl in self])
+        return all(
+            [
+                all([line.picked for line in pl.move_line_ids])
+                and pl.shipment_advice_id
+                for pl in self
+            ]
+        )
