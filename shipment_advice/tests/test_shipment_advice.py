@@ -170,3 +170,12 @@ class TestShipmentAdvice(Common):
     def test_shipment_name(self):
         self.assertTrue("OUT" in self.shipment_advice_out.name)
         self.assertTrue("IN" in self.shipment_advice_in.name)
+
+    def test_shipment_advice_package_level_loaded(self):
+        """Check the package level is loaded in shipment computation."""
+        package_level = self.move_product_out2.move_line_ids.package_level_id
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.assertFalse(package_level._is_loaded_in_shipment())
+        self.load_records_in_shipment(self.shipment_advice_out, package_level)
+        self.assertEqual(package_level.picking_id, self.move_product_out1.picking_id)
+        self.assertTrue(package_level._is_loaded_in_shipment())
