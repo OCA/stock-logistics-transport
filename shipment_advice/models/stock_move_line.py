@@ -111,6 +111,10 @@ class StockMoveLine(models.Model):
                 )
             if move_line.state in ("partially_available", "assigned"):
                 move_line.picked = True
+                # stock.package_level.is_done computed field doesn't include
+                # move_line_ids.picked in its @api.depends, so we manually
+                # invalidate the cache
+                move_line.package_level_id.invalidate_recordset(["is_done"])
 
     def _unload_from_shipment(self):
         """Unload the move lines from their related shipment advice."""
@@ -123,6 +127,10 @@ class StockMoveLine(models.Model):
             )
         self.shipment_advice_id = False
         self.picked = False
+        # stock.package_level.is_done computed field doesn't include
+        # move_line_ids.picked in its @api.depends, so we manually invalidate
+        # the cache
+        self.package_level_id.invalidate_recordset(["is_done"])
 
     def _is_loaded_in_shipment(self):
         """Return `True` if the move lines are loaded in a shipment."""
