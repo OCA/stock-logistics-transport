@@ -44,7 +44,8 @@ class StockPackageLevel(models.Model):
         """Return `True` if the package levels are loaded in a shipment."""
         return all(
             [
-                all([line.picked for line in pl.move_line_ids])
+                pl.move_line_ids
+                and all([line.picked for line in pl.move_line_ids])
                 and pl.shipment_advice_id
                 for pl in self
             ]
