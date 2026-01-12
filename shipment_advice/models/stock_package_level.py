@@ -35,10 +35,7 @@ class StockPackageLevel(models.Model):
 
     def _unload_from_shipment(self):
         """Unload the package levels from their related shipment advice."""
-        # Workaround: Odoo's stock.package_level.is_done computed field doesn't include
-        # move_line_ids.picked in its @api.depends, so we manually invalidate the cache
         self.move_line_ids._unload_from_shipment()
-        self.invalidate_recordset(fnames=["is_done"])
 
     def _is_loaded_in_shipment(self):
         """Return `True` if the package levels are loaded in a shipment."""
