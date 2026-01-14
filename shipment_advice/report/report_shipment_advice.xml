@@ -80,7 +80,7 @@
                         </thead>
                         <tbody>
                             <tr
-                                t-foreach="o.loaded_package_level_ids.sorted(lambda r: r.picking_id.name)"
+                                t-foreach="o.loaded_package_level_ids.sorted(lambda r: r.with_context(active_shipment_advice_id=o.id).picking_id.sequence_in_shipment_advice)"
                                 t-as="package_level"
                             >
                                 <td>
@@ -131,7 +131,7 @@
                         </thead>
                         <tbody>
                             <tr
-                                t-foreach="o.loaded_move_line_without_package_ids"
+                                t-foreach="o.loaded_move_line_without_package_ids.sorted(lambda r: (r.move_id.with_context(active_shipment_advice_id=o.id).picking_sequence_in_shipment_advice, 'sequence'))"
                                 t-as="line"
                             >
                                 <td>
