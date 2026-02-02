@@ -125,41 +125,86 @@
 }
 
 /* ============================================
-   Group Capacity Line (inline in header area)
+   Unified Group Info Line (compact single line)
    ============================================ */
 
-.o_group_capacity_line {
+.o_group_info_line {
     display: flex;
-    gap: 12px;
-    padding: 4px 8px 8px 32px;
+    gap: 8px;
+    padding: 4px 8px 6px 32px;
     font-size: 11px;
     color: var(--bs-secondary);
     border-bottom: 1px solid var(--bs-border-color);
     background-color: var(--bs-tertiary-bg);
+    align-items: center;
 }
 
-.o_capacity_item {
+.o_info_item {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
+    cursor: default;
 }
 
-.o_capacity_item i {
+.o_info_item i {
+    font-size: 10px;
+}
+
+.o_info_separator {
+    color: var(--bs-border-color);
     font-size: 10px;
 }
 
 /* Utilization color states */
-.o_capacity_item.text-success {
+.o_info_item.text-success {
     color: var(--bs-success) !important;
 }
 
-.o_capacity_item.text-warning {
+.o_info_item.text-warning {
     color: var(--bs-warning) !important;
 }
 
-.o_capacity_item.text-danger {
+.o_info_item.text-danger {
     color: var(--bs-danger) !important;
     font-weight: 600;
+}
+
+/* Driver name truncated */
+.o_info_driver .o_driver_name {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Maps button in header */
+.o_group_maps_btn {
+    padding: 2px 6px;
+    font-size: 11px;
+    line-height: 1;
+}
+
+/* Weight/volume column in stop item */
+.o_pin_weight_volume {
+    font-size: 10px;
+    min-width: 45px;
+    margin-left: auto;
+    padding-left: 8px;
+    flex-shrink: 0;
+}
+
+.o_pin_weight_volume i {
+    font-size: 9px;
+    margin-right: 2px;
+    width: 10px;
+    display: inline-block;
+}
+
+.o_wv_volume,
+.o_wv_weight {
+    white-space: nowrap;
 }
 
 /* Ensure group header has space for indicators */
@@ -188,43 +233,6 @@
     font-size: 10px;
 }
 
-/* Driver/vehicle line */
-.o_group_driver_line {
-    display: flex;
-    gap: 12px;
-    padding: 4px 8px 4px 32px;
-    font-size: 11px;
-    color: var(--bs-secondary);
-    background-color: var(--bs-tertiary-bg);
-}
-
-.o_driver_item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.o_driver_item i {
-    font-size: 10px;
-}
-
-/* Google Maps link in capacity line */
-.o_capacity_maps_link {
-    color: var(--bs-primary);
-    text-decoration: none;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.o_capacity_maps_link:hover {
-    color: var(--bs-primary);
-    text-decoration: underline;
-}
-
-.o_capacity_maps_link i {
-    color: #ea4335; /* Google Maps red */
-}
-
 /* ============================================
    Responsive styles
    ============================================ */
@@ -239,9 +247,9 @@
         padding: 10px 12px;
     }
 
-    .o_group_capacity_line {
+    .o_group_info_line {
         padding-left: 16px;
-        gap: 8px;
+        gap: 6px;
         font-size: 10px;
     }
 

@@ -113,18 +113,31 @@ and capacity comparison features.
             >(ev) => !group.isUnassigned and this.onOrderNameClick(ev, group)</attribute>
         </xpath>
 
-        <!-- Add scheduled date after group name for assigned groups -->
+        <!-- Add scheduled date and Maps button after group name for assigned groups -->
         <xpath
             expr="//div[contains(@t-attf-class, 'o_pin_group_header')]//span[contains(@class, 'o_pin_group_name')]"
             position="after"
         >
             <t t-if="!group.isUnassigned">
                 <t t-set="orderInfo" t-value="getGroupOrderInfo(group)" />
+                <!-- Scheduled date -->
                 <t t-if="orderInfo and orderInfo.scheduledDate">
                     <span class="o_group_scheduled_date text-muted small ms-auto">
                         <i class="fa fa-calendar" />
                         <t t-esc="orderInfo.scheduledDate" />
                     </span>
+                </t>
+                <!-- Maps button (always visible) -->
+                <t t-if="getGroupGoogleMapsUrl(group)">
+                    <a
+                        class="o_group_maps_btn btn btn-sm btn-outline-primary ms-2"
+                        t-att-href="getGroupGoogleMapsUrl(group)"
+                        target="_blank"
+                        t-on-click.stop=""
+                        title="Navegar com Google Maps"
+                    >
+                        <i class="fa fa-location-arrow" />
+                    </a>
                 </t>
             </t>
         </xpath>
@@ -139,90 +152,75 @@ and capacity comparison features.
             >o_group_navigate_all btn btn-sm btn-outline-primary ms-2 {{ group.isUnassigned ? '' : 'd-none' }}</attribute>
         </xpath>
 
-        <!-- Add capacity line after group header for assigned groups -->
+        <!-- Add unified info line after group header for assigned groups -->
         <xpath
             expr="//div[contains(@t-attf-class, 'o_pin_group_header')]"
             position="after"
         >
             <t t-if="!group.isUnassigned">
                 <t t-set="capacity" t-value="getGroupCapacity(group)" />
-                <t t-if="capacity">
-                    <div class="o_group_capacity_line">
-                        <span class="o_capacity_item">
-                            <i class="fa fa-truck" />
-                            <t t-esc="group.records.length" />
+                <t t-set="orderInfo" t-value="getGroupOrderInfo(group)" />
+                <div class="o_group_info_line">
+                    <!-- Driver name (truncated, hover for full name) -->
+                    <t t-if="orderInfo and orderInfo.driverName">
+                        <span
+                            class="o_info_item o_info_driver"
+                            t-att-title="orderInfo.driverName"
+                        >
+                            <i class="fa fa-user" />
+                            <span class="o_driver_name">
+                                <t t-esc="orderInfo.driverName" />
+                            </span>
                         </span>
-                        <!-- Show weight: % if capacity defined, otherwise total -->
+                    </t>
+                    <!-- Vehicle icon (hover for name) -->
+                    <t t-if="orderInfo and orderInfo.vehicleName">
+                        <span class="o_info_item" t-att-title="orderInfo.vehicleName">
+                            <i class="fa fa-truck" />
+                        </span>
+                    </t>
+                    <!-- Separator -->
+                    <span class="o_info_separator">|</span>
+                    <!-- Deliveries count -->
+                    <span class="o_info_item">
+                        <i class="fa fa-map-marker" />
+                        <t t-esc="group.records.length" />
+                    </span>
+                    <!-- Weight -->
+                    <t t-if="capacity">
                         <t t-if="capacity.hasCapacity and capacity.weightCapacity > 0">
                             <span
-                                t-attf-class="o_capacity_item {{ capacity.weightUtilization > 100 ? 'text-danger' : capacity.weightUtilization > 80 ? 'text-warning' : 'text-success' }}"
+                                t-attf-class="o_info_item {{ capacity.weightUtilization > 100 ? 'text-danger' : capacity.weightUtilization > 80 ? 'text-warning' : 'text-success' }}"
+                                t-att-title="capacity.totalWeight.toFixed(1) + ' / ' + capacity.weightCapacity.toFixed(0) + ' kg'"
                             >
                                 <i class="fa fa-balance-scale" />
                                 <t t-esc="Math.round(capacity.weightUtilization)" />%
                             </span>
                         </t>
                         <t t-else="">
-                            <span class="o_capacity_item">
+                            <span class="o_info_item" title="Peso total">
                                 <i class="fa fa-balance-scale" />
-                                <t t-esc="capacity.totalWeight.toFixed(1)" /> kg
+                                <t t-esc="capacity.totalWeight.toFixed(0)" />kg
                             </span>
                         </t>
-                        <!-- Show volume: % if capacity defined, otherwise total -->
+                        <!-- Volume -->
                         <t t-if="capacity.hasCapacity and capacity.volumeCapacity > 0">
                             <span
-                                t-attf-class="o_capacity_item {{ capacity.volumeUtilization > 100 ? 'text-danger' : capacity.volumeUtilization > 80 ? 'text-warning' : 'text-success' }}"
+                                t-attf-class="o_info_item {{ capacity.volumeUtilization > 100 ? 'text-danger' : capacity.volumeUtilization > 80 ? 'text-warning' : 'text-success' }}"
+                                t-att-title="capacity.totalVolume.toFixed(2) + ' / ' + capacity.volumeCapacity.toFixed(1) + ' m³'"
                             >
                                 <i class="fa fa-cube" />
                                 <t t-esc="Math.round(capacity.volumeUtilization)" />%
                             </span>
                         </t>
                         <t t-else="">
-                            <span class="o_capacity_item">
+                            <span class="o_info_item" title="Volume total">
                                 <i class="fa fa-cube" />
-                                <t t-esc="capacity.totalVolume.toFixed(2)" /> m³
+                                <t t-esc="capacity.totalVolume.toFixed(1)" />m³
                             </span>
                         </t>
-                        <!-- Google Maps navigation link -->
-                        <t t-if="getGroupGoogleMapsUrl(group)">
-                            <a
-                                class="o_capacity_item o_capacity_maps_link ms-auto"
-                                t-att-href="getGroupGoogleMapsUrl(group)"
-                                target="_blank"
-                                t-on-click.stop=""
-                                title="Navegar com Google Maps"
-                            >
-                                <i class="fa fa-map-marker" />
-                                <span>Maps</span>
-                            </a>
-                        </t>
-                    </div>
-                </t>
-            </t>
-        </xpath>
-
-        <!-- Add driver/vehicle line after group header for assigned groups -->
-        <xpath
-            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]"
-            position="after"
-        >
-            <t t-if="!group.isUnassigned">
-                <t t-set="orderInfo" t-value="getGroupOrderInfo(group)" />
-                <t t-if="orderInfo and (orderInfo.driverName or orderInfo.vehicleName)">
-                    <div class="o_group_driver_line">
-                        <t t-if="orderInfo.driverName">
-                            <span class="o_driver_item">
-                                <i class="fa fa-user" />
-                                <t t-esc="orderInfo.driverName" />
-                            </span>
-                        </t>
-                        <t t-if="orderInfo.vehicleName">
-                            <span class="o_driver_item">
-                                <i class="fa fa-truck" />
-                                <t t-esc="orderInfo.vehicleName" />
-                            </span>
-                        </t>
-                    </div>
-                </t>
+                    </t>
+                </div>
             </t>
         </xpath>
 
@@ -245,6 +243,29 @@ and capacity comparison features.
         <!-- Modify tooltip of pin title to show weight/volume -->
         <xpath expr="//div[contains(@class, 'o_pin_title')]" position="attributes">
             <attribute name="t-att-title">getItemTooltip(record)</attribute>
+        </xpath>
+
+        <!-- Hide navigate button for stops in assigned groups -->
+        <xpath expr="//a[contains(@class, 'o_pin_navigate')]" position="attributes">
+            <attribute
+                name="t-attf-class"
+            >o_pin_navigate btn btn-sm btn-outline-primary {{ isUnassigned(record) ? '' : 'd-none' }}</attribute>
+        </xpath>
+
+        <!-- Add weight/volume column after pin content for assigned stops -->
+        <xpath expr="//div[contains(@class, 'o_pin_content')]" position="after">
+            <t t-if="!isUnassigned(record)">
+                <div class="o_pin_weight_volume text-muted text-end">
+                    <div class="o_wv_volume">
+                        <i class="fa fa-cube" />
+                        <t t-esc="(record.volume || 0).toFixed(2)" />
+                    </div>
+                    <div class="o_wv_weight">
+                        <i class="fa fa-balance-scale" />
+                        <t t-esc="(record.weight || 0).toFixed(1)" />
+                    </div>
+                </div>
+            </t>
         </xpath>
     </t>
 
