@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="tms_delivery_product_demo" model="product.product">
+        <field name="name">TMS Delivery Service</field>
+        <field name="type">service</field>
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="uom_po_id" ref="uom.product_uom_unit" />
+    </record>
+
+    <record id="tms_delivery_product_demo_move" model="product.product">
+        <field name="name">TMS Delivery Product</field>
+        <field name="type">consu</field>
+        <field name="volume">0.8</field>
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="uom_po_id" ref="uom.product_uom_unit" />
+    </record>
+
+    <record id="tms_team_demo_delivery" model="tms.team">
+        <field name="name">TMS Delivery Team</field>
+    </record>
+
+    <record id="tms_internal_carrier_demo" model="delivery.carrier">
+        <field name="name">TMS Internal Carrier</field>
+        <field name="delivery_type">fixed</field>
+        <field name="product_id" ref="tms_delivery_product_demo" />
+        <field name="is_internal_carrier">True</field>
+        <field name="auto_create_stops">True</field>
+        <field name="tms_team_id" ref="tms_team_demo_delivery" />
+    </record>
+
+    <record id="tms_delivery_picking_demo_1" model="stock.picking">
+        <field name="partner_id" ref="tms_delivery_stops.demo_partner_delivery_1" />
+        <field name="picking_type_id" ref="stock.picking_type_out" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_customers" />
+        <field name="carrier_id" ref="tms_internal_carrier_demo" />
+    </record>
+
+    <record id="tms_delivery_move_demo_1" model="stock.move">
+        <field name="name">Demo Move 1</field>
+        <field name="product_id" ref="tms_delivery_product_demo_move" />
+        <field name="product_uom_qty">1.0</field>
+        <field name="product_uom" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_customers" />
+        <field name="picking_id" ref="tms_delivery_picking_demo_1" />
+    </record>
+
+    <record id="tms_delivery_picking_demo_2" model="stock.picking">
+        <field name="partner_id" ref="tms_delivery_stops.demo_partner_delivery_2" />
+        <field name="picking_type_id" ref="stock.picking_type_out" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_customers" />
+        <field name="carrier_id" ref="tms_internal_carrier_demo" />
+    </record>
+
+    <record id="tms_delivery_move_demo_2" model="stock.move">
+        <field name="name">Demo Move 2</field>
+        <field name="product_id" ref="tms_delivery_product_demo_move" />
+        <field name="product_uom_qty">2.0</field>
+        <field name="product_uom" ref="uom.product_uom_unit" />
+        <field name="location_id" ref="stock.stock_location_stock" />
+        <field name="location_dest_id" ref="stock.stock_location_customers" />
+        <field name="picking_id" ref="tms_delivery_picking_demo_2" />
+    </record>
+</odoo>

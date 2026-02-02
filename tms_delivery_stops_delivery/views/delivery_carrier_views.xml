@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_delivery_carrier_form_tms" model="ir.ui.view">
+        <field name="name">delivery.carrier.form.tms</field>
+        <field name="model">delivery.carrier</field>
+        <field name="inherit_id" ref="delivery.view_delivery_carrier_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="TMS Integration" name="tms_integration">
+                    <group>
+                        <field name="is_internal_carrier" />
+                        <field name="tms_team_id" invisible="not is_internal_carrier" />
+                        <field
+                            name="auto_create_stops"
+                            invisible="not is_internal_carrier"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

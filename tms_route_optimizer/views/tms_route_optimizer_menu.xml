@@ -17,7 +17,7 @@
         id="menu_tms_route_optimizer_root"
         name="Route Optimizer"
         parent="tms.operations"
-        sequence="40"
+        sequence="19"
     />
 
     <!-- Menu Item - Optimization -->

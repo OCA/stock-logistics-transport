@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_tms_order_from_pickings_form" model="ir.ui.view">
+        <field name="name">tms.order.from.pickings.form</field>
+        <field name="model">tms.order.from.pickings</field>
+        <field name="arch" type="xml">
+            <form string="Create/Assign TMS Order">
+                <sheet>
+                    <group>
+                        <field name="mode" />
+                        <field
+                            name="picking_ids"
+                            widget="many2many_tags"
+                            domain="[('tms_stop_id','!=',False)]"
+                        />
+                    </group>
+                    <group invisible="mode == 'existing_order'">
+                        <field name="tms_team_id" required="1" />
+                        <field name="vehicle_id" />
+                        <field name="driver_id" />
+                        <field name="origin_id" />
+                        <field name="destination_id" />
+                        <field name="scheduled_date_start" />
+                        <field name="description" />
+                    </group>
+                    <group invisible="mode != 'existing_order'">
+                        <field name="existing_order_id" required="1" />
+                    </group>
+                </sheet>
+                <footer>
+                    <button
+                        name="action_create_order"
+                        type="object"
+                        string="Apply"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_create_tms_order_wizard" model="ir.actions.act_window">
+        <field name="name">Create/Assign TMS Order</field>
+        <field name="res_model">tms.order.from.pickings</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>
+</odoo>
