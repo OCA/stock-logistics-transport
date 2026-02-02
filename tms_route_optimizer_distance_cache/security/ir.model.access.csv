@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_route_distance_cache_system,tms.route.distance.cache system,model_tms_route_distance_cache,base.group_system,1,1,1,1

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="tms_route_optimizer_distance_cache_limit" model="ir.config_parameter">
+        <field name="key">tms.route_optimizer.distance_cache_limit</field>
+        <field name="value">200000</field>
+    </record>
+</odoo>

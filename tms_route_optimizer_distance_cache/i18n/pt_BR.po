@@ -1,0 +1,95 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_route_optimizer_distance_cache
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__display_name
+msgid "Display Name"
+msgstr "Nome de Exibição"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__distance_km
+msgid "Distance Km"
+msgstr "Distância Km"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.constraint,message:tms_route_optimizer_distance_cache.constraint_tms_route_distance_cache_route_distance_cache_unique
+msgid "Distance cache entry already exists."
+msgstr "Entrada de cache de distância já existe."
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__write_uid
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__write_date
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__last_used
+msgid "Last Used"
+msgstr "Último Uso"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__lat_a
+msgid "Lat A"
+msgstr "Lat A"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__lat_b
+msgid "Lat B"
+msgstr "Lat B"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__lon_a
+msgid "Lon A"
+msgstr "Lon A"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model.fields,field_description:tms_route_optimizer_distance_cache.field_tms_route_distance_cache__lon_b
+msgid "Lon B"
+msgstr "Lon B"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model,name:tms_route_optimizer_distance_cache.model_tms_route_distance_cache
+msgid "TMS Route Distance Cache"
+msgstr "Cache de Distância de Rota TMS"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.actions.server,name:tms_route_optimizer_distance_cache.ir_cron_tms_route_distance_cache_cleanup_ir_actions_server
+msgid "TMS Route Distance Cache Cleanup"
+msgstr "Limpeza de Cache de Distância de Rota TMS"
+
+#. module: tms_route_optimizer_distance_cache
+#: model:ir.model,name:tms_route_optimizer_distance_cache.model_tms_route_optimizer
+msgid "TMS Route Optimizer Wizard"
+msgstr "Assistente do Otimizador de Rotas TMS"
