@@ -19,6 +19,9 @@
     "data": [
         "views/tms_order_stop_views.xml",
     ],
+    "demo": [
+        "demo/demo_unallocated_stops.xml",
+    ],
     "assets": {
         "web.assets_backend": [
             "tms_delivery_stops_leaflet/static/src/tms_stops_map/selectable_pin_list.esm.js",

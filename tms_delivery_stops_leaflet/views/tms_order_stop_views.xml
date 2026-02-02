@@ -34,6 +34,9 @@
                 <field name="display_address" />
                 <field name="scheduled_date" />
                 <field name="state" />
+                <field name="weight" />
+                <field name="volume" />
+                <field name="package_count" />
             </leaflet_map>
         </field>
     </record>
