@@ -13,9 +13,25 @@ TmsStopsMapRenderer template - extends LeafletMapRenderer.
         t-inherit-mode="primary"
         owl="1"
     >
-        <!-- Override PinList component to use SelectablePinList with onDataReload -->
-        <xpath expr="//t[@t-component='PinListComponent']" position="attributes">
-            <attribute name="onDataReload">() => this.onDataReload()</attribute>
+        <!-- Replace PinList component to add onDataReload callback -->
+        <xpath expr="//t[@t-component='PinListComponent']" position="replace">
+            <t
+                t-component="PinListComponent"
+                records="records"
+                groupBy="groupBy"
+                groupColors="groupColors"
+                panelTitle="panelTitle"
+                onPinClick.bind="onPinClick"
+                onNavigateClick.bind="onNavigateClick"
+                onResequence.bind="onResequence"
+                fieldTitle="fieldTitle"
+                fieldAddress="fieldAddress"
+                fieldLatitude="fieldLatitude"
+                fieldLongitude="fieldLongitude"
+                groupField="groupField"
+                unassignedGroupName="unassignedGroupName"
+                onDataReload.bind="onDataReload"
+            />
         </xpath>
     </t>
 

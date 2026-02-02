@@ -36,6 +36,36 @@ SelectablePinList template - extends DraggablePinList with selection support.
                         <i class="fa fa-times" />
                     </button>
                 </div>
+
+                <!-- Status bar with totals - using position:fixed to overlay map -->
+                <div class="o_tms_status_bar">
+                    <div class="o_status_bar_content">
+                        <div class="o_status_item">
+                            <i class="fa fa-map-marker" />
+                            <span
+                                class="o_status_value"
+                                t-esc="selectionStats.stopCount"
+                            />
+                            <span class="o_status_label">paradas</span>
+                        </div>
+                        <div class="o_status_item">
+                            <i class="fa fa-balance-scale" />
+                            <span
+                                class="o_status_value"
+                                t-esc="selectionStats.totalWeight"
+                            />
+                            <span class="o_status_label">kg</span>
+                        </div>
+                        <div class="o_status_item">
+                            <i class="fa fa-cube" />
+                            <span
+                                class="o_status_value"
+                                t-esc="selectionStats.totalVolume"
+                            />
+                            <span class="o_status_label">m³</span>
+                        </div>
+                    </div>
+                </div>
             </t>
         </xpath>
 

@@ -93,6 +93,32 @@ export class SelectablePinList extends DraggablePinList {
     }
 
     /**
+     * Calculates aggregated statistics from selected stops.
+     * @returns {Object} Stats object with totalWeight, totalVolume, stopCount
+     */
+    get selectionStats() {
+        const selectedIds = this.selectionState.selectedIds;
+        if (selectedIds.size === 0) {
+            return {totalWeight: 0, totalVolume: 0, stopCount: 0};
+        }
+
+        const selectedRecords = this.props.records.filter((r) => selectedIds.has(r.id));
+        let totalWeight = 0;
+        let totalVolume = 0;
+
+        for (const record of selectedRecords) {
+            totalWeight += record.weight || 0;
+            totalVolume += record.volume || 0;
+        }
+
+        return {
+            totalWeight: totalWeight.toFixed(2),
+            totalVolume: totalVolume.toFixed(3),
+            stopCount: selectedRecords.length,
+        };
+    }
+
+    /**
      * Check if a record is unassigned (no order_id).
      * @param {Object} record - Record object
      * @returns {Boolean}
