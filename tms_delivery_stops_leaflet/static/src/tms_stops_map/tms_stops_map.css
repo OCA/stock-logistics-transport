@@ -1,0 +1,176 @@
+/*
+ * Copyright (C) 2025 KMEE (https://kmee.com.br)
+ * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ *
+ * Styles for TMS Stops Map - popup styling and legend
+ */
+
+/* ======================================
+   Stop Popup Styles
+   ====================================== */
+
+.o_stop_popup {
+    min-width: 220px;
+    font-size: 13px;
+}
+
+.o_stop_popup .o_popup_header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.o_stop_popup .o_stop_number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.o_stop_popup .o_stop_state {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.o_stop_popup .o_map_selector {
+    cursor: pointer;
+    margin-bottom: 6px;
+}
+
+.o_stop_popup .o_map_selector:hover {
+    color: #007bff;
+}
+
+.o_stop_popup .o_popup_order,
+.o_stop_popup .o_popup_address,
+.o_stop_popup .o_popup_phone,
+.o_stop_popup .o_popup_info,
+.o_stop_popup .o_popup_scheduled {
+    margin: 4px 0;
+    color: #6c757d;
+}
+
+.o_stop_popup .o_popup_order i,
+.o_stop_popup .o_popup_address i,
+.o_stop_popup .o_popup_phone i,
+.o_stop_popup .o_popup_info i,
+.o_stop_popup .o_popup_scheduled i {
+    width: 16px;
+    text-align: center;
+    margin-right: 6px;
+    color: #868e96;
+}
+
+.o_stop_popup .o_popup_phone a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.o_stop_popup .o_popup_phone a:hover {
+    text-decoration: underline;
+}
+
+.o_stop_popup .o_popup_actions {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e9ecef;
+}
+
+.o_stop_popup .o_popup_actions .btn {
+    width: 100%;
+}
+
+/* ======================================
+   Legend Styles
+   ====================================== */
+
+.o_stops_legend {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    background: white;
+    padding: 10px 12px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    font-size: 12px;
+}
+
+.o_stops_legend .o_legend_title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #495057;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 4px;
+}
+
+.o_stops_legend .o_legend_item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 4px 0;
+    color: #6c757d;
+}
+
+.o_stops_legend .o_legend_color {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+/* Circle marker in legend for "Sem Viagem" */
+.o_stops_legend .o_legend_color.o_legend_circle {
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 1px #fd7e14;
+}
+
+/* Circle marker styling */
+.o_circle_marker {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* ======================================
+   Pin List Enhancements for Stops
+   ====================================== */
+
+.o_leaflet_pin_list .o_pin_item .o_stop_state_badge {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: 6px;
+}
+
+/* ======================================
+   Responsive Adjustments
+   ====================================== */
+
+@media (max-width: 768px) {
+    .o_stops_legend {
+        bottom: 10px;
+        right: 10px;
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .o_stop_popup {
+        min-width: 180px;
+        font-size: 12px;
+    }
+}

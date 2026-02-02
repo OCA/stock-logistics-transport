@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2025 KMEE (https://kmee.com.br)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- Add Stops Map button to TMS Order form -->
+    <record id="view_tms_order_form_stops_map_button" model="ir.ui.view">
+        <field name="name">tms.order.form.stops.map.button</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_open_stops_map"
+                    type="object"
+                    string="Stops Map"
+                    icon="fa-map-marker"
+                    class="oe_highlight"
+                    invisible="not stop_ids"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add Stops Map button to TMS Order list view (server action for multi-select) -->
+    <record id="action_open_stops_map_server" model="ir.actions.server">
+        <field name="name">View Stops on Map</field>
+        <field name="model_id" ref="tms.model_tms_order" />
+        <field name="binding_model_id" ref="tms.model_tms_order" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+if records:
+    action = records.action_open_all_stops_map()
+        </field>
+    </record>
+</odoo>
