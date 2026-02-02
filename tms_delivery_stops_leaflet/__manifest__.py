@@ -14,6 +14,7 @@
     "depends": [
         "tms_delivery_stops",
         "web_view_leaflet_map",
+        "web_leaflet_routing",
     ],
     "data": [
         "views/tms_order_stop_views.xml",
