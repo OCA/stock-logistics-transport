@@ -14,6 +14,7 @@
     ],
     "data": [
         "security/ir.model.access.csv",
+        "wizard/create_order_from_stops_wizard.xml",
         "views/res_config_settings.xml",
         "views/tms_stage.xml",
         "views/tms_order_stop.xml",
