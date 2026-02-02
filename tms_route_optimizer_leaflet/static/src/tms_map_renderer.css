@@ -1,0 +1,190 @@
+/*
+    TMS Route Optimizer Leaflet Map Styles
+    Custom styling for TMS route visualization
+*/
+
+/* Route metrics panel */
+.o_tms_route_metrics {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 120px;
+}
+
+.o_tms_metric {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #495057;
+}
+
+.o_tms_metric i {
+    width: 16px;
+    color: #007bff;
+    text-align: center;
+}
+
+.o_tms_metric_value {
+    font-weight: 600;
+}
+
+/* Route polyline highlight on hover */
+.leaflet-interactive.o_tms_route_polyline:hover {
+    stroke-width: 8px !important;
+    stroke-opacity: 1 !important;
+}
+
+/* Stop sequence badges on markers */
+.o_tms_stop_badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #dc3545;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Vehicle color coding for multi-vehicle routes */
+.o_tms_route_vehicle_1 {
+    stroke: #007bff !important;
+}
+
+.o_tms_route_vehicle_2 {
+    stroke: #28a745 !important;
+}
+
+.o_tms_route_vehicle_3 {
+    stroke: #ffc107 !important;
+}
+
+.o_tms_route_vehicle_4 {
+    stroke: #dc3545 !important;
+}
+
+.o_tms_route_vehicle_5 {
+    stroke: #6f42c1 !important;
+}
+
+/* Depot marker styling */
+.o_tms_depot_marker {
+    background-color: #343a40 !important;
+}
+
+.o_tms_depot_marker svg path {
+    fill: #343a40 !important;
+}
+
+/* Delivery stop marker styling */
+.o_tms_stop_marker_delivered {
+    background-color: #28a745 !important;
+}
+
+.o_tms_stop_marker_pending {
+    background-color: #ffc107 !important;
+}
+
+.o_tms_stop_marker_failed {
+    background-color: #dc3545 !important;
+}
+
+/* Route info popup */
+.o_tms_route_popup {
+    min-width: 200px;
+}
+
+.o_tms_route_popup .o_route_header {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.o_tms_route_popup .o_route_details {
+    font-size: 12px;
+}
+
+.o_tms_route_popup .o_route_detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.o_tms_route_popup .o_route_detail_label {
+    color: #6c757d;
+}
+
+.o_tms_route_popup .o_route_detail_value {
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .o_tms_route_metrics {
+        top: auto;
+        bottom: 60px;
+        right: 10px;
+        left: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 8px 12px;
+    }
+
+    .o_tms_metric {
+        font-size: 11px;
+    }
+}
+
+/* Legend panel for multi-vehicle routes */
+.o_tms_legend {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    font-size: 12px;
+}
+
+.o_tms_legend_title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #495057;
+}
+
+.o_tms_legend_item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.o_tms_legend_color {
+    width: 20px;
+    height: 4px;
+    border-radius: 2px;
+}
+
+.o_tms_legend_label {
+    color: #6c757d;
+}

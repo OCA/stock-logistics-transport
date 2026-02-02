@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t
+        t-name="tms_route_optimizer_leaflet.TMSMapRenderer"
+        t-inherit="web_view_leaflet_map.MapRenderer"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <!-- Add route metrics panel to the map -->
+        <xpath expr="//div[hasclass('o_leaflet_map_wrapper')]" position="inside">
+            <t t-if="routeMetrics and routeMetrics.totalDistance > 0">
+                <div class="o_tms_route_metrics">
+                    <div class="o_tms_metric">
+                        <i class="fa fa-road" />
+                        <span class="o_tms_metric_value">
+                            <t t-esc="formattedDistance" />
+                        </span>
+                    </div>
+                    <div class="o_tms_metric">
+                        <i class="fa fa-clock-o" />
+                        <span class="o_tms_metric_value">
+                            <t t-esc="formattedDuration" />
+                        </span>
+                    </div>
+                    <div class="o_tms_metric">
+                        <i class="fa fa-map-marker" />
+                        <span class="o_tms_metric_value"><t
+                            t-esc="state.records.length"
+                        /> stops</span>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+</templates>
