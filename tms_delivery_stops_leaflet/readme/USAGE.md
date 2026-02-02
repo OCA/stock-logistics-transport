@@ -1,41 +1,29 @@
-**From TMS Order:**
+**Using the Map View:**
 
-1. Open a TMS Order with delivery stops
-2. Click the **"Stops Map"** button in the header
-3. All stops from the order will be displayed on the map
+1. Navigate to Inventory > Transport > Delivery Stops > Map
+2. The map will display all delivery stops with markers
+3. Stops are grouped by their assigned TMS order
+4. Unallocated stops appear in the "Sem Viagem" (No Trip) group
 
-**From Delivery Stops List:**
+**Creating Orders from Selected Stops:**
 
-1. Go to **TMS > Delivery Stops**
-2. Click the Map icon in the view switcher (or use the view menu)
-3. All visible stops will be shown on the map
+1. In the sidebar, expand the "Sem Viagem" group
+2. Use the checkboxes to select stops you want to assign to a new order
+3. Click the "Criar Ordem" (Create Order) button that appears in the selection bar
+4. Fill in the order details in the wizard:
+   - TMS Team (required)
+   - Vehicle and Driver (optional)
+   - Origin and Destination locations (optional)
+   - Scheduled start date (optional)
+5. Click "Create Order" to create the TMS order
 
-**From Main Menu:**
+**Drag-and-Drop Resequencing:**
 
-1. Go to **TMS > Stops Map**
-2. View all delivery stops from all orders on a single map
-3. Use filters to narrow down the stops displayed
+* Drag stops within a group to change their delivery sequence
+* Drag stops between groups to move them to different orders
+* The sequence numbers update automatically
 
-**Marker Colors:**
+**Navigation:**
 
-- Gray: Draft stops
-- Blue: Scheduled stops
-- Green: Delivered stops
-- Red: Skipped stops
-
-**Interactions:**
-
-- Click marker: Opens popup with stop details
-- Click partner name: Opens the stop form
-- Click "Navigate": Opens Google Maps with directions
-- Click phone number: Initiates phone call (on mobile)
-
-**Pin List:**
-
-The sidebar shows all stops grouped by order. Click a pin to center
-the map on that stop. Pins show sequence number and status color.
-
-**Route Lines:**
-
-Dashed lines connect stops in their sequence order. Each order has a
-different color route to help visualize the delivery path.
+* Click the car icon on group headers to open Google Maps with the full route
+* Click the navigation arrow on individual stops to navigate to that location

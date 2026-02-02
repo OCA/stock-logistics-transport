@@ -1,91 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-Copyright (C) 2025 KMEE (https://kmee.com.br)
+Copyright (C) 2026 KMEE (https://kmee.com.br)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-TMS Stops Map Renderer template - extends LeafletMapRenderer with TMS-specific UI.
-Adds status legend overlay to the map.
+TmsStopsMapRenderer template - extends LeafletMapRenderer.
 -->
 <templates xml:space="preserve">
 
-    <!--
-        TmsStopsMapRenderer template
-        Extends base renderer with TMS-specific legend
-    -->
-    <t t-name="tms_delivery_stops_leaflet.TmsStopsMapRenderer" owl="1">
-        <div class="o_leaflet_main_container h-100">
-            <!-- Sidebar Pin List with drag-and-drop -->
-            <t t-if="showPinList">
-                <t
-                    t-component="PinListComponent"
-                    records="records"
-                    groupBy="groupBy"
-                    groupColors="groupColors"
-                    panelTitle="panelTitle"
-                    onPinClick.bind="onPinClick"
-                    onNavigateClick.bind="onNavigateClick"
-                    onResequence.bind="onResequence"
-                    fieldTitle="fieldTitle"
-                    fieldAddress="fieldAddress"
-                    fieldLatitude="fieldLatitude"
-                    fieldLongitude="fieldLongitude"
-                    groupField="groupField"
-                    unassignedGroupName="unassignedGroupName"
-                />
-            </t>
-            <!-- Map Container -->
-            <div class="o_leaflet_map_wrapper h-100">
-                <div t-ref="mapContainer" class="o_leaflet_map_container h-100">
-                    <!-- Legend for stop states -->
-                    <div class="o_stops_legend">
-                        <div class="o_legend_title">Status</div>
-                        <div class="o_legend_item">
-                            <span
-                                class="o_legend_color o_legend_circle"
-                                style="background-color: #fd7e14;"
-                            />
-                            <span>Sem Viagem</span>
-                        </div>
-                        <div class="o_legend_item">
-                            <span
-                                class="o_legend_color"
-                                style="background-color: #6c757d;"
-                            />
-                            <span>Draft</span>
-                        </div>
-                        <div class="o_legend_item">
-                            <span
-                                class="o_legend_color"
-                                style="background-color: #007bff;"
-                            />
-                            <span>Scheduled</span>
-                        </div>
-                        <div class="o_legend_item">
-                            <span
-                                class="o_legend_color"
-                                style="background-color: #28a745;"
-                            />
-                            <span>Delivered</span>
-                        </div>
-                        <div class="o_legend_item">
-                            <span
-                                class="o_legend_color"
-                                style="background-color: #dc3545;"
-                            />
-                            <span>Skipped</span>
-                        </div>
-                    </div>
-                </div>
-                <!-- Loading Overlay -->
-                <t t-if="loading">
-                    <div class="o_leaflet_loading_overlay">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
-                </t>
-            </div>
-        </div>
+    <t
+        t-name="tms_delivery_stops_leaflet.TmsStopsMapRenderer"
+        t-inherit="web_view_leaflet_map.LeafletMapRenderer"
+        t-inherit-mode="primary"
+        owl="1"
+    >
+        <!-- Override PinList component to use SelectablePinList with onDataReload -->
+        <xpath expr="//t[@t-component='PinListComponent']" position="attributes">
+            <attribute name="onDataReload">() => this.onDataReload()</attribute>
+        </xpath>
     </t>
 
 </templates>

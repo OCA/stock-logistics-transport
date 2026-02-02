@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2026 KMEE (https://kmee.com.br)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+SelectablePinList template - extends DraggablePinList with selection support.
+-->
+<templates xml:space="preserve">
+
+    <t
+        t-name="tms_delivery_stops_leaflet.SelectablePinList"
+        t-inherit="web_view_leaflet_map.DraggablePinList"
+        t-inherit-mode="primary"
+        owl="1"
+    >
+        <!-- Add selection bar after stats div -->
+        <xpath expr="//div[contains(@class, 'o_pin_list_stats')]" position="after">
+            <t t-if="selectedCount > 0">
+                <div
+                    class="o_tms_selection_bar d-flex align-items-center gap-2 px-2 py-2 bg-primary-subtle border-bottom"
+                >
+                    <span class="badge bg-primary">
+                        <t t-esc="selectedCount" /> selecionado(s)
+                    </span>
+                    <button
+                        class="btn btn-sm btn-primary ms-auto"
+                        t-on-click="onCreateOrder"
+                    >
+                        <i class="fa fa-plus me-1" />Criar Ordem
+                    </button>
+                    <button
+                        class="btn btn-sm btn-outline-secondary"
+                        t-on-click="clearSelection"
+                        title="Limpar seleção"
+                    >
+                        <i class="fa fa-times" />
+                    </button>
+                </div>
+            </t>
+        </xpath>
+
+        <!-- Add "select all" checkbox in unassigned group header (before the group name span) -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]//span[contains(@class, 'o_pin_group_name')]"
+            position="before"
+        >
+            <t t-if="group.isUnassigned">
+                <input
+                    type="checkbox"
+                    class="form-check-input o_tms_select_all_checkbox me-2"
+                    t-att-checked="isGroupAllSelected(group)"
+                    t-on-click="(ev) => this.toggleSelectAll(ev, group)"
+                    t-on-mousedown.stop=""
+                    title="Selecionar todos"
+                />
+            </t>
+        </xpath>
+
+        <!-- Add checkbox in each item of unassigned group (before drag handle) -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_item_draggable')]//span[contains(@class, 'o_drag_handle')]"
+            position="before"
+        >
+            <t t-if="isUnassigned(record)">
+                <input
+                    type="checkbox"
+                    class="form-check-input o_tms_stop_checkbox me-1"
+                    t-att-checked="isSelected(record.id)"
+                    t-on-click="(ev) => this.toggleSelection(ev, record.id)"
+                    t-on-mousedown.stop=""
+                />
+            </t>
+        </xpath>
+    </t>
+
+</templates>

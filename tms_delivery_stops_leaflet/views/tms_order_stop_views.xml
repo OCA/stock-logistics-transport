@@ -1,121 +1,119 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!--
-Copyright (C) 2025 KMEE (https://kmee.com.br)
-License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
--->
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Leaflet Map View for TMS Order Stops -->
-    <record id="view_tms_order_stop_leaflet_map" model="ir.ui.view">
+    <record id="tms_order_stop_leaflet_map" model="ir.ui.view">
         <field name="name">tms.order.stop.leaflet_map</field>
         <field name="model">tms.order.stop</field>
         <field name="arch" type="xml">
             <leaflet_map
-                js_class="tms_stops_map"
+                js_class="tms_stops_leaflet_map"
                 field_latitude="latitude"
                 field_longitude="longitude"
-                field_title="display_name"
+                field_title="partner_id"
                 field_address="display_address"
+                default_zoom="12"
                 show_pin_list="1"
+                group_by="order_id"
+                group_field="order_id"
+                default_order="sequence"
+                draggable="1"
                 numbered_markers="1"
                 routing="1"
                 enable_navigation="1"
-                panel_title="Delivery Stops"
-                group_by="order_id"
-                draggable="1"
-                group_field="order_id"
-                default_order="sequence"
                 unassigned_group_name="Sem Viagem"
+                panel_title="Entregas"
+                limit="500"
             >
-                <field name="display_name" />
-                <field name="partner_id" />
-                <field name="partner_name" />
-                <field name="partner_phone" />
-                <field name="partner_mobile" />
-                <field name="latitude" />
-                <field name="longitude" />
-                <field name="display_address" />
+                <field name="id" />
                 <field name="sequence" />
                 <field name="order_id" />
-                <field name="order_name" />
-                <field name="state" />
-                <field name="state_display" />
-                <field name="weight" />
-                <field name="volume" />
-                <field name="package_count" />
+                <field name="partner_id" />
+                <field name="latitude" />
+                <field name="longitude" />
+                <field name="address_complete" />
+                <field name="display_address" />
                 <field name="scheduled_date" />
+                <field name="state" />
             </leaflet_map>
         </field>
     </record>
 
-    <!-- Action for Delivery Stops Map -->
-    <record id="action_tms_order_stop_map" model="ir.actions.act_window">
-        <field name="name">Delivery Stops Map</field>
-        <field name="res_model">tms.order.stop</field>
-        <field name="view_mode">leaflet_map,list,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                No delivery stops found
-            </p>
-            <p>
-                Create delivery stops from TMS Orders to see them on the map.
-            </p>
-        </field>
+    <!-- Update action to include map view -->
+    <record id="tms_delivery_stops.action_tms_order_stop" model="ir.actions.act_window">
+        <field name="view_mode">list,leaflet_map,form</field>
     </record>
 
-    <!-- Register leaflet_map view for the action -->
-    <record id="action_tms_order_stop_map_view_map" model="ir.actions.act_window.view">
-        <field name="sequence" eval="1" />
+    <!-- Add map view to action -->
+    <record id="action_tms_order_stop_view_map" model="ir.actions.act_window.view">
+        <field name="sequence" eval="15" />
         <field name="view_mode">leaflet_map</field>
-        <field name="view_id" ref="view_tms_order_stop_leaflet_map" />
-        <field name="act_window_id" ref="action_tms_order_stop_map" />
+        <field name="view_id" ref="tms_order_stop_leaflet_map" />
+        <field name="act_window_id" ref="tms_delivery_stops.action_tms_order_stop" />
     </record>
 
-    <!-- Menu entry for Delivery Stops Map -->
-    <menuitem
-        id="menu_tms_delivery_stops_map"
-        name="Map"
-        parent="tms_delivery_stops.menu_tms_order_stop_submenu"
-        action="action_tms_order_stop_map"
-        sequence="30"
-    />
-
-    <!-- Add Map button to Stop form view -->
-    <record id="view_tms_order_stop_form_map_button" model="ir.ui.view">
-        <field name="name">tms.order.stop.form.map.button</field>
+    <!-- Update search view to add filter for unallocated stops -->
+    <record id="tms_order_stop_search_inherit" model="ir.ui.view">
+        <field name="name">tms.order.stop.search.leaflet</field>
         <field name="model">tms.order.stop</field>
-        <field name="inherit_id" ref="tms_delivery_stops.tms_order_stop_form" />
+        <field name="inherit_id" ref="tms_delivery_stops.tms_order_stop_search" />
         <field name="arch" type="xml">
-            <xpath expr="//sheet" position="before">
-                <header>
-                    <button
-                        name="action_open_in_map"
-                        type="object"
-                        string="View on Map"
-                        icon="fa-map-marker"
-                        class="oe_highlight"
+            <xpath expr="//filter[@name='draft']" position="before">
+                <filter
+                    name="unallocated"
+                    string="Unallocated"
+                    domain="[('order_id', '=', False)]"
+                />
+                <filter
+                    name="allocated"
+                    string="Allocated"
+                    domain="[('order_id', '!=', False)]"
+                />
+                <separator />
+            </xpath>
+            <xpath expr="//search" position="inside">
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_order"
+                        string="Order"
+                        context="{'group_by': 'order_id'}"
                     />
-                    <button
-                        name="action_open_google_maps"
-                        type="object"
-                        string="Google Maps"
-                        icon="fa-external-link"
-                        invisible="not order_id"
+                    <filter
+                        name="group_by_state"
+                        string="State"
+                        context="{'group_by': 'state'}"
                     />
-                </header>
+                    <filter
+                        name="group_by_scheduled_date"
+                        string="Scheduled Date"
+                        context="{'group_by': 'scheduled_date:day'}"
+                    />
+                </group>
             </xpath>
         </field>
     </record>
 
-    <!-- Add leaflet_map to stops list action -->
-    <record id="tms_delivery_stops.action_tms_order_stop" model="ir.actions.act_window">
-        <field name="view_mode">list,form,leaflet_map</field>
+    <!-- Add a dedicated menu for map view with unallocated filter -->
+    <record id="action_tms_order_stop_map" model="ir.actions.act_window">
+        <field name="name">Delivery Stops Map</field>
+        <field name="res_model">tms.order.stop</field>
+        <field name="view_mode">leaflet_map,list,form</field>
+        <field name="context">{'search_default_unallocated': 0}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No delivery stops to display on map
+            </p>
+            <p>
+                Create delivery stops and they will appear here.
+                Select unallocated stops to create a new delivery order.
+            </p>
+        </field>
     </record>
 
-    <!-- Register leaflet_map view for stops list action -->
-    <record id="action_tms_order_stop_view_map" model="ir.actions.act_window.view">
-        <field name="sequence" eval="30" />
-        <field name="view_mode">leaflet_map</field>
-        <field name="view_id" ref="view_tms_order_stop_leaflet_map" />
-        <field name="act_window_id" ref="tms_delivery_stops.action_tms_order_stop" />
-    </record>
+    <menuitem
+        id="menu_tms_order_stop_map"
+        name="Map"
+        parent="tms_delivery_stops.menu_tms_order_stop_submenu"
+        action="action_tms_order_stop_map"
+        sequence="20"
+    />
 </odoo>
