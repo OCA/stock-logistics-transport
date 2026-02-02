@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2025 KMEE (https://kmee.com.br)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="res_config_settings_view_form_tms_distance" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.tms.distance</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="50" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app
+                    data-string="TMS Route Optimizer"
+                    string="TMS Route Optimizer"
+                    name="tms_route_optimizer_distance_config"
+                    groups="base.group_system"
+                >
+                    <block title="Distance Provider" name="distance_provider_settings">
+                        <setting
+                            id="tms_distance_provider"
+                            help="Choose how distances are calculated"
+                        >
+                            <field name="tms_distance_provider" />
+                        </setting>
+                        <setting
+                            id="tms_distance_fallback"
+                            help="Fallback to Haversine if provider fails"
+                        >
+                            <field name="tms_distance_fallback_enabled" />
+                        </setting>
+                    </block>
+
+                    <block
+                        title="OSRM Configuration"
+                        name="osrm_settings"
+                        invisible="tms_distance_provider != 'osrm'"
+                    >
+                        <setting id="tms_osrm_url" help="OSRM routing server URL">
+                            <field
+                                name="tms_osrm_server_url"
+                                placeholder="https://router.project-osrm.org"
+                            />
+                            <div class="text-muted mt-2">
+                                The public server is for demo only. For production,
+                                consider self-hosting OSRM.
+                            </div>
+                        </setting>
+                        <setting id="tms_osrm_profile" help="Routing profile">
+                            <field name="tms_osrm_profile" />
+                        </setting>
+                    </block>
+
+                    <block
+                        title="Google Maps Configuration"
+                        name="google_settings"
+                        invisible="tms_distance_provider != 'google'"
+                    >
+                        <setting
+                            id="tms_google_api_key"
+                            help="Google Maps Distance Matrix API key"
+                        >
+                            <field
+                                name="tms_google_api_key"
+                                placeholder="AIza..."
+                                password="True"
+                            />
+                            <div class="text-muted mt-2">
+                                Get an API key at
+                                <a
+                                href="https://console.cloud.google.com"
+                                target="_blank"
+                            >Google Cloud Console</a>.
+                                Enable Distance Matrix API.
+                            </div>
+                        </setting>
+                        <setting id="tms_google_travel_mode" help="Travel mode">
+                            <field name="tms_google_travel_mode" />
+                        </setting>
+                    </block>
+
+                    <block title="Performance Settings" name="performance_settings">
+                        <setting
+                            id="tms_batch_size"
+                            help="Max locations per API request"
+                        >
+                            <field name="tms_batch_size" />
+                        </setting>
+                        <setting id="tms_cache" help="Cache distance calculations">
+                            <field name="tms_cache_enabled" />
+                        </setting>
+                        <setting
+                            id="tms_cache_ttl"
+                            help="How long to keep cached distances"
+                            invisible="not tms_cache_enabled"
+                        >
+                            <field name="tms_cache_ttl_hours" /> hours
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

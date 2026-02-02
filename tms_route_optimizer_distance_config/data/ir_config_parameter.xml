@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2025 KMEE (https://kmee.com.br)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo noupdate="1">
+    <!-- Distance Provider -->
+    <record id="config_parameter_tms_distance_provider" model="ir.config_parameter">
+        <field name="key">tms.distance_provider</field>
+        <field name="value">haversine</field>
+    </record>
+
+    <record id="config_parameter_tms_distance_fallback" model="ir.config_parameter">
+        <field name="key">tms.distance_fallback_enabled</field>
+        <field name="value">True</field>
+    </record>
+
+    <!-- OSRM Configuration (URL defined in tms_route_optimizer_osrm) -->
+    <record id="config_parameter_tms_osrm_profile" model="ir.config_parameter">
+        <field name="key">tms.osrm_profile</field>
+        <field name="value">driving</field>
+    </record>
+
+    <!-- Google Configuration -->
+    <record id="config_parameter_tms_google_travel_mode" model="ir.config_parameter">
+        <field name="key">tms.google_travel_mode</field>
+        <field name="value">driving</field>
+    </record>
+
+    <!-- Performance -->
+    <record id="config_parameter_tms_batch_size" model="ir.config_parameter">
+        <field name="key">tms.distance_batch_size</field>
+        <field name="value">25</field>
+    </record>
+
+    <record id="config_parameter_tms_cache_enabled" model="ir.config_parameter">
+        <field name="key">tms.distance_cache_enabled</field>
+        <field name="value">True</field>
+    </record>
+
+    <record id="config_parameter_tms_cache_ttl" model="ir.config_parameter">
+        <field name="key">tms.distance_cache_ttl_hours</field>
+        <field name="value">168</field>
+    </record>
+</odoo>
