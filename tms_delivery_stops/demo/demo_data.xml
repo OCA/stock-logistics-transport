@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Demo Depot Location -->
+    <record id="demo_depot_location" model="res.partner">
+        <field name="name">Depósito Central - São Paulo</field>
+        <field name="is_company">True</field>
+        <field name="tms_location">True</field>
+        <field name="street">Av. Paulista, 1000</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">01310-100</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.550520</field>
+        <field name="partner_longitude">-46.633308</field>
+    </record>
+
+    <!-- Demo Delivery Partners with Geolocation (São Paulo area) -->
+    <record id="demo_partner_delivery_1" model="res.partner">
+        <field name="name">Cliente Avenida Paulista</field>
+        <field name="is_company">True</field>
+        <field name="street">Av. Paulista, 1578</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">01310-200</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.561399</field>
+        <field name="partner_longitude">-46.656571</field>
+    </record>
+
+    <record id="demo_partner_delivery_2" model="res.partner">
+        <field name="name">Cliente Ibirapuera</field>
+        <field name="is_company">True</field>
+        <field name="street">Av. República do Líbano, 1000</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">04502-000</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.587328</field>
+        <field name="partner_longitude">-46.657634</field>
+    </record>
+
+    <record id="demo_partner_delivery_3" model="res.partner">
+        <field name="name">Cliente Vila Madalena</field>
+        <field name="is_company">True</field>
+        <field name="street">R. Harmonia, 500</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">05435-000</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.548943</field>
+        <field name="partner_longitude">-46.691508</field>
+    </record>
+
+    <record id="demo_partner_delivery_4" model="res.partner">
+        <field name="name">Cliente Pinheiros</field>
+        <field name="is_company">True</field>
+        <field name="street">R. dos Pinheiros, 1000</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">05422-001</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.567000</field>
+        <field name="partner_longitude">-46.690000</field>
+    </record>
+
+    <record id="demo_partner_delivery_5" model="res.partner">
+        <field name="name">Cliente Faria Lima</field>
+        <field name="is_company">True</field>
+        <field name="street">Av. Brigadeiro Faria Lima, 2000</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">01452-000</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.574186</field>
+        <field name="partner_longitude">-46.691512</field>
+    </record>
+
+    <record id="demo_partner_delivery_6" model="res.partner">
+        <field name="name">Cliente Itaim Bibi</field>
+        <field name="is_company">True</field>
+        <field name="street">R. Bandeira Paulista, 800</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">04532-002</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.592500</field>
+        <field name="partner_longitude">-46.684444</field>
+    </record>
+
+    <record id="demo_partner_delivery_7" model="res.partner">
+        <field name="name">Cliente Moema</field>
+        <field name="is_company">True</field>
+        <field name="street">Av. Ibirapuera, 2927</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">04029-200</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.609167</field>
+        <field name="partner_longitude">-46.660833</field>
+    </record>
+
+    <record id="demo_partner_delivery_8" model="res.partner">
+        <field name="name">Cliente Jardins</field>
+        <field name="is_company">True</field>
+        <field name="street">Av. Rebouças, 1000</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">05402-000</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.560000</field>
+        <field name="partner_longitude">-46.680000</field>
+    </record>
+
+    <!-- Demo TMS Orders with Stops -->
+    <record id="demo_tms_order_with_stops_1" model="tms.order">
+        <field name="name">ORD-DEMO-001</field>
+        <field name="tms_team_id" ref="tms.demo_team_1" />
+        <field name="origin_id" ref="demo_depot_location" />
+    </record>
+
+    <record id="demo_tms_order_stop_1" model="tms.order.stop">
+        <field name="order_id" ref="demo_tms_order_with_stops_1" />
+        <field name="sequence">10</field>
+        <field name="partner_id" ref="demo_partner_delivery_1" />
+        <field name="weight">500</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">2.5</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="unloading_time">30</field>
+        <field
+            name="scheduled_date"
+            eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 09:00:00')"
+        />
+        <field name="state">draft</field>
+    </record>
+
+    <record id="demo_tms_order_stop_2" model="tms.order.stop">
+        <field name="order_id" ref="demo_tms_order_with_stops_1" />
+        <field name="sequence">20</field>
+        <field name="partner_id" ref="demo_partner_delivery_2" />
+        <field name="weight">800</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">4.0</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="unloading_time">45</field>
+        <field
+            name="scheduled_date"
+            eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 10:30:00')"
+        />
+        <field name="state">draft</field>
+    </record>
+
+    <record id="demo_tms_order_stop_3" model="tms.order.stop">
+        <field name="order_id" ref="demo_tms_order_with_stops_1" />
+        <field name="sequence">30</field>
+        <field name="partner_id" ref="demo_partner_delivery_3" />
+        <field name="weight">300</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">1.5</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="unloading_time">20</field>
+        <field
+            name="scheduled_date"
+            eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 12:00:00')"
+        />
+        <field name="state">draft</field>
+    </record>
+
+    <record id="demo_tms_order_with_stops_2" model="tms.order">
+        <field name="name">ORD-DEMO-002</field>
+        <field name="tms_team_id" ref="tms.demo_team_2" />
+        <field name="origin_id" ref="demo_depot_location" />
+    </record>
+
+    <record id="demo_tms_order_stop_4" model="tms.order.stop">
+        <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="sequence">10</field>
+        <field name="partner_id" ref="demo_partner_delivery_4" />
+        <field name="weight">2000</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">10.0</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="unloading_time">60</field>
+        <field
+            name="scheduled_date"
+            eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d 08:00:00')"
+        />
+        <field name="state">draft</field>
+    </record>
+
+    <record id="demo_tms_order_stop_5" model="tms.order.stop">
+        <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="sequence">20</field>
+        <field name="partner_id" ref="demo_partner_delivery_5" />
+        <field name="weight">3500</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">15.0</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="unloading_time">90</field>
+        <field
+            name="scheduled_date"
+            eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d 10:00:00')"
+        />
+        <field name="state">draft</field>
+    </record>
+
+    <record id="demo_tms_order_stop_6" model="tms.order.stop">
+        <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="sequence">30</field>
+        <field name="partner_id" ref="demo_partner_delivery_6" />
+        <field name="weight">1500</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">8.0</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="unloading_time">45</field>
+        <field
+            name="scheduled_date"
+            eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d 14:00:00')"
+        />
+        <field name="state">draft</field>
+    </record>
+
+    <record id="demo_tms_order_stop_7" model="tms.order.stop">
+        <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="sequence">40</field>
+        <field name="partner_id" ref="demo_partner_delivery_7" />
+        <field name="weight">1200</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">6.0</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="unloading_time">30</field>
+        <field
+            name="scheduled_date"
+            eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d 16:00:00')"
+        />
+        <field name="state">draft</field>
+    </record>
+
+    <record id="demo_tms_order_stop_8" model="tms.order.stop">
+        <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="sequence">50</field>
+        <field name="partner_id" ref="demo_partner_delivery_8" />
+        <field name="weight">800</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">4.0</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="unloading_time">25</field>
+        <field
+            name="scheduled_date"
+            eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d 17:30:00')"
+        />
+        <field name="state">draft</field>
+    </record>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extend TMS Order Form View -->
+    <record id="tms_order_form_inherit_stops" model="ir.ui.view">
+        <field name="name">tms.order.form.inherit.stops</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <page name="planning_page" position="before">
+                <page string="Stops" name="stops">
+                    <field name="stop_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle" />
+                            <field name="partner_id" />
+                            <field name="weight" />
+                            <field name="weight_uom_id" />
+                            <field name="volume" />
+                            <field name="volume_uom_id" />
+                            <field name="unloading_time" />
+                            <field name="scheduled_date" />
+                            <field name="state" />
+                        </list>
+                    </field>
+                    <group string="Delivery Stops" colspan="4">
+                        <group>
+                            <field name="total_weight" />
+                            <field name="total_volume" />
+                        </group>
+                        <group>
+                            <field name="total_stops" />
+                            <field name="estimated_total_time" />
+                        </group>
+                    </group>
+                </page>
+            </page>
+            <field name="scheduled_date_end" position="after">
+                <field
+                    name="google_maps_url"
+                    widget="url"
+                    string="View Route on Google Maps"
+                    readonly="1"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

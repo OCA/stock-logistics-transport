@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Tree View for TMS Order Stops -->
+    <record id="tms_order_stop_tree" model="ir.ui.view">
+        <field name="name">tms.order.stop.tree</field>
+        <field name="model">tms.order.stop</field>
+        <field name="arch" type="xml">
+            <list string="Delivery Stops">
+                <field name="sequence" widget="handle" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="hide"
+                />
+                <field name="scheduled_date" />
+                <field name="partner_id" />
+                <field name="address_complete" optional="show" />
+                <field name="weight" optional="show" />
+                <field name="weight_uom_id" column_invisible="1" optional="hide" />
+                <field name="volume" optional="show" />
+                <field name="volume_uom_id" column_invisible="1" optional="hide" />
+                <field name="package_count" optional="show" />
+                <field name="unloading_time" />
+                <field name="latitude" column_invisible="1" optional="hide" />
+                <field name="longitude" column_invisible="1" optional="hide" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state in ('draft', 'scheduled')"
+                    decoration-success="state == 'delivered'"
+                    decoration-muted="state == 'skipped'"
+                />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View for TMS Order Stops -->
+    <record id="tms_order_stop_form" model="ir.ui.view">
+        <field name="name">tms.order.stop.form</field>
+        <field name="model">tms.order.stop</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Stop">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="order_id" />
+                            <field name="sequence" />
+                            <field name="partner_id" />
+                            <field name="state" />
+                        </group>
+                        <group>
+                            <field name="scheduled_date" />
+                            <field name="unloading_time" />
+                        </group>
+                    </group>
+                    <group string="Weight and Volume">
+                        <group>
+                            <field name="weight" />
+                            <field name="weight_uom_id" />
+                        </group>
+                        <group>
+                            <field name="volume" />
+                            <field name="volume_uom_id" />
+                            <field name="package_count" />
+                        </group>
+                    </group>
+                    <group string="Location">
+                        <field name="latitude" />
+                        <field name="longitude" />
+                        <field name="address_complete" />
+                    </group>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View for TMS Order Stops -->
+    <record id="tms_order_stop_search" model="ir.ui.view">
+        <field name="name">tms.order.stop.search</field>
+        <field name="model">tms.order.stop</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Stops">
+                <field name="partner_id" />
+                <field name="order_id" />
+                <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    name="scheduled"
+                    string="Scheduled"
+                    domain="[('state', '=', 'scheduled')]"
+                />
+                <filter
+                    name="delivered"
+                    string="Delivered"
+                    domain="[('state', '=', 'delivered')]"
+                />
+                <filter
+                    name="skipped"
+                    string="Skipped"
+                    domain="[('state', '=', 'skipped')]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for TMS Order Stops -->
+    <record id="action_tms_order_stop" model="ir.actions.act_window">
+        <field name="name">Delivery Stops</field>
+        <field name="res_model">tms.order.stop</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                    Create a new delivery stop
+                </p>
+        </field>
+    </record>
+
+    <!-- Add list view to action -->
+    <record id="action_tms_order_stop_view_list" model="ir.actions.act_window.view">
+        <field name="sequence" eval="10" />
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="tms_order_stop_tree" />
+        <field name="act_window_id" ref="action_tms_order_stop" />
+    </record>
+
+    <!-- Add form view to action -->
+    <record id="action_tms_order_stop_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="20" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="tms_order_stop_form" />
+        <field name="act_window_id" ref="action_tms_order_stop" />
+    </record>
+
+    <menuitem
+        id="menu_tms_order_stop_submenu"
+        name="Delivery Stops"
+        parent="tms.operations"
+        sequence="18"
+    />
+
+    <!-- Menu Item -->
+    <menuitem
+        id="menu_tms_order_stop"
+        name="Stops"
+        parent="menu_tms_order_stop_submenu"
+        action="action_tms_order_stop"
+        sequence="10"
+    />
+
+    <!-- Server Action: Open Google Maps for Selected Stops -->
+    <record id="action_tms_order_stop_open_google_maps" model="ir.actions.server">
+        <field name="name">Open in Google Maps</field>
+        <field name="model_id" ref="model_tms_order_stop" />
+        <field name="binding_model_id" ref="model_tms_order_stop" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+action = records.action_open_google_maps_multi()
+        </field>
+    </record>
+</odoo>

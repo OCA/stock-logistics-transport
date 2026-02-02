@@ -1,0 +1,419 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_delivery_stops
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__display_address
+msgid "Address formatted for display in map view"
+msgstr "Endereço formatado para exibição na visualização de mapa"
+
+#. module: tms_delivery_stops
+#: model:ir.model,name:tms_delivery_stops.model_res_company
+msgid "Companies"
+msgstr "Empresas"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__address_complete
+msgid "Complete Address"
+msgstr "Endereço Completo"
+
+#. module: tms_delivery_stops
+#: model:ir.model,name:tms_delivery_stops.model_res_config_settings
+msgid "Config Settings"
+msgstr "Configurações"
+
+#. module: tms_delivery_stops
+#. odoo-python
+#: code:addons/tms_delivery_stops/models/tms_order_stop.py:0
+msgid "Could not generate Google Maps URL."
+msgstr "Não foi possível gerar a URL do Google Maps."
+
+#. module: tms_delivery_stops
+#: model_terms:ir.actions.act_window,help:tms_delivery_stops.action_tms_order_stop
+msgid "Create a new delivery stop"
+msgstr "Criar uma nova parada de entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_res_company__tms_default_destination_location_id
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_res_config_settings__tms_default_destination_location_id
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_team__default_destination_location_id
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.res_config_settings_view_form
+msgid "Default Destination Location"
+msgstr "Local de Destino Padrão"
+
+#. module: tms_delivery_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_team_form_inherit_delivery_stops
+msgid "Default Locations"
+msgstr "Locais Padrão"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_res_company__tms_default_origin_location_id
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_res_config_settings__tms_default_origin_location_id
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_team__default_origin_location_id
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.res_config_settings_view_form
+msgid "Default Origin Location"
+msgstr "Local de Origem Padrão"
+
+#. module: tms_delivery_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.res_config_settings_view_form
+msgid "Default Unloading Time"
+msgstr "Tempo de Descarga Padrão"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_res_company__tms_default_unloading_time
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_res_config_settings__tms_default_unloading_time
+msgid "Default Unloading Time (minutes)"
+msgstr "Tempo de Descarga Padrão (minutos)"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_res_company__tms_default_destination_location_id
+#: model:ir.model.fields,help:tms_delivery_stops.field_res_config_settings__tms_default_destination_location_id
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.res_config_settings_view_form
+msgid "Default destination location for TMS orders"
+msgstr "Local de destino padrão para ordens TMS"
+
+#. module: tms_delivery_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_team_form_inherit_delivery_stops
+msgid "Default destination location for orders in this team"
+msgstr "Local de destino padrão para ordens desta equipe"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_team__default_destination_location_id
+msgid ""
+"Default destination location for this team. If not set, uses the system "
+"default."
+msgstr ""
+"Local de destino padrão para esta equipe. Se não definido, usa o padrão do "
+"sistema."
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_res_company__tms_default_origin_location_id
+#: model:ir.model.fields,help:tms_delivery_stops.field_res_config_settings__tms_default_origin_location_id
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.res_config_settings_view_form
+msgid "Default origin location for TMS orders"
+msgstr "Local de origem padrão para ordens TMS"
+
+#. module: tms_delivery_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_team_form_inherit_delivery_stops
+msgid "Default origin location for orders in this team"
+msgstr "Local de origem padrão para ordens desta equipe"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_team__default_origin_location_id
+msgid ""
+"Default origin location for this team. If not set, uses the system default."
+msgstr ""
+"Local de origem padrão para esta equipe. Se não definido, usa o padrão do "
+"sistema."
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_res_company__tms_default_unloading_time
+#: model:ir.model.fields,help:tms_delivery_stops.field_res_config_settings__tms_default_unloading_time
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.res_config_settings_view_form
+msgid "Default unloading time in minutes for delivery stops"
+msgstr "Tempo de descarga padrão em minutos para paradas de entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields.selection,name:tms_delivery_stops.selection__tms_order_stop__state__delivered
+#: model:ir.model.fields.selection,name:tms_delivery_stops.selection__tms_stage__stop_state_sync__delivered
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_stop_search
+msgid "Delivered"
+msgstr "Entregue"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__partner_id
+msgid "Delivery Partner"
+msgstr "Parceiro de Entrega"
+
+#. module: tms_delivery_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_stop_form
+msgid "Delivery Stop"
+msgstr "Parada de Entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.actions.act_window,name:tms_delivery_stops.action_tms_order_stop
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order__stop_ids
+#: model:ir.ui.menu,name:tms_delivery_stops.menu_tms_order_stop
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_form_inherit_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_stop_search
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_stop_tree
+msgid "Delivery Stops"
+msgstr "Paradas de Entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__display_address
+msgid "Display Address"
+msgstr "Endereço para Exibição"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__display_name
+msgid "Display Name"
+msgstr "Nome de Exibição"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields.selection,name:tms_delivery_stops.selection__tms_order_stop__state__draft
+#: model:ir.model.fields.selection,name:tms_delivery_stops.selection__tms_stage__stop_state_sync__draft
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_stop_search
+msgid "Draft"
+msgstr "Rascunho"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order__estimated_total_time
+msgid "Estimated Total Time (hours)"
+msgstr "Tempo Total Estimado (horas)"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order__google_maps_url
+msgid "Google Maps Route"
+msgstr "Rota Google Maps"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order__google_maps_url
+msgid "Google Maps URL with route for all delivery stops"
+msgstr "URL do Google Maps com rota para todas as paradas de entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__write_uid
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__write_date
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__latitude
+msgid "Latitude"
+msgstr "Latitude"
+
+#. module: tms_delivery_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_stop_form
+msgid "Location"
+msgstr "Localização"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__longitude
+msgid "Longitude"
+msgstr "Longitude"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__unloading_time
+msgid "Minimum unloading time in minutes"
+msgstr "Tempo mínimo de descarga em minutos"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order__stop_ids
+msgid "Multiple delivery stops for this order"
+msgstr "Múltiplas paradas de entrega para esta ordem"
+
+#. module: tms_delivery_stops
+#: model:ir.actions.server,name:tms_delivery_stops.action_tms_order_stop_open_google_maps
+msgid "Open in Google Maps"
+msgstr "Abrir no Google Maps"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__order_id
+msgid "Order"
+msgstr "Ordem"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__sequence
+msgid "Order of the stop in the route"
+msgstr "Ordem da parada na rota"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__partner_id
+msgid "Recipient of the delivery"
+msgstr "Destinatário da entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields.selection,name:tms_delivery_stops.selection__tms_order_stop__state__scheduled
+#: model:ir.model.fields.selection,name:tms_delivery_stops.selection__tms_stage__stop_state_sync__scheduled
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_stop_search
+msgid "Scheduled"
+msgstr "Agendado"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__scheduled_date
+msgid "Scheduled Date"
+msgstr "Data Agendada"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__scheduled_date
+msgid "Scheduled delivery date/time"
+msgstr "Data/hora agendada para entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__sequence
+msgid "Sequence"
+msgstr "Sequência"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields.selection,name:tms_delivery_stops.selection__tms_order_stop__state__skipped
+#: model:ir.model.fields.selection,name:tms_delivery_stops.selection__tms_stage__stop_state_sync__skipped
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_stop_search
+msgid "Skipped"
+msgstr "Ignorado"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__state
+msgid "State"
+msgstr "Estado"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_stage__stop_state_sync
+msgid "Stop State Sync"
+msgstr "Sincronização de Estado da Parada"
+
+#. module: tms_delivery_stops
+#. odoo-python
+#: code:addons/tms_delivery_stops/models/tms_order_stop.py:0
+msgid "Stop must be linked to an order."
+msgstr "A parada deve estar vinculada a uma ordem."
+
+#. module: tms_delivery_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_form_inherit_stops
+msgid "Stops"
+msgstr "Paradas"
+
+#. module: tms_delivery_stops
+#: model:ir.model,name:tms_delivery_stops.model_tms_order_stop
+msgid "TMS Order Delivery Stop"
+msgstr "Parada de Entrega da Ordem TMS"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order__total_stops
+msgid "Total Stops"
+msgstr "Total de Paradas"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order__total_volume
+msgid "Total Volume"
+msgstr "Volume Total"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order__total_weight
+msgid "Total Weight"
+msgstr "Peso Total"
+
+#. module: tms_delivery_stops
+#: model:ir.model,name:tms_delivery_stops.model_tms_order
+msgid "Transport Management System Order"
+msgstr "Ordem do Sistema de Gestão de Transporte"
+
+#. module: tms_delivery_stops
+#: model:ir.model,name:tms_delivery_stops.model_tms_stage
+msgid "Transport Management System Stage"
+msgstr "Estágio do Sistema de Gestão de Transporte"
+
+#. module: tms_delivery_stops
+#: model:ir.model,name:tms_delivery_stops.model_tms_team
+msgid "Transport Management System Team"
+msgstr "Equipe do Sistema de Gestão de Transporte"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__volume_uom_id
+msgid "Unit of measure for volume"
+msgstr "Unidade de medida para volume"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__weight_uom_id
+msgid "Unit of measure for weight"
+msgstr "Unidade de medida para peso"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__unloading_time
+msgid "Unloading Time (minutes)"
+msgstr "Tempo de Descarga (minutos)"
+
+#. module: tms_delivery_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_form_inherit_stops
+msgid "View Route on Google Maps"
+msgstr "Ver Rota no Google Maps"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__volume
+msgid "Volume"
+msgstr "Volume"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__volume_uom_id
+msgid "Volume UoM"
+msgstr "UdM Volume"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__package_count
+msgid "Package Count"
+msgstr "Quantidade de Volumes"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__volume
+msgid "Volume of the delivery"
+msgstr "Volume da entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__package_count
+msgid "Number of packages/boxes in this delivery"
+msgstr "Número de volumes/caixas nesta entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__weight
+msgid "Weight"
+msgstr "Peso"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,field_description:tms_delivery_stops.field_tms_order_stop__weight_uom_id
+msgid "Weight UoM"
+msgstr "UdM Peso"
+
+#. module: tms_delivery_stops
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops.tms_order_stop_form
+msgid "Weight and Volume"
+msgstr "Peso e Volume"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_order_stop__weight
+msgid "Weight of the delivery"
+msgstr "Peso da entrega"
+
+#. module: tms_delivery_stops
+#: model:ir.model.fields,help:tms_delivery_stops.field_tms_stage__stop_state_sync
+msgid ""
+"When an order is in this stage, sync all its stops to this state. Leave "
+"empty to not enforce state sync."
+msgstr ""
+"Quando uma ordem está neste estágio, sincroniza todas as suas paradas para "
+"este estado. Deixe vazio para não forçar sincronização de estado."

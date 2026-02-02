@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extend TMS Team Form View -->
+    <record id="tms_team_form_inherit_delivery_stops" model="ir.ui.view">
+        <field name="name">tms.team.form.inherit.delivery.stops</field>
+        <field name="model">tms.team</field>
+        <field name="inherit_id" ref="tms.tms_team_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Default Locations">
+                    <field
+                        name="default_origin_location_id"
+                        help="Default origin location for orders in this team"
+                    />
+                    <field
+                        name="default_destination_location_id"
+                        help="Default destination location for orders in this team"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
