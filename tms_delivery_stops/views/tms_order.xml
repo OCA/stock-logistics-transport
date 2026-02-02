@@ -31,6 +31,20 @@
                             <field name="estimated_total_time" />
                         </group>
                     </group>
+                    <group
+                        string="Capacity Utilization"
+                        colspan="4"
+                        invisible="not vehicle_id"
+                    >
+                        <group>
+                            <field name="weight_capacity" readonly="1" />
+                            <field name="weight_utilization" widget="progressbar" />
+                        </group>
+                        <group>
+                            <field name="volume_capacity" readonly="1" />
+                            <field name="volume_utilization" widget="progressbar" />
+                        </group>
+                    </group>
                 </page>
             </page>
             <field name="scheduled_date_end" position="after">

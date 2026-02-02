@@ -7,6 +7,7 @@ from odoo.exceptions import UserError
 
 class TmsOrderFromStops(models.TransientModel):
     _name = "tms.order.from.stops"
+    _inherit = "capacity.utilization.mixin"
     _description = "Create TMS Order from Selected Stops"
 
     stop_ids = fields.Many2many(
@@ -44,6 +45,30 @@ class TmsOrderFromStops(models.TransientModel):
     scheduled_date_start = fields.Datetime(
         string="Scheduled Start Date",
     )
+
+    # Cargo totals for capacity utilization
+    total_weight = fields.Float(
+        string="Total Weight (kg)",
+        compute="_compute_stop_totals",
+    )
+    total_volume = fields.Float(
+        string="Total Volume (m³)",
+        compute="_compute_stop_totals",
+    )
+
+    @api.depends("stop_ids", "stop_ids.weight", "stop_ids.volume")
+    def _compute_stop_totals(self):
+        for wizard in self:
+            wizard.total_weight = sum(wizard.stop_ids.mapped("weight"))
+            wizard.total_volume = sum(wizard.stop_ids.mapped("volume"))
+
+    @api.depends("vehicle_id")
+    def _compute_capacity_from_vehicle(self):
+        return super()._compute_capacity_from_vehicle()
+
+    @api.depends("vehicle_id", "total_weight", "total_volume")
+    def _compute_utilization(self):
+        return super()._compute_utilization()
 
     @api.depends("stop_ids")
     def _compute_stop_count(self):

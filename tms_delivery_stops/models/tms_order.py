@@ -2,7 +2,8 @@ from odoo import api, fields, models
 
 
 class TMSOrder(models.Model):
-    _inherit = "tms.order"
+    _name = "tms.order"
+    _inherit = ["tms.order", "capacity.utilization.mixin"]
 
     stop_ids = fields.One2many(
         "tms.order.stop",
@@ -34,6 +35,34 @@ class TMSOrder(models.Model):
         store=True,
         help="Google Maps URL with route for all delivery stops",
     )
+
+    # Override mixin fields to add store=True and proper depends
+    weight_utilization = fields.Float(
+        compute="_compute_utilization",
+        store=True,
+    )
+    volume_utilization = fields.Float(
+        compute="_compute_utilization",
+        store=True,
+    )
+
+    @api.depends(
+        "vehicle_id",
+        "vehicle_id.weight_capacity",
+        "vehicle_id.volume_capacity",
+    )
+    def _compute_capacity_from_vehicle(self):
+        return super()._compute_capacity_from_vehicle()
+
+    @api.depends(
+        "vehicle_id",
+        "vehicle_id.weight_capacity",
+        "vehicle_id.volume_capacity",
+        "total_weight",
+        "total_volume",
+    )
+    def _compute_utilization(self):
+        return super()._compute_utilization()
 
     @api.model
     def default_get(self, fields_list):

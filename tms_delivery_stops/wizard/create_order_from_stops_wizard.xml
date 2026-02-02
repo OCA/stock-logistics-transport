@@ -27,6 +27,26 @@
                         options="{'no_create': True}"
                     />
                 </group>
+                <group string="Cargo Summary" colspan="2">
+                    <group>
+                        <field name="total_weight" readonly="1" />
+                        <field name="total_volume" readonly="1" />
+                    </group>
+                </group>
+                <group
+                    string="Capacity Utilization"
+                    colspan="2"
+                    invisible="not vehicle_id"
+                >
+                    <group>
+                        <field name="weight_capacity" readonly="1" />
+                        <field name="weight_utilization" widget="progressbar" />
+                    </group>
+                    <group>
+                        <field name="volume_capacity" readonly="1" />
+                        <field name="volume_utilization" widget="progressbar" />
+                    </group>
+                </group>
                 <footer>
                     <button
                         name="action_create_order"
