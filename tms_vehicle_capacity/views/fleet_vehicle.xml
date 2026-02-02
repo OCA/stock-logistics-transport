@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extend Fleet Vehicle Form View -->
+    <record id="fleet_vehicle_form_inherit_capacity" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.inherit.capacity</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Capacity &amp; Costs">
+                    <group>
+                        <field name="vehicle_type_id" />
+                        <field name="weight_capacity" />
+                        <field name="weight_capacity_uom_id" />
+                    </group>
+                    <group>
+                        <field name="volume_capacity" />
+                        <field name="volume_capacity_uom_id" />
+                    </group>
+                </group>
+                <group string="Costs">
+                    <group>
+                        <field name="cost_per_km" />
+                        <field name="minimum_trip_cost" />
+                    </group>
+                    <group>
+                        <field name="depot_location_id" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,277 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_vehicle_capacity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__active
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_type_search
+msgid "Active"
+msgstr "Ativo"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_tms_team__allowed_vehicle_type_ids
+msgid "Allowed Vehicle Types"
+msgstr "Tipos de Veículo Permitidos"
+
+#. module: tms_vehicle_capacity
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_form_inherit_capacity
+msgid "Capacity & Costs"
+msgstr "Capacidade e Custos"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__code
+msgid "Code"
+msgstr "Código"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle__cost_per_km
+msgid "Cost per KM"
+msgstr "Custo por KM"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle__cost_per_km
+msgid "Cost per kilometer"
+msgstr "Custo por quilômetro"
+
+#. module: tms_vehicle_capacity
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_form_inherit_capacity
+msgid "Costs"
+msgstr "Custos"
+
+#. module: tms_vehicle_capacity
+#: model_terms:ir.actions.act_window,help:tms_vehicle_capacity.action_fleet_vehicle_type
+msgid "Create a new vehicle type"
+msgstr "Criar um novo tipo de veículo"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__currency_id
+msgid "Currency"
+msgstr "Moeda"
+
+#. module: tms_vehicle_capacity
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_type_form
+msgid "Default Capacity"
+msgstr "Capacidade Padrão"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__default_cost_per_km
+msgid "Default Cost per KM"
+msgstr "Custo Padrão por KM"
+
+#. module: tms_vehicle_capacity
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_type_form
+msgid "Default Costs"
+msgstr "Custos Padrão"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_tms_team__default_depot_location_id
+msgid "Default Depot Location"
+msgstr "Local de Depósito Padrão"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__default_minimum_trip_cost
+msgid "Default Minimum Trip Cost"
+msgstr "Custo Mínimo de Viagem Padrão"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__default_volume_capacity
+msgid "Default Volume Capacity (m³)"
+msgstr "Capacidade de Volume Padrão (m³)"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__default_weight_capacity
+msgid "Default Weight Capacity (kg)"
+msgstr "Capacidade de Peso Padrão (kg)"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle_type__default_cost_per_km
+msgid "Default cost per kilometer"
+msgstr "Custo padrão por quilômetro"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_tms_team__default_depot_location_id
+msgid "Default depot/starting point for this team"
+msgstr "Depósito/ponto de partida padrão para esta equipe"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle__depot_location_id
+msgid "Default depot/starting point for this vehicle"
+msgstr "Depósito/ponto de partida padrão para este veículo"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle_type__default_minimum_trip_cost
+msgid "Default minimum cost per trip"
+msgstr "Custo mínimo padrão por viagem"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle_type__default_volume_capacity
+msgid "Default volume capacity in cubic meters"
+msgstr "Capacidade de volume padrão em metros cúbicos"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle_type__default_weight_capacity
+msgid "Default weight capacity in kilograms"
+msgstr "Capacidade de peso padrão em quilogramas"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle__depot_location_id
+msgid "Depot Location"
+msgstr "Local do Depósito"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__description
+msgid "Description"
+msgstr "Descrição"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__display_name
+msgid "Display Name"
+msgstr "Nome de Exibição"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model,name:tms_vehicle_capacity.model_fleet_vehicle_type
+msgid "Fleet Vehicle Type"
+msgstr "Tipo de Veículo da Frota"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tms_vehicle_capacity
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_type_search
+msgid "Inactive"
+msgstr "Inativo"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__write_uid
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__write_date
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle__minimum_trip_cost
+msgid "Minimum Trip Cost"
+msgstr "Custo Mínimo de Viagem"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle__minimum_trip_cost
+msgid "Minimum cost per trip"
+msgstr "Custo mínimo por viagem"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model,name:tms_vehicle_capacity.model_fleet_vehicle_model
+msgid "Model of a vehicle"
+msgstr "Modelo de um veículo"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle__vehicle_type_id
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_model__vehicle_type_id
+msgid "TMS Vehicle Type"
+msgstr "Tipo de Veículo TMS"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model,name:tms_vehicle_capacity.model_tms_team
+msgid "Transport Management System Team"
+msgstr "Equipe do Sistema de Gestão de Transporte"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle_type__name
+msgid "Type Name"
+msgstr "Nome do Tipo"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle__vehicle_type_id
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle_model__vehicle_type_id
+msgid "Type of vehicle (Van, VUC, Toco, etc) for capacity management"
+msgstr "Tipo de veículo (Van, VUC, Toco, etc) para gestão de capacidade"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_tms_team__allowed_vehicle_type_ids
+msgid "Types of vehicles allowed in this team"
+msgstr "Tipos de veículos permitidos nesta equipe"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model,name:tms_vehicle_capacity.model_fleet_vehicle
+msgid "Vehicle"
+msgstr "Veículo"
+
+#. module: tms_vehicle_capacity
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.tms_team_form_inherit_capacity
+msgid "Vehicle Configuration"
+msgstr "Configuração de Veículo"
+
+#. module: tms_vehicle_capacity
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_model_form_inherit_type
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_type_form
+msgid "Vehicle Type"
+msgstr "Tipo de Veículo"
+
+#. module: tms_vehicle_capacity
+#: model:ir.actions.act_window,name:tms_vehicle_capacity.action_fleet_vehicle_type
+#: model:ir.ui.menu,name:tms_vehicle_capacity.menu_fleet_vehicle_type
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_type_search
+#: model_terms:ir.ui.view,arch_db:tms_vehicle_capacity.fleet_vehicle_type_tree
+msgid "Vehicle Types"
+msgstr "Tipos de Veículo"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.constraint,message:tms_vehicle_capacity.constraint_fleet_vehicle_type_code_unique
+msgid "Vehicle type code must be unique"
+msgstr "O código do tipo de veículo deve ser único"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle__volume_capacity
+msgid "Volume Capacity (m³)"
+msgstr "Capacidade de Volume (m³)"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle__volume_capacity_uom_id
+msgid "Volume Capacity UoM"
+msgstr "UdM Capacidade de Volume"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle__volume_capacity
+msgid "Volume capacity in cubic meters"
+msgstr "Capacidade de volume em metros cúbicos"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle__weight_capacity
+msgid "Weight Capacity (kg)"
+msgstr "Capacidade de Peso (kg)"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,field_description:tms_vehicle_capacity.field_fleet_vehicle__weight_capacity_uom_id
+msgid "Weight Capacity UoM"
+msgstr "UdM Capacidade de Peso"
+
+#. module: tms_vehicle_capacity
+#: model:ir.model.fields,help:tms_vehicle_capacity.field_fleet_vehicle__weight_capacity
+msgid "Weight capacity in kilograms"
+msgstr "Capacidade de peso em quilogramas"

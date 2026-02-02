@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Demo Depot Location -->
+    <record id="demo_depot_location" model="res.partner">
+        <field name="name">Depósito Central - São Paulo</field>
+        <field name="is_company">True</field>
+        <field name="street">Av. Paulista, 1000</field>
+        <field name="city">São Paulo</field>
+        <field name="zip">01310-100</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.550520</field>
+        <field name="partner_longitude">-46.633308</field>
+    </record>
+
+    <!-- Demo Vehicle Models (if not exist) -->
+    <record id="demo_brand_transport" model="fleet.vehicle.model.brand">
+        <field name="name">Transport Brand</field>
+    </record>
+
+    <record id="demo_model_van" model="fleet.vehicle.model">
+        <field name="name">Van Model</field>
+        <field name="brand_id" ref="demo_brand_transport" />
+        <field name="vehicle_type">car</field>
+    </record>
+
+    <record id="demo_model_truck" model="fleet.vehicle.model">
+        <field name="name">Truck Model</field>
+        <field name="brand_id" ref="demo_brand_transport" />
+        <field name="vehicle_type">car</field>
+    </record>
+
+    <!-- Demo Vehicles -->
+    <record id="demo_vehicle_van_1" model="fleet.vehicle">
+        <field name="license_plate">VAN-001</field>
+        <field name="model_id" ref="demo_model_van" />
+        <field
+            name="vehicle_type_id"
+            ref="tms_vehicle_capacity.fleet_vehicle_type_van"
+        />
+        <field name="weight_capacity">1500</field>
+        <field name="volume_capacity">8</field>
+        <field name="cost_per_km">2.50</field>
+        <field name="minimum_trip_cost">50.00</field>
+        <field name="depot_location_id" ref="demo_depot_location" />
+        <field name="tms_team_id" ref="tms.demo_team_1" />
+    </record>
+
+    <record id="demo_vehicle_vuc_1" model="fleet.vehicle">
+        <field name="license_plate">VUC-001</field>
+        <field name="model_id" ref="demo_model_van" />
+        <field
+            name="vehicle_type_id"
+            ref="tms_vehicle_capacity.fleet_vehicle_type_vuc"
+        />
+        <field name="weight_capacity">3000</field>
+        <field name="volume_capacity">15</field>
+        <field name="cost_per_km">3.50</field>
+        <field name="minimum_trip_cost">75.00</field>
+        <field name="depot_location_id" ref="demo_depot_location" />
+        <field name="tms_team_id" ref="tms.demo_team_1" />
+    </record>
+
+    <record id="demo_vehicle_toco_1" model="fleet.vehicle">
+        <field name="license_plate">TOCO-001</field>
+        <field name="model_id" ref="demo_model_truck" />
+        <field
+            name="vehicle_type_id"
+            ref="tms_vehicle_capacity.fleet_vehicle_type_toco"
+        />
+        <field name="weight_capacity">8000</field>
+        <field name="volume_capacity">35</field>
+        <field name="cost_per_km">5.00</field>
+        <field name="minimum_trip_cost">150.00</field>
+        <field name="depot_location_id" ref="demo_depot_location" />
+        <field name="tms_team_id" ref="tms.demo_team_1" />
+    </record>
+
+    <record id="demo_vehicle_truck_1" model="fleet.vehicle">
+        <field name="license_plate">TRUCK-001</field>
+        <field name="model_id" ref="demo_model_truck" />
+        <field
+            name="vehicle_type_id"
+            ref="tms_vehicle_capacity.fleet_vehicle_type_truck"
+        />
+        <field name="weight_capacity">15000</field>
+        <field name="volume_capacity">60</field>
+        <field name="cost_per_km">7.00</field>
+        <field name="minimum_trip_cost">250.00</field>
+        <field name="depot_location_id" ref="demo_depot_location" />
+        <field name="tms_team_id" ref="tms.demo_team_2" />
+    </record>
+
+    <record id="demo_vehicle_bitrem_1" model="fleet.vehicle">
+        <field name="license_plate">BITREM-001</field>
+        <field name="model_id" ref="demo_model_truck" />
+        <field
+            name="vehicle_type_id"
+            ref="tms_vehicle_capacity.fleet_vehicle_type_bitrem"
+        />
+        <field name="weight_capacity">25000</field>
+        <field name="volume_capacity">100</field>
+        <field name="cost_per_km">10.00</field>
+        <field name="minimum_trip_cost">400.00</field>
+        <field name="depot_location_id" ref="demo_depot_location" />
+        <field name="tms_team_id" ref="tms.demo_team_2" />
+    </record>
+
+    <!-- Update Teams with allowed vehicle types and depot -->
+    <record id="tms.demo_team_1" model="tms.team">
+        <field
+            name="allowed_vehicle_type_ids"
+            eval="[(6, 0, [
+            ref('tms_vehicle_capacity.fleet_vehicle_type_van'),
+            ref('tms_vehicle_capacity.fleet_vehicle_type_vuc'),
+            ref('tms_vehicle_capacity.fleet_vehicle_type_toco')
+        ])]"
+        />
+        <field name="default_depot_location_id" ref="demo_depot_location" />
+    </record>
+
+    <record id="tms.demo_team_2" model="tms.team">
+        <field
+            name="allowed_vehicle_type_ids"
+            eval="[(6, 0, [
+            ref('tms_vehicle_capacity.fleet_vehicle_type_truck'),
+            ref('tms_vehicle_capacity.fleet_vehicle_type_bitrem')
+        ])]"
+        />
+        <field name="default_depot_location_id" ref="demo_depot_location" />
+    </record>
+</odoo>
