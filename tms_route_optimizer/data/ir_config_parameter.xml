@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="tms_route_optimizer_max_deliveries" model="ir.config_parameter">
+        <field name="key">tms.route_optimizer.max_deliveries</field>
+        <field name="value">100</field>
+    </record>
+    <record id="tms_route_optimizer_max_time_seconds" model="ir.config_parameter">
+        <field name="key">tms.route_optimizer.max_time_seconds</field>
+        <field name="value">300</field>
+    </record>
+</odoo>

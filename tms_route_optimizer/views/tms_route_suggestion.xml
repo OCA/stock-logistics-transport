@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Form View for TMS Route Suggestion -->
+    <record id="tms_route_suggestion_form" model="ir.ui.view">
+        <field name="name">tms.route.suggestion.form</field>
+        <field name="model">tms.route.suggestion</field>
+        <field name="arch" type="xml">
+            <form string="Route Suggestion">
+                <header>
+                    <button
+                        name="action_approve"
+                        string="Approve"
+                        type="object"
+                        class="btn-success"
+                        invisible="state != 'suggested'"
+                    />
+                    <button
+                        name="action_reject"
+                        string="Reject"
+                        type="object"
+                        class="btn-secondary"
+                        invisible="state != 'suggested'"
+                    />
+                    <button
+                        name="action_view_on_map"
+                        string="View on Map"
+                        type="object"
+                        icon="fa-map-marker"
+                        invisible="not google_maps_url"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Route Information">
+                            <field name="config_id" />
+                            <field name="team_id" />
+                            <field name="planning_date" />
+                            <field name="suggestion_date" />
+                        </group>
+                        <group string="Vehicle">
+                            <field name="vehicle_id" />
+                            <field name="vehicle_type_id" />
+                        </group>
+                    </group>
+
+                    <group string="Metrics">
+                        <group>
+                            <field name="stop_count" />
+                            <field name="total_distance" />
+                            <field name="total_packages" />
+                        </group>
+                        <group>
+                            <field name="total_weight" />
+                            <field name="total_volume" />
+                            <field name="total_cost" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Delivery Stops" name="stops">
+                            <field name="stop_ids" nolabel="1">
+                                <list>
+                                    <field name="partner_id" />
+                                    <field name="weight" />
+                                    <field name="volume" />
+                                    <field name="package_count" />
+                                    <field name="scheduled_date" />
+                                </list>
+                            </field>
+                        </page>
+                        <page
+                            string="Created Order"
+                            name="order"
+                            invisible="state != 'approved'"
+                        >
+                            <group>
+                                <field name="order_id" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for TMS Route Suggestion -->
+    <record id="tms_route_suggestion_tree" model="ir.ui.view">
+        <field name="name">tms.route.suggestion.tree</field>
+        <field name="model">tms.route.suggestion</field>
+        <field name="arch" type="xml">
+            <list
+                string="Route Suggestions"
+                decoration-info="state == 'suggested'"
+                decoration-success="state == 'approved'"
+                decoration-muted="state in ('rejected', 'expired')"
+            >
+                <field name="planning_date" />
+                <field name="vehicle_id" />
+                <field name="vehicle_type_id" optional="show" />
+                <field name="stop_count" />
+                <field name="total_packages" />
+                <field name="total_distance" />
+                <field name="total_cost" />
+                <field name="state" widget="badge" />
+                <button
+                    name="action_approve"
+                    type="object"
+                    string="Approve"
+                    class="btn-success btn-sm"
+                    invisible="state != 'suggested'"
+                />
+                <button
+                    name="action_reject"
+                    type="object"
+                    string="Reject"
+                    class="btn-secondary btn-sm"
+                    invisible="state != 'suggested'"
+                />
+            </list>
+        </field>
+    </record>
+
+    <!-- Search View for TMS Route Suggestion -->
+    <record id="tms_route_suggestion_search" model="ir.ui.view">
+        <field name="name">tms.route.suggestion.search</field>
+        <field name="model">tms.route.suggestion</field>
+        <field name="arch" type="xml">
+            <search string="Search Suggestions">
+                <field name="name" />
+                <field name="config_id" />
+                <field name="team_id" />
+                <field name="vehicle_id" />
+                <separator />
+                <filter
+                    name="filter_suggested"
+                    string="Pending"
+                    domain="[('state', '=', 'suggested')]"
+                />
+                <filter
+                    name="filter_approved"
+                    string="Approved"
+                    domain="[('state', '=', 'approved')]"
+                />
+                <filter
+                    name="filter_rejected"
+                    string="Rejected"
+                    domain="[('state', '=', 'rejected')]"
+                />
+                <filter
+                    name="filter_expired"
+                    string="Expired"
+                    domain="[('state', '=', 'expired')]"
+                />
+                <separator />
+                <filter
+                    name="filter_today"
+                    string="Today"
+                    domain="[('planning_date', '=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_tomorrow"
+                    string="Tomorrow"
+                    domain="[('planning_date', '=', (context_today() + datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_state"
+                        string="State"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="group_date"
+                        string="Route Date"
+                        context="{'group_by': 'planning_date'}"
+                    />
+                    <filter
+                        name="group_team"
+                        string="Team"
+                        context="{'group_by': 'team_id'}"
+                    />
+                    <filter
+                        name="group_config"
+                        string="Configuration"
+                        context="{'group_by': 'config_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for TMS Route Suggestion -->
+    <record id="tms_route_suggestion_action" model="ir.actions.act_window">
+        <field name="name">Route Suggestions</field>
+        <field name="res_model">tms.route.suggestion</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_filter_suggested': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No route suggestions yet
+            </p>
+            <p>
+                Route suggestions are created automatically by the nightly optimization.
+                You can approve or reject them here.
+            </p>
+        </field>
+    </record>
+</odoo>

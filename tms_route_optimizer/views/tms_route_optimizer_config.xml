@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Form View for TMS Route Optimizer Config -->
+    <record id="tms_route_optimizer_config_form" model="ir.ui.view">
+        <field name="name">tms.route.optimizer.config.form</field>
+        <field name="model">tms.route.optimizer.config</field>
+        <field name="arch" type="xml">
+            <form string="Optimization Configuration">
+                <header>
+                    <button
+                        name="action_run_now"
+                        string="Run Now"
+                        type="object"
+                        class="btn-primary"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_suggestions"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-lightbulb-o"
+                        >
+                            <div class="o_stat_info">
+                                <field
+                                    name="pending_suggestion_count"
+                                    class="o_stat_value"
+                                />
+                                <span class="o_stat_text">Pending</span>
+                            </div>
+                            <div class="o_stat_info">
+                                <field name="suggestion_count" class="o_stat_value" />
+                                <span class="o_stat_text">Total Suggestions</span>
+                            </div>
+                        </button>
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Configuration Name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="General">
+                            <field name="active" invisible="1" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="team_id" />
+                            <field name="start_location_id" />
+                            <field name="end_location_id" />
+                        </group>
+                        <group string="Schedule">
+                            <label for="cron_hour" string="Execution Time" />
+                            <div class="o_row">
+                                <field name="cron_hour" class="oe_inline" />
+                                <span>:</span>
+                                <field name="cron_minute" class="oe_inline" />
+                            </div>
+                            <field name="days_ahead" />
+                        </group>
+                    </group>
+
+                    <group string="Planning Mode">
+                        <group>
+                            <field name="planning_mode" widget="radio" />
+                        </group>
+                        <group>
+                            <field
+                                name="vehicle_ids"
+                                widget="many2many_tags"
+                                invisible="planning_mode != 'vehicles'"
+                            />
+                            <field
+                                name="vehicle_type_ids"
+                                widget="many2many_tags"
+                                invisible="planning_mode != 'vehicle_types'"
+                            />
+                            <field
+                                name="vehicles_per_type"
+                                invisible="planning_mode != 'vehicle_types'"
+                            />
+                        </group>
+                    </group>
+
+                    <group string="Optimization Parameters">
+                        <group>
+                            <field name="optimization_speed" widget="radio" />
+                            <field name="max_stops_per_vehicle" />
+                        </group>
+                        <group>
+                            <field name="enable_multi_day" />
+                            <field
+                                name="planning_horizon_days"
+                                invisible="not enable_multi_day"
+                            />
+                        </group>
+                    </group>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for TMS Route Optimizer Config -->
+    <record id="tms_route_optimizer_config_tree" model="ir.ui.view">
+        <field name="name">tms.route.optimizer.config.tree</field>
+        <field name="model">tms.route.optimizer.config</field>
+        <field name="arch" type="xml">
+            <list string="Optimization Configurations">
+                <field name="name" />
+                <field name="team_id" />
+                <field name="planning_mode" />
+                <field name="days_ahead" />
+                <field name="pending_suggestion_count" string="Pending" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Action for TMS Route Optimizer Config -->
+    <record id="tms_route_optimizer_config_action" model="ir.actions.act_window">
+        <field name="name">Optimization Configurations</field>
+        <field name="res_model">tms.route.optimizer.config</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create an automatic optimization configuration
+            </p>
+            <p>
+                Define how routes should be automatically optimized each night.
+                The system will create route suggestions that can be approved or rejected.
+            </p>
+        </field>
+    </record>
+</odoo>

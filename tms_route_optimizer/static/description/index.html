@@ -1,0 +1,912 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>TMS Route Optimizer</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="tms-route-optimizer">
+<h1 class="title">TMS Route Optimizer</h1>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:397a6aaf1e9249d903f596d727d2214f3172976dbd0072211ff8c98bd6ab9f49
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Alpha" src="https://img.shields.io/badge/maturity-Alpha-red.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-transport/tree/18.0/tms_route_optimizer"><img alt="OCA/stock-logistics-transport" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--transport-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-transport-18-0/stock-logistics-transport-18-0-tms_route_optimizer"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-transport&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<div class="section" id="tms-route-optimizer-1">
+<h1>TMS Route Optimizer</h1>
+<p>This module provides route optimization functionality for TMS (Transport
+Management System) using Google OR-Tools. It solves Vehicle Routing
+Problems (VRP) to find optimal routes for multiple delivery stops,
+considering vehicle capacity constraints, distances, and costs.</p>
+<div class="section" id="key-features">
+<h2>Key Features</h2>
+<ul class="simple">
+<li><strong>Route Optimization</strong>: Uses Google OR-Tools to solve VRP problems</li>
+<li><strong>Multi-Vehicle Support</strong>: Distributes stops across multiple vehicles</li>
+<li><strong>Capacity Constraints</strong>: Considers weight and volume capacity of
+vehicles</li>
+<li><strong>Distance Calculation</strong>: Uses Haversine formula to calculate
+distances between locations</li>
+<li><strong>Cost Optimization</strong>: Minimizes total cost considering distance and
+vehicle costs</li>
+<li><strong>Automatic Order Creation</strong>: Creates TMS orders from optimized routes</li>
+<li><strong>Visualization</strong>: Provides Google Maps and Waze URLs for each route</li>
+<li><strong>Performance Metrics</strong>: Shows utilization rates, distances, and costs
+per route</li>
+</ul>
+</div>
+<div class="section" id="use-cases">
+<h2>Use Cases</h2>
+<ul class="simple">
+<li>Optimize delivery routes for multiple stops</li>
+<li>Minimize transportation costs</li>
+<li>Maximize vehicle capacity utilization</li>
+<li>Plan efficient multi-vehicle delivery operations</li>
+<li>Reduce total distance traveled</li>
+<li>Improve delivery time estimation</li>
+</ul>
+</div>
+<div class="section" id="technical-details">
+<h2>Technical Details</h2>
+<ul class="simple">
+<li><strong>Algorithm</strong>: Vehicle Routing Problem (VRP) solver using Google
+OR-Tools</li>
+<li><strong>Distance Calculation</strong>: Haversine formula for great-circle distances</li>
+<li><strong>Constraints</strong>: Weight capacity, volume capacity, vehicle
+availability</li>
+<li><strong>Objective</strong>: Minimize total cost (distance × cost per km + minimum
+trip cost)</li>
+</ul>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This is an alpha version, the data model and design can change at any time without warning.
+Only for development or testing purpose, do not use in production.
+<a class="reference external" href="https://odoo-community.org/page/development-status">More details on development status</a></p>
+</div>
+<p><strong>Table of contents</strong></p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h1>Configuration</h1>
+</div>
+<div class="section" id="configuration-tms-route-optimizer">
+<h1>Configuration - TMS Route Optimizer</h1>
+<div class="section" id="module-dependencies">
+<h2>Module Dependencies</h2>
+<p>This module requires the following Odoo modules:</p>
+<ul class="simple">
+<li><tt class="docutils literal">tms</tt>: Base Transport Management System module</li>
+<li><tt class="docutils literal">tms_delivery_stops</tt>: Multiple delivery stops per order</li>
+<li><tt class="docutils literal">tms_vehicle_capacity</tt>: Vehicle types with capacity and cost
+management</li>
+<li><tt class="docutils literal">base_geolocalize</tt>: Geolocation support for partners</li>
+</ul>
+</div>
+<div class="section" id="external-dependencies">
+<h2>External Dependencies</h2>
+<div class="section" id="python-package-or-tools">
+<h3>Python Package: OR-Tools</h3>
+<p>Install the Google OR-Tools Python package:</p>
+<pre class="code bash literal-block">
+pip<span class="w"> </span>install<span class="w"> </span>ortools
+</pre>
+<p><strong>Note</strong>: This is required for the optimization algorithm to work.</p>
+</div>
+</div>
+<div class="section" id="required-configuration">
+<h2>Required Configuration</h2>
+<div class="section" id="configure-tms-team">
+<h3>1. Configure TMS Team</h3>
+<ol class="arabic simple">
+<li>Go to <strong>TMS &gt; Configuration &gt; Teams</strong></li>
+<li>For each team used in optimization:<ul>
+<li><strong>Default Depot Location</strong>: Select a partner with geolocation
+(latitude/longitude)<ul>
+<li>This is the starting and ending point for all routes</li>
+</ul>
+</li>
+<li><strong>Allowed Vehicle Types</strong>: Select vehicle types that can be used in
+this team<ul>
+<li>Only vehicles with these types will be considered</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Critical</strong>: The depot location MUST have geolocation coordinates
+configured.</p>
+</div>
+<div class="section" id="configure-vehicles">
+<h3>2. Configure Vehicles</h3>
+<ol class="arabic simple">
+<li>Go to <strong>Fleet &gt; Vehicles</strong></li>
+<li>For each vehicle:<ul>
+<li><strong>Vehicle Type</strong>: Must match one of the team’s allowed types</li>
+<li><strong>Weight Capacity</strong>: Maximum weight capacity (kg)</li>
+<li><strong>Volume Capacity</strong>: Maximum volume capacity (m³)</li>
+<li><strong>Cost per KM</strong>: Cost per kilometer traveled</li>
+<li><strong>Minimum Trip Cost</strong>: Minimum cost for any trip</li>
+<li><strong>TMS Team</strong>: Link to the appropriate team</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-delivery-stops">
+<h3>3. Configure Delivery Stops</h3>
+<ol class="arabic simple">
+<li>Create TMS orders with delivery stops (using <tt class="docutils literal">tms_delivery_stops</tt>
+module)</li>
+<li>Ensure all stops:<ul>
+<li>Are in <strong>Draft</strong> state (for optimization)</li>
+<li>Have partners with <strong>geolocation</strong> (latitude/longitude)</li>
+<li>Have <strong>weight</strong> and <strong>volume</strong> defined (for capacity planning)</li>
+<li>Have <strong>scheduled date</strong> set (for date range filtering)</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-system-parameters-optional">
+<h3>4. Configure System Parameters (Optional)</h3>
+<p>Go to <strong>Settings &gt; Technical &gt; Parameters &gt; System Parameters</strong>:</p>
+<ul class="simple">
+<li><strong>`tms.route_optimizer.max_time_seconds``</strong>: Maximum time for
+optimization (default: 300 seconds / 5 minutes)<ul>
+<li>Increase for complex problems with many stops</li>
+</ul>
+</li>
+<li><strong>``tms.route_optimizer.max_deliveries``</strong>: Maximum number of
+deliveries (default: 100)<ul>
+<li>Limits the number of stops that can be optimized at once</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="optimization-workflow">
+<h2>Optimization Workflow</h2>
+<div class="section" id="prerequisites-checklist">
+<h3>Prerequisites Checklist</h3>
+<p>Before running optimization, ensure:</p>
+<ul class="simple">
+<li>☐ OR-Tools Python package is installed</li>
+<li>☐ TMS team has depot location with geolocation</li>
+<li>☐ TMS team has allowed vehicle types configured</li>
+<li>☐ Vehicles are configured with capacities and costs</li>
+<li>☐ Vehicles are linked to the team</li>
+<li>☐ Delivery stops exist in Draft state</li>
+<li>☐ All delivery partners have geolocation</li>
+<li>☐ Stops have weight and volume defined</li>
+</ul>
+</div>
+<div class="section" id="optimization-process">
+<h3>Optimization Process</h3>
+<ol class="arabic simple">
+<li><strong>Select Team</strong>: Choose team with configured depot and vehicles</li>
+<li><strong>Set Date Range</strong>: Define period for finding delivery stops</li>
+<li><strong>Review Stops</strong>: Verify all stops have required data</li>
+<li><strong>Run Optimization</strong>: Execute the VRP solver</li>
+<li><strong>Review Results</strong>: Check routes, utilization, and costs</li>
+<li><strong>Create Orders</strong>: Generate TMS orders from optimized routes</li>
+</ol>
+</div>
+</div>
+<div class="section" id="integration-points">
+<h2>Integration Points</h2>
+<div class="section" id="with-tms-delivery-stops">
+<h3>With tms_delivery_stops</h3>
+<ul class="simple">
+<li>Finds stops in Draft state within date range</li>
+<li>Updates stops to Scheduled state when orders are created</li>
+<li>Uses stop weight/volume for capacity constraints</li>
+<li>Uses stop geolocation for distance calculation</li>
+</ul>
+</div>
+<div class="section" id="with-tms-vehicle-capacity">
+<h3>With tms_vehicle_capacity</h3>
+<ul class="simple">
+<li>Uses vehicle weight/volume capacity as constraints</li>
+<li>Uses vehicle cost per KM and minimum trip cost</li>
+<li>Filters vehicles by team’s allowed vehicle types</li>
+<li>Uses team’s default depot location</li>
+</ul>
+</div>
+</div>
+<div class="section" id="algorithm-configuration">
+<h2>Algorithm Configuration</h2>
+<div class="section" id="distance-calculation">
+<h3>Distance Calculation</h3>
+<ul class="simple">
+<li>Uses <strong>Haversine formula</strong> for great-circle distances</li>
+<li>Calculates distances between:<ul>
+<li>Depot and all stops</li>
+<li>All stops to each other</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="optimization-constraints">
+<h3>Optimization Constraints</h3>
+<ul class="simple">
+<li><strong>Capacity</strong>: Total weight/volume cannot exceed vehicle capacity</li>
+<li><strong>Vehicle Availability</strong>: Only vehicles in the team are considered</li>
+<li><strong>Vehicle Types</strong>: Only allowed vehicle types are used</li>
+</ul>
+</div>
+<div class="section" id="optimization-objective">
+<h3>Optimization Objective</h3>
+<p>Minimizes total cost:</p>
+<pre class="literal-block">
+Total Cost = Σ (Minimum Trip Cost + Distance × Cost per KM)
+</pre>
+<p>For all routes in the solution.</p>
+</div>
+</div>
+<div class="section" id="performance-tuning">
+<h2>Performance Tuning</h2>
+<div class="section" id="for-many-stops-50">
+<h3>For Many Stops (&gt;50)</h3>
+<ol class="arabic simple">
+<li>Increase <tt class="docutils literal">max_time_seconds</tt> parameter</li>
+<li>Consider splitting into multiple optimizations (by region)</li>
+<li>Filter stops by date range to reduce problem size</li>
+</ol>
+</div>
+<div class="section" id="for-better-solutions">
+<h3>For Better Solutions</h3>
+<ol class="arabic simple">
+<li>Ensure accurate geolocation coordinates</li>
+<li>Use realistic vehicle capacities</li>
+<li>Configure accurate cost data</li>
+<li>Allow sufficient optimization time</li>
+</ol>
+</div>
+</div>
+<div class="section" id="troubleshooting-configuration">
+<h2>Troubleshooting Configuration</h2>
+<div class="section" id="no-vehicles-available">
+<h3>“No vehicles available”</h3>
+<ul class="simple">
+<li>Check vehicle types match team’s allowed types</li>
+<li>Verify vehicles are linked to the team</li>
+<li>Ensure vehicles have capacities configured</li>
+</ul>
+</div>
+<div class="section" id="depot-has-no-geolocation">
+<h3>“Depot has no geolocation”</h3>
+<ul class="simple">
+<li>Configure <tt class="docutils literal">partner_latitude</tt> and <tt class="docutils literal">partner_longitude</tt> for depot
+partner</li>
+<li>Use <tt class="docutils literal">base_geolocalize</tt> module to geocode address</li>
+</ul>
+</div>
+<div class="section" id="or-tools-not-found">
+<h3>“OR-Tools not found”</h3>
+<ul class="simple">
+<li>Install: <tt class="docutils literal">pip install ortools</tt></li>
+<li>Restart Odoo server after installation</li>
+</ul>
+</div>
+<div class="section" id="optimization-timeout">
+<h3>Optimization timeout</h3>
+<ul class="simple">
+<li>Increase <tt class="docutils literal">tms.route_optimizer.max_time_seconds</tt></li>
+<li>Reduce number of stops per optimization</li>
+<li>Split into multiple smaller optimizations</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="usage">
+<h1>Usage</h1>
+</div>
+<div class="section" id="usage-tms-route-optimizer">
+<h1>Usage - TMS Route Optimizer</h1>
+<div class="section" id="quick-start">
+<h2>Quick Start</h2>
+<ol class="arabic simple">
+<li><strong>Configure TMS Team</strong> with depot location and allowed vehicle types</li>
+<li><strong>Configure Vehicles</strong> with capacities and costs</li>
+<li><strong>Create TMS Orders</strong> with delivery stops in Draft state</li>
+<li><strong>Run Optimization</strong> from TMS &gt; Route Optimizer</li>
+<li><strong>Review Results</strong> and create orders from optimized routes</li>
+</ol>
+</div>
+<div class="section" id="detailed-usage">
+<h2>Detailed Usage</h2>
+<div class="section" id="step-1-access-route-optimizer">
+<h3>Step 1: Access Route Optimizer</h3>
+<ol class="arabic simple">
+<li>Navigate to <strong>TMS &gt; Route Optimizer</strong> in the main menu</li>
+<li>Click <strong>Create</strong> to start a new optimization</li>
+</ol>
+</div>
+<div class="section" id="step-2-configure-optimization-parameters">
+<h3>Step 2: Configure Optimization Parameters</h3>
+<p>Fill in the optimization form:</p>
+<ul class="simple">
+<li><strong>Name</strong>: Optimization name (auto-generated with timestamp)</li>
+<li><strong>Team</strong>: Select the TMS team (must have depot and allowed vehicle
+types configured)</li>
+<li><strong>Optimization Date</strong>: Date for the optimization</li>
+<li><strong>Date From</strong>: Start date/time for searching delivery stops</li>
+<li><strong>Date To</strong>: End date/time for searching delivery stops</li>
+</ul>
+<p><strong>Note</strong>: Delivery stops are automatically loaded based on the date
+range (stops in Draft state).</p>
+</div>
+<div class="section" id="step-3-review-delivery-stops">
+<h3>Step 3: Review Delivery Stops</h3>
+<ol class="arabic simple">
+<li>The <strong>Delivery Stops</strong> section shows stops found automatically</li>
+<li>You can:<ul>
+<li>Add stops manually by clicking <strong>Add a line</strong></li>
+<li>Remove stops that shouldn’t be optimized</li>
+<li>Verify all stops have geolocation (required)</li>
+</ul>
+</li>
+</ol>
+<p><strong>Important</strong>: All stops must have partner geolocation
+(latitude/longitude).</p>
+</div>
+<div class="section" id="step-4-run-optimization">
+<h3>Step 4: Run Optimization</h3>
+<ol class="arabic simple">
+<li>Click the <strong>Run Optimization</strong> button</li>
+<li>The system will:<ul>
+<li>Validate all data (stops, vehicles, geolocations)</li>
+<li>Calculate distance matrix between all points</li>
+<li>Solve the VRP problem using OR-Tools</li>
+<li>Display results</li>
+</ul>
+</li>
+</ol>
+<p><strong>Processing Time</strong>: Typically a few seconds for 8-10 stops, may take
+longer for many stops.</p>
+</div>
+<div class="section" id="step-5-analyze-results">
+<h3>Step 5: Analyze Results</h3>
+<p>After optimization, review:</p>
+<div class="section" id="summary-information">
+<h4>Summary Information</h4>
+<ul class="simple">
+<li><strong>Total Cost</strong>: Total cost of all routes</li>
+<li><strong>Total Distance</strong>: Total distance in kilometers</li>
+<li><strong>Total Vehicles Used</strong>: Number of vehicles in the solution</li>
+<li><strong>Optimization Time</strong>: Time taken to solve (seconds)</li>
+</ul>
+</div>
+<div class="section" id="routes-tab">
+<h4>Routes Tab</h4>
+<p>Each route shows:</p>
+<ul class="simple">
+<li><strong>Vehicle</strong>: Assigned vehicle</li>
+<li><strong>Stop Count</strong>: Number of stops in route</li>
+<li><strong>Total Distance</strong>: Route distance (km)</li>
+<li><strong>Total Weight</strong>: Total weight carried (kg)</li>
+<li><strong>Total Volume</strong>: Total volume carried (m³)</li>
+<li><strong>Weight Utilization</strong>: Percentage of weight capacity used</li>
+<li><strong>Volume Utilization</strong>: Percentage of volume capacity used</li>
+<li><strong>Route Cost</strong>: Total cost for this route</li>
+</ul>
+</div>
+<div class="section" id="raw-result-tab">
+<h4>Raw Result Tab</h4>
+<p>Shows the optimization result in JSON format (useful for debugging or
+integration).</p>
+</div>
+</div>
+<div class="section" id="step-6-view-route-details">
+<h3>Step 6: View Route Details</h3>
+<p>Click on a route to see:</p>
+<ul class="simple">
+<li>Vehicle information</li>
+<li>Capacity utilization (with visual indicators)</li>
+<li>Detailed costs</li>
+<li><strong>Google Maps URL</strong>: Link to view route on Google Maps</li>
+<li><strong>Waze URL</strong>: Link for navigation in Waze app</li>
+<li>List of stops in optimized order</li>
+</ul>
+</div>
+<div class="section" id="step-7-create-orders-from-optimization">
+<h3>Step 7: Create Orders from Optimization</h3>
+<ol class="arabic simple">
+<li>After reviewing results, click <strong>Create Orders</strong></li>
+<li>The system will:<ul>
+<li>Create one TMS order per route</li>
+<li>Add stops in optimized order</li>
+<li>Link vehicles to orders</li>
+<li>Update stop states to “Scheduled”</li>
+</ul>
+</li>
+<li>You’ll be redirected to the list of created orders</li>
+</ol>
+</div>
+</div>
+<div class="section" id="understanding-results">
+<h2>Understanding Results</h2>
+<div class="section" id="route-structure">
+<h3>Route Structure</h3>
+<p>Each route follows this pattern:</p>
+<pre class="literal-block">
+Depot → Stop 1 → Stop 2 → ... → Stop N → Depot
+</pre>
+<p>All routes start and end at the team’s depot location.</p>
+</div>
+<div class="section" id="utilization-metrics">
+<h3>Utilization Metrics</h3>
+<ul class="simple">
+<li><strong>Weight Utilization</strong>:
+<tt class="docutils literal">(Total Weight / Vehicle Weight Capacity) × 100</tt></li>
+<li><strong>Volume Utilization</strong>:
+<tt class="docutils literal">(Total Volume / Vehicle Volume Capacity) × 100</tt></li>
+</ul>
+<p>Higher utilization (closer to 100%) indicates better capacity usage.</p>
+</div>
+<div class="section" id="cost-calculation">
+<h3>Cost Calculation</h3>
+<p>For each route:</p>
+<pre class="literal-block">
+Route Cost = Minimum Trip Cost + (Total Distance × Cost per KM)
+</pre>
+<p>Total cost is the sum of all route costs.</p>
+</div>
+</div>
+<div class="section" id="best-practices">
+<h2>Best Practices</h2>
+<ol class="arabic simple">
+<li><strong>Geolocation</strong>: Ensure all partners have accurate coordinates</li>
+<li><strong>Date Range</strong>: Select appropriate date ranges to group nearby
+deliveries</li>
+<li><strong>Vehicle Capacity</strong>: Configure realistic capacities with safety
+margins</li>
+<li><strong>Costs</strong>: Use accurate cost data (fuel, maintenance, driver costs)</li>
+<li><strong>Review Before Creating</strong>: Always review routes before creating
+orders</li>
+<li><strong>Use Map Links</strong>: Verify routes using Google Maps/Waze links</li>
+</ol>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting</h2>
+<div class="section" id="no-delivery-stops-to-optimize">
+<h3>“No delivery stops to optimize”</h3>
+<ul class="simple">
+<li>Check date range (Date From/Date To)</li>
+<li>Verify stops are in Draft state</li>
+<li>Add stops manually if needed</li>
+</ul>
+</div>
+<div class="section" id="stop-has-no-geolocation-coordinates">
+<h3>“Stop has no geolocation coordinates”</h3>
+<ul class="simple">
+<li>Configure latitude/longitude for the partner</li>
+<li>Use <tt class="docutils literal">base_geolocalize</tt> module to geocode addresses</li>
+</ul>
+</div>
+<div class="section" id="no-vehicles-available-for-this-team">
+<h3>“No vehicles available for this team”</h3>
+<ul class="simple">
+<li>Verify vehicles are linked to the team</li>
+<li>Check vehicle types match team’s allowed types</li>
+<li>Ensure vehicles have capacities and costs configured</li>
+</ul>
+</div>
+<div class="section" id="no-feasible-solution-found">
+<h3>“No feasible solution found”</h3>
+<ul class="simple">
+<li>Total capacity may be insufficient</li>
+<li>Add more vehicles or remove some stops</li>
+<li>Check weight/volume totals vs. vehicle capacities</li>
+</ul>
+</div>
+<div class="section" id="optimization-is-slow">
+<h3>Optimization is slow</h3>
+<ul class="simple">
+<li>Increase <tt class="docutils literal">tms.route_optimizer.max_time_seconds</tt> parameter</li>
+<li>Consider splitting stops into multiple optimizations</li>
+<li>Reduce number of stops per optimization</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="bug-tracker">
+<h1>Bug Tracker</h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/stock-logistics-transport/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/OCA/stock-logistics-transport/issues/new?body=module:%20tms_route_optimizer%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h1>Credits</h1>
+<div class="section" id="authors">
+<h2>Authors</h2>
+<ul class="simple">
+<li>KMEE</li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h2>Contributors</h2>
+<ul class="simple">
+<li>Luis Felipe Miléo <a class="reference external" href="mailto:mileo&#64;kmee.com.br">mileo&#64;kmee.com.br</a></li>
+</ul>
+</div>
+<div class="section" id="other-credits">
+<h2>Other credits</h2>
+<ul class="simple">
+<li>KMEE <a class="reference external" href="https://kmee.com.br">https://kmee.com.br</a></li>
+</ul>
+</div>
+<div class="section" id="maintainers">
+<h2>Maintainers</h2>
+<p>This module is maintained by the OCA.</p>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
+<p>OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/stock-logistics-transport/tree/18.0/tms_route_optimizer">OCA/stock-logistics-transport</a> project on GitHub.</p>
+<p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1342 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_route_optimizer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__recalculation_mode
+msgid ""
+"'New' creates fresh routes. 'Merge' adds stops to existing pending trips."
+msgstr ""
+"'Novo' cria rotas novas. 'Mesclar' adiciona paradas a viagens pendentes "
+"existentes."
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "<span class=\"o_stat_text\">Pending</span>"
+msgstr "<span class=\"o_stat_text\">Pendentes</span>"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "<span class=\"o_stat_text\">Total Suggestions</span>"
+msgstr "<span class=\"o_stat_text\">Total de Sugestões</span>"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "<span>:</span>"
+msgstr "<span>:</span>"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_needaction
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_needaction
+msgid "Action Needed"
+msgstr "Ação Necessária"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__active
+msgid "Active"
+msgstr "Ativo"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__activity_ids
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__activity_ids
+msgid "Activities"
+msgstr "Atividades"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__activity_exception_decoration
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decoração de Exceção da Atividade"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__activity_state
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__activity_state
+msgid "Activity State"
+msgstr "Estado da Atividade"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__activity_type_icon
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Ícone do Tipo de Atividade"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__enable_multi_day
+msgid "Allow optimization to span multiple days if capacity is exceeded"
+msgstr ""
+"Permitir que a otimização abranja vários dias se a capacidade for excedida"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_form
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_tree
+msgid "Approve"
+msgstr "Aprovar"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_suggestion__state__approved
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Approved"
+msgstr "Aprovado"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "Archived"
+msgstr "Arquivado"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_attachment_count
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_attachment_count
+msgid "Attachment Count"
+msgstr "Contagem de Anexos"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer_config.py:0
+msgid "Auto: %(name)s - %(date)s"
+msgstr "Auto: %(name)s - %(date)s"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__pending_order_ids
+msgid "Available Pending Orders"
+msgstr "Ordens Pendentes Disponíveis"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__optimization_speed__balanced
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer_config__optimization_speed__balanced
+msgid "Balanceado (1-2 minutos)"
+msgstr "Balanceado (1-2 minutos)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__planning_mode__vehicles
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer_config__planning_mode__vehicles
+msgid "By Specific Vehicles"
+msgstr "Por Veículos Específicos"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__planning_mode__team
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer_config__planning_mode__team
+msgid "By Team"
+msgstr "Por Equipe"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__planning_mode__vehicle_types
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer_config__planning_mode__vehicle_types
+msgid "By Vehicle Types"
+msgstr "Por Tipos de Veículo"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_order__can_recalculate
+msgid "Can Recalculate"
+msgstr "Pode Recalcular"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__company_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__config_id
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Configuration"
+msgstr "Configuração"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "Configuration Name"
+msgstr "Nome da Configuração"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__cost_per_km
+msgid "Cost per KM"
+msgstr "Custo por KM"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_result_form
+msgid "Costs"
+msgstr "Custos"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Create Orders"
+msgstr "Criar Ordens"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.actions.act_window,help:tms_route_optimizer.action_tms_route_optimizer
+msgid "Create a new route optimization"
+msgstr "Criar uma nova otimização de rota"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.actions.act_window,help:tms_route_optimizer.tms_route_optimizer_config_action
+msgid "Create an automatic optimization configuration"
+msgstr "Criar uma configuração de otimização automática"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_suggestion.py:0
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__order_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__order_id
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_form
+msgid "Created Order"
+msgstr "Ordem Criada"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__create_uid
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__create_uid
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__create_uid
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__create_uid
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__create_date
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__create_date
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__create_date
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__create_date
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__day_result_ids
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Daily Results"
+msgstr "Resultados Diários"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__date_from
+msgid "Date From"
+msgstr "Data Inicial"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__date_to
+msgid "Date To"
+msgstr "Data Final"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__suggestion_date
+msgid "Date when this suggestion was created"
+msgstr "Data em que esta sugestão foi criada"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__day_result_id
+msgid "Day Result"
+msgstr "Resultado do Dia"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__days_ahead
+msgid "Days Ahead"
+msgstr "Dias à Frente"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.actions.act_window,help:tms_route_optimizer.tms_route_optimizer_config_action
+msgid ""
+"Define how routes should be automatically optimized each night.\n"
+"                The system will create route suggestions that can be "
+"approved or rejected."
+msgstr ""
+"Defina como as rotas devem ser automaticamente otimizadas cada noite.\n"
+"                O sistema criará sugestões de rotas que podem ser aprovadas "
+"ou rejeitadas."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__delivery_stop_ids
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__stop_ids
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__stop_ids
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_form
+msgid "Delivery Stops"
+msgstr "Paradas de Entrega"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__display_name
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__display_name
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__display_name
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__display_name
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__display_name
+msgid "Display Name"
+msgstr "Nome de Exibição"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__state__done
+msgid "Done"
+msgstr "Concluído"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__state__draft
+msgid "Draft"
+msgstr "Rascunho"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__enable_multi_day
+msgid "Enable Multi-Day Planning"
+msgstr "Habilitar Planejamento Multi-Dia"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__enable_multi_day
+msgid "Enable Multi-day Planning"
+msgstr "Habilitar Planejamento Multi-dia"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__end_location_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__end_location_id
+msgid "End Location"
+msgstr "Local de Término"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid ""
+"End location '%s' has no geolocation coordinates. Please configure latitude "
+"and longitude."
+msgstr ""
+"Local de término '%s' não possui coordenadas de geolocalização. Por favor "
+"configure latitude e longitude."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__end_location_id
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__end_location_id
+msgid "Ending location for route optimization (optional)"
+msgstr "Local de término para otimização de rota (opcional)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__state__error
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Error"
+msgstr "Erro"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__error_message
+msgid "Error Message"
+msgstr "Mensagem de Erro"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__cron_hour
+msgid "Execution Hour"
+msgstr "Hora de Execução"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__cron_minute
+msgid "Execution Minute"
+msgstr "Minuto de Execução"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "Execution Time"
+msgstr "Hora de Execução"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer_config.py:0
+msgid "Execution hour must be between 0 and 23"
+msgstr "A hora de execução deve estar entre 0 e 23"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer_config.py:0
+msgid "Execution minute must be between 0 and 59"
+msgstr "O minuto de execução deve estar entre 0 e 59"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_suggestion__state__expired
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Expired"
+msgstr "Expirado"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__days_ahead
+msgid "Fetch stops scheduled for the next N days"
+msgstr "Buscar paradas agendadas para os próximos N dias"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_follower_ids
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_partner_ids
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Parceiros)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__activity_type_icon
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Ícone Font Awesome ex. fa-tasks"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "General"
+msgstr "Geral"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__google_maps_url
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__google_maps_url
+msgid "Google Maps URL"
+msgstr "URL do Google Maps"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Group By"
+msgstr "Agrupar Por"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__has_message
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__has_message
+msgid "Has Message"
+msgstr "Tem Mensagem"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__cron_hour
+msgid "Hour of day when automatic optimization runs (0-23)"
+msgstr "Hora do dia quando a otimização automática é executada (0-23)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__activity_exception_icon
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__activity_exception_icon
+msgid "Icon"
+msgstr "Ícone"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__activity_exception_icon
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Ícone para indicar uma atividade de exceção."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__message_needaction
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Se marcado, novas mensagens requerem sua atenção."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__message_has_error
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__message_has_sms_error
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__message_has_error
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Se marcado, algumas mensagens têm erro de entrega."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__include_pending_orders
+msgid "Include Pending Orders"
+msgstr "Incluir Ordens Pendentes"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__include_pending_orders
+msgid "Include stops from pending (non-executed) orders in optimization"
+msgstr "Incluir paradas de ordens pendentes (não executadas) na otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_order__can_recalculate
+msgid "Indicates if this order can be included in a route recalculation"
+msgstr "Indica se esta ordem pode ser incluída em um recálculo de rota"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid "Invalid planning mode"
+msgstr "Modo de planejamento inválido"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_is_follower
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_is_follower
+msgid "Is Follower"
+msgstr "É Seguidor"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__write_uid
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__write_uid
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__write_uid
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__write_uid
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__write_uid
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__write_date
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__write_date
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__write_date
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__write_date
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__write_date
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_order__is_locked_for_optimization
+msgid "Locked for Optimization"
+msgstr "Bloqueado para Otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__max_stops_per_vehicle
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__max_stops_per_vehicle
+msgid "Max Stops per Vehicle"
+msgstr "Máx. Paradas por Veículo"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__max_stops_per_vehicle
+msgid "Maximum number of stops per vehicle (0 = unlimited)"
+msgstr "Número máximo de paradas por veículo (0 = ilimitado)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__max_stops_per_vehicle
+msgid "Maximum number of stops per vehicle. 0 means no limit."
+msgstr "Número máximo de paradas por veículo. 0 significa sem limite."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__recalculation_mode__merge
+msgid "Merge with Pending Trips"
+msgstr "Mesclar com Viagens Pendentes"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_has_error
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_has_error
+msgid "Message Delivery error"
+msgstr "Erro de Entrega de Mensagem"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_ids
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_ids
+msgid "Messages"
+msgstr "Mensagens"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_form
+msgid "Metrics"
+msgstr "Métricas"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__cron_minute
+msgid "Minute of hour when automatic optimization runs (0-59)"
+msgstr "Minuto da hora quando a otimização automática é executada (0-59)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__recalculation_mode
+msgid "Mode"
+msgstr "Modo"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__my_activity_date_deadline
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Prazo da Minha Atividade"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__name
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__name
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_result_form
+msgid "Navigation"
+msgstr "Navegação"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__recalculation_mode__new
+msgid "New Optimization"
+msgstr "Nova Otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__activity_date_deadline
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Prazo da Próxima Atividade"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__activity_summary
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumo da Próxima Atividade"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__activity_type_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo da Próxima Atividade"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid "No delivery stops to optimize"
+msgstr "Nenhuma parada de entrega para otimizar"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid "No feasible solution found for the given constraints"
+msgstr "Nenhuma solução viável encontrada para as restrições dadas"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_suggestion.py:0
+msgid "No map URL available for this route."
+msgstr "Nenhuma URL de mapa disponível para esta rota."
+
+#. module: tms_route_optimizer
+#: model_terms:ir.actions.act_window,help:tms_route_optimizer.tms_route_suggestion_action
+msgid "No route suggestions yet"
+msgstr "Nenhuma sugestão de rota ainda"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_suggestion.py:0
+msgid "No vehicle available for this route. Please select a vehicle first."
+msgstr ""
+"Nenhum veículo disponível para esta rota. Por favor selecione um veículo "
+"primeiro."
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid "No vehicles available for this team"
+msgstr "Nenhum veículo disponível para esta equipe"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_needaction_counter
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de Ações"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__planning_horizon_days
+msgid "Number of days to consider for multi-day optimization"
+msgstr "Número de dias a considerar para otimização multi-dia"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_has_error_counter
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de erros"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__message_needaction_counter
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensagens requerendo ação"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__message_has_error_counter
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensagens com erro de entrega"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__vehicles_per_type
+msgid "Number of virtual vehicles to create per vehicle type"
+msgstr "Número de veículos virtuais a criar por tipo de veículo"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_suggestion.py:0
+msgid "Only suggested routes can be approved."
+msgstr "Apenas rotas sugeridas podem ser aprovadas."
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_suggestion.py:0
+msgid "Only suggested routes can be rejected."
+msgstr "Apenas rotas sugeridas podem ser rejeitadas."
+
+#. module: tms_route_optimizer
+#: model:ir.ui.menu,name:tms_route_optimizer.menu_tms_route_optimizer
+msgid "Optimization"
+msgstr "Otimização"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer_config.py:0
+msgid "Optimization Complete"
+msgstr "Otimização Concluída"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "Optimization Configuration"
+msgstr "Configuração de Otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.actions.act_window,name:tms_route_optimizer.tms_route_optimizer_config_action
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_tree
+msgid "Optimization Configurations"
+msgstr "Configurações de Otimização"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Optimization Constraints"
+msgstr "Restrições de Otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__optimization_date
+msgid "Optimization Date"
+msgstr "Data de Otimização"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "Optimization Parameters"
+msgstr "Parâmetros de Otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__optimization_result
+msgid "Optimization Result (JSON)"
+msgstr "Resultado da Otimização (JSON)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_order__optimization_source
+msgid "Optimization Source"
+msgstr "Fonte da Otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__optimization_speed
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__optimization_speed
+msgid "Optimization Speed"
+msgstr "Velocidade de Otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__optimization_time
+msgid "Optimization Time (seconds)"
+msgstr "Tempo de Otimização (segundos)"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid "Optimization failed: %s"
+msgstr "Otimização falhou: %s"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid "Optimization must be completed before creating orders"
+msgstr "A otimização deve ser concluída antes de criar ordens"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__optimizer_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__optimizer_id
+msgid "Optimizer"
+msgstr "Otimizador"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__state__optimizing
+msgid "Optimizing"
+msgstr "Otimizando"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__selected_pending_order_ids
+msgid "Orders to Recalculate"
+msgstr "Ordens para Recalcular"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid ""
+"Origin location '%s' has no geolocation coordinates. Please configure "
+"latitude and longitude."
+msgstr ""
+"Local de origem '%s' não possui coordenadas de geolocalização. Por favor "
+"configure latitude e longitude."
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid ""
+"Origin location not configured. Please set start location or default origin "
+"location in team or settings."
+msgstr ""
+"Local de origem não configurado. Por favor defina o local de início ou local "
+"de origem padrão na equipe ou configurações."
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_tree
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Pending"
+msgstr "Pendente"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__pending_suggestion_count
+msgid "Pending Suggestions"
+msgstr "Sugestões Pendentes"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__planning_date
+msgid "Planned date for this route"
+msgstr "Data planejada para esta rota"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Planning Configuration"
+msgstr "Configuração de Planejamento"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__planning_date
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__planning_date
+msgid "Planning Date"
+msgstr "Data de Planejamento"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__planning_horizon_days
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__planning_horizon_days
+msgid "Planning Horizon (days)"
+msgstr "Horizonte de Planejamento (dias)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__planning_mode
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__planning_mode
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "Planning Mode"
+msgstr "Modo de Planejamento"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid "Please select at least one vehicle"
+msgstr "Por favor selecione pelo menos um veículo"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid "Please select at least one vehicle type"
+msgstr "Por favor selecione pelo menos um tipo de veículo"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__optimization_speed__quality
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer_config__optimization_speed__quality
+msgid "Qualidade Maxima (ate 5 minutos)"
+msgstr "Qualidade Máxima (até 5 minutos)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer__optimization_speed__fast
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_optimizer_config__optimization_speed__fast
+msgid "Rapido (menos de 1 minuto)"
+msgstr "Rápido (menos de 1 minuto)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__optimization_speed
+msgid ""
+"Rapido: solucao em segundos, boa para testes. Balanceado: melhor relacao "
+"tempo/qualidade. Qualidade: busca exaustiva, ideal para rotas criticas."
+msgstr ""
+"Rápido: solução em segundos, boa para testes. Balanceado: melhor relação "
+"tempo/qualidade. Qualidade: busca exaustiva, ideal para rotas críticas."
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Raw Result"
+msgstr "Resultado Bruto"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Recalculation Options"
+msgstr "Opções de Recálculo"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_order__optimization_source
+msgid "Reference to the optimization that created this order"
+msgstr "Referência à otimização que criou esta ordem"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_form
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_tree
+msgid "Reject"
+msgstr "Rejeitar"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_suggestion__state__rejected
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Rejected"
+msgstr "Rejeitado"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__activity_user_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__activity_user_id
+msgid "Responsible User"
+msgstr "Usuário Responsável"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__result_ids
+msgid "Results"
+msgstr "Resultados"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__route_cost
+msgid "Route Cost"
+msgstr "Custo da Rota"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__planning_date
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Route Date"
+msgstr "Data da Rota"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_form
+msgid "Route Information"
+msgstr "Informações da Rota"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Route Locations"
+msgstr "Locais da Rota"
+
+#. module: tms_route_optimizer
+#: model:ir.ui.menu,name:tms_route_optimizer.menu_tms_route_optimizer_config
+msgid "Route Optimization"
+msgstr "Otimização de Rotas"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_tree
+msgid "Route Optimizations"
+msgstr "Otimizações de Rota"
+
+#. module: tms_route_optimizer
+#: model:ir.actions.act_window,name:tms_route_optimizer.action_tms_route_optimizer
+#: model:ir.ui.menu,name:tms_route_optimizer.menu_tms_route_optimizer_root
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Route Optimizer"
+msgstr "Otimizador de Rotas"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_result_form
+msgid "Route Result"
+msgstr "Resultado da Rota"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_result_tree
+msgid "Route Results"
+msgstr "Resultados das Rotas"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__route_sequence
+msgid "Route Sequence (JSON)"
+msgstr "Sequência da Rota (JSON)"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_form
+msgid "Route Suggestion"
+msgstr "Sugestão de Rota"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer_config.py:0
+#: model:ir.actions.act_window,name:tms_route_optimizer.tms_route_suggestion_action
+#: model:ir.ui.menu,name:tms_route_optimizer.menu_tms_route_suggestion
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_tree
+msgid "Route Suggestions"
+msgstr "Sugestões de Rota"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer_config.py:0
+msgid "Route optimization has been executed."
+msgstr "A otimização de rota foi executada."
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer_config.py:0
+msgid "Route suggestion: %(vehicle)s - %(date)s"
+msgstr "Sugestão de rota: %(vehicle)s - %(date)s"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.actions.act_window,help:tms_route_optimizer.tms_route_suggestion_action
+msgid ""
+"Route suggestions are created automatically by the nightly optimization.\n"
+"                You can approve or reject them here."
+msgstr ""
+"As sugestões de rota são criadas automaticamente pela otimização noturna.\n"
+"                Você pode aprová-las ou rejeitá-las aqui."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__result_ids
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Routes"
+msgstr "Rotas"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "Run Now"
+msgstr "Executar Agora"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Run Optimization"
+msgstr "Executar Otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__message_has_sms_error
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erro de Entrega de SMS"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_config_form
+msgid "Schedule"
+msgstr "Agenda"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Search Suggestions"
+msgstr "Pesquisar Sugestões"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_suggestion.py:0
+msgid "Select Vehicle"
+msgstr "Selecionar Veículo"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__planning_mode
+msgid "Select how to choose vehicles for optimization"
+msgstr "Selecione como escolher veículos para otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__vehicle_ids
+msgid "Specific vehicles to use for optimization"
+msgstr "Veículos específicos a usar para otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__start_location_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__start_location_id
+msgid "Start Location"
+msgstr "Local de Início"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid ""
+"Start location '%s' has no geolocation coordinates. Please configure "
+"latitude and longitude."
+msgstr ""
+"Local de início '%s' não possui coordenadas de geolocalização. Por favor "
+"configure latitude e longitude."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__start_location_id
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__start_location_id
+msgid "Starting location for route optimization (uses team default if not set)"
+msgstr ""
+"Local de início para otimização de rota (usa padrão da equipe se não "
+"definido)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__state
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__state
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "State"
+msgstr "Estado"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__activity_state
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Status baseado em atividades\n"
+"Atrasado: Data de vencimento já passou\n"
+"Hoje: Data da atividade é hoje\n"
+"Planejado: Atividades futuras."
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid "Stop %s has no geolocation coordinates"
+msgstr "Parada %s não possui coordenadas de geolocalização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__stop_count
+msgid "Stop Count"
+msgstr "Contagem de Paradas"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__stop_count
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_result_form
+msgid "Stops"
+msgstr "Paradas"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_day_result__unassigned_stop_ids
+msgid "Stops that could not be assigned on this day"
+msgstr "Paradas que não puderam ser atribuídas neste dia"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__delivery_stop_ids
+msgid "Stops to optimize (auto-filled based on date range)"
+msgstr "Paradas para otimizar (preenchido automaticamente baseado no período)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields.selection,name:tms_route_optimizer.selection__tms_route_suggestion__state__suggested
+msgid "Suggested"
+msgstr "Sugerido"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__suggestion_date
+msgid "Suggestion Date"
+msgstr "Data da Sugestão"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_suggestion.py:0
+msgid "Suggestion Rejected"
+msgstr "Sugestão Rejeitada"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__suggestion_ids
+msgid "Suggestions"
+msgstr "Sugestões"
+
+#. module: tms_route_optimizer
+#: model:ir.model,name:tms_route_optimizer.model_tms_route_optimizer_config
+msgid "TMS Route Optimizer Configuration"
+msgstr "Configuração do Otimizador de Rotas TMS"
+
+#. module: tms_route_optimizer
+#: model:ir.model,name:tms_route_optimizer.model_tms_route_optimizer_day_result
+msgid "TMS Route Optimizer Daily Result"
+msgstr "Resultado Diário do Otimizador de Rotas TMS"
+
+#. module: tms_route_optimizer
+#: model:ir.model,name:tms_route_optimizer.model_tms_route_optimizer_result
+msgid "TMS Route Optimizer Result"
+msgstr "Resultado do Otimizador de Rotas TMS"
+
+#. module: tms_route_optimizer
+#: model:ir.model,name:tms_route_optimizer.model_tms_route_optimizer
+msgid "TMS Route Optimizer Wizard"
+msgstr "Assistente do Otimizador de Rotas TMS"
+
+#. module: tms_route_optimizer
+#: model:ir.model,name:tms_route_optimizer.model_tms_route_suggestion
+msgid "TMS Route Suggestion"
+msgstr "Sugestão de Rota TMS"
+
+#. module: tms_route_optimizer
+#: model:ir.actions.server,name:tms_route_optimizer.ir_cron_auto_route_optimization_ir_actions_server
+msgid "TMS: Automatic Route Optimization"
+msgstr "TMS: Otimização Automática de Rotas"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__team_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__team_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__team_id
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Team"
+msgstr "Equipe"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__team_id
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__team_id
+msgid "Team whose stops will be optimized"
+msgstr "Equipe cujas paradas serão otimizadas"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_suggestion.py:0
+msgid ""
+"The route suggestion has been rejected. Stops will be included in the next "
+"optimization."
+msgstr ""
+"A sugestão de rota foi rejeitada. As paradas serão incluídas na próxima "
+"otimização."
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Today"
+msgstr "Hoje"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_search
+msgid "Tomorrow"
+msgstr "Amanhã"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__total_cost
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__total_cost
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__total_cost
+msgid "Total Cost"
+msgstr "Custo Total"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__total_distance
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__total_distance
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__total_distance
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__total_distance
+msgid "Total Distance (km)"
+msgstr "Distância Total (km)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__total_stops
+msgid "Total Stops"
+msgstr "Total de Paradas"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__suggestion_count
+msgid "Total Suggestions"
+msgstr "Total de Sugestões"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__total_time
+msgid "Total Time (hours)"
+msgstr "Tempo Total (horas)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__total_vehicles_used
+msgid "Total Vehicles Used"
+msgstr "Total de Veículos Usados"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__total_volume
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__total_volume
+msgid "Total Volume (m³)"
+msgstr "Volume Total (m³)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__total_weight
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__total_weight
+msgid "Total Weight (kg)"
+msgstr "Peso Total (kg)"
+
+#. module: tms_route_optimizer
+#: model:ir.model,name:tms_route_optimizer.model_tms_order
+msgid "Transport Management System Order"
+msgstr "Ordem do Sistema de Gestão de Transporte"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__activity_exception_decoration
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo da atividade de exceção no registro."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer__vehicle_type_ids
+msgid "Types of vehicles to use for optimization"
+msgstr "Tipos de veículos a usar para otimização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__unassigned_count
+msgid "Unassigned"
+msgstr "Não Atribuído"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__unassigned_stop_ids
+msgid "Unassigned Stops"
+msgstr "Paradas Não Atribuídas"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_result_form
+msgid "Utilization"
+msgstr "Utilização"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__vehicle_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__vehicle_id
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_form
+msgid "Vehicle"
+msgstr "Veículo"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_optimizer_form
+msgid "Vehicle Selection"
+msgstr "Seleção de Veículo"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__vehicle_type_id
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__vehicle_type_id
+msgid "Vehicle Type"
+msgstr "Tipo de Veículo"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__vehicle_type_ids
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__vehicle_type_ids
+msgid "Vehicle Types"
+msgstr "Tipos de Veículo"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_suggestion.py:0
+msgid "Vehicle can only be selected for suggested routes."
+msgstr "Veículo só pode ser selecionado para rotas sugeridas."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__vehicle_ids
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__vehicle_ids
+msgid "Vehicles"
+msgstr "Veículos"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_day_result__total_vehicles
+msgid "Vehicles Used"
+msgstr "Veículos Usados"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer__vehicles_per_type
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__vehicles_per_type
+msgid "Vehicles per Type"
+msgstr "Veículos por Tipo"
+
+#. module: tms_route_optimizer
+#: model_terms:ir.ui.view,arch_db:tms_route_optimizer.tms_route_suggestion_form
+msgid "View on Map"
+msgstr "Ver no Mapa"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__volume_utilization
+msgid "Volume Utilization (%)"
+msgstr "Utilização de Volume (%)"
+
+#. module: tms_route_optimizer
+#. odoo-python
+#: code:addons/tms_route_optimizer/models/tms_route_optimizer.py:0
+msgid ""
+"Warning: %(stop_count)d stops could not be assigned within the %(days)d-day "
+"planning horizon. Consider increasing the horizon or adding more vehicles."
+msgstr ""
+"Aviso: %(stop_count)d paradas não puderam ser atribuídas dentro do horizonte "
+"de planejamento de %(days)d dias. Considere aumentar o horizonte ou "
+"adicionar mais veículos."
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_config__website_message_ids
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_suggestion__website_message_ids
+msgid "Website Messages"
+msgstr "Mensagens do Website"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_optimizer_config__website_message_ids
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_route_suggestion__website_message_ids
+msgid "Website communication history"
+msgstr "Histórico de comunicação do website"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,field_description:tms_route_optimizer.field_tms_route_optimizer_result__weight_utilization
+msgid "Weight Utilization (%)"
+msgstr "Utilização de Peso (%)"
+
+#. module: tms_route_optimizer
+#: model:ir.model.fields,help:tms_route_optimizer.field_tms_order__is_locked_for_optimization
+msgid "When checked, this order cannot be included in route recalculations"
+msgstr "Quando marcado, esta ordem não pode ser incluída em recálculos de rota"

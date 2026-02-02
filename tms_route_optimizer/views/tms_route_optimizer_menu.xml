@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Action for TMS Route Optimizer -->
+    <record id="action_tms_route_optimizer" model="ir.actions.act_window">
+        <field name="name">Route Optimizer</field>
+        <field name="res_model">tms.route.optimizer</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                    Create a new route optimization
+                </p>
+        </field>
+    </record>
+
+    <!-- Parent Menu for Route Optimizer -->
+    <menuitem
+        id="menu_tms_route_optimizer_root"
+        name="Route Optimizer"
+        parent="tms.operations"
+        sequence="40"
+    />
+
+    <!-- Menu Item - Optimization -->
+    <menuitem
+        id="menu_tms_route_optimizer"
+        name="Optimization"
+        parent="menu_tms_route_optimizer_root"
+        action="action_tms_route_optimizer"
+        sequence="10"
+    />
+
+    <!-- Menu Item - Route Suggestions -->
+    <menuitem
+        id="menu_tms_route_suggestion"
+        name="Route Suggestions"
+        parent="menu_tms_route_optimizer_root"
+        action="tms_route_suggestion_action"
+        sequence="20"
+    />
+
+    <!-- Menu Item - Optimization Configuration (under Configuration menu) -->
+    <menuitem
+        id="menu_tms_route_optimizer_config"
+        name="Route Optimization"
+        parent="tms.config"
+        action="tms_route_optimizer_config_action"
+        sequence="15"
+        groups="base.group_system"
+    />
+</odoo>
