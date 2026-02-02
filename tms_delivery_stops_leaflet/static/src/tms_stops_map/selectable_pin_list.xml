@@ -3,7 +3,8 @@
 Copyright (C) 2026 KMEE (https://kmee.com.br)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-SelectablePinList template - extends DraggablePinList with selection support.
+SelectablePinList template - extends DraggablePinList with selection support
+and capacity comparison features.
 -->
 <templates xml:space="preserve">
 
@@ -13,7 +14,7 @@ SelectablePinList template - extends DraggablePinList with selection support.
         t-inherit-mode="primary"
         owl="1"
     >
-        <!-- Add selection bar after stats div -->
+        <!-- Add selection bar after stats div (inline) -->
         <xpath expr="//div[contains(@class, 'o_pin_list_stats')]" position="after">
             <t t-if="selectedCount > 0">
                 <div
@@ -37,32 +38,35 @@ SelectablePinList template - extends DraggablePinList with selection support.
                     </button>
                 </div>
 
-                <!-- Status bar with totals - using position:fixed to overlay map -->
+                <!-- Floating status bar with selection totals -->
                 <div class="o_tms_status_bar">
-                    <div class="o_status_bar_content">
-                        <div class="o_status_item">
-                            <i class="fa fa-map-marker" />
-                            <span
-                                class="o_status_value"
-                                t-esc="selectionStats.stopCount"
-                            />
-                            <span class="o_status_label">paradas</span>
-                        </div>
-                        <div class="o_status_item">
-                            <i class="fa fa-balance-scale" />
-                            <span
-                                class="o_status_value"
-                                t-esc="selectionStats.totalWeight"
-                            />
-                            <span class="o_status_label">kg</span>
-                        </div>
-                        <div class="o_status_item">
-                            <i class="fa fa-cube" />
-                            <span
-                                class="o_status_value"
-                                t-esc="selectionStats.totalVolume"
-                            />
-                            <span class="o_status_label">m³</span>
+                    <div class="o_status_bar_section">
+                        <div class="o_status_bar_title">Selecionado</div>
+                        <div class="o_status_bar_content">
+                            <div class="o_status_item">
+                                <i class="fa fa-map-marker" />
+                                <span
+                                    class="o_status_value"
+                                    t-esc="selectionStats.stopCount"
+                                />
+                                <span class="o_status_label">paradas</span>
+                            </div>
+                            <div class="o_status_item">
+                                <i class="fa fa-balance-scale" />
+                                <span
+                                    class="o_status_value"
+                                    t-esc="selectionStats.totalWeight"
+                                />
+                                <span class="o_status_label">kg</span>
+                            </div>
+                            <div class="o_status_item">
+                                <i class="fa fa-cube" />
+                                <span
+                                    class="o_status_value"
+                                    t-esc="selectionStats.totalVolume"
+                                />
+                                <span class="o_status_label">m³</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -86,6 +90,142 @@ SelectablePinList template - extends DraggablePinList with selection support.
             </t>
         </xpath>
 
+        <!-- Hide count badge for non-unassigned groups (will show in capacity line) -->
+        <xpath
+            expr="//span[contains(@t-attf-class, 'o_pin_group_count')]"
+            position="attributes"
+        >
+            <attribute
+                name="t-attf-class"
+            >o_pin_group_count badge {{ group.isUnassigned ? 'bg-warning' : 'd-none' }} ms-auto</attribute>
+        </xpath>
+
+        <!-- Make group name clickable for assigned groups -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]//span[contains(@class, 'o_pin_group_name')]"
+            position="attributes"
+        >
+            <attribute
+                name="t-attf-class"
+            >o_pin_group_name {{ group.isUnassigned ? '' : 'o_clickable_order_name' }}</attribute>
+            <attribute
+                name="t-on-click"
+            >(ev) => !group.isUnassigned and this.onOrderNameClick(ev, group)</attribute>
+        </xpath>
+
+        <!-- Add scheduled date after group name for assigned groups -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]//span[contains(@class, 'o_pin_group_name')]"
+            position="after"
+        >
+            <t t-if="!group.isUnassigned">
+                <t t-set="orderInfo" t-value="getGroupOrderInfo(group)" />
+                <t t-if="orderInfo and orderInfo.scheduledDate">
+                    <span class="o_group_scheduled_date text-muted small ms-auto">
+                        <i class="fa fa-calendar" />
+                        <t t-esc="orderInfo.scheduledDate" />
+                    </span>
+                </t>
+            </t>
+        </xpath>
+
+        <!-- Hide original navigate all button for assigned groups (moved to capacity line) -->
+        <xpath
+            expr="//a[contains(@class, 'o_group_navigate_all')]"
+            position="attributes"
+        >
+            <attribute
+                name="t-attf-class"
+            >o_group_navigate_all btn btn-sm btn-outline-primary ms-2 {{ group.isUnassigned ? '' : 'd-none' }}</attribute>
+        </xpath>
+
+        <!-- Add capacity line after group header for assigned groups -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]"
+            position="after"
+        >
+            <t t-if="!group.isUnassigned">
+                <t t-set="capacity" t-value="getGroupCapacity(group)" />
+                <t t-if="capacity">
+                    <div class="o_group_capacity_line">
+                        <span class="o_capacity_item">
+                            <i class="fa fa-truck" />
+                            <t t-esc="group.records.length" />
+                        </span>
+                        <!-- Show weight: % if capacity defined, otherwise total -->
+                        <t t-if="capacity.hasCapacity and capacity.weightCapacity > 0">
+                            <span
+                                t-attf-class="o_capacity_item {{ capacity.weightUtilization > 100 ? 'text-danger' : capacity.weightUtilization > 80 ? 'text-warning' : 'text-success' }}"
+                            >
+                                <i class="fa fa-balance-scale" />
+                                <t t-esc="Math.round(capacity.weightUtilization)" />%
+                            </span>
+                        </t>
+                        <t t-else="">
+                            <span class="o_capacity_item">
+                                <i class="fa fa-balance-scale" />
+                                <t t-esc="capacity.totalWeight.toFixed(1)" /> kg
+                            </span>
+                        </t>
+                        <!-- Show volume: % if capacity defined, otherwise total -->
+                        <t t-if="capacity.hasCapacity and capacity.volumeCapacity > 0">
+                            <span
+                                t-attf-class="o_capacity_item {{ capacity.volumeUtilization > 100 ? 'text-danger' : capacity.volumeUtilization > 80 ? 'text-warning' : 'text-success' }}"
+                            >
+                                <i class="fa fa-cube" />
+                                <t t-esc="Math.round(capacity.volumeUtilization)" />%
+                            </span>
+                        </t>
+                        <t t-else="">
+                            <span class="o_capacity_item">
+                                <i class="fa fa-cube" />
+                                <t t-esc="capacity.totalVolume.toFixed(2)" /> m³
+                            </span>
+                        </t>
+                        <!-- Google Maps navigation link -->
+                        <t t-if="getGroupGoogleMapsUrl(group)">
+                            <a
+                                class="o_capacity_item o_capacity_maps_link ms-auto"
+                                t-att-href="getGroupGoogleMapsUrl(group)"
+                                target="_blank"
+                                t-on-click.stop=""
+                                title="Navegar com Google Maps"
+                            >
+                                <i class="fa fa-map-marker" />
+                                <span>Maps</span>
+                            </a>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+
+        <!-- Add driver/vehicle line after group header for assigned groups -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]"
+            position="after"
+        >
+            <t t-if="!group.isUnassigned">
+                <t t-set="orderInfo" t-value="getGroupOrderInfo(group)" />
+                <t t-if="orderInfo and (orderInfo.driverName or orderInfo.vehicleName)">
+                    <div class="o_group_driver_line">
+                        <t t-if="orderInfo.driverName">
+                            <span class="o_driver_item">
+                                <i class="fa fa-user" />
+                                <t t-esc="orderInfo.driverName" />
+                            </span>
+                        </t>
+                        <t t-if="orderInfo.vehicleName">
+                            <span class="o_driver_item">
+                                <i class="fa fa-truck" />
+                                <t t-esc="orderInfo.vehicleName" />
+                            </span>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+
         <!-- Add checkbox in each item of unassigned group (before drag handle) -->
         <xpath
             expr="//div[contains(@t-attf-class, 'o_pin_item_draggable')]//span[contains(@class, 'o_drag_handle')]"
@@ -100,6 +240,11 @@ SelectablePinList template - extends DraggablePinList with selection support.
                     t-on-mousedown.stop=""
                 />
             </t>
+        </xpath>
+
+        <!-- Modify tooltip of pin title to show weight/volume -->
+        <xpath expr="//div[contains(@class, 'o_pin_title')]" position="attributes">
+            <attribute name="t-att-title">getItemTooltip(record)</attribute>
         </xpath>
     </t>
 

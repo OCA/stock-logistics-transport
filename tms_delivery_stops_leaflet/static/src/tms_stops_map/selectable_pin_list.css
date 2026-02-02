@@ -3,7 +3,7 @@
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
  */
 
-/* Selection bar */
+/* Selection bar (inline) */
 .o_tms_selection_bar {
     animation: slideDown 0.2s ease-out;
 }
@@ -48,7 +48,10 @@
     margin-left: 0;
 }
 
-/* Status Bar - positioned at the bottom of the map */
+/* ============================================
+   Floating Status Bar (when items selected)
+   ============================================ */
+
 .o_tms_status_bar {
     position: fixed;
     bottom: 20px;
@@ -56,10 +59,14 @@
     transform: translateX(-50%);
     z-index: 1050;
 
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 12px 16px;
+
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
 
     animation: slideUp 0.3s ease-out;
 }
@@ -75,47 +82,171 @@
     }
 }
 
+.o_status_bar_section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.o_status_bar_title {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--bs-secondary);
+    letter-spacing: 0.5px;
+}
+
 .o_status_bar_content {
     display: flex;
-    gap: 24px;
+    gap: 16px;
     align-items: center;
 }
 
 .o_status_item {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
 }
 
 .o_status_item i {
     color: var(--bs-primary);
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .o_status_value {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
     color: var(--bs-dark);
 }
 
 .o_status_label {
-    font-size: 12px;
+    font-size: 11px;
     color: var(--bs-secondary);
-    text-transform: lowercase;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
+/* ============================================
+   Group Capacity Line (inline in header area)
+   ============================================ */
+
+.o_group_capacity_line {
+    display: flex;
+    gap: 12px;
+    padding: 4px 8px 8px 32px;
+    font-size: 11px;
+    color: var(--bs-secondary);
+    border-bottom: 1px solid var(--bs-border-color);
+    background-color: var(--bs-tertiary-bg);
+}
+
+.o_capacity_item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.o_capacity_item i {
+    font-size: 10px;
+}
+
+/* Utilization color states */
+.o_capacity_item.text-success {
+    color: var(--bs-success) !important;
+}
+
+.o_capacity_item.text-warning {
+    color: var(--bs-warning) !important;
+}
+
+.o_capacity_item.text-danger {
+    color: var(--bs-danger) !important;
+    font-weight: 600;
+}
+
+/* Ensure group header has space for indicators */
+.o_pin_group_header {
+    display: flex;
+    align-items: center;
+}
+
+/* Clickable order name */
+.o_clickable_order_name {
+    cursor: pointer;
+    color: var(--bs-primary);
+}
+
+.o_clickable_order_name:hover {
+    text-decoration: underline;
+}
+
+/* Scheduled date in header */
+.o_group_scheduled_date {
+    font-size: 11px;
+}
+
+.o_group_scheduled_date i {
+    margin-right: 3px;
+    font-size: 10px;
+}
+
+/* Driver/vehicle line */
+.o_group_driver_line {
+    display: flex;
+    gap: 12px;
+    padding: 4px 8px 4px 32px;
+    font-size: 11px;
+    color: var(--bs-secondary);
+    background-color: var(--bs-tertiary-bg);
+}
+
+.o_driver_item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.o_driver_item i {
+    font-size: 10px;
+}
+
+/* Google Maps link in capacity line */
+.o_capacity_maps_link {
+    color: var(--bs-primary);
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.o_capacity_maps_link:hover {
+    color: var(--bs-primary);
+    text-decoration: underline;
+}
+
+.o_capacity_maps_link i {
+    color: #ea4335; /* Google Maps red */
+}
+
+/* ============================================
+   Responsive styles
+   ============================================ */
+
+@media (max-width: 576px) {
     .o_tms_status_bar {
-        width: calc(100% - 40px);
-        left: 20px;
-        right: 20px;
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        width: calc(100% - 20px);
         transform: none;
+        padding: 10px 12px;
+    }
+
+    .o_group_capacity_line {
+        padding-left: 16px;
+        gap: 8px;
+        font-size: 10px;
     }
 
     .o_status_bar_content {
         flex-wrap: wrap;
-        justify-content: center;
         gap: 12px;
     }
 }
