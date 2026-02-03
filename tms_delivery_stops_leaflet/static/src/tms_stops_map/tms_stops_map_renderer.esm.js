@@ -349,4 +349,43 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
             this.renderMarkers();
         }
     }
+
+    /**
+     * Override onPinClick to handle filtered-out stops.
+     * When destination is filtered (same location as origin), open origin's popup.
+     * @param {Object} record - The record clicked in the sidebar
+     */
+    onPinClick(record) {
+        const lat = record[this.fieldLatitude];
+        const lng = record[this.fieldLongitude];
+
+        if (!this.validateCoordinates(lat, lng)) {
+            return;
+        }
+
+        // Center map on the record
+        this.leafletMap.setView([lat, lng], 16);
+
+        // Try to find the marker for this record
+        let marker = this.markersById[record.id];
+
+        // If no marker found (e.g., destination filtered out), find a marker at same location
+        if (!marker && record.stop_type === "destination") {
+            // Look for origin marker at the same coordinates
+            for (const m of Object.values(this.markersById)) {
+                const markerLatLng = m.getLatLng();
+                if (
+                    Math.abs(markerLatLng.lat - lat) < 0.0001 &&
+                    Math.abs(markerLatLng.lng - lng) < 0.0001
+                ) {
+                    marker = m;
+                    break;
+                }
+            }
+        }
+
+        if (marker) {
+            marker.openPopup();
+        }
+    }
 }
