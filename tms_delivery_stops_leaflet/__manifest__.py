@@ -18,6 +18,7 @@
     ],
     "data": [
         "views/tms_order_stop_views.xml",
+        "views/tms_order_views.xml",
     ],
     "demo": [
         "demo/demo_unallocated_stops.xml",
