@@ -192,23 +192,26 @@
 
 /* Weight/volume column in stop item */
 .o_pin_weight_volume {
-    font-size: 10px;
-    min-width: 45px;
+    font-size: 11px;
+    min-width: 55px;
     margin-left: auto;
     padding-left: 8px;
     flex-shrink: 0;
+    color: var(--bs-body-color);
 }
 
 .o_pin_weight_volume i {
-    font-size: 9px;
-    margin-right: 2px;
-    width: 10px;
+    font-size: 10px;
+    margin-right: 3px;
+    width: 12px;
     display: inline-block;
+    color: var(--bs-secondary);
 }
 
 .o_wv_volume,
 .o_wv_weight {
     white-space: nowrap;
+    line-height: 1.4;
 }
 
 /* Ensure group header has space for indicators */
