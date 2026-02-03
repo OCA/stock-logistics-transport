@@ -14,31 +14,9 @@ and capacity comparison features.
         t-inherit-mode="primary"
         owl="1"
     >
-        <!-- Add selection bar after stats div (inline) -->
-        <xpath expr="//div[contains(@class, 'o_pin_list_stats')]" position="after">
+        <!-- Floating status bar with selection totals (bottom) -->
+        <xpath expr="//div[contains(@class, 'o_pin_list_groups')]" position="after">
             <t t-if="selectedCount > 0">
-                <div
-                    class="o_tms_selection_bar d-flex align-items-center gap-2 px-2 py-2 bg-primary-subtle border-bottom"
-                >
-                    <span class="badge bg-primary">
-                        <t t-esc="selectedCount" /> selecionado(s)
-                    </span>
-                    <button
-                        class="btn btn-sm btn-primary ms-auto"
-                        t-on-click="onCreateOrder"
-                    >
-                        <i class="fa fa-plus me-1" />Criar Ordem
-                    </button>
-                    <button
-                        class="btn btn-sm btn-outline-secondary"
-                        t-on-click="clearSelection"
-                        title="Limpar seleção"
-                    >
-                        <i class="fa fa-times" />
-                    </button>
-                </div>
-
-                <!-- Floating status bar with selection totals -->
                 <div class="o_tms_status_bar">
                     <div class="o_status_bar_section">
                         <div class="o_status_bar_title">Selecionado</div>
@@ -69,6 +47,19 @@ and capacity comparison features.
                             </div>
                         </div>
                     </div>
+                    <button
+                        class="btn btn-primary btn-sm o_status_bar_action"
+                        t-on-click="onCreateOrder"
+                    >
+                        <i class="fa fa-plus me-1" />Criar Ordem
+                    </button>
+                    <button
+                        class="btn btn-outline-secondary btn-sm"
+                        t-on-click="clearSelection"
+                        title="Limpar seleção"
+                    >
+                        <i class="fa fa-times" />
+                    </button>
                 </div>
             </t>
         </xpath>
