@@ -231,6 +231,13 @@ and capacity comparison features.
             </t>
         </xpath>
 
+        <!-- Override pin number to use global index instead of group index -->
+        <xpath expr="//span[contains(@class, 'o_pin_number')]" position="replace">
+            <span class="o_pin_number">
+                <t t-esc="getGlobalIndex(record, group, record_index)" />
+            </span>
+        </xpath>
+
         <!-- Modify tooltip of pin title to show weight/volume -->
         <xpath expr="//div[contains(@class, 'o_pin_title')]" position="attributes">
             <attribute name="t-att-title">getItemTooltip(record)</attribute>
@@ -243,10 +250,18 @@ and capacity comparison features.
             >o_pin_navigate btn btn-sm btn-outline-primary {{ isUnassigned(record) ? '' : 'd-none' }}</attribute>
         </xpath>
 
-        <!-- Add weight/volume column after pin content for assigned stops -->
+        <!-- Add stop type badge and weight/volume column after pin content for assigned stops -->
         <xpath expr="//div[contains(@class, 'o_pin_content')]" position="after">
             <t t-if="!isUnassigned(record)">
                 <div class="o_pin_weight_volume text-muted text-end">
+                    <!-- Stop type badge above volumes -->
+                    <div class="o_stop_type_badge_container">
+                        <span
+                            t-attf-class="badge o_stop_type_badge {{ getStopTypeBadgeClass(record) }}"
+                        >
+                            <t t-esc="getStopTypeBadgeLabel(record)" />
+                        </span>
+                    </div>
                     <div class="o_wv_volume">
                         <i class="fa fa-cube" />
                         <t t-esc="(record.volume || 0).toFixed(2)" />

@@ -214,6 +214,19 @@
     line-height: 1.4;
 }
 
+/* Stop type badge above volume/weight */
+.o_stop_type_badge_container {
+    margin-bottom: 2px;
+}
+
+.o_stop_type_badge {
+    font-size: 9px;
+    padding: 1px 4px;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+}
+
 /* Ensure group header has space for indicators */
 .o_pin_group_header {
     display: flex;

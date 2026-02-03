@@ -406,6 +406,92 @@ export class SelectablePinList extends DraggablePinList {
     }
 
     /**
+     * Get the global index of a record across all groups.
+     * Returns 1-based index for display.
+     * @param {Object} record - The record to find
+     * @param {Object} group - The group containing the record
+     * @param {Number} recordIndex - The index within the group
+     * @returns {Number} Global 1-based index
+     */
+    getGlobalIndex(record, group, recordIndex) {
+        // Calculate offset from previous groups
+        let offset = 0;
+        for (const g of this.groupedRecords) {
+            if (g.name === group.name) {
+                break;
+            }
+            offset += g.records.length;
+        }
+        return offset + recordIndex + 1;
+    }
+
+    /**
+     * Get stop type badge label for display.
+     * @param {Object} record - Stop record
+     * @returns {String} Badge label (start, stop, end, stop-end)
+     */
+    getStopTypeBadgeLabel(record) {
+        const stopType = record.stop_type;
+        switch (stopType) {
+            case "origin":
+                return "start";
+            case "destination":
+                return "end";
+            case "origin_destination":
+                return "stop-end";
+            default:
+                return "stop";
+        }
+    }
+
+    /**
+     * Get stop type badge CSS class.
+     * @param {Object} record - Stop record
+     * @returns {String} Bootstrap badge class
+     */
+    getStopTypeBadgeClass(record) {
+        const stopType = record.stop_type;
+        switch (stopType) {
+            case "origin":
+                return "bg-info";
+            case "destination":
+                return "bg-success";
+            case "origin_destination":
+                return "bg-primary";
+            default:
+                return "bg-secondary";
+        }
+    }
+
+    /**
+     * Check if a stop is an endpoint (origin or destination).
+     * @param {Object} record - Stop record
+     * @returns {Boolean}
+     */
+    isEndpoint(record) {
+        return record.stop_type === "origin" || record.stop_type === "destination";
+    }
+
+    /**
+     * Get display name for a stop (partner or location).
+     * @param {Object} record - Stop record
+     * @returns {String}
+     */
+    getStopDisplayName(record) {
+        if (record.stop_type === "origin" || record.stop_type === "destination") {
+            const location = record.location_id;
+            if (location) {
+                return Array.isArray(location) ? location[1] : location;
+            }
+        }
+        const partner = record.partner_id;
+        if (partner) {
+            return Array.isArray(partner) ? partner[1] : partner;
+        }
+        return `Stop #${record.id}`;
+    }
+
+    /**
      * Get utilization status class based on percentage.
      * @param {Number} utilization - Percentage value
      * @returns {String} Bootstrap badge class
