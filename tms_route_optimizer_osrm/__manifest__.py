@@ -13,6 +13,7 @@
     "category": "Inventory/Transport",
     "depends": [
         "tms_route_optimizer",
+        "web_leaflet_lib",
     ],
     "external_dependencies": {
         "python": ["requests"],
@@ -20,5 +21,6 @@
     "data": [
         "data/ir_config_parameter.xml",
     ],
+    "post_init_hook": "post_init_hook",
     "installable": True,
 }

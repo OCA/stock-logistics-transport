@@ -5,11 +5,12 @@ from unittest.mock import MagicMock, patch
 
 from odoo.tests.common import TransactionCase
 
-from ..models.osrm_service import OSRMService
+# Import shared OSRM service from web_leaflet_lib
+from odoo.addons.web_leaflet_lib.models.osrm_service import OSRMService
 
 
 class TestOSRMService(TransactionCase):
-    """Tests for the OSRM Service."""
+    """Tests for the OSRM Service (shared from web_leaflet_lib)."""
 
     @classmethod
     def setUpClass(cls):
@@ -32,7 +33,7 @@ class TestOSRMService(TransactionCase):
         result = self.osrm.get_distance_matrix([(0, 0)])
         self.assertIsNone(result)
 
-    @patch("odoo.addons.tms_route_optimizer_osrm.models.osrm_service.requests.get")
+    @patch("odoo.addons.web_leaflet_lib.models.osrm_service.requests.get")
     def test_distance_matrix_success(self, mock_get):
         """Test successful distance matrix calculation."""
         mock_response = MagicMock()
@@ -68,7 +69,7 @@ class TestOSRMService(TransactionCase):
         # Check conversion to km
         self.assertEqual(result["distances_km"][0][1], 10.0)  # 10000m = 10km
 
-    @patch("odoo.addons.tms_route_optimizer_osrm.models.osrm_service.requests.get")
+    @patch("odoo.addons.web_leaflet_lib.models.osrm_service.requests.get")
     def test_get_route_success(self, mock_get):
         """Test successful route calculation."""
         mock_response = MagicMock()
@@ -90,6 +91,7 @@ class TestOSRMService(TransactionCase):
                             "distance": 430000,
                             "duration": 18000,
                             "summary": "BR-116",
+                            "steps": [],
                         }
                     ],
                 }
@@ -113,14 +115,14 @@ class TestOSRMService(TransactionCase):
         # Check geometry is in [lat, lng] format
         self.assertEqual(result["geometry"][0], [-22.9068, -43.1729])
 
-    @patch("odoo.addons.tms_route_optimizer_osrm.models.osrm_service.requests.get")
+    @patch("odoo.addons.web_leaflet_lib.models.osrm_service.requests.get")
     def test_get_route_insufficient_waypoints(self, mock_get):
         """Test route calculation with insufficient waypoints."""
         result = self.osrm.get_route([(-22.9068, -43.1729)])
         self.assertIsNone(result)
         mock_get.assert_not_called()
 
-    @patch("odoo.addons.tms_route_optimizer_osrm.models.osrm_service.requests.get")
+    @patch("odoo.addons.web_leaflet_lib.models.osrm_service.requests.get")
     def test_get_optimized_route_success(self, mock_get):
         """Test successful TSP route optimization."""
         mock_response = MagicMock()
@@ -161,7 +163,7 @@ class TestOSRMService(TransactionCase):
         self.assertIn("waypoint_order", result)
         self.assertEqual(result["waypoint_order"], [0, 2, 1])
 
-    @patch("odoo.addons.tms_route_optimizer_osrm.models.osrm_service.requests.get")
+    @patch("odoo.addons.web_leaflet_lib.models.osrm_service.requests.get")
     def test_is_available_success(self, mock_get):
         """Test OSRM server availability check."""
         mock_response = MagicMock()
@@ -170,7 +172,7 @@ class TestOSRMService(TransactionCase):
 
         self.assertTrue(self.osrm.is_available())
 
-    @patch("odoo.addons.tms_route_optimizer_osrm.models.osrm_service.requests.get")
+    @patch("odoo.addons.web_leaflet_lib.models.osrm_service.requests.get")
     def test_is_available_failure(self, mock_get):
         """Test OSRM server unavailability."""
         import requests

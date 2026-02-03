@@ -10,7 +10,8 @@ from odoo.addons.tms_route_optimizer.models.tms_route_optimizer_ortools import (
     RouteOptimizerHelper,
 )
 
-from .osrm_service import OSRMService
+# Import shared OSRM service from web_leaflet_lib
+from odoo.addons.web_leaflet_lib.models.osrm_service import OSRMService
 
 _logger = logging.getLogger(__name__)
 
@@ -42,10 +43,19 @@ class TMSRouteOptimizer(models.TransientModel):
 
     @api.model
     def _get_osrm_url(self):
-        """Get OSRM server URL from configuration."""
+        """
+        Get OSRM server URL from configuration.
+
+        Priority:
+            1. tms.osrm_server_url (TMS-specific config)
+            2. leaflet.osrm_url (shared Leaflet config)
+            3. OSRMService.DEFAULT_URL (public server)
+        """
         config = self.env["ir.config_parameter"].sudo()
-        return config.get_param(
-            "tms.osrm_server_url", "https://router.project-osrm.org"
+        return (
+            config.get_param("tms.osrm_server_url")
+            or config.get_param("leaflet.osrm_url")
+            or OSRMService.DEFAULT_URL
         )
 
     @api.model
