@@ -42,6 +42,11 @@ class TmsOrderFromStops(models.TransientModel):
         string="Destination",
         domain="[('tms_location', '=', True)]",
     )
+    return_to_origin = fields.Boolean(
+        string="Retornar à Origem",
+        default=False,
+        help="Se marcado, o destino final será o mesmo local de origem",
+    )
     scheduled_date_start = fields.Datetime(
         string="Scheduled Start Date",
     )
@@ -95,6 +100,23 @@ class TmsOrderFromStops(models.TransientModel):
                 self.origin_id = self.tms_team_id.default_origin_location_id
             if self.tms_team_id.default_destination_location_id:
                 self.destination_id = self.tms_team_id.default_destination_location_id
+
+    @api.onchange("return_to_origin", "origin_id")
+    def _onchange_return_to_origin(self):
+        """Set destination to origin when return_to_origin is checked."""
+        if self.return_to_origin and self.origin_id:
+            self.destination_id = self.origin_id
+        elif self.return_to_origin and not self.origin_id:
+            # Checkbox marked but no origin yet - keep destination empty
+            self.destination_id = False
+
+    @api.onchange("destination_id")
+    def _onchange_destination_id(self):
+        """Sync return_to_origin checkbox based on destination value."""
+        if self.destination_id and self.origin_id:
+            self.return_to_origin = self.destination_id == self.origin_id
+        elif not self.destination_id:
+            self.return_to_origin = False
 
     def action_create_order(self):
         """Create TMS order and assign stops."""

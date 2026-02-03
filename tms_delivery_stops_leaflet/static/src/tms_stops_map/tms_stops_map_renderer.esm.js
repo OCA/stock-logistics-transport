@@ -32,10 +32,13 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
 
     /**
      * Get stop type badge label for display.
+     * Considers if this is the last stop when no destination exists.
      * @param {Object} record - Stop record
+     * @param {Boolean} isLastStop - Whether this is the last stop in route
+     * @param {Boolean} hasDestination - Whether the order has a destination stop
      * @returns {String} Badge label (start, stop, end, stop-end)
      */
-    _getStopTypeBadgeLabel(record) {
+    _getStopTypeBadgeLabel(record, isLastStop = false, hasDestination = true) {
         const stopType = record.stop_type;
         switch (stopType) {
             case "origin":
@@ -45,16 +48,23 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
             case "origin_destination":
                 return "stop-end";
             default:
+                // If this is the last delivery and no destination, show "end"
+                if (isLastStop && !hasDestination) {
+                    return "end";
+                }
                 return "stop";
         }
     }
 
     /**
      * Get stop type badge CSS class.
+     * Considers if this is the last stop when no destination exists.
      * @param {Object} record - Stop record
+     * @param {Boolean} isLastStop - Whether this is the last stop in route
+     * @param {Boolean} hasDestination - Whether the order has a destination stop
      * @returns {String} Bootstrap badge class
      */
-    _getStopTypeBadgeClass(record) {
+    _getStopTypeBadgeClass(record, isLastStop = false, hasDestination = true) {
         const stopType = record.stop_type;
         switch (stopType) {
             case "origin":
@@ -64,6 +74,10 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
             case "origin_destination":
                 return "bg-primary";
             default:
+                // If this is the last delivery and no destination, use destination style
+                if (isLastStop && !hasDestination) {
+                    return "bg-success";
+                }
                 return "bg-secondary";
         }
     }
@@ -85,9 +99,19 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
         // Build navigation URL
         const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
 
-        // Get badge info
-        const badgeLabel = this._getStopTypeBadgeLabel(record);
-        const badgeClass = this._getStopTypeBadgeClass(record);
+        // Get badge info - use metadata from getFilteredRecords if available
+        const isLastStop = record._isLastStop || false;
+        const hasDestination = record._hasDestination !== false; // Default true
+        const badgeLabel = this._getStopTypeBadgeLabel(
+            record,
+            isLastStop,
+            hasDestination
+        );
+        const badgeClass = this._getStopTypeBadgeClass(
+            record,
+            isLastStop,
+            hasDestination
+        );
 
         // Navigation button HTML
         const navButton = this.enableNavigation
@@ -183,6 +207,7 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
      * Get records filtered to avoid duplicate origin/destination markers.
      * When origin and destination are at the same location, show only one marker.
      * Returns records sorted in route order: origin -> deliveries -> destination
+     * Adds metadata: _hasDestination, _isLastStop for each record.
      * @returns {Array}
      */
     getFilteredRecords() {
@@ -217,7 +242,18 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
                 : stops;
 
             // Sort stops in correct order: origin -> delivery -> destination
-            result.push(...this.sortRecordsByStopOrder(filteredStops));
+            const sortedStops = this.sortRecordsByStopOrder(filteredStops);
+
+            // Add metadata to each record
+            const hasDestination = sortedStops.some(
+                (s) => s.stop_type === "destination"
+            );
+            sortedStops.forEach((stop, idx) => {
+                stop._hasDestination = hasDestination;
+                stop._isLastStop = idx === sortedStops.length - 1;
+            });
+
+            result.push(...sortedStops);
         }
         return result;
     }

@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
+    <!-- Server Action: Regenerate Endpoint Stops -->
+    <record id="action_tms_order_regenerate_endpoint_stops" model="ir.actions.server">
+        <field name="name">Regenerate Origin/Destination Stops</field>
+        <field name="model_id" ref="tms.model_tms_order" />
+        <field name="binding_model_id" ref="tms.model_tms_order" />
+        <field name="binding_view_types">list,form</field>
+        <field name="state">code</field>
+        <field name="code">
+if records:
+    records.action_regenerate_endpoint_stops()
+        </field>
+    </record>
+
     <!-- Extend TMS Order Form View -->
     <record id="tms_order_form_inherit_stops" model="ir.ui.view">
         <field name="name">tms.order.form.inherit.stops</field>
@@ -11,12 +24,37 @@
                     <field name="stop_ids">
                         <list editable="bottom">
                             <field name="sequence" widget="handle" />
-                            <field name="partner_id" />
-                            <field name="weight" />
-                            <field name="weight_uom_id" />
-                            <field name="volume" />
-                            <field name="volume_uom_id" />
-                            <field name="unloading_time" />
+                            <field
+                                name="stop_type"
+                                widget="badge"
+                                decoration-info="stop_type == 'origin'"
+                                decoration-success="stop_type == 'destination'"
+                                decoration-primary="stop_type == 'delivery'"
+                            />
+                            <field
+                                name="partner_id"
+                                invisible="stop_type != 'delivery'"
+                                required="stop_type == 'delivery'"
+                            />
+                            <field
+                                name="location_id"
+                                invisible="stop_type == 'delivery'"
+                                required="stop_type != 'delivery'"
+                            />
+                            <field name="weight" invisible="stop_type != 'delivery'" />
+                            <field
+                                name="weight_uom_id"
+                                invisible="stop_type != 'delivery'"
+                            />
+                            <field name="volume" invisible="stop_type != 'delivery'" />
+                            <field
+                                name="volume_uom_id"
+                                invisible="stop_type != 'delivery'"
+                            />
+                            <field
+                                name="unloading_time"
+                                invisible="stop_type != 'delivery'"
+                            />
                             <field name="scheduled_date" />
                             <field name="state" />
                         </list>
@@ -55,6 +93,40 @@
                     readonly="1"
                 />
             </field>
+            <!-- Add return_to_origin checkbox before destination_id (route group) -->
+            <xpath
+                expr="//group[@groups='tms.group_tms_route']/field[@name='destination_id']"
+                position="before"
+            >
+                <field
+                    name="return_to_origin"
+                    widget="boolean_toggle"
+                    invisible="route"
+                />
+            </xpath>
+            <!-- Make destination_id readonly when return_to_origin is checked (route group) -->
+            <xpath
+                expr="//group[@groups='tms.group_tms_route']/field[@name='destination_id']"
+                position="attributes"
+            >
+                <attribute name="readonly">return_to_origin</attribute>
+                <attribute name="required">0</attribute>
+            </xpath>
+            <!-- Add return_to_origin checkbox before destination_id (non-route group) -->
+            <xpath
+                expr="//group[@groups='!tms.group_tms_route']/field[@name='destination_id']"
+                position="before"
+            >
+                <field name="return_to_origin" widget="boolean_toggle" />
+            </xpath>
+            <!-- Make destination_id readonly when return_to_origin is checked (non-route group) -->
+            <xpath
+                expr="//group[@groups='!tms.group_tms_route']/field[@name='destination_id']"
+                position="attributes"
+            >
+                <attribute name="readonly">return_to_origin</attribute>
+                <attribute name="required">0</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
