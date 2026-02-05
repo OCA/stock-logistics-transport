@@ -418,9 +418,9 @@ class ShipmentAdvice(models.Model):
 
     def _validate_picking(self, picking, backorder_policy="create_backorder"):
         self.ensure_one()
-        self._lock_records(picking)
         try:
             with self.env.cr.savepoint():
+                self._lock_records(picking)
                 if not picking._check_backorder():
                     picking.with_context(skip_backorder=True).button_validate()
                 elif backorder_policy == "create_backorder":
