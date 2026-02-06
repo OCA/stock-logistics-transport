@@ -5,12 +5,6 @@ class TMSOrder(models.Model):
     _name = "tms.order"
     _inherit = ["tms.order", "capacity.utilization.mixin"]
 
-    return_to_origin = fields.Boolean(
-        string="Retornar à Origem",
-        default=False,
-        help="Se marcado, o destino final será o mesmo local de origem",
-    )
-
     stop_ids = fields.One2many(
         "tms.order.stop",
         "order_id",
@@ -254,23 +248,6 @@ class TMSOrder(models.Model):
             if self.tms_team_id.default_destination_location_id:
                 self.destination_id = self.tms_team_id.default_destination_location_id
 
-    @api.onchange("return_to_origin", "origin_id")
-    def _onchange_return_to_origin(self):
-        """Set destination to origin when return_to_origin is checked."""
-        if self.return_to_origin and self.origin_id:
-            self.destination_id = self.origin_id
-        elif self.return_to_origin and not self.origin_id:
-            # Checkbox marked but no origin yet - keep destination empty
-            self.destination_id = False
-
-    @api.onchange("destination_id")
-    def _onchange_destination_id(self):
-        """Sync return_to_origin checkbox based on destination value."""
-        if self.destination_id and self.origin_id:
-            self.return_to_origin = self.destination_id == self.origin_id
-        elif not self.destination_id:
-            self.return_to_origin = False
-
     @api.model_create_multi
     def create(self, vals_list):
         """Override create to auto-create endpoint stops."""
@@ -279,12 +256,10 @@ class TMSOrder(models.Model):
         return orders
 
     def write(self, vals):
-        """Override write to sync stop states and update endpoint stops."""
+        """Override write to sync stop states."""
         res = super().write(vals)
         if "stage_id" in vals:
             self._sync_stop_states()
-        if "origin_id" in vals or "destination_id" in vals:
-            self._update_endpoint_stops()
         return res
 
     def _create_endpoint_stops(self):
@@ -321,57 +296,6 @@ class TMSOrder(models.Model):
                     }
                 )
 
-    def _update_endpoint_stops(self):
-        """
-        Update or create endpoint stops when origin_id/destination_id changes.
-        Called automatically when these fields are modified.
-        """
-        Stop = self.env["tms.order.stop"]
-        for order in self:
-            # Handle origin stop
-            origin_stop = order.stop_ids.filtered(lambda s: s.stop_type == "origin")
-            if order.origin_id:
-                if origin_stop:
-                    # Update existing origin stop
-                    origin_stop.write({"location_id": order.origin_id.id})
-                else:
-                    # Create new origin stop
-                    Stop.create(
-                        {
-                            "order_id": order.id,
-                            "stop_type": "origin",
-                            "location_id": order.origin_id.id,
-                            "sequence": 0,
-                            "company_id": order.company_id.id,
-                        }
-                    )
-            elif origin_stop:
-                # Remove origin stop if origin_id is cleared
-                origin_stop.unlink()
-
-            # Handle destination stop
-            destination_stop = order.stop_ids.filtered(
-                lambda s: s.stop_type == "destination"
-            )
-            if order.destination_id:
-                if destination_stop:
-                    # Update existing destination stop
-                    destination_stop.write({"location_id": order.destination_id.id})
-                else:
-                    # Create new destination stop
-                    Stop.create(
-                        {
-                            "order_id": order.id,
-                            "stop_type": "destination",
-                            "location_id": order.destination_id.id,
-                            "sequence": 9999,
-                            "company_id": order.company_id.id,
-                        }
-                    )
-            elif destination_stop:
-                # Remove destination stop if destination_id is cleared
-                destination_stop.unlink()
-
     def _sync_stop_states(self):
         """Sync stop states based on order stage configuration"""
         for order in self:
@@ -379,17 +303,3 @@ class TMSOrder(models.Model):
                 continue
             stop_state = order.stage_id.stop_state_sync
             order.stop_ids.write({"state": stop_state})
-
-    def action_regenerate_endpoint_stops(self):
-        """
-        Manually regenerate origin/destination stops for existing orders.
-        Can be called from a server action or button.
-        """
-        for order in self:
-            # Remove existing endpoint stops
-            order.stop_ids.filtered(
-                lambda s: s.stop_type in ("origin", "destination")
-            ).unlink()
-        # Recreate endpoint stops
-        self._create_endpoint_stops()
-        return True

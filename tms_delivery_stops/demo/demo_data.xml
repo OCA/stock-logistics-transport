@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <!-- Demo Depot Location -->
+    <!-- Demo Depot Locations -->
     <record id="demo_depot_location" model="res.partner">
         <field name="name">Depósito Central - São Paulo</field>
         <field name="is_company">True</field>
@@ -11,6 +11,18 @@
         <field name="country_id" ref="base.br" />
         <field name="partner_latitude">-23.550520</field>
         <field name="partner_longitude">-46.633308</field>
+    </record>
+
+    <record id="demo_depot_location_guarulhos" model="res.partner">
+        <field name="name">CD Guarulhos</field>
+        <field name="is_company">True</field>
+        <field name="tms_location">True</field>
+        <field name="street">Rod. Presidente Dutra, km 228</field>
+        <field name="city">Guarulhos</field>
+        <field name="zip">07190-000</field>
+        <field name="country_id" ref="base.br" />
+        <field name="partner_latitude">-23.450200</field>
+        <field name="partner_longitude">-46.533100</field>
     </record>
 
     <!-- Demo Delivery Partners with Geolocation (São Paulo area) -->
@@ -103,14 +115,18 @@
     </record>
 
     <!-- Demo TMS Orders with Stops -->
+    <!-- Order 1: Round trip from Depósito Central (same origin and destination) -->
+    <!-- Origin/Destination stops are created automatically by _create_endpoint_stops -->
     <record id="demo_tms_order_with_stops_1" model="tms.order">
         <field name="name">ORD-DEMO-001</field>
         <field name="tms_team_id" ref="tms.demo_team_1" />
         <field name="origin_id" ref="demo_depot_location" />
+        <field name="destination_id" ref="demo_depot_location" />
     </record>
 
     <record id="demo_tms_order_stop_1" model="tms.order.stop">
         <field name="order_id" ref="demo_tms_order_with_stops_1" />
+        <field name="stop_type">delivery</field>
         <field name="sequence">10</field>
         <field name="partner_id" ref="demo_partner_delivery_1" />
         <field name="weight">500</field>
@@ -127,6 +143,7 @@
 
     <record id="demo_tms_order_stop_2" model="tms.order.stop">
         <field name="order_id" ref="demo_tms_order_with_stops_1" />
+        <field name="stop_type">delivery</field>
         <field name="sequence">20</field>
         <field name="partner_id" ref="demo_partner_delivery_2" />
         <field name="weight">800</field>
@@ -143,6 +160,7 @@
 
     <record id="demo_tms_order_stop_3" model="tms.order.stop">
         <field name="order_id" ref="demo_tms_order_with_stops_1" />
+        <field name="stop_type">delivery</field>
         <field name="sequence">30</field>
         <field name="partner_id" ref="demo_partner_delivery_3" />
         <field name="weight">300</field>
@@ -157,14 +175,18 @@
         <field name="state">draft</field>
     </record>
 
+    <!-- Order 2: One-way trip from Depósito Central to CD Guarulhos -->
+    <!-- Origin/Destination stops are created automatically by _create_endpoint_stops -->
     <record id="demo_tms_order_with_stops_2" model="tms.order">
         <field name="name">ORD-DEMO-002</field>
         <field name="tms_team_id" ref="tms.demo_team_2" />
         <field name="origin_id" ref="demo_depot_location" />
+        <field name="destination_id" ref="demo_depot_location_guarulhos" />
     </record>
 
     <record id="demo_tms_order_stop_4" model="tms.order.stop">
         <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="stop_type">delivery</field>
         <field name="sequence">10</field>
         <field name="partner_id" ref="demo_partner_delivery_4" />
         <field name="weight">2000</field>
@@ -181,6 +203,7 @@
 
     <record id="demo_tms_order_stop_5" model="tms.order.stop">
         <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="stop_type">delivery</field>
         <field name="sequence">20</field>
         <field name="partner_id" ref="demo_partner_delivery_5" />
         <field name="weight">3500</field>
@@ -197,6 +220,7 @@
 
     <record id="demo_tms_order_stop_6" model="tms.order.stop">
         <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="stop_type">delivery</field>
         <field name="sequence">30</field>
         <field name="partner_id" ref="demo_partner_delivery_6" />
         <field name="weight">1500</field>
@@ -213,6 +237,7 @@
 
     <record id="demo_tms_order_stop_7" model="tms.order.stop">
         <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="stop_type">delivery</field>
         <field name="sequence">40</field>
         <field name="partner_id" ref="demo_partner_delivery_7" />
         <field name="weight">1200</field>
@@ -229,6 +254,7 @@
 
     <record id="demo_tms_order_stop_8" model="tms.order.stop">
         <field name="order_id" ref="demo_tms_order_with_stops_2" />
+        <field name="stop_type">delivery</field>
         <field name="sequence">50</field>
         <field name="partner_id" ref="demo_partner_delivery_8" />
         <field name="weight">800</field>

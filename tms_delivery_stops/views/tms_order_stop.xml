@@ -8,12 +8,20 @@
             <list string="Delivery Stops">
                 <field name="sequence" widget="handle" />
                 <field
+                    name="stop_type"
+                    widget="badge"
+                    decoration-info="stop_type == 'origin'"
+                    decoration-success="stop_type == 'destination'"
+                    decoration-primary="stop_type == 'delivery'"
+                />
+                <field
                     name="company_id"
                     groups="base.group_multi_company"
                     optional="hide"
                 />
                 <field name="scheduled_date" />
-                <field name="partner_id" />
+                <field name="partner_id" optional="show" />
+                <field name="location_id" optional="show" />
                 <field name="address_complete" optional="show" />
                 <field name="weight" optional="show" />
                 <field name="weight_uom_id" column_invisible="1" optional="hide" />
@@ -44,8 +52,22 @@
                     <group>
                         <group>
                             <field name="order_id" />
+                            <field
+                                name="stop_type"
+                                widget="radio"
+                                options="{'horizontal': true}"
+                            />
                             <field name="sequence" />
-                            <field name="partner_id" />
+                            <field
+                                name="partner_id"
+                                invisible="stop_type != 'delivery'"
+                                required="stop_type == 'delivery'"
+                            />
+                            <field
+                                name="location_id"
+                                invisible="stop_type == 'delivery'"
+                                required="stop_type != 'delivery'"
+                            />
                             <field name="state" />
                         </group>
                         <group>
@@ -53,7 +75,10 @@
                             <field name="unloading_time" />
                         </group>
                     </group>
-                    <group string="Weight and Volume">
+                    <group
+                        string="Weight and Volume"
+                        invisible="stop_type != 'delivery'"
+                    >
                         <group>
                             <field name="weight" />
                             <field name="weight_uom_id" />
@@ -82,7 +107,25 @@
         <field name="arch" type="xml">
             <search string="Delivery Stops">
                 <field name="partner_id" />
+                <field name="location_id" />
                 <field name="order_id" />
+                <separator />
+                <filter
+                    name="origin"
+                    string="Origin"
+                    domain="[('stop_type', '=', 'origin')]"
+                />
+                <filter
+                    name="delivery"
+                    string="Delivery"
+                    domain="[('stop_type', '=', 'delivery')]"
+                />
+                <filter
+                    name="destination"
+                    string="Destination"
+                    domain="[('stop_type', '=', 'destination')]"
+                />
+                <separator />
                 <filter
                     name="draft"
                     string="Draft"
@@ -103,6 +146,13 @@
                     string="Skipped"
                     domain="[('state', '=', 'skipped')]"
                 />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_stop_type"
+                        string="Stop Type"
+                        context="{'group_by': 'stop_type'}"
+                    />
+                </group>
             </search>
         </field>
     </record>

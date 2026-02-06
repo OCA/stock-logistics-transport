@@ -6,7 +6,10 @@ class TMSOrderStop(models.Model):
     _name = "tms.order.stop"
     _description = "TMS Order Delivery Stop"
     _inherit = ["mail.thread", "mail.activity.mixin"]
-    _order = "order_id, sequence"
+    _order = "order_id, stop_type_order, sequence"
+
+    # Mapping for stop_type sort order: origin=0, delivery=1, destination=2
+    STOP_TYPE_ORDER = {"origin": 0, "delivery": 1, "destination": 2}
 
     company_id = fields.Many2one(
         "res.company",
@@ -22,6 +25,24 @@ class TMSOrderStop(models.Model):
         ondelete="set null",
         index=True,
     )
+    stop_type = fields.Selection(
+        [
+            ("origin", "Origin/Pickup"),
+            ("delivery", "Delivery"),
+            ("destination", "Destination/Return"),
+        ],
+        default="delivery",
+        required=True,
+        index=True,
+        help="Type of stop: origin (pickup point), delivery (normal stop), "
+        "or destination (return/final point)",
+    )
+    stop_type_order = fields.Integer(
+        compute="_compute_stop_type_order",
+        store=True,
+        index=True,
+        help="Numeric order for stop_type: 0=origin, 1=delivery, 2=destination",
+    )
     sequence = fields.Integer(
         default=10,
         help="Order of the stop in the route",
@@ -29,8 +50,14 @@ class TMSOrderStop(models.Model):
     partner_id = fields.Many2one(
         "res.partner",
         string="Delivery Partner",
-        required=True,
-        help="Recipient of the delivery",
+        required=False,
+        help="Recipient of the delivery (for delivery stops)",
+    )
+    location_id = fields.Many2one(
+        "res.partner",
+        string="TMS Location",
+        domain="[('tms_location', '=', True)]",
+        help="TMS location for origin/destination stops",
     )
     weight = fields.Float(
         help="Weight of the delivery",
@@ -69,13 +96,13 @@ class TMSOrderStop(models.Model):
         help="Scheduled delivery date/time",
     )
     latitude = fields.Float(
-        related="partner_id.partner_latitude",
-        string="Latitude",
+        compute="_compute_coordinates",
+        store=True,
         readonly=True,
     )
     longitude = fields.Float(
-        related="partner_id.partner_longitude",
-        string="Longitude",
+        compute="_compute_coordinates",
+        store=True,
         readonly=True,
     )
     address_complete = fields.Char(
@@ -98,36 +125,130 @@ class TMSOrderStop(models.Model):
         default="draft",
     )
 
-    @api.depends("partner_id", "order_id", "sequence")
-    def _compute_display_name(self):
+    @api.constrains("stop_type", "order_id")
+    def _check_unique_endpoint_per_order(self):
+        """Ensure each order has at most one origin and one destination stop."""
         for stop in self:
-            if stop.partner_id:
+            if stop.order_id and stop.stop_type in ("origin", "destination"):
+                count = self.search_count(
+                    [
+                        ("order_id", "=", stop.order_id.id),
+                        ("stop_type", "=", stop.stop_type),
+                        ("id", "!=", stop.id),
+                    ]
+                )
+                if count > 0:
+                    type_label = (
+                        _("origin") if stop.stop_type == "origin" else _("destination")
+                    )
+                    raise UserError(
+                        _(
+                            "Order %(order)s already has a"
+                            " %(type)s stop. Each order can"
+                            " have only one %(type)s."
+                        )
+                        % {
+                            "order": stop.order_id.name,
+                            "type": type_label,
+                        }
+                    )
+
+    @api.constrains("stop_type", "partner_id", "location_id")
+    def _check_partner_or_location(self):
+        """Validate partner_id for delivery and location_id
+        for origin/destination stops."""
+        for stop in self:
+            if stop.stop_type == "delivery" and not stop.partner_id:
+                raise UserError(
+                    _("Delivery stops must have a Delivery Partner specified.")
+                )
+            if stop.stop_type in ("origin", "destination") and not stop.location_id:
+                raise UserError(
+                    _("Origin/Destination stops must have a TMS Location specified.")
+                )
+
+    @api.depends("stop_type")
+    def _compute_stop_type_order(self):
+        """Compute numeric order for stop_type to enable correct SQL ordering."""
+        for stop in self:
+            stop.stop_type_order = self.STOP_TYPE_ORDER.get(stop.stop_type, 1)
+
+    @api.onchange("stop_type")
+    def _onchange_stop_type(self):
+        """Set default sequence based on stop_type."""
+        if self.stop_type == "origin":
+            self.sequence = 0
+        elif self.stop_type == "destination":
+            self.sequence = 9999
+
+    @api.depends(
+        "partner_id.partner_latitude",
+        "partner_id.partner_longitude",
+        "location_id.partner_latitude",
+        "location_id.partner_longitude",
+        "stop_type",
+    )
+    def _compute_coordinates(self):
+        """Compute coordinates from partner_id or location_id based on stop_type."""
+        for stop in self:
+            if stop.stop_type in ("origin", "destination") and stop.location_id:
+                stop.latitude = stop.location_id.partner_latitude or 0.0
+                stop.longitude = stop.location_id.partner_longitude or 0.0
+            elif stop.partner_id:
+                stop.latitude = stop.partner_id.partner_latitude or 0.0
+                stop.longitude = stop.partner_id.partner_longitude or 0.0
+            else:
+                stop.latitude = 0.0
+                stop.longitude = 0.0
+
+    @api.depends("partner_id", "location_id", "order_id", "sequence", "stop_type")
+    def _compute_display_name(self):
+        stop_type_labels = {
+            "origin": _("Origin"),
+            "destination": _("Destination"),
+            "delivery": _("Stop"),
+        }
+        for stop in self:
+            partner = (
+                stop.location_id if stop.stop_type != "delivery" else stop.partner_id
+            )
+            if partner:
                 name_parts = []
                 if stop.order_id:
                     name_parts.append(stop.order_id.name)
-                name_parts.append(f"Stop {stop.sequence}")
-                name_parts.append(stop.partner_id.display_name)
+                type_label = stop_type_labels.get(stop.stop_type, _("Stop"))
+                if stop.stop_type == "delivery":
+                    name_parts.append(f"{type_label} {stop.sequence}")
+                else:
+                    name_parts.append(type_label)
+                name_parts.append(partner.display_name)
                 stop.display_name = " - ".join(name_parts)
             else:
                 stop.display_name = f"Stop {stop.id}"
 
-    @api.depends("partner_id")
+    @api.depends("partner_id", "location_id", "stop_type")
     def _compute_address_complete(self):
         for stop in self:
-            if stop.partner_id:
+            # Use location_id for origin/destination, partner_id for delivery
+            partner = (
+                stop.location_id
+                if stop.stop_type in ("origin", "destination")
+                else stop.partner_id
+            )
+            if partner:
                 address_parts = []
-                if stop.partner_id.street:
-                    address_parts.append(stop.partner_id.street)
-                if stop.partner_id.street2:
-                    address_parts.append(stop.partner_id.street2)
-                if stop.partner_id.city:
-                    address_parts.append(stop.partner_id.city)
-                if stop.partner_id.state_id:
-                    address_parts.append(stop.partner_id.state_id.name)
-                if stop.partner_id.zip:
-                    address_parts.append(stop.partner_id.zip)
-                if stop.partner_id.country_id:
-                    address_parts.append(stop.partner_id.country_id.name)
+                if partner.street:
+                    address_parts.append(partner.street)
+                if partner.street2:
+                    address_parts.append(partner.street2)
+                if partner.city:
+                    address_parts.append(partner.city)
+                if partner.state_id:
+                    address_parts.append(partner.state_id.name)
+                if partner.zip:
+                    address_parts.append(partner.zip)
+                if partner.country_id:
+                    address_parts.append(partner.country_id.name)
                 address_str = ", ".join(address_parts)
                 stop.address_complete = address_str
                 stop.display_address = address_str
@@ -139,7 +260,7 @@ class TMSOrderStop(models.Model):
         """
         Open Google Maps in a new tab with route for a single stop.
         Uses the stop's order to get all stops for the route.
-        Considers origin_id and destination_id from the order.
+        Now uses stop_type to determine origin/destination from stops.
 
         Returns:
             dict: Action to open Google Maps URL
@@ -148,39 +269,10 @@ class TMSOrderStop(models.Model):
         if not self.order_id:
             raise UserError(_("Stop must be linked to an order."))
 
-        # Get origin coordinates from order.origin_id if available
-        origin_coords = None
-        if (
-            self.order_id.origin_id
-            and self.order_id.origin_id.partner_latitude
-            and self.order_id.origin_id.partner_longitude
-        ):
-            origin_coords = (
-                self.order_id.origin_id.partner_latitude,
-                self.order_id.origin_id.partner_longitude,
-            )
+        # Get all stops sorted by stop_type and sequence
+        all_stops = self.order_id.stop_ids.sorted(lambda s: (s.stop_type, s.sequence))
+        url = self._generate_google_maps_url_from_stops(all_stops)
 
-        # Get destination coordinates from order.destination_id if available
-        destination_coords = None
-        if (
-            self.order_id.destination_id
-            and self.order_id.destination_id.partner_latitude
-            and self.order_id.destination_id.partner_longitude
-        ):
-            destination_coords = (
-                self.order_id.destination_id.partner_latitude,
-                self.order_id.destination_id.partner_longitude,
-            )
-
-        # Collect stop coordinates
-        stop_coordinates = []
-        for stop in self.order_id.stop_ids.sorted("sequence"):
-            if stop.latitude and stop.longitude:
-                stop_coordinates.append((stop.latitude, stop.longitude))
-
-        url = self._generate_google_maps_url(
-            stop_coordinates, origin_coords, destination_coords
-        )
         if not url:
             raise UserError(_("Could not generate Google Maps URL."))
 
@@ -193,46 +285,15 @@ class TMSOrderStop(models.Model):
     def action_open_google_maps_multi(self):
         """
         Open Google Maps in a new tab with route for multiple selected stops.
-        Considers origin_id and destination_id from the order if available.
+        Uses stop_type to determine origin/destination.
 
         Returns:
             dict: Action to open Google Maps URL
         """
-        # Get origin coordinates from order.origin_id if available
-        origin_coords = None
-        destination_coords = None
+        # Sort stops by stop_type and sequence
+        sorted_stops = self.sorted(lambda s: (s.stop_type, s.sequence))
+        url = self._generate_google_maps_url_from_stops(sorted_stops)
 
-        # Try to get order from first stop
-        order = self[0].order_id if self and self[0].order_id else None
-        if order:
-            if (
-                order.origin_id
-                and order.origin_id.partner_latitude
-                and order.origin_id.partner_longitude
-            ):
-                origin_coords = (
-                    order.origin_id.partner_latitude,
-                    order.origin_id.partner_longitude,
-                )
-            if (
-                order.destination_id
-                and order.destination_id.partner_latitude
-                and order.destination_id.partner_longitude
-            ):
-                destination_coords = (
-                    order.destination_id.partner_latitude,
-                    order.destination_id.partner_longitude,
-                )
-
-        # Collect stop coordinates
-        stop_coordinates = []
-        for stop in self.sorted("sequence"):
-            if stop.latitude and stop.longitude:
-                stop_coordinates.append((stop.latitude, stop.longitude))
-
-        url = self._generate_google_maps_url(
-            stop_coordinates, origin_coords, destination_coords
-        )
         if not url:
             raise UserError(_("Could not generate Google Maps URL."))
 
@@ -242,12 +303,71 @@ class TMSOrderStop(models.Model):
             "target": "new",
         }
 
+    def _generate_google_maps_url_from_stops(self, stops):
+        """
+        Generate Google Maps URL from a recordset of stops.
+        Uses stop_type to determine origin and destination.
+
+        Args:
+            stops: Recordset of tms.order.stop sorted by stop_type and sequence
+
+        Returns:
+            Google Maps URL string or None if insufficient coordinates
+        """
+        # Find origin, delivery stops, and destination
+        origin_stop = stops.filtered(lambda s: s.stop_type == "origin")[:1]
+        destination_stop = stops.filtered(lambda s: s.stop_type == "destination")[:1]
+        delivery_stops = stops.filtered(lambda s: s.stop_type == "delivery")
+
+        # Collect coordinates
+        all_coords = []
+
+        # Add origin if exists
+        if origin_stop and origin_stop.latitude and origin_stop.longitude:
+            all_coords.append((origin_stop.latitude, origin_stop.longitude))
+
+        # Add delivery stops
+        for stop in delivery_stops.sorted("sequence"):
+            if stop.latitude and stop.longitude:
+                all_coords.append((stop.latitude, stop.longitude))
+
+        # Add destination if exists
+        if (
+            destination_stop
+            and destination_stop.latitude
+            and destination_stop.longitude
+        ):
+            all_coords.append((destination_stop.latitude, destination_stop.longitude))
+
+        if len(all_coords) < 2:
+            return None
+
+        # First coord is origin, last is destination, rest are waypoints
+        origin = f"{all_coords[0][0]},{all_coords[0][1]}"
+        destination = f"{all_coords[-1][0]},{all_coords[-1][1]}"
+
+        waypoints = []
+        for lat, lon in all_coords[1:-1]:
+            waypoints.append(f"{lat},{lon}")
+
+        waypoints_str = "|".join(waypoints) if waypoints else ""
+
+        url = (
+            f"https://www.google.com/maps/dir/?api=1"
+            f"&origin={origin}&destination={destination}"
+        )
+        if waypoints_str:
+            url += f"&waypoints={waypoints_str}"
+
+        return url
+
     @staticmethod
     def _generate_google_maps_url(
         stop_coordinates, origin_coords=None, destination_coords=None
     ):
         """
         Generate Google Maps URL for a route with waypoints.
+        Kept for backward compatibility.
 
         Args:
             stop_coordinates: List of (latitude, longitude) tuples for stops

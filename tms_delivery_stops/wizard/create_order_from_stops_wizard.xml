@@ -15,12 +15,7 @@
                     </group>
                     <group string="Route">
                         <field name="origin_id" options="{'no_create': True}" />
-                        <field name="return_to_origin" widget="boolean_toggle" />
-                        <field
-                            name="destination_id"
-                            options="{'no_create': True}"
-                            readonly="return_to_origin"
-                        />
+                        <field name="destination_id" options="{'no_create': True}" />
                     </group>
                 </group>
                 <group string="Selected Stops">
