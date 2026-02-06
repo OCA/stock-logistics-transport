@@ -6,7 +6,10 @@
         <field name="res_model">tms.order.stop</field>
         <field name="view_mode">leaflet_map,list,form</field>
         <field name="domain">[('order_id.tms_team_id', '=', active_id)]</field>
-        <field name="context">{'search_default_group_by_order': 1}</field>
+        <field name="context">{
+            'search_default_group_by_order': 1,
+            'search_default_not_completed': 1
+        }</field>
     </record>
 
     <!-- Botão MAP no Dashboard do Team (Kanban) -->
