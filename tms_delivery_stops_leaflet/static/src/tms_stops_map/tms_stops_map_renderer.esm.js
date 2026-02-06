@@ -32,52 +32,36 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
 
     /**
      * Get stop type badge label for display.
-     * Considers if this is the last stop when no destination exists.
+     * Simple switch by stop_type.
      * @param {Object} record - Stop record
-     * @param {Boolean} isLastStop - Whether this is the last stop in route
-     * @param {Boolean} hasDestination - Whether the order has a destination stop
-     * @returns {String} Badge label (start, stop, end, stop-end)
+     * @returns {String} Badge label (start, stop, end)
      */
-    _getStopTypeBadgeLabel(record, isLastStop = false, hasDestination = true) {
+    _getStopTypeBadgeLabel(record) {
         const stopType = record.stop_type;
         switch (stopType) {
             case "origin":
                 return "start";
             case "destination":
                 return "end";
-            case "origin_destination":
-                return "stop-end";
             default:
-                // If this is the last delivery and no destination, show "end"
-                if (isLastStop && !hasDestination) {
-                    return "end";
-                }
                 return "stop";
         }
     }
 
     /**
      * Get stop type badge CSS class.
-     * Considers if this is the last stop when no destination exists.
+     * Simple switch by stop_type.
      * @param {Object} record - Stop record
-     * @param {Boolean} isLastStop - Whether this is the last stop in route
-     * @param {Boolean} hasDestination - Whether the order has a destination stop
      * @returns {String} Bootstrap badge class
      */
-    _getStopTypeBadgeClass(record, isLastStop = false, hasDestination = true) {
+    _getStopTypeBadgeClass(record) {
         const stopType = record.stop_type;
         switch (stopType) {
             case "origin":
                 return "bg-info";
             case "destination":
                 return "bg-success";
-            case "origin_destination":
-                return "bg-primary";
             default:
-                // If this is the last delivery and no destination, use destination style
-                if (isLastStop && !hasDestination) {
-                    return "bg-success";
-                }
                 return "bg-secondary";
         }
     }
@@ -99,19 +83,9 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
         // Build navigation URL
         const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
 
-        // Get badge info - use metadata from getFilteredRecords if available
-        const isLastStop = record._isLastStop || false;
-        const hasDestination = record._hasDestination !== false; // Default true
-        const badgeLabel = this._getStopTypeBadgeLabel(
-            record,
-            isLastStop,
-            hasDestination
-        );
-        const badgeClass = this._getStopTypeBadgeClass(
-            record,
-            isLastStop,
-            hasDestination
-        );
+        // Get badge info - simple switch by stop_type
+        const badgeLabel = this._getStopTypeBadgeLabel(record);
+        const badgeClass = this._getStopTypeBadgeClass(record);
 
         // Navigation button HTML
         const navButton = this.enableNavigation
@@ -206,8 +180,8 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
     /**
      * Get records filtered to avoid duplicate origin/destination markers.
      * When origin and destination are at the same location, show only one marker.
-     * Returns records sorted in route order: origin -> deliveries -> destination
-     * Adds metadata: _hasDestination, _isLastStop for each record.
+     * Returns records sorted in route order: origin -> deliveries -> destination.
+     * Used for MARKERS only - for routing, use getRecordsForRouting().
      * @returns {Array}
      */
     getFilteredRecords() {
@@ -244,15 +218,36 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
             // Sort stops in correct order: origin -> delivery -> destination
             const sortedStops = this.sortRecordsByStopOrder(filteredStops);
 
-            // Add metadata to each record
-            const hasDestination = sortedStops.some(
-                (s) => s.stop_type === "destination"
-            );
-            sortedStops.forEach((stop, idx) => {
-                stop._hasDestination = hasDestination;
-                stop._isLastStop = idx === sortedStops.length - 1;
-            });
+            result.push(...sortedStops);
+        }
+        return result;
+    }
 
+    /**
+     * Get records for routing - keeps all stops including destination.
+     * This ensures routes close the loop back to origin when destination == origin.
+     * Returns records sorted in route order: origin -> deliveries -> destination.
+     * @returns {Array}
+     */
+    getRecordsForRouting() {
+        const records = this.records;
+
+        // Group by order_id
+        const byOrder = {};
+        for (const r of records) {
+            const orderId = r.order_id
+                ? Array.isArray(r.order_id)
+                    ? r.order_id[0]
+                    : r.order_id
+                : "unassigned";
+            if (!byOrder[orderId]) byOrder[orderId] = [];
+            byOrder[orderId].push(r);
+        }
+
+        // Sort all stops (keep destination for routing to close the loop)
+        const result = [];
+        for (const stops of Object.values(byOrder)) {
+            const sortedStops = this.sortRecordsByStopOrder(stops);
             result.push(...sortedStops);
         }
         return result;
@@ -316,8 +311,8 @@ export class TmsStopsMapRenderer extends LeafletMapRenderer {
         }
 
         // Use RoutingRenderer to draw routes with OSRM
-        // Pass filtered records to include origin/destination in route
-        this.routingRenderer.renderRoutes(this.getFilteredRecords(), {
+        // Use getRecordsForRouting() to include destination (closes loop for circular routes)
+        this.routingRenderer.renderRoutes(this.getRecordsForRouting(), {
             groupBy: this.groupBy,
             sequenceField: "sequence",
             stopTypeField: "stop_type",

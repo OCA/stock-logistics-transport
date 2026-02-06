@@ -427,74 +427,36 @@ export class SelectablePinList extends DraggablePinList {
 
     /**
      * Get stop type badge label for display.
-     * Considers if this is the last delivery when no destination exists.
+     * Simple switch by stop_type.
      * @param {Object} record - Stop record
-     * @param {Object} group - Optional group containing the record
-     * @param {Number} recordIndex - Optional index within the group
-     * @returns {String} Badge label (start, stop, end, stop-end)
+     * @returns {String} Badge label (start, stop, end)
      */
-    getStopTypeBadgeLabel(record, group = null, recordIndex = null) {
+    getStopTypeBadgeLabel(record) {
         const stopType = record.stop_type;
         switch (stopType) {
             case "origin":
                 return "start";
             case "destination":
                 return "end";
-            case "origin_destination":
-                return "stop-end";
             default:
-                // Check if this is the last delivery and no destination exists
-                if (group && recordIndex !== null) {
-                    const hasDestination = group.records.some(
-                        (r) => r.stop_type === "destination"
-                    );
-                    const isLastDelivery =
-                        recordIndex === group.records.length - 1 ||
-                        (recordIndex < group.records.length - 1 &&
-                            !group.records
-                                .slice(recordIndex + 1)
-                                .some((r) => r.stop_type === "delivery"));
-                    if (!hasDestination && isLastDelivery) {
-                        return "end";
-                    }
-                }
                 return "stop";
         }
     }
 
     /**
      * Get stop type badge CSS class.
-     * Considers if this is the last delivery when no destination exists.
+     * Simple switch by stop_type.
      * @param {Object} record - Stop record
-     * @param {Object} group - Optional group containing the record
-     * @param {Number} recordIndex - Optional index within the group
      * @returns {String} Bootstrap badge class
      */
-    getStopTypeBadgeClass(record, group = null, recordIndex = null) {
+    getStopTypeBadgeClass(record) {
         const stopType = record.stop_type;
         switch (stopType) {
             case "origin":
                 return "bg-info";
             case "destination":
                 return "bg-success";
-            case "origin_destination":
-                return "bg-primary";
             default:
-                // Check if this is the last delivery and no destination exists
-                if (group && recordIndex !== null) {
-                    const hasDestination = group.records.some(
-                        (r) => r.stop_type === "destination"
-                    );
-                    const isLastDelivery =
-                        recordIndex === group.records.length - 1 ||
-                        (recordIndex < group.records.length - 1 &&
-                            !group.records
-                                .slice(recordIndex + 1)
-                                .some((r) => r.stop_type === "delivery"));
-                    if (!hasDestination && isLastDelivery) {
-                        return "bg-success"; // Same as destination
-                    }
-                }
                 return "bg-secondary";
         }
     }

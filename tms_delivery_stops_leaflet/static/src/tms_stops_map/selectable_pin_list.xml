@@ -177,7 +177,7 @@ and capacity comparison features.
                         <i class="fa fa-map-marker" />
                         <t t-esc="group.records.length" />
                     </span>
-                    <!-- Weight -->
+                    <!-- Weight (always show as percentage) -->
                     <t t-if="capacity">
                         <t t-if="capacity.hasCapacity and capacity.weightCapacity > 0">
                             <span
@@ -189,12 +189,14 @@ and capacity comparison features.
                             </span>
                         </t>
                         <t t-else="">
-                            <span class="o_info_item" title="Peso total">
-                                <i class="fa fa-balance-scale" />
-                                <t t-esc="capacity.totalWeight.toFixed(0)" />kg
+                            <span
+                                class="o_info_item text-muted"
+                                t-att-title="capacity.totalWeight.toFixed(1) + ' kg (sem capacidade definida)'"
+                            >
+                                <i class="fa fa-balance-scale" />--%
                             </span>
                         </t>
-                        <!-- Volume -->
+                        <!-- Volume (always show as percentage) -->
                         <t t-if="capacity.hasCapacity and capacity.volumeCapacity > 0">
                             <span
                                 t-attf-class="o_info_item {{ capacity.volumeUtilization > 100 ? 'text-danger' : capacity.volumeUtilization > 80 ? 'text-warning' : 'text-success' }}"
@@ -205,9 +207,11 @@ and capacity comparison features.
                             </span>
                         </t>
                         <t t-else="">
-                            <span class="o_info_item" title="Volume total">
-                                <i class="fa fa-cube" />
-                                <t t-esc="capacity.totalVolume.toFixed(1)" />m³
+                            <span
+                                class="o_info_item text-muted"
+                                t-att-title="capacity.totalVolume.toFixed(2) + ' m³ (sem capacidade definida)'"
+                            >
+                                <i class="fa fa-cube" />--%
                             </span>
                         </t>
                     </t>

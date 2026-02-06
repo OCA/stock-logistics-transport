@@ -26,8 +26,11 @@
             >
                 <field name="id" />
                 <field name="sequence" />
+                <field name="stop_type" />
+                <field name="stop_type_order" />
                 <field name="order_id" />
                 <field name="partner_id" />
+                <field name="location_id" />
                 <field name="latitude" />
                 <field name="longitude" />
                 <field name="address_complete" />
