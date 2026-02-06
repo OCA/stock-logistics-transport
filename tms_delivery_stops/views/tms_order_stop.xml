@@ -38,6 +38,22 @@
                     decoration-success="state == 'delivered'"
                     decoration-muted="state == 'skipped'"
                 />
+                <button
+                    name="action_deliver"
+                    type="object"
+                    string="Deliver"
+                    class="btn-link text-success"
+                    icon="fa-check"
+                    invisible="state not in ('draft', 'scheduled')"
+                />
+                <button
+                    name="action_skip"
+                    type="object"
+                    string="Skip"
+                    class="btn-link text-muted"
+                    icon="fa-forward"
+                    invisible="state not in ('draft', 'scheduled')"
+                />
             </list>
         </field>
     </record>
@@ -48,6 +64,27 @@
         <field name="model">tms.order.stop</field>
         <field name="arch" type="xml">
             <form string="Delivery Stop">
+                <header>
+                    <button
+                        name="action_deliver"
+                        type="object"
+                        string="Deliver"
+                        class="btn-primary"
+                        invisible="state not in ('draft', 'scheduled')"
+                    />
+                    <button
+                        name="action_skip"
+                        type="object"
+                        string="Skip"
+                        class="btn-secondary"
+                        invisible="state not in ('draft', 'scheduled')"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,scheduled,delivered"
+                    />
+                </header>
                 <sheet>
                     <group>
                         <group>
@@ -68,7 +105,6 @@
                                 invisible="stop_type == 'delivery'"
                                 required="stop_type != 'delivery'"
                             />
-                            <field name="state" />
                         </group>
                         <group>
                             <field name="scheduled_date" />

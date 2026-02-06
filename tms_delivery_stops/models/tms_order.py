@@ -258,7 +258,7 @@ class TMSOrder(models.Model):
     def write(self, vals):
         """Override write to sync stop states."""
         res = super().write(vals)
-        if "stage_id" in vals:
+        if "stage_id" in vals and not self.env.context.get("skip_stop_state_sync"):
             self._sync_stop_states()
         return res
 
@@ -302,4 +302,31 @@ class TMSOrder(models.Model):
             if not order.stage_id or not order.stage_id.stop_state_sync:
                 continue
             stop_state = order.stage_id.stop_state_sync
-            order.stop_ids.write({"state": stop_state})
+            order.stop_ids.with_context(skip_order_completion_check=True).write(
+                {"state": stop_state}
+            )
+
+    def button_start_order(self):
+        """Override to schedule draft stops when starting the trip."""
+        res = super().button_start_order()
+        for order in self:
+            draft_stops = order.stop_ids.filtered(lambda s: s.state == "draft")
+            if draft_stops:
+                draft_stops.write({"state": "scheduled"})
+        return res
+
+    def button_end_order(self):
+        """Override to deliver remaining stops when ending the trip."""
+        res = super().button_end_order()
+        for order in self:
+            remaining_stops = order.stop_ids.filtered(
+                lambda s: s.state in ("draft", "scheduled")
+            )
+            if remaining_stops:
+                remaining_stops.write(
+                    {
+                        "state": "delivered",
+                        "delivered_date": fields.Datetime.now(),
+                    }
+                )
+        return res

@@ -124,6 +124,10 @@ class TMSOrderStop(models.Model):
         ],
         default="draft",
     )
+    delivered_date = fields.Datetime(
+        readonly=True,
+        help="Date and time when the stop was actually delivered",
+    )
 
     @api.constrains("stop_type", "order_id")
     def _check_unique_endpoint_per_order(self):
@@ -255,6 +259,58 @@ class TMSOrderStop(models.Model):
             else:
                 stop.address_complete = ""
                 stop.display_address = ""
+
+    def write(self, vals):
+        res = super().write(vals)
+        if "state" in vals and not self.env.context.get("skip_order_completion_check"):
+            self._check_order_completion()
+        return res
+
+    def _check_order_completion(self):
+        """Auto-complete orders when all delivery stops are done."""
+        orders = self.mapped("order_id")
+        if not orders:
+            return
+        completed_stage = self.env["tms.stage"].search(
+            [("is_completed", "=", True), ("stage_type", "=", "order")],
+            limit=1,
+        )
+        if not completed_stage:
+            return
+        for order in orders:
+            if order.stage_id.is_completed:
+                continue
+            delivery_stops = order.stop_ids.filtered(
+                lambda s: s.stop_type == "delivery"
+            )
+            if not delivery_stops:
+                continue
+            if all(s.state in ("delivered", "skipped") for s in delivery_stops):
+                order.with_context(skip_stop_state_sync=True).write(
+                    {"stage_id": completed_stage.id}
+                )
+
+    def action_deliver(self):
+        """Mark stop as delivered."""
+        for stop in self:
+            if stop.state == "skipped":
+                raise UserError(
+                    _("Cannot deliver a skipped stop. Stop: %s") % stop.display_name
+                )
+            if stop.state not in ("draft", "scheduled"):
+                continue
+            stop.write({"state": "delivered", "delivered_date": fields.Datetime.now()})
+
+    def action_skip(self):
+        """Mark stop as skipped."""
+        for stop in self:
+            if stop.state == "delivered":
+                raise UserError(
+                    _("Cannot skip a delivered stop. Stop: %s") % stop.display_name
+                )
+            if stop.state not in ("draft", "scheduled"):
+                continue
+            stop.write({"state": "skipped"})
 
     def action_open_google_maps(self):
         """
