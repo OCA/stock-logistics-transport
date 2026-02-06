@@ -5,12 +5,14 @@
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
  */
 
+import {_t} from "@web/core/l10n/translation";
 import {LeafletMapModel} from "@web_view_leaflet_map/leaflet_map_view/leaflet_map_model.esm";
 
 /**
  * TmsStopsMapModel extends LeafletMapModel with TMS-specific functionality:
  * - Resequencing stops within and between orders
  * - Moving stops to different orders via drag-and-drop
+ * - Validation of origin/destination stop constraints
  */
 export class TmsStopsMapModel extends LeafletMapModel {
     /**
@@ -24,7 +26,32 @@ export class TmsStopsMapModel extends LeafletMapModel {
     async resequence(recordId, targetGroupId, previousRecordId) {
         const record = this.data.records.find((r) => r.id === recordId);
         if (!record) {
-            return {success: false, error: "Stop not found"};
+            return {success: false, error: _t("Stop not found")};
+        }
+
+        // Check if moving between orders
+        const currentOrderId = record.order_id;
+        const currentOrderIdValue = Array.isArray(currentOrderId)
+            ? currentOrderId[0]
+            : currentOrderId;
+        const isMovingBetweenOrders = currentOrderIdValue !== targetGroupId;
+
+        // Prevent moving origin/destination stops between orders
+        // (server constraint _check_unique_endpoint_per_order would reject it)
+        if (
+            isMovingBetweenOrders &&
+            ["origin", "destination"].includes(record.stop_type)
+        ) {
+            const typeLabel =
+                record.stop_type === "origin" ? _t("origin") : _t("destination");
+            return {
+                success: false,
+                error: _t(
+                    "Cannot move %s stops between orders. Each order can have only one %s.",
+                    typeLabel,
+                    typeLabel
+                ),
+            };
         }
 
         // Build updates object
@@ -55,21 +82,18 @@ export class TmsStopsMapModel extends LeafletMapModel {
         }
 
         // Update order_id if moving between groups
-        const currentOrderId = record.order_id;
-        const currentOrderIdValue = Array.isArray(currentOrderId)
-            ? currentOrderId[0]
-            : currentOrderId;
-
-        if (currentOrderIdValue !== targetGroupId) {
-            // Moving to a different order (or to unassigned if targetGroupId is null)
+        if (isMovingBetweenOrders) {
             updates.order_id = targetGroupId || false;
         }
 
         try {
-            await this.orm.write(this.resModel, [recordId], updates);
+            await this.orm.write(this.metaData.resModel, [recordId], updates);
+            // Reload data to reflect server-side changes
+            this.data = await this._fetchData(this.metaData);
+            this.notify();
             return {success: true};
         } catch (error) {
-            return {success: false, error: error.message};
+            return {success: false, error: this._extractErrorMessage(error)};
         }
     }
 }
