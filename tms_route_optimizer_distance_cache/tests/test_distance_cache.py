@@ -38,19 +38,24 @@ class TestDistanceCacheModel(TransactionCase):
         self.assertIsNone(self.cache._normalize_coords(None, 2.0, 3.0, 4.0))
         self.assertIsNone(self.cache._normalize_coords(0.0, 2.0, 3.0, 4.0))
 
-    def test_get_distance_creates_cache(self):
-        distance = self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
-        self.assertGreater(distance, 0.0)
+    def test_get_distance_returns_none_on_miss(self):
+        """get_distance returns None when the pair is not cached."""
+        result = self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
+        self.assertIsNone(result)
+
+    def test_store_distance_creates_cache(self):
+        """store_distance creates a cache entry."""
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 157.0, "haversine")
         self.assertEqual(self.cache.sudo().search_count([]), 1)
 
     def test_get_distance_returns_cached(self):
-        first = self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
-        second = self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
-        self.assertEqual(first, second)
-        self.assertEqual(self.cache.sudo().search_count([]), 1)
+        """get_distance returns the stored value after store_distance."""
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 157.0, "haversine")
+        result = self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
+        self.assertEqual(result, 157.0)
 
     def test_get_distance_updates_last_used(self):
-        self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 157.0)
         record = self.cache.sudo().search([], limit=1)
         old_time = fields.Datetime.now() - timedelta(days=1)
         record.write({"last_used": old_time})
@@ -59,11 +64,10 @@ class TestDistanceCacheModel(TransactionCase):
         self.assertGreater(record.last_used, old_time)
 
     def test_get_distance_symmetry(self):
-        self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
-        record = self.cache.sudo().search([], limit=1)
-        self.cache.get_distance(2.0, 2.0, 1.0, 1.0)
-        record_after = self.cache.sudo().search([], limit=1)
-        self.assertEqual(record.id, record_after.id)
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 157.0)
+        result = self.cache.get_distance(2.0, 2.0, 1.0, 1.0)
+        self.assertEqual(result, 157.0)
+        self.assertEqual(self.cache.sudo().search_count([]), 1)
 
     def test_cache_unique_constraint(self):
         self.cache.sudo().create(
@@ -87,6 +91,12 @@ class TestDistanceCacheModel(TransactionCase):
                     "last_used": fields.Datetime.now(),
                 }
             )
+
+    def test_store_distance_provider_field(self):
+        """store_distance records the provider name."""
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 157.0, "osrm")
+        record = self.cache.sudo().search([], limit=1)
+        self.assertEqual(record.distance_provider, "osrm")
 
     def test_cleanup_lru_removes_oldest(self):
         self.cache.sudo().create(
@@ -123,20 +133,20 @@ class TestDistanceCacheModel(TransactionCase):
         self.assertEqual(self.cache.sudo().search_count([]), 2)
 
     def test_cleanup_lru_respects_limit(self):
-        self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
-        self.cache.get_distance(3.0, 3.0, 4.0, 4.0)
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 10.0)
+        self.cache.store_distance(3.0, 3.0, 4.0, 4.0, 20.0)
         self.cache.cleanup_lru(limit=3)
         self.assertEqual(self.cache.sudo().search_count([]), 2)
 
     def test_cleanup_lru_zero_limit(self):
-        self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
-        self.cache.get_distance(3.0, 3.0, 4.0, 4.0)
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 10.0)
+        self.cache.store_distance(3.0, 3.0, 4.0, 4.0, 20.0)
         self.cache.cleanup_lru(limit=0)
         self.assertEqual(self.cache.sudo().search_count([]), 2)
 
     def test_cron_cleanup_method(self):
-        self.cache.get_distance(1.0, 1.0, 2.0, 2.0)
-        self.cache.get_distance(3.0, 3.0, 4.0, 4.0)
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 10.0)
+        self.cache.store_distance(3.0, 3.0, 4.0, 4.0, 20.0)
         self.env["ir.config_parameter"].sudo().set_param(
             "tms.route_optimizer.distance_cache_limit", "1"
         )

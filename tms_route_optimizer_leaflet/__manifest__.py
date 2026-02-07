@@ -26,6 +26,9 @@
             "tms_route_optimizer_leaflet/static/src/tms_map_renderer.xml",
             "tms_route_optimizer_leaflet/static/src/tms_map_renderer.css",
         ],
+        "web.assets_unit_tests": [
+            "tms_route_optimizer_leaflet/static/tests/**/*.test.js",
+        ],
     },
     "installable": True,
 }

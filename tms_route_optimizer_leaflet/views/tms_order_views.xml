@@ -10,6 +10,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">tms.order</field>
         <field name="arch" type="xml">
             <leaflet_map
+                js_class="tms_optimizer_leaflet_map"
                 field_latitude="map_latitude"
                 field_longitude="map_longitude"
                 field_title="name"
@@ -76,6 +77,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">tms.order.stop</field>
         <field name="arch" type="xml">
             <leaflet_map
+                js_class="tms_optimizer_leaflet_map"
                 field_latitude="latitude"
                 field_longitude="longitude"
                 field_title="display_name"

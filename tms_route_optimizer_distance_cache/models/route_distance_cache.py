@@ -1,9 +1,5 @@
 from odoo import api, fields, models
 
-from odoo.addons.tms_route_optimizer.models.tms_route_optimizer_ortools import (
-    RouteOptimizerHelper,
-)
-
 
 class TMSRouteDistanceCache(models.Model):
     _name = "tms.route.distance.cache"
@@ -15,6 +11,9 @@ class TMSRouteDistanceCache(models.Model):
     lat_b = fields.Float(required=True)
     lon_b = fields.Float(required=True)
     distance_km = fields.Float(required=True)
+    distance_provider = fields.Char(
+        help="Provider that computed this distance (e.g. haversine, osrm).",
+    )
     last_used = fields.Datetime(required=True, default=fields.Datetime.now)
 
     _sql_constraints = [
@@ -82,7 +81,15 @@ class TMSRouteDistanceCache(models.Model):
             cache.write({"last_used": now})
             return cache.distance_km
 
-        distance = RouteOptimizerHelper.haversine_distance(lat_a, lon_a, lat_b, lon_b)
+        return None
+
+    @api.model
+    def store_distance(self, lat1, lon1, lat2, lon2, distance, provider=""):
+        """Store a computed distance in the cache."""
+        coords = self._normalize_coords(lat1, lon1, lat2, lon2)
+        if not coords:
+            return
+        lat_a, lon_a, lat_b, lon_b = coords
         self.sudo().create(
             {
                 "lat_a": lat_a,
@@ -90,11 +97,11 @@ class TMSRouteDistanceCache(models.Model):
                 "lat_b": lat_b,
                 "lon_b": lon_b,
                 "distance_km": distance,
-                "last_used": now,
+                "distance_provider": provider,
+                "last_used": fields.Datetime.now(),
             }
         )
         self.cleanup_lru(self._get_cache_limit())
-        return distance
 
     @api.model
     def cron_cleanup_distance_cache(self):

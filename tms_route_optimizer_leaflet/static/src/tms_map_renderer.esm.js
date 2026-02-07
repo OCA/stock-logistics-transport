@@ -1,101 +1,91 @@
 /** @odoo-module **/
 
-/* global console, L */
+/* global L */
 
-import {MapRenderer} from "@web_view_leaflet_map/components/map-component/map_view.esm";
+import {useState} from "@odoo/owl";
+
 import {registry} from "@web/core/registry";
-import {routingService} from "@web_leaflet_routing/routing_service.esm";
+import {RoutingService} from "@web_leaflet_routing/routing_service.esm";
+import {LeafletMapRenderer} from "@web_view_leaflet_map/leaflet_map_view/leaflet_map_renderer.esm";
 
 /**
- * TMSMapRenderer extends the base MapRenderer with TMS-specific functionality:
- * - Route polylines between stops
- * - Route metrics display (distance, duration)
- * - Optimized stop sequence visualization
+ * TMSMapRenderer extends the base LeafletMapRenderer with route optimization
+ * visualization:
+ * - Route polylines between stops (OSRM or straight-line fallback)
+ * - Route metrics display (distance, duration, stop count)
  */
-export class TMSMapRenderer extends MapRenderer {
+export class TMSMapRenderer extends LeafletMapRenderer {
     static template = "tms_route_optimizer_leaflet.TMSMapRenderer";
 
-    /**
-     * Override setup to add TMS-specific configuration.
-     */
     setup() {
         super.setup();
 
-        // TMS-specific state
+        this.routingService = new RoutingService();
         this.routePolylines = [];
-        this.routeMetrics = {
+        this.routeMetrics = useState({
             totalDistance: 0,
             totalDuration: 0,
-        };
+            stopCount: 0,
+        });
     }
 
     /**
-     * Override renderMarkers to also render routes.
+     * Override renderRouteLines to use OSRM routing when available.
      */
-    async renderMarkers() {
-        await super.renderMarkers();
-
-        // Render routes after markers
-        if (this.enableRouting && this.state.records.length > 1) {
-            await this.renderRoutes();
+    async renderRouteLines() {
+        if (!this.routeLayer) {
+            this.routeLayer = L.layerGroup().addTo(this.leafletMap);
         }
-    }
+        this.routeLayer.clearLayers();
+        this.routePolylines = [];
 
-    /**
-     * Render route polylines between markers.
-     */
-    async renderRoutes() {
-        // Clear existing routes
-        this.clearRoutes();
-
-        // Get coordinates from records in order
-        const waypoints = this.getOrderedWaypoints();
-
+        const waypoints = this._getOrderedWaypoints();
         if (waypoints.length < 2) {
+            Object.assign(this.routeMetrics, {
+                totalDistance: 0,
+                totalDuration: 0,
+                stopCount: waypoints.length,
+            });
             return;
         }
 
-        // Get route from OSRM
-        const route = await routingService.getRoute(waypoints);
+        // Try OSRM routing
+        let route = null;
+        try {
+            route = await this.routingService.getRoute(waypoints);
+        } catch {
+            // OSRM unavailable, will use fallback
+        }
 
         if (route && route.geometry) {
-            // Render the route polyline
-            const polyline = this.renderRoute(route.geometry, {
+            const polyline = L.polyline(route.geometry, {
                 color: "#007bff",
                 weight: 5,
                 opacity: 0.7,
             });
+            polyline.addTo(this.routeLayer);
+            this.routePolylines.push(polyline);
 
-            if (polyline) {
-                this.routePolylines.push(polyline);
-            }
-
-            // Store metrics
-            this.routeMetrics = {
+            Object.assign(this.routeMetrics, {
                 totalDistance: route.distance,
                 totalDuration: route.duration,
-            };
-
-            // Update metrics display if available
-            this.updateMetricsDisplay();
+                stopCount: waypoints.length,
+            });
         } else {
-            // Fallback: draw straight lines between points
-            this.renderStraightLineRoute(waypoints);
+            // Fallback: draw straight dashed lines
+            this._renderStraightLineRoute(waypoints);
         }
     }
 
     /**
-     * Get waypoints from records in proper order.
-     * @returns {Array} Array of [lat, lng] coordinate pairs
+     * Get waypoints from records sorted by sequence.
+     * @returns {Array} Array of [lat, lng] pairs
      */
-    getOrderedWaypoints() {
+    _getOrderedWaypoints() {
         const waypoints = [];
 
-        // Sort records by sequence if available
-        const sortedRecords = [...this.state.records].sort((a, b) => {
-            const seqA = a.sequence || 0;
-            const seqB = b.sequence || 0;
-            return seqA - seqB;
+        const sortedRecords = [...this.records].sort((a, b) => {
+            return (a.sequence || 0) - (b.sequence || 0);
         });
 
         for (const record of sortedRecords) {
@@ -111,10 +101,10 @@ export class TMSMapRenderer extends MapRenderer {
     }
 
     /**
-     * Render a simple straight-line route between waypoints.
+     * Render straight-line fallback route with distance estimation.
      * @param {Array} waypoints - Array of [lat, lng] pairs
      */
-    renderStraightLineRoute(waypoints) {
+    _renderStraightLineRoute(waypoints) {
         if (!this.routeLayer || waypoints.length < 2) {
             return;
         }
@@ -125,82 +115,41 @@ export class TMSMapRenderer extends MapRenderer {
             opacity: 0.5,
             dashArray: "10, 10",
         });
-
         polyline.addTo(this.routeLayer);
         this.routePolylines.push(polyline);
 
-        // Calculate approximate distance
+        // Calculate approximate Haversine distance
         let totalDistance = 0;
         for (let i = 0; i < waypoints.length - 1; i++) {
             const [lat1, lng1] = waypoints[i];
             const [lat2, lng2] = waypoints[i + 1];
-            totalDistance += this.haversineDistance(lat1, lng1, lat2, lng2);
+            totalDistance += this._haversineDistance(lat1, lng1, lat2, lng2);
         }
 
-        // Convert km to meters, estimate duration at 1 min/km
-        this.routeMetrics = {
+        // Km → meters for distance, estimate 60 sec/km for duration
+        Object.assign(this.routeMetrics, {
             totalDistance: totalDistance * 1000,
             totalDuration: totalDistance * 60,
-        };
-
-        this.updateMetricsDisplay();
+            stopCount: waypoints.length,
+        });
     }
 
     /**
      * Calculate Haversine distance between two points.
-     * @param {Number} lat1
-     * @param {Number} lng1
-     * @param {Number} lat2
-     * @param {Number} lng2
      * @returns {Number} Distance in kilometers
      */
-    haversineDistance(lat1, lng1, lat2, lng2) {
-        // Earth's radius in km
+    _haversineDistance(lat1, lng1, lat2, lng2) {
         const R = 6371;
-        const dLat = this.toRad(lat2 - lat1);
-        const dLng = this.toRad(lng2 - lng1);
+        const dLat = ((lat2 - lat1) * Math.PI) / 180;
+        const dLng = ((lng2 - lng1) * Math.PI) / 180;
         const a =
             Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(this.toRad(lat1)) *
-                Math.cos(this.toRad(lat2)) *
+            Math.cos((lat1 * Math.PI) / 180) *
+                Math.cos((lat2 * Math.PI) / 180) *
                 Math.sin(dLng / 2) *
                 Math.sin(dLng / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
-    }
-
-    /**
-     * Convert degrees to radians.
-     * @param {Number} deg
-     * @returns {Number}
-     */
-    toRad(deg) {
-        return (deg * Math.PI) / 180;
-    }
-
-    /**
-     * Update the metrics display element.
-     */
-    updateMetricsDisplay() {
-        // This will be handled by the template/component state
-        // For now, just log the metrics
-        if (this.routeMetrics.totalDistance > 0) {
-            const distanceKm = (this.routeMetrics.totalDistance / 1000).toFixed(1);
-            const durationMin = Math.round(this.routeMetrics.totalDuration / 60);
-            console.log(`Route: ${distanceKm} km, ${durationMin} min`);
-        }
-    }
-
-    /**
-     * Override clearRoutes to also clear TMS-specific polylines.
-     */
-    clearRoutes() {
-        super.clearRoutes();
-        this.routePolylines = [];
-        this.routeMetrics = {
-            totalDistance: 0,
-            totalDuration: 0,
-        };
     }
 
     /**
@@ -209,7 +158,7 @@ export class TMSMapRenderer extends MapRenderer {
      */
     get formattedDistance() {
         if (this.routeMetrics.totalDistance > 0) {
-            return routingService.formatDistance(this.routeMetrics.totalDistance);
+            return this.routingService.formatDistance(this.routeMetrics.totalDistance);
         }
         return "";
     }
@@ -220,17 +169,15 @@ export class TMSMapRenderer extends MapRenderer {
      */
     get formattedDuration() {
         if (this.routeMetrics.totalDuration > 0) {
-            return routingService.formatDuration(this.routeMetrics.totalDuration);
+            return this.routingService.formatDuration(this.routeMetrics.totalDuration);
         }
         return "";
     }
 }
 
-// Register TMS-specific map view
-export const tmsMapView = {
-    ...registry.category("views").get("leaflet_map"),
-    type: "tms_leaflet_map",
+// Register as js_class="tms_optimizer_leaflet_map" for XML views
+const leafletMapView = registry.category("views").get("leaflet_map");
+registry.category("views").add("tms_optimizer_leaflet_map", {
+    ...leafletMapView,
     Renderer: TMSMapRenderer,
-};
-
-registry.category("views").add("tms_leaflet_map", tmsMapView);
+});

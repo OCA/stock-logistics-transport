@@ -1,6 +1,7 @@
 # Copyright (C) 2025 KMEE (https://kmee.com.br)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import json
 import logging
 
 from odoo import api, fields, models
@@ -64,7 +65,7 @@ class TMSRouteOptimizer(models.TransientModel):
         url = self._get_osrm_url()
         return OSRMService(base_url=url)
 
-    def _calculate_distance_matrix(self, locations):
+    def _compute_distance_matrix(self, locations):
         """
         Calculate distance matrix using OSRM if available, otherwise Haversine.
 
@@ -77,7 +78,7 @@ class TMSRouteOptimizer(models.TransientModel):
             2D list of distances in kilometers
         """
         if not self.use_osrm:
-            return RouteOptimizerHelper.calculate_distance_matrix(locations)
+            return super()._compute_distance_matrix(locations)
 
         osrm = self._get_osrm_service()
 
@@ -109,7 +110,7 @@ class TMSRouteOptimizer(models.TransientModel):
             "OSRM unavailable, falling back to Haversine distances for %d locations",
             len(locations),
         )
-        return RouteOptimizerHelper.calculate_distance_matrix(locations)
+        return super()._compute_distance_matrix(locations)
 
     def _get_route_geometry(self, coordinates):
         """
@@ -177,61 +178,37 @@ class TMSRouteOptimizer(models.TransientModel):
             "geometry": None,
         }
 
-    def _store_optimization_results(self, result, vehicles, stop_ids, locations):
+    def _create_result_records(self, solution, vehicles, locations, stop_ids):
         """
-        Override to also store route geometries for visualization.
+        Override to also store route geometries for visualization after creating
+        result records.
         """
-        # Call parent method first
-        records = super()._store_optimization_results(
-            result, vehicles, stop_ids, locations
+        result = super()._create_result_records(solution, vehicles, locations, stop_ids)
+        self._store_route_geometries(locations, stop_ids, solution)
+        return result
+
+    def _store_route_geometries(self, locations, stop_ids, solution):
+        """
+        Fetch and store OSRM route geometries for each route in the solution.
+        """
+        if not self.use_osrm:
+            return
+
+        geometries = {}
+        results = self.env["tms.route.optimizer.result"].search(
+            [("optimizer_id", "=", self.id)]
         )
 
-        # If OSRM is enabled, fetch and store route geometries
-        if self.use_osrm and records:
-            import json
+        for idx, record in enumerate(results):
+            if idx >= len(solution.get("routes", [])):
+                break
 
-            geometries = {}
+            route = solution["routes"][idx]
+            route_coords = [locations[node] for node in route["route"]]
 
-            for record in records:
-                # Get coordinates for this route's stops
-                route_coords = []
+            geometry = self._get_route_geometry(route_coords)
+            if geometry:
+                geometries[record.id] = geometry
 
-                # Start from depot
-                start_location = self.start_location_id
-                if start_location:
-                    route_coords.append(
-                        (
-                            start_location.partner_latitude,
-                            start_location.partner_longitude,
-                        )
-                    )
-
-                # Add stops in order
-                for stop in record.stop_ids:
-                    if stop.partner_id:
-                        route_coords.append(
-                            (
-                                stop.partner_id.partner_latitude,
-                                stop.partner_id.partner_longitude,
-                            )
-                        )
-
-                # End location
-                end_location = self.end_location_id or start_location
-                if end_location:
-                    route_coords.append(
-                        (
-                            end_location.partner_latitude,
-                            end_location.partner_longitude,
-                        )
-                    )
-
-                # Get geometry from OSRM
-                geometry = self._get_route_geometry(route_coords)
-                if geometry:
-                    geometries[record.id] = geometry
-
-            if geometries:
-                self.route_geometries = json.dumps(geometries)
-
-        return records
+        if geometries:
+            self.route_geometries = json.dumps(geometries)
