@@ -36,7 +36,12 @@ class TestDistanceCacheModel(TransactionCase):
 
     def test_normalize_coords_none_values(self):
         self.assertIsNone(self.cache._normalize_coords(None, 2.0, 3.0, 4.0))
-        self.assertIsNone(self.cache._normalize_coords(0.0, 2.0, 3.0, 4.0))
+
+    def test_normalize_coords_zero_is_valid(self):
+        """Zero is a valid coordinate (equator / prime meridian)."""
+        coords = self.cache._normalize_coords(0.0, 2.0, 3.0, 4.0)
+        self.assertIsNotNone(coords)
+        self.assertEqual(coords, (0.0, 2.0, 3.0, 4.0))
 
     def test_get_distance_returns_none_on_miss(self):
         """get_distance returns None when the pair is not cached."""
@@ -97,6 +102,16 @@ class TestDistanceCacheModel(TransactionCase):
         self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 157.0, "osrm")
         record = self.cache.sudo().search([], limit=1)
         self.assertEqual(record.distance_provider, "osrm")
+
+    def test_store_distance_duplicate_is_safe(self):
+        """Storing the same pair twice should not raise an error."""
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 157.0, "haversine")
+        # Second store with same coords must not crash (IntegrityError handled)
+        self.cache.store_distance(1.0, 1.0, 2.0, 2.0, 160.0, "osrm")
+        # Original value is kept (first writer wins)
+        self.assertEqual(self.cache.sudo().search_count([]), 1)
+        record = self.cache.sudo().search([], limit=1)
+        self.assertEqual(record.distance_km, 157.0)
 
     def test_cleanup_lru_removes_oldest(self):
         self.cache.sudo().create(

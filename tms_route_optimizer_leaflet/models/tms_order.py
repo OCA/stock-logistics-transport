@@ -112,8 +112,10 @@ class TMSOrder(models.Model):
         self.ensure_one()
         coordinates = []
 
-        # Start from origin
-        if self.origin_id and self.origin_id.partner_latitude:
+        # Start from origin (both zero means not geocoded)
+        if self.origin_id and (
+            self.origin_id.partner_latitude or self.origin_id.partner_longitude
+        ):
             coordinates.append(
                 [self.origin_id.partner_latitude, self.origin_id.partner_longitude]
             )
@@ -121,13 +123,16 @@ class TMSOrder(models.Model):
         # Add stops in sequence order
         for stop in (self.stop_ids or []).sorted("sequence"):
             partner = stop.partner_id
-            if partner and partner.partner_latitude:
+            if partner and (partner.partner_latitude or partner.partner_longitude):
                 coordinates.append(
                     [partner.partner_latitude, partner.partner_longitude]
                 )
 
         # End at destination
-        if self.destination_id and self.destination_id.partner_latitude:
+        if self.destination_id and (
+            self.destination_id.partner_latitude
+            or self.destination_id.partner_longitude
+        ):
             coordinates.append(
                 [
                     self.destination_id.partner_latitude,

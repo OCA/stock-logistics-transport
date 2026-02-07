@@ -1,4 +1,10 @@
+import logging
+
+from psycopg2 import IntegrityError
+
 from odoo import api, fields, models
+
+_logger = logging.getLogger(__name__)
 
 
 class TMSRouteDistanceCache(models.Model):
@@ -27,8 +33,6 @@ class TMSRouteDistanceCache(models.Model):
     @api.model
     def _normalize_coords(self, lat1, lon1, lat2, lon2):
         if any(v is None for v in (lat1, lon1, lat2, lon2)):
-            return None
-        if not all([lat1, lon1, lat2, lon2]):
             return None
         point_a = (round(lat1, 6), round(lon1, 6))
         point_b = (round(lat2, 6), round(lon2, 6))
@@ -64,7 +68,7 @@ class TMSRouteDistanceCache(models.Model):
     def get_distance(self, lat1, lon1, lat2, lon2):
         coords = self._normalize_coords(lat1, lon1, lat2, lon2)
         if not coords:
-            return 0.0
+            return None
 
         lat_a, lon_a, lat_b, lon_b = coords
         cache = self.sudo().search(
@@ -85,22 +89,37 @@ class TMSRouteDistanceCache(models.Model):
 
     @api.model
     def store_distance(self, lat1, lon1, lat2, lon2, distance, provider=""):
-        """Store a computed distance in the cache."""
+        """Store a computed distance in the cache.
+
+        Uses a savepoint to handle concurrent inserts gracefully:
+        if another worker already cached the same pair, the duplicate
+        IntegrityError is silently ignored.
+        """
         coords = self._normalize_coords(lat1, lon1, lat2, lon2)
         if not coords:
             return
         lat_a, lon_a, lat_b, lon_b = coords
-        self.sudo().create(
-            {
-                "lat_a": lat_a,
-                "lon_a": lon_a,
-                "lat_b": lat_b,
-                "lon_b": lon_b,
-                "distance_km": distance,
-                "distance_provider": provider,
-                "last_used": fields.Datetime.now(),
-            }
-        )
+        try:
+            with self.env.cr.savepoint():
+                self.sudo().create(
+                    {
+                        "lat_a": lat_a,
+                        "lon_a": lon_a,
+                        "lat_b": lat_b,
+                        "lon_b": lon_b,
+                        "distance_km": distance,
+                        "distance_provider": provider,
+                        "last_used": fields.Datetime.now(),
+                    }
+                )
+        except IntegrityError:
+            _logger.debug(
+                "Distance cache duplicate ignored: (%s,%s) -> (%s,%s)",
+                lat_a,
+                lon_a,
+                lat_b,
+                lon_b,
+            )
         self.cleanup_lru(self._get_cache_limit())
 
     @api.model

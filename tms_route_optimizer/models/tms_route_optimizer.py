@@ -297,9 +297,10 @@ class TMSRouteOptimizer(models.TransientModel):
         if not self.delivery_stop_ids:
             raise UserError(_("No delivery stops to optimize"))
 
-        # Check geolocation
+        # Check geolocation (both zero means not geocoded;
+        # a single zero is valid, e.g. equator or prime meridian)
         for stop in self.delivery_stop_ids:
-            if not stop.latitude or not stop.longitude:
+            if not stop.latitude and not stop.longitude:
                 raise UserError(
                     _("Stop %s has no geolocation coordinates") % stop.partner_id.name
                 )
@@ -325,7 +326,7 @@ class TMSRouteOptimizer(models.TransientModel):
             )
         if (
             not origin_location.partner_latitude
-            or not origin_location.partner_longitude
+            and not origin_location.partner_longitude
         ):
             raise UserError(
                 _(
@@ -341,7 +342,7 @@ class TMSRouteOptimizer(models.TransientModel):
         if self.end_location_id:
             if (
                 not self.end_location_id.partner_latitude
-                or not self.end_location_id.partner_longitude
+                and not self.end_location_id.partner_longitude
             ):
                 raise UserError(
                     _(
