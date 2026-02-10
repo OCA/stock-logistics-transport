@@ -405,11 +405,16 @@ describe("Seleção de stops não alocados", () => {
         }
     });
 
-    test("botão 'Criar Ordem' aparece quando há seleção", async () => {
+    test("botão 'Criar Ordem' está sempre visível", async () => {
         await mountTmsMapView();
         await animationFrame();
 
-        // Initially no status bar
+        // "Criar Ordem" button should always be visible
+        expect(queryAll(".o_tms_create_order_bar").length).toBe(1);
+        const createBtn = queryOne(".o_tms_create_order_bar .btn-primary");
+        expect(createBtn.textContent).toInclude("Criar Ordem");
+
+        // Initially no status bar (no selection)
         expect(queryAll(".o_tms_status_bar").length).toBe(0);
 
         // Expand and select
@@ -420,10 +425,10 @@ describe("Seleção de stops não alocados", () => {
         await click(checkboxes[0]);
         await animationFrame();
 
-        // "Criar Ordem" button should appear in status bar
+        // Status bar should appear with selection stats
         expect(queryAll(".o_tms_status_bar").length).toBe(1);
-        const createBtn = queryOne(".o_status_bar_action");
-        expect(createBtn.textContent).toInclude("Criar Ordem");
+        // "Criar Ordem" button should still be visible
+        expect(queryAll(".o_tms_create_order_bar .btn-primary").length).toBe(1);
     });
 
     test("botão 'Limpar' remove seleção e esconde barra", async () => {
@@ -487,7 +492,7 @@ describe("Wizard de criação de ordem", () => {
         }
 
         // Click "Criar Ordem"
-        const createBtn = queryOne(".o_status_bar_action");
+        const createBtn = queryOne(".o_tms_create_order_bar .btn-primary");
         await click(createBtn);
         await animationFrame();
 

@@ -71,6 +71,11 @@
     animation: slideUp 0.3s ease-out;
 }
 
+.o_tms_create_order_bar {
+    padding: 8px 12px;
+    text-align: center;
+}
+
 .o_status_bar_action {
     white-space: nowrap;
 }

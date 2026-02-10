@@ -224,11 +224,6 @@ export class SelectablePinList extends DraggablePinList {
     async onCreateOrder() {
         const stopIds = [...this.selectionState.selectedIds];
 
-        if (stopIds.length === 0) {
-            this.notification.add("Nenhum stop selecionado.", {type: "warning"});
-            return;
-        }
-
         try {
             await this.action.doAction(
                 {

@@ -48,12 +48,6 @@ and capacity comparison features.
                         </div>
                     </div>
                     <button
-                        class="btn btn-primary btn-sm o_status_bar_action"
-                        t-on-click="onCreateOrder"
-                    >
-                        <i class="fa fa-plus me-1" />Criar Ordem
-                    </button>
-                    <button
                         class="btn btn-outline-secondary btn-sm"
                         t-on-click="clearSelection"
                         title="Limpar seleção"
@@ -62,6 +56,11 @@ and capacity comparison features.
                     </button>
                 </div>
             </t>
+            <div class="o_tms_create_order_bar">
+                <button class="btn btn-primary btn-sm" t-on-click="onCreateOrder">
+                    <i class="fa fa-plus me-1" />Criar Ordem
+                </button>
+            </div>
         </xpath>
 
         <!-- Add "select all" checkbox in unassigned group header (before the group name span) -->

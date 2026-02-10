@@ -4,7 +4,7 @@
     <t
         t-name="tms_route_optimizer_leaflet.TMSMapRenderer"
         t-inherit="web_view_leaflet_map.LeafletMapRenderer"
-        t-inherit-mode="extension"
+        t-inherit-mode="primary"
         owl="1"
     >
         <!-- Add route metrics panel to the map -->
