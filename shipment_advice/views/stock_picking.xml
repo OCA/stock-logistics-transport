@@ -8,6 +8,7 @@
         <field name="inherit_id" ref="stock.view_picking_form" />
         <field name="arch" type="xml">
             <header position="inside">
+                <field name="is_fully_loaded_in_shipment" invisible="1" />
                 <button
                     name="button_plan_in_shipment"
                     type="object"
@@ -89,13 +90,13 @@
         <field name="model">stock.picking</field>
         <field name="priority">1000</field>
         <field name="arch" type="xml">
-            <list create="0">
+            <tree create="0">
                 <field name="name" />
                 <field name="partner_id" />
                 <field name="scheduled_date" />
                 <field name="origin" />
                 <field name="state" />
-            </list>
+            </tree>
         </field>
     </record>
     <record id="stock_picking_loading_progress_view_tree" model="ir.ui.view">
@@ -103,18 +104,20 @@
         <field name="model">stock.picking</field>
         <field name="priority" eval="110" />
         <field name="arch" type="xml">
-            <list
+            <tree
                 create="0"
                 decoration-success="is_fully_loaded_in_shipment"
                 decoration-warning="is_partially_loaded_in_shipment"
             >
+                <field name="is_fully_loaded_in_shipment" column_invisible="1" />
+                <field name="is_partially_loaded_in_shipment" column_invisible="1" />
                 <field name="name" />
                 <field name="loaded_packages_progress" />
                 <field name="loaded_move_lines_progress" />
                 <field name="loaded_weight_progress" />
                 <field name="state" />
                 <field name="loaded_waiting_quantity" />
-            </list>
+            </tree>
         </field>
     </record>
     <record id="wizard_plan_shipment_picking_action" model="ir.actions.act_window">
@@ -125,7 +128,7 @@
         <field name="target">new</field>
         <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
         <field name="binding_model_id" ref="stock.model_stock_picking" />
-        <field name="binding_view_types">list</field>
+        <field name="binding_view_types">tree</field>
     </record>
     <record id="wizard_unplan_shipment_picking_action" model="ir.actions.act_window">
         <field name="name">Unplan in shipment</field>
@@ -135,7 +138,7 @@
         <field name="target">new</field>
         <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
         <field name="binding_model_id" ref="stock.model_stock_picking" />
-        <field name="binding_view_types">list</field>
+        <field name="binding_view_types">tree</field>
     </record>
     <record id="wizard_load_shipment_picking_action" model="ir.actions.act_window">
         <field name="name">Load in shipment</field>
@@ -145,7 +148,7 @@
         <field name="target">new</field>
         <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
         <field name="binding_model_id" ref="stock.model_stock_picking" />
-        <field name="binding_view_types">list</field>
+        <field name="binding_view_types">tree</field>
     </record>
     <record id="wizard_unload_shipment_picking_action" model="ir.actions.act_window">
         <field name="name">Unload in shipment</field>
@@ -155,6 +158,6 @@
         <field name="target">new</field>
         <field name="groups_id" eval="[(4,ref('stock.group_stock_user'))]" />
         <field name="binding_model_id" ref="stock.model_stock_picking" />
-        <field name="binding_view_types">list</field>
+        <field name="binding_view_types">tree</field>
     </record>
 </odoo>

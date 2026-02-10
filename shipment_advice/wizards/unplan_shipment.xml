@@ -13,7 +13,7 @@
                 <group name="pickings" invisible="not picking_ids" string="Transfers">
                     <field
                         name="picking_ids"
-                        context="{'list_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
+                        context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
                     />
                 </group>
                 <group name="moves" invisible="not move_ids" string="Moves">

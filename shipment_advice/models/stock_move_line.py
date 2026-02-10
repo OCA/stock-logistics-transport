@@ -1,7 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import fields, models
+from odoo import _, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_is_zero
 
@@ -47,14 +47,14 @@ class StockMoveLine(models.Model):
             products = move_lines.product_id.mapped("display_name")
             packages = move_lines.package_id.mapped("display_name")
             raise UserError(
-                self.env._(
+                _(
                     "You cannot load this move line alone, you have to "
                     "move the whole package content.\n%(info)s",
                     info="\n".join(
                         [
-                            self.env._("Transfers: %s", ", ".join(pickings)),
-                            self.env._("Products: %s", ", ".join(products)),
-                            self.env._("Packages: %s", ", ".join(packages)),
+                            _("Transfers: %s", ", ".join(pickings)),
+                            _("Products: %s", ", ".join(products)),
+                            _("Packages: %s", ", ".join(packages)),
                         ]
                     ),
                 )
@@ -64,7 +64,7 @@ class StockMoveLine(models.Model):
             planned_shipment = move_line.move_id.shipment_advice_id
             if planned_shipment and planned_shipment != shipment_advice:
                 raise UserError(
-                    self.env._(
+                    _(
                         "You cannot load this into this shipment as it has been "
                         "planned to be loaded in %s",
                         planned_shipment.name,
@@ -74,15 +74,13 @@ class StockMoveLine(models.Model):
             # is not a planned one
             elif not planned_shipment and shipment_advice.planned_move_ids:
                 raise UserError(
-                    self.env._(
+                    _(
                         "You cannot load this into this shipment because its "
                         "content is planned already.\n%(info)s",
                         info="\n".join(
                             [
-                                self.env._("Transfer: %s", move_line.picking_id.name),
-                                self.env._(
-                                    "Product: %s", move_line.product_id.display_name
-                                ),
+                                _("Transfer: %s", move_line.picking_id.name),
+                                _("Product: %s", move_line.product_id.display_name),
                             ]
                         ),
                     )
@@ -92,7 +90,7 @@ class StockMoveLine(models.Model):
                 and move_line.shipment_advice_id != shipment_advice
             ):
                 raise UserError(
-                    self.env._(
+                    _(
                         "This move is already loaded  in another shipment."
                         "\nProduct: %(product)s.\nPicking: %(picking)s",
                         product=move_line.product_id.display_name,
@@ -103,7 +101,7 @@ class StockMoveLine(models.Model):
             uom = move_line.product_uom_id or move_line.product_id.uom_id
             if float_is_zero(move_line.quantity, precision_rounding=uom.rounding):
                 raise UserError(
-                    self.env._(
+                    _(
                         "Nothing to load for %(product)s.\nPicking: %(picking)s",
                         product=move_line.product_id.display_name,
                         picking=move_line.picking_id.name,
@@ -120,7 +118,7 @@ class StockMoveLine(models.Model):
         """Unload the move lines from their related shipment advice."""
         if not self._check_entire_package():
             raise UserError(
-                self.env._(
+                _(
                     "You cannot unload this move line alone, you have to "
                     "unload the whole package content."
                 )

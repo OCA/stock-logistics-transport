@@ -15,7 +15,7 @@ class TestShipmentAdvice(Common):
         cls.shipment_advice_in.run_in_queue_job = True
         cls.shipment_advice_out.run_in_queue_job = True
         cls.product_out4 = cls.env["product.product"].create(
-            {"name": "product_out4", "is_storable": True, "type": "consu"}
+            {"name": "product_out4", "type": "product"}
         )
         cls.group1 = cls.env["procurement.group"].create({})
         cls.group2 = cls.env["procurement.group"].create({})

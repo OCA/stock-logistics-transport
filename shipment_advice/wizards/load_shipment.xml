@@ -13,13 +13,13 @@
                 <group name="pickings" invisible="not picking_ids" string="Transfers">
                     <field
                         name="picking_ids"
-                        context="{'list_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
+                        context="{'tree_view_ref': 'shipment_advice.stock_picking_limited_view_tree'}"
                     />
                 </group>
                 <group name="products" invisible="not move_line_ids" string="Products">
                     <field
                         name="move_line_ids"
-                        context="{'list_view_ref': 'shipment_advice.stock_move_line_limited_view_tree'}"
+                        context="{'tree_view_ref': 'shipment_advice.stock_move_line_limited_view_tree'}"
                     />
                 </group>
                 <group
@@ -29,7 +29,7 @@
                 >
                     <field
                         name="package_level_ids"
-                        context="{'list_view_ref': 'shipment_advice.stock_package_level_limited_view_tree'}"
+                        context="{'tree_view_ref': 'shipment_advice.stock_package_level_limited_view_tree'}"
                     />
                 </group>
                 <group

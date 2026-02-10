@@ -30,7 +30,7 @@
         <field name="model">stock.package_level</field>
         <field name="priority">2000</field>
         <field name="arch" type="xml">
-            <list decoration-muted="state == 'done'" create="0">
+            <tree decoration-muted="state == 'done'" create="0">
                 <field name="picking_id" />
                 <field name="package_id" />
                 <field name="location_id" groups="stock.group_stock_multi_locations" />
@@ -42,7 +42,7 @@
                 <field name="is_done" />
                 <field name="package_shipping_weight" />
                 <field name="package_shipping_weight_uom_name" string=" " />
-            </list>
+            </tree>
         </field>
     </record>
 </odoo>

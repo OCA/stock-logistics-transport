@@ -66,13 +66,13 @@
         <field name="priority" eval="100" />
         <field name="arch" type="xml">
             <!-- string="Products" -->
-            <list create="0">
+            <tree create="0">
                 <field name="picking_id" />
                 <field name="product_id" />
                 <field name="lot_id" />
                 <field name="picked" />
                 <field name="product_uom_id" />
-            </list>
+            </tree>
         </field>
     </record>
 </odoo>

@@ -1,7 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -36,7 +36,7 @@ class WizardLoadInShipment(models.TransientModel):
         active_ids = self.env.context.get("active_ids")
         if not active_ids:
             raise UserError(
-                self.env._("Please select at least one record to load in a shipment.")
+                _("Please select at least one record to load in a shipment.")
             )
         if active_model == "stock.picking" and active_ids:
             res = self._default_get_from_stock_picking(res, active_ids)
@@ -55,12 +55,12 @@ class WizardLoadInShipment(models.TransientModel):
         )
         res["picking_ids"] = [(6, False, pickings_to_keep.ids)]
         if not pickings_to_keep:
-            res["warning"] = self.env._(
-                "No transfer to load among selected ones (already done or "
-                "not qualified as delivery)."
+            res["warning"] = _(
+                "No transfer to load among selected ones (already done "
+                "or not qualified as delivery)."
             )
         elif pickings != pickings_to_keep:
-            res["warning"] = self.env._(
+            res["warning"] = _(
                 "Transfers to include have been updated, keeping only those "
                 "assigned and qualified as delivery."
             )
@@ -79,7 +79,7 @@ class WizardLoadInShipment(models.TransientModel):
         # We keep only deliveries not canceled/done
         if not lines._check_entire_package():
             raise UserError(
-                self.env._(
+                _(
                     "You cannot load move lines which are part of a package, "
                     "unless you select all the move lines related to this package."
                 )
@@ -92,12 +92,12 @@ class WizardLoadInShipment(models.TransientModel):
         )
         res["move_line_ids"] = [(6, False, lines_to_keep.ids)]
         if not lines_to_keep:
-            res["warning"] = self.env._(
+            res["warning"] = _(
                 "No product to load among selected ones (already done or "
                 "not qualified as delivery)."
             )
         elif lines != lines_to_keep:
-            res["warning"] = self.env._(
+            res["warning"] = _(
                 "Lines to include have been updated, keeping only those "
                 "qualified as delivery."
             )
@@ -118,12 +118,12 @@ class WizardLoadInShipment(models.TransientModel):
         )
         res["package_level_ids"] = [(6, False, package_levels_to_keep.ids)]
         if not package_levels_to_keep:
-            res["warning"] = self.env._(
+            res["warning"] = _(
                 "No package to load among selected ones (already done or "
                 "not qualified as delivery)."
             )
         elif package_levels != package_levels_to_keep:
-            res["warning"] = self.env._(
+            res["warning"] = _(
                 "Packages to include have been updated, keeping only those "
                 "qualified as delivery."
             )
@@ -146,8 +146,8 @@ class WizardLoadInShipment(models.TransientModel):
         if self.picking_ids != pickings:
             res.update(
                 warning={
-                    "title": self.env._("Transfers updated"),
-                    "message": self.env._(
+                    "title": _("Transfers updated"),
+                    "message": _(
                         "Transfers to load have been updated "
                         "to match the selected shipment type."
                     ),
@@ -163,8 +163,8 @@ class WizardLoadInShipment(models.TransientModel):
         if self.move_line_ids != lines:
             res.update(
                 warning={
-                    "title": self.env._("Products updated"),
-                    "message": self.env._(
+                    "title": _("Products updated"),
+                    "message": _(
                         "Products to load have been updated "
                         "to match the selected shipment type."
                     ),
@@ -180,8 +180,8 @@ class WizardLoadInShipment(models.TransientModel):
         if self.package_level_ids != package_levels:
             res.update(
                 warning={
-                    "title": self.env._("Packages updated"),
-                    "message": self.env._(
+                    "title": _("Packages updated"),
+                    "message": _(
                         "Packages to load have been updated "
                         "to match the selected shipment type."
                     ),
