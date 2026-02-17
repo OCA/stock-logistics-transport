@@ -436,6 +436,16 @@ msgid "Leave open"
 msgstr "Lasciare aperta"
 
 #. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__line_to_load_ids
+msgid "Line To Load"
+msgstr ""
+
+#. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__lines_to_load_count
+msgid "Lines To Load Count"
+msgstr ""
+
+#. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
@@ -444,6 +454,15 @@ msgid ""
 msgstr ""
 "Le righe da includere sono state aggiornate, prendendo solo quelle "
 "qualificate per la consegna."
+
+#. module: shipment_advice
+#: model:ir.model.fields,help:shipment_advice.field_shipment_advice__line_to_load_ids
+msgid ""
+"Lines to load in priority.\n"
+"If the shipment is planned, it'll return the planned lines.\n"
+"If the shipment is not planned, it'll return lines from transfers partially "
+"loaded."
+msgstr ""
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
@@ -1179,6 +1198,11 @@ msgstr ""
 "Prelievo: %(picking)s"
 
 #. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
+msgid "To load"
+msgstr ""
+
+#. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
 msgid "To plan in Shipment Advice"
 msgstr "Da pianificare nell'avviso di spedizione"
@@ -1322,6 +1346,11 @@ msgstr "Trasferimenti da scaricare"
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__picking_ids
 msgid "Transfers to unplan"
 msgstr "Trasferimenti da depianificare"
+
+#. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__to_validate_picking_ids
+msgid "Transfers to validate"
+msgstr ""
 
 #. module: shipment_advice
 #. odoo-python
