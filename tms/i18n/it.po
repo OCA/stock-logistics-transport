@@ -31,15 +31,6 @@ msgstr ""
 "icon\" title=\"Freccia\"/>"
 
 #. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
-msgid ""
-"<i groups=\"tms.group_tms_route\" class=\"fa fa-long-arrow-right mx-2 "
-"oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\"/>"
-msgstr ""
-"<i groups=\"tms.group_tms_route\" class=\"fa fa-long-arrow-right mx-2 "
-"oe_read_only\" aria-label=\"Arrow icon\" title=\"Freccia\"/>"
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
 msgid "<span class=\"badge badge-primary\">Crew</span>"
 msgstr "<span class=\"badge badge-primary\">Equipaggio</span>"
@@ -88,32 +79,9 @@ msgstr ""
 "<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Squadra\"/>"
 
 #. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
-msgid ""
-"<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Hours\n"
-"                                </span>"
-msgstr ""
-"<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Ore\n"
-"                                </span>"
-
-#. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
-msgid "<span class=\"w-75\" groups=\"!tms.group_tms_uom\">km</span>"
-msgstr "<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Km</span>"
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "<span class=\"w-75\">Hours</span>"
 msgstr "<span class=\"w-75\">Ore</span>"
-
-#. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
-msgid ""
-"<span groups=\"tms.group_tms_route\" class=\"fa fa-map-o me-2\" "
-"title=\"Route\"/>"
-msgstr ""
-"<span groups=\"tms.group_tms_route\" class=\"fa fa-map-o me-2\" "
-"title=\"Percorso\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
@@ -249,6 +217,16 @@ msgstr "Consentire l'utilizzo di percorsi predefiniti nei viaggi"
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_team_search
 msgid "Archived"
 msgstr "In archivio"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "Arrow"
+msgstr ""
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "Arrow icon"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_attachment_count
@@ -1051,6 +1029,11 @@ msgid "Has Message"
 msgstr "Ha un messaggio"
 
 #. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Hours"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__id
 #: model:ir.model.fields,field_description:tms.field_tms_driver__id
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__id
@@ -1681,8 +1664,8 @@ msgstr "Altro personale"
 #: model:ir.model.fields,help:tms.field_tms_driver__on_time_rate
 msgid ""
 "Over the past x days; the number of products received on time divided by the "
-"number of ordered products.x is either the System Parameter purchase_stock."
-"on_time_delivery_days or the default 365"
+"number of ordered products.x is either the System Parameter "
+"purchase_stock.on_time_delivery_days or the default 365"
 msgstr ""
 "Negli ultimi X giorni; il numero di prodotti ricevuti puntualmente diviso "
 "per il numero di prodotti ordinati. X è il parametro di sistema "
@@ -2730,6 +2713,7 @@ msgstr "Formato fattura elettronica"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__distance_traveled_uom__km
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
 msgid "km"
 msgstr "Km"
 
@@ -2748,6 +2732,30 @@ msgstr "mi"
 msgid "mph"
 msgstr "mph"
 
+#~ msgid ""
+#~ "<i groups=\"tms.group_tms_route\" class=\"fa fa-long-arrow-right mx-2 "
+#~ "oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\"/>"
+#~ msgstr ""
+#~ "<i groups=\"tms.group_tms_route\" class=\"fa fa-long-arrow-right mx-2 "
+#~ "oe_read_only\" aria-label=\"Arrow icon\" title=\"Freccia\"/>"
+
+#~ msgid ""
+#~ "<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Hours\n"
+#~ "                                </span>"
+#~ msgstr ""
+#~ "<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Ore\n"
+#~ "                                </span>"
+
+#~ msgid "<span class=\"w-75\" groups=\"!tms.group_tms_uom\">km</span>"
+#~ msgstr "<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Km</span>"
+
+#~ msgid ""
+#~ "<span groups=\"tms.group_tms_route\" class=\"fa fa-map-o me-2\" "
+#~ "title=\"Route\"/>"
+#~ msgstr ""
+#~ "<span groups=\"tms.group_tms_route\" class=\"fa fa-map-o me-2\" "
+#~ "title=\"Percorso\"/>"
+
 #~ msgid "Available Peppol Eas"
 #~ msgstr "EAS Peppol disponibile"
 
@@ -2759,8 +2767,8 @@ msgstr "mph"
 #~ msgstr ""
 #~ "Codice utilizzato per identificare l'endpoint per BIS Billing 3.0 e suoi "
 #~ "derivati.\n"
-#~ "             Elenco disponibile a https://docs.peppol.eu/poacc/"
-#~ "billing/3.0/codelist/eas/"
+#~ "             Elenco disponibile a https://docs.peppol.eu/poacc/billing/"
+#~ "3.0/codelist/eas/"
 
 #~ msgid "Is Peppol Edi Format"
 #~ msgstr "È un formato EDI Peppol"
