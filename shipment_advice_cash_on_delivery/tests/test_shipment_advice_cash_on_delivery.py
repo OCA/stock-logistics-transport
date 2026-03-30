@@ -79,9 +79,9 @@ class TestShipmentAdviceCashOnDelivery(Common):
         shipment_advice = self.env["shipment.advice"].create(
             {"shipment_type": "outgoing"}
         )
-        self._plan_records_in_shipment(shipment_advice, pick)
-        self._in_progress_shipment_advice(shipment_advice)
-        wiz = self._load_records_in_shipment(shipment_advice, pick)
+        self.plan_records_in_shipment(shipment_advice, pick)
+        self.progress_shipment_advice(shipment_advice)
+        wiz = self.load_records_in_shipment(shipment_advice, pick)
         self.assertEqual(wiz.picking_ids, pick)
         self.assertFalse(wiz.move_line_ids)
         pick.move_ids.write({"quantity_done": 1})
