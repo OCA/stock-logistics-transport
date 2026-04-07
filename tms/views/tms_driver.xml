@@ -28,6 +28,9 @@
                     />
                 </header>
             </xpath>
+            <xpath expr="//button[@name='schedule_meeting']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
             <xpath expr="//field[@name='company_type']" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
