@@ -22,5 +22,13 @@ class ShipmentAdvice(models.Model):
                 and shipment.state not in ("done", "cancel")
             )
             if incoming_shipment:
-                incoming_shipment.planned_move_ids.write({"date": vals["arrival_date"]})
+                incoming_shipment._update_moves_date_with_arrival_date(
+                    incoming_shipment.planned_move_ids
+                )
         return res
+
+    def _update_moves_date_with_arrival_date(self, moves):
+        self.ensure_one()
+        not_done_moves = moves.filtered(lambda m: m.state not in ["done", "cancel"])
+        if not_done_moves:
+            not_done_moves.write({"date": self.arrival_date})

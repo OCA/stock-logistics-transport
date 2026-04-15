@@ -51,6 +51,8 @@ class TestShipmentAdviceReceptionPlanner(Common):
         cls.move_product2 = cls.picking.move_lines.filtered(
             lambda move: move.product_id == cls.product2
         )
+        cls.purchase2 = cls.purchase1.copy()
+        cls.purchase2.button_confirm()
 
     def _plan_reception(self, shipment_advice):
         wiz_model = self.env["wizard.plan.reception.shipment"].with_context(
@@ -65,15 +67,25 @@ class TestShipmentAdviceReceptionPlanner(Common):
         self.arrival_date = fields.Datetime.to_datetime("2038-01-19")
         self.shipment.arrival_date = self.arrival_date
         wizard = self._plan_reception(self.shipment)
-        wizard.move_ids = [(4, self.move_product1.id, 0)]
+        wizard.move_ids = [
+            (4, self.move_product1.id, 0),
+            (4, self.purchase2.picking_ids.move_lines[0].id, 0),
+        ]
+        done_picking = self.purchase2.picking_ids
+        done_move = done_picking.move_lines[0]
+        done_move.move_line_ids.qty_done = done_move.product_qty
+        done_picking._action_done()
+        done_date = done_move.date
         wizard.action_plan_reception()
         self.assertEqual(self.move_product1.shipment_advice_id, self.shipment)
         # Check the scheduled date on the move has changed
         self.assertEqual(self.move_product1.date, self.shipment.arrival_date)
+        self.assertEqual(done_move.date, done_date)
         # And changing the arrival date on the shipment will change the scheduled date
         self.arrival_date = fields.Datetime.to_datetime("2038-01-20")
         self.shipment.arrival_date = self.arrival_date
         self.assertEqual(self.move_product1.date, self.arrival_date)
+        self.assertEqual(done_move.date, done_date)
 
     def test_shipment_advice_reception_split_move(self):
         self.arrival_date = fields.Datetime.to_datetime("2038-01-19")
