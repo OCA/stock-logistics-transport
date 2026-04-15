@@ -79,7 +79,7 @@ class WizardPlanReceptionShipment(models.TransientModel):
             self.move_ids |= new_move
         if self.move_ids:
             self.move_ids._plan_in_shipment(self.shipment_advice_id)
-            self.move_ids.write({"date": self.shipment_advice_id.arrival_date})
+            self.shipment_advice_id._update_moves_date_with_arrival_date(self.move_ids)
         view_form = self.env.ref("shipment_advice.shipment_advice_view_form")
         action_xmlid = "shipment_advice.shipment_advice_action"
         action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
