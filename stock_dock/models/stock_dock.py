@@ -28,5 +28,9 @@ class StockDock(models.Model):
     )
 
     def _default_warehouse_id(self):
-        wh = self.env.ref("stock.warehouse0", raise_if_not_found=False)
-        return wh.id or False
+        wh = self.env["stock.warehouse"].search(
+            [("company_id", "=", self.env.company.id)], limit=1
+        )
+        if not wh:
+            wh = self.env.ref("stock.warehouse0", raise_if_not_found=False)
+        return wh
