@@ -53,7 +53,6 @@
     <record id="stock_dock_view_search" model="ir.ui.view">
         <field name="name">stock.dock.search</field>
         <field name="model">stock.dock</field>
-        <field name="type">search</field>
         <field name="arch" type="xml">
             <search string="Docks">
                 <field name="name" />
@@ -65,7 +64,7 @@
                     name="inactive"
                     domain="[('active','=',False)]"
                 />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Company"
                         name="groupby_company_id"
