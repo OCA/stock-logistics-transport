@@ -375,6 +375,9 @@ class ToursolverTask(models.Model):
                 )
             }
         )
+        if self.toursolver_backend_id.advanced_settings:
+            advanced_settings = self.toursolver_backend_id.advanced_settings.split(",")
+            res.update({"advancedSettings": advanced_settings})
         return res
 
     def button_check_status(self):
