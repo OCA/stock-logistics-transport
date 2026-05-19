@@ -5,5 +5,6 @@
     <record id="stock_dock_demo" model="stock.dock">
         <field name="name">Dock 01</field>
         <field name="barcode">DOCK01</field>
+        <field name="warehouse_id" ref="stock.warehouse0" />
     </record>
 </odoo>
