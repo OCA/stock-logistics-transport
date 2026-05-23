@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 18:47+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: shipment_advice
 #. odoo-python
@@ -24,52 +26,52 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.actions.report,print_report_name:shipment_advice.action_report_shipment_advice
 msgid "'Shipment Advice - %s' % (object.name)"
-msgstr ""
+msgstr "'Aviso de Envío - %s' % (object.name)"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "<span class=\"o_horizontal_separator\">Bulk content</span>"
-msgstr ""
+msgstr "<span class=\"o_horizontal_separator\">Contido a granel</span>"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "<span class=\"o_horizontal_separator\">Package content</span>"
-msgstr ""
+msgstr "<span class=\"o_horizontal_separator\">Contido do paquete</span>"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "<strong>Bulk content</strong>"
-msgstr ""
+msgstr "<strong>Contido a granel</strong>"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "<strong>Package content</strong>"
-msgstr ""
+msgstr "<strong>Contido do paquete</strong>"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Acción requirida"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Actividades"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Decoración de excepción de actividade"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Estado de actividade"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Tipo de icona de actividade"
 
 #. module: shipment_advice
 #. odoo-python
@@ -83,44 +85,44 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__arrival_date
 msgid "Arrival Date"
-msgstr ""
+msgstr "Data de chegada"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Arrival date"
-msgstr ""
+msgstr "Data de chegada"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Arrival date should be set on the shipment advice {}."
-msgstr ""
+msgstr "A data de chegada debería ser engadida no aviso de envío {}."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Contador de arquivos adxuntos"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Back to draft"
-msgstr ""
+msgstr "Restablecer borrador"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_count
 msgid "Bulk lines loaded"
-msgstr ""
+msgstr "Liñas a granel cargadas"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_progress
 msgid "Bulk lines loaded/total"
-msgstr ""
+msgstr "Liñas a granel cargadas/total"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_progress_f
 msgid "Bulk lines loaded/total %"
-msgstr ""
+msgstr "Liñas a granel cargadas/total %"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -129,27 +131,27 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unload_shipment_form
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__cancel
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__company_id
 msgid "Company"
-msgstr ""
+msgstr "Compañía"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__carrier_ids
@@ -162,27 +164,27 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Axustes da configuración"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmar"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__confirmed
 msgid "Confirmed"
-msgstr ""
+msgstr "Confirmado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__ref
 msgid "Consignment/Truck Ref."
-msgstr ""
+msgstr "Consignación/Camión Ref."
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__res_company__shipment_advice_outgoing_backorder_policy__create_backorder
 msgid "Create backorder"
-msgstr ""
+msgstr "Crear pedido pendente"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__create_uid
@@ -191,7 +193,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__create_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__create_date
@@ -200,27 +202,27 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__create_date
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Delivery Addr."
-msgstr ""
+msgstr "Dir. de entrega"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Delivery date"
-msgstr ""
+msgstr "Data de entrega"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__departure_date
 msgid "Departure Date"
-msgstr ""
+msgstr "Data de saída"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Departure date"
-msgstr ""
+msgstr "Data de saída"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__display_name
@@ -229,29 +231,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__display_name
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome a mostrar"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Dock should be set on the shipment advice {}."
-msgstr ""
+msgstr "O peirao debe establecerse no aviso de envío {}."
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__done
 msgid "Done"
-msgstr ""
+msgstr "Feito"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__draft
 msgid "Draft"
-msgstr ""
+msgstr "Borrador"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Driver signature"
-msgstr ""
+msgstr "Firma do condutor"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__error
@@ -266,27 +268,27 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Seguidores"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Seguidores (Contactos)"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icona de Font awesome. Ex. fa-tasks"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ten unha mensaxe"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__id
@@ -295,27 +297,28 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__id
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icona para indicar unha excepción de actividade."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr ""
+"Se se atopa seleccionado, hai novas mensaxes que requiren a túa atención."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se se atopa seleccionado, algunhas mensaxes teñen erro de envío."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
@@ -327,6 +330,16 @@ msgid ""
 "              loaded in a shipment advice choose 'Leave open'. This last option\n"
 "              is useful when your deliveries will be shipped by several trucks."
 msgstr ""
+"Se desexa que o peche dun aviso de envío saínte marque como\n"
+"              feito todas as entregas relacionadas e cre un pedido pendente "
+"en caso\n"
+"              de parcial elixa 'Crear pedido pendente'\n"
+"              Se desexa marcar as entregas como realizadas só cando todas "
+"estean\n"
+"              cargadas nun aviso nun aviso de envío, elixa 'Deixar en "
+"aberto'. Esta última opción\n"
+"              é útil cando as súas entregas serán enviadas por varios "
+"camións."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
@@ -335,6 +348,11 @@ msgid ""
 "If you want that closing an outgoing shipment advice marks as done all related deliveries and creates backorder in case of partial choose 'Create backorder'.\n"
 "If you want to mark deliveries as done only when they are all loaded in a shipment advice choose 'Leave open'. This last option is useful when your deliveries will be shipped by several trucks."
 msgstr ""
+"Se desexa que o peche dun aviso de envío saínte marque como realizadas e cre "
+"un pedido pendente en caso de parcial, seleccione 'Crear pedido pendente'.\n"
+"Se desexa marcar as entregas como realizadas só cando estean todas cargadas "
+"nun aviso de envío, seleccione \"Deixar aberto\". Esta última opción é útil "
+"cando as súas entregas serán enviadas por varios camións."
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_process
@@ -344,33 +362,33 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_progress
 msgid "In progress"
-msgstr ""
+msgstr "En progreso"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__shipment_type__incoming
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Incoming"
-msgstr ""
+msgstr "Entrante"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "É un seguidor"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__is_fully_loaded_in_shipment
 msgid "Is fully loaded in a shipment?"
-msgstr ""
+msgstr "O envío está completamente cargado?"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__is_partially_loaded_in_shipment
 msgid "Is partially loaded in a shipment?"
-msgstr ""
+msgstr "Está parcialmente cargado nun envío?"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Lading"
-msgstr ""
+msgstr "Frete"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice____last_update
@@ -379,7 +397,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment____last_update
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación o"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__write_uid
@@ -388,7 +406,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__write_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__write_date
@@ -397,12 +415,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__write_date
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización o"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__res_company__shipment_advice_outgoing_backorder_policy__leave_open
 msgid "Leave open"
-msgstr ""
+msgstr "Deixar aberto"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__line_to_load_ids
@@ -422,6 +440,8 @@ msgid ""
 "Lines to include have been updated, keeping only those qualified as "
 "delivery."
 msgstr ""
+"Actualizáronse as liñas para incluír, mantendo só aquelas cualificadas como "
+"entrega."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__line_to_load_ids
@@ -434,7 +454,7 @@ msgstr ""
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Load in Shipment Advice"
-msgstr ""
+msgstr "Cargar en Aviso de Envío"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_load_shipment_picking_action
@@ -442,116 +462,116 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_form
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_stock_move_line_detailed_operation_tree
 msgid "Load in shipment"
-msgstr ""
+msgstr "Cargar en envío"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_wizard_load_shipment
 msgid "Load shipment"
-msgstr ""
+msgstr "Cargar envío"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Loaded"
-msgstr ""
+msgstr "Cargado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_move_lines_without_package_count
 msgid "Loaded Move Lines Without Package Count"
-msgstr ""
+msgstr "Liñas de movemento cargadas sen reconto de paquetes"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_packages_count
 msgid "Loaded Packages Count"
-msgstr ""
+msgstr "Número de paquetes cargados"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_pickings_count
 msgid "Loaded Pickings Count"
-msgstr ""
+msgstr "Número de albarás cargados"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_shipment_advice_ids
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
 msgid "Loaded Shipment Advice"
-msgstr ""
+msgstr "Aviso de envío cargado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_weight
 msgid "Loaded Weight"
-msgstr ""
+msgstr "Peso cargado"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Loaded bulk"
-msgstr ""
+msgstr "Vulto cargado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_move_line_ids
 msgid "Loaded content list"
-msgstr ""
+msgstr "Lista de contido cargado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_move_line_without_package_ids
 msgid "Loaded content list (w/o packages)"
-msgstr ""
+msgstr "Lista de contido cargado (sen paquetes)"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Loaded packages"
-msgstr ""
+msgstr "Paquetes cargados"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_picking_ids
 msgid "Loaded transfers"
-msgstr ""
+msgstr "Transferencias cargadas"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_progress
 msgid "Loaded/total"
-msgstr ""
+msgstr "Total/cargado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_progress_f
 msgid "Loaded/total %"
-msgstr ""
+msgstr "Total/cargado %"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Loading Progress"
-msgstr ""
+msgstr "Progreso de carga"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__dock_id
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Loading dock"
-msgstr ""
+msgstr "Peirao de carga"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Arquivo adxunto principal"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Mark as done"
-msgstr ""
+msgstr "Marcar como feito"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Erro de Envío de Mensaxe"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Mensaxes"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_plan_shipment_form
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
 msgid "Moves"
-msgstr ""
+msgstr "Movementos"
 
 #. module: shipment_advice
 #. odoo-python
@@ -560,6 +580,8 @@ msgstr ""
 msgid ""
 "Moves to include have been updated to match the selected shipment type."
 msgstr ""
+"Os movementos para incluír actualizáronse para que coincidan co tipo de "
+"envío seleccionado."
 
 #. module: shipment_advice
 #. odoo-python
@@ -569,6 +591,8 @@ msgid ""
 "Moves to include have been updated, keeping only those still in progress and"
 " related to a delivery/reception."
 msgstr ""
+"Os movementos para incluír actualizáronse, mantendo só aqueles que aínda "
+"están en progreso e están relacionados cunha entrega/recepción."
 
 #. module: shipment_advice
 #. odoo-python
@@ -578,53 +602,55 @@ msgid ""
 "Moves to include have been updated, keeping only those still in progress and"
 " related to a shipment."
 msgstr ""
+"Actualizáronse os movementos para incluír, mantendo só aqueles que aínda "
+"están en progreso e están relacionados cun envío."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__move_ids
 msgid "Moves to plan"
-msgstr ""
+msgstr "Movementos a planificar"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__move_ids
 msgid "Moves to unplan"
-msgstr ""
+msgstr "Movementos a desplanificar"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid "Moves updated"
-msgstr ""
+msgstr "Movementos actualizados"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Data límite da miña actividade"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Nb. of packages"
-msgstr ""
+msgstr "Nº de paquetes"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Data límite para a próxima actividade"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Resumo da próxima actividade"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Seguinte tipo de actividade"
 
 #. module: shipment_advice
 #. odoo-python
@@ -634,6 +660,9 @@ msgid ""
 "No move to plan among selected ones (already done, linked to other moves "
 "through a package, or not related to a delivery/reception)."
 msgstr ""
+"Ningún movemento para planificar entre os seleccionados (xa realizados, "
+"vinculados a outros movementos a través dun paquete, ou non relacionados "
+"cunha entrega/recepción)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -643,6 +672,9 @@ msgid ""
 "No move to unplan among selected ones (already done, linked to other moves "
 "through a package, or not related to a shipment)."
 msgstr ""
+"Non hai movementos a cancelar planificación entre os seleccionados (xa "
+"realizados, vinculados a outros movementos a través dun paquete, ou non "
+"relacionados cun envío)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -652,6 +684,8 @@ msgid ""
 "No package to load among selected ones (already done or not qualified as "
 "delivery)."
 msgstr ""
+"Ningún paquete para cargar entre os seleccionados (xa feitos ou non "
+"cualificados como entrega)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -661,6 +695,8 @@ msgid ""
 "No product to load among selected ones (already done or not qualified as "
 "delivery)."
 msgstr ""
+"Ningún produto para cargar entre os seleccionados (xa feitos ou non "
+"cualificados como entrega)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -670,6 +706,8 @@ msgid ""
 "No product to unload among selected ones (already done or not related to a "
 "shipment)."
 msgstr ""
+"Ningún produto para descargar entre os seleccionados (xa feitos ou non "
+"cualificados como entrega)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -679,6 +717,8 @@ msgid ""
 "No transfer to load among selected ones (already done or not qualified as "
 "delivery)."
 msgstr ""
+"Ningunha transferencia para cargar entre as seleccionadas (xa realizadas ou "
+"non cualificadas como entrega)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -688,6 +728,8 @@ msgid ""
 "No transfer to plan among selected ones (already done or not qualified as "
 "deliveries/receptions)."
 msgstr ""
+"Ningunha transferencia para planificar entre as seleccionadas (xa realizadas "
+"ou non cualificadas como entrega/recepción)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -697,6 +739,8 @@ msgid ""
 "No transfer to unload among selected ones (already done or not related to a "
 "shipment)."
 msgstr ""
+"Ningunha transferencia para descargar entre as seleccionadas (xa realizadas "
+"ou non cualificadas como entrega)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -706,6 +750,8 @@ msgid ""
 "No transfer to unplan among selected ones (already done or not related to a "
 "shipment)."
 msgstr ""
+"Non hai transferencia a cancelar planificación entre as seleccionadas (xa "
+"realizadas ou non relacionadas cun envío)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -715,26 +761,28 @@ msgid ""
 "Nothing to load for %(product)s.\n"
 "Picking: %(picking)s"
 msgstr ""
+"Nada a cargar para %(product)s.\n"
+"Albará: %(picking)s"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Número de accións"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Número de erros"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Número de mensaxes que requiren unha acción"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Número de mensaxes con erro de envío"
 
 #. module: shipment_advice
 #. odoo-python
@@ -746,44 +794,44 @@ msgstr ""
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__open_shipment
 msgid "Open Shipment"
-msgstr ""
+msgstr "Envío aberto"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__shipment_type__outgoing
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Outgoing"
-msgstr ""
+msgstr "Saínte"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Package"
-msgstr ""
+msgstr "Paquete"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_package_level_ids
 msgid "Package Levels"
-msgstr ""
+msgstr "Niveis de paquetería"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_package_ids
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Packages"
-msgstr ""
+msgstr "Paquetes"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_packages_count
 msgid "Packages loaded"
-msgstr ""
+msgstr "Paquetes cargados"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_packages_progress
 msgid "Packages loaded/total"
-msgstr ""
+msgstr "Paquetes cargados/totais"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_packages_progress_f
 msgid "Packages loaded/total %"
-msgstr ""
+msgstr "Paquetes cargados/totais %"
 
 #. module: shipment_advice
 #. odoo-python
@@ -793,11 +841,13 @@ msgid ""
 "Packages to include have been updated, keeping only those qualified as "
 "delivery."
 msgstr ""
+"Actualizáronse os paquetes para incluír, manténdose unicamente aqueles "
+"cualificados como entregas."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__package_level_ids
 msgid "Packages to load"
-msgstr ""
+msgstr "Paquetes a cargar"
 
 #. module: shipment_advice
 #. odoo-python
@@ -806,92 +856,94 @@ msgstr ""
 msgid ""
 "Packages to load have been updated to match the selected shipment type."
 msgstr ""
+"Os paquetes para cargar actualizáronse para que coincidan co tipo de envío "
+"seleccionado."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid "Packages updated"
-msgstr ""
+msgstr "Paquetes actualizados"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_plan_shipment_form
 msgid "Plan in Shipment Advice"
-msgstr ""
+msgstr "Planificar en aviso de envío"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_plan_shipment_move_action
 #: model:ir.actions.act_window,name:shipment_advice.wizard_plan_shipment_picking_action
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_form
 msgid "Plan in shipment"
-msgstr ""
+msgstr "Planificar en envío"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_wizard_plan_shipment
 msgid "Plan shipment"
-msgstr ""
+msgstr "Planificar envío"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Planned"
-msgstr ""
+msgstr "Planificado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__planned_moves_count
 msgid "Planned Moves Count"
-msgstr ""
+msgstr "Número de movementos planificados"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__planned_pickings_count
 msgid "Planned Pickings Count"
-msgstr ""
+msgstr "Número de albarás planificados"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
 msgid "Planned Shipment Advice"
-msgstr ""
+msgstr "Aviso de envío planificado"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Planned bulk"
-msgstr ""
+msgstr "Vulto planificado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__planned_move_ids
 msgid "Planned content list"
-msgstr ""
+msgstr "Lista de contidos planificada"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_move__shipment_advice_id
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__planned_shipment_advice_id
 msgid "Planned shipment"
-msgstr ""
+msgstr "Envío planificado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__planned_picking_ids
 msgid "Planned transfers"
-msgstr ""
+msgstr "Transferencia planificada"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid "Please select at least one record to load in a shipment."
-msgstr ""
+msgstr "Seleccione polo menos un rexistro para cargar nun envío."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid "Please select at least one record to plan in a shipment."
-msgstr ""
+msgstr "Seleccione polo menos un rexistro para planificar nun envío."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #, python-format
 msgid "Please select at least one record to unload from shipment."
-msgstr ""
+msgstr "Seleccione polo menos un rexistro para descargar do envío."
 
 #. module: shipment_advice
 #. odoo-python
@@ -899,21 +951,23 @@ msgstr ""
 #, python-format
 msgid "Please select at least one record to unplan from shipment."
 msgstr ""
+"Seleccione polo menos un rexistro para cancelar a planificación desde o "
+"envío."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Product"
-msgstr ""
+msgstr "Produto"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movementos de produto"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Products"
-msgstr ""
+msgstr "Produtos"
 
 #. module: shipment_advice
 #. odoo-python
@@ -923,11 +977,13 @@ msgid ""
 "Products to include have been updated, keeping only those still in progress "
 "and related to a shipment."
 msgstr ""
+"Actualizáronse os produtos para incluír, mantendo só aqueles aínda en "
+"proceso e relacionados cun envío."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__move_line_ids
 msgid "Products to load"
-msgstr ""
+msgstr "Produtos a cargar"
 
 #. module: shipment_advice
 #. odoo-python
@@ -936,39 +992,41 @@ msgstr ""
 msgid ""
 "Products to load have been updated to match the selected shipment type."
 msgstr ""
+"Actualizáronse os produtos para cargar para que coincidan co tipo de envío "
+"seleccionado."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__move_line_ids
 msgid "Products to unload"
-msgstr ""
+msgstr "Produtos a descargar"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #, python-format
 msgid "Products updated"
-msgstr ""
+msgstr "Produtos actualizados"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Quantity"
-msgstr ""
+msgstr "Cantidade"
 
 #. module: shipment_advice
 #: model:ir.model.constraint,message:shipment_advice.constraint_shipment_advice_name_uniq
 msgid "Reference must be unique per company!"
-msgstr ""
+msgstr "A referencia debe ser única por compañía!"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__carrier_ids
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Related shipping methods"
-msgstr ""
+msgstr "Métodos de envío relacionados"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Usuario responsable"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__run_in_queue_job
@@ -990,7 +1048,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:shipment_advice.stock_move_line_view_search
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_move_search
 msgid "Shipment Advice"
-msgstr ""
+msgstr "Aviso de envío"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
@@ -1002,7 +1060,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_outgoing_backorder_policy
 msgid "Shipment Advice: Outgoing backorder policy"
-msgstr ""
+msgstr "Aviso de envío: Política de pedidos pendentes saíntes"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.shipment_advice_action
@@ -1010,35 +1068,35 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_calendar
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Shipment Advices"
-msgstr ""
+msgstr "Avisos de envío"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_move_line__shipment_advice_id
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__shipment_advice_id
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Shipment advice"
-msgstr ""
+msgstr "Aviso de envío"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not canceled, operation aborted."
-msgstr ""
+msgstr "O envío {} non está cancelado, operación abortada."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not confirmed, operation aborted."
-msgstr ""
+msgstr "O envío {} non está confirmado, operación abortada."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not draft, operation aborted."
-msgstr ""
+msgstr "O envío {} non é un borrador, operación abortada."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1046,23 +1104,23 @@ msgstr ""
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 #, python-format
 msgid "Shipment {} is not started, operation aborted."
-msgstr ""
+msgstr "O envío {} non está empezado, operación abortada."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_shipping_weight
 msgid "Shipping Weight"
-msgstr ""
+msgstr "Peso de envío"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Start"
-msgstr ""
+msgstr "Empezar"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__state
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__activity_state
@@ -1072,26 +1130,32 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Estado baseado en actividades.\n"
+"Vencido: a data de vencemento xa pasou\n"
+"Hoxe: a data da actividade é hoxe.\n"
+"Planificado: Actividades futuras."
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movemento de stock"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_stock_package_level
 msgid "Stock Package Level"
-msgstr ""
+msgstr "Nivel de Almacén de Paquete"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__company_id
 msgid "The company is automatically set from your user preferences."
 msgstr ""
+"A compañía establécese automaticamente de acordo ás súas preferencias de "
+"usuario."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "This Week"
-msgstr ""
+msgstr "Esta semana"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
@@ -1127,7 +1191,7 @@ msgstr ""
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
 msgid "To plan in Shipment Advice"
-msgstr ""
+msgstr "A planificar en Aviso de envío"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
@@ -1149,34 +1213,34 @@ msgstr ""
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Today"
-msgstr ""
+msgstr "Hoxe"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__total_move_lines_count
 msgid "Total bulk lines"
-msgstr ""
+msgstr "Liñas totais de vulto"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__total_load
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Total load (kg)"
-msgstr ""
+msgstr "Carga total (kg)"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__total_packages_count
 msgid "Total packages"
-msgstr ""
+msgstr "Paquetes totais"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_stock_package_level__package_shipping_weight
 msgid "Total weight of the package."
-msgstr ""
+msgstr "Peso total do paquete."
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_stock_picking
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Transfer"
-msgstr ""
+msgstr "Transferencia"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
@@ -1184,7 +1248,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unload_shipment_form
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
 msgid "Transfers"
-msgstr ""
+msgstr "Tarnsferencias"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1193,6 +1257,8 @@ msgstr ""
 msgid ""
 "Transfers to include have been updated to match the selected shipment type."
 msgstr ""
+"As transferencias para incluír actualizáronse para que coincidan co tipo de "
+"envío seleccionado."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1202,6 +1268,8 @@ msgid ""
 "Transfers to include have been updated, keeping only those assigned and "
 "qualified as delivery."
 msgstr ""
+"Actualizáronse as transferencias para incluír, manténdose unicamente aquelas "
+"asignadas e cualificadas como entrega."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1211,6 +1279,8 @@ msgid ""
 "Transfers to include have been updated, keeping only those still in progress"
 " and qualified as delivery/reception."
 msgstr ""
+"Actualizáronse as transferencias para incluír, manténdose unicamente aquelas "
+"en progreso e cualificadas como entrega/recepción."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1221,11 +1291,13 @@ msgid ""
 "Transfers to include have been updated, keeping only those still in progress"
 " and related to a shipment."
 msgstr ""
+"Actualizáronse as transferencias para incluír, manténdose unicamente aquelas "
+"en progreso e que están relacionadas cun envío."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__picking_ids
 msgid "Transfers to load"
-msgstr ""
+msgstr "Transferencias a cargar"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1234,21 +1306,23 @@ msgstr ""
 msgid ""
 "Transfers to load have been updated to match the selected shipment type."
 msgstr ""
+"As transferencias para cargar actualizáronse para que coincidan co tipo de "
+"envío seleccionado."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__picking_ids
 msgid "Transfers to plan"
-msgstr ""
+msgstr "Transferencias a planificar"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__picking_ids
 msgid "Transfers to unload"
-msgstr ""
+msgstr "Transferencias a descargar"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__picking_ids
 msgid "Transfers to unplan"
-msgstr ""
+msgstr "Transferencias a anular planificación"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__to_validate_picking_ids
@@ -1261,72 +1335,73 @@ msgstr ""
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 #, python-format
 msgid "Transfers updated"
-msgstr ""
+msgstr "Transferencias actualizadas"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Truck ref."
-msgstr ""
+msgstr "Ref. de camión"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__shipment_type
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo de actividade de excepción rexistrada."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unload_shipment_form
 msgid "Unload from Shipment Advice"
-msgstr ""
+msgstr "Descargar desde o aviso de envío"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_form
 msgid "Unload from shipment"
-msgstr ""
+msgstr "Descargar desde o envío"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_unload_shipment_picking_action
 msgid "Unload in shipment"
-msgstr ""
+msgstr "Descargar no envío"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_wizard_unload_shipment
 msgid "Unload shipment"
-msgstr ""
+msgstr "Descargar envío"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Unloading Progress"
-msgstr ""
+msgstr "Progreso de descarga"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
 msgid "Unplan from Shipment Advice"
-msgstr ""
+msgstr "Anular planificación desde o aviso de envío"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_unplan_shipment_move_action
 msgid "Unplan from shipment"
-msgstr ""
+msgstr "Anular planificación desde o envío"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_unplan_shipment_picking_action
 msgid "Unplan in shipment"
-msgstr ""
+msgstr "Anular planificación en envío"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_wizard_unplan_shipment
 msgid "Unplan shipment"
-msgstr ""
+msgstr "Anular planificación do envío"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__shipment_type
 msgid "Use incoming to plan receptions, use outgoing for deliveries."
 msgstr ""
+"Usar o entrante para planificar recepcións, usar o saínte para entregas."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
@@ -1334,7 +1409,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unload_shipment_form
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
 msgid "Validate"
-msgstr ""
+msgstr "Validar"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_waiting_quantity
@@ -1345,12 +1420,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__warehouse_id
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Warehouse"
-msgstr ""
+msgstr "Almacén"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Warehouse address"
-msgstr ""
+msgstr "Dirección do almacén"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__warning
@@ -1358,32 +1433,32 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__warning
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__warning
 msgid "Warning"
-msgstr ""
+msgstr "Aviso"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Mensaxes do sitio web"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Historial de comunicacións do sitio web"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Weight"
-msgstr ""
+msgstr "Peso"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_weight_uom_name
 msgid "Weight unit of measure label"
-msgstr ""
+msgstr "Etiqueta de unidade de medida de peso"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_weight_progress
 msgid "Weight/total"
-msgstr ""
+msgstr "Peso/total"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__arrival_date
@@ -1391,6 +1466,8 @@ msgid ""
 "When will the shipment arrive at the (un)loading dock. It is a planned date "
 "until in progress, then it represents the real one."
 msgstr ""
+"Data de chegada do envío ao peirao de (deas)carga. É unha data planificada "
+"ata que está en curso, logo representa a real."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__departure_date
@@ -1398,6 +1475,8 @@ msgid ""
 "When will the shipment leave the (un)loading dock. It is a planned date "
 "until in progress, then it represents the real one."
 msgstr ""
+"Data na que o envío abandonará o peirao de (deas)carga. É unha data "
+"planificada ata que está en curso, logo representa a real."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1407,6 +1486,8 @@ msgid ""
 "You cannot load move lines which are part of a package, unless you select "
 "all the move lines related to this package."
 msgstr ""
+"Non podes cargar movementos que formen parte dun paquete, a menos que "
+"seleccións todos os movementos relacionados con este paquete."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1415,7 +1496,7 @@ msgstr ""
 msgid ""
 "You cannot load this into this shipment as it has been planned to be loaded "
 "in {}"
-msgstr ""
+msgstr "Non pode cargar isto neste envío, xa que se planificou cargalo o {}"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1425,6 +1506,8 @@ msgid ""
 "You cannot load this into this shipment because its content is planned already.\n"
 "%(info)s"
 msgstr ""
+"Non podes cargar isto neste envío porque o seu contido xa está planificado.\n"
+"%(info)s"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1434,6 +1517,8 @@ msgid ""
 "You cannot load this move line alone, you have to move the whole package content.\n"
 "%(info)s"
 msgstr ""
+"Non podes cargar só este movemento, debes mover todo o contido do paquete.\n"
+"%(info)s"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1443,6 +1528,8 @@ msgid ""
 "You cannot unload this move line alone, you have to unload the whole package"
 " content."
 msgstr ""
+"Non podes descargar só este movemento, debes descargar todo o contido do "
+"paquete."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
