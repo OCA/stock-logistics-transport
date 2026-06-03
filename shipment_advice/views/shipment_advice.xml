@@ -252,6 +252,9 @@
                         <page name="carriers" string="Related shipping methods">
                             <field name="carrier_ids" nolabel="1" />
                         </page>
+                        <page string="Notes" name="notes">
+                            <field name="notes" nolabel="1" />
+                        </page>
                     </notebook>
                     <group class="oe_right" name="total_load">
                         <div class="oe_subtotal_footer_separator oe_inline o_td_label">
