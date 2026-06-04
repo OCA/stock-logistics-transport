@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-02-18 10:48+0000\n"
+"PO-Revision-Date: 2026-06-04 15:48+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -772,7 +772,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__notes
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Notes"
-msgstr ""
+msgstr "Note"
 
 #. module: shipment_advice
 #. odoo-python
