@@ -1,0 +1,3 @@
+<odoo noupdate="1">
+        <function model="tms.driver" name="update_existing_drivers_as_employees" />
+</odoo>

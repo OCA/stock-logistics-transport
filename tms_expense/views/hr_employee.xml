@@ -1,0 +1,17 @@
+<odoo>
+    <!--hr Employee Inherit Form -->
+    <record id="hr_employee_inherit_view_form" model="ir.ui.view">
+        <field name="name">hr.employee.inherit.view.form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="TMS">
+                    <group>
+                        <field name="is_driver" string="Is driver?" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

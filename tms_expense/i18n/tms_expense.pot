@@ -1,0 +1,91 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_expense
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tms_expense
+#: model_terms:ir.ui.view,arch_db:tms_expense.tms_hr_expense_inherit_view_form
+msgid "<span class=\"o_stat_text\">Trip</span>"
+msgstr ""
+
+#. module: tms_expense
+#: model:ir.model.fields,field_description:tms_expense.field_tms_order__employee_id
+msgid "Driver"
+msgstr ""
+
+#. module: tms_expense
+#: model:ir.model,name:tms_expense.model_hr_expense
+#: model:ir.model.fields,field_description:tms_expense.field_tms_order__expense_ids
+msgid "Expense"
+msgstr ""
+
+#. module: tms_expense
+#: model:ir.model.fields,field_description:tms_expense.field_tms_order__expense_count
+msgid "Expense Count"
+msgstr ""
+
+#. module: tms_expense
+#: model_terms:ir.ui.view,arch_db:tms_expense.tms_order_inherit_view_form
+msgid "Expenses"
+msgstr ""
+
+#. module: tms_expense
+#. odoo-python
+#: code:addons/tms_expense/models/tms_order.py:0
+#, python-format
+msgid "Expenses for Trip %s"
+msgstr ""
+
+#. module: tms_expense
+#: model:product.template,name:tms_expense.expense_trip_fuel_product_template
+msgid "Fuel"
+msgstr ""
+
+#. module: tms_expense
+#: model_terms:product.template,description:tms_expense.expense_trip_fuel_product_template
+msgid "Fuel expenses for transportation trips"
+msgstr ""
+
+#. module: tms_expense
+#: model:ir.model,name:tms_expense.model_tms_driver
+msgid "TMS Drivers"
+msgstr ""
+
+#. module: tms_expense
+#: model:product.template,name:tms_expense.expense_trip_toll_product_template
+msgid "Toll"
+msgstr ""
+
+#. module: tms_expense
+#: model_terms:product.template,description:tms_expense.expense_trip_toll_product_template
+msgid "Toll expenses for transportation trips"
+msgstr ""
+
+#. module: tms_expense
+#: model:ir.model,name:tms_expense.model_tms_order
+msgid "Transport Management System Order"
+msgstr ""
+
+#. module: tms_expense
+#: model:ir.model.fields,field_description:tms_expense.field_hr_expense__trip_id
+#: model_terms:ir.ui.view,arch_db:tms_expense.hr_expense_inherit_view_search
+#: model_terms:ir.ui.view,arch_db:tms_expense.tms_hr_expense_inherit_view_form
+msgid "Trip"
+msgstr ""
+
+#. module: tms_expense
+#. odoo-python
+#: code:addons/tms_expense/models/hr_expense.py:0
+#, python-format
+msgid "Trip: %s"
+msgstr ""

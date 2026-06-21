@@ -1,0 +1,30 @@
+<odoo>
+    <!--TMS Order Inherit Form -->
+    <record id="tms_order_inherit_view_form" model="ir.ui.view">
+        <field name="name">tms.order.inherit.view.form</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_expenses"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-money"
+                    invisible="not expense_ids"
+                >
+                    <field string="Expenses" name="expense_count" widget="statinfo" />
+                </button>
+            </xpath>
+            <xpath expr="//page[@name='tracking_page']" position="before">
+                <page string="Expenses">
+                    <field name="employee_id" invisible="1" />
+                    <field
+                        name="expense_ids"
+                        context="{'form_view_ref': 'tms_expense.tms_hr_expense_view_form', 'default_employee_id': employee_id, 'default_trip_id': id}"
+                    />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
