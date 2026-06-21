@@ -1,0 +1,34 @@
+<odoo>
+
+    <record id="product_template_form_view" model="ir.ui.view">
+        <field name="name">product.template.common.form.inherit.tms.product</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']" position="inside">
+                <span class="d-inline-block" invisible="detailed_type == 'service'">
+                    <field name="tms_vehicle" />
+                    <label for="tms_vehicle" />
+                </span>
+                <span class="d-inline-block" invisible="not detailed_type == 'service'">
+                    <field name="tms_trip" />
+                    <label for="tms_trip" />
+                </span>
+            </xpath>
+            <xpath expr="//field[@name='detailed_type']" position="after">
+                <field
+                    name="vehicle_type"
+                    invisible="not tms_vehicle"
+                    required="tms_vehicle"
+                />
+                <field
+                    name="model_id"
+                    invisible="not vehicle_type"
+                    required="tms_vehicle"
+                    domain="[('vehicle_type', '=', vehicle_type)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

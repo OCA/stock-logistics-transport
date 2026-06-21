@@ -1,0 +1,25 @@
+<odoo>
+
+    <record id="view_production_lot_form" model="ir.ui.view">
+        <field name="name">stock.production.lot.form.inherit.tms.product</field>
+        <field name="model">stock.lot</field>
+        <field name="inherit_id" ref="stock.view_production_lot_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="vehicle_id" invisible="1" />
+                <button
+                    name="action_view_vehicle"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-car"
+                    invisible="not vehicle_id"
+                >
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Vehicle</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

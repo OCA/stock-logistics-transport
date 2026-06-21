@@ -1,0 +1,27 @@
+<odoo>
+
+    <record id="view_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.tms.product</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="tms_vehicle_count" invisible="1" />
+                <button
+                    type="object"
+                    name="action_view_tms_vehicle"
+                    class="oe_stat_button"
+                    icon="fa-car"
+                    invisible="tms_vehicle_count == 0"
+                >
+                    <field
+                        name="tms_vehicle_count"
+                        widget="statinfo"
+                        string="Vehicles"
+                    />
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
