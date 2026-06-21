@@ -1,0 +1,14 @@
+<odoo>
+
+    <record id="account_analytic_plan_form_view" model="ir.ui.view">
+        <field name="name">account.analytic.plan.form.inherit.tms.account</field>
+        <field name="model">account.analytic.plan</field>
+        <field name="inherit_id" ref="analytic.account_analytic_plan_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='color']" position="after">
+                <field name="tms_flag" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

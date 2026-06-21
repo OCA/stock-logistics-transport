@@ -1,0 +1,73 @@
+<odoo>
+
+    <record id="view_tms_route_form" model="ir.ui.view">
+        <field name="name">tms.route.view.form.inherit.tms.account</field>
+        <field name="model">tms.route</field>
+        <field name="inherit_id" ref="tms.view_tms_route_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="accounting" string="Accounting">
+                    <group name="accounting_group">
+                        <field
+                            name="analytic_account_id"
+                            context="{'default_plan_id': %(tms_account.tms_route_analytic_plan)d}"
+                        />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tms_route_view_tree" model="ir.ui.view">
+        <field name="name">tms.route.view.tree.inherit.tms.account</field>
+        <field name="model">tms.route</field>
+        <field name="inherit_id" ref="tms.tms_route_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="analytic_account_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- TMS Route Graph View -->
+    <record id="tms_route_report_view_graph" model="ir.ui.view">
+        <field name="name">tms.route.report.view.graph</field>
+        <field name="model">tms.route</field>
+        <field name="arch" type="xml">
+            <graph string="Route revenue" type="bar">
+                <field name="name" type="row" />
+                <field name="total_revenue" string="Revenues" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- TMS Order Pivot View-->
+    <record id="tms_route_view_pivot" model="ir.ui.view">
+        <field name="name">tms.route.view.pivot</field>
+        <field name="model">tms.route</field>
+        <field name="arch" type="xml">
+            <pivot string="Routes">
+                <field name="name" type="row" />
+                <field name="total_expenses" type="measure" string="Total Expenses" />
+                <field name="total_income" type="measure" string="Total Income" />
+                <field name="total_revenue" type="measure" string="Total Revenue" />
+            </pivot>
+        </field>
+    </record>
+
+    <record id="action_tms_report_route" model="ir.actions.act_window">
+        <field name="name">Routes</field>
+        <field name="res_model">tms.route</field>
+        <field name="view_mode">graph,pivot</field>
+    </record>
+
+    <menuitem
+        id="menu_tms_report_route"
+        name="Routes"
+        action="action_tms_report_route"
+        parent="tms.reporting"
+        sequence="11"
+        groups="tms.group_tms_route"
+    />
+
+</odoo>

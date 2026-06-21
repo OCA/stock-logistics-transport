@@ -1,0 +1,270 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tms_account
+#. odoo-python
+#: code:addons/tms_account/models/account_move_line.py:0
+#, python-format
+msgid "(Discount)"
+msgstr ""
+
+#. module: tms_account
+#: model_terms:ir.ui.view,arch_db:tms_account.view_tms_route_form
+msgid "Accounting"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_account_analytic_account
+#: model:ir.model.fields,field_description:tms_account.field_tms_order__analytic_account_id
+#: model:ir.model.fields,field_description:tms_account.field_tms_route__analytic_account_id
+#: model_terms:ir.ui.view,arch_db:tms_account.view_tms_order_form_inherit_account
+msgid "Analytic Account"
+msgstr ""
+
+#. module: tms_account
+#. odoo-python
+#: code:addons/tms_account/models/tms_order.py:0
+#, python-format
+msgid "Analytic Account for Trip %s"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_account_analytic_line
+msgid "Analytic Line"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_tms_route__analytic_plan_id
+msgid "Analytic Plan"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_account_analytic_plan
+msgid "Analytic Plans"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_tms_order__bill_count
+msgid "Bill Count"
+msgstr ""
+
+#. module: tms_account
+#: model_terms:ir.ui.view,arch_db:tms_account.view_tms_order_form_inherit_account
+msgid "Bills"
+msgstr ""
+
+#. module: tms_account
+#. odoo-python
+#: code:addons/tms_account/models/tms_order.py:0
+#, python-format
+msgid "Bills for Trip %s"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: tms_account
+#: model:res.groups,name:tms_account.group_tms_route_analytic_plan
+msgid "Create analytic plan for routes"
+msgstr ""
+
+#. module: tms_account
+#: model:res.groups,name:tms_account.group_tms_order_analytic_plan
+msgid "Create analytic plan for trips"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_tms_order__create_invoice
+msgid "Create invoices and bills when completed?"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_hr_expense
+msgid "Expense"
+msgstr ""
+
+#. module: tms_account
+#: model_terms:ir.ui.view,arch_db:tms_account.account_invoice_form
+msgid "Factor"
+msgstr ""
+
+#. module: tms_account
+#: model_terms:ir.ui.view,arch_db:tms_account.account_invoice_form
+msgid "Factor UoM"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_res_config_settings__group_tms_order_analytic_plan
+msgid "Group Tms Order Analytic Plan"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_res_config_settings__group_tms_route_analytic_plan
+msgid "Group Tms Route Analytic Plan"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_account_bank_statement_line__has_tms_order
+#: model:ir.model.fields,field_description:tms_account.field_account_move__has_tms_order
+#: model:ir.model.fields,field_description:tms_account.field_account_payment__has_tms_order
+msgid "Has Tms Order"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_tms_order__invoice_count
+msgid "Invoice Count"
+msgstr ""
+
+#. module: tms_account
+#: model_terms:ir.ui.view,arch_db:tms_account.view_tms_order_form_inherit_account
+msgid "Invoices"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: tms_account
+#: model_terms:ir.ui.view,arch_db:tms_account.res_config_settings_view_form
+msgid "Manage analytic account for trips or routes."
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr ""
+
+#. module: tms_account
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_order_report_view_graph_inherit
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_route_report_view_graph
+msgid "Revenues"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_account_analytic_account__route_id
+msgid "Route"
+msgstr ""
+
+#. module: tms_account
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_route_report_view_graph
+msgid "Route revenue"
+msgstr ""
+
+#. module: tms_account
+#: model:account.analytic.plan,name:tms_account.tms_route_analytic_plan
+#: model:ir.actions.act_window,name:tms_account.action_tms_report_route
+#: model:ir.ui.menu,name:tms_account.menu_tms_report_route
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_route_view_pivot
+msgid "Routes"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: tms_account
+#: model_terms:ir.ui.view,arch_db:tms_account.account_invoice_form
+msgid "TMS Trip"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,help:tms_account.field_account_analytic_plan__tms_flag
+msgid ""
+"This plan is used as a default in the Transport application.\n"
+"        "
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_res_config_settings__tms_analytic_plan
+msgid "Tms Analytic Plan"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_res_config_settings__tms_analytic_plan_domain
+msgid "Tms Analytic Plan Domain"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_account_move_line__tms_factor
+msgid "Tms Factor"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_account_move_line__tms_factor_uom
+msgid "Tms Factor Uom"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_tms_order__total_expenses
+#: model:ir.model.fields,field_description:tms_account.field_tms_route__total_expenses
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_order_view_pivot_inherit
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_route_view_pivot
+msgid "Total Expenses"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_tms_order__total_income
+#: model:ir.model.fields,field_description:tms_account.field_tms_route__total_income
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_order_view_pivot_inherit
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_route_view_pivot
+msgid "Total Income"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_tms_order__total_revenue
+#: model:ir.model.fields,field_description:tms_account.field_tms_route__total_revenue
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_order_view_pivot_inherit
+#: model_terms:ir.ui.view,arch_db:tms_account.tms_route_view_pivot
+msgid "Total Revenue"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_tms_order
+msgid "Transport Management System Order"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model,name:tms_account.model_tms_route
+msgid "Transport Management System Route"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_account_analytic_account__trip_id
+msgid "Trip"
+msgstr ""
+
+#. module: tms_account
+#: model:account.analytic.plan,name:tms_account.tms_order_analytic_plan
+msgid "Trips"
+msgstr ""
+
+#. module: tms_account
+#: model:ir.model.fields,field_description:tms_account.field_account_analytic_plan__tms_flag
+msgid "Used for Transports?"
+msgstr ""

@@ -1,0 +1,11 @@
+<odoo>
+    <record id="group_tms_route_analytic_plan" model="res.groups">
+        <field name="name">Create analytic plan for routes</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+    <record id="group_tms_order_analytic_plan" model="res.groups">
+        <field name="name">Create analytic plan for trips</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+    </record>
+
+</odoo>

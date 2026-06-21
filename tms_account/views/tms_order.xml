@@ -1,0 +1,75 @@
+<odoo>
+    <record id="view_tms_order_form_inherit_account" model="ir.ui.view">
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_invoices"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-pencil-square-o"
+                    invisible="invoice_count == 0"
+                    groups="account.group_account_invoice"
+                >
+                    <field name="invoice_count" widget="statinfo" string="Invoices" />
+                </button>
+                <button
+                    name="action_view_bills"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-file-text-o"
+                    invisible="bill_count == 0"
+                    groups="account.group_account_invoice"
+                >
+                    <field name="bill_count" widget="statinfo" string="Bills" />
+                </button>
+                <button
+                    name="action_view_analytic_account"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-bar-chart"
+                    invisible="not analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                >
+                    <field
+                        name="analytic_account_id"
+                        widget="statinfo"
+                        string="Analytic Account"
+                    />
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='driver_id']" position="after">
+                <field
+                    name="create_invoice"
+                    invisible="not sale_id and not purchase_ids"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tms_order_report_view_graph_inherit" model="ir.ui.view">
+        <field name="name">tms.order.report.view.graph.inherit</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_report_view_graph" />
+        <field name="arch" type="xml">
+            <xpath expr="//graph" position="inside">
+                <field name="total_revenue" string="Revenues" type="measure" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tms_order_view_pivot_inherit" model="ir.ui.view">
+        <field name="name">tms.order.view.pivot.inherit</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_pivot" />
+        <field name="arch" type="xml">
+            <xpath expr="//pivot" position="inside">
+                <field name="total_expenses" type="measure" string="Total Expenses" />
+                <field name="total_income" type="measure" string="Total Income" />
+                <field name="total_revenue" type="measure" string="Total Revenue" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
