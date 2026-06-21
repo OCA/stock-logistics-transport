@@ -1,0 +1,107 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_purchase
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tms_purchase
+#: model_terms:ir.ui.view,arch_db:tms_purchase.fleet_vehicle_view_form
+msgid "<span class=\"o_stat_text\">Purchase order</span>"
+msgstr ""
+
+#. module: tms_purchase
+#: model_terms:ir.ui.view,arch_db:tms_purchase.purchase_order_form
+msgid "<span class=\"o_stat_text\">Trip</span>"
+msgstr ""
+
+#. module: tms_purchase
+#: model:ir.model.fields,field_description:tms_purchase.field_tms_order__purchase_ids
+#: model_terms:ir.ui.view,arch_db:tms_purchase.tms_order_view_form
+msgid "Purchase"
+msgstr ""
+
+#. module: tms_purchase
+#: model:ir.model,name:tms_purchase.model_purchase_order
+#: model:ir.model.fields,field_description:tms_purchase.field_fleet_vehicle__purchase_order_id
+msgid "Purchase Order"
+msgstr ""
+
+#. module: tms_purchase
+#: model:ir.model.fields,field_description:tms_purchase.field_tms_order__purchase_order_count
+msgid "Purchase Order Count"
+msgstr ""
+
+#. module: tms_purchase
+#. odoo-python
+#: code:addons/tms_purchase/models/fleet_vehicle.py:0
+#, python-format
+msgid "Purchase order: %s"
+msgstr ""
+
+#. module: tms_purchase
+#. odoo-python
+#: code:addons/tms_purchase/models/tms_order.py:0
+#, python-format
+msgid "Purchase orders for Trip %s"
+msgstr ""
+
+#. module: tms_purchase
+#: model_terms:ir.ui.view,arch_db:tms_purchase.tms_order_view_form
+msgid "Purchases"
+msgstr ""
+
+#. module: tms_purchase
+#: model:ir.model,name:tms_purchase.model_stock_move
+msgid "Stock Move"
+msgstr ""
+
+#. module: tms_purchase
+#: model:ir.model,name:tms_purchase.model_tms_order
+msgid "Transport Management System Order"
+msgstr ""
+
+#. module: tms_purchase
+#: model:ir.model.fields,field_description:tms_purchase.field_purchase_order__trip_id
+#: model_terms:ir.ui.view,arch_db:tms_purchase.purchase_order_form
+msgid "Trip"
+msgstr ""
+
+#. module: tms_purchase
+#. odoo-python
+#: code:addons/tms_purchase/models/purchase_order.py:0
+#, python-format
+msgid "Trip: %s"
+msgstr ""
+
+#. module: tms_purchase
+#: model:ir.model,name:tms_purchase.model_fleet_vehicle
+#: model:ir.model.fields,field_description:tms_purchase.field_purchase_order__vehicle_ids
+msgid "Vehicle"
+msgstr ""
+
+#. module: tms_purchase
+#: model:ir.model.fields,field_description:tms_purchase.field_purchase_order__order_vehicle_count
+#: model:ir.model.fields,field_description:tms_purchase.field_purchase_order__vehicle_count
+msgid "Vehicle Count"
+msgstr ""
+
+#. module: tms_purchase
+#: model_terms:ir.ui.view,arch_db:tms_purchase.purchase_order_form
+msgid "Vehicles"
+msgstr ""
+
+#. module: tms_purchase
+#. odoo-python
+#: code:addons/tms_purchase/models/purchase_order.py:0
+#, python-format
+msgid "Vehicles from purchase order %s"
+msgstr ""
