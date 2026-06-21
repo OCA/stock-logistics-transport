@@ -1,0 +1,90 @@
+<odoo>
+    <record id="sale_order_line_trip_view_form" model="ir.ui.view">
+        <field name="name">trip.sale.order.line.trip.view.form</field>
+        <field name="model">sale.order.line.trip</field>
+        <field name="priority" eval="8" />
+        <field name="arch" type="xml">
+            <form string="Trip information" js_class="sale_order_line_trip_form">
+                <field name="order_confirmed" invisible="1" />
+                <group
+                    name="tms_route_group"
+                    string="Route"
+                    groups="tms.group_tms_route"
+                >
+                    <group>
+                        <field
+                            name="has_route"
+                            string="Use route"
+                            readonly="order_confirmed"
+                        />
+                    </group>
+                    <group invisible="not has_route">
+                        <label for="route">Route</label>
+                        <div class="o_row">
+                            <field name="route" readonly="order_confirmed" />
+                        </div>
+                    </group>
+                    <span invisible="has_route" />
+                    <group>
+                        <field
+                            name="origin"
+                            invisible="has_route"
+                            readonly="order_confirmed"
+                        />
+                    </group>
+                    <group invisible="has_route">
+                        <label for="destination">Destination</label>
+                        <div class="o_row">
+                            <field name="destination" readonly="order_confirmed" />
+                        </div>
+                    </group>
+                </group>
+                <group name="tms_route" string="Route" groups="!tms.group_tms_route">
+                    <group>
+                        <field name="origin" readonly="order_confirmed" />
+                    </group>
+                    <group>
+                        <label for="destination">Destination</label>
+                        <div class="o_row">
+                            <field name="destination" readonly="order_confirmed" />
+                        </div>
+                    </group>
+
+                </group>
+                <group>
+                    <group>
+                        <field name="start" readonly="order_confirmed" />
+                    </group>
+                    <group>
+                        <label for="end">Scheduled end</label>
+                        <div class="o_row">
+                            <field name="end" readonly="order_confirmed" />
+                        </div>
+                    </group>
+                </group>
+                <footer>
+                    <button
+                        string="Save"
+                        class="btn-primary"
+                        special="save"
+                        data-hotkey="q"
+                    />
+                    <button
+                        string="Cancel"
+                        class="btn-secondary"
+                        special="cancel"
+                        data-hotkey="x"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_trip_sale_order_line" model="ir.actions.act_window">
+        <field name="name">Trip information</field>
+        <field name="res_model">sale.order.line.trip</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="sale_order_line_trip_view_form" />
+    </record>
+</odoo>
