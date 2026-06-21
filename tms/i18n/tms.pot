@@ -35,13 +35,6 @@ msgid ""
 msgstr ""
 
 #. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
-msgid ""
-"<i groups=\"tms.group_tms_route\" class=\"fa fa-long-arrow-right mx-2 "
-"oe_read_only\" aria-label=\"Arrow icon\" title=\"Arrow\"/>"
-msgstr ""
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
 msgid "<span class=\"badge badge-primary\">Crew</span>"
 msgstr ""
@@ -81,25 +74,8 @@ msgid "<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Team\"/>"
 msgstr ""
 
 #. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
-msgid ""
-"<span class=\"w-75\" groups=\"!tms.group_tms_uom\">Hours\n"
-"                                </span>"
-msgstr ""
-
-#. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
-msgid "<span class=\"w-75\" groups=\"!tms.group_tms_uom\">km</span>"
-msgstr ""
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "<span class=\"w-75\">Hours</span>"
-msgstr ""
-
-#. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
-msgid "<span groups=\"tms.group_tms_route\" class=\"fa fa-map-o me-2\" title=\"Route\"/>"
 msgstr ""
 
 #. module: tms
@@ -229,6 +205,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_stage_search
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_team_search
 msgid "Archived"
+msgstr ""
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "Arrow"
+msgstr ""
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "Arrow icon"
 msgstr ""
 
 #. module: tms
@@ -999,6 +985,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__has_unreconciled_entries
 msgid "Has Unreconciled Entries"
+msgstr ""
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Hours"
 msgstr ""
 
 #. module: tms
@@ -2603,6 +2594,7 @@ msgstr ""
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__distance_traveled_uom__km
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
 msgid "km"
 msgstr ""
 
