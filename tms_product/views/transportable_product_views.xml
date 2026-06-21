@@ -1,0 +1,36 @@
+<odoo>
+    <record id="transportable_product_tree_view" model="ir.ui.view">
+        <field name="name">transportable.product.tree.view</field>
+        <field name="model">transportable.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="product_id" />
+                <field name="capacity" />
+                <field name="measure_type" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="transportable_product_form_view" model="ir.ui.view">
+        <field name="name">transportable.product.form.view</field>
+        <field name="model">transportable.product</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="product_id" />
+                        <field name="capacity" />
+                        <field
+                            name="measure_type"
+                            widget="radio"
+                            options="{'horizontal': True}"
+                        />
+                        <field name="volume_uom" invisible="measure_type != 'volume'" />
+                        <field name="unit_uom" invisible="measure_type != 'unit'" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>
