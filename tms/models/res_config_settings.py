@@ -51,8 +51,29 @@ class ResConfigSettings(models.TransientModel):
     )
 
     @api.model
+    def _uom_hierarchy_domain(self, xmlid):
+        uom = self.env.ref(xmlid)
+        return ["|", ("id", "=", uom.id), ("relative_uom_id", "child_of", uom.id)]
+
+    @api.model
     def _length_domain(self):
-        return [("category_id.id", "=", self.env.ref("uom.uom_categ_length").id)]
+        return self._uom_hierarchy_domain("uom.product_uom_meter")
+
+    @api.model
+    def _weight_domain(self):
+        return self._uom_hierarchy_domain("uom.product_uom_kgm")
+
+    @api.model
+    def _speed_domain(self):
+        return self._uom_hierarchy_domain("tms.uom_kmh")
+
+    @api.model
+    def _time_domain(self):
+        return self._uom_hierarchy_domain("uom.product_uom_hour")
+
+    @api.model
+    def _volume_domain(self):
+        return self._uom_hierarchy_domain("uom.product_uom_milliliter")
 
     tms_length_uom = fields.Many2one(
         "uom.uom",
@@ -70,10 +91,6 @@ class ResConfigSettings(models.TransientModel):
         default=lambda self: self.env.ref("uom.product_uom_km").id,
     )
 
-    @api.model
-    def _weight_domain(self):
-        return [("category_id.id", "=", self.env.ref("uom.product_uom_categ_kgm").id)]
-
     tms_weight_uom = fields.Many2one(
         "uom.uom",
         domain=lambda self: self._weight_domain(),
@@ -82,10 +99,6 @@ class ResConfigSettings(models.TransientModel):
         default=lambda self: self.env.ref("uom.product_uom_kgm").id,
     )
 
-    @api.model
-    def _speed_domain(self):
-        return [("category_id.id", "=", self.env.ref("tms.uom_category_speed").id)]
-
     tms_speed_uom = fields.Many2one(
         "uom.uom",
         domain=lambda self: self._speed_domain(),
@@ -93,10 +106,6 @@ class ResConfigSettings(models.TransientModel):
         config_parameter="tms.default_speed_uom",
         default=lambda self: self.env.ref("tms.uom_kmh").id,
     )
-
-    @api.model
-    def _time_domain(self):
-        return [("category_id.id", "=", self.env.ref("uom.uom_categ_wtime").id)]
 
     tms_time_uom = fields.Many2one(
         "uom.uom",

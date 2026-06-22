@@ -17,7 +17,7 @@ class FleetVehicle(models.Model):
     capacity = fields.Float()
     cargo_uom_id = fields.Many2one(
         "uom.uom",
-        domain="[('category_id', '=', 'Volume')]",
+        domain=lambda self: self.env["res.config.settings"]._volume_domain(),
         default=lambda self: self._default_volume_uom_id(),
     )
 

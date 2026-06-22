@@ -40,12 +40,12 @@ class TMSRoute(models.Model):
 
     distance_uom = fields.Many2one(
         "uom.uom",
-        domain="[('category_id', '=', 'Length / Distance')]",
+        domain=lambda self: self.env["res.config.settings"]._length_domain(),
         default=lambda self: self._default_distance_uom_id(),
     )
     estimated_time_uom = fields.Many2one(
         "uom.uom",
-        domain="[('category_id', '=', 'Working Time')]",
+        domain=lambda self: self.env["res.config.settings"]._time_domain(),
         default=lambda self: self._default_time_uom_id(),
     )
 
