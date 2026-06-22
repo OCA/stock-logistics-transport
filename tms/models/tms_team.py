@@ -18,7 +18,7 @@ class TMSTeam(models.Model):
                 ("stage_id.is_completed", "!=", True),
             ],
             groupby=["tms_team_id"],
-            aggregates=["__count:count"],
+            aggregates=["__count"],
         )
         result = {team.id: count for team, count in order_data if team}
         for team in self:
@@ -28,7 +28,7 @@ class TMSTeam(models.Model):
         driver_data = self.env["tms.driver"]._read_group(
             domain=[("tms_team_id", "in", self.ids)],
             groupby=["tms_team_id"],
-            aggregates=["__count:count"],
+            aggregates=["__count"],
         )
         result = {team.id: count for team, count in driver_data if team}
         for team in self:
@@ -110,7 +110,7 @@ class TMSTeam(models.Model):
                     ),
                 ],
                 groupby=["stage_id"],
-                aggregates=["__count:count"],
+                aggregates=["__count"],
             )
 
             team.trips_todo_count = sum(count for _stage, count in data)
