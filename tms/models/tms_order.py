@@ -118,7 +118,7 @@ class TMSOrder(models.Model):
 
     time_uom = fields.Many2one(
         "uom.uom",
-        domain="[('category_id', '=', 'Working Time')]",
+        domain=lambda self: self.env["res.config.settings"]._time_domain(),
         default=lambda self: self._default_time_uom_id(),
     )
 
