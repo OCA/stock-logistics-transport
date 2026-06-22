@@ -33,7 +33,7 @@ class TestTMSOrder(TransactionCase):
         cls.driver = cls.env["tms.driver"].create(
             {
                 "name": "Test Driver",
-                "mobile": "1234567890",
+                "phone": "1234567890",
             }
         )
 

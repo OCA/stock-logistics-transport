@@ -102,7 +102,7 @@
                 <field name="display_name" />
                 <field name="tms_team_id" />
                 <field name="crew_ids" />
-                <field name="mobile" />
+                <field name="phone" />
                 <field name="avatar_128" />
                 <templates>
                     <t t-name="card">
@@ -131,14 +131,14 @@
                                             <p style="margin-bottom: 0.5rem;">
                                                 <span
                                                     class="o_text_overflow text-muted"
-                                                    t-if="record.mobile.value"
+                                                    t-if="record.phone.value"
                                                 >
                                                     <span
                                                         class="fa fa-phone me-2"
-                                                        aria-label="Mobile"
-                                                        title="Mobile"
+                                                        aria-label="Phone"
+                                                        title="Phone"
                                                     />
-                                                    <t t-esc="record.mobile.value" />
+                                                    <t t-esc="record.phone.value" />
                                                 </span>
                                             </p>
                                             <p style="margin-bottom: 0.5rem;">
