@@ -113,3 +113,6 @@ class TmsDriver(models.Model):
     def geo_localize(self):
         res = super().geo_localize()
         return res
+
+    def schedule_meeting(self):
+        return self.partner_id.schedule_meeting()

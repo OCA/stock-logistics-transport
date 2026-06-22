@@ -59,3 +59,9 @@ class TestTmsDriver(TransactionCase):
         self.assertTrue(
             self.driver.stage_id, "Driver stage should be correctly assigned"
         )
+
+    def test_schedule_meeting(self):
+        if not hasattr(type(self.driver.partner_id), "schedule_meeting"):
+            self.skipTest("calendar module is not installed")
+        action = self.driver.schedule_meeting()
+        self.assertEqual(action.get("res_model"), "calendar.event")
