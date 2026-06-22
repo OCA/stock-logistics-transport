@@ -1,6 +1,7 @@
 - Santiago Rodriguez <srodriguez@opensourceintegrators.com>
 - Edgar Martinez <emartinez@opensourceintegrators.com>
-- Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
+- [Gray Matter Logic](https://www.graymatterlogic.com):
+  - Maxime Chambreuil \<<maxime.chambreuil@graymatterlogic.com>\>
 - Israel Cruz <israel.cruz@argil.mx>
 - Alan Ramos <alan.ramos@jarsa.com.mx>
 - Luis Triana <luis.triana@jarsa.com.mx>

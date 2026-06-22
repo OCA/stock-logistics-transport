@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 
-from odoo import _
 from odoo.tests.common import TransactionCase
 
 
@@ -185,9 +184,10 @@ class TestTMSOrder(TransactionCase):
                 "padding": 5,
             }
         )
-        order = self.create_order(name=_("New"))
+        new_name = self.env._("New")
+        order = self.create_order(name=new_name)
         self.assertNotEqual(
-            order.name, _("New"), "Name should be replaced by sequence code"
+            order.name, new_name, "Name should be replaced by sequence code"
         )
         self.assertTrue(
             order.name.startswith("TMS/"), "Name should start with sequence prefix"

@@ -38,4 +38,4 @@ class TMSCrew(models.Model):
 
     tms_team_id = fields.Many2one("tms.team")
 
-    _sql_constraints = [("name_uniq", "unique (name)", "Crew name already exists!")]
+    _name_uniq = models.Constraint("unique (name)", "Crew name already exists!")
