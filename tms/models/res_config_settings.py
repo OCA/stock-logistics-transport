@@ -56,7 +56,7 @@ class ResConfigSettings(models.TransientModel):
 
     tms_length_uom = fields.Many2one(
         "uom.uom",
-        domain=_length_domain,
+        domain=lambda self: self._length_domain(),
         default_model="res.config.settings",
         config_parameter="tms.default_length_uom",
         default=lambda self: self.env.ref("uom.product_uom_meter").id,
@@ -64,7 +64,7 @@ class ResConfigSettings(models.TransientModel):
 
     tms_distance_uom = fields.Many2one(
         "uom.uom",
-        domain=_length_domain,
+        domain=lambda self: self._length_domain(),
         default_model="res.config.settings",
         config_parameter="tms.default_distance_uom",
         default=lambda self: self.env.ref("uom.product_uom_km").id,
@@ -76,7 +76,7 @@ class ResConfigSettings(models.TransientModel):
 
     tms_weight_uom = fields.Many2one(
         "uom.uom",
-        domain=_weight_domain,
+        domain=lambda self: self._weight_domain(),
         default_model="res.config.settings",
         config_parameter="tms.default_weight_uom",
         default=lambda self: self.env.ref("uom.product_uom_kgm").id,
@@ -88,7 +88,7 @@ class ResConfigSettings(models.TransientModel):
 
     tms_speed_uom = fields.Many2one(
         "uom.uom",
-        domain=_speed_domain,
+        domain=lambda self: self._speed_domain(),
         default_model="res.config.settings",
         config_parameter="tms.default_speed_uom",
         default=lambda self: self.env.ref("tms.uom_kmh").id,
@@ -100,7 +100,7 @@ class ResConfigSettings(models.TransientModel):
 
     tms_time_uom = fields.Many2one(
         "uom.uom",
-        domain=_time_domain,
+        domain=lambda self: self._time_domain(),
         default_model="res.config.settings",
         config_parameter="tms.default_time_uom",
         default=lambda self: self.env.ref("uom.product_uom_hour").id,

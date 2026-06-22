@@ -1,7 +1,7 @@
 # Copyright (C) 2024 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -62,8 +62,8 @@ class TMSStage(models.Model):
     )
 
     def get_color_information(self):
-        # get stage ids
-        stage_ids = self.search([])
+        stages = self.env["tms.stage"]
+        stage_ids = stages.browse(stages._search([]))
         color_information_dict = []
         for stage in stage_ids:
             color_information_dict.append(
@@ -78,19 +78,21 @@ class TMSStage(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        stages = self.search([])
         for vals in vals_list:
-            for stage in stages:
-                if stage.stage_type == vals.get(
-                    "stage_type"
-                ) and stage.sequence == vals.get("sequence"):
-                    raise ValidationError(
-                        _(
-                            "Cannot create TMS Stage because "
-                            "it has the same Type and Sequence "
-                            "of an existing TMS Stage."
-                        )
+            stage_type = vals.get("stage_type")
+            sequence = vals.get("sequence")
+            if stage_type is None or sequence is None:
+                continue
+            if self.search_count(
+                [("stage_type", "=", stage_type), ("sequence", "=", sequence)]
+            ):
+                raise ValidationError(
+                    self.env._(
+                        "Cannot create TMS Stage because "
+                        "it has the same Type and Sequence "
+                        "of an existing TMS Stage."
                     )
+                )
         return super().create(vals_list)
 
     @api.constrains("custom_color")
@@ -100,10 +102,11 @@ class TMSStage(models.Model):
             and not self.custom_color.startswith("#")
             or len(self.custom_color) != 7
         ):
-            raise ValidationError(_("Color code should be Hex Code. Ex:-#FFFFFF"))
+            raise ValidationError(
+                self.env._("Color code should be Hex Code. Ex:-#FFFFFF")
+            )
 
-    def unlink(self):
-        for stage in self:
-            if stage.is_default:
-                raise UserError(_("You cannot delete default stages."))
-        return super().unlink()
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_default(self):
+        if any(stage.is_default for stage in self):
+            raise UserError(self.env._("You cannot delete default stages."))

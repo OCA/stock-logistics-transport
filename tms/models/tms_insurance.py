@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class TMSInsurance(models.Model):
@@ -30,7 +30,7 @@ class TMSInsurance(models.Model):
         required=True,
         copy=False,
         readonly=True,
-        default=lambda self: _("Draft"),
+        default=lambda self: self.env._("Draft"),
         compute="_compute_name",
         store=True,
     )
@@ -43,13 +43,10 @@ class TMSInsurance(models.Model):
 
     vehicle_ids = fields.Many2many("fleet.vehicle")
 
-    _sql_constraints = [
-        (
-            "unique_policy_number_per_insurer",
-            "UNIQUE(policy_number, insurer_id)",
-            "The policy number must be unique for each insurer!",
-        )
-    ]
+    _unique_policy_number_per_insurer = models.Constraint(
+        "UNIQUE(policy_number, insurer_id)",
+        "The policy number must be unique for each insurer!",
+    )
 
     @api.depends("insurer_id", "policy_number")
     def _compute_name(self):

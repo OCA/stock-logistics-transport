@@ -3,7 +3,7 @@
 
 from datetime import datetime, timedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -19,7 +19,7 @@ class TMSOrder(models.Model):
         copy=False,
         readonly=False,
         index="trigram",
-        default=lambda self: _("New"),
+        default=lambda self: self.env._("New"),
     )
 
     company_id = fields.Many2one(
@@ -92,7 +92,7 @@ class TMSOrder(models.Model):
         string="Scheduled Start", default=datetime.now()
     )
     scheduled_duration = fields.Float(
-        help="Scheduled duration of the work in" " hours",
+        help="Scheduled duration of the work in hours",
         compute="_compute_scheduled_duration",
         store=True,
         readonly=False,
@@ -145,7 +145,7 @@ class TMSOrder(models.Model):
         )
         if stage:
             return stage
-        raise ValidationError(_("You must create an TMS order stage first."))
+        raise ValidationError(self.env._("You must create an TMS order stage first."))
 
     @api.depends("route")
     def _compute_route_id(self):
@@ -201,8 +201,8 @@ class TMSOrder(models.Model):
 
     @api.depends("tms_team_id.driver_ids", "crew_id.driver_ids")
     def _compute_driver_ids_domain(self):
-        all_drivers = self.env["tms.driver"].search([])
-        all_driver_ids = all_drivers.ids
+        drivers = self.env["tms.driver"]
+        all_driver_ids = drivers.browse(drivers._search([])).ids
         for order in self:
             order.driver_ids_domain = [(6, 0, all_driver_ids)]
             if order.tms_team_id:
@@ -218,8 +218,8 @@ class TMSOrder(models.Model):
 
     @api.depends("tms_team_id")
     def _compute_vehicle_ids_domain(self):
-        all_vehicles = self.env["fleet.vehicle"].search([])
-        all_vehicles_ids = all_vehicles.ids
+        vehicles = self.env["fleet.vehicle"]
+        all_vehicles_ids = vehicles.browse(vehicles._search([])).ids
         for order in self:
             order.vehicle_ids_domain = [(6, 0, all_vehicles_ids)]
             if order.tms_team_id:
@@ -229,24 +229,28 @@ class TMSOrder(models.Model):
         "fleet.vehicle",
         "team_vehicles_rel",
         compute="_compute_vehicle_ids_domain",
-        default=lambda self: self.env["fleet.vehicle"].search([]).ids,
+        default=lambda self: self.env["fleet.vehicle"]
+        .browse(self.env["fleet.vehicle"]._search([]))
+        .ids,
     )
 
     @api.depends("tms_team_id")
     def _compute_crew_ids_domain(self):
-        all_crews = self.env["tms.crew"].search([])
-        all_crews_ids = all_crews.ids
-
-        if self.tms_team_id:
-            self.crew_ids_domain = [(6, 0, self.tms_team_id.crew_ids.ids)]
-        else:
-            self.crew_ids_domain = [(6, 0, all_crews_ids)]
+        crews = self.env["tms.crew"]
+        all_crews_ids = crews.browse(crews._search([])).ids
+        for order in self:
+            if order.tms_team_id:
+                order.crew_ids_domain = [(6, 0, order.tms_team_id.crew_ids.ids)]
+            else:
+                order.crew_ids_domain = [(6, 0, all_crews_ids)]
 
     crew_ids_domain = fields.Many2many(
         "tms.crew",
         "team_crews_rel",
         compute="_compute_crew_ids_domain",
-        default=lambda self: self.env["tms.crew"].search([]).ids,
+        default=lambda self: self.env["tms.crew"]
+        .browse(self.env["tms.crew"]._search([]))
+        .ids,
     )
 
     @api.depends("crew_id")
@@ -263,14 +267,11 @@ class TMSOrder(models.Model):
     )
 
     # Constraints
-    _sql_constraints = [
-        ("name_uniq", "unique (name)", "Trip name already exists!"),
-        (
-            "duration_ge_zero",
-            "CHECK (scheduled_duration >= 0)",
-            "Scheduled duration must be greater than or equal to zero!",
-        ),
-    ]
+    _name_uniq = models.Constraint("unique (name)", "Trip name already exists!")
+    _duration_ge_zero = models.Constraint(
+        "CHECK (scheduled_duration >= 0)",
+        "Scheduled duration must be greater than or equal to zero!",
+    )
 
     @api.model
     def _read_group_stage_ids(self, stages, domain, order=None):
@@ -290,11 +291,13 @@ class TMSOrder(models.Model):
 
             if days_to_expire <= vehicle_security_days:
                 raise UserError(
-                    _(
-                        f"""Vehicle {self.vehicle_id.name} insurance """
-                        f"""will expire in {days_to_expire} days, """
-                        f"""which is less than or equal to the security """
-                        f"""threshold of {vehicle_security_days} days."""
+                    self.env._(
+                        "Vehicle %(vehicle)s insurance will expire in "
+                        "%(days)s days, which is less than or equal to the "
+                        "security threshold of %(threshold)s days.",
+                        vehicle=self.vehicle_id.name,
+                        days=days_to_expire,
+                        threshold=vehicle_security_days,
                     )
                 )
 
@@ -308,12 +311,15 @@ class TMSOrder(models.Model):
             expiration_date = self.driver_id.driver_license_expiration_date
             days_to_expire = (expiration_date - datetime.today().date()).days
 
-            if days_to_expire <= vehicle_security_days:
+            if days_to_expire <= driver_security_days:
                 raise UserError(
-                    _(
-                        f"""Driver {self.driver_id.name} license will expire """
-                        f"""in {days_to_expire} days, which is less than or equal """
-                        f"""to the security threshold of {driver_security_days} days."""
+                    self.env._(
+                        "Driver %(driver)s license will expire in %(days)s days, "
+                        "which is less than or equal to the security threshold "
+                        "of %(threshold)s days.",
+                        driver=self.driver_id.name,
+                        days=days_to_expire,
+                        threshold=driver_security_days,
                     )
                 )
 
@@ -336,7 +342,7 @@ class TMSOrder(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if vals.get("name", _("New")) == _("New"):
+            if vals.get("name", self.env._("New")) == self.env._("New"):
                 vals["name"] = self.env["ir.sequence"].next_by_code("tms.order")
 
         return super().create(vals_list)

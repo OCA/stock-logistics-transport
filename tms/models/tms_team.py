@@ -12,31 +12,25 @@ class TMSTeam(models.Model):
         return self.env["tms.stage"].search([("is_default", "=", True)])
 
     def _compute_order_count(self):
-        order_data = self.env["tms.order"].read_group(
-            [
+        order_data = self.env["tms.order"]._read_group(
+            domain=[
                 ("tms_team_id", "in", self.ids),
                 ("stage_id.is_completed", "!=", True),
             ],
-            ["tms_team_id"],
-            ["tms_team_id"],
+            groupby=["tms_team_id"],
+            aggregates=["__count:count"],
         )
-        result = {
-            data["tms_team_id"][0]: int(data["tms_team_id_count"])
-            for data in order_data
-        }
+        result = {team.id: count for team, count in order_data if team}
         for team in self:
             team.order_count = result.get(team.id, 0)
 
     def _compute_driver_count(self):
-        order_data = self.env["tms.driver"].read_group(
-            [("tms_team_id", "in", self.ids)],
-            ["tms_team_id"],
-            ["tms_team_id"],
+        driver_data = self.env["tms.driver"]._read_group(
+            domain=[("tms_team_id", "in", self.ids)],
+            groupby=["tms_team_id"],
+            aggregates=["__count:count"],
         )
-        result = {
-            data["tms_team_id"][0]: int(data["tms_team_id_count"])
-            for data in order_data
-        }
+        result = {team.id: count for team, count in driver_data if team}
         for team in self:
             team.driver_count = result.get(team.id, 0)
 
@@ -54,7 +48,7 @@ class TMSTeam(models.Model):
         "tms_team_id",
         "stage_id",
         string="Stages",
-        default=_default_stages,
+        default=lambda self: self._default_stages(),
     )
     order_ids = fields.One2many(
         "tms.order",
@@ -106,8 +100,8 @@ class TMSTeam(models.Model):
                     ),
                 ]
             )
-            data = self.env["tms.order"].read_group(
-                [
+            data = self.env["tms.order"]._read_group(
+                domain=[
                     ("tms_team_id", "=", team.id),
                     (
                         "stage_id.is_completed",
@@ -115,14 +109,10 @@ class TMSTeam(models.Model):
                         True,
                     ),
                 ],
-                ["stage_id"],
-                ["stage_id", "count(*) as count"],
+                groupby=["stage_id"],
+                aggregates=["__count:count"],
             )
 
-            team.trips_todo_count = 0
+            team.trips_todo_count = sum(count for _stage, count in data)
 
-            for record in data:
-                if "stage_id_count" in record:
-                    team.trips_todo_count += record["stage_id_count"]
-
-    _sql_constraints = [("name_uniq", "unique (name)", "Team name already exists!")]
+    _name_uniq = models.Constraint("unique (name)", "Team name already exists!")
