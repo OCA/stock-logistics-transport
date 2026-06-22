@@ -39,10 +39,6 @@
             <xpath expr="//field[@name='function']" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
-
-            <xpath expr="//field[@name='title']" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </xpath>
         </field>
     </record>
 
