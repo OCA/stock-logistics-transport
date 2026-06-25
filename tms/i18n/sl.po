@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 15:54+0000\n"
+"PO-Revision-Date: 2026-06-25 17:38+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -34,7 +34,7 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
 msgid "<span class=\"badge badge-primary\">Crew</span>"
-msgstr ""
+msgstr "<span class=\"badge badge-primary\">Posadka</span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
@@ -42,21 +42,25 @@ msgid ""
 "<span class=\"fa fa-bus me-2\" aria-label=\"Vehicle\" title=\"Vehicles\"/>\n"
 "                                                <span>Vehicles: </span>"
 msgstr ""
+"<span class=\"fa fa-bus me-2\" aria-label=\"Vozilo\" title=\"Vozila\"/>\n"
+"                                                <span>Vozila: </span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
 msgid "<span class=\"fa fa-car me-2\" aria-label=\"Vehicle\" title=\"Vehicle\"/>"
-msgstr ""
+msgstr "<span class=\"fa fa-car me-2\" aria-label=\"Vozilo\" title=\"Vozilo\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
 msgid "<span class=\"fa fa-map-o me-2\" title=\"Route\"/>"
-msgstr ""
+msgstr "<span class=\"fa fa-map-o me-2\" title=\"Pot\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "<span class=\"fa fa-phone me-2\" aria-label=\"Mobile\" title=\"Mobile\"/>"
 msgstr ""
+"<span class=\"fa fa-phone me-2\" aria-label=\"Mobilni telefon\" "
+"title=\"Mobilni telefon\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
@@ -64,16 +68,18 @@ msgid ""
 "<span class=\"fa fa-users me-2\" aria-label=\"Driver\" title=\"Drivers\"/>\n"
 "                                                <span>Drivers: </span>"
 msgstr ""
+"<span class=\"fa fa-users me-2\" aria-label=\"Voznik\" title=\"Vozniki\"/>\n"
+"                                                <span>Vozniki: </span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Team\"/>"
-msgstr ""
+msgstr "<span class=\"fa fa-users me-2\" aria-label=\"Ekipa\" title=\"Ekipa\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "<span class=\"w-75\">Hours</span>"
-msgstr ""
+msgstr "<span class=\"w-75\">Ure</span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
@@ -81,37 +87,39 @@ msgid ""
 "<span invisible=\"operation != 'passenger'\" class=\"w-50\">Passengers\n"
 "                                </span>"
 msgstr ""
+"<span invisible=\"operation != 'passenger'\" class=\"w-50\">Potniki\n"
+"                                </span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
 msgid "<span>Reporting</span>"
-msgstr ""
+msgstr "<span>Poročanje</span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
 msgid "<span>View</span>"
-msgstr ""
+msgstr "<span>Prikaz</span>"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__a
 msgid "A - Motorcycles"
-msgstr ""
+msgstr "A - motorna kolesa"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_payable_id
 msgid "Account Payable"
-msgstr ""
+msgstr "Obveznosti do dobaviteljev"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_receivable_id
 msgid "Account Receivable"
-msgstr ""
+msgstr "Terjatve do kupcev"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_needaction
 #: model:ir.model.fields,field_description:tms.field_tms_order__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Potrebno ukrepanje"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__active
@@ -163,7 +171,7 @@ msgstr "Tipi aktivnosti"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Add a description for the order..."
-msgstr ""
+msgstr "Dodajte opis za nalog..."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
@@ -183,7 +191,7 @@ msgstr "Administrator"
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_tms_operation_trip
 msgid "All Trips"
-msgstr ""
+msgstr "Vsi prevozi"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__lang
@@ -197,7 +205,7 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Allow the use of predefined routes in trips"
-msgstr ""
+msgstr "Dovoli uporabo vnaprej določenih poti pri prevozih"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_crew_search
@@ -321,6 +329,8 @@ msgid ""
 "Cannot create TMS Stage because it has the same Type and Sequence of an "
 "existing TMS Stage."
 msgstr ""
+"Stopnje TMS ni mogoče ustvariti, ker ima enak tip in zaporedje kot obstoječa "
+"stopnja TMS."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__capacity
@@ -331,12 +341,12 @@ msgstr "Kapaciteta"
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__fleet_vehicle__operation__cargo
 msgid "Cargo"
-msgstr ""
+msgstr "Tovor"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__cargo_uom_id
 msgid "Cargo Uom"
-msgstr ""
+msgstr "EM tovora"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models_categories
@@ -378,7 +388,7 @@ msgstr "Barvni indeks"
 #. odoo-python
 #: code:addons/tms/models/tms_stage.py:0
 msgid "Color code should be Hex Code. Ex:-#FFFFFF"
-msgstr ""
+msgstr "Barvna koda mora biti šestnajstiška koda. Primer: #FFFFFF"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__commercial_partner_id
@@ -428,14 +438,14 @@ msgstr "Tip družbe"
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_insurance__company_id
 msgid "Company related to this insurance"
-msgstr ""
+msgstr "Družba, povezana s tem zavarovanjem"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_crew__company_id
 #: model:ir.model.fields,help:tms.field_tms_order__company_id
 #: model:ir.model.fields,help:tms.field_tms_team__company_id
 msgid "Company related to this order"
-msgstr ""
+msgstr "Družba, povezana s tem nalogom"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__contact_address
@@ -496,12 +506,12 @@ msgstr "Pokritost"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__coverage_details
 msgid "Coverage Details"
-msgstr ""
+msgstr "Podrobnosti kritja"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Create Trip Orders with Sale Orders"
-msgstr ""
+msgstr "Ustvari naloge za prevoz s prodajnimi nalogi"
 
 #. module: tms
 #: model_terms:ir.actions.act_window,help:tms.action_tms_stage
@@ -512,6 +522,8 @@ msgstr "Ustvari stopnjo."
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Create vendor bills and customer invoices when completing trip orders."
 msgstr ""
+"Ob zaključku nalogov za prevoz ustvari prejete račune dobaviteljev in izdane "
+"račune kupcev."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__create_uid
@@ -554,27 +566,27 @@ msgstr "Kreditni limit, specifičen za tega partnerja."
 #: model:ir.model.fields,field_description:tms.field_tms_order__crew_id
 #: model:ir.model.fields,field_description:tms.field_tms_team__crew_ids
 msgid "Crew"
-msgstr ""
+msgstr "Posadka"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__crew_active
 msgid "Crew Active"
-msgstr ""
+msgstr "Posadka aktivna"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__crew_ids_domain
 msgid "Crew Ids Domain"
-msgstr ""
+msgstr "Domena ID-jev posadk"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
 msgid "Crew Name"
-msgstr ""
+msgstr "Naziv posadke"
 
 #. module: tms
 #: model:ir.model.constraint,message:tms.constraint_tms_crew_name_uniq
 msgid "Crew name already exists!"
-msgstr ""
+msgstr "Naziv posadke že obstaja!"
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_config_crew
@@ -583,12 +595,12 @@ msgstr ""
 #: model:ir.ui.menu,name:tms.menu_tms_config_crew
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
 msgid "Crews"
-msgstr ""
+msgstr "Posadke"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "Crews:"
-msgstr ""
+msgstr "Posadke:"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__currency_id
@@ -643,7 +655,7 @@ msgstr "Dnevi neporavnanih terjatev (DSO)"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Days before expiration"
-msgstr ""
+msgstr "Dni pred potekom"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -683,7 +695,7 @@ msgstr "Privzeta metoda dobave uporabljena v prodajnih nalogih."
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
 msgid "Defines how this stage is evaluated as completed stage"
-msgstr ""
+msgstr "Določa, kako se ta stopnja ovrednoti kot zaključena stopnja"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__trust
@@ -786,22 +798,22 @@ msgstr "ID voznika"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__driver_ids_domain
 msgid "Driver Ids Domain"
-msgstr ""
+msgstr "Domena ID-jev voznikov"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_expiration_date
 msgid "Driver License Expiration Date"
-msgstr ""
+msgstr "Datum poteka vozniškega dovoljenja"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_file
 msgid "Driver License File"
-msgstr ""
+msgstr "Datoteka vozniškega dovoljenja"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_number
 msgid "Driver License Number"
-msgstr ""
+msgstr "Številka vozniškega dovoljenja"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
@@ -816,7 +828,7 @@ msgstr "Tip voznika"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__driver_license_security_days
 msgid "Driver license security days"
-msgstr ""
+msgstr "Varnostni dnevi vozniškega dovoljenja"
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_config_stage_driver
@@ -878,7 +890,7 @@ msgstr "Kader"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Enable the creation of stops in a route"
-msgstr ""
+msgstr "Omogoči ustvarjanje postankov na poti"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
@@ -894,18 +906,18 @@ msgstr "Končni datum"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__end_trip
 msgid "End Trip"
-msgstr ""
+msgstr "Zaključi prevoz"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_route__estimated_time
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
 msgid "Estimated Time"
-msgstr ""
+msgstr "Ocenjeni čas"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_route__estimated_time_uom
 msgid "Estimated Time Uom"
-msgstr ""
+msgstr "EM ocenjenega časa"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__expired
@@ -918,11 +930,13 @@ msgid ""
 "Explanation text to help users using the star and priority mechanism on "
 "stages or orders that are in this stage."
 msgstr ""
+"Pojasnilno besedilo za pomoč uporabnikom pri uporabi zvezdice in mehanizma "
+"prioritete na stopnjah ali nalogih v tej stopnji."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_external
 msgid "External Driver"
-msgstr ""
+msgstr "Zunanji voznik"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__fiscal_country_codes
@@ -937,17 +951,17 @@ msgstr "Fiskalni položaj"
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models
 msgid "Fleet Models"
-msgstr ""
+msgstr "Modeli voznega parka"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_services
 msgid "Fleet Services"
-msgstr ""
+msgstr "Storitve voznega parka"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles
 msgid "Fleet Vehicles"
-msgstr ""
+msgstr "Vozila voznega parka"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__fold
@@ -1000,7 +1014,7 @@ msgstr "Geografska dolžina"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__date_localization
 msgid "Geolocation Date"
-msgstr ""
+msgstr "Datum geolokacije"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__global_location_number
@@ -1107,7 +1121,7 @@ msgstr "Slika 512"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_training
 msgid "In Training"
-msgstr ""
+msgstr "Na usposabljanju"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
@@ -1133,23 +1147,23 @@ msgstr "V vrstici celotni naslov"
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__insurance_id
 #: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
 msgid "Insurance"
-msgstr ""
+msgstr "Zavarovanje"
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_insurance
 #: model:ir.ui.menu,name:tms.menu_tms_insurance
 msgid "Insurance Policies"
-msgstr ""
+msgstr "Zavarovalne police"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
 msgid "Insurance Policy"
-msgstr ""
+msgstr "Zavarovalna polica"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__insurer_id
 msgid "Insurer"
-msgstr ""
+msgstr "Zavarovalnica"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_warn
@@ -1252,27 +1266,27 @@ msgstr "Zadnjič posodobljeno"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
 msgid "Licence Expiration Date"
-msgstr ""
+msgstr "Datum poteka licence"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
 msgid "Licence No."
-msgstr ""
+msgstr "Št. licence"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
 msgid "Licence Type"
-msgstr ""
+msgstr "Tip licence"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
 msgid "License File"
-msgstr ""
+msgstr "Datoteka licence"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_type
 msgid "License type"
-msgstr ""
+msgstr "Tip licence"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_res_partner_list_tms_location
@@ -1297,153 +1311,153 @@ msgstr "Lokacije"
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_crew
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage Crews"
-msgstr ""
+msgstr "Upravljanje posadk"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_driver_license
 msgid "Manage Driver License"
-msgstr ""
+msgstr "Upravljanje vozniških dovoljenj"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage Driver License Expiration"
-msgstr ""
+msgstr "Upravljanje poteka vozniških dovoljenj"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage Driver License Expiration Date Before A Trip"
-msgstr ""
+msgstr "Upravljanje datuma poteka vozniškega dovoljenja pred prevozom"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_route_stop
 msgid "Manage Route Stops"
-msgstr ""
+msgstr "Upravljanje postankov na poti"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_route
 msgid "Manage Routes"
-msgstr ""
+msgstr "Upravljanje poti"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_crew
 msgid "Manage TMS Crew"
-msgstr ""
+msgstr "Upravljanje posadke TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_driver_license
 msgid "Manage TMS Driver License"
-msgstr ""
+msgstr "Upravljanje vozniških dovoljenj TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_uom
 msgid "Manage TMS Oum"
-msgstr ""
+msgstr "Upravljanje merskih enot TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_route_stop
 msgid "Manage TMS Route Stops"
-msgstr ""
+msgstr "Upravljanje postankov poti TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_route
 msgid "Manage TMS Routes"
-msgstr ""
+msgstr "Upravljanje poti TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_team
 msgid "Manage TMS Teams"
-msgstr ""
+msgstr "Upravljanje ekip TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_vehicle_insurance
 msgid "Manage TMS Vehicle Insurance"
-msgstr ""
+msgstr "Upravljanje zavarovanj vozil TMS"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_team
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage Teams"
-msgstr ""
+msgstr "Upravljanje ekip"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage Trips Accounting"
-msgstr ""
+msgstr "Upravljanje računovodstva prevozov"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_vehicle_insurance
 msgid "Manage Vehicle Insurance"
-msgstr ""
+msgstr "Upravljanje zavarovanj vozil"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage Vehicle Insurance Expiration"
-msgstr ""
+msgstr "Upravljanje poteka zavarovanj vozil"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage Vehicle Insurance Expiration Date Before A Trip"
-msgstr ""
+msgstr "Upravljanje datuma poteka zavarovanja vozila pred prevozom"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage crews that share the same vehicle"
-msgstr ""
+msgstr "Upravljanje posadk, ki si delijo isto vozilo"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage depreciations"
-msgstr ""
+msgstr "Upravljanje amortizacij"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage expenses of a trip: hotel, tolls, fuel"
-msgstr ""
+msgstr "Upravljanje stroškov prevoza: hotel, cestnine, gorivo"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage pre-defined routes"
-msgstr ""
+msgstr "Upravljanje vnaprej določenih poti"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage purchase requests for drivers and other suppliers"
-msgstr ""
+msgstr "Upravljanje nabavnih zahtevkov za voznike in druge dobavitelje"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage teams that share the same process/stages"
-msgstr ""
+msgstr "Upravljanje ekip, ki si delijo isti proces/stopnje"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_expense
 msgid "Manage trip expenses"
-msgstr ""
+msgstr "Upravljanje stroškov prevoza"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_account
 msgid "Manage trip invoicing"
-msgstr ""
+msgstr "Upravljanje obračunavanja prevozov"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_purchase
 msgid "Manage trip purchases"
-msgstr ""
+msgstr "Upravljanje nabav za prevoze"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_sale
 msgid "Manage trip sales"
-msgstr ""
+msgstr "Upravljanje prodaje prevozov"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_account_asset
 msgid "Manage vehicle as accounting assets"
-msgstr ""
+msgstr "Upravljanje vozila kot računovodskega sredstva"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage vehicles as accounting assets"
-msgstr ""
+msgstr "Upravljanje vozil kot računovodskih sredstev"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models_Manufacturers
@@ -1453,7 +1467,7 @@ msgstr "Proizvajalci"
 #. module: tms
 #: model:ir.ui.menu,name:tms.data
 msgid "Master Data"
-msgstr ""
+msgstr "Matični podatki"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_error
@@ -1495,12 +1509,12 @@ msgstr "Mobilni"
 #. module: tms
 #: model:ir.model,name:tms.model_tms_driver
 msgid "Model for TMS drivers"
-msgstr ""
+msgstr "Model za voznike TMS"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_insurance
 msgid "Model for TMS insurances"
-msgstr ""
+msgstr "Model za zavarovanja TMS"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models_models
@@ -1574,7 +1588,7 @@ msgstr "Število ukrepov"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_team__trips_todo_count
 msgid "Number of Trips"
-msgstr ""
+msgstr "Število prevozov"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__reminder_date_before_receipt
@@ -1733,22 +1747,22 @@ msgstr "Telefon"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__plan_to_change_bike
 msgid "Plan To Change Bike"
-msgstr ""
+msgstr "Načrtovana menjava kolesa"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__plan_to_change_car
 msgid "Plan To Change Car"
-msgstr ""
+msgstr "Načrtovana menjava avtomobila"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Planning"
-msgstr ""
+msgstr "Planiranje"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__policy_number
 msgid "Policy Number"
-msgstr ""
+msgstr "Številka police"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_outbound_payment_method_line_id
@@ -1771,7 +1785,7 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__premium_amount
 msgid "Premium Amount"
-msgstr ""
+msgstr "Znesek premije"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_product_pricelist
@@ -1781,7 +1795,7 @@ msgstr "Cenik"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_stage__legend_priority
 msgid "Priority Management Explanation"
-msgstr ""
+msgstr "Pojasnilo upravljanja prioritete"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_inbound_payment_method_line_id
@@ -1849,23 +1863,23 @@ msgstr "Proga"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
 msgid "Route Details"
-msgstr ""
+msgstr "Podrobnosti poti"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_route__name
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
 msgid "Route Name"
-msgstr ""
+msgstr "Naziv poti"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__route_destination
 msgid "Route destination"
-msgstr ""
+msgstr "Cilj poti"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__route_origin
 msgid "Route origin"
-msgstr ""
+msgstr "Izvor poti"
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_route
@@ -1897,32 +1911,32 @@ msgstr "Prodajalec"
 #: model:ir.model.fields,field_description:tms.field_tms_order__scheduled_duration
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Scheduled Duration"
-msgstr ""
+msgstr "Načrtovano trajanje"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__diff_duration
 msgid "Scheduled Duration - Actual Duration"
-msgstr ""
+msgstr "Načrtovano trajanje - dejansko trajanje"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__scheduled_date_end
 msgid "Scheduled End"
-msgstr ""
+msgstr "Načrtovani konec"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__scheduled_date_start
 msgid "Scheduled Start"
-msgstr ""
+msgstr "Načrtovani začetek"
 
 #. module: tms
 #: model:ir.model.constraint,message:tms.constraint_tms_order_duration_ge_zero
 msgid "Scheduled duration must be greater than or equal to zero!"
-msgstr ""
+msgstr "Načrtovano trajanje mora biti večje ali enako nič!"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_order__scheduled_duration
 msgid "Scheduled duration of the work in hours"
-msgstr ""
+msgstr "Načrtovano trajanje dela v urah"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__invoice_warn
@@ -1941,12 +1955,12 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__self
 msgid "Self"
-msgstr ""
+msgstr "Sam"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Sell trips or tickets"
-msgstr ""
+msgstr "Prodaja prevozov ali vozovnic"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__sequence
@@ -1972,6 +1986,8 @@ msgid ""
 "Set the number of days before the expiration date of the driver license to show a\n"
 "                                warning."
 msgstr ""
+"Nastavite število dni pred datumom poteka vozniškega dovoljenja za prikaz\n"
+"                                opozorila."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -1979,6 +1995,8 @@ msgid ""
 "Set the number of days before the expiration date of the vehicle insurance to show a\n"
 "                                warning."
 msgstr ""
+"Nastavite število dni pred datumom poteka zavarovanja vozila za prikaz\n"
+"                                opozorila."
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_config
@@ -2051,13 +2069,13 @@ msgstr "Začetni datum"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__start_trip
 msgid "Start Trip"
-msgstr ""
+msgstr "Začni prevoz"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__state_id
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__state
 msgid "State"
-msgstr ""
+msgstr "Stanje"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles_status
@@ -2087,17 +2105,17 @@ msgstr "Dobavnica"
 #: model:ir.model.fields,field_description:tms.field_tms_route__stop_location_ids
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
 msgid "Stop Locations"
-msgstr ""
+msgstr "Lokacije postankov"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Stops"
-msgstr ""
+msgstr "Postanki"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_route__stop_locations
 msgid "Stops locations in route"
-msgstr ""
+msgstr "Lokacije postankov na poti"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__street
@@ -2123,12 +2141,12 @@ msgstr "Rang dobavitelja"
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_uom
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "TMS Units of Measure"
-msgstr ""
+msgstr "Merske enote TMS"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
 msgid "TRIPS"
-msgstr ""
+msgstr "PREVOZI"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__category_id
@@ -2180,7 +2198,7 @@ msgstr "Ekipe"
 #: model:ir.model.fields.selection,name:tms.selection__res_partner__location_type__terrestrial
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_type__terrestrial
 msgid "Terrestrial"
-msgstr ""
+msgstr "Kopenski"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__country_code
@@ -2215,7 +2233,7 @@ msgstr "Notranji uporabnik, zadolžen za ta stik."
 #. module: tms
 #: model:ir.model.constraint,message:tms.constraint_tms_insurance_unique_policy_number_per_insurer
 msgid "The policy number must be unique for each insurer!"
-msgstr ""
+msgstr "Številka police mora biti edinstvena za vsako zavarovalnico!"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__company_registry
@@ -2304,6 +2322,8 @@ msgid ""
 "This stage is folded in the kanban view when there are no record in that "
 "stage to display."
 msgstr ""
+"Ta stopnja je v pogledu kanban zložena, kadar v tej stopnji ni zapisov za "
+"prikaz."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__time_uom
@@ -2323,39 +2343,39 @@ msgstr "Časovni razmak"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__title
 msgid "Title"
-msgstr ""
+msgstr "Naziv"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_distance_uom
 msgid "Tms Distance Uom"
-msgstr ""
+msgstr "EM razdalje TMS"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_length_uom
 msgid "Tms Length Uom"
-msgstr ""
+msgstr "EM dolžine TMS"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_speed_uom
 msgid "Tms Speed Uom"
-msgstr ""
+msgstr "EM hitrosti TMS"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__tms_team_id
 #: model:ir.model.fields,field_description:tms.field_tms_crew__tms_team_id
 #: model:ir.model.fields,field_description:tms.field_tms_driver__tms_team_id
 msgid "Tms Team"
-msgstr ""
+msgstr "Ekipa TMS"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_time_uom
 msgid "Tms Time Uom"
-msgstr ""
+msgstr "EM časa TMS"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_weight_uom
 msgid "Tms Weight Uom"
-msgstr ""
+msgstr "EM mase TMS"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__total_invoiced
@@ -2392,69 +2412,69 @@ msgstr "Prevoz"
 #. module: tms
 #: model:ir.module.category,name:tms.tms
 msgid "Transport Management System"
-msgstr ""
+msgstr "Sistem za upravljanje transporta"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_crew
 msgid "Transport Management System Crew"
-msgstr ""
+msgstr "Posadka sistema za upravljanje transporta"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_order
 msgid "Transport Management System Order"
-msgstr ""
+msgstr "Nalog sistema za upravljanje transporta"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_route
 msgid "Transport Management System Route"
-msgstr ""
+msgstr "Pot sistema za upravljanje transporta"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_stage
 msgid "Transport Management System Stage"
-msgstr ""
+msgstr "Stopnja sistema za upravljanje transporta"
 
 #. module: tms
 #: model:ir.model,name:tms.model_tms_team
 msgid "Transport Management System Team"
-msgstr ""
+msgstr "Ekipa sistema za upravljanje transporta"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_partner__tms_location
 #: model:ir.model.fields,field_description:tms.field_res_users__tms_location
 #: model:ir.model.fields,field_description:tms.field_tms_driver__tms_location
 msgid "Transport location"
-msgstr ""
+msgstr "Transportna lokacija"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__order
 msgid "Trip"
-msgstr ""
+msgstr "Prevoz"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__duration
 msgid "Trip Duration"
-msgstr ""
+msgstr "Trajanje prevoza"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Trip Name"
-msgstr ""
+msgstr "Naziv prevoza"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_report_view_graph
 msgid "Trip Reports"
-msgstr ""
+msgstr "Poročila o prevozih"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Trip Tracking"
-msgstr ""
+msgstr "Sledenje prevozom"
 
 #. module: tms
 #: model:ir.model.constraint,message:tms.constraint_tms_order_name_uniq
 msgid "Trip name already exists!"
-msgstr ""
+msgstr "Naziv prevoza že obstaja!"
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_dash_order
@@ -2467,12 +2487,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_pivot
 msgid "Trips"
-msgstr ""
+msgstr "Prevozi"
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_order_kanban
 msgid "Trips Kanban"
-msgstr ""
+msgstr "Kanban prevozov"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__driver_type
@@ -2505,7 +2525,7 @@ msgstr "EM"
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__custom_color
 msgid "Use Hex Code only Ex:-#FFFFFF"
-msgstr ""
+msgstr "Uporabite samo šestnajstiško kodo. Primer: #FFFFFF"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__barcode
@@ -2515,17 +2535,17 @@ msgstr "Uporabite črtno kodo za identifikacijo tega stika."
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__route
 msgid "Use predefined route"
-msgstr ""
+msgstr "Uporabi vnaprej določeno pot"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__sequence
 msgid "Used to order stages. Lower is first."
-msgstr ""
+msgstr "Uporablja se za razvrščanje stopenj. Nižja vrednost je prva."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_team__sequence
 msgid "Used to sort teams. Lower is better."
-msgstr ""
+msgstr "Uporablja se za razvrščanje ekip. Nižja vrednost je boljša."
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_user
@@ -2549,12 +2569,12 @@ msgstr "Vozilo"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__vehicle_ids_domain
 msgid "Vehicle Ids Domain"
-msgstr ""
+msgstr "Domena ID-jev vozil"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__vehicle_insurance_security_days
 msgid "Vehicle Insurance security days"
-msgstr ""
+msgstr "Varnostni dnevi zavarovanja vozila"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__vehicles_ids
@@ -2617,23 +2637,25 @@ msgid ""
 "You can add a description to help your coworkers\n"
 "                            understand the meaning and purpose of the stage."
 msgstr ""
+"Dodate lahko opis, ki sodelavcem pomaga\n"
+"                            razumeti pomen in namen stopnje."
 
 #. module: tms
 #. odoo-python
 #: code:addons/tms/models/tms_stage.py:0
 msgid "You cannot delete default stages."
-msgstr ""
+msgstr "Privzetih stopenj ni mogoče izbrisati."
 
 #. module: tms
 #. odoo-python
 #: code:addons/tms/models/tms_order.py:0
 msgid "You must create an TMS order stage first."
-msgstr ""
+msgstr "Najprej morate ustvariti stopnjo naloga TMS."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__zip
 msgid "Zip"
-msgstr ""
+msgstr "Poštna številka"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__days_sales_outstanding
