@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 17:38+0000\n"
+"PO-Revision-Date: 2026-06-25 17:53+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -26,27 +26,27 @@ msgstr "%(sa)s: preverjanje %(pick)s v ozadju"
 #. module: shipment_advice
 #: model:ir.actions.report,print_report_name:shipment_advice.action_report_shipment_advice
 msgid "'Shipment Advice - %s' % (object.name)"
-msgstr ""
+msgstr "'Najava pošiljke - %s' % (object.name)"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "<span class=\"o_horizontal_separator\">Bulk content</span>"
-msgstr ""
+msgstr "<span class=\"o_horizontal_separator\">Razsuta vsebina</span>"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "<span class=\"o_horizontal_separator\">Package content</span>"
-msgstr ""
+msgstr "<span class=\"o_horizontal_separator\">Vsebina pakiranja</span>"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "<strong>Bulk content</strong>"
-msgstr ""
+msgstr "<strong>Razsuta vsebina</strong>"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "<strong>Package content</strong>"
-msgstr ""
+msgstr "<strong>Vsebina pakiranja</strong>"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_needaction
@@ -80,22 +80,24 @@ msgid ""
 "An error occurred while processing:\n"
 "- %(related_object_name)s: %(error)s"
 msgstr ""
+"Pri obdelavi je prišlo do napake:\n"
+"- %(related_object_name)s: %(error)s"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__arrival_date
 msgid "Arrival Date"
-msgstr ""
+msgstr "Datum prihoda"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Arrival date"
-msgstr ""
+msgstr "Datum prihoda"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Arrival date should be set on the shipment advice %s."
-msgstr ""
+msgstr "Datum prihoda mora biti nastavljen na najavi pošiljke %s."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_attachment_count
@@ -105,13 +107,13 @@ msgstr "Št. priponk"
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "Auto-close Incoming Shipments"
-msgstr ""
+msgstr "Samodejno zapri vhodne pošiljke"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid ""
 "Automatically close incoming shipment advice when all moves are completed"
-msgstr ""
+msgstr "Samodejno zapri najavo vhodne pošiljke, ko so vsi premiki zaključeni"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -121,22 +123,22 @@ msgstr "Vrni v osnutek"
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "Backorder Policy for Outgoing Shipments"
-msgstr ""
+msgstr "Pravilnik za zaostale naloge pri izhodnih pošiljkah"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_count
 msgid "Bulk lines loaded"
-msgstr ""
+msgstr "Naložene razsute postavke"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_progress
 msgid "Bulk lines loaded/total"
-msgstr ""
+msgstr "Naložene/skupaj razsute postavke"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_move_lines_progress_f
 msgid "Bulk lines loaded/total %"
-msgstr ""
+msgstr "Naložene/skupaj razsute postavke %"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -174,6 +176,9 @@ msgid ""
 "determine what are the eligible deliveries to load in the shipment when you "
 "don't have planned content (e.g. through the shopfloor application)."
 msgstr ""
+"Zadevni način dostave za to najavo pošiljke. Uporabi se lahko za določitev "
+"primernih dostav za nalaganje v pošiljko, kadar ni načrtovane vsebine (npr. "
+"prek aplikacije za delo v skladišču)."
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_res_config_settings
@@ -185,6 +190,7 @@ msgstr "Nastavitve"
 msgid ""
 "Configure how outgoing shipment advice handles backorders for deliveries"
 msgstr ""
+"Nastavite, kako najava izhodne pošiljke obravnava zaostale naloge za dostave"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -199,7 +205,7 @@ msgstr "Potrjeno"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__ref
 msgid "Consignment/Truck Ref."
-msgstr ""
+msgstr "Sklic pošiljke/tovornjaka"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__res_company__shipment_advice_outgoing_backorder_policy__create_backorder
@@ -237,12 +243,12 @@ msgstr "Datum dobave"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__departure_date
 msgid "Departure Date"
-msgstr ""
+msgstr "Datum odhoda"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Departure date"
-msgstr ""
+msgstr "Datum odhoda"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__display_name
@@ -257,7 +263,7 @@ msgstr "Prikazani naziv"
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Dock should be set on the shipment advice %s."
-msgstr ""
+msgstr "Rampa mora biti nastavljena na najavi pošiljke %s."
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__done
@@ -350,6 +356,16 @@ msgid ""
 "                            loaded in a shipment advice choose 'Leave open'. This last option\n"
 "                            is useful when your deliveries will be shipped by several trucks."
 msgstr ""
+"Če želite, da zapiranje najave izhodne pošiljke označi vse povezane dostave\n"
+"                            kot opravljene in v primeru delne dostave "
+"ustvari zaostali nalog,\n"
+"                            izberite 'Ustvari zaostali nalog'.\n"
+"                            Če želite dostave označiti kot opravljene samo, "
+"ko so vse\n"
+"                            naložene v najavi pošiljke, izberite 'Pusti "
+"odprto'. Ta zadnja možnost\n"
+"                            je uporabna, kadar bodo vaše dostave odpremljene "
+"z več tovornjaki."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
@@ -358,6 +374,12 @@ msgid ""
 "If you want that closing an outgoing shipment advice marks as done all related deliveries and creates backorder in case of partial choose 'Create backorder'.\n"
 "If you want to mark deliveries as done only when they are all loaded in a shipment advice choose 'Leave open'. This last option is useful when your deliveries will be shipped by several trucks."
 msgstr ""
+"Če želite, da zapiranje najave izhodne pošiljke označi vse povezane dostave "
+"kot opravljene in v primeru delne dostave ustvari zaostali nalog, izberite "
+"'Ustvari zaostali nalog'.\n"
+"Če želite dostave označiti kot opravljene samo, ko so vse naložene v najavi "
+"pošiljke, izberite 'Pusti odprto'. Ta zadnja možnost je uporabna, kadar bodo "
+"vaše dostave odpremljene z več tovornjaki."
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__state__in_process
@@ -383,17 +405,17 @@ msgstr "Je sledilec"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__is_fully_loaded_in_shipment
 msgid "Is fully loaded in a shipment?"
-msgstr ""
+msgstr "Je v celoti naloženo v pošiljki?"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__is_partially_loaded_in_shipment
 msgid "Is partially loaded in a shipment?"
-msgstr ""
+msgstr "Je delno naloženo v pošiljki?"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Lading"
-msgstr ""
+msgstr "Tovorjenje"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__write_uid
@@ -421,12 +443,12 @@ msgstr "Pusti odprto"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__line_to_load_ids
 msgid "Line To Load"
-msgstr ""
+msgstr "Postavka za nalaganje"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__lines_to_load_count
 msgid "Lines To Load Count"
-msgstr ""
+msgstr "Število postavk za nalaganje"
 
 #. module: shipment_advice
 #. odoo-python
@@ -435,6 +457,8 @@ msgid ""
 "Lines to include have been updated, keeping only those qualified as "
 "delivery."
 msgstr ""
+"Postavke za vključitev so bile posodobljene; ohranjene so samo tiste, ki "
+"ustrezajo dostavi."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__line_to_load_ids
@@ -443,11 +467,14 @@ msgid ""
 "If the shipment is planned, it'll return the planned lines.\n"
 "If the shipment is not planned, it'll return lines from transfers partially loaded."
 msgstr ""
+"Postavke za prednostno nalaganje.\n"
+"Če je pošiljka načrtovana, vrne načrtovane postavke.\n"
+"Če pošiljka ni načrtovana, vrne postavke iz delno naloženih premestitev."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
 msgid "Load in Shipment Advice"
-msgstr ""
+msgstr "Naloži v najavo pošiljke"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_load_shipment_picking_action
@@ -455,90 +482,90 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_form
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_stock_move_line_detailed_operation_tree
 msgid "Load in shipment"
-msgstr ""
+msgstr "Naloži v pošiljko"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_wizard_load_shipment
 msgid "Load shipment"
-msgstr ""
+msgstr "Naloži pošiljko"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Loaded"
-msgstr ""
+msgstr "Naloženo"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_move_lines_without_package_count
 msgid "Loaded Move Lines Without Package Count"
-msgstr ""
+msgstr "Število naloženih postavk premika brez pakiranja"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_packages_count
 msgid "Loaded Packages Count"
-msgstr ""
+msgstr "Število naloženih pakiranj"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_pickings_count
 msgid "Loaded Pickings Count"
-msgstr ""
+msgstr "Število naloženih premestitev"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_shipment_advice_ids
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
 msgid "Loaded Shipment Advice"
-msgstr ""
+msgstr "Naložena najava pošiljke"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_weight
 msgid "Loaded Weight"
-msgstr ""
+msgstr "Naložena teža"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Loaded bulk"
-msgstr ""
+msgstr "Naložena razsuta vsebina"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_move_line_ids
 msgid "Loaded content list"
-msgstr ""
+msgstr "Seznam naložene vsebine"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_move_line_without_package_ids
 msgid "Loaded content list (w/o packages)"
-msgstr ""
+msgstr "Seznam naložene vsebine (brez pakiranj)"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Loaded packages"
-msgstr ""
+msgstr "Naložena pakiranja"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_picking_ids
 msgid "Loaded transfers"
-msgstr ""
+msgstr "Naložene premestitve"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_progress
 msgid "Loaded/total"
-msgstr ""
+msgstr "Naloženo/skupaj"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_progress_f
 msgid "Loaded/total %"
-msgstr ""
+msgstr "Naloženo/skupaj %"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Loading Progress"
-msgstr ""
+msgstr "Napredek nalaganja"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__dock_id
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Loading dock"
-msgstr ""
+msgstr "Nakladalna rampa"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -567,6 +594,8 @@ msgstr "Premiki"
 msgid ""
 "Moves to include have been updated to match the selected shipment type."
 msgstr ""
+"Premiki za vključitev so bili posodobljeni, da ustrezajo izbranemu tipu "
+"pošiljke."
 
 #. module: shipment_advice
 #. odoo-python
@@ -575,6 +604,8 @@ msgid ""
 "Moves to include have been updated, keeping only those still in progress and"
 " related to a delivery/reception."
 msgstr ""
+"Premiki za vključitev so bili posodobljeni; ohranjeni so samo tisti, ki so "
+"še v teku in povezani z dostavo/prejemom."
 
 #. module: shipment_advice
 #. odoo-python
@@ -583,22 +614,24 @@ msgid ""
 "Moves to include have been updated, keeping only those still in progress and"
 " related to a shipment."
 msgstr ""
+"Premiki za vključitev so bili posodobljeni; ohranjeni so samo tisti, ki so "
+"še v teku in povezani s pošiljko."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__move_ids
 msgid "Moves to plan"
-msgstr ""
+msgstr "Premiki za načrtovanje"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__move_ids
 msgid "Moves to unplan"
-msgstr ""
+msgstr "Premiki za odstranitev iz načrta"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 msgid "Moves updated"
-msgstr ""
+msgstr "Premiki posodobljeni"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__my_activity_date_deadline
@@ -613,7 +646,7 @@ msgstr "Naziv"
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Nb. of packages"
-msgstr ""
+msgstr "Št. pakiranj"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_date_deadline
@@ -637,6 +670,8 @@ msgid ""
 "No move to plan among selected ones (already done, linked to other moves "
 "through a package, or not related to a delivery/reception)."
 msgstr ""
+"Med izbranimi ni premika za načrtovanje (je že opravljen, povezan z drugimi "
+"premiki prek pakiranja ali ni povezan z dostavo/prejemom)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -645,6 +680,8 @@ msgid ""
 "No move to unplan among selected ones (already done, linked to other moves "
 "through a package, or not related to a shipment)."
 msgstr ""
+"Med izbranimi ni premika za odstranitev iz načrta (je že opravljen, povezan "
+"z drugimi premiki prek pakiranja ali ni povezan s pošiljko)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -653,6 +690,8 @@ msgid ""
 "No package to load among selected ones (already done or not qualified as "
 "delivery)."
 msgstr ""
+"Med izbranimi ni pakiranja za nalaganje (je že opravljeno ali ne ustreza "
+"dostavi)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -661,6 +700,8 @@ msgid ""
 "No product to load among selected ones (already done or not qualified as "
 "delivery)."
 msgstr ""
+"Med izbranimi ni proizvoda za nalaganje (je že opravljen ali ne ustreza "
+"dostavi)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -669,6 +710,8 @@ msgid ""
 "No product to unload among selected ones (already done or not related to a "
 "shipment)."
 msgstr ""
+"Med izbranimi ni proizvoda za razlaganje (je že opravljen ali ni povezan s "
+"pošiljko)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -677,6 +720,8 @@ msgid ""
 "No transfer to load among selected ones (already done or not qualified as "
 "delivery)."
 msgstr ""
+"Med izbranimi ni premestitve za nalaganje (je že opravljena ali ne ustreza "
+"dostavi)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -685,6 +730,8 @@ msgid ""
 "No transfer to plan among selected ones (already done or not qualified as "
 "deliveries/receptions)."
 msgstr ""
+"Med izbranimi ni premestitve za načrtovanje (je že opravljena ali ne ustreza "
+"dostavam/prejemom)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -693,6 +740,8 @@ msgid ""
 "No transfer to unload among selected ones (already done or not related to a "
 "shipment)."
 msgstr ""
+"Med izbranimi ni premestitve za razlaganje (je že opravljena ali ni povezana "
+"s pošiljko)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -701,6 +750,8 @@ msgid ""
 "No transfer to unplan among selected ones (already done or not related to a "
 "shipment)."
 msgstr ""
+"Med izbranimi ni premestitve za odstranitev iz načrta (je že opravljena ali "
+"ni povezana s pošiljko)."
 
 #. module: shipment_advice
 #. odoo-python
@@ -709,6 +760,8 @@ msgid ""
 "Nothing to load for %(product)s.\n"
 "Picking: %(picking)s"
 msgstr ""
+"Za %(product)s ni ničesar za naložiti.\n"
+"Premestitev: %(picking)s"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_needaction_counter
@@ -733,7 +786,7 @@ msgstr "Število sporočil, ki niso bila pravilno dostavljena"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__open_shipment
 msgid "Open Shipment"
-msgstr ""
+msgstr "Odpri pošiljko"
 
 #. module: shipment_advice
 #: model:ir.model.fields.selection,name:shipment_advice.selection__shipment_advice__shipment_type__outgoing
@@ -749,12 +802,12 @@ msgstr "Pakiranje"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_package_level_ids
 msgid "Package Levels"
-msgstr ""
+msgstr "Ravni pakiranja"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_shipping_weight_uom_name
 msgid "Package Shipping Weight Uom Name"
-msgstr ""
+msgstr "Naziv EM odpremne teže pakiranja"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__loaded_package_ids
@@ -765,17 +818,17 @@ msgstr "Pakiranja"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_packages_count
 msgid "Packages loaded"
-msgstr ""
+msgstr "Pakiranja naložena"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_packages_progress
 msgid "Packages loaded/total"
-msgstr ""
+msgstr "Pakiranja naložena/skupaj"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_packages_progress_f
 msgid "Packages loaded/total %"
-msgstr ""
+msgstr "Pakiranja naložena/skupaj %"
 
 #. module: shipment_advice
 #. odoo-python
@@ -784,11 +837,13 @@ msgid ""
 "Packages to include have been updated, keeping only those qualified as "
 "delivery."
 msgstr ""
+"Pakiranja za vključitev so bila posodobljena; ohranjena so samo tista, ki "
+"ustrezajo dostavi."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__package_level_ids
 msgid "Packages to load"
-msgstr ""
+msgstr "Pakiranja za nalaganje"
 
 #. module: shipment_advice
 #. odoo-python
@@ -796,29 +851,31 @@ msgstr ""
 msgid ""
 "Packages to load have been updated to match the selected shipment type."
 msgstr ""
+"Pakiranja za nalaganje so bila posodobljena, da ustrezajo izbranemu tipu "
+"pošiljke."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 msgid "Packages updated"
-msgstr ""
+msgstr "Pakiranja posodobljena"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_plan_shipment_form
 msgid "Plan in Shipment Advice"
-msgstr ""
+msgstr "Načrtuj v najavi pošiljke"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_plan_shipment_move_action
 #: model:ir.actions.act_window,name:shipment_advice.wizard_plan_shipment_picking_action
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_form
 msgid "Plan in shipment"
-msgstr ""
+msgstr "Načrtuj v pošiljki"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_wizard_plan_shipment
 msgid "Plan shipment"
-msgstr ""
+msgstr "Načrtuj pošiljko"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -838,52 +895,52 @@ msgstr "Št. planiranih dobavnic"
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
 msgid "Planned Shipment Advice"
-msgstr ""
+msgstr "Načrtovana najava pošiljke"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Planned bulk"
-msgstr ""
+msgstr "Načrtovana razsuta vsebina"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__planned_move_ids
 msgid "Planned content list"
-msgstr ""
+msgstr "Seznam načrtovane vsebine"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_move__shipment_advice_id
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__planned_shipment_advice_id
 msgid "Planned shipment"
-msgstr ""
+msgstr "Načrtovana pošiljka"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__planned_picking_ids
 msgid "Planned transfers"
-msgstr ""
+msgstr "Načrtovane premestitve"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 msgid "Please select at least one record to load in a shipment."
-msgstr ""
+msgstr "Izberite vsaj en zapis za nalaganje v pošiljko."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 msgid "Please select at least one record to plan in a shipment."
-msgstr ""
+msgstr "Izberite vsaj en zapis za načrtovanje v pošiljki."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 msgid "Please select at least one record to unload from shipment."
-msgstr ""
+msgstr "Izberite vsaj en zapis za razlaganje iz pošiljke."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
 msgid "Please select at least one record to unplan from shipment."
-msgstr ""
+msgstr "Izberite vsaj en zapis za odstranitev iz načrta pošiljke."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
@@ -891,6 +948,8 @@ msgid ""
 "Process shipment advice validation through queued jobs to handle large "
 "shipments"
 msgstr ""
+"Obdelaj potrjevanje najave pošiljke prek opravil v čakalni vrsti za "
+"obravnavo velikih pošiljk"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
@@ -914,11 +973,13 @@ msgid ""
 "Products to include have been updated, keeping only those still in progress "
 "and related to a shipment."
 msgstr ""
+"Proizvodi za vključitev so bili posodobljeni; ohranjeni so samo tisti, ki so "
+"še v teku in povezani s pošiljko."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__move_line_ids
 msgid "Products to load"
-msgstr ""
+msgstr "Proizvodi za nalaganje"
 
 #. module: shipment_advice
 #. odoo-python
@@ -926,17 +987,19 @@ msgstr ""
 msgid ""
 "Products to load have been updated to match the selected shipment type."
 msgstr ""
+"Proizvodi za nalaganje so bili posodobljeni, da ustrezajo izbranemu tipu "
+"pošiljke."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__move_line_ids
 msgid "Products to unload"
-msgstr ""
+msgstr "Proizvodi za razlaganje"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 msgid "Products updated"
-msgstr ""
+msgstr "Proizvodi posodobljeni"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
@@ -952,7 +1015,7 @@ msgstr "Sklic mora biti za vsako družbo unikaten!"
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__carrier_ids
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Related shipping methods"
-msgstr ""
+msgstr "Povezani načini dostave"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__activity_user_id
@@ -962,37 +1025,37 @@ msgstr "Odgovorni uporabnik"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__run_in_queue_job
 msgid "Run In Queue Job"
-msgstr ""
+msgstr "Zaženi kot opravilo v čakalni vrsti"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_run_in_queue_job
 msgid "Run shipment advice in queue job"
-msgstr ""
+msgstr "Zaženi najavo pošiljke kot opravilo v čakalni vrsti"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Shipment %s is not canceled, operation aborted."
-msgstr ""
+msgstr "Pošiljka %s ni preklicana, operacija prekinjena."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Shipment %s is not confirmed, operation aborted."
-msgstr ""
+msgstr "Pošiljka %s ni potrjena, operacija prekinjena."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Shipment %s is not draft, operation aborted."
-msgstr ""
+msgstr "Pošiljka %s ni v osnutku, operacija prekinjena."
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
 msgid "Shipment %s is not started, operation aborted."
-msgstr ""
+msgstr "Pošiljka %s ni začeta, operacija prekinjena."
 
 #. module: shipment_advice
 #: model:ir.actions.report,name:shipment_advice.action_report_shipment_advice
@@ -1003,19 +1066,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:shipment_advice.stock_move_line_view_search
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_move_search
 msgid "Shipment Advice"
-msgstr ""
+msgstr "Najava pošiljke"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_auto_close_incoming
 msgid "Shipment Advice: Auto Close Incoming Advices"
-msgstr ""
+msgstr "Najava pošiljke: samodejno zapiranje vhodnih najav"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_outgoing_backorder_policy
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_outgoing_backorder_policy
 msgid "Shipment Advice: Outgoing backorder policy"
-msgstr ""
+msgstr "Najava pošiljke: pravilnik za izhodne zaostale naloge"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.shipment_advice_action
@@ -1023,24 +1086,24 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_calendar
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
 msgid "Shipment Advices"
-msgstr ""
+msgstr "Najave pošiljk"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_move_line__shipment_advice_id
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__shipment_advice_id
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Shipment advice"
-msgstr ""
+msgstr "Najava pošiljke"
 
 #. module: shipment_advice
 #: model:ir.ui.menu,name:shipment_advice.shipment_advice_menu_section
 msgid "Shipments"
-msgstr ""
+msgstr "Pošiljke"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_package_level__package_shipping_weight
 msgid "Shipping Weight"
-msgstr ""
+msgstr "Odpremna teža"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -1088,6 +1151,8 @@ msgid ""
 "The following pickings failed to validate\n"
 "%s"
 msgstr ""
+"Naslednjih premestitev ni bilo mogoče potrditi\n"
+"%s"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
@@ -1101,6 +1166,10 @@ msgid ""
 "                            will be automatically set to done\n"
 "                            if all related moves are done or canceled"
 msgstr ""
+"Ta zastavica označuje, ali bo najava vhodne pošiljke\n"
+"                            samodejno nastavljena na opravljeno,\n"
+"                            če so vsi povezani premiki opravljeni ali "
+"preklicani"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
@@ -1109,6 +1178,8 @@ msgid ""
 "This flag indicates if an incoming shipment advice will be automatically set"
 " to done if all related moves are done or canceled"
 msgstr ""
+"Ta zastavica označuje, ali bo najava vhodne pošiljke samodejno nastavljena "
+"na opravljeno, če so vsi povezani premiki opravljeni ali preklicani"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1118,16 +1189,19 @@ msgid ""
 "Product: %(product)s.\n"
 "Picking: %(picking)s"
 msgstr ""
+"Ta premik je že naložen v drugi pošiljki.\n"
+"Proizvod: %(product)s.\n"
+"Premestitev: %(picking)s"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "To load"
-msgstr ""
+msgstr "Za nalaganje"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
 msgid "To plan in Shipment Advice"
-msgstr ""
+msgstr "Za načrtovanje v najavi pošiljke"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
@@ -1136,6 +1210,11 @@ msgid ""
 "                            shipment advice validation through a queued job. Each picking will be\n"
 "                            validated in a separate jobs."
 msgstr ""
+"Za preprečevanje časovnih omejitev pri velikih pošiljkah omogočite to "
+"možnost za izvedbo\n"
+"                            potrjevanja najave pošiljke prek opravila v "
+"čakalni vrsti. Vsaka premestitev bo\n"
+"                            potrjena v ločenem opravilu."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_res_company__shipment_advice_run_in_queue_job
@@ -1145,6 +1224,9 @@ msgid ""
 "shipment advice validation through a queued jobs. Each picking will be "
 "validated in a separate job."
 msgstr ""
+"Za preprečevanje časovnih omejitev pri velikih pošiljkah omogočite to "
+"možnost za izvedbo potrjevanja najave pošiljke prek opravil v čakalni vrsti. "
+"Vsaka premestitev bo potrjena v ločenem opravilu."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_search
@@ -1154,23 +1236,23 @@ msgstr "Danes"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__total_move_lines_count
 msgid "Total bulk lines"
-msgstr ""
+msgstr "Skupaj razsutih postavk"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__total_load
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Total load (kg)"
-msgstr ""
+msgstr "Skupna obremenitev (kg)"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__total_packages_count
 msgid "Total packages"
-msgstr ""
+msgstr "Skupaj pakiranj"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_stock_package_level__package_shipping_weight
 msgid "Total weight of the package."
-msgstr ""
+msgstr "Skupna teža pakiranja."
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_stock_picking
@@ -1192,6 +1274,8 @@ msgstr "Premestitve"
 msgid ""
 "Transfers to include have been updated to match the selected shipment type."
 msgstr ""
+"Premestitve za vključitev so bile posodobljene, da ustrezajo izbranemu tipu "
+"pošiljke."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1200,6 +1284,8 @@ msgid ""
 "Transfers to include have been updated, keeping only those assigned and "
 "qualified as delivery."
 msgstr ""
+"Premestitve za vključitev so bile posodobljene; ohranjene so samo tiste, ki "
+"so dodeljene in ustrezajo dostavi."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1208,6 +1294,8 @@ msgid ""
 "Transfers to include have been updated, keeping only those still in progress"
 " and qualified as delivery/reception."
 msgstr ""
+"Premestitve za vključitev so bile posodobljene; ohranjene so samo tiste, ki "
+"so še v teku in ustrezajo dostavi/prejemu."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1217,11 +1305,13 @@ msgid ""
 "Transfers to include have been updated, keeping only those still in progress"
 " and related to a shipment."
 msgstr ""
+"Premestitve za vključitev so bile posodobljene; ohranjene so samo tiste, ki "
+"so še v teku in povezane s pošiljko."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__picking_ids
 msgid "Transfers to load"
-msgstr ""
+msgstr "Premestitve za nalaganje"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1229,33 +1319,35 @@ msgstr ""
 msgid ""
 "Transfers to load have been updated to match the selected shipment type."
 msgstr ""
+"Premestitve za nalaganje so bile posodobljene, da ustrezajo izbranemu tipu "
+"pošiljke."
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__picking_ids
 msgid "Transfers to plan"
-msgstr ""
+msgstr "Premestitve za načrtovanje"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__picking_ids
 msgid "Transfers to unload"
-msgstr ""
+msgstr "Premestitve za razlaganje"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unplan_shipment__picking_ids
 msgid "Transfers to unplan"
-msgstr ""
+msgstr "Premestitve za odstranitev iz načrta"
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
 msgid "Transfers updated"
-msgstr ""
+msgstr "Premestitve posodobljene"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.report_shipment_advice_document
 msgid "Truck ref."
-msgstr ""
+msgstr "Sklic tovornjaka"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__shipment_type
@@ -1270,57 +1362,57 @@ msgstr "Tip izjeme pri aktivnosti na zapisu."
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unload_shipment_form
 msgid "Unload from Shipment Advice"
-msgstr ""
+msgstr "Razloži iz najave pošiljke"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_form
 msgid "Unload from shipment"
-msgstr ""
+msgstr "Razloži iz pošiljke"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_unload_shipment_picking_action
 msgid "Unload in shipment"
-msgstr ""
+msgstr "Razloži v pošiljki"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_wizard_unload_shipment
 msgid "Unload shipment"
-msgstr ""
+msgstr "Razloži pošiljko"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "Unloading Progress"
-msgstr ""
+msgstr "Napredek razlaganja"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_unplan_shipment_form
 msgid "Unplan from Shipment Advice"
-msgstr ""
+msgstr "Odstrani iz načrta najave pošiljke"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_unplan_shipment_move_action
 msgid "Unplan from shipment"
-msgstr ""
+msgstr "Odstrani iz načrta pošiljke"
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.wizard_unplan_shipment_picking_action
 msgid "Unplan in shipment"
-msgstr ""
+msgstr "Odstrani iz načrta v pošiljki"
 
 #. module: shipment_advice
 #: model:ir.model,name:shipment_advice.model_wizard_unplan_shipment
 msgid "Unplan shipment"
-msgstr ""
+msgstr "Odstrani pošiljko iz načrta"
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "Use Queue Jobs for Shipment Advice"
-msgstr ""
+msgstr "Uporabi opravila v čakalni vrsti za najavo pošiljke"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__shipment_type
 msgid "Use incoming to plan receptions, use outgoing for deliveries."
-msgstr ""
+msgstr "Uporabite vhodno za načrtovanje prejemov, izhodno pa za dostave."
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_load_shipment_form
@@ -1333,7 +1425,7 @@ msgstr "Potrdi"
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__loaded_waiting_quantity
 msgid "Waiting Quantity"
-msgstr ""
+msgstr "Čakajoča količina"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__warehouse_id
@@ -1380,6 +1472,8 @@ msgid ""
 "When will the shipment arrive at the (un)loading dock. It is a planned date "
 "until in progress, then it represents the real one."
 msgstr ""
+"Kdaj bo pošiljka prispela na nakladalno/razkladalno rampo. Do začetka "
+"obdelave je to načrtovani datum, nato predstavlja dejanski datum."
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__departure_date
@@ -1387,6 +1481,8 @@ msgid ""
 "When will the shipment leave the (un)loading dock. It is a planned date "
 "until in progress, then it represents the real one."
 msgstr ""
+"Kdaj bo pošiljka zapustila nakladalno/razkladalno rampo. Do začetka obdelave "
+"je to načrtovani datum, nato predstavlja dejanski datum."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1395,6 +1491,8 @@ msgid ""
 "You cannot load move lines which are part of a package, unless you select "
 "all the move lines related to this package."
 msgstr ""
+"Postavk premika, ki so del pakiranja, ni mogoče naložiti, razen če izberete "
+"vse postavke premika, povezane s tem pakiranjem."
 
 #. module: shipment_advice
 #. odoo-python
@@ -1403,6 +1501,7 @@ msgid ""
 "You cannot load this into this shipment as it has been planned to be loaded "
 "in %s"
 msgstr ""
+"Tega ni mogoče naložiti v to pošiljko, ker je načrtovano za nalaganje v %s"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1411,6 +1510,9 @@ msgid ""
 "You cannot load this into this shipment because its content is planned already.\n"
 "%(info)s"
 msgstr ""
+"Tega ni mogoče naložiti v to pošiljko, ker je njegova vsebina že "
+"načrtovana.\n"
+"%(info)s"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1419,6 +1521,9 @@ msgid ""
 "You cannot load this move line alone, you have to move the whole package content.\n"
 "%(info)s"
 msgstr ""
+"Te postavke premika ni mogoče naložiti same; premakniti morate celotno "
+"vsebino pakiranja.\n"
+"%(info)s"
 
 #. module: shipment_advice
 #. odoo-python
@@ -1427,3 +1532,5 @@ msgid ""
 "You cannot unload this move line alone, you have to unload the whole package"
 " content."
 msgstr ""
+"Te postavke premika ni mogoče razložiti same; razložiti morate celotno "
+"vsebino pakiranja."
