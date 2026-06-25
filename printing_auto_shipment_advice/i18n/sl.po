@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 17:53+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,32 +15,33 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: printing_auto_shipment_advice
 #: model:ir.model.fields,field_description:printing_auto_shipment_advice.field_shipment_advice__auto_printing_ids
 #: model:ir.model.fields,field_description:printing_auto_shipment_advice.field_stock_warehouse__shipment_advice_auto_printing_ids
 msgid "Auto Printing Configuration"
-msgstr ""
+msgstr "Nastavitve samodejnega tiskanja"
 
 #. module: printing_auto_shipment_advice
 #: model_terms:ir.ui.view,arch_db:printing_auto_shipment_advice.view_shipment_advice_form
 msgid "Print documents"
-msgstr ""
+msgstr "Natisni dokumente"
 
 #. module: printing_auto_shipment_advice
 #: model:ir.model.fields,field_description:printing_auto_shipment_advice.field_shipment_advice__printing_auto_error
 msgid "Printing error"
-msgstr ""
+msgstr "Napaka pri tiskanju"
 
 #. module: printing_auto_shipment_advice
 #: model:ir.model,name:printing_auto_shipment_advice.model_shipment_advice
 msgid "Shipment Advice"
-msgstr ""
+msgstr "Najava pošiljke"
 
 #. module: printing_auto_shipment_advice
 #: model_terms:ir.ui.view,arch_db:printing_auto_shipment_advice.view_warehouse_form_inherit
 msgid "Shipment Advice - Auto Printing Configuration"
-msgstr ""
+msgstr "Najava pošiljke - nastavitve samodejnega tiskanja"
 
 #. module: printing_auto_shipment_advice
 #: model_terms:ir.ui.view,arch_db:printing_auto_shipment_advice.view_shipment_advice_form
@@ -47,8 +49,10 @@ msgid ""
 "Unable to print the documents: the CUPS server is maybe not available, or "
 "printers are not configured properly. Error:"
 msgstr ""
+"Dokumentov ni mogoče natisniti: strežnik CUPS morda ni na voljo ali pa "
+"tiskalniki niso pravilno nastavljeni. Napaka:"
 
 #. module: printing_auto_shipment_advice
 #: model:ir.model,name:printing_auto_shipment_advice.model_stock_warehouse
 msgid "Warehouse"
-msgstr ""
+msgstr "Skladišče"
