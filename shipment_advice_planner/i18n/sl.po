@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-25 17:53+0000\n"
+"PO-Revision-Date: 2026-06-25 20:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -113,13 +113,13 @@ msgstr "Transferji ne pripadajo izbranemu skladišču."
 #. odoo-python
 #: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
 msgid "The transfers selected must be ready and of the delivery type."
-msgstr ""
+msgstr "Izbrane premestitve morajo biti pripravljene in tipa dostave."
 
 #. module: shipment_advice_planner
 #. odoo-python
 #: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
 msgid "There is no implementation for the planning method '%s'"
-msgstr ""
+msgstr "Za način planiranja '%s' ni implementacije"
 
 #. module: shipment_advice_planner
 #: model:ir.model,name:shipment_advice_planner.model_stock_picking
