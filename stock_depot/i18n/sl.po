@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 17:53+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,54 +15,55 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: stock_depot
 #: model:ir.model.fields,field_description:stock_depot.field_stock_depot__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: stock_depot
 #: model:ir.model.fields,field_description:stock_depot.field_stock_depot__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: stock_depot
 #: model:ir.actions.act_window,name:stock_depot.stock_depot_action
 #: model:ir.ui.menu,name:stock_depot.stock_depot_menu
 msgid "Depots"
-msgstr ""
+msgstr "Depoji"
 
 #. module: stock_depot
 #: model:ir.model.fields,field_description:stock_depot.field_stock_depot__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: stock_depot
 #: model:ir.model.fields,field_description:stock_depot.field_stock_depot__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: stock_depot
 #: model:ir.model.fields,field_description:stock_depot.field_stock_depot__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: stock_depot
 #: model:ir.model.fields,field_description:stock_depot.field_stock_depot__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: stock_depot
 #: model:ir.model.fields,field_description:stock_depot.field_stock_depot__name
 msgid "Name"
-msgstr ""
+msgstr "Naziv"
 
 #. module: stock_depot
 #: model:ir.model.fields,field_description:stock_depot.field_stock_depot__partner_id
 msgid "Partner"
-msgstr ""
+msgstr "Partner"
 
 #. module: stock_depot
 #: model:ir.model,name:stock_depot.model_stock_depot
 msgid "Partner depot"
-msgstr ""
+msgstr "Partnerjev depo"
