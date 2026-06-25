@@ -6,7 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-06-25 17:53+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -14,68 +15,69 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_stock_picking__can_be_planned_in_shipment_advice
 msgid "Can Be Planned In Shipment Advice"
-msgstr ""
+msgstr "Lahko se planira v najavi pošiljke"
 
 #. module: shipment_advice_planner
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner.shipment_advice_planner_form_view
 msgid "Cancel"
-msgstr ""
+msgstr "Prekliči"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Ustvaril"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Ustvarjeno"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Prikazani naziv"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__dock_id
 msgid "Dock"
-msgstr ""
+msgstr "Dok"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zadnji posodobil"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zadnjič posodobljeno"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__picking_to_plan_ids
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner.shipment_advice_planner_form_view
 msgid "Pickings to plan"
-msgstr ""
+msgstr "Dobavnice za planiranje"
 
 #. module: shipment_advice_planner
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner.shipment_advice_planner_form_view
 msgid "Plan Shipments"
-msgstr ""
+msgstr "Planiraj pošiljke"
 
 #. module: shipment_advice_planner
 #. odoo-python
 #: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
 msgid "Shipment Advice"
-msgstr ""
+msgstr "Najava pošiljke"
 
 #. module: shipment_advice_planner
 #: model:ir.actions.act_window,name:shipment_advice_planner.shipment_advice_planner_act_multi
@@ -83,29 +85,29 @@ msgstr ""
 #: model:ir.model,name:shipment_advice_planner.model_shipment_advice_planner
 #: model:ir.ui.menu,name:shipment_advice_planner.shipment_advice_planner_menu
 msgid "Shipment Advice Planner"
-msgstr ""
+msgstr "Planer za najave pošiljk"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__shipment_planning_method
 msgid "Shipment Planning Method"
-msgstr ""
+msgstr "Način planiranja pošiljke"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields.selection,name:shipment_advice_planner.selection__shipment_advice_planner__shipment_planning_method__simple
 msgid "Simple"
-msgstr ""
+msgstr "Enostavno"
 
 #. module: shipment_advice_planner
 #. odoo-python
 #: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
 msgid "The dock doesn't belong to the selected warehouse."
-msgstr ""
+msgstr "Dok ne pripada izbranemu skladišču."
 
 #. module: shipment_advice_planner
 #. odoo-python
 #: code:addons/shipment_advice_planner/wizards/shipment_advice_planner.py:0
 msgid "The transfers don't belong to the selected warehouse."
-msgstr ""
+msgstr "Transferji ne pripadajo izbranemu skladišču."
 
 #. module: shipment_advice_planner
 #. odoo-python
@@ -122,9 +124,9 @@ msgstr ""
 #. module: shipment_advice_planner
 #: model:ir.model,name:shipment_advice_planner.model_stock_picking
 msgid "Transfer"
-msgstr ""
+msgstr "Transfer"
 
 #. module: shipment_advice_planner
 #: model:ir.model.fields,field_description:shipment_advice_planner.field_shipment_advice_planner__warehouse_id
 msgid "Warehouse"
-msgstr ""
+msgstr "Skladišče"
