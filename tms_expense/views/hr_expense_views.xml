@@ -19,11 +19,11 @@
             </xpath>
             <xpath expr="//sheet" position="inside">
                 <notebook>
-                <page string="Trip">
-                    <group>
-                        <field name="trip_id" string="Trip" />
-                    </group>
-                </page>
+                    <page string="Trip">
+                        <group>
+                            <field name="trip_id" string="Trip" />
+                        </group>
+                    </page>
                 </notebook>
             </xpath>
         </field>
