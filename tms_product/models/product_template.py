@@ -61,9 +61,7 @@ class ProductTemplate(models.Model):
     )
     tms_factor_distance_uom = fields.Many2one(
         "uom.uom",
-        domain=lambda self: [
-            ("category_id", "=", self.env.ref("uom.uom_categ_length").id)
-        ],
+        domain=lambda self: self.env["res.config.settings"]._length_domain(),
         string="Distance Unit of Measure",
         compute="_compute_restore_transport_line_fields",
         store=True,
@@ -71,9 +69,7 @@ class ProductTemplate(models.Model):
     )
     tms_factor_weight_uom = fields.Many2one(
         "uom.uom",
-        domain=lambda self: [
-            ("category_id", "=", self.env.ref("uom.product_uom_categ_kgm").id)
-        ],
+        domain=lambda self: self.env["res.config.settings"]._weight_domain(),
         string="Weight Unit of Measure",
         compute="_compute_restore_transport_line_fields",
         store=True,
@@ -88,10 +84,10 @@ class ProductTemplate(models.Model):
         ]
         return vehicle_types
 
-    @api.depends("detailed_type")
+    @api.depends("type")
     def _compute_restore_transport_fields(self):
         for product in self:
-            if product.detailed_type in ["service"]:
+            if product.type == "service":
                 product.tms_vehicle = False
             else:
                 product.tms_trip = False

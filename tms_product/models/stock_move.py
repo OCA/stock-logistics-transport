@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
@@ -29,12 +29,12 @@ class StockMove(models.Model):
                 and not rec.product_id.model_id
             ):
                 raise UserError(
-                    _(
+                    self.env._(
                         "The product '%s' is configure to create a fleet "
                         "vehicle but vehicle model is not configured in the "
-                        "product."
+                        "product.",
+                        rec.product_id.name,
                     )
-                    % rec.product_id.name
                 )
 
             if (

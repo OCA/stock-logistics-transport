@@ -24,6 +24,6 @@ class StockPicking(models.Model):
         return {
             "type": "ir.actions.act_window",
             "res_model": "fleet.vehicle",
-            "views": [(False, "tree")],
+            "views": [(False, "list")],
             "domain": [("id", "in", tms_vehicles.ids)],
         }

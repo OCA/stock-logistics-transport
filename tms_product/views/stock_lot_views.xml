@@ -1,5 +1,4 @@
 <odoo>
-
     <record id="view_production_lot_form" model="ir.ui.view">
         <field name="name">stock.production.lot.form.inherit.tms.product</field>
         <field name="model">stock.lot</field>
@@ -21,5 +20,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

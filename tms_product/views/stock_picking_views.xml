@@ -1,5 +1,4 @@
 <odoo>
-
     <record id="view_picking_form" model="ir.ui.view">
         <field name="name">stock.picking.form.inherit.tms.product</field>
         <field name="model">stock.picking</field>
@@ -23,5 +22,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
