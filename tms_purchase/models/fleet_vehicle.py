@@ -1,4 +1,7 @@
-from odoo import _, fields, models
+# Copyright (C) 2024 Open Source Integrators
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo import fields, models
 
 
 class FleetVehicle(models.Model):
@@ -14,5 +17,5 @@ class FleetVehicle(models.Model):
             "view_mode": "form",
             "res_id": self.purchase_order_id.id,
             "target": "current",
-            "name": _("Purchase order: %s") % self.purchase_order_id.name,
+            "name": self.env._("Purchase order: %s", self.purchase_order_id.name),
         }

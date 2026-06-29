@@ -11,7 +11,6 @@
                     type="object"
                     groups="purchase.group_purchase_user"
                     icon="fa-handshake-o"
-                    invisible="purchase_order_count == 0"
                 >
                     <field
                         string="Purchases"
@@ -20,15 +19,6 @@
                     />
                 </button>
             </xpath>
-            <xpath expr="//page[@name='tracking_page']" position="before">
-                <page string="Purchase">
-                    <field
-                        name="purchase_ids"
-                        context="{'tree_view_ref': 'tms_purchase.tms_custom_purchase_order_tree'}"
-                    />
-                </page>
-            </xpath>
         </field>
-
     </record>
 </odoo>

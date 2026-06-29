@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class TMSOrder(models.Model):
@@ -18,10 +18,13 @@ class TMSOrder(models.Model):
         return {
             "type": "ir.actions.act_window",
             "res_model": "purchase.order",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("trip_id", "=", self.id)],
-            "context": {"default_trip_id": self.id},
-            "name": _("Purchase orders for Trip %s") % self.name,
+            "context": {
+                "default_trip_id": self.id,
+                "list_view_ref": "tms_purchase.tms_custom_purchase_order_tree",
+            },
+            "name": self.env._("Purchase orders for Trip %s", self.name),
         }
 
     @api.depends("purchase_ids")
