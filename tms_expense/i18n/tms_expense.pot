@@ -20,7 +20,7 @@ msgstr ""
 
 #. module: tms_expense
 #: model:ir.model.fields,field_description:tms_expense.field_tms_order__employee_id
-msgid "Driver"
+msgid "Driver Employee"
 msgstr ""
 
 #. module: tms_expense
