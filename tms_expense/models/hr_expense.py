@@ -1,7 +1,7 @@
 # Copyright (C) 2024 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class HrExpense(models.Model):
@@ -17,5 +17,5 @@ class HrExpense(models.Model):
             "view_mode": "form",
             "res_id": self.trip_id.id,
             "target": "current",
-            "name": _("Trip: %s") % self.trip_id.name,
+            "name": self.env._("Trip: %s", self.trip_id.name),
         }

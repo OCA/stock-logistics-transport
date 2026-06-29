@@ -1,7 +1,7 @@
 # Copyright (C) 2024 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class TMSOrder(models.Model):
@@ -25,22 +25,15 @@ class TMSOrder(models.Model):
     def _compute_driver_employee_id(self):
         for record in self:
             record.employee_id = self.env["hr.employee"].search(
-                [("work_contact_id", "=", record.driver_id.id)], limit=1
+                [("work_contact_id", "=", record.driver_id.partner_id.id)], limit=1
             )
-            if not record.employee_id:
-                record.employee_id = self.env["hr.employee"].search(
-                    [("address_id", "=", record.driver_id.id)], limit=1
-                )
 
-    @api.model
     def write(self, vals):
         result = super().write(vals)
         if "stage_id" in vals:
-            if vals["stage_id"] == 3:
-                for expense in self.expense_ids:
-                    if expense.state != "reported":
-                        expense.action_submit_expenses()
-                        expense.sheet_id.action_submit_sheet()
+            for order in self.filtered(lambda o: o.stage_id.is_completed):
+                for expense in order.expense_ids.filtered(lambda e: e.state == "draft"):
+                    expense.action_submit()
         return result
 
     @api.depends("expense_ids")
@@ -53,8 +46,8 @@ class TMSOrder(models.Model):
         return {
             "type": "ir.actions.act_window",
             "res_model": "hr.expense",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("trip_id", "=", self.id)],
             "context": {"default_trip_id": self.id},
-            "name": _("Expenses for Trip %s") % self.name,
+            "name": self.env._("Expenses for Trip %s", self.name),
         }
