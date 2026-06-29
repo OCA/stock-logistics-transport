@@ -1,5 +1,4 @@
 <odoo>
-
     <record id="purchase_order_form" model="ir.ui.view">
         <field name="name">purchase.order.form.inherit.tms.purchase</field>
         <field name="model">purchase.order</field>
@@ -41,7 +40,7 @@
         <field name="name">tms.custom.purchase.order.tree</field>
         <field name="model">purchase.order</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="date_approve" />
                 <field name="partner_id" />
@@ -50,8 +49,7 @@
                 <field name="amount_total" />
                 <field name="state" />
                 <field name="date_planned" />
-            </tree>
+            </list>
         </field>
     </record>
-
 </odoo>

@@ -1,3 +1,4 @@
 - Santiago Rodriguez <srodriguez@opensourceintegrators.com>
 - Edgar Martinez <emartinez@opensourceintegrators.com>
-- Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
+- [Gray Matter Logic](https://www.graymatterlogic.com):
+  - Maxime Chambreuil <maxime.chambreuil@graymatterlogic.com>

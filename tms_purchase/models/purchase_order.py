@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class PurchaseOrder(models.Model):
@@ -32,7 +32,7 @@ class PurchaseOrder(models.Model):
             "view_mode": "form",
             "res_id": self.trip_id.id,
             "target": "current",
-            "name": _("Trip: %s") % self.trip_id.name,
+            "name": self.env._("Trip: %s", self.trip_id.name),
         }
 
     def action_view_vehicle(self, vehicles=False):
@@ -72,10 +72,10 @@ class PurchaseOrder(models.Model):
         return {
             "type": "ir.actions.act_window",
             "res_model": "fleet.vehicle",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("purchase_order_id", "=", self.id)],
             "context": {"default_order_id": self.id},
-            "name": _("Vehicles from purchase order %s") % self.name,
+            "name": self.env._("Vehicles from purchase order %s", self.name),
         }
 
     @api.depends("vehicle_ids")
