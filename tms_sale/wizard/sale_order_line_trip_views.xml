@@ -49,7 +49,6 @@
                             <field name="destination" readonly="order_confirmed" />
                         </div>
                     </group>
-
                 </group>
                 <group>
                     <group>
