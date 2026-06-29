@@ -3,11 +3,11 @@
         <field name="name">transportable.product.tree.view</field>
         <field name="model">transportable.product</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="product_id" />
                 <field name="capacity" />
                 <field name="measure_type" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -32,5 +32,4 @@
             </form>
         </field>
     </record>
-
 </odoo>

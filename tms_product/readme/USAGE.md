@@ -1,5 +1,5 @@
 ## Setup
-1. Got to Apps module.
+1. Go to Apps module.
 2. Search TMS - Product.
 3. Install the module.
 
@@ -14,7 +14,7 @@
 1. Go to Inventory.
 2. Go to Products > Products.
 3. Create a new product.
-4. Select "Storable Product" in Product Type.
+4. Select "Goods" in Product Type.
 5. Mark the product as vehicle enabling the "Is a vehicle" box.
 6. Select the vehicle type.
 7. If the vehicle type is "Car", select the model of the car.

@@ -6,6 +6,7 @@ from odoo import fields, models
 
 class TransportableProduct(models.Model):
     _name = "transportable.product"
+    _description = "Transportable Product"
 
     vehicle_id = fields.Many2one("fleet.vehicle")
     product_id = fields.Many2one("product.product")
@@ -16,13 +17,11 @@ class TransportableProduct(models.Model):
 
     volume_uom = fields.Many2one(
         "uom.uom",
-        domain=lambda self: [
-            ("category_id", "=", self.env.ref("uom.product_uom_categ_vol").id)
-        ],
+        domain=lambda self: self.env["res.config.settings"]._volume_domain(),
     )
     unit_uom = fields.Many2one(
         "uom.uom",
-        domain=lambda self: [
-            ("category_id", "=", self.env.ref("uom.product_uom_categ_unit").id)
-        ],
+        domain=lambda self: self.env["res.config.settings"]._uom_hierarchy_domain(
+            "uom.product_uom_unit"
+        ),
     )

@@ -14,7 +14,6 @@
                     widget="radio"
                     options="{'horizontal': True}"
                 />
-
             </xpath>
             <xpath expr="//group[@name='insurance']" position="after">
                 <field
