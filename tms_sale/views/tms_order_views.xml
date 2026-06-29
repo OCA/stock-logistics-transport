@@ -1,5 +1,4 @@
 <odoo>
-
     <record id="tms_order_view_form" model="ir.ui.view">
         <field name="name">tms.order.view.form.inherit.tms.sale</field>
         <field name="model">tms.order</field>
@@ -17,12 +16,33 @@
                     <field name="sale_id" invisible="1" />
                     <field name="sale_line_id" invisible="1" />
                 </button>
+                <button
+                    type="object"
+                    name="action_view_seat_sale_orders"
+                    class="oe_stat_button"
+                    icon="fa-shopping-cart"
+                    invisible="seat_sale_order_count == 0"
+                >
+                    <field
+                        name="seat_sale_order_count"
+                        widget="statinfo"
+                        string="Sales Orders"
+                    />
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='vehicle_id']" position="after">
+                <field name="vehicle_operation" invisible="1" />
             </xpath>
             <xpath expr="//page[@name='planning_page']" position="after">
-                <page name="seats_page" string="Seats">
+                <page
+                    name="seats_page"
+                    string="Seats"
+                    invisible="vehicle_operation != 'passenger'"
+                >
                     <field name="seat_ticket_ids">
-                        <tree>
+                        <list>
                             <field name="name" />
+                            <field name="product_id" />
                             <field name="price" />
                             <field name="sale_order_id" />
                             <field name="customer_id" />
@@ -32,11 +52,10 @@
                                 decoration-success="available == 'available'"
                                 decoration-danger="available == 'not_available'"
                             />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </xpath>
         </field>
     </record>
-
 </odoo>

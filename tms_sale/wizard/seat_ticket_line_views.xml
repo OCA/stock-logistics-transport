@@ -7,11 +7,12 @@
             <form string="Ticket for trip:" js_class="sale_order_line_seat_ticket_form">
                 <field name="order_confirmed" invisible="1" />
                 <group name="trip_ticket">
-                    <field name="trip_id" />
+                    <field name="trip_id" options="{'no_create': True}" />
                     <field
                         name="ticket_ids"
                         domain="['&amp;', ('tms_order_id', '=', trip_id), ('available', '=', 'available')]"
                         widget="many2many_tags"
+                        options="{'no_create': True}"
                     />
                 </group>
                 <footer>

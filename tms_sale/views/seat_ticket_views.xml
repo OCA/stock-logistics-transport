@@ -7,6 +7,7 @@
                 <sheet>
                     <group>
                         <field name="name" />
+                        <field name="product_id" />
                         <field name="price" />
                         <field name="sale_order_id" />
                         <field name="customer_id" />

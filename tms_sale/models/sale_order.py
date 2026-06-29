@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from markupsafe import Markup
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class SaleOrder(models.Model):
@@ -26,29 +26,21 @@ class SaleOrder(models.Model):
             "res_model": "sale.order.line.trip",
             "target": "new",
             "view_mode": "form",
-            "view_type": "form",
         }
 
-    @api.depends("order_line")
+    @api.depends("order_line.has_trip_product")
     def _compute_has_tms_order(self):
         for sale in self:
-            has_tms_order = any(
-                line.product_template_id.tms_trip
-                and line.product_template_id.trip_product_type == "trip"
-                for line in sale.order_line
-            )
+            has_tms_order = any(line.has_trip_product for line in sale.order_line)
             sale.has_tms_order = has_tms_order
 
-    @api.depends("order_line")
+    @api.depends("order_line.tms_order_ids", "order_line.tms_trip_ticket_id")
     def _compute_tms_order_ids(self):
         for sale in self:
-            tms = self.env["tms.order"].search(
-                [
-                    "|",
-                    ("sale_id", "=", sale.id),
-                    ("sale_line_id", "in", sale.order_line.ids),
-                ]
+            tms = sale.order_line.tms_order_ids | sale.order_line.mapped(
+                "tms_trip_ticket_id"
             )
+            tms |= self.env["tms.order"].search([("sale_id", "=", sale.id)])
             sale.tms_order_ids = tms
             sale.tms_order_count = len(sale.tms_order_ids)
 
@@ -76,7 +68,7 @@ class SaleOrder(models.Model):
         new_tms_orders = self.env["tms.order"]
 
         new_tms_line_sol = self.order_line.filtered(
-            lambda L: L.product_id.trip_product_type == "trip"
+            lambda L: L.has_trip_product
             and len(L.tms_order_ids) != L.product_uom_qty
             and len(L.tms_order_ids) < L.product_uom_qty
         )
@@ -114,7 +106,7 @@ class SaleOrder(models.Model):
                 subtype_id=self.env.ref("mail.mt_note").id,
                 author_id=self.env.user.partner_id.id,
             )
-            message = _(
+            message = self.env._(
                 "Transport Order(s) Created: %s",
                 Markup(
                     f"""<a href=# data-oe-model=tms.order data-oe-id={tms_order.id}"""
@@ -125,7 +117,7 @@ class SaleOrder(models.Model):
 
     def _action_create_new_trips(self):
         if any(
-            sol.product_id.trip_product_type == "trip"
+            sol.has_trip_product
             for sol in self.order_line.filtered(
                 lambda x: x.display_type not in ("line_section", "line_note")
             )
@@ -166,12 +158,20 @@ class SaleOrder(models.Model):
                     if trips_to_delete:
                         trips_to_delete.unlink()
 
-    @api.model
-    def create(self, vals):
-        order = super().create(vals)
-        if "order_line" in vals and order.has_tms_order:
-            order._action_create_new_trips()
-        return order
+    def _refresh_tms_trip_lines(self):
+        self.order_line._compute_sale_order_line_tms()
+        self._compute_has_tms_order()
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        orders = super().create(vals_list)
+        for order, vals in zip(orders, vals_list, strict=True):
+            if vals.get("order_line"):
+                self.env.flush_all()
+                order._refresh_tms_trip_lines()
+                order._action_create_new_trips()
+                order.invalidate_recordset(["tms_order_ids", "tms_order_count"])
+        return orders
 
     @api.model
     def write(self, vals):
@@ -183,7 +183,8 @@ class SaleOrder(models.Model):
 
         result = super().write(vals)
 
-        if "order_line" in vals and self.has_tms_order:
+        if "order_line" in vals:
+            self._refresh_tms_trip_lines()
             self.remove_lines_with_trips(
                 initial_trips, initial_order_line_ids, initial_quantities
             )

@@ -3,6 +3,7 @@ from odoo import api, fields, models
 
 class SaleOrderLineTrip(models.TransientModel):
     _name = "sale.order.line.trip"
+    _description = "Sale Order Line Trip"
     order_line_id = fields.Many2one("sale.order.line")
 
     has_route = fields.Boolean(string="Use Routes")
@@ -25,7 +26,7 @@ class SaleOrderLineTrip(models.TransientModel):
     @api.onchange("origin", "destination", "start", "end", "has_route", "route")
     def _compute_readonly_fields(self):
         state = self.order_line_id.order_id.state
-        if state == "sale" or state == "cancelled":
+        if state == "sale" or state == "cancel":
             self.order_confirmed = True
         else:
             self.order_confirmed = False

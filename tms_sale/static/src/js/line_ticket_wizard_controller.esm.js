@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {formView} from "@web/views/form/form_view";
 import {registry} from "@web/core/registry";
 import {useService} from "@web/core/utils/hooks";
@@ -18,7 +16,7 @@ export class TicketConfiguratorController extends formView.Controller {
             infos: {
                 ticketConfiguration: {
                     tms_trip_ticket_id: trip_id,
-                    tms_ticket_ids: ticket_ids._currentIds,
+                    tms_ticket_ids: ticket_ids.currentIds,
                 },
             },
         });

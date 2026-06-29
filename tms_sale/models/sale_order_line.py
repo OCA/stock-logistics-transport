@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from datetime import timedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -23,10 +23,17 @@ class SaleOrderLine(models.Model):
     )
 
     tms_factor_uom = fields.Char(
-        compute="_compute_sale_order_line_tms", store=True, readonly=False
+        compute="_compute_sale_order_line_tms",
+        store=True,
+        readonly=False,
+        precompute=True,
     )
     tms_factor = fields.Float(
-        default=1, compute="_compute_sale_order_line_tms", store=True, readonly=False
+        default=1,
+        compute="_compute_sale_order_line_tms",
+        store=True,
+        readonly=False,
+        precompute=True,
     )
 
     tms_route_flag = fields.Boolean(string="Use Routes", default=False)
@@ -48,47 +55,49 @@ class SaleOrderLine(models.Model):
     tms_scheduled_date_end = fields.Datetime(string="Scheduled End")
 
     has_trip_product = fields.Boolean(
-        readonly=True, default=False, compute="_compute_sale_order_line_tms", store=True
+        readonly=True,
+        default=False,
+        compute="_compute_sale_order_line_tms",
+        store=True,
+        precompute=True,
     )
     seat_ticket = fields.Boolean(
-        readonly=True, default=False, compute="_compute_sale_order_line_tms", store=True
+        readonly=True,
+        default=False,
+        compute="_compute_sale_order_line_tms",
+        store=True,
+        precompute=True,
     )
 
-    @api.depends("product_id", "product_template_id")
+    @api.depends("product_id", "tms_route_id")
     def _compute_sale_order_line_tms(self):
         for line in self:
-            if line.product_template_id.tms_factor_distance_uom:
-                line.tms_factor_uom = (
-                    line.product_template_id.tms_factor_distance_uom.name
-                )
+            if not line.product_id:
+                line.tms_factor_uom = False
+                line.has_trip_product = False
+                line.seat_ticket = False
+                continue
+            template = line.product_id.product_tmpl_id
+            if template.tms_factor_distance_uom:
+                line.tms_factor_uom = template.tms_factor_distance_uom.name
                 if line.tms_route_id.distance:
                     line.tms_factor = line.tms_route_id.distance
                     line.tms_factor_uom = line.tms_route_id.distance_uom.name
-            elif line.product_template_id.tms_factor_weight_uom:
-                line.tms_factor_uom = (
-                    line.product_template_id.tms_factor_weight_uom.name
-                )
+            elif template.tms_factor_weight_uom:
+                line.tms_factor_uom = template.tms_factor_weight_uom.name
             else:
                 line.tms_factor_uom = False
 
             line.has_trip_product = (
-                line.product_template_id.trip_product_type == "trip"
-                and line.product_template_id.tms_trip
-                and line.product_template_id.detailed_type == "service"
-            ) or (
-                line.product_id.trip_product_type == "trip"
-                and line.product_id.tms_trip
-                and line.product_id.detailed_type == "service"
+                template.trip_product_type == "trip"
+                and template.tms_trip
+                and template.type == "service"
             )
 
             line.seat_ticket = (
-                line.product_template_id.trip_product_type == "seat"
-                and line.product_template_id.tms_trip
-                and line.product_template_id.detailed_type == "service"
-            ) or (
-                line.product_id.trip_product_type == "seat"
-                and line.product_id.tms_trip
-                and line.product_id.detailed_type == "service"
+                template.trip_product_type == "seat"
+                and template.tms_trip
+                and template.type == "service"
             )
 
     def _update_tickets(self, tickets):
@@ -107,32 +116,38 @@ class SaleOrderLine(models.Model):
             if record.trip_line_ids:
                 if record.tms_route_flag and not record.tms_route_id:
                     raise ValidationError(
-                        _("The route is not set in a trip using predefined routes.")
+                        self.env._(
+                            "The route is not set in a trip using predefined routes."
+                        )
                     )
                 if not record.tms_route_flag:
                     if not record.tms_origin_id:
                         raise ValidationError(
-                            _("The origin location from a trip is not set.")
+                            self.env._("The origin location from a trip is not set.")
                         )
                     if not record.tms_destination_id:
                         raise ValidationError(
-                            _("The destination location from a trip is not set.")
+                            self.env._(
+                                "The destination location from a trip is not set."
+                            )
                         )
                 if not record.tms_scheduled_date_start:
                     raise ValidationError(
-                        _("A scheduled date of start from a trip is not set.")
+                        self.env._("A scheduled date of start from a trip is not set.")
                     )
                 if not record.tms_scheduled_date_end:
                     raise ValidationError(
-                        _("A scheduled date of end from a trip is not set.")
+                        self.env._("A scheduled date of end from a trip is not set.")
                     )
 
             if (
-                record.product_template_id.detailed_type == "service"
+                record.product_template_id.type == "service"
                 and record.product_template_id.trip_product_type == "seat"
             ):
                 if not record.tms_trip_ticket_id:
-                    raise ValidationError(_("A ticket isn't assigned to a trip"))
+                    raise ValidationError(
+                        self.env._("A ticket isn't assigned to a trip")
+                    )
 
     def _prepare_tms_values(self, **kwargs):
         """
@@ -165,28 +180,11 @@ class SaleOrderLine(models.Model):
         vals = self._prepare_tms_values(so_id=self.order_id.id, sol_id=self.id)
         return vals
 
-    def _convert_to_tax_base_line_dict(self, **kwargs):
-        """Convert the current record to a dictionary in
-        order to use the generic taxes computation method
-        defined on account.tax.
+    def _prepare_base_line_for_taxes_computation(self, **kwargs):
+        kwargs["quantity"] = self.product_uom_qty * self.tms_factor
+        return super()._prepare_base_line_for_taxes_computation(**kwargs)
 
-        :return: A python dictionary.
-        """
-        self.ensure_one()
-        return self.env["account.tax"]._convert_to_tax_base_line_dict(
-            self,
-            partner=self.order_id.partner_id,
-            currency=self.order_id.currency_id,
-            product=self.product_id,
-            taxes=self.tax_id,
-            price_unit=self.price_unit,
-            quantity=self.product_uom_qty * self.tms_factor,
-            discount=self.discount,
-            price_subtotal=self.price_subtotal,
-            **kwargs,
-        )
-
-    @api.depends("product_uom_qty", "discount", "price_unit", "tax_id", "tms_factor")
+    @api.depends("product_uom_qty", "discount", "price_unit", "tax_ids", "tms_factor")
     def _compute_amount(self):
         return super()._compute_amount()
 

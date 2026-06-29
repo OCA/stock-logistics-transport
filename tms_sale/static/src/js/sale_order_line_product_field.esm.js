@@ -1,8 +1,7 @@
-/** @odoo-module **/
-
 import {SaleOrderLineProductField} from "@sale/js/sale_product_field";
-import {patch} from "@web/core/utils/patch";
 import {x2ManyCommands} from "@web/core/orm_service";
+import {useService} from "@web/core/utils/hooks";
+import {patch} from "@web/core/utils/patch";
 
 function formatDateForOdoo(dateString) {
     const date = new Date(dateString);
@@ -16,8 +15,13 @@ function formatDateForOdoo(dateString) {
 }
 
 patch(SaleOrderLineProductField.prototype, {
+    setup() {
+        super.setup(...arguments);
+        this.action = useService("action");
+    },
+
     async _onProductUpdate() {
-        super._onProductUpdate(...arguments);
+        await super._onProductUpdate(...arguments);
         if (this.props.record.data.has_trip_product === true) {
             this._openTripConfigurator();
         } else if (this.props.record.data.seat_ticket === true) {
@@ -25,8 +29,7 @@ patch(SaleOrderLineProductField.prototype, {
         }
     },
 
-    _editLineConfiguration() {
-        super._editLineConfiguration(...arguments);
+    onEditConfiguration() {
         if (
             this.props.record.data.has_trip_product === true ||
             this.props.record.data.tms_scheduled_date_start
@@ -37,12 +40,14 @@ patch(SaleOrderLineProductField.prototype, {
             this.props.record.data.tms_trip_ticket_id
         ) {
             this._openTicketConfigurator();
+        } else {
+            super.onEditConfiguration(...arguments);
         }
     },
 
-    get isConfigurableLine() {
+    get hasConfigurationButton() {
         return (
-            super.isConfigurableLine ||
+            super.hasConfigurationButton ||
             this.props.record.data.has_trip_product === true ||
             this.props.record.data.tms_scheduled_date_start ||
             this.props.record.data.seat_ticket === true ||
@@ -52,14 +57,14 @@ patch(SaleOrderLineProductField.prototype, {
 
     async _openTripConfigurator() {
         const actionContext = {
-            default_product_template_id: this.props.record.data.product_template_id[0],
+            default_product_template_id: this.props.record.data.product_template_id.id,
         };
         if (this.props.record.data.tms_origin_id) {
-            actionContext.default_origin = this.props.record.data.tms_origin_id[0];
+            actionContext.default_origin = this.props.record.data.tms_origin_id.id;
         }
         if (this.props.record.data.tms_destination_id) {
             actionContext.default_destination =
-                this.props.record.data.tms_destination_id[0];
+                this.props.record.data.tms_destination_id.id;
         }
         if (this.props.record.data.tms_scheduled_date_start) {
             actionContext.default_start = formatDateForOdoo(
@@ -75,7 +80,7 @@ patch(SaleOrderLineProductField.prototype, {
             actionContext.default_has_route = this.props.record.data.tms_route_flag;
         }
         if (this.props.record.data.tms_route_id) {
-            actionContext.default_route = this.props.record.data.tms_route_id[0];
+            actionContext.default_route = this.props.record.data.tms_route_id.id;
         }
         if (this.props.record.resId) {
             actionContext.default_order_line_id = this.props.record.resId;
@@ -110,18 +115,16 @@ patch(SaleOrderLineProductField.prototype, {
     },
 
     async _openTicketConfigurator() {
-        console.log("Data:  ", this.props.record.data);
-        console.log("tms_ticket_ids:", typeof this.props.record.data.tms_ticket_ids);
         const actionContext = {
-            default_product_template_id: this.props.record.data.product_template_id[0],
+            default_product_template_id: this.props.record.data.product_template_id.id,
         };
         if (this.props.record.data.tms_trip_ticket_id) {
             actionContext.default_trip_id =
-                this.props.record.data.tms_trip_ticket_id[0];
+                this.props.record.data.tms_trip_ticket_id.id;
         }
         if (this.props.record.data.tms_ticket_ids) {
             actionContext.default_ticket_ids =
-                this.props.record.data.tms_ticket_ids._currentIds;
+                this.props.record.data.tms_ticket_ids.currentIds;
         }
         if (this.props.record.resId) {
             actionContext.default_order_line_id = this.props.record.resId;
