@@ -14,7 +14,7 @@ class TMSOrder(models.Model):
 
     employee_id = fields.Many2one(
         "hr.employee",
-        string="Driver",
+        string="Driver Employee",
         compute="_compute_driver_employee_id",
         store=True,
     )

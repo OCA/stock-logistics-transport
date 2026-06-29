@@ -23,7 +23,11 @@ class TestTmsExpenseDriver(TransactionCase):
 
     def test_create_driver_employee_skips_existing(self):
         driver = self.env["tms.driver"].create(
-            {"name": "Existing Employee Driver", "phone": "5550003", "is_external": True}
+            {
+                "name": "Existing Employee Driver",
+                "phone": "5550003",
+                "is_external": True,
+            }
         )
         existing = self.env["hr.employee"].create({"name": "Existing Employee Driver"})
         driver.create_driver_employee(driver)
