@@ -1,0 +1,19 @@
+<odoo noupdate="1">
+    <record id="product_tms_trip_service" model="product.template">
+        <field name="name">TMS Trip Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="tms_trip" eval="True" />
+        <field name="trip_product_type">trip</field>
+        <field name="tms_factor_type">distance</field>
+        <field name="tms_factor_distance_uom" ref="uom.product_uom_km" />
+    </record>
+
+    <record id="product_tms_seat_service" model="product.template">
+        <field name="name">TMS Seat Service</field>
+        <field name="type">service</field>
+        <field name="list_price">25.0</field>
+        <field name="tms_trip" eval="True" />
+        <field name="trip_product_type">seat</field>
+    </record>
+</odoo>

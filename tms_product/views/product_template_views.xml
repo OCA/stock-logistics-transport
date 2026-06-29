@@ -29,4 +29,25 @@
             </xpath>
         </field>
     </record>
+
+    <record id="product_template_search_view_tms" model="ir.ui.view">
+        <field name="name">product.template.search.inherit.tms.product</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_to_sell']" position="after">
+                <separator />
+                <filter
+                    string="TMS Trip Services"
+                    name="tms_trip_services"
+                    domain="[('tms_trip', '=', True), ('trip_product_type', '=', 'trip')]"
+                />
+                <filter
+                    string="TMS Seat Services"
+                    name="tms_seat_services"
+                    domain="[('tms_trip', '=', True), ('trip_product_type', '=', 'seat')]"
+                />
+            </xpath>
+        </field>
+    </record>
 </odoo>
