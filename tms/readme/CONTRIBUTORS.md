@@ -1,0 +1,14 @@
+- Santiago Rodriguez <srodriguez@opensourceintegrators.com>
+- Edgar Martinez <emartinez@opensourceintegrators.com>
+- [Gray Matter Logic](https://www.graymatterlogic.com):
+  - Maxime Chambreuil \<<maxime.chambreuil@graymatterlogic.com>\>
+- Israel Cruz <israel.cruz@argil.mx>
+- Alan Ramos <alan.ramos@jarsa.com.mx>
+- Luis Triana <luis.triana@jarsa.com.mx>
+- Sarai Osorio <sarai.osorio@jarsa.com.mx>
+- Oscar Garza <oscar.garza@jarsa.com.mx>
+- Hector Camacho <hector.camacho@jarsa.com.mx>
+- Luis Miguel Guzmán <miguel.ruiz@jarsa.com.mx>
+- Isabel Ávila <isabel.esparza@jarsa.com.mx>
+- Erick Reza <alexis.reza.s@gmail.com>
+- Tecnativa: * Sergio Teruel * Carlos Dauden

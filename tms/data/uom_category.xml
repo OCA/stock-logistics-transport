@@ -1,0 +1,12 @@
+<odoo noupdate="1">
+    <record id="uom_kmh" model="uom.uom">
+        <field name="name">km/h</field>
+        <field name="relative_factor" eval="1.0" />
+    </record>
+
+    <record id="uom_mph" model="uom.uom">
+        <field name="name">mph</field>
+        <field name="relative_factor">1.60934</field>
+        <field name="relative_uom_id" ref="tms.uom_kmh" />
+    </record>
+</odoo>
