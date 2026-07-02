@@ -15,11 +15,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_invoice_count
-msgid "# Vendor Bills"
-msgstr ""
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
 msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow "
@@ -51,8 +46,7 @@ msgstr ""
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
-msgid ""
-"<span class=\"fa fa-phone me-2\" aria-label=\"Mobile\" title=\"Mobile\"/>"
+msgid "<span class=\"fa fa-phone me-2\" aria-label=\"Phone\" title=\"Phone\"/>"
 msgstr ""
 
 #. module: tms
@@ -92,16 +86,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__a
 msgid "A - Motorcycles"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_payable_id
-msgid "Account Payable"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_receivable_id
-msgid "Account Receivable"
 msgstr ""
 
 #. module: tms
@@ -173,6 +157,11 @@ msgid "Address Type"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__type_address_label
+msgid "Address Type Description"
+msgstr ""
+
+#. module: tms
 #: model:res.groups,name:tms.group_tms_admin
 msgid "Administrator"
 msgstr ""
@@ -220,23 +209,6 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__autopost_bills
-msgid "Auto-post bills"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__autopost_bills
-msgid "Automatically post bills for this trusted partner"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__receipt_reminder_email
-msgid ""
-"Automatically send a confirmation email to the vendor X days before the "
-"expected receipt date, asking him to confirm the exact date."
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
 msgid "Avatar"
 msgstr ""
@@ -267,11 +239,6 @@ msgid "B - Automobiles"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__bank_account_count
-msgid "Bank"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__bank_ids
 msgid "Banks"
 msgstr ""
@@ -289,11 +256,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_bounce
 msgid "Bounce"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__buyer_id
-msgid "Buyer"
 msgstr ""
 
 #. module: tms
@@ -333,6 +295,11 @@ msgstr ""
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models_categories
 msgid "Categories"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__channel_member_ids
+msgid "Channel Member"
 msgstr ""
 
 #. module: tms
@@ -378,11 +345,6 @@ msgid "Commercial Entity"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__ref_company_ids
-msgid "Companies that refers to partner"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__company_id
 #: model:ir.model.fields,field_description:tms.field_tms_driver__company_id
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__company_id
@@ -410,6 +372,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__commercial_company_name
 msgid "Company Name Entity"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_registry_placeholder
+msgid "Company Registry Placeholder"
 msgstr ""
 
 #. module: tms
@@ -528,21 +495,6 @@ msgid "Created on"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__credit_limit
-msgid "Credit Limit"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__credit_to_invoice
-msgid "Credit To Invoice"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__credit_limit
-msgid "Credit limit specific to this partner."
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__crew_id
 #: model:ir.model.fields,field_description:tms.field_tms_team__crew_ids
 msgid "Crew"
@@ -583,23 +535,8 @@ msgid "Crews:"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__currency_id
-msgid "Currency"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_customer
 msgid "Customer Location"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__property_payment_term_id
-msgid "Customer Payment Terms"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__customer_rank
-msgid "Customer Rank"
 msgstr ""
 
 #. module: tms
@@ -620,16 +557,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__date_start
 msgid "Date Start"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__reminder_date_before_receipt
-msgid "Days Before Receipt"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__days_sales_outstanding
-msgid "Days Sales Outstanding (DSO)"
 msgstr ""
 
 #. module: tms
@@ -668,23 +595,8 @@ msgid "Default Weight UoM"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_delivery_carrier_id
-msgid "Default delivery method used in sales orders."
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
 msgid "Defines how this stage is evaluated as completed stage"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__trust
-msgid "Degree of trust you have in this debtor"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__property_delivery_carrier_id
-msgid "Delivery Method"
 msgstr ""
 
 #. module: tms
@@ -708,16 +620,9 @@ msgid "Destination Location"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__display_invoice_edi_format
-msgid "Display Invoice Edi Format"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__display_invoice_template_pdf_report_id
-msgid "Display Invoice Template Pdf Report"
-msgstr ""
-
-#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__display_name
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:tms.field_res_partner__display_name
 #: model:ir.model.fields,field_description:tms.field_tms_crew__display_name
 #: model:ir.model.fields,field_description:tms.field_tms_driver__display_name
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__display_name
@@ -763,6 +668,14 @@ msgstr ""
 #: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__driver
 #: model:res.groups,name:tms.group_tms_driver
 msgid "Driver"
+msgstr ""
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_order.py:0
+msgid ""
+"Driver %(driver)s license will expire in %(days)s days, which is less than "
+"or equal to the security threshold of %(threshold)s days."
 msgstr ""
 
 #. module: tms
@@ -829,16 +742,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__driving_experience_years
 msgid "Driving Experience Years"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__duplicate_bank_partner_ids
-msgid "Duplicate Bank Partner"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__duplicated_bank_account_partners_count
-msgid "Duplicated Bank Account Partners Count"
 msgstr ""
 
 #. module: tms
@@ -914,16 +817,6 @@ msgid "External Driver"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__fiscal_country_codes
-msgid "Fiscal Country Codes"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_position_id
-msgid "Fiscal Position"
-msgstr ""
-
-#. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_models
 msgid "Fleet Models"
 msgstr ""
@@ -972,11 +865,6 @@ msgid "Formatted Email"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__global_location_number
-msgid "GLN"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__partner_latitude
 msgid "Geo Latitude"
 msgstr ""
@@ -992,11 +880,6 @@ msgid "Geolocation Date"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__global_location_number
-msgid "Global Location Number"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__has_message
 #: model:ir.model.fields,field_description:tms.field_tms_order__has_message
 msgid "Has Message"
@@ -1008,6 +891,9 @@ msgid "Hours"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__id
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__id
+#: model:ir.model.fields,field_description:tms.field_res_partner__id
 #: model:ir.model.fields,field_description:tms.field_tms_crew__id
 #: model:ir.model.fields,field_description:tms.field_tms_driver__id
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__id
@@ -1052,16 +938,6 @@ msgstr ""
 msgid ""
 "If the email address is on the blacklist, the contact won't receive mass "
 "mailing anymore, from any list"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__ignore_abnormal_invoice_amount
-msgid "Ignore Abnormal Invoice Amount"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__ignore_abnormal_invoice_date
-msgid "Ignore Abnormal Invoice Date"
 msgstr ""
 
 #. module: tms
@@ -1137,38 +1013,8 @@ msgid "Insurer"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_warn
-msgid "Invoice"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_edi_format_store
-msgid "Invoice Edi Format Store"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_sending_method
-msgid "Invoice sending"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_template_pdf_report_id
-msgid "Invoice template"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_ids
-msgid "Invoices"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_active
 msgid "Is Active"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__is_coa_installed
-msgid "Is Coa Installed"
 msgstr ""
 
 #. module: tms
@@ -1188,6 +1034,11 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_in_call
+msgid "Is In Call"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_public
 msgid "Is Public"
 msgstr ""
@@ -1200,11 +1051,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__function
 msgid "Job Position"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__journal_item_count
-msgid "Journal Items"
 msgstr ""
 
 #. module: tms
@@ -1279,6 +1125,11 @@ msgid "Locations"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__main_user_id
+msgid "Main User"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_crew
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Manage Crews"
@@ -1311,36 +1162,43 @@ msgstr ""
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_crew
+#: model:res.groups.privilege,name:tms.privilege_tms_crew
 msgid "Manage TMS Crew"
 msgstr ""
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_driver_license
+#: model:res.groups.privilege,name:tms.privilege_tms_driver_license
 msgid "Manage TMS Driver License"
 msgstr ""
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_uom
+#: model:res.groups.privilege,name:tms.privilege_tms_uom
 msgid "Manage TMS Oum"
 msgstr ""
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_route_stop
+#: model:res.groups.privilege,name:tms.privilege_tms_route_stop
 msgid "Manage TMS Route Stops"
 msgstr ""
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_route
+#: model:res.groups.privilege,name:tms.privilege_tms_route
 msgid "Manage TMS Routes"
 msgstr ""
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_team
+#: model:res.groups.privilege,name:tms.privilege_tms_team
 msgid "Manage TMS Teams"
 msgstr ""
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_vehicle_insurance
+#: model:res.groups.privilege,name:tms.privilege_tms_vehicle_insurance
 msgid "Manage TMS Vehicle Insurance"
 msgstr ""
 
@@ -1447,21 +1305,6 @@ msgid "Message Delivery error"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_warn_msg
-msgid "Message for Invoice"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_warn_msg
-msgid "Message for Purchase Order"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn_msg
-msgid "Message for Sales Order"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn_msg
 msgid "Message for Stock Picking"
 msgstr ""
@@ -1470,11 +1313,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_ids
 #: model:ir.model.fields,field_description:tms.field_tms_order__message_ids
 msgid "Messages"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__mobile
-msgid "Mobile"
 msgstr ""
 
 #. module: tms
@@ -1562,11 +1400,6 @@ msgid "Number of Trips"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__reminder_date_before_receipt
-msgid "Number of days to send reminder email before the promised receipt date"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_error_counter
 #: model:ir.model.fields,field_description:tms.field_tms_order__message_has_error_counter
 msgid "Number of errors"
@@ -1590,8 +1423,8 @@ msgid "Odometers"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__on_time_rate
-msgid "On-Time Delivery Rate"
+#: model:ir.model.fields,field_description:tms.field_tms_driver__offline_since
+msgid "Offline since"
 msgstr ""
 
 #. module: tms
@@ -1632,14 +1465,6 @@ msgid "Other Personnel"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__on_time_rate
-msgid ""
-"Over the past x days; the number of products received on time divided by the "
-"number of ordered products.x is either the System Parameter "
-"purchase_stock.on_time_delivery_days or the default 365"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__parent_name
 msgid "Parent name"
 msgstr ""
@@ -1647,26 +1472,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__partner_id
 msgid "Partner"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_company_registry_placeholder
-msgid "Partner Company Registry Placeholder"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__contract_ids
-msgid "Partner Contracts"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__use_partner_credit_limit
-msgid "Partner Limit"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_vat_placeholder
-msgid "Partner Vat Placeholder"
 msgstr ""
 
 #. module: tms
@@ -1685,21 +1490,6 @@ msgid "Passenger"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__debit_limit
-msgid "Payable Limit"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_count
-msgid "Payment Token Count"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_ids
-msgid "Payment Tokens"
-msgstr ""
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
 msgid "Personnel"
@@ -1711,16 +1501,6 @@ msgid "Phone"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__plan_to_change_bike
-msgid "Plan To Change Bike"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__plan_to_change_car
-msgid "Plan To Change Car"
-msgstr ""
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
 msgid "Planning"
 msgstr ""
@@ -1728,20 +1508,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_insurance__policy_number
 msgid "Policy Number"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_outbound_payment_method_line_id
-msgid ""
-"Preferred payment method when buying from this vendor. This will be set by "
-"default on all outgoing payments created for this vendor"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_inbound_payment_method_line_id
-msgid ""
-"Preferred payment method when selling to this customer. This will be set by "
-"default on all incoming payments created for this customer"
 msgstr ""
 
 #. module: tms
@@ -1760,33 +1526,13 @@ msgid "Priority Management Explanation"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__property_inbound_payment_method_line_id
-msgid "Property Inbound Payment Method Line"
+#: model:ir.model.fields,field_description:tms.field_tms_driver__properties
+msgid "Properties"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__property_outbound_payment_method_line_id
-msgid "Property Outbound Payment Method Line"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_line_ids
-msgid "Purchase Lines"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_order_count
-msgid "Purchase Order Count"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_warn
-msgid "Purchase Order Warning"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__receipt_reminder_email
-msgid "Receipt Reminder"
+#: model:ir.model.fields,field_description:tms.field_tms_driver__properties_base_definition_id
+msgid "Properties Base Definition"
 msgstr ""
 
 #. module: tms
@@ -1850,18 +1596,8 @@ msgid "Routes"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_count
-msgid "Sale Order Count"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_ids
-msgid "Sales Order"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn
-msgid "Sales Warnings"
+#: model:ir.model.fields,field_description:tms.field_tms_driver__rtc_session_ids
+msgid "Rtc Session"
 msgstr ""
 
 #. module: tms
@@ -1901,17 +1637,6 @@ msgid "Scheduled duration of the work in hours"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__invoice_warn
-#: model:ir.model.fields,help:tms.field_tms_driver__picking_warn
-#: model:ir.model.fields,help:tms.field_tms_driver__purchase_warn
-#: model:ir.model.fields,help:tms.field_tms_driver__sale_warn
-msgid ""
-"Selecting the \"Warning\" option will notify user with the message, "
-"Selecting \"Blocking Message\" will throw an exception with the message and "
-"block the flow. The Message has to be written in the next field."
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__self
 msgid "Self"
 msgstr ""
@@ -1931,11 +1656,6 @@ msgstr ""
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_fleet_services
 msgid "Services"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__use_partner_credit_limit
-msgid "Set a value greater than 0.0 to activate a credit limit check"
 msgstr ""
 
 #. module: tms
@@ -1966,11 +1686,6 @@ msgid "Share Partner"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__show_credit_limit
-msgid "Show Credit Limit"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__signup_type
 msgid "Signup Token Type"
 msgstr ""
@@ -1978,11 +1693,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__specific_property_product_pricelist
 msgid "Specific Property Product Pricelist"
-msgstr ""
-
-#. module: tms
-#: model:uom.category,name:tms.uom_category_speed
-msgid "Speed"
 msgstr ""
 
 #. module: tms
@@ -2004,11 +1714,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms.field_tms_team__stage_ids
 #: model:ir.ui.menu,name:tms.menu_tms_config_stage
 msgid "Stages"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__starred_message_ids
-msgid "Starred Message"
 msgstr ""
 
 #. module: tms
@@ -2034,6 +1739,11 @@ msgid "State"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__application_statistics
+msgid "Stats"
+msgstr ""
+
+#. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles_status
 msgid "Status"
 msgstr ""
@@ -2046,11 +1756,6 @@ msgid ""
 "Overdue: Due date is already passed\n"
 "Today: Activity date is today\n"
 "Planned: Future activities."
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn
-msgid "Stock Picking"
 msgstr ""
 
 #. module: tms
@@ -2077,16 +1782,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__street2
 msgid "Street2"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__property_purchase_currency_id
-msgid "Supplier Currency"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_rank
-msgid "Supplier Rank"
 msgstr ""
 
 #. module: tms
@@ -2168,12 +1863,6 @@ msgid ""
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_account_position_id
-msgid ""
-"The fiscal position determines the taxes/accounts used for this contact."
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__user_id
 msgid "The internal user in charge of this contact."
 msgstr ""
@@ -2203,24 +1892,10 @@ msgid ""
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_account_payable_id
+#: model:ir.model.fields,help:tms.field_tms_driver__main_user_id
 msgid ""
-"This account will be used instead of the default one as the payable account "
-"for the current partner"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_account_receivable_id
-msgid ""
-"This account will be used instead of the default one as the receivable "
-"account for the current partner"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_purchase_currency_id
-msgid ""
-"This currency will be used, instead of the default one, for purchases from "
-"the current partner"
+"There can be several users related to the same partner. When a single user "
+"is needed, this field attempts to find the most appropriate one."
 msgstr ""
 
 #. module: tms
@@ -2228,27 +1903,6 @@ msgstr ""
 msgid ""
 "This field is used to search on email address as the primary email field can "
 "contain more than strictly an email address."
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_supplier_payment_term_id
-msgid ""
-"This payment term will be used instead of the default one for purchase "
-"orders and vendor bills"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_payment_term_id
-msgid ""
-"This payment term will be used instead of the default one for sales orders "
-"and customer invoices"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__property_product_pricelist
-msgid ""
-"This pricelist will be used, instead of the default one, for sales to the "
-"current partner"
 msgstr ""
 
 #. module: tms
@@ -2271,11 +1925,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__tz_offset
 msgid "Timezone offset"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__title
-msgid "Title"
 msgstr ""
 
 #. module: tms
@@ -2311,31 +1960,6 @@ msgid "Tms Weight Uom"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__total_invoiced
-msgid "Total Invoiced"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__debit
-msgid "Total Payable"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__credit
-msgid "Total Receivable"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__credit
-msgid "Total amount this customer owes you."
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__debit
-msgid "Total amount you have to pay to this vendor."
-msgstr ""
-
-#. module: tms
 #: model:ir.ui.menu,name:tms.root
 #: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -2344,6 +1968,7 @@ msgstr ""
 
 #. module: tms
 #: model:ir.module.category,name:tms.tms
+#: model:res.groups.privilege,name:tms.privilege_tms
 msgid "Transport Management System"
 msgstr ""
 
@@ -2471,6 +2096,11 @@ msgid "Use predefined route"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_product_pricelist
+msgid "Used for sales to the current partner"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__sequence
 msgid "Used to order stages. Lower is first."
 msgstr ""
@@ -2500,6 +2130,14 @@ msgid "Vehicle"
 msgstr ""
 
 #. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_order.py:0
+msgid ""
+"Vehicle %(vehicle)s insurance will expire in %(days)s days, which is less "
+"than or equal to the security threshold of %(threshold)s days."
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__vehicle_ids_domain
 msgid "Vehicle Ids Domain"
 msgstr ""
@@ -2526,11 +2164,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_supplier
 msgid "Vendor Location"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__property_supplier_payment_term_id
-msgid "Vendor Payment Terms"
 msgstr ""
 
 #. module: tms
@@ -2585,13 +2218,6 @@ msgid "Zip"
 msgstr ""
 
 #. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__days_sales_outstanding
-msgid ""
-"[(Total Receivable/Total Revenue) * number of days since the first invoice] "
-"for this customer"
-msgstr ""
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "e.g. Hours"
 msgstr ""
@@ -2614,11 +2240,6 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "e.g. m"
-msgstr ""
-
-#. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_edi_format
-msgid "eInvoice format"
 msgstr ""
 
 #. module: tms
