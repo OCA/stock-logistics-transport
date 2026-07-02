@@ -54,6 +54,11 @@ msgid "Determines if the product is sold as a trip or as a passenger seat"
 msgstr ""
 
 #. module: tms_product
+#: model:ir.model.fields,field_description:tms_product.field_fleet_vehicle__display_name
+#: model:ir.model.fields,field_description:tms_product.field_product_template__display_name
+#: model:ir.model.fields,field_description:tms_product.field_stock_lot__display_name
+#: model:ir.model.fields,field_description:tms_product.field_stock_move__display_name
+#: model:ir.model.fields,field_description:tms_product.field_stock_picking__display_name
 #: model:ir.model.fields,field_description:tms_product.field_transportable_product__display_name
 msgid "Display Name"
 msgstr ""
@@ -70,6 +75,11 @@ msgid "Distance Unit of Measure"
 msgstr ""
 
 #. module: tms_product
+#: model:ir.model.fields,field_description:tms_product.field_fleet_vehicle__id
+#: model:ir.model.fields,field_description:tms_product.field_product_template__id
+#: model:ir.model.fields,field_description:tms_product.field_stock_lot__id
+#: model:ir.model.fields,field_description:tms_product.field_stock_move__id
+#: model:ir.model.fields,field_description:tms_product.field_stock_picking__id
 #: model:ir.model.fields,field_description:tms_product.field_transportable_product__id
 msgid "ID"
 msgstr ""
@@ -162,7 +172,6 @@ msgstr ""
 #. module: tms_product
 #. odoo-python
 #: code:addons/tms_product/models/stock_move.py:0
-#, python-format
 msgid ""
 "The product '%s' is configure to create a fleet vehicle but vehicle model is"
 " not configured in the product."
@@ -190,6 +199,7 @@ msgid "Transfer"
 msgstr ""
 
 #. module: tms_product
+#: model:ir.model,name:tms_product.model_transportable_product
 #: model:ir.model.fields,field_description:tms_product.field_fleet_vehicle__transportable_product_ids
 msgid "Transportable Product"
 msgstr ""
@@ -226,7 +236,6 @@ msgstr ""
 #. module: tms_product
 #. odoo-python
 #: code:addons/tms_product/models/stock_lot.py:0
-#, python-format
 msgid "Vehicle for Lot/Serial Number: %s"
 msgstr ""
 
@@ -255,9 +264,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_product.field_product_product__tms_factor_weight_uom
 #: model:ir.model.fields,field_description:tms_product.field_product_template__tms_factor_weight_uom
 msgid "Weight Unit of Measure"
-msgstr ""
-
-#. module: tms_product
-#: model:ir.model,name:tms_product.model_transportable_product
-msgid "transportable.product"
 msgstr ""
