@@ -13,7 +13,6 @@ class PurchaseOrder(models.Model):
 
     order_vehicle_count = fields.Integer(
         compute="_compute_order_vehicle_count",
-        string="Vehicle Count",
         copy=False,
         default=0,
         store=True,
