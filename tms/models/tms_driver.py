@@ -74,7 +74,8 @@ class TmsDriver(models.Model):
     driving_experience_years = fields.Integer()
 
     @api.model
-    def _read_group_stage_ids(self, stages, domain, order):
+    def _read_group_stage_ids(self, stages, domain, order=None):
+        order = order or "sequence, id"
         return self.env["tms.stage"].search(
             [("stage_type", "=", "driver")], order=order
         )

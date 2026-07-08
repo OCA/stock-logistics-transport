@@ -60,6 +60,28 @@ class TestTmsDriver(TransactionCase):
             self.driver.stage_id, "Driver stage should be correctly assigned"
         )
 
+    def test_read_group_stage_ids(self):
+        stages = self.env["tms.driver"]._read_group_stage_ids(
+            self.env["tms.stage"], [], "sequence"
+        )
+        self.assertIn(self.stage, stages)
+        self.assertTrue(all(stage.stage_type == "driver" for stage in stages))
+
+    def test_web_read_group_expands_driver_stages(self):
+        result = (
+            self.env["tms.driver"]
+            .with_context(read_group_expand=True)
+            .web_read_group(
+                domain=[("is_company", "=", False)],
+                groupby=["stage_id"],
+                auto_unfold=True,
+                opening_info=[],
+                unfold_read_specification={"display_name": {}, "is_active": {}},
+            )
+        )
+        self.assertGreater(result["length"], 0)
+        self.assertTrue(result["groups"])
+
     def test_schedule_meeting(self):
         if not hasattr(type(self.driver.partner_id), "schedule_meeting"):
             self.skipTest("calendar module is not installed")

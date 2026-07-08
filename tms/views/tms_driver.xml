@@ -103,6 +103,7 @@
                 <field name="tms_team_id" />
                 <field name="crew_ids" />
                 <field name="phone" />
+                <field name="is_active" />
                 <field name="avatar_128" />
                 <templates>
                     <t t-name="card">
