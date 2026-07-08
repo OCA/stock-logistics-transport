@@ -1,0 +1,24 @@
+<odoo noupdate="1">
+    <record id="demo_tms_sale_order_line_trip" model="sale.order.line">
+        <field name="order_id" ref="demo_tms_sale_order" />
+        <field
+            name="product_id"
+            eval="obj().env.ref('tms_product.product_tms_trip_service').product_variant_ids[0].id"
+        />
+        <field name="product_uom_qty">1</field>
+        <field name="tms_origin_id" ref="tms.demo_location_3" />
+        <field name="tms_destination_id" ref="tms.demo_location_4" />
+        <field name="tms_scheduled_date_start">2026-07-15 08:00:00</field>
+        <field name="tms_scheduled_date_end">2026-07-15 18:00:00</field>
+    </record>
+
+    <record id="demo_tms_sale_order_line_seat" model="sale.order.line">
+        <field name="order_id" ref="demo_tms_sale_order" />
+        <field
+            name="product_id"
+            eval="obj().env.ref('tms_product.product_tms_seat_service').product_variant_ids[0].id"
+        />
+        <field name="product_uom_qty">1</field>
+        <field name="tms_trip_ticket_id" ref="tms.demo_order_1" />
+    </record>
+</odoo>

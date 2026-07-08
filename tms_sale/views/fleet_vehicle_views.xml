@@ -1,0 +1,18 @@
+<odoo>
+    <record id="fleet_vehicle_view_form_tms_sale" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.inherit.tms.sale</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="tms.fleet_vehicle_inherit_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='operation']" position="after">
+                <field name="tms_service_filter_type" invisible="1" />
+                <field
+                    name="tms_service_product_id"
+                    invisible="not operation"
+                    domain="[('type', '=', 'service'), ('product_tmpl_id.tms_trip', '=', True), ('product_tmpl_id.trip_product_type', '=', tms_service_filter_type)]"
+                    options="{'no_create': True}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

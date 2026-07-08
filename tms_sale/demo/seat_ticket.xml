@@ -1,0 +1,9 @@
+<odoo>
+    <function model="seat.ticket" name="write">
+        <value
+            model="seat.ticket"
+            search="[('tms_order_id', '=', ref('tms.demo_order_1')), ('name', '=', 'TMS/DEMO1-1')]"
+        />
+        <value eval="{'sale_line_id': ref('demo_tms_sale_order_line_seat')}" />
+    </function>
+</odoo>

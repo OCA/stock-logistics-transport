@@ -11,6 +11,7 @@
     "depends": ["tms", "stock", "product"],
     "data": [
         "security/ir.model.access.csv",
+        "data/tms_service_products.xml",
         "views/transportable_product_views.xml",
         "views/fleet_vehicle_views.xml",
         "views/product_template_views.xml",
