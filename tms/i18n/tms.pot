@@ -1480,6 +1480,11 @@ msgid "Message Delivery error"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn_msg
+msgid "Message for Sales Order"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn_msg
 msgid "Message for Stock Picking"
 msgstr ""
@@ -1685,6 +1690,16 @@ msgid "Passenger"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_count
+msgid "Payment Token Count"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_ids
+msgid "Payment Tokens"
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
 msgid "Personnel"
@@ -1818,6 +1833,16 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__rtc_session_ids
 msgid "Rtc Session"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_count
+msgid "Sale Order Count"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_ids
+msgid "Sales Order"
 msgstr ""
 
 #. module: tms
