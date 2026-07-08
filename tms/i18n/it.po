@@ -253,6 +253,15 @@ msgid "Automatically post bills for this trusted partner"
 msgstr "Invia automaticamente le fatture per questo partner affidabile"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__receipt_reminder_email
+msgid ""
+"Automatically send a confirmation email to the vendor X days before the "
+"expected receipt date, asking him to confirm the exact date."
+msgstr ""
+"Invia automaticamente una email al fornitore X giorni prima della data "
+"fattura prevista, chiedendo la conferma della data."
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__available_invoice_template_pdf_report_ids
 msgid "Available Invoice Template Pdf Report"
 msgstr ""
@@ -316,6 +325,11 @@ msgstr "Il numero in blacklist è un telefono fisso"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_bounce
 msgid "Bounce"
 msgstr "Respingi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__buyer_id
+msgid "Buyer"
+msgstr "Acquirente"
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__c
@@ -653,6 +667,11 @@ msgid "Date Start"
 msgstr "Data inizio"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__reminder_date_before_receipt
+msgid "Days Before Receipt"
+msgstr "Giorni antecedenti la fattura"
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__days_sales_outstanding
 msgid "Days Sales Outstanding (DSO)"
 msgstr "Giorni medi di accredito vendite (DSO)"
@@ -691,6 +710,20 @@ msgstr "Veicolo predefinito"
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Default Weight UoM"
 msgstr "UdM predefinita peso"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__group_rfq
+msgid ""
+"Define if RFQ should be grouped         together based on expected arrival, "
+"except for dropship operations.\n"
+"         On Order: Replenishment needs will be grouped together except for "
+"MTO.\n"
+"         Daily: Replenishment needs will be grouped if the expected arrival "
+"is the same day\n"
+"         Weekly: Replenishment needs will be grouped if the expected arrival "
+"is the same week or week day\n"
+"         Always: Replenishment needs will always be grouped."
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
@@ -1035,6 +1068,11 @@ msgstr "Longitudine geografica"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__date_localization
 msgid "Geolocation Date"
 msgstr "Data geolocalizzazione"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__group_rfq
+msgid "Group RFQ"
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__has_message
@@ -1514,6 +1552,11 @@ msgid "Message Delivery error"
 msgstr "Errore di consegna messaggio"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_warn_msg
+msgid "Message for Purchase Order"
+msgstr "Messaggio per ordine di acquisto"
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn_msg
 msgid "Message for Sales Order"
 msgstr "Messaggio per ordine di vendita"
@@ -1614,6 +1657,12 @@ msgid "Number of Trips"
 msgstr "Numero di viaggi"
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__reminder_date_before_receipt
+msgid "Number of days to send reminder email before the promised receipt date"
+msgstr ""
+"Numero di giorni per invio email promemoria prima della data fattura attesa"
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_error_counter
 #: model:ir.model.fields,field_description:tms.field_tms_order__message_has_error_counter
 msgid "Number of errors"
@@ -1640,6 +1689,11 @@ msgstr "Contachilometri"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__offline_since
 msgid "Offline since"
 msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__on_time_rate
+msgid "On-Time Delivery Rate"
+msgstr "Tasso puntualità consegna"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__operation
@@ -1677,6 +1731,17 @@ msgstr "Ubicazione di origine"
 #: model:ir.model.fields,field_description:tms.field_tms_crew__personnel_ids
 msgid "Other Personnel"
 msgstr "Altro personale"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__on_time_rate
+msgid ""
+"Over the past x days; the number of products received on time divided by the "
+"number of ordered products.x is either the System Parameter "
+"purchase_stock.on_time_delivery_days or the default 365"
+msgstr ""
+"Negli ultimi X giorni; il numero di prodotti ricevuti puntualmente diviso "
+"per il numero di prodotti ordinati. X è il parametro di sistema "
+"purchase_stock.on_time_delivery_days o il predefinito 365"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__parent_name
@@ -1798,6 +1863,21 @@ msgstr "Riga del metodo di pagamento in entrata della proprietà"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_outbound_payment_method_line_id
 msgid "Property Outbound Payment Method Line"
 msgstr "Riga del metodo di pagamento in uscita della proprietà"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_line_ids
+msgid "Purchase Lines"
+msgstr "Righe acquisti"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_order_count
+msgid "Purchase Order Count"
+msgstr "Conteggio ordine di acquisto"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__receipt_reminder_email
+msgid "Receipt Reminder"
+msgstr "Promemoria ricevuta"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__ref
@@ -2089,6 +2169,26 @@ msgid "Street2"
 msgstr "Indirizzo2"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_based_on
+msgid "Suggest Based On"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_days
+msgid "Suggest Days"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_percent
+msgid "Suggest Percent"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_purchase_currency_id
+msgid "Supplier Currency"
+msgstr "Valuta fornitore"
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_rank
 msgid "Supplier Rank"
 msgstr "Classe fornitore"
@@ -2212,6 +2312,11 @@ msgstr ""
 msgid ""
 "There can be several users related to the same partner. When a single user "
 "is needed, this field attempts to find the most appropriate one."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_purchase_currency_id
+msgid "This currency will be used for purchases from the current partner"
 msgstr ""
 
 #. module: tms
@@ -2534,6 +2639,11 @@ msgid "Website communication history"
 msgstr "Cronologia comunicazioni sito web"
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__group_on
+msgid "Week Day"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__tz
 msgid ""
 "When printing documents and exporting/importing data, time values are "
@@ -2663,19 +2773,6 @@ msgstr "mph"
 #~ "<span class=\"fa fa-phone me-2\" aria-label=\"Mobile\" "
 #~ "title=\"Cellulare\"/>"
 
-#~ msgid ""
-#~ "Automatically send a confirmation email to the vendor X days before the "
-#~ "expected receipt date, asking him to confirm the exact date."
-#~ msgstr ""
-#~ "Invia automaticamente una email al fornitore X giorni prima della data "
-#~ "fattura prevista, chiedendo la conferma della data."
-
-#~ msgid "Buyer"
-#~ msgstr "Acquirente"
-
-#~ msgid "Days Before Receipt"
-#~ msgstr "Giorni antecedenti la fattura"
-
 #~ msgid "Default delivery method used in sales orders."
 #~ msgstr "Metodo di consegna predefinito utilizzato negli ordini di vendita."
 
@@ -2706,29 +2803,8 @@ msgstr "mph"
 #~ msgid "Message for Invoice"
 #~ msgstr "Messaggio per fattura"
 
-#~ msgid "Message for Purchase Order"
-#~ msgstr "Messaggio per ordine di acquisto"
-
 #~ msgid "Mobile"
 #~ msgstr "Cellulare"
-
-#~ msgid ""
-#~ "Number of days to send reminder email before the promised receipt date"
-#~ msgstr ""
-#~ "Numero di giorni per invio email promemoria prima della data fattura "
-#~ "attesa"
-
-#~ msgid "On-Time Delivery Rate"
-#~ msgstr "Tasso puntualità consegna"
-
-#~ msgid ""
-#~ "Over the past x days; the number of products received on time divided by "
-#~ "the number of ordered products.x is either the System Parameter "
-#~ "purchase_stock.on_time_delivery_days or the default 365"
-#~ msgstr ""
-#~ "Negli ultimi X giorni; il numero di prodotti ricevuti puntualmente diviso "
-#~ "per il numero di prodotti ordinati. X è il parametro di sistema "
-#~ "purchase_stock.on_time_delivery_days o il predefinito 365"
 
 #~ msgid "Payable Limit"
 #~ msgstr "Limite pagabile"
@@ -2755,17 +2831,8 @@ msgstr "mph"
 #~ "impostato di default su tutti i pagamenti in entrata creati per questo "
 #~ "cliente"
 
-#~ msgid "Purchase Lines"
-#~ msgstr "Righe acquisti"
-
-#~ msgid "Purchase Order Count"
-#~ msgstr "Conteggio ordine di acquisto"
-
 #~ msgid "Purchase Order Warning"
 #~ msgstr "Avviso ordine acquisto"
-
-#~ msgid "Receipt Reminder"
-#~ msgstr "Promemoria ricevuta"
 
 #~ msgid "Sales Warnings"
 #~ msgstr "Allerte vendite"
@@ -2788,9 +2855,6 @@ msgstr "mph"
 
 #~ msgid "Stock Picking"
 #~ msgstr "Prelievo di magazzino"
-
-#~ msgid "Supplier Currency"
-#~ msgstr "Valuta fornitore"
 
 #~ msgid ""
 #~ "This account will be used instead of the default one as the payable "
