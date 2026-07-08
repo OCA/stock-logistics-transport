@@ -115,10 +115,11 @@
                             >
                                 <div class="o_kanban_card_content mw-100">
                                     <div class="o_kanban_image o_kanban_image_top_left">
-                                        <img
-                                            t-attf-src="#{kanban_image('tms.driver', 'avatar_128', record.id.raw_value)}"
-                                            t-att-alt="record.id.value"
-                                            class="img-fluid rounded-circle"
+                                        <field
+                                            name="avatar_128"
+                                            alt="Driver"
+                                            widget="image"
+                                            options="{'img_class': 'img-fluid rounded-circle'}"
                                         />
                                     </div>
                                     <div class="o_kanban_primary_left">
