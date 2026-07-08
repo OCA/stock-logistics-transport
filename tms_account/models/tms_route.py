@@ -31,19 +31,18 @@ class TMSRoute(models.Model):
         for record in self:
             record.total_revenue = record.total_income - record.total_expenses
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals_list):
-        route = super().create(vals_list)
-        if self.env.user.has_group("tms_account.group_tms_route_analytic_plan"):
-            # If analytic account not provided
-            if vals_list.get("analytic_account_id") in [False, None]:
-                # Create analytic account
-                analytic_plan = self.env.ref("tms_account.tms_route_analytic_plan")
-                account_vals_list = {"name": route.name, "plan_id": analytic_plan.id}
-                AccountAnalyticAccount = self.env["account.analytic.account"]
-                account = AccountAnalyticAccount.create(account_vals_list)
-
-                # Set the analytic_account_id
-                route.analytic_account_id = account.id
-
-        return route
+        routes = super().create(vals_list)
+        if not self.env.user.has_group("tms_account.group_tms_route_analytic_plan"):
+            return routes
+        analytic_plan = self.env.ref("tms_account.tms_route_analytic_plan")
+        AccountAnalyticAccount = self.env["account.analytic.account"]
+        for route, vals in zip(routes, vals_list, strict=True):
+            if vals.get("analytic_account_id"):
+                continue
+            account = AccountAnalyticAccount.create(
+                {"name": route.name, "plan_id": analytic_plan.id}
+            )
+            route.analytic_account_id = account
+        return routes

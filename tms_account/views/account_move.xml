@@ -16,7 +16,7 @@
                     invisible="not has_tms_order"
                 />
             </div>
-            <xpath expr="//tree//field[@name='name']" position="after">
+            <xpath expr="//list//field[@name='name']" position="after">
                 <field
                     name="tms_factor"
                     string="Factor"
@@ -30,5 +30,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

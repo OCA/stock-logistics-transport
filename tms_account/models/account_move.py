@@ -11,10 +11,18 @@ class AccountMove(models.Model):
     @api.depends("line_ids")
     def _compute_has_trip(self):
         for record in self:
-            if record.line_ids.sale_line_ids.order_id.tms_order_ids:
-                record.has_tms_order = True
-            else:
-                record.has_tms_order = False
+            record.has_tms_order = bool(
+                record.line_ids.sale_line_ids.order_id.tms_order_ids
+            )
+
+    def _prepare_product_base_line_for_taxes_computation(self, product_line):
+        base_line = super()._prepare_product_base_line_for_taxes_computation(
+            product_line
+        )
+        tms_factor = product_line.tms_factor or 1.0
+        if tms_factor != 1.0 and self.is_invoice(include_receipts=True):
+            base_line["quantity"] = base_line.get("quantity", 1.0) * tms_factor
+        return base_line
 
     def action_view_tms_orders(self):
         self.ensure_one()

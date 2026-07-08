@@ -1,5 +1,4 @@
 <odoo noupdate="1">
-
     <record id="tms_route_analytic_plan" model="account.analytic.plan">
         <field name="name">Routes</field>
         <field name="tms_flag">True</field>
@@ -8,5 +7,4 @@
         <field name="name">Trips</field>
         <field name="tms_flag">True</field>
     </record>
-
 </odoo>

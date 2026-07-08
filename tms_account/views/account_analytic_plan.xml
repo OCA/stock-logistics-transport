@@ -1,5 +1,4 @@
 <odoo>
-
     <record id="account_analytic_plan_form_view" model="ir.ui.view">
         <field name="name">account.analytic.plan.form.inherit.tms.account</field>
         <field name="model">account.analytic.plan</field>
@@ -10,5 +9,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

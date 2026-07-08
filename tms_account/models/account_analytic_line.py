@@ -6,19 +6,33 @@ from odoo import api, models
 class AccountAnalyticLine(models.Model):
     _inherit = "account.analytic.line"
 
-    @api.model
-    def create(self, vals):
-        line = super().create(vals)
-        if "x_plan3_id" in vals:
+    @api.model_create_multi
+    def create(self, vals_list):
+        lines = super().create(vals_list)
+        route_plan = self.env.ref(
+            "tms_account.tms_route_analytic_plan", raise_if_not_found=False
+        )
+        order_plan = self.env.ref(
+            "tms_account.tms_order_analytic_plan", raise_if_not_found=False
+        )
+        for line, vals in zip(lines, vals_list, strict=True):
             amount = line.amount
-            if amount < 0:
-                line.x_plan3_id.trip_id.total_expenses += abs(amount)
-            else:
-                line.x_plan3_id.trip_id.total_income += amount
-        if "x_plan2_id" in vals:
-            amount = line.amount
-            if amount < 0:
-                line.x_plan2_id.route_id.total_expenses += abs(amount)
-            else:
-                line.x_plan2_id.route_id.total_income += amount
-        return line
+            if route_plan:
+                route_column = route_plan._column_name()
+                if route_column in vals and vals[route_column]:
+                    account = line[route_column]
+                    for route in account.route_id:
+                        if amount < 0:
+                            route.total_expenses += abs(amount)
+                        else:
+                            route.total_income += amount
+            if order_plan:
+                order_column = order_plan._column_name()
+                if order_column in vals and vals[order_column]:
+                    account = line[order_column]
+                    for trip in account.trip_id:
+                        if amount < 0:
+                            trip.total_expenses += abs(amount)
+                        else:
+                            trip.total_income += amount
+        return lines
