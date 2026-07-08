@@ -171,11 +171,31 @@ msgid "Stock Picking"
 msgstr ""
 
 #. module: tms_product
+#: model:product.template,name:tms_product.product_tms_seat_service
+msgid "TMS Seat Service"
+msgstr ""
+
+#. module: tms_product
+#: model_terms:ir.ui.view,arch_db:tms_product.product_template_search_view_tms
+msgid "TMS Seat Services"
+msgstr ""
+
+#. module: tms_product
+#: model:product.template,name:tms_product.product_tms_trip_service
+msgid "TMS Trip Service"
+msgstr ""
+
+#. module: tms_product
+#: model_terms:ir.ui.view,arch_db:tms_product.product_template_search_view_tms
+msgid "TMS Trip Services"
+msgstr ""
+
+#. module: tms_product
 #. odoo-python
 #: code:addons/tms_product/models/stock_move.py:0
 msgid ""
-"The product '%s' is configure to create a fleet vehicle but vehicle model is"
-" not configured in the product."
+"The product '%s' is configure to create a fleet vehicle but vehicle model is "
+"not configured in the product."
 msgstr ""
 
 #. module: tms_product
