@@ -239,6 +239,13 @@ msgid "Automatically post bills for this trusted partner"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__receipt_reminder_email
+msgid ""
+"Automatically send a confirmation email to the vendor X days before the "
+"expected receipt date, asking him to confirm the exact date."
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__available_invoice_template_pdf_report_ids
 msgid "Available Invoice Template Pdf Report"
 msgstr ""
@@ -301,6 +308,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_bounce
 msgid "Bounce"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__buyer_id
+msgid "Buyer"
 msgstr ""
 
 #. module: tms
@@ -635,6 +647,11 @@ msgid "Date Start"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__reminder_date_before_receipt
+msgid "Days Before Receipt"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__days_sales_outstanding
 msgid "Days Sales Outstanding (DSO)"
 msgstr ""
@@ -672,6 +689,20 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Default Weight UoM"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__group_rfq
+msgid ""
+"Define if RFQ should be grouped         together based on expected arrival, "
+"except for dropship operations.\n"
+"         On Order: Replenishment needs will be grouped together except for "
+"MTO.\n"
+"         Daily: Replenishment needs will be grouped if the expected arrival "
+"is the same day\n"
+"         Weekly: Replenishment needs will be grouped if the expected arrival "
+"is the same week or week day\n"
+"         Always: Replenishment needs will always be grouped."
 msgstr ""
 
 #. module: tms
@@ -1009,6 +1040,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__date_localization
 msgid "Geolocation Date"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__group_rfq
+msgid "Group RFQ"
 msgstr ""
 
 #. module: tms
@@ -1482,6 +1518,11 @@ msgid "Message Delivery error"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_warn_msg
+msgid "Message for Purchase Order"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn_msg
 msgid "Message for Sales Order"
 msgstr ""
@@ -1582,6 +1623,11 @@ msgid "Number of Trips"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__reminder_date_before_receipt
+msgid "Number of days to send reminder email before the promised receipt date"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_error_counter
 #: model:ir.model.fields,field_description:tms.field_tms_order__message_has_error_counter
 msgid "Number of errors"
@@ -1607,6 +1653,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__offline_since
 msgid "Offline since"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__on_time_rate
+msgid "On-Time Delivery Rate"
 msgstr ""
 
 #. module: tms
@@ -1644,6 +1695,14 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__personnel_ids
 msgid "Other Personnel"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__on_time_rate
+msgid ""
+"Over the past x days; the number of products received on time divided by the "
+"number of ordered products.x is either the System Parameter "
+"purchase_stock.on_time_delivery_days or the default 365"
 msgstr ""
 
 #. module: tms
@@ -1765,6 +1824,21 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_outbound_payment_method_line_id
 msgid "Property Outbound Payment Method Line"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_line_ids
+msgid "Purchase Lines"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_order_count
+msgid "Purchase Order Count"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__receipt_reminder_email
+msgid "Receipt Reminder"
 msgstr ""
 
 #. module: tms
@@ -2047,6 +2121,26 @@ msgid "Street2"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_based_on
+msgid "Suggest Based On"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_days
+msgid "Suggest Days"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_percent
+msgid "Suggest Percent"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_purchase_currency_id
+msgid "Supplier Currency"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_rank
 msgid "Supplier Rank"
 msgstr ""
@@ -2161,6 +2255,11 @@ msgstr ""
 msgid ""
 "There can be several users related to the same partner. When a single user "
 "is needed, this field attempts to find the most appropriate one."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_purchase_currency_id
+msgid "This currency will be used for purchases from the current partner"
 msgstr ""
 
 #. module: tms
@@ -2476,6 +2575,11 @@ msgstr ""
 #: model:ir.model.fields,help:tms.field_tms_driver__website_message_ids
 #: model:ir.model.fields,help:tms.field_tms_order__website_message_ids
 msgid "Website communication history"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__group_on
+msgid "Week Day"
 msgstr ""
 
 #. module: tms
