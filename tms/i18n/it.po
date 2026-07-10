@@ -22,6 +22,16 @@ msgid "# Vendor Bills"
 msgstr "N. fatture fornitore"
 
 #. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<i class=\"fa fa-fw me-1 fa-phone\" title=\"Phone\"/>"
+msgstr ""
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<i class=\"fa fa-fw me-1 fa-users\" title=\"Team\"/>"
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
 msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow "
@@ -57,11 +67,6 @@ msgid "<span class=\"fa fa-map-o me-2\" title=\"Route\"/>"
 msgstr "<span class=\"fa fa-map-o me-2\" title=\"Percorso\"/>"
 
 #. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
-msgid "<span class=\"fa fa-phone me-2\" aria-label=\"Phone\" title=\"Phone\"/>"
-msgstr ""
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
 msgid ""
 "<span class=\"fa fa-users me-2\" aria-label=\"Driver\" title=\"Drivers\"/>\n"
@@ -69,12 +74,6 @@ msgid ""
 msgstr ""
 "<span class=\"fa fa-users me-2\" aria-label=\"Driver\" title=\"Autisti\"/>\n"
 "                                                <span>Autisti: </span>"
-
-#. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
-msgid "<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Team\"/>"
-msgstr ""
-"<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Squadra\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
@@ -89,6 +88,11 @@ msgid ""
 msgstr ""
 "<span invisible=\"operation != 'passenger'\" class=\"w-50\">Passeggeri\n"
 "                                </span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<span>Crews: </span>"
+msgstr ""
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
@@ -135,7 +139,6 @@ msgstr "Azione richiesta"
 #: model:ir.model.fields,field_description:tms.field_tms_stage__active
 #: model:ir.model.fields,field_description:tms.field_tms_team__active
 #: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__active
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "Active"
 msgstr "Attivo"
 
@@ -622,11 +625,6 @@ msgid "Crews"
 msgstr "Equipaggi"
 
 #. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
-msgid "Crews:"
-msgstr "Equipaggi:"
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__currency_id
 msgid "Currency"
 msgstr "Valuta"
@@ -813,6 +811,7 @@ msgstr "Bozza"
 #: model:ir.model.fields,field_description:tms.field_tms_team__driver_ids
 #: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__driver
 #: model:res.groups,name:tms.group_tms_driver
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "Driver"
 msgstr "Autista"
 
@@ -1185,11 +1184,6 @@ msgstr "Immagine 512"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_training
 msgid "In Training"
 msgstr "In addestramento"
-
-#. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
-msgid "Inactive"
-msgstr "Inattivo"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__phone_blacklisted
@@ -2754,6 +2748,17 @@ msgstr "mi"
 #: model:uom.uom,name:tms.uom_mph
 msgid "mph"
 msgstr "mph"
+
+#~ msgid ""
+#~ "<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Team\"/>"
+#~ msgstr ""
+#~ "<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Squadra\"/>"
+
+#~ msgid "Crews:"
+#~ msgstr "Equipaggi:"
+
+#~ msgid "Inactive"
+#~ msgstr "Inattivo"
 
 #~ msgid "Check this box if this contact is an Employee."
 #~ msgstr "Seleziona questa casella se questo contatto è un dipendente."
