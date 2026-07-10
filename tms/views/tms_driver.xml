@@ -103,88 +103,46 @@
                 <field name="tms_team_id" />
                 <field name="crew_ids" />
                 <field name="phone" />
+                <field name="is_active" />
                 <field name="avatar_128" />
                 <templates>
-                    <t t-name="card">
-                        <div
-                            t-attf-class="oe_kanban_global_click o_has_icon oe_kanban_content oe_kanban_card"
-                        >
+                    <t t-name="card" class="flex-row">
+                        <aside class="o_kanban_aside_full">
+                            <field
+                                name="avatar_128"
+                                alt="Driver"
+                                widget="image"
+                                options="{'img_class': 'object-fit-cover rounded-circle'}"
+                            />
+                        </aside>
+                        <main class="ps-2">
+                            <field name="display_name" class="mb-0 fw-bold" />
                             <div
-                                class="o_project_kanban_main d-flex align-items-baseline gap-1"
+                                t-if="record.phone.raw_value"
+                                class="text-truncate text-muted"
                             >
-                                <div class="o_kanban_card_content mw-100">
-                                    <div class="o_kanban_image o_kanban_image_top_left">
-                                        <img
-                                            t-attf-src="#{kanban_image('tms.driver', 'avatar_128', record.id.raw_value)}"
-                                            t-att-alt="record.id.value"
-                                            class="img-fluid rounded-circle"
-                                        />
-                                    </div>
-                                    <div class="o_kanban_primary_left">
-                                        <div class="o_primary me-5">
-                                            <span
-                                                class="o_text_overflow mb-2"
-                                                t-att-title="record.display_name.value"
-                                            >
-                                                <t t-esc="record.display_name.value" />
-                                            </span>
-                                            <p style="margin-bottom: 0.5rem;">
-                                                <span
-                                                    class="o_text_overflow text-muted"
-                                                    t-if="record.phone.value"
-                                                >
-                                                    <span
-                                                        class="fa fa-phone me-2"
-                                                        aria-label="Phone"
-                                                        title="Phone"
-                                                    />
-                                                    <t t-esc="record.phone.value" />
-                                                </span>
-                                            </p>
-                                            <p style="margin-bottom: 0.5rem;">
-                                                <span
-                                                    class="o_text_overflow text-muted"
-                                                    t-if="record.tms_team_id.value"
-                                                >
-                                                    <span
-                                                        class="fa fa-users me-2"
-                                                        aria-label="Team"
-                                                        title="Team"
-                                                    />
-                                                    <t
-                                                        t-esc="record.tms_team_id.value"
-                                                    />
-                                                </span>
-                                            </p>
-                                            <p style="margin-bottom: 0.5rem;">
-                                                <span
-                                                    groups="tms.group_tms_crew"
-                                                    class="o_text_overflow text-muted"
-                                                    t-if="record.crew_ids.raw_value != 0"
-                                                >
-                                                    <t>Crews:</t>
-                                                    <span
-                                                        class="oe_kanban_list_many2many"
-                                                    >
-                                                        <field name="crew_ids" />
-                                                    </span>
-                                                </span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <i class="fa fa-fw me-1 fa-phone" title="Phone" />
+                                <field name="phone" />
                             </div>
-                            <div class="o_kanban_record_bottom mt-3">
-                                <div class="oe_kanban_bottom_left">
-                                    <label for="is_active">
-                                        <span t-if="record.is_active.raw_value">Active
-                                        </span>
-                                        <span t-else="">Inactive</span>
-                                    </label>
-                                    <field name="is_active" widget="boolean_toggle" />
-                                </div>
+                            <div
+                                t-if="record.tms_team_id.raw_value"
+                                class="text-truncate text-muted"
+                            >
+                                <i class="fa fa-fw me-1 fa-users" title="Team" />
+                                <field name="tms_team_id" />
                             </div>
-                        </div>
+                            <div
+                                t-if="record.crew_ids.raw_value.length"
+                                groups="tms.group_tms_crew"
+                                class="text-muted"
+                            >
+                                <span>Crews: </span>
+                                <field name="crew_ids" widget="many2many_tags" />
+                            </div>
+                            <footer class="pt-2">
+                                <field name="is_active" widget="boolean_toggle" />
+                            </footer>
+                        </main>
                     </t>
                 </templates>
             </kanban>
