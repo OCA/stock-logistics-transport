@@ -20,6 +20,16 @@ msgid "# Vendor Bills"
 msgstr ""
 
 #. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<i class=\"fa fa-fw me-1 fa-phone\" title=\"Phone\"/>"
+msgstr ""
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<i class=\"fa fa-fw me-1 fa-users\" title=\"Team\"/>"
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
 msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow "
@@ -50,20 +60,10 @@ msgid "<span class=\"fa fa-map-o me-2\" title=\"Route\"/>"
 msgstr ""
 
 #. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
-msgid "<span class=\"fa fa-phone me-2\" aria-label=\"Phone\" title=\"Phone\"/>"
-msgstr ""
-
-#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
 msgid ""
 "<span class=\"fa fa-users me-2\" aria-label=\"Driver\" title=\"Drivers\"/>\n"
 "                                                <span>Drivers: </span>"
-msgstr ""
-
-#. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
-msgid "<span class=\"fa fa-users me-2\" aria-label=\"Team\" title=\"Team\"/>"
 msgstr ""
 
 #. module: tms
@@ -76,6 +76,11 @@ msgstr ""
 msgid ""
 "<span invisible=\"operation != 'passenger'\" class=\"w-50\">Passengers\n"
 "                                </span>"
+msgstr ""
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<span>Crews: </span>"
 msgstr ""
 
 #. module: tms
@@ -123,7 +128,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms.field_tms_stage__active
 #: model:ir.model.fields,field_description:tms.field_tms_team__active
 #: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__active
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "Active"
 msgstr ""
 
@@ -602,11 +606,6 @@ msgid "Crews"
 msgstr ""
 
 #. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
-msgid "Crews:"
-msgstr ""
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__currency_id
 msgid "Currency"
 msgstr ""
@@ -793,6 +792,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms.field_tms_team__driver_ids
 #: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__driver
 #: model:res.groups,name:tms.group_tms_driver
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "Driver"
 msgstr ""
 
@@ -1153,11 +1153,6 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_training
 msgid "In Training"
-msgstr ""
-
-#. module: tms
-#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
-msgid "Inactive"
 msgstr ""
 
 #. module: tms
