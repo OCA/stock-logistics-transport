@@ -998,11 +998,6 @@ msgid "Formatted Email"
 msgstr "Email formattata"
 
 #. module: tms
-#: model:ir.model.fields,field_description:tms.field_tms_driver__global_location_number
-msgid "GLN"
-msgstr "NUG"
-
-#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__partner_latitude
 msgid "Geo Latitude"
 msgstr "Latitudine geografica"
@@ -1016,11 +1011,6 @@ msgstr "Longitudine geografica"
 #: model:ir.model.fields,field_description:tms.field_tms_driver__date_localization
 msgid "Geolocation Date"
 msgstr "Data geolocalizzazione"
-
-#. module: tms
-#: model:ir.model.fields,help:tms.field_tms_driver__global_location_number
-msgid "Global Location Number"
-msgstr "Numero ubicazione globale"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__has_message
@@ -2731,6 +2721,12 @@ msgstr "mi"
 #: model:uom.uom,name:tms.uom_mph
 msgid "mph"
 msgstr "mph"
+
+#~ msgid "GLN"
+#~ msgstr "NUG"
+
+#~ msgid "Global Location Number"
+#~ msgstr "Numero ubicazione globale"
 
 #~ msgid ""
 #~ "<i groups=\"tms.group_tms_route\" class=\"fa fa-long-arrow-right mx-2 "
