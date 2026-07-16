@@ -1,0 +1,24 @@
+<odoo>
+    <record id="tms_order_view_form" model="ir.ui.view">
+        <field name="name">tms.order.view.form.inherit.tms.purchase</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    class="oe_stat_button"
+                    name="action_view_purchase_orders"
+                    type="object"
+                    groups="purchase.group_purchase_user"
+                    icon="fa-handshake-o"
+                >
+                    <field
+                        string="Purchases"
+                        name="purchase_order_count"
+                        widget="statinfo"
+                    />
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

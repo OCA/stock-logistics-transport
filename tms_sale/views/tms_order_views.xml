@@ -1,0 +1,61 @@
+<odoo>
+    <record id="tms_order_view_form" model="ir.ui.view">
+        <field name="name">tms.order.view.form.inherit.tms.sale</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_sales"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-usd"
+                    invisible="not sale_id"
+                >
+                    <span class="o_stat_text">Sale Order</span>
+                    <field name="sale_id" invisible="1" />
+                    <field name="sale_line_id" invisible="1" />
+                </button>
+                <button
+                    type="object"
+                    name="action_view_seat_sale_orders"
+                    class="oe_stat_button"
+                    icon="fa-shopping-cart"
+                    invisible="seat_sale_order_count == 0"
+                >
+                    <field
+                        name="seat_sale_order_count"
+                        widget="statinfo"
+                        string="Sales Orders"
+                    />
+                </button>
+            </xpath>
+            <xpath expr="//field[@name='vehicle_id']" position="after">
+                <field name="vehicle_operation" invisible="1" />
+            </xpath>
+            <xpath expr="//page[@name='planning_page']" position="after">
+                <page
+                    name="seats_page"
+                    string="Seats"
+                    invisible="vehicle_operation != 'passenger'"
+                >
+                    <field name="seat_ticket_ids">
+                        <list>
+                            <field name="name" />
+                            <field name="product_id" />
+                            <field name="price" />
+                            <field name="sale_order_id" />
+                            <field name="customer_id" />
+                            <field
+                                name="available"
+                                widget="badge"
+                                decoration-success="available == 'available'"
+                                decoration-danger="available == 'not_available'"
+                            />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

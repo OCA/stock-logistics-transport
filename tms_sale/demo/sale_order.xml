@@ -1,0 +1,5 @@
+<odoo noupdate="1">
+    <record id="demo_tms_sale_order" model="sale.order">
+        <field name="partner_id" ref="demo_tms_sale_customer" />
+    </record>
+</odoo>
