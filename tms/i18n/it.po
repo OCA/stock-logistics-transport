@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-02-23 11:09+0000\n"
+"PO-Revision-Date: 2026-07-16 08:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -2217,7 +2217,7 @@ msgstr "Partita IVA"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__vat_label
 msgid "Tax ID Label"
-msgstr "Etichetta ID imposta"
+msgstr "Etichetta partita IVA"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__tms_team_id
