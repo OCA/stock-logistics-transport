@@ -49,6 +49,11 @@ msgid "<strong>Package content</strong>"
 msgstr "<strong>Contenido del paquete</strong>"
 
 #. module: shipment_advice
+#: model:ir.model.constraint,message:shipment_advice.constraint_shipment_advice_planned_picking_order_shipment_advice_planned_picking_uniq
+msgid "A stock picking can only be planned once per shipment advice."
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__message_needaction
 msgid "Action Needed"
 msgstr "Acción requerida"
@@ -152,6 +157,7 @@ msgstr "Compañías"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__company_id
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__company_id
 msgid "Company"
 msgstr "Compañía"
 
@@ -194,6 +200,7 @@ msgstr "Crear pedido pendiente"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__create_uid
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__create_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__create_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__create_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__create_uid
@@ -203,6 +210,7 @@ msgstr "Creado por"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__create_date
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__create_date
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__create_date
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__create_date
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__create_date
@@ -232,6 +240,7 @@ msgstr "Fecha de salida"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__display_name
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__display_name
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__display_name
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__display_name
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__display_name
@@ -298,6 +307,7 @@ msgstr "Tiene un mensaje"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__id
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__id
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__id
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__id
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__id
@@ -404,6 +414,7 @@ msgstr "Flete"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice____last_update
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order____last_update
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment____last_update
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment____last_update
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment____last_update
@@ -413,6 +424,7 @@ msgstr "Última modificación el"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__write_uid
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__write_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__write_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__write_uid
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__write_uid
@@ -422,6 +434,7 @@ msgstr "Última actualización por"
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__write_date
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__write_date
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__write_date
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__write_date
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_unload_shipment__write_date
@@ -883,6 +896,11 @@ msgid "Packages updated"
 msgstr "Paquetes actualizados"
 
 #. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_stock_move__picking_sequence_in_shipment_advice
+msgid "Picking Sequence In Shipment Advice"
+msgstr ""
+
+#. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.wizard_plan_shipment_form
 msgid "Plan in Shipment Advice"
 msgstr "Planificar en aviso de envío"
@@ -910,9 +928,19 @@ msgid "Planned Moves Count"
 msgstr "Número de movimientos planificados"
 
 #. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__stock_picking_id
+msgid "Planned Picking"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__planned_pickings_count
 msgid "Planned Pickings Count"
 msgstr "Número de albaranes planificados"
+
+#. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice__planned_picking_order_ids
+msgid "Planned Pickings Order"
+msgstr ""
 
 #. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_picking_internal_search
@@ -1055,8 +1083,19 @@ msgid "Run shipment advice in queue job"
 msgstr "Ejecuta el aviso de envío en la cola de trabajo"
 
 #. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__sequence_in_shipment_advice
+msgid "Sequence In Shipment Advice"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.actions.report,name:shipment_advice.action_report_shipment_advice
 #: model:ir.model,name:shipment_advice.model_shipment_advice
+#: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__shipment_advice_id
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_load_shipment__shipment_advice_id
 #: model:ir.model.fields,field_description:shipment_advice.field_wizard_plan_shipment__shipment_advice_id
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
@@ -1064,6 +1103,12 @@ msgstr "Ejecuta el aviso de envío en la cola de trabajo"
 #: model_terms:ir.ui.view,arch_db:shipment_advice.view_move_search
 msgid "Shipment Advice"
 msgstr "Aviso de envío"
+
+#. module: shipment_advice
+#: model:ir.model,name:shipment_advice.model_shipment_advice_planned_picking_order
+#: model:ir.model.fields,field_description:shipment_advice.field_stock_picking__shipment_advice_planned_picking_order_ids
+msgid "Shipment Advice Planned Picking Order"
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
@@ -1161,6 +1206,7 @@ msgstr "Nivel de Almacén de Paquete"
 
 #. module: shipment_advice
 #: model:ir.model.fields,help:shipment_advice.field_shipment_advice__company_id
+#: model:ir.model.fields,help:shipment_advice.field_shipment_advice_planned_picking_order__company_id
 msgid "The company is automatically set from your user preferences."
 msgstr ""
 "La compañía se establece automáticamente de acuerdo a sus preferencias de "
