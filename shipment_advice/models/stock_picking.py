@@ -14,6 +14,17 @@ class StockPicking(models.Model):
         store=True,
         index=True,
     )
+
+    shipment_advice_planned_picking_order_ids = fields.One2many(
+        comodel_name="shipment.advice.planned.picking.order",
+        inverse_name="stock_picking_id",
+    )
+
+    sequence_in_shipment_advice = fields.Integer(
+        compute="_compute_sequence_in_shipment_advice",
+        inverse="_inverse_sequence_in_shipment_advice",
+    )
+
     is_fully_loaded_in_shipment = fields.Boolean(
         string="Is fully loaded in a shipment?",
         compute="_compute_loaded_in_shipment",
@@ -174,6 +185,29 @@ class StockPicking(models.Model):
                 picking.loaded_progress_f = picking.loaded_move_lines_progress_f
                 picking.loaded_progress = picking.loaded_move_lines_progress
 
+    @api.depends("shipment_advice_planned_picking_order_ids.sequence")
+    @api.depends_context("active_shipment_advice_id")
+    def _compute_sequence_in_shipment_advice(self):
+        for picking in self:
+            planned_order = picking.shipment_advice_planned_picking_order_ids.filtered(
+                lambda r: r.shipment_advice_id.id
+                == self.env.context.get("active_shipment_advice_id")
+            )
+            picking.sequence_in_shipment_advice = (
+                planned_order.sequence if planned_order else False
+            )
+
+    def _inverse_sequence_in_shipment_advice(self):
+        for picking in self:
+            if not (active_id := self.env.context.get("active_shipment_advice_id")):
+                return
+
+            planned_order = picking.shipment_advice_planned_picking_order_ids.filtered(
+                lambda r: r.shipment_advice_id.id == active_id
+            )
+            if planned_order:
+                planned_order.sequence = picking.sequence_in_shipment_advice
+
     def button_plan_in_shipment(self):
         action_xmlid = "shipment_advice.wizard_plan_shipment_picking_action"
         action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
@@ -205,3 +239,19 @@ class StockPicking(models.Model):
         """Unload the whole transfers content from their related shipment advice."""
         self.package_level_ids._unload_from_shipment()
         self.move_line_ids._unload_from_shipment()
+
+    @api.model
+    def search(self, domain, offset=0, limit=None, order=None, count=False):
+        res = super().search(
+            domain, offset=offset, limit=limit, order=order, count=count
+        )
+        # if this is used to count, sorting does not make sense, also if limit is set
+        # at this point sorting for what?
+
+        if (
+            self.env.context.get("active_shipment_advice_id")
+            and not count
+            and not limit
+        ):
+            res = res.sorted("sequence_in_shipment_advice")
+        return res

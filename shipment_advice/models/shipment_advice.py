@@ -3,8 +3,9 @@
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import _, api, fields, models
+from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools.safe_eval import safe_eval
 
 from odoo.addons.queue_job.delay import chain, group
 from odoo.addons.queue_job.job import identity_exact
@@ -125,6 +126,15 @@ class ShipmentAdvice(models.Model):
         compute="_compute_picking_ids",
         string="Planned transfers",
     )
+
+    planned_picking_order_ids = fields.One2many(
+        "shipment.advice.planned.picking.order",
+        "shipment_advice_id",
+        string="Planned Pickings Order",
+        compute="_compute_planned_picking_order_ids",
+        store=True,
+    )
+
     planned_pickings_count = fields.Integer(compute="_compute_count")
     loaded_move_line_ids = fields.One2many(
         comodel_name="stock.move.line",
@@ -316,6 +326,27 @@ class ShipmentAdvice(models.Model):
             shipment.to_validate_picking_ids = self.env["stock.picking"].browse(
                 to_validate_picking_ids
             )
+
+    @api.depends("planned_picking_ids")
+    def _compute_planned_picking_order_ids(self):
+        for shipment in self:
+            # unplanned pickings
+            shipment.planned_picking_order_ids.filtered(
+                lambda it, s=shipment: it.stock_picking_id not in s.planned_picking_ids
+            ).unlink()
+            planned_pickings = [
+                Command.create(
+                    {
+                        "stock_picking_id": planned_picking.id,
+                        "sequence": 0,
+                    }
+                )
+                for planned_picking in (
+                    shipment.planned_picking_ids
+                    - shipment.planned_picking_order_ids.stock_picking_id
+                )
+            ]
+            shipment.planned_picking_order_ids = planned_pickings
 
     @api.depends(
         "loaded_move_line_ids.package_level_id.package_id",
@@ -583,19 +614,44 @@ class ShipmentAdvice(models.Model):
             shipment.state = "draft"
 
     def button_open_planned_pickings(self):
+        self.ensure_one()
         action_xmlid = "stock.action_picking_tree_all"
         action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["domain"] = [("id", "in", self.planned_picking_ids.ids)]
+
+        context = (
+            safe_eval(
+                action.get("context", "{}"),
+                dict(self.env.context),
+                mode="exec",
+                nocopy=True,
+            )
+            or {}
+        )
+        context.update({"active_shipment_advice_id": self.id})
+        action["context"] = context
+
+        tree_view = self.env.ref(
+            "shipment_advice.vpicktree_planned_shipment_advice_order"
+        )
+        tree_view_index = action["views"].index((False, "tree"))
+        action["views"][tree_view_index] = (tree_view.id, "tree")
         return action
 
     def button_open_planned_moves(self):
+        self.ensure_one()
         action_xmlid = "stock.stock_move_action"
         action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
         action["views"] = [
-            (self.env.ref("stock.view_picking_move_tree").id, "tree"),
+            (self.env.ref("shipment_advice.view_picking_move_tree").id, "tree"),
         ]
         action["domain"] = [("id", "in", self.planned_move_ids.ids)]
         action["context"] = {}  # Disable filters
+        active_shipment_advice_id = self.id
+        if active_shipment_advice_id:
+            action["context"].update(
+                {"active_shipment_advice_id": active_shipment_advice_id}
+            )
         return action
 
     def button_open_loaded_pickings(self):
@@ -672,3 +728,40 @@ class ShipmentAdvice(models.Model):
         action["views"][tree_view_index] = (view_tree.id, "tree")
         action["domain"] = [("id", "in", self.planned_picking_ids.ids)]
         return action
+
+
+class ShipmentAdvicePlannedPickingOrder(models.Model):
+    _name = "shipment.advice.planned.picking.order"
+    _description = "Shipment Advice Planned Picking Order"
+    _order = "shipment_advice_id, sequence"
+    _check_company_auto = True
+
+    shipment_advice_id = fields.Many2one(
+        comodel_name="shipment.advice",
+        string="Shipment Advice",
+        required=True,
+        ondelete="cascade",
+        index=True,
+    )
+    stock_picking_id = fields.Many2one(
+        comodel_name="stock.picking",
+        string="Planned Picking",
+        required=True,
+        ondelete="cascade",
+        check_company=True,
+        index=True,
+    )
+    sequence = fields.Integer(default=0)
+    company_id = fields.Many2one(
+        related="shipment_advice_id.company_id",
+        store=True,
+        readonly=True,
+    )
+
+    _sql_constraints = [
+        (
+            "shipment_advice_planned_picking_uniq",
+            "unique(shipment_advice_id, stock_picking_id)",
+            "A stock picking can only be planned once per shipment advice.",
+        ),
+    ]
