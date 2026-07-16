@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Leaflet Map View for TMS Order Stops -->
+    <record id="tms_order_stop_leaflet_map" model="ir.ui.view">
+        <field name="name">tms.order.stop.leaflet_map</field>
+        <field name="model">tms.order.stop</field>
+        <field name="arch" type="xml">
+            <leaflet_map
+                js_class="tms_stops_leaflet_map"
+                field_latitude="latitude"
+                field_longitude="longitude"
+                field_title="partner_id"
+                field_address="display_address"
+                default_zoom="12"
+                show_pin_list="1"
+                group_by="order_id"
+                group_field="order_id"
+                default_order="sequence"
+                draggable="1"
+                numbered_markers="1"
+                routing="1"
+                enable_navigation="1"
+                unassigned_group_name="Sem Viagem"
+                panel_title="Entregas"
+                limit="500"
+            >
+                <field name="id" />
+                <field name="sequence" />
+                <field name="stop_type" />
+                <field name="stop_type_order" />
+                <field name="order_id" />
+                <field name="partner_id" />
+                <field name="location_id" />
+                <field name="latitude" />
+                <field name="longitude" />
+                <field name="address_complete" />
+                <field name="display_address" />
+                <field name="scheduled_date" />
+                <field name="state" />
+                <field name="weight" />
+                <field name="volume" />
+                <field name="package_count" />
+            </leaflet_map>
+        </field>
+    </record>
+
+    <!-- Update action to include map view -->
+    <record id="tms_delivery_stops.action_tms_order_stop" model="ir.actions.act_window">
+        <field name="view_mode">list,leaflet_map,form</field>
+    </record>
+
+    <!-- Add map view to action -->
+    <record id="action_tms_order_stop_view_map" model="ir.actions.act_window.view">
+        <field name="sequence" eval="15" />
+        <field name="view_mode">leaflet_map</field>
+        <field name="view_id" ref="tms_order_stop_leaflet_map" />
+        <field name="act_window_id" ref="tms_delivery_stops.action_tms_order_stop" />
+    </record>
+
+    <!-- Update search view to add filter for unallocated stops -->
+    <record id="tms_order_stop_search_inherit" model="ir.ui.view">
+        <field name="name">tms.order.stop.search.leaflet</field>
+        <field name="model">tms.order.stop</field>
+        <field name="inherit_id" ref="tms_delivery_stops.tms_order_stop_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='draft']" position="before">
+                <filter
+                    name="unallocated"
+                    string="Unallocated"
+                    domain="[('order_id', '=', False)]"
+                />
+                <filter
+                    name="allocated"
+                    string="Allocated"
+                    domain="[('order_id', '!=', False)]"
+                />
+                <separator />
+            </xpath>
+            <xpath expr="//search" position="inside">
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_order"
+                        string="Order"
+                        context="{'group_by': 'order_id'}"
+                    />
+                    <filter
+                        name="group_by_state"
+                        string="State"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="group_by_scheduled_date"
+                        string="Scheduled Date"
+                        context="{'group_by': 'scheduled_date:day'}"
+                    />
+                    <filter
+                        name="group_by_scheduled_date_week"
+                        string="Scheduled Week"
+                        context="{'group_by': 'scheduled_date:week'}"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add a dedicated menu for map view with unallocated filter -->
+    <record id="action_tms_order_stop_map" model="ir.actions.act_window">
+        <field name="name">Delivery Stops Map</field>
+        <field name="res_model">tms.order.stop</field>
+        <field name="view_mode">leaflet_map,list,form</field>
+        <field name="context">{
+            'search_default_delivery': 1,
+            'search_default_not_completed': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No delivery stops to display on map
+            </p>
+            <p>
+                Create delivery stops and they will appear here.
+                Select unallocated stops to create a new delivery order.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_tms_order_stop_map"
+        name="Map"
+        parent="tms_delivery_stops.menu_tms_order_stop_submenu"
+        action="action_tms_order_stop_map"
+        sequence="20"
+    />
+</odoo>

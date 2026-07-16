@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Action: Ver Stops do Team no Mapa -->
+    <record id="action_tms_order_stop_map_team" model="ir.actions.act_window">
+        <field name="name">Team Stops Map</field>
+        <field name="res_model">tms.order.stop</field>
+        <field name="view_mode">leaflet_map,list,form</field>
+        <field name="domain">[('order_id.tms_team_id', '=', active_id)]</field>
+        <field name="context">{
+            'search_default_group_by_order': 1,
+            'search_default_not_completed': 1
+        }</field>
+    </record>
+
+    <!-- Botão MAP no Dashboard do Team (Kanban) -->
+    <record id="tms_team_view_kanban_map_button" model="ir.ui.view">
+        <field name="name">tms.team.kanban.map.button</field>
+        <field name="model">tms.team</field>
+        <field name="inherit_id" ref="tms.tms_team_view_kanban" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='%(tms.action_tms_order_kanban)d']"
+                position="after"
+            >
+                <button
+                    name="%(action_tms_order_stop_map_team)d"
+                    type="action"
+                    class="btn btn-primary ms-2"
+                >
+                    <i class="fa fa-map-marker" /> MAP
+                </button>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action: Ver Stops da Order no Mapa -->
+    <record id="action_tms_order_stop_map_order" model="ir.actions.act_window">
+        <field name="name">Order Stops Map</field>
+        <field name="res_model">tms.order.stop</field>
+        <field name="view_mode">leaflet_map,list,form</field>
+        <field name="domain">[('order_id', '=', active_id)]</field>
+    </record>
+
+    <!-- Smart Button na Order Form -->
+    <record id="tms_order_view_form_map_button" model="ir.ui.view">
+        <field name="name">tms.order.form.map.button</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="%(action_tms_order_stop_map_order)d"
+                    type="action"
+                    class="oe_stat_button"
+                    icon="fa-map-marker"
+                    invisible="not stop_ids"
+                >
+                    <div class="o_stat_info">
+                        <field name="total_stops" class="o_stat_value" />
+                        <span class="o_stat_text">Ver no Mapa</span>
+                    </div>
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

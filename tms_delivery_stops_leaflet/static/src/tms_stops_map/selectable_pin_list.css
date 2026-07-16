@@ -1,0 +1,285 @@
+/*
+ * Copyright (C) 2026 KMEE (https://kmee.com.br)
+ * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ */
+
+/* Selection bar (inline) */
+.o_tms_selection_bar {
+    animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Checkboxes */
+.o_tms_stop_checkbox,
+.o_tms_select_all_checkbox {
+    cursor: pointer;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.o_tms_stop_checkbox:focus,
+.o_tms_select_all_checkbox:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Highlight selected items */
+.o_pin_item_draggable:has(.o_tms_stop_checkbox:checked) {
+    background-color: var(--bs-primary-bg-subtle);
+    border-left: 3px solid var(--bs-primary);
+}
+
+/* Select all checkbox in group header */
+.o_pin_group_header .o_tms_select_all_checkbox {
+    margin-left: 0.5rem;
+}
+
+/* Adjust drag handle when checkbox is present */
+.o_pin_item_draggable:has(.o_tms_stop_checkbox) .o_drag_handle {
+    margin-left: 0;
+}
+
+/* ============================================
+   Floating Status Bar (when items selected)
+   ============================================ */
+
+.o_tms_status_bar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050;
+
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 12px 16px;
+
+    display: flex;
+    gap: 12px;
+    align-items: center;
+
+    animation: slideUp 0.3s ease-out;
+}
+
+.o_tms_create_order_bar {
+    padding: 8px 12px;
+    text-align: center;
+}
+
+.o_status_bar_action {
+    white-space: nowrap;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.o_status_bar_section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.o_status_bar_title {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--bs-secondary);
+    letter-spacing: 0.5px;
+}
+
+.o_status_bar_content {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.o_status_item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.o_status_item i {
+    color: var(--bs-primary);
+    font-size: 12px;
+}
+
+.o_status_value {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--bs-dark);
+}
+
+.o_status_label {
+    font-size: 11px;
+    color: var(--bs-secondary);
+}
+
+/* ============================================
+   Unified Group Info Line (compact single line)
+   ============================================ */
+
+.o_group_info_line {
+    display: flex;
+    gap: 8px;
+    padding: 4px 8px 6px 32px;
+    font-size: 11px;
+    color: var(--bs-secondary);
+    border-bottom: 1px solid var(--bs-border-color);
+    background-color: var(--bs-tertiary-bg);
+    align-items: center;
+}
+
+.o_info_item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    cursor: default;
+}
+
+.o_info_item i {
+    font-size: 10px;
+}
+
+.o_info_separator {
+    color: var(--bs-border-color);
+    font-size: 10px;
+}
+
+/* Utilization color states */
+.o_info_item.text-success {
+    color: var(--bs-success) !important;
+}
+
+.o_info_item.text-warning {
+    color: var(--bs-warning) !important;
+}
+
+.o_info_item.text-danger {
+    color: var(--bs-danger) !important;
+    font-weight: 600;
+}
+
+/* Driver name truncated */
+.o_info_driver .o_driver_name {
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Maps button in header */
+.o_group_maps_btn {
+    padding: 2px 6px;
+    font-size: 11px;
+    line-height: 1;
+}
+
+/* Weight/volume column in stop item */
+.o_pin_weight_volume {
+    font-size: 11px;
+    min-width: 55px;
+    margin-left: auto;
+    padding-left: 8px;
+    flex-shrink: 0;
+    color: var(--bs-body-color);
+}
+
+.o_pin_weight_volume i {
+    font-size: 10px;
+    margin-right: 3px;
+    width: 12px;
+    display: inline-block;
+    color: var(--bs-secondary);
+}
+
+.o_wv_volume,
+.o_wv_weight {
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+/* Stop type badge above volume/weight */
+.o_stop_type_badge_container {
+    margin-bottom: 2px;
+}
+
+.o_stop_type_badge {
+    font-size: 9px;
+    padding: 1px 4px;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+}
+
+/* Ensure group header has space for indicators */
+.o_pin_group_header {
+    display: flex;
+    align-items: center;
+}
+
+/* Clickable order name */
+.o_clickable_order_name {
+    cursor: pointer;
+    color: var(--bs-primary);
+}
+
+.o_clickable_order_name:hover {
+    text-decoration: underline;
+}
+
+/* Scheduled date in header */
+.o_group_scheduled_date {
+    font-size: 11px;
+}
+
+.o_group_scheduled_date i {
+    margin-right: 3px;
+    font-size: 10px;
+}
+
+/* ============================================
+   Responsive styles
+   ============================================ */
+
+@media (max-width: 576px) {
+    .o_tms_status_bar {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        width: calc(100% - 20px);
+        transform: none;
+        padding: 10px 12px;
+    }
+
+    .o_group_info_line {
+        padding-left: 16px;
+        gap: 6px;
+        font-size: 10px;
+    }
+
+    .o_status_bar_content {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+}

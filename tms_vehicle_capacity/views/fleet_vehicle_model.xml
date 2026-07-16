@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extend Fleet Vehicle Model Form View -->
+    <record id="fleet_vehicle_model_form_inherit_type" model="ir.ui.view">
+        <field name="name">fleet.vehicle.model.form.inherit.type</field>
+        <field name="model">fleet.vehicle.model</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Vehicle Type">
+                    <field name="vehicle_type_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

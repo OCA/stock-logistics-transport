@@ -1,0 +1,129 @@
+/*
+ * Copyright (C) 2026 KMEE (https://kmee.com.br)
+ * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ *
+ * Styles for TMS stops map popups and markers
+ */
+
+/* Depot marker container - transparent background to show SVG */
+.o_leaflet_depot_marker {
+    background: transparent !important;
+    border: none !important;
+}
+
+/* ============================================
+   Map Popup Styles (matching sidebar layout)
+   ============================================ */
+
+.o_tms_stop_popup {
+    min-width: 280px;
+}
+
+.o_tms_stop_popup .o_popup_row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.o_tms_stop_popup .o_popup_left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.o_tms_stop_popup .o_popup_number {
+    background: var(--bs-primary, #007bff);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.o_tms_stop_popup .o_popup_content {
+    flex: 1;
+    min-width: 0;
+    cursor: pointer;
+}
+
+.o_tms_stop_popup .o_popup_title {
+    font-size: 13px;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+.o_tms_stop_popup .o_popup_address {
+    font-size: 11px;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+}
+
+.o_tms_stop_popup .o_popup_right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.o_tms_stop_popup .o_popup_metrics {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1px;
+}
+
+.o_tms_stop_popup .o_stop_type_badge {
+    font-size: 9px;
+    padding: 2px 5px;
+    font-weight: 500;
+    text-transform: lowercase;
+    letter-spacing: 0.3px;
+    margin-bottom: 2px;
+}
+
+.o_tms_stop_popup .o_popup_volume,
+.o_tms_stop_popup .o_popup_weight {
+    font-size: 10px;
+    white-space: nowrap;
+    line-height: 1.3;
+}
+
+.o_tms_stop_popup .o_popup_volume i,
+.o_tms_stop_popup .o_popup_weight i {
+    width: 12px;
+    display: inline-block;
+    font-size: 9px;
+}
+
+.o_tms_stop_popup .btn {
+    padding: 6px 10px;
+    font-size: 14px;
+    background-color: var(--bs-primary, #007bff) !important;
+    border-color: var(--bs-primary, #007bff) !important;
+    color: white !important;
+}
+
+.o_tms_stop_popup .btn:hover,
+.o_tms_stop_popup .btn:focus,
+.o_tms_stop_popup .btn:active {
+    background-color: var(--bs-primary, #007bff) !important;
+    border-color: var(--bs-primary, #007bff) !important;
+    color: white !important;
+    box-shadow: none !important;
+}
+
+/* Hover effect on clickable title */
+.o_tms_stop_popup .o_map_selector:hover .o_popup_title {
+    color: var(--bs-primary, #007bff);
+    text-decoration: underline;
+}

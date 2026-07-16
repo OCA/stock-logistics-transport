@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2026 KMEE (https://kmee.com.br)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+TmsStopsMapRenderer template - extends LeafletMapRenderer.
+-->
+<templates xml:space="preserve">
+
+    <t
+        t-name="tms_delivery_stops_leaflet.TmsStopsMapRenderer"
+        t-inherit="web_view_leaflet_map.LeafletMapRenderer"
+        t-inherit-mode="primary"
+        owl="1"
+    >
+        <!-- Replace PinList component to add onDataReload callback -->
+        <xpath expr="//t[@t-component='PinListComponent']" position="replace">
+            <t
+                t-component="PinListComponent"
+                records="records"
+                groupBy="groupBy"
+                groupColors="groupColors"
+                panelTitle="panelTitle"
+                onPinClick.bind="onPinClick"
+                onNavigateClick.bind="onNavigateClick"
+                onResequence.bind="onResequence"
+                fieldTitle="fieldTitle"
+                fieldAddress="fieldAddress"
+                fieldLatitude="fieldLatitude"
+                fieldLongitude="fieldLongitude"
+                groupField="groupField"
+                unassignedGroupName="unassignedGroupName"
+                onDataReload.bind="onDataReload"
+            />
+        </xpath>
+    </t>
+
+</templates>

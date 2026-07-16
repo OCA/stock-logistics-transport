@@ -1,0 +1,319 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_delivery_stops_delivery
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/wizard/create_tms_order_wizard.py:0
+msgid "All selected pickings must have a TMS stop."
+msgstr "Todas as transferências selecionadas devem ter uma parada TMS."
+
+#. module: tms_delivery_stops_delivery
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops_delivery.view_tms_order_from_pickings_form
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields.selection,name:tms_delivery_stops_delivery.selection__tms_order_from_pickings__mode__existing_order
+msgid "Assign to Existing TMS Order"
+msgstr "Atribuir a Ordem TMS Existente"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_delivery_carrier__auto_create_stops
+msgid "Auto Create TMS Stops"
+msgstr "Criar Paradas TMS Automaticamente"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,help:tms_delivery_stops_delivery.field_delivery_carrier__auto_create_stops
+msgid "Automatically create TMS delivery stops from stock pickings."
+msgstr ""
+"Criar automaticamente paradas de entrega TMS a partir de transferências."
+
+#. module: tms_delivery_stops_delivery
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops_delivery.view_tms_order_from_pickings_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields.selection,name:tms_delivery_stops_delivery.selection__tms_order_from_pickings__mode__manual_plan
+msgid "Create Manual Plan"
+msgstr "Criar Plano Manual"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields.selection,name:tms_delivery_stops_delivery.selection__tms_order_from_pickings__mode__new_order
+msgid "Create New TMS Order"
+msgstr "Criar Nova Ordem TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops_delivery.view_stock_picking_form_tms
+msgid "Create TMS Stop"
+msgstr "Criar Parada TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model,name:tms_delivery_stops_delivery.model_tms_order_from_pickings
+msgid "Create or Assign TMS Order from Pickings"
+msgstr "Criar ou Atribuir Ordem TMS a partir de Transferências"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.actions.act_window,name:tms_delivery_stops_delivery.action_create_tms_order_wizard
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops_delivery.view_stock_picking_form_tms
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops_delivery.view_tms_order_from_pickings_form
+msgid "Create/Assign TMS Order"
+msgstr "Criar/Atribuir Ordem TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,help:tms_delivery_stops_delivery.field_delivery_carrier__tms_team_id
+msgid "Default TMS team for pickings using this carrier."
+msgstr "Equipe TMS padrão para transferências usando esta transportadora."
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__description
+msgid "Description"
+msgstr "Descrição"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__destination_id
+msgid "Destination Location"
+msgstr "Local de Destino"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__display_name
+msgid "Display Name"
+msgstr "Nome de Exibição"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__driver_id
+msgid "Driver"
+msgstr "Motorista"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,help:tms_delivery_stops_delivery.field_delivery_carrier__is_internal_carrier
+msgid "Enable to mark this carrier as an internal company carrier."
+msgstr ""
+"Habilite para marcar esta transportadora como transportadora interna da "
+"empresa."
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__existing_order_id
+msgid "Existing TMS Order"
+msgstr "Ordem TMS Existente"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_stock_picking__has_tms_stop
+msgid "Has Tms Stop"
+msgstr "Possui Parada TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_stock_picking__package_count
+msgid "Package Count"
+msgstr "Quantidade de Volumes"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_delivery_carrier__is_internal_carrier
+msgid "Internal Carrier"
+msgstr "Transportadora Interna"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__write_uid
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__write_date
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/wizard/create_tms_order_wizard.py:0
+msgid "Missing TMS Stops"
+msgstr "Paradas TMS Faltando"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__mode
+msgid "Mode"
+msgstr "Modo"
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/models/stock_picking.py:0
+msgid "Only outgoing pickings can create TMS stops."
+msgstr "Apenas transferências de saída podem criar paradas TMS."
+
+#. module: tms_delivery_stops_delivery
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops_delivery.view_stock_picking_form_tms
+msgid "Open TMS Stop"
+msgstr "Abrir Parada TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_stop__order_id
+msgid "Order"
+msgstr "Ordem"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__origin_id
+msgid "Origin Location"
+msgstr "Local de Origem"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_stop__picking_id
+msgid "Picking"
+msgstr "Transferência"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_stop__picking_name
+msgid "Picking Reference"
+msgstr "Referência da Transferência"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__picking_ids
+msgid "Pickings"
+msgstr "Transferências"
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/wizard/create_tms_order_wizard.py:0
+msgid "Please select an existing TMS order."
+msgstr "Por favor selecione uma ordem TMS existente."
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_stop__sale_order_id
+msgid "Sales Order"
+msgstr "Pedido de Venda"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__scheduled_date_start
+msgid "Scheduled Start"
+msgstr "Início Agendado"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model,name:tms_delivery_stops_delivery.model_delivery_carrier
+msgid "Shipping Methods"
+msgstr "Métodos de Envio"
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/wizard/create_tms_order_wizard.py:0
+msgid "Some pickings have no TMS stop and will be ignored."
+msgstr "Algumas transferências não têm parada TMS e serão ignoradas."
+
+#. module: tms_delivery_stops_delivery
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops_delivery.view_stock_picking_form_tms
+msgid "TMS"
+msgstr "TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model:product.template,name:tms_delivery_stops_delivery.tms_delivery_product_demo_move_product_template
+msgid "TMS Delivery Product"
+msgstr "Produto de Entrega TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model:product.template,name:tms_delivery_stops_delivery.tms_delivery_product_demo_product_template
+msgid "TMS Delivery Service"
+msgstr "Serviço de Entrega TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model_terms:ir.ui.view,arch_db:tms_delivery_stops_delivery.view_delivery_carrier_form_tms
+msgid "TMS Integration"
+msgstr "Integração TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model:delivery.carrier,name:tms_delivery_stops_delivery.tms_internal_carrier_demo
+msgid "TMS Internal Carrier"
+msgstr "Transportadora Interna TMS"
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/wizard/create_tms_order_wizard.py:0
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_stock_picking__tms_order_id
+msgid "TMS Order"
+msgstr "Ordem TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model,name:tms_delivery_stops_delivery.model_tms_order_stop
+msgid "TMS Order Delivery Stop"
+msgstr "Parada de Entrega da Ordem TMS"
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/models/stock_picking.py:0
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_stock_picking__tms_stop_id
+msgid "TMS Stop"
+msgstr "Parada TMS"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_delivery_carrier__tms_team_id
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__tms_team_id
+msgid "TMS Team"
+msgstr "Equipe TMS"
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/wizard/create_tms_order_wizard.py:0
+msgid "TMS Team is required."
+msgstr "Equipe TMS é obrigatória."
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/models/stock_picking.py:0
+msgid "TMS stop created for this picking."
+msgstr "Parada TMS criada para esta transferência."
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/models/stock_picking.py:0
+msgid ""
+"TMS stop created, but the partner has no geolocation. Please geolocate the "
+"partner to enable route optimization."
+msgstr ""
+"Parada TMS criada, mas o parceiro não possui geolocalização. Por favor "
+"geolocalize o parceiro para habilitar a otimização de rotas."
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/models/stock_picking.py:0
+msgid "There is no TMS stop linked to this picking."
+msgstr "Não há parada TMS vinculada a esta transferência."
+
+#. module: tms_delivery_stops_delivery
+#. odoo-python
+#: code:addons/tms_delivery_stops_delivery/models/stock_picking.py:0
+msgid "This picking does not use an internal carrier."
+msgstr "Esta transferência não usa uma transportadora interna."
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model,name:tms_delivery_stops_delivery.model_stock_picking
+msgid "Transfer"
+msgstr "Transferência"
+
+#. module: tms_delivery_stops_delivery
+#: model:ir.model.fields,field_description:tms_delivery_stops_delivery.field_tms_order_from_pickings__vehicle_id
+msgid "Vehicle"
+msgstr "Veículo"

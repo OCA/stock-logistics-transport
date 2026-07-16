@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.tms.delivery.stops</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="tms.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='trips_settings_container']" position="inside">
+                <setting
+                    string="Default Unloading Time"
+                    help="Default unloading time in minutes for delivery stops"
+                >
+                    <field name="tms_default_unloading_time" />
+                </setting>
+                <setting
+                    string="Default Origin Location"
+                    help="Default origin location for TMS orders"
+                >
+                    <field name="tms_default_origin_location_id" />
+                </setting>
+                <setting
+                    string="Default Destination Location"
+                    help="Default destination location for TMS orders"
+                >
+                    <field name="tms_default_destination_location_id" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

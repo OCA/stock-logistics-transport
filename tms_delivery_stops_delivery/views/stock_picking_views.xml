@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_picking_form_tms" model="ir.ui.view">
+        <field name="name">stock.picking.form.tms</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="TMS" name="tms">
+                    <group>
+                        <group>
+                            <field name="has_tms_stop" invisible="1" />
+                            <field name="tms_stop_id" options="{'no_create': True}" />
+                            <field name="tms_order_id" options="{'no_create': True}" />
+                        </group>
+                        <group>
+                            <button
+                                name="action_create_tms_stop"
+                                type="object"
+                                string="Create TMS Stop"
+                                class="btn-primary"
+                                invisible="has_tms_stop or not carrier_id or not carrier_id.is_internal_carrier"
+                            />
+                            <button
+                                name="action_open_tms_stop"
+                                type="object"
+                                string="Open TMS Stop"
+                                invisible="not has_tms_stop"
+                            />
+                            <button
+                                name="action_create_tms_order"
+                                type="object"
+                                string="Create/Assign TMS Order"
+                                invisible="not has_tms_stop"
+                            />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

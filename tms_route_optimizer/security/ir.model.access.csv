@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_route_optimizer_user,tms.route.optimizer user,model_tms_route_optimizer,base.group_user,1,1,1,1
+access_tms_route_optimizer_manager,tms.route.optimizer manager,model_tms_route_optimizer,base.group_system,1,1,1,1
+access_tms_route_optimizer_result_user,tms.route.optimizer.result user,model_tms_route_optimizer_result,base.group_user,1,1,1,1
+access_tms_route_optimizer_result_manager,tms.route.optimizer.result manager,model_tms_route_optimizer_result,base.group_system,1,1,1,1
+access_tms_route_optimizer_day_result_user,tms.route.optimizer.day.result user,model_tms_route_optimizer_day_result,base.group_user,1,1,1,1
+access_tms_route_optimizer_day_result_manager,tms.route.optimizer.day.result manager,model_tms_route_optimizer_day_result,base.group_system,1,1,1,1
+access_tms_route_optimizer_config_user,tms.route.optimizer.config user,model_tms_route_optimizer_config,base.group_user,1,0,0,0
+access_tms_route_optimizer_config_manager,tms.route.optimizer.config manager,model_tms_route_optimizer_config,base.group_system,1,1,1,1
+access_tms_route_suggestion_user,tms.route.suggestion user,model_tms_route_suggestion,base.group_user,1,1,1,0
+access_tms_route_suggestion_manager,tms.route.suggestion manager,model_tms_route_suggestion,base.group_system,1,1,1,1

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Van -->
+    <record id="fleet_vehicle_type_van" model="fleet.vehicle.type">
+        <field name="name">Van</field>
+        <field name="code">VAN</field>
+        <field name="description">Light delivery van for urban areas</field>
+        <field name="default_weight_capacity">1500</field>
+        <field name="default_volume_capacity">8</field>
+        <field name="default_cost_per_km">2.50</field>
+        <field name="default_minimum_trip_cost">50.00</field>
+    </record>
+
+    <!-- VUC (Veículo Urbano de Carga) -->
+    <record id="fleet_vehicle_type_vuc" model="fleet.vehicle.type">
+        <field name="name">VUC</field>
+        <field name="code">VUC</field>
+        <field name="description">Urban cargo vehicle</field>
+        <field name="default_weight_capacity">3000</field>
+        <field name="default_volume_capacity">15</field>
+        <field name="default_cost_per_km">3.50</field>
+        <field name="default_minimum_trip_cost">75.00</field>
+    </record>
+
+    <!-- Toco -->
+    <record id="fleet_vehicle_type_toco" model="fleet.vehicle.type">
+        <field name="name">Toco</field>
+        <field name="code">TOCO</field>
+        <field name="description">Medium truck with 2 axles</field>
+        <field name="default_weight_capacity">8000</field>
+        <field name="default_volume_capacity">35</field>
+        <field name="default_cost_per_km">5.00</field>
+        <field name="default_minimum_trip_cost">150.00</field>
+    </record>
+
+    <!-- Truck -->
+    <record id="fleet_vehicle_type_truck" model="fleet.vehicle.type">
+        <field name="name">Truck</field>
+        <field name="code">TRUCK</field>
+        <field name="description">Heavy truck with 3 axles</field>
+        <field name="default_weight_capacity">15000</field>
+        <field name="default_volume_capacity">60</field>
+        <field name="default_cost_per_km">7.00</field>
+        <field name="default_minimum_trip_cost">250.00</field>
+    </record>
+
+    <!-- Bitrem -->
+    <record id="fleet_vehicle_type_bitrem" model="fleet.vehicle.type">
+        <field name="name">Bitrem</field>
+        <field name="code">BITREM</field>
+        <field name="description">Double trailer truck</field>
+        <field name="default_weight_capacity">25000</field>
+        <field name="default_volume_capacity">100</field>
+        <field name="default_cost_per_km">10.00</field>
+        <field name="default_minimum_trip_cost">400.00</field>
+    </record>
+</odoo>

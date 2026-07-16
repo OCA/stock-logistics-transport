@@ -1,0 +1,1063 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>TMS Delivery Stops - Delivery Integration</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="tms-delivery-stops-delivery-integration">
+<h1 class="title">TMS Delivery Stops - Delivery Integration</h1>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:16703d69d6b8fc757557abc98d03ca8148f3685ded90f2fe46be419fc4d14fc3
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-transport/tree/18.0/tms_delivery_stops_delivery"><img alt="OCA/stock-logistics-transport" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--transport-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-transport-18-0/stock-logistics-transport-18-0-tms_delivery_stops_delivery"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-transport&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<div class="section" id="tms-route-optimizer-delivery-integration">
+<h1>TMS Route Optimizer - Delivery Integration</h1>
+<p>This module bridges the gap between Odoo’s standard delivery/stock
+management and the TMS (Transport Management System) by automatically
+creating TMS delivery stops from stock pickings that use internal
+carriers.</p>
+<div class="section" id="key-features">
+<h2>Key Features</h2>
+<ul class="simple">
+<li><strong>Automatic TMS Stop Creation</strong>: Automatically creates TMS delivery
+stops when stock pickings are confirmed</li>
+<li><strong>Internal Carrier Detection</strong>: Identifies when pickings use
+company-owned vehicles</li>
+<li><strong>Geolocation Integration</strong>: Links pickings with geolocated delivery
+addresses</li>
+<li><strong>State Synchronization</strong>: Keeps picking and TMS stop states
+synchronized</li>
+<li><strong>Flexible Order Creation</strong>: Create new TMS orders or assign stops to
+existing orders</li>
+<li><strong>Manual Planning Support</strong>: Create draft stops for manual route
+planning</li>
+<li><strong>Weight &amp; Volume Tracking</strong>: Automatically transfers weight and
+volume from pickings to TMS stops</li>
+</ul>
+</div>
+<div class="section" id="use-cases">
+<h2>Use Cases</h2>
+<ul class="simple">
+<li>Automatically create delivery stops from sales orders</li>
+<li>Integrate warehouse operations with transportation planning</li>
+<li>Track deliveries using internal fleet vehicles</li>
+<li>Link sales orders with TMS routes</li>
+<li>Prepare pickings for route optimization</li>
+<li>Maintain delivery visibility from order to delivery</li>
+</ul>
+</div>
+<div class="section" id="technical-details">
+<h2>Technical Details</h2>
+<ul class="simple">
+<li><strong>Integration Points</strong>: delivery, stock_delivery, tms,
+tms_delivery_stops</li>
+<li><strong>Automatic Triggers</strong>: Stock picking confirmation</li>
+<li><strong>State Mapping</strong>: Picking states sync with TMS stop states</li>
+<li><strong>Data Transfer</strong>: Weight, volume, partner, scheduled date from
+picking to stop</li>
+</ul>
+<p><strong>Table of contents</strong></p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h1>Configuration</h1>
+</div>
+<div class="section" id="configuration-tms-route-optimizer-delivery-integration">
+<h1>Configuration - TMS Route Optimizer - Delivery Integration</h1>
+<div class="section" id="module-dependencies">
+<h2>Module Dependencies</h2>
+<p>This module requires the following Odoo modules:</p>
+<ul class="simple">
+<li><tt class="docutils literal">delivery</tt>: Standard Odoo delivery management</li>
+<li><tt class="docutils literal">sale_stock</tt>: Link sales orders with stock operations</li>
+<li><tt class="docutils literal">stock_delivery</tt>: Stock picking delivery integration</li>
+<li><tt class="docutils literal">tms</tt>: Base Transport Management System module</li>
+<li><tt class="docutils literal">tms_delivery_stops</tt>: Multiple delivery stops per order</li>
+<li><tt class="docutils literal">base_geolocalize</tt>: Geolocation support for partners</li>
+<li><tt class="docutils literal">stock_picking_volume</tt>: Volume calculation for pickings</li>
+</ul>
+</div>
+<div class="section" id="required-configuration">
+<h2>Required Configuration</h2>
+<div class="section" id="configure-delivery-carriers">
+<h3>1. Configure Delivery Carriers</h3>
+<ol class="arabic simple">
+<li>Go to <strong>Inventory &gt; Configuration &gt; Delivery &gt; Delivery Methods</strong></li>
+<li>For each carrier representing your internal fleet:<ul>
+<li>Enable <strong>Internal Carrier</strong> checkbox<ul>
+<li>This marks the carrier as company-owned</li>
+</ul>
+</li>
+<li>Select a <strong>TMS Team</strong> (optional)<ul>
+<li>Default team for pickings using this carrier</li>
+</ul>
+</li>
+<li>Enable <strong>Auto Create TMS Stops</strong> (optional)<ul>
+<li>Automatically create stops when pickings are confirmed</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="configure-partner-geolocation">
+<h3>2. Configure Partner Geolocation</h3>
+<p>For automatic TMS integration to work effectively:</p>
+<ol class="arabic simple">
+<li>Go to <strong>Contacts</strong></li>
+<li>For each delivery partner:<ul>
+<li>Ensure the address is complete</li>
+<li>Use <strong>Geo Localize</strong> action to get coordinates</li>
+<li>Or manually set <strong>Latitude</strong> and <strong>Longitude</strong></li>
+</ul>
+</li>
+</ol>
+<p><strong>Important</strong>: Partners without geolocation can still have TMS stops
+created, but will need manual geocoding before route optimization.</p>
+</div>
+<div class="section" id="configure-products-weight-volume">
+<h3>3. Configure Products (Weight &amp; Volume)</h3>
+<p>For accurate capacity planning:</p>
+<ol class="arabic simple">
+<li>Go to <strong>Inventory &gt; Products</strong></li>
+<li>For each product:<ul>
+<li>Set <strong>Weight</strong> in the Inventory tab</li>
+<li>Set <strong>Volume</strong> (if using <tt class="docutils literal">stock_picking_volume</tt> module)</li>
+</ul>
+</li>
+</ol>
+<p>This data is automatically transferred to TMS stops when pickings are
+confirmed.</p>
+</div>
+</div>
+<div class="section" id="integration-workflow">
+<h2>Integration Workflow</h2>
+<div class="section" id="automatic-integration-recommended">
+<h3>Automatic Integration (Recommended)</h3>
+<ol class="arabic simple">
+<li><strong>Sales Order</strong>: Create sales order with delivery address</li>
+<li><strong>Delivery Method</strong>: Select an internal carrier with auto-create
+enabled</li>
+<li><strong>Confirm Order</strong>: Sales order creates delivery order (picking)</li>
+<li><strong>Picking Confirmation</strong>: When picking is confirmed, TMS stop is
+auto-created</li>
+<li><strong>Route Planning</strong>: Use TMS Route Optimizer to plan routes</li>
+<li><strong>Order Creation</strong>: Create TMS orders from optimized routes</li>
+</ol>
+</div>
+<div class="section" id="manual-integration">
+<h3>Manual Integration</h3>
+<ol class="arabic simple">
+<li><strong>Create Picking</strong>: Create outgoing picking with internal carrier</li>
+<li><strong>Confirm Picking</strong>: Confirm the picking to make it ready</li>
+<li><strong>Manual Stop Creation</strong>: Click <strong>Create TMS Stop</strong> button on picking</li>
+<li><strong>Plan Routes</strong>: Use TMS Route Optimizer or manual planning</li>
+<li><strong>Create Orders</strong>: Create TMS orders for deliveries</li>
+</ol>
+</div>
+</div>
+<div class="section" id="carrier-configuration-examples">
+<h2>Carrier Configuration Examples</h2>
+<div class="section" id="example-1-fleet-with-automatic-integration">
+<h3>Example 1: Fleet with Automatic Integration</h3>
+<pre class="literal-block">
+Carrier Name: Company Fleet - North
+Internal Carrier: ✓ Yes
+TMS Team: North Operations
+Auto Create TMS Stops: ✓ Yes
+</pre>
+<p>When a picking uses this carrier and is confirmed, a TMS stop is
+automatically created and linked to the North Operations team.</p>
+</div>
+<div class="section" id="example-2-fleet-with-manual-planning">
+<h3>Example 2: Fleet with Manual Planning</h3>
+<pre class="literal-block">
+Carrier Name: Company Fleet - Express
+Internal Carrier: ✓ Yes
+TMS Team: Express Delivery
+Auto Create TMS Stops: ✗ No
+</pre>
+<p>Pickings with this carrier need manual TMS stop creation using the
+button on the picking form.</p>
+</div>
+</div>
+<div class="section" id="state-synchronization">
+<h2>State Synchronization</h2>
+<p>The module automatically synchronizes states between pickings and TMS
+stops:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="22%" />
+<col width="23%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Picking State</th>
+<th class="head">TMS Stop State</th>
+<th class="head">Action</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Confirmed</td>
+<td>Draft</td>
+<td>Initial creation</td>
+</tr>
+<tr><td>Assigned</td>
+<td>Draft</td>
+<td>No change (waiting for delivery)</td>
+</tr>
+<tr><td>Done</td>
+<td>Scheduled</td>
+<td>Updated when picking is delivered</td>
+</tr>
+<tr><td>Cancelled</td>
+<td>Skipped</td>
+<td>Marked as skipped (not delivered)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="integration-with-tms-route-optimizer">
+<h2>Integration with TMS Route Optimizer</h2>
+<p>This module creates TMS stops that can be optimized by
+<tt class="docutils literal">tms_route_optimizer</tt>:</p>
+<ol class="arabic simple">
+<li><strong>Stops Created</strong>: From pickings with internal carriers</li>
+<li><strong>Data Populated</strong>: Weight, volume, partner, geolocation, scheduled
+date</li>
+<li><strong>State</strong>: Created in Draft state (ready for optimization)</li>
+<li><strong>Optimization</strong>: Use TMS Route Optimizer to plan routes</li>
+<li><strong>Orders</strong>: Create TMS orders from optimized routes</li>
+</ol>
+</div>
+<div class="section" id="wizard-options">
+<h2>Wizard Options</h2>
+<p>The <strong>Create TMS Order</strong> wizard provides three modes:</p>
+<div class="section" id="mode-1-create-new-tms-order">
+<h3>Mode 1: Create New TMS Order</h3>
+<ul class="simple">
+<li>Creates a new TMS order</li>
+<li>Assigns selected stops to the new order</li>
+<li>Marks stops as “Scheduled”</li>
+<li>Requires: Team, Vehicle (optional), Driver (optional)</li>
+</ul>
+</div>
+<div class="section" id="mode-2-create-manual-plan">
+<h3>Mode 2: Create Manual Plan</h3>
+<ul class="simple">
+<li>Creates a new TMS order with stops in Draft state</li>
+<li>Allows manual route planning and reordering</li>
+<li>Useful when route optimization is not needed</li>
+</ul>
+</div>
+<div class="section" id="mode-3-assign-to-existing-order">
+<h3>Mode 3: Assign to Existing Order</h3>
+<ul class="simple">
+<li>Adds stops to an existing TMS order</li>
+<li>Useful for adding deliveries to partially-filled routes</li>
+<li>Maintains existing route structure</li>
+</ul>
+</div>
+</div>
+<div class="section" id="troubleshooting-configuration">
+<h2>Troubleshooting Configuration</h2>
+<div class="section" id="no-tms-stop-button-appears">
+<h3>“No TMS Stop button appears”</h3>
+<ul class="simple">
+<li>Ensure carrier is marked as <strong>Internal Carrier</strong></li>
+<li>Check picking type is “Outgoing” (delivery order)</li>
+<li>Verify it’s not a return picking</li>
+</ul>
+</div>
+<div class="section" id="tms-stop-not-automatically-created">
+<h3>“TMS Stop not automatically created”</h3>
+<ul class="simple">
+<li>Check <strong>Auto Create TMS Stops</strong> is enabled on carrier</li>
+<li>Ensure picking is confirmed (not just draft)</li>
+<li>Verify carrier is set on picking</li>
+</ul>
+</div>
+<div class="section" id="partner-has-no-geolocation-warning">
+<h3>“Partner has no geolocation warning”</h3>
+<ul class="simple">
+<li>This is informational only - stop is still created</li>
+<li>Geolocate the partner to enable route optimization</li>
+<li>Go to partner form and use <strong>Geo Localize</strong> action</li>
+</ul>
+</div>
+<div class="section" id="cannot-create-tms-stop">
+<h3>“Cannot create TMS Stop”</h3>
+<ul class="simple">
+<li>Verify picking is outgoing type</li>
+<li>Check carrier is marked as internal</li>
+<li>Ensure TMS modules are properly installed</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="usage">
+<h1>Usage</h1>
+</div>
+<div class="section" id="usage-tms-route-optimizer-delivery-integration">
+<h1>Usage - TMS Route Optimizer - Delivery Integration</h1>
+<div class="section" id="quick-start">
+<h2>Quick Start</h2>
+<ol class="arabic simple">
+<li><strong>Configure Internal Carriers</strong> with auto-create enabled</li>
+<li><strong>Create Sales Orders</strong> with delivery addresses</li>
+<li><strong>Confirm Sales Orders</strong> to generate pickings</li>
+<li><strong>TMS Stops Auto-Created</strong> when pickings are confirmed</li>
+<li><strong>Plan Routes</strong> using TMS Route Optimizer</li>
+<li><strong>Create TMS Orders</strong> from optimized routes</li>
+</ol>
+</div>
+<div class="section" id="usage-scenarios">
+<h2>Usage Scenarios</h2>
+<div class="section" id="scenario-1-automatic-integration-most-common">
+<h3>Scenario 1: Automatic Integration (Most Common)</h3>
+<p>This is the recommended workflow for automatic TMS stop creation from
+sales orders.</p>
+<div class="section" id="step-1-setup-one-time">
+<h4>Step 1: Setup (One-time)</h4>
+<ol class="arabic simple">
+<li>Go to <strong>Inventory &gt; Configuration &gt; Delivery &gt; Delivery Methods</strong></li>
+<li>Create or edit an internal carrier:<ul>
+<li>Name: “Company Fleet”</li>
+<li>Check <strong>Internal Carrier</strong></li>
+<li>Select <strong>TMS Team</strong></li>
+<li>Check <strong>Auto Create TMS Stops</strong></li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="step-2-normal-sales-flow">
+<h4>Step 2: Normal Sales Flow</h4>
+<ol class="arabic simple">
+<li>Create a <strong>Sales Order</strong></li>
+<li>Set <strong>Delivery Method</strong> to your internal carrier</li>
+<li>Add products with delivery address</li>
+<li><strong>Confirm</strong> the sales order</li>
+<li>When the <strong>Delivery Order</strong> (picking) is created and confirmed:<ul>
+<li>TMS Stop is <strong>automatically created</strong></li>
+<li>Linked to the picking</li>
+<li>Ready for route optimization</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="step-3-plan-routes">
+<h4>Step 3: Plan Routes</h4>
+<ol class="arabic simple">
+<li>Go to <strong>TMS &gt; Route Optimizer</strong></li>
+<li>Create optimization for the date range</li>
+<li>Review and optimize routes</li>
+<li>Create TMS orders from results</li>
+</ol>
+</div>
+</div>
+<div class="section" id="scenario-2-manual-stop-creation-from-picking">
+<h3>Scenario 2: Manual Stop Creation from Picking</h3>
+<p>For cases where automatic creation is disabled or you need more control.</p>
+<div class="section" id="from-picking-form">
+<h4>From Picking Form</h4>
+<ol class="arabic simple">
+<li>Open a <strong>Stock Picking</strong> (delivery order)</li>
+<li>Ensure carrier is set and is <strong>Internal Carrier</strong></li>
+<li>Click <strong>Create TMS Stop</strong> button</li>
+<li>System creates and links TMS stop</li>
+<li>Proceed with route planning</li>
+</ol>
+</div>
+<div class="section" id="from-multiple-pickings">
+<h4>From Multiple Pickings</h4>
+<ol class="arabic simple">
+<li>Select multiple pickings in list view</li>
+<li>Use <strong>Create TMS Stop</strong> action</li>
+<li>Stops created for all selected pickings</li>
+</ol>
+</div>
+</div>
+<div class="section" id="scenario-3-create-tms-orders-from-pickings">
+<h3>Scenario 3: Create TMS Orders from Pickings</h3>
+<p>Use the wizard to quickly create TMS orders from one or more pickings.</p>
+<div class="section" id="single-picking-workflow">
+<h4>Single Picking Workflow</h4>
+<ol class="arabic simple">
+<li>Open a <strong>Stock Picking</strong> with a TMS stop</li>
+<li>Click <strong>Create TMS Order</strong> button</li>
+<li>Select mode:<ul>
+<li><strong>Create New TMS Order</strong>: Start fresh order</li>
+<li><strong>Create Manual Plan</strong>: Draft stops for manual planning</li>
+<li><strong>Assign to Existing Order</strong>: Add to existing order</li>
+</ul>
+</li>
+</ol>
+</div>
+<div class="section" id="wizard-fields">
+<h4>Wizard Fields</h4>
+<p><strong>Mode: Create New TMS Order</strong></p>
+<ul class="simple">
+<li><strong>TMS Team</strong>: Required - select team</li>
+<li><strong>Vehicle</strong>: Optional - assign vehicle</li>
+<li><strong>Driver</strong>: Optional - assign driver</li>
+<li><strong>Origin Location</strong>: Optional - start location</li>
+<li><strong>Destination Location</strong>: Optional - end location</li>
+<li><strong>Scheduled Start</strong>: Optional - start date/time</li>
+<li><strong>Description</strong>: Optional - order notes</li>
+</ul>
+<p><strong>Mode: Create Manual Plan</strong></p>
+<ul class="simple">
+<li>Same as above, but stops remain in Draft state</li>
+<li>Allows manual stop reordering and planning</li>
+<li>Good for experienced dispatchers</li>
+</ul>
+<p><strong>Mode: Assign to Existing Order</strong></p>
+<ul class="simple">
+<li><strong>Existing TMS Order</strong>: Select order to add stops to</li>
+<li>Useful for adding deliveries to partially-filled routes</li>
+</ul>
+</div>
+</div>
+<div class="section" id="scenario-4-view-and-track-tms-information">
+<h3>Scenario 4: View and Track TMS Information</h3>
+<div class="section" id="from-stock-picking">
+<h4>From Stock Picking</h4>
+<ol class="arabic simple">
+<li>Open any <strong>Stock Picking</strong></li>
+<li>View <strong>TMS Stop</strong> field (if linked)</li>
+<li>View <strong>TMS Order</strong> field (if stop is in an order)</li>
+<li>Click <strong>Open TMS Stop</strong> button to see stop details</li>
+<li>Check <strong>Smart Buttons</strong> for TMS-related information</li>
+</ol>
+</div>
+<div class="section" id="from-tms-stop">
+<h4>From TMS Stop</h4>
+<ol class="arabic simple">
+<li>Go to <strong>TMS &gt; Delivery Stops</strong></li>
+<li>Open a stop created from picking</li>
+<li>View <strong>Picking</strong> field showing source picking</li>
+<li>View <strong>Sales Order</strong> field (if from sales)</li>
+<li>View <strong>Picking Reference</strong> for tracking</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="section" id="field-mapping">
+<h2>Field Mapping</h2>
+<p>When a TMS stop is created from a picking, the following data is
+transferred:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="51%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Picking Field</th>
+<th class="head">TMS Stop Field</th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Partner</td>
+<td>Partner</td>
+<td>Delivery address</td>
+</tr>
+<tr><td>Weight</td>
+<td>Weight</td>
+<td>Total weight from stock moves</td>
+</tr>
+<tr><td>Volume</td>
+<td>Volume</td>
+<td>From stock_picking_volume</td>
+</tr>
+<tr><td>Scheduled Date</td>
+<td>Scheduled Date</td>
+<td>Expected delivery date</td>
+</tr>
+<tr><td>Company</td>
+<td>Company</td>
+<td>Company context</td>
+</tr>
+<tr><td>Picking (self)</td>
+<td>Picking ID</td>
+<td>Link back to picking</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="state-synchronization-1">
+<h2>State Synchronization</h2>
+<p>The module automatically synchronizes states:</p>
+<div class="section" id="picking-tms-stop-state-changes">
+<h3>Picking → TMS Stop State Changes</h3>
+<ul class="simple">
+<li><strong>Picking Confirmed</strong> → No change (stop stays Draft)</li>
+<li><strong>Picking Done</strong> → Stop becomes Scheduled (ready for delivery)</li>
+<li><strong>Picking Cancelled</strong> → Stop becomes Skipped (not delivered)</li>
+</ul>
+</div>
+<div class="section" id="manual-state-changes">
+<h3>Manual State Changes</h3>
+<ul class="simple">
+<li>TMS Stop states can be changed manually</li>
+<li>Changes don’t affect picking state</li>
+<li>Allows flexibility in route planning</li>
+</ul>
+</div>
+</div>
+<div class="section" id="integration-with-route-optimizer">
+<h2>Integration with Route Optimizer</h2>
+<div class="section" id="before-optimization">
+<h3>Before Optimization</h3>
+<ol class="arabic simple">
+<li><strong>Create Pickings</strong> for all deliveries</li>
+<li><strong>Confirm Pickings</strong> to generate TMS stops</li>
+<li><strong>Geolocate Partners</strong> if not already done</li>
+<li>Stops are now in Draft state, ready for optimization</li>
+</ol>
+</div>
+<div class="section" id="run-optimization">
+<h3>Run Optimization</h3>
+<ol class="arabic simple">
+<li>Go to <strong>TMS &gt; Route Optimizer</strong></li>
+<li>Select <strong>Team</strong> (matching carrier’s team)</li>
+<li>Set <strong>Date Range</strong> covering your deliveries</li>
+<li>System finds all Draft stops in date range</li>
+<li><strong>Run Optimization</strong> to plan routes</li>
+</ol>
+</div>
+<div class="section" id="after-optimization">
+<h3>After Optimization</h3>
+<ol class="arabic simple">
+<li>Review optimized routes</li>
+<li><strong>Create Orders</strong> from optimization results</li>
+<li>Stops are linked to orders and marked Scheduled</li>
+<li>Original pickings show TMS Order link</li>
+</ol>
+</div>
+</div>
+<div class="section" id="best-practices">
+<h2>Best Practices</h2>
+<div class="section" id="partner-data-quality">
+<h3>1. Partner Data Quality</h3>
+<ul class="simple">
+<li>Ensure delivery addresses are complete</li>
+<li>Geolocate all partners before confirming orders</li>
+<li>Use <strong>Geo Localize</strong> button on partner form</li>
+</ul>
+</div>
+<div class="section" id="product-configuration">
+<h3>2. Product Configuration</h3>
+<ul class="simple">
+<li>Set accurate product weights</li>
+<li>Configure product volumes if using volume constraints</li>
+<li>Keep data updated for accurate capacity planning</li>
+</ul>
+</div>
+<div class="section" id="carrier-configuration">
+<h3>3. Carrier Configuration</h3>
+<ul class="simple">
+<li>Use different carriers for different service levels</li>
+<li>Link carriers to appropriate TMS teams</li>
+<li>Enable auto-create for standard operations</li>
+<li>Disable auto-create for special handling cases</li>
+</ul>
+</div>
+<div class="section" id="workflow-planning">
+<h3>4. Workflow Planning</h3>
+<ul class="simple">
+<li>Group sales orders by delivery date</li>
+<li>Confirm pickings in batches for same day</li>
+<li>Run route optimization before assigning drivers</li>
+<li>Review routes before creating orders</li>
+</ul>
+</div>
+<div class="section" id="exception-handling">
+<h3>5. Exception Handling</h3>
+<ul class="simple">
+<li>Pickings without geolocation create stops with warnings</li>
+<li>Review and geolocate before optimization</li>
+<li>Use manual planning mode for special cases</li>
+</ul>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting</h2>
+<div class="section" id="no-tms-stop-created-automatically">
+<h3>“No TMS Stop created automatically”</h3>
+<p><strong>Check:</strong></p>
+<ul class="simple">
+<li>Is carrier marked as <strong>Internal Carrier</strong>?</li>
+<li>Is <strong>Auto Create TMS Stops</strong> enabled on carrier?</li>
+<li>Is picking type “Outgoing” (delivery)?</li>
+<li>Has picking been confirmed (not just draft)?</li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li>Update carrier configuration, or</li>
+<li>Use manual <strong>Create TMS Stop</strong> button</li>
+</ul>
+</div>
+<div class="section" id="cannot-create-tms-order-from-picking">
+<h3>“Cannot create TMS order from picking”</h3>
+<p><strong>Check:</strong></p>
+<ul class="simple">
+<li>Does picking have a linked TMS stop?</li>
+<li>If not, click <strong>Create TMS Stop</strong> first</li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li>Create TMS stop, then use wizard</li>
+</ul>
+</div>
+<div class="section" id="partner-has-no-geolocation-warning-1">
+<h3>“Partner has no geolocation warning”</h3>
+<p><strong>Issue:</strong></p>
+<ul class="simple">
+<li>TMS stop created, but partner lacks coordinates</li>
+<li>Cannot be used in route optimization</li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li>Open partner record</li>
+<li>Click <strong>Geo Localize</strong> action, or</li>
+<li>Manually set Latitude and Longitude</li>
+</ul>
+</div>
+<div class="section" id="stop-already-in-an-order">
+<h3>“Stop already in an order”</h3>
+<p><strong>Issue:</strong></p>
+<ul class="simple">
+<li>Trying to create order for stop already assigned</li>
+</ul>
+<p><strong>Check:</strong></p>
+<ul class="simple">
+<li>View TMS Order field on picking</li>
+<li>Stop may already be planned</li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li>Review existing order, or</li>
+<li>Remove stop from old order first</li>
+</ul>
+</div>
+<div class="section" id="multiple-carriers-on-picked-products">
+<h3>“Multiple carriers on picked products”</h3>
+<p><strong>Behavior:</strong></p>
+<ul class="simple">
+<li>Only picking-level carrier is considered</li>
+<li>Product-level carriers are ignored</li>
+</ul>
+<p><strong>Solution:</strong></p>
+<ul class="simple">
+<li>Ensure carrier is set at picking level</li>
+<li>Use correct carrier when confirming sales order</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="bug-tracker">
+<h1>Bug Tracker</h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/stock-logistics-transport/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/OCA/stock-logistics-transport/issues/new?body=module:%20tms_delivery_stops_delivery%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h1>Credits</h1>
+<div class="section" id="authors">
+<h2>Authors</h2>
+<ul class="simple">
+<li>KMEE</li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h2>Contributors</h2>
+<ul class="simple">
+<li>Luis Felipe Miléo <a class="reference external" href="mailto:mileo&#64;kmee.com.br">mileo&#64;kmee.com.br</a></li>
+</ul>
+</div>
+<div class="section" id="other-credits">
+<h2>Other credits</h2>
+<ul class="simple">
+<li>KMEE <a class="reference external" href="https://kmee.com.br">https://kmee.com.br</a></li>
+</ul>
+</div>
+<div class="section" id="maintainers">
+<h2>Maintainers</h2>
+<p>This module is maintained by the OCA.</p>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
+<p>OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/stock-logistics-transport/tree/18.0/tms_delivery_stops_delivery">OCA/stock-logistics-transport</a> project on GitHub.</p>
+<p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

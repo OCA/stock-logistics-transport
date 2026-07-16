@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2025 KMEE (https://kmee.com.br)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo noupdate="1">
+    <!-- Demo: Enable OSRM as default distance provider -->
+    <record id="tms_distance_provider_demo" model="ir.config_parameter">
+        <field name="key">tms.distance_provider</field>
+        <field name="value">osrm</field>
+    </record>
+
+    <!-- Demo: Enable fallback to Haversine -->
+    <record id="tms_distance_fallback_demo" model="ir.config_parameter">
+        <field name="key">tms.distance_fallback_enabled</field>
+        <field name="value">True</field>
+    </record>
+
+    <!-- Demo: OSRM public server -->
+    <record id="tms_osrm_server_demo" model="ir.config_parameter">
+        <field name="key">tms.osrm_server_url</field>
+        <field name="value">https://router.project-osrm.org</field>
+    </record>
+
+    <!-- Demo: Driving profile -->
+    <record id="tms_osrm_profile_demo" model="ir.config_parameter">
+        <field name="key">tms.osrm_profile</field>
+        <field name="value">driving</field>
+    </record>
+
+    <!-- Demo: Enable distance cache -->
+    <record id="tms_distance_cache_demo" model="ir.config_parameter">
+        <field name="key">tms.distance_cache_enabled</field>
+        <field name="value">True</field>
+    </record>
+
+    <!-- Demo: Cache TTL of 1 week (168 hours) -->
+    <record id="tms_cache_ttl_demo" model="ir.config_parameter">
+        <field name="key">tms.distance_cache_ttl_hours</field>
+        <field name="value">168</field>
+    </record>
+
+    <!-- Demo: Batch size of 25 locations per request -->
+    <record id="tms_batch_size_demo" model="ir.config_parameter">
+        <field name="key">tms.distance_batch_size</field>
+        <field name="value">25</field>
+    </record>
+</odoo>

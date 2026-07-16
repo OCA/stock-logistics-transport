@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Tree View for TMS Order Stops -->
+    <record id="tms_order_stop_tree" model="ir.ui.view">
+        <field name="name">tms.order.stop.tree</field>
+        <field name="model">tms.order.stop</field>
+        <field name="arch" type="xml">
+            <list string="Delivery Stops">
+                <field name="sequence" widget="handle" />
+                <field
+                    name="stop_type"
+                    widget="badge"
+                    decoration-info="stop_type == 'origin'"
+                    decoration-success="stop_type == 'destination'"
+                    decoration-primary="stop_type == 'delivery'"
+                />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="hide"
+                />
+                <field name="scheduled_date" />
+                <field name="partner_id" optional="show" />
+                <field name="location_id" optional="show" />
+                <field name="address_complete" optional="show" />
+                <field name="weight" optional="show" />
+                <field name="weight_uom_id" column_invisible="1" optional="hide" />
+                <field name="volume" optional="show" />
+                <field name="volume_uom_id" column_invisible="1" optional="hide" />
+                <field name="package_count" optional="show" />
+                <field name="unloading_time" />
+                <field name="latitude" column_invisible="1" optional="hide" />
+                <field name="longitude" column_invisible="1" optional="hide" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state in ('draft', 'scheduled')"
+                    decoration-success="state == 'delivered'"
+                    decoration-muted="state == 'skipped'"
+                />
+                <button
+                    name="action_deliver"
+                    type="object"
+                    string="Deliver"
+                    class="btn-link text-success"
+                    icon="fa-check"
+                    invisible="state not in ('draft', 'scheduled')"
+                />
+                <button
+                    name="action_skip"
+                    type="object"
+                    string="Skip"
+                    class="btn-link text-muted"
+                    icon="fa-forward"
+                    invisible="state not in ('draft', 'scheduled')"
+                />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View for TMS Order Stops -->
+    <record id="tms_order_stop_form" model="ir.ui.view">
+        <field name="name">tms.order.stop.form</field>
+        <field name="model">tms.order.stop</field>
+        <field name="arch" type="xml">
+            <form string="Delivery Stop">
+                <header>
+                    <button
+                        name="action_deliver"
+                        type="object"
+                        string="Deliver"
+                        class="btn-primary"
+                        invisible="state not in ('draft', 'scheduled')"
+                    />
+                    <button
+                        name="action_skip"
+                        type="object"
+                        string="Skip"
+                        class="btn-secondary"
+                        invisible="state not in ('draft', 'scheduled')"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,scheduled,delivered"
+                    />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="order_id" />
+                            <field
+                                name="stop_type"
+                                widget="radio"
+                                options="{'horizontal': true}"
+                            />
+                            <field name="sequence" />
+                            <field
+                                name="partner_id"
+                                invisible="stop_type != 'delivery'"
+                                required="stop_type == 'delivery'"
+                            />
+                            <field
+                                name="location_id"
+                                invisible="stop_type == 'delivery'"
+                                required="stop_type != 'delivery'"
+                            />
+                        </group>
+                        <group>
+                            <field name="scheduled_date" />
+                            <field name="unloading_time" />
+                        </group>
+                    </group>
+                    <group
+                        string="Weight and Volume"
+                        invisible="stop_type != 'delivery'"
+                    >
+                        <group>
+                            <field name="weight" />
+                            <field name="weight_uom_id" />
+                        </group>
+                        <group>
+                            <field name="volume" />
+                            <field name="volume_uom_id" />
+                            <field name="package_count" />
+                        </group>
+                    </group>
+                    <group string="Location">
+                        <field name="latitude" />
+                        <field name="longitude" />
+                        <field name="address_complete" />
+                    </group>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View for TMS Order Stops -->
+    <record id="tms_order_stop_search" model="ir.ui.view">
+        <field name="name">tms.order.stop.search</field>
+        <field name="model">tms.order.stop</field>
+        <field name="arch" type="xml">
+            <search string="Delivery Stops">
+                <field name="partner_id" />
+                <field name="location_id" />
+                <field name="order_id" />
+                <separator />
+                <filter
+                    name="origin"
+                    string="Origin"
+                    domain="[('stop_type', '=', 'origin')]"
+                />
+                <filter
+                    name="delivery"
+                    string="Delivery"
+                    domain="[('stop_type', '=', 'delivery')]"
+                />
+                <filter
+                    name="destination"
+                    string="Destination"
+                    domain="[('stop_type', '=', 'destination')]"
+                />
+                <separator />
+                <filter
+                    name="draft"
+                    string="Draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    name="scheduled"
+                    string="Scheduled"
+                    domain="[('state', '=', 'scheduled')]"
+                />
+                <filter
+                    name="delivered"
+                    string="Delivered"
+                    domain="[('state', '=', 'delivered')]"
+                />
+                <filter
+                    name="skipped"
+                    string="Skipped"
+                    domain="[('state', '=', 'skipped')]"
+                />
+                <separator />
+                <filter
+                    name="not_completed"
+                    string="Not Completed"
+                    domain="[('state', 'not in', ('delivered', 'skipped'))]"
+                />
+                <filter
+                    name="open_order"
+                    string="Open Orders"
+                    domain="['|', ('order_id', '=', False),
+                             ('order_id.stage_id.is_completed', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="filter_today"
+                    string="Today"
+                    domain="[('scheduled_date', '&gt;=', context_today().strftime('%Y-%m-%d')),
+                             ('scheduled_date', '&lt;', (context_today()+datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_this_week"
+                    string="This Week"
+                    domain="[('scheduled_date', '&gt;=', (context_today()-datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d')),
+                             ('scheduled_date', '&lt;', (context_today()-datetime.timedelta(days=context_today().weekday())+datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_upcoming"
+                    string="Upcoming"
+                    domain="[('scheduled_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_no_date"
+                    string="No Date"
+                    domain="[('scheduled_date', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_stop_type"
+                        string="Stop Type"
+                        context="{'group_by': 'stop_type'}"
+                    />
+                    <filter
+                        name="group_by_partner"
+                        string="Partner"
+                        context="{'group_by': 'partner_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for TMS Order Stops -->
+    <record id="action_tms_order_stop" model="ir.actions.act_window">
+        <field name="name">Delivery Stops</field>
+        <field name="res_model">tms.order.stop</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{
+            'search_default_delivery': 1,
+            'search_default_not_completed': 1
+        }</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                    Create a new delivery stop
+                </p>
+        </field>
+    </record>
+
+    <!-- Add list view to action -->
+    <record id="action_tms_order_stop_view_list" model="ir.actions.act_window.view">
+        <field name="sequence" eval="10" />
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="tms_order_stop_tree" />
+        <field name="act_window_id" ref="action_tms_order_stop" />
+    </record>
+
+    <!-- Add form view to action -->
+    <record id="action_tms_order_stop_view_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="20" />
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="tms_order_stop_form" />
+        <field name="act_window_id" ref="action_tms_order_stop" />
+    </record>
+
+    <menuitem
+        id="menu_tms_order_stop_submenu"
+        name="Delivery Stops"
+        parent="tms.operations"
+        sequence="18"
+    />
+
+    <!-- Menu Item -->
+    <menuitem
+        id="menu_tms_order_stop"
+        name="Stops"
+        parent="menu_tms_order_stop_submenu"
+        action="action_tms_order_stop"
+        sequence="10"
+    />
+
+    <!-- Server Action: Open Google Maps for Selected Stops -->
+    <record id="action_tms_order_stop_open_google_maps" model="ir.actions.server">
+        <field name="name">Open in Google Maps</field>
+        <field name="model_id" ref="model_tms_order_stop" />
+        <field name="binding_model_id" ref="model_tms_order_stop" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+action = records.action_open_google_maps_multi()
+        </field>
+    </record>
+</odoo>

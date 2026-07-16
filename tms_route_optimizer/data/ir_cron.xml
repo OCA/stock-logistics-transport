@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Cron job for automatic route optimization -->
+    <record id="ir_cron_auto_route_optimization" model="ir.cron">
+        <field name="name">TMS: Automatic Route Optimization</field>
+        <field name="model_id" ref="model_tms_route_optimizer_config" />
+        <field name="state">code</field>
+        <field name="code">model._run_scheduled_optimization()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

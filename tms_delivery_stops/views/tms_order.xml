@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extend TMS Order Form View -->
+    <record id="tms_order_form_inherit_stops" model="ir.ui.view">
+        <field name="name">tms.order.form.inherit.stops</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <page name="planning_page" position="before">
+                <page string="Stops" name="stops">
+                    <field name="stop_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle" />
+                            <field
+                                name="stop_type"
+                                widget="badge"
+                                decoration-info="stop_type == 'origin'"
+                                decoration-success="stop_type == 'destination'"
+                                decoration-primary="stop_type == 'delivery'"
+                            />
+                            <field
+                                name="partner_id"
+                                invisible="stop_type != 'delivery'"
+                                required="stop_type == 'delivery'"
+                            />
+                            <field
+                                name="location_id"
+                                invisible="stop_type == 'delivery'"
+                                required="stop_type != 'delivery'"
+                            />
+                            <field name="weight" invisible="stop_type != 'delivery'" />
+                            <field
+                                name="weight_uom_id"
+                                invisible="stop_type != 'delivery'"
+                            />
+                            <field name="volume" invisible="stop_type != 'delivery'" />
+                            <field
+                                name="volume_uom_id"
+                                invisible="stop_type != 'delivery'"
+                            />
+                            <field
+                                name="unloading_time"
+                                invisible="stop_type != 'delivery'"
+                            />
+                            <field name="scheduled_date" />
+                            <field name="state" />
+                            <button
+                                name="action_deliver"
+                                type="object"
+                                string="Deliver"
+                                class="btn-link text-success"
+                                icon="fa-check"
+                                invisible="state not in ('draft', 'scheduled')"
+                            />
+                            <button
+                                name="action_skip"
+                                type="object"
+                                string="Skip"
+                                class="btn-link text-muted"
+                                icon="fa-forward"
+                                invisible="state not in ('draft', 'scheduled')"
+                            />
+                        </list>
+                    </field>
+                    <group string="Delivery Stops" colspan="4">
+                        <group>
+                            <field name="total_weight" />
+                            <field name="total_volume" />
+                        </group>
+                        <group>
+                            <field name="total_stops" />
+                            <field name="estimated_total_time" />
+                        </group>
+                    </group>
+                    <group
+                        string="Capacity Utilization"
+                        colspan="4"
+                        invisible="not vehicle_id"
+                    >
+                        <group>
+                            <field name="weight_capacity" readonly="1" />
+                            <field name="weight_utilization" widget="progressbar" />
+                        </group>
+                        <group>
+                            <field name="volume_capacity" readonly="1" />
+                            <field name="volume_utilization" widget="progressbar" />
+                        </group>
+                    </group>
+                </page>
+            </page>
+            <field name="scheduled_date_end" position="after">
+                <field
+                    name="google_maps_url"
+                    widget="url"
+                    string="View Route on Google Maps"
+                    readonly="1"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

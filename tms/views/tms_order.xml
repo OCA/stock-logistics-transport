@@ -356,13 +356,74 @@
         <field name="model">tms.order</field>
         <field name="arch" type="xml">
             <search>
+                <field name="name" string="Trip" />
+                <field name="tms_team_id" string="Team" />
+                <field name="stage_id" string="Stage" />
+                <field name="driver_id" string="Driver" />
+                <field name="vehicle_id" string="Vehicle" />
+                <separator />
+                <filter
+                    name="filter_in_progress"
+                    string="In Progress"
+                    domain="[('stage_id.is_completed', '=', False)]"
+                />
+                <filter
+                    name="filter_completed"
+                    string="Completed"
+                    domain="[('stage_id.is_completed', '=', True)]"
+                />
+                <separator />
+                <filter
+                    name="filter_today"
+                    string="Today"
+                    domain="[('scheduled_date_start', '&gt;=', context_today().strftime('%Y-%m-%d')),
+                             ('scheduled_date_start', '&lt;', (context_today()+datetime.timedelta(days=1)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_this_week"
+                    string="This Week"
+                    domain="[('scheduled_date_start', '&gt;=', (context_today()-datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d')),
+                             ('scheduled_date_start', '&lt;', (context_today()-datetime.timedelta(days=context_today().weekday())+datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_upcoming"
+                    string="Upcoming"
+                    domain="[('scheduled_date_start', '&gt;=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <separator />
                 <filter
                     name="is_active"
                     string="Archived"
-                    domain="[('active', '=', 'False')]"
+                    domain="[('active', '=', False)]"
                 />
-                <field name="tms_team_id" string="Team" />
-                <field name="stage_id" string="Stage" />
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_stage"
+                        string="Stage"
+                        context="{'group_by': 'stage_id'}"
+                    />
+                    <filter
+                        name="group_by_team"
+                        string="Team"
+                        context="{'group_by': 'tms_team_id'}"
+                    />
+                    <filter
+                        name="group_by_driver"
+                        string="Driver"
+                        context="{'group_by': 'driver_id'}"
+                    />
+                    <filter
+                        name="group_by_vehicle"
+                        string="Vehicle"
+                        context="{'group_by': 'vehicle_id'}"
+                    />
+                    <filter
+                        name="group_by_date"
+                        string="Scheduled Date"
+                        context="{'group_by': 'scheduled_date_start:day'}"
+                    />
+                </group>
             </search>
         </field>
     </record>
@@ -396,6 +457,7 @@
         <field name="name">Trips</field>
         <field name="res_model">tms.order</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_filter_in_progress': 1}</field>
     </record>
 
     <record id="action_tms_report_order" model="ir.actions.act_window">
@@ -414,6 +476,7 @@
         <field name="name">Trips</field>
         <field name="res_model">tms.order</field>
         <field name="view_mode">kanban,list,form</field>
+        <field name="context">{'search_default_filter_in_progress': 1}</field>
     </record>
 
     <record id="action_tms_order_kanban" model="ir.actions.act_window">

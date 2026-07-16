@@ -1,0 +1,881 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>TMS Route Optimizer Distance Cache</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="tms-route-optimizer-distance-cache">
+<h1 class="title">TMS Route Optimizer Distance Cache</h1>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:89ff6cd7f7eac650ea8cc75f3d7658883335817809b41b465278f55f6d148709
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Alpha" src="https://img.shields.io/badge/maturity-Alpha-red.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/stock-logistics-transport/tree/18.0/tms_route_optimizer_distance_cache"><img alt="OCA/stock-logistics-transport" src="https://img.shields.io/badge/github-OCA%2Fstock--logistics--transport-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/stock-logistics-transport-18-0/stock-logistics-transport-18-0-tms_route_optimizer_distance_cache"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-transport&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<div class="section" id="tms-route-optimizer-distance-cache-1">
+<h1>TMS Route Optimizer Distance Cache</h1>
+<p>This module extends the TMS Route Optimizer by adding a persistent
+distance cache to significantly improve performance when optimizing
+routes with overlapping locations.</p>
+<div class="section" id="key-features">
+<h2>Key Features</h2>
+<ul class="simple">
+<li><strong>Persistent Distance Cache</strong>: Stores calculated distances between
+coordinate pairs in the database</li>
+<li><strong>Automatic Cache Management</strong>: Uses LRU (Least Recently Used)
+strategy to limit cache size</li>
+<li><strong>Performance Boost</strong>: Eliminates redundant distance calculations
+across optimizations</li>
+<li><strong>Coordinate Normalization</strong>: Ensures consistent cache lookups through
+coordinate rounding and ordering</li>
+<li><strong>Scheduled Cleanup</strong>: Automatic daily cleanup to maintain cache size
+limits</li>
+<li><strong>Seamless Integration</strong>: Transparent caching with no changes to
+existing optimization workflows</li>
+</ul>
+</div>
+<div class="section" id="use-cases">
+<h2>Use Cases</h2>
+<ul class="simple">
+<li><strong>Multiple Daily Optimizations</strong>: Reuse distance calculations when
+optimizing similar routes throughout the day</li>
+<li><strong>Recurring Deliveries</strong>: Speed up optimizations for frequently
+visited locations</li>
+<li><strong>Large-Scale Operations</strong>: Reduce computation time for routes with
+many overlapping stops</li>
+<li><strong>Performance Optimization</strong>: Minimize API calls and calculation
+overhead</li>
+</ul>
+</div>
+<div class="section" id="technical-details">
+<h2>Technical Details</h2>
+<ul class="simple">
+<li><strong>Cache Model</strong>: <tt class="docutils literal">tms.route.distance.cache</tt> stores coordinate pairs
+and distances</li>
+<li><strong>LRU Strategy</strong>: Automatically removes oldest unused entries when
+limit is reached</li>
+<li><strong>Configurable Limit</strong>: Default 200,000 entries (configurable via
+system parameter)</li>
+<li><strong>Coordinate Precision</strong>: 6 decimal places (~0.1 meter accuracy)</li>
+<li><strong>Automatic Updates</strong>: Last used timestamp updated on each cache hit</li>
+<li><strong>Scheduled Cleanup</strong>: Daily cron job to enforce cache size limits</li>
+</ul>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">This is an alpha version, the data model and design can change at any time without warning.
+Only for development or testing purpose, do not use in production.
+<a class="reference external" href="https://odoo-community.org/page/development-status">More details on development status</a></p>
+</div>
+<p><strong>Table of contents</strong></p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h1>Configuration</h1>
+</div>
+<div class="section" id="configuration-tms-route-optimizer-distance-cache">
+<h1>Configuration - TMS Route Optimizer Distance Cache</h1>
+<div class="section" id="module-dependencies">
+<h2>Module Dependencies</h2>
+<p>This module requires:</p>
+<ul class="simple">
+<li><tt class="docutils literal">tms_route_optimizer</tt>: Base route optimization module</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2>Installation</h2>
+<p>No special installation steps required beyond installing the module.</p>
+</div>
+<div class="section" id="configuration-1">
+<h2>Configuration</h2>
+<div class="section" id="cache-size-limit">
+<h3>Cache Size Limit</h3>
+<p>The cache size is controlled by a system parameter that can be
+configured in Odoo:</p>
+<ol class="arabic simple">
+<li>Go to <strong>Settings &gt; Technical &gt; Parameters &gt; System Parameters</strong></li>
+<li>Find or create parameter:
+<tt class="docutils literal">tms.route_optimizer.distance_cache_limit</tt></li>
+<li>Set the value to desired maximum number of cache entries (default:
+200000)</li>
+</ol>
+<p><strong>Recommended Values</strong>:</p>
+<ul class="simple">
+<li><strong>Small Operations</strong> (&lt; 50 stops/day): 10,000 entries</li>
+<li><strong>Medium Operations</strong> (50-200 stops/day): 50,000 entries</li>
+<li><strong>Large Operations</strong> (&gt; 200 stops/day): 200,000+ entries</li>
+<li><strong>Set to 0</strong>: Disables cache cleanup (unlimited cache, use with
+caution)</li>
+</ul>
+</div>
+<div class="section" id="cache-cleanup-schedule">
+<h3>Cache Cleanup Schedule</h3>
+<p>The module includes a scheduled action that runs daily to clean up old
+cache entries:</p>
+<ol class="arabic simple">
+<li>Go to <strong>Settings &gt; Technical &gt; Automation &gt; Scheduled Actions</strong></li>
+<li>Find action: <strong>TMS Route Distance Cache Cleanup</strong></li>
+<li>Configure:<ul>
+<li><strong>Interval Number</strong>: 1 (default)</li>
+<li><strong>Interval Unit</strong>: Days (default)</li>
+<li><strong>Active</strong>: True</li>
+</ul>
+</li>
+</ol>
+<p><strong>Note</strong>: The cleanup only removes entries when the total count exceeds
+the configured limit, keeping the most recently used entries.</p>
+</div>
+</div>
+<div class="section" id="integration-with-tms-route-optimizer">
+<h2>Integration with tms_route_optimizer</h2>
+<p>This module integrates automatically with <tt class="docutils literal">tms_route_optimizer</tt>. No
+additional configuration is needed. The cache is used transparently
+during route optimization:</p>
+<ol class="arabic simple">
+<li>When optimization calculates distances, it first checks the cache</li>
+<li>Cache hits return stored distance immediately</li>
+<li>Cache misses calculate distance and store it for future use</li>
+<li>Last used timestamp is updated on each access</li>
+</ol>
+</div>
+<div class="section" id="performance-monitoring">
+<h2>Performance Monitoring</h2>
+<p>To monitor cache performance:</p>
+<div class="section" id="check-cache-size">
+<h3>Check Cache Size</h3>
+<pre class="code python literal-block">
+<span class="n">cache_count</span> <span class="o">=</span> <span class="n">env</span><span class="p">[</span><span class="s1">'tms.route.distance.cache'</span><span class="p">]</span><span class="o">.</span><span class="n">sudo</span><span class="p">()</span><span class="o">.</span><span class="n">search_count</span><span class="p">([])</span><span class="w">
+</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current cache entries: </span><span class="si">{</span><span class="n">cache_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre>
+</div>
+<div class="section" id="view-cache-statistics">
+<h3>View Cache Statistics</h3>
+<ol class="arabic simple">
+<li>Go to <strong>Settings &gt; Technical &gt; Database Structure &gt; Models</strong></li>
+<li>Search for: <tt class="docutils literal">tms.route.distance.cache</tt></li>
+<li>Click <strong>Records</strong> to view cached entries</li>
+</ol>
+</div>
+<div class="section" id="clear-cache-manually">
+<h3>Clear Cache Manually</h3>
+<p>To clear all cache entries:</p>
+<pre class="code python literal-block">
+<span class="n">env</span><span class="p">[</span><span class="s1">'tms.route.distance.cache'</span><span class="p">]</span><span class="o">.</span><span class="n">sudo</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">([])</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+</pre>
+</div>
+</div>
+<div class="section" id="storage-considerations">
+<h2>Storage Considerations</h2>
+<div class="section" id="database-size">
+<h3>Database Size</h3>
+<p>Each cache entry stores:</p>
+<ul class="simple">
+<li>2 coordinate pairs (4 float values)</li>
+<li>1 distance value (float)</li>
+<li>1 timestamp (datetime)</li>
+<li>System fields (create_date, write_date, etc.)</li>
+</ul>
+<p><strong>Estimated Storage</strong>: ~200-300 bytes per entry</p>
+<p><strong>Total Storage Examples</strong>:</p>
+<ul class="simple">
+<li>10,000 entries: ~2-3 MB</li>
+<li>50,000 entries: ~10-15 MB</li>
+<li>200,000 entries: ~40-60 MB</li>
+</ul>
+</div>
+<div class="section" id="cleanup-impact">
+<h3>Cleanup Impact</h3>
+<p>The LRU cleanup ensures:</p>
+<ul class="simple">
+<li>Cache stays within configured limit</li>
+<li>Most frequently used distances remain cached</li>
+<li>Oldest unused entries are removed first</li>
+<li>No manual intervention needed</li>
+</ul>
+</div>
+</div>
+<div class="section" id="troubleshooting">
+<h2>Troubleshooting</h2>
+<div class="section" id="cache-not-working">
+<h3>Cache Not Working</h3>
+<ol class="arabic simple">
+<li>Verify module is installed: <tt class="docutils literal">tms_route_optimizer_distance_cache</tt></li>
+<li>Check system parameter exists:
+<tt class="docutils literal">tms.route_optimizer.distance_cache_limit</tt></li>
+<li>Ensure cache table exists in database</li>
+</ol>
+</div>
+<div class="section" id="cache-growing-too-large">
+<h3>Cache Growing Too Large</h3>
+<ol class="arabic simple">
+<li>Reduce cache limit parameter</li>
+<li>Run cleanup manually: <tt class="docutils literal">model.cron_cleanup_distance_cache()</tt></li>
+<li>Check scheduled action is active and running</li>
+</ol>
+</div>
+<div class="section" id="performance-not-improving">
+<h3>Performance Not Improving</h3>
+<ul class="simple">
+<li>Cache needs time to populate with frequently used distances</li>
+<li>First optimization is always slower (populates cache)</li>
+<li>Subsequent optimizations with overlapping locations will be faster</li>
+<li>Monitor cache hit rate by checking if entries are being reused</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="usage">
+<h1>Usage</h1>
+</div>
+<div class="section" id="usage-tms-route-optimizer-distance-cache">
+<h1>Usage - TMS Route Optimizer Distance Cache</h1>
+<div class="section" id="overview">
+<h2>Overview</h2>
+<p>The distance cache works automatically behind the scenes. Once
+installed, no user action is required to benefit from improved
+performance.</p>
+</div>
+<div class="section" id="how-it-works">
+<h2>How It Works</h2>
+<div class="section" id="automatic-caching">
+<h3>Automatic Caching</h3>
+<p>When you run a route optimization:</p>
+<ol class="arabic simple">
+<li><strong>First Run</strong>: Distances are calculated and stored in cache</li>
+<li><strong>Subsequent Runs</strong>: Cached distances are reused for matching
+coordinates</li>
+<li><strong>Cache Updates</strong>: Last used timestamp updated on every access</li>
+<li><strong>Automatic Cleanup</strong>: Old unused entries removed when limit is
+reached</li>
+</ol>
+</div>
+<div class="section" id="cache-key">
+<h3>Cache Key</h3>
+<p>The cache uses normalized coordinates as keys:</p>
+<ul class="simple">
+<li><strong>Rounding</strong>: Coordinates rounded to 6 decimal places (~0.1 meter
+precision)</li>
+<li><strong>Ordering</strong>: Points ordered consistently (smaller coordinates first)</li>
+<li><strong>Symmetry</strong>: Distance A→B same as B→A (stored once)</li>
+</ul>
+<p>Example:</p>
+<pre class="literal-block">
+Point A: (lat=23.550520, lon=-46.633308)
+Point B: (lat=23.547745, lon=-46.636023)
+
+Cache Key: (23.547745, -46.636023, 23.550520, -46.633308)
+</pre>
+</div>
+</div>
+<div class="section" id="performance-benefits">
+<h2>Performance Benefits</h2>
+<div class="section" id="scenario-daily-route-optimization">
+<h3>Scenario: Daily Route Optimization</h3>
+<p><strong>Without Cache</strong>:</p>
+<ul class="simple">
+<li>50 stops × 50 stops = 2,500 distance calculations</li>
+<li>Each calculation ~0.1ms</li>
+<li>Total time: ~250ms per optimization</li>
+</ul>
+<p><strong>With Cache</strong> (after first run):</p>
+<ul class="simple">
+<li>2,500 cache lookups</li>
+<li>Each lookup ~0.01ms</li>
+<li>Total time: ~25ms (10× faster)</li>
+</ul>
+</div>
+<div class="section" id="real-world-example">
+<h3>Real-World Example</h3>
+<p><strong>Company with recurring delivery locations</strong>:</p>
+<ul class="simple">
+<li>100 stops per day</li>
+<li>80% location overlap daily</li>
+<li>First optimization: 100% cache misses</li>
+<li>Subsequent optimizations: 80% cache hits</li>
+<li>Performance improvement: 5-8× faster</li>
+</ul>
+</div>
+</div>
+<div class="section" id="monitoring-cache-performance">
+<h2>Monitoring Cache Performance</h2>
+<div class="section" id="view-cache-entries">
+<h3>View Cache Entries</h3>
+<ol class="arabic simple">
+<li>Go to <strong>Settings &gt; Technical</strong></li>
+<li>Enable Developer Mode</li>
+<li>Navigate to <strong>Database Structure &gt; Models</strong></li>
+<li>Search for <tt class="docutils literal">tms.route.distance.cache</tt></li>
+<li>Click <strong>Records</strong> to view all cached distances</li>
+</ol>
+</div>
+<div class="section" id="cache-entry-information">
+<h3>Cache Entry Information</h3>
+<p>Each entry shows:</p>
+<ul class="simple">
+<li><strong>Lat A / Lon A</strong>: First coordinate pair</li>
+<li><strong>Lat B / Lon B</strong>: Second coordinate pair</li>
+<li><strong>Distance (km)</strong>: Cached distance value</li>
+<li><strong>Last Used</strong>: Timestamp of most recent access</li>
+</ul>
+</div>
+<div class="section" id="analyze-cache-usage">
+<h3>Analyze Cache Usage</h3>
+<p>To see which routes are most cached:</p>
+<pre class="code python literal-block">
+<span class="c1"># Get top 10 most recently used cache entries</span><span class="w">
+</span><span class="n">cache</span> <span class="o">=</span> <span class="n">env</span><span class="p">[</span><span class="s1">'tms.route.distance.cache'</span><span class="p">]</span><span class="w">
+</span><span class="n">top_entries</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">sudo</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">([],</span> <span class="n">order</span><span class="o">=</span><span class="s1">'last_used desc'</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="w">
+
+</span><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">top_entries</span><span class="p">:</span><span class="w">
+</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Distance: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">distance_km</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> km, Last used: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">last_used</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre>
+</div>
+</div>
+<div class="section" id="manual-operations">
+<h2>Manual Operations</h2>
+<div class="section" id="clear-entire-cache">
+<h3>Clear Entire Cache</h3>
+<p>If you need to clear all cached distances:</p>
+<pre class="code python literal-block">
+<span class="n">env</span><span class="p">[</span><span class="s1">'tms.route.distance.cache'</span><span class="p">]</span><span class="o">.</span><span class="n">sudo</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">([])</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+</pre>
+<p><strong>Use Cases</strong>:</p>
+<ul class="simple">
+<li>Changing distance calculation method</li>
+<li>Migrating to different geolocation data</li>
+<li>Testing optimization performance</li>
+</ul>
+</div>
+<div class="section" id="force-cache-cleanup">
+<h3>Force Cache Cleanup</h3>
+<p>To manually trigger LRU cleanup:</p>
+<pre class="code python literal-block">
+<span class="n">env</span><span class="p">[</span><span class="s1">'tms.route.distance.cache'</span><span class="p">]</span><span class="o">.</span><span class="n">cron_cleanup_distance_cache</span><span class="p">()</span>
+</pre>
+<p>This removes oldest entries if cache exceeds configured limit.</p>
+</div>
+<div class="section" id="check-cache-size-1">
+<h3>Check Cache Size</h3>
+<pre class="code python literal-block">
+<span class="n">cache_model</span> <span class="o">=</span> <span class="n">env</span><span class="p">[</span><span class="s1">'tms.route.distance.cache'</span><span class="p">]</span><span class="w">
+</span><span class="n">count</span> <span class="o">=</span> <span class="n">cache_model</span><span class="o">.</span><span class="n">sudo</span><span class="p">()</span><span class="o">.</span><span class="n">search_count</span><span class="p">([])</span><span class="w">
+</span><span class="n">limit</span> <span class="o">=</span> <span class="n">cache_model</span><span class="o">.</span><span class="n">_get_cache_limit</span><span class="p">()</span><span class="w">
+
+</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cache entries: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> / </span><span class="si">{</span><span class="n">limit</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="w">
+</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Usage: </span><span class="si">{</span><span class="p">(</span><span class="n">count</span><span class="o">/</span><span class="n">limit</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span> <span class="k">if</span> <span class="n">limit</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;Unlimited&quot;</span><span class="p">)</span>
+</pre>
+</div>
+</div>
+<div class="section" id="best-practices">
+<h2>Best Practices</h2>
+<div class="section" id="optimize-cache-size">
+<h3>Optimize Cache Size</h3>
+<ol class="arabic simple">
+<li><strong>Monitor</strong> cache size over 1-2 weeks of normal operations</li>
+<li><strong>Adjust</strong> limit parameter to cover typical distance pairs</li>
+<li><strong>Balance</strong> between memory usage and hit rate</li>
+</ol>
+</div>
+<div class="section" id="recurring-routes">
+<h3>Recurring Routes</h3>
+<p>For maximum benefit:</p>
+<ul class="simple">
+<li>Keep delivery locations consistent when possible</li>
+<li>Group orders by geographic area</li>
+<li>Run optimizations at similar times daily</li>
+</ul>
+</div>
+<div class="section" id="cache-warm-up">
+<h3>Cache Warm-up</h3>
+<p>Before peak operations:</p>
+<ol class="arabic simple">
+<li>Run optimization with representative stops</li>
+<li>Cache populates with common distances</li>
+<li>Subsequent optimizations benefit immediately</li>
+</ol>
+</div>
+<div class="section" id="maintenance-schedule">
+<h3>Maintenance Schedule</h3>
+<ul class="simple">
+<li><strong>Daily</strong>: Automatic cleanup via scheduled action</li>
+<li><strong>Weekly</strong>: Review cache size and adjust limit if needed</li>
+<li><strong>Monthly</strong>: Analyze cache hit patterns</li>
+<li><strong>As Needed</strong>: Clear cache if geolocation data changes</li>
+</ul>
+</div>
+</div>
+<div class="section" id="troubleshooting-1">
+<h2>Troubleshooting</h2>
+<div class="section" id="distance-cache-entry-already-exists-error">
+<h3>“Distance cache entry already exists” Error</h3>
+<p>This indicates a database constraint violation (should not happen in
+normal use).</p>
+<p><strong>Solution</strong>: Check for corrupted data or duplicate entries</p>
+<pre class="code python literal-block">
+<span class="c1"># Find potential duplicates</span><span class="w">
+</span><span class="n">env</span><span class="o">.</span><span class="n">cr</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;
+    SELECT lat_a, lon_a, lat_b, lon_b, COUNT(*)
+    FROM tms_route_distance_cache
+    GROUP BY lat_a, lon_a, lat_b, lon_b
+    HAVING COUNT(*) &gt; 1
+&quot;&quot;&quot;</span><span class="p">)</span><span class="w">
+</span><span class="n">duplicates</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">cr</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+</pre>
+</div>
+<div class="section" id="cache-not-reducing-optimization-time">
+<h3>Cache Not Reducing Optimization Time</h3>
+<p><strong>Possible Causes</strong>:</p>
+<ol class="arabic simple">
+<li><strong>First Run</strong>: Cache needs to be populated first</li>
+<li><strong>Different Locations</strong>: Stops have no overlapping coordinates</li>
+<li><strong>High Precision</strong>: Coordinates vary beyond 6 decimal places</li>
+</ol>
+<p><strong>Solutions</strong>:</p>
+<ul class="simple">
+<li>Run multiple optimizations with same/similar stops</li>
+<li>Verify coordinates are consistent across runs</li>
+<li>Check that location data is stable</li>
+</ul>
+</div>
+<div class="section" id="cache-growing-unbounded">
+<h3>Cache Growing Unbounded</h3>
+<ol class="arabic simple">
+<li>Verify scheduled action is active</li>
+<li>Check cache limit parameter is set correctly</li>
+<li>Manually run cleanup if needed</li>
+</ol>
+<pre class="code python literal-block">
+<span class="c1"># Check scheduled action status</span><span class="w">
+</span><span class="n">cron</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">ref</span><span class="p">(</span><span class="s1">'tms_route_optimizer_distance_cache.ir_cron_tms_route_distance_cache_cleanup'</span><span class="p">)</span><span class="w">
+</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Active: </span><span class="si">{</span><span class="n">cron</span><span class="o">.</span><span class="n">active</span><span class="si">}</span><span class="s2">, Interval: </span><span class="si">{</span><span class="n">cron</span><span class="o">.</span><span class="n">interval_number</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">cron</span><span class="o">.</span><span class="n">interval_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre>
+</div>
+</div>
+<div class="section" id="integration-tips">
+<h2>Integration Tips</h2>
+<div class="section" id="api-external-integration">
+<h3>API / External Integration</h3>
+<p>When calling optimization via API:</p>
+<pre class="code python literal-block">
+<span class="c1"># The cache works automatically</span><span class="w">
+</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">env</span><span class="p">[</span><span class="s1">'tms.route.optimizer'</span><span class="p">]</span><span class="o">.</span><span class="n">create</span><span class="p">({</span><span class="w">
+</span>    <span class="s1">'name'</span><span class="p">:</span> <span class="s1">'API Optimization'</span><span class="p">,</span><span class="w">
+</span>    <span class="s1">'team_id'</span><span class="p">:</span> <span class="n">team</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w">
+</span>    <span class="c1"># ... other fields</span><span class="w">
+</span><span class="p">})</span><span class="w">
+</span><span class="n">optimizer</span><span class="o">.</span><span class="n">run_optimization</span><span class="p">()</span>  <span class="c1"># Uses cache automatically</span>
+</pre>
+</div>
+<div class="section" id="custom-distance-providers">
+<h3>Custom Distance Providers</h3>
+<p>If implementing custom distance calculation:</p>
+<pre class="code python literal-block">
+<span class="c1"># Use cache in custom calculations</span><span class="w">
+</span><span class="n">cache</span> <span class="o">=</span> <span class="n">env</span><span class="p">[</span><span class="s1">'tms.route.distance.cache'</span><span class="p">]</span><span class="w">
+</span><span class="n">distance</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get_distance</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">)</span><span class="w">
+</span><span class="c1"># Returns cached value or calculates and stores new distance</span>
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="bug-tracker">
+<h1>Bug Tracker</h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/stock-logistics-transport/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/OCA/stock-logistics-transport/issues/new?body=module:%20tms_route_optimizer_distance_cache%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h1>Credits</h1>
+<div class="section" id="authors">
+<h2>Authors</h2>
+<ul class="simple">
+<li>KMEE</li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h2>Contributors</h2>
+<ul class="simple">
+<li>Luis Felipe Miléo <a class="reference external" href="mailto:mileo&#64;kmee.com.br">mileo&#64;kmee.com.br</a></li>
+</ul>
+</div>
+<div class="section" id="other-credits">
+<h2>Other credits</h2>
+<ul class="simple">
+<li>KMEE <a class="reference external" href="https://kmee.com.br">https://kmee.com.br</a></li>
+</ul>
+</div>
+<div class="section" id="maintainers">
+<h2>Maintainers</h2>
+<p>This module is maintained by the OCA.</p>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
+<p>OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/stock-logistics-transport/tree/18.0/tms_route_optimizer_distance_cache">OCA/stock-logistics-transport</a> project on GitHub.</p>
+<p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

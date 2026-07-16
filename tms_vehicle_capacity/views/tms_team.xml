@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extend TMS Team Form View -->
+    <record id="tms_team_form_inherit_capacity" model="ir.ui.view">
+        <field name="name">tms.team.form.inherit.capacity</field>
+        <field name="model">tms.team</field>
+        <field name="inherit_id" ref="tms.tms_team_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <group string="Vehicle Configuration">
+                    <field name="allowed_vehicle_type_ids" widget="many2many_tags" />
+                    <field name="default_depot_location_id" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

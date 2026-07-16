@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2026 KMEE (https://kmee.com.br)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
+SelectablePinList template - extends DraggablePinList with selection support
+and capacity comparison features.
+-->
+<templates xml:space="preserve">
+
+    <t
+        t-name="tms_delivery_stops_leaflet.SelectablePinList"
+        t-inherit="web_view_leaflet_map.DraggablePinList"
+        t-inherit-mode="primary"
+        owl="1"
+    >
+        <!-- Floating status bar with selection totals (bottom) -->
+        <xpath expr="//div[contains(@class, 'o_pin_list_groups')]" position="after">
+            <t t-if="selectedCount > 0">
+                <div class="o_tms_status_bar">
+                    <div class="o_status_bar_section">
+                        <div class="o_status_bar_title">Selecionado</div>
+                        <div class="o_status_bar_content">
+                            <div class="o_status_item">
+                                <i class="fa fa-map-marker" />
+                                <span
+                                    class="o_status_value"
+                                    t-esc="selectionStats.stopCount"
+                                />
+                                <span class="o_status_label">paradas</span>
+                            </div>
+                            <div class="o_status_item">
+                                <i class="fa fa-balance-scale" />
+                                <span
+                                    class="o_status_value"
+                                    t-esc="selectionStats.totalWeight"
+                                />
+                                <span class="o_status_label">kg</span>
+                            </div>
+                            <div class="o_status_item">
+                                <i class="fa fa-cube" />
+                                <span
+                                    class="o_status_value"
+                                    t-esc="selectionStats.totalVolume"
+                                />
+                                <span class="o_status_label">m³</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        class="btn btn-outline-secondary btn-sm"
+                        t-on-click="clearSelection"
+                        title="Limpar seleção"
+                    >
+                        <i class="fa fa-times" />
+                    </button>
+                </div>
+            </t>
+            <div class="o_tms_create_order_bar">
+                <button class="btn btn-primary btn-sm" t-on-click="onCreateOrder">
+                    <i class="fa fa-plus me-1" />Criar Ordem
+                </button>
+            </div>
+        </xpath>
+
+        <!-- Add "select all" checkbox in unassigned group header (before the group name span) -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]//span[contains(@class, 'o_pin_group_name')]"
+            position="before"
+        >
+            <t t-if="group.isUnassigned">
+                <input
+                    type="checkbox"
+                    class="form-check-input o_tms_select_all_checkbox me-2"
+                    t-att-checked="isGroupAllSelected(group)"
+                    t-on-click="(ev) => this.toggleSelectAll(ev, group)"
+                    t-on-mousedown.stop=""
+                    title="Selecionar todos"
+                />
+            </t>
+        </xpath>
+
+        <!-- Hide count badge for non-unassigned groups (will show in capacity line) -->
+        <xpath
+            expr="//span[contains(@t-attf-class, 'o_pin_group_count')]"
+            position="attributes"
+        >
+            <attribute
+                name="t-attf-class"
+            >o_pin_group_count badge {{ group.isUnassigned ? 'bg-warning' : 'd-none' }} ms-auto</attribute>
+        </xpath>
+
+        <!-- Make group name clickable for assigned groups -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]//span[contains(@class, 'o_pin_group_name')]"
+            position="attributes"
+        >
+            <attribute
+                name="t-attf-class"
+            >o_pin_group_name {{ group.isUnassigned ? '' : 'o_clickable_order_name' }}</attribute>
+            <attribute
+                name="t-on-click"
+            >(ev) => !group.isUnassigned and this.onOrderNameClick(ev, group)</attribute>
+        </xpath>
+
+        <!-- Add scheduled date and Maps button after group name for assigned groups -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]//span[contains(@class, 'o_pin_group_name')]"
+            position="after"
+        >
+            <t t-if="!group.isUnassigned">
+                <t t-set="orderInfo" t-value="getGroupOrderInfo(group)" />
+                <!-- Scheduled date -->
+                <t t-if="orderInfo and orderInfo.scheduledDate">
+                    <span class="o_group_scheduled_date text-muted small ms-auto">
+                        <i class="fa fa-calendar" />
+                        <t t-esc="orderInfo.scheduledDate" />
+                    </span>
+                </t>
+                <!-- Maps button (always visible) -->
+                <t t-if="getGroupGoogleMapsUrl(group)">
+                    <a
+                        class="o_group_maps_btn btn btn-sm btn-outline-primary ms-2"
+                        t-att-href="getGroupGoogleMapsUrl(group)"
+                        target="_blank"
+                        t-on-click.stop=""
+                        title="Navegar com Google Maps"
+                    >
+                        <i class="fa fa-location-arrow" />
+                    </a>
+                </t>
+            </t>
+        </xpath>
+
+        <!-- Hide original navigate all button for assigned groups (moved to capacity line) -->
+        <xpath
+            expr="//a[contains(@class, 'o_group_navigate_all')]"
+            position="attributes"
+        >
+            <attribute
+                name="t-attf-class"
+            >o_group_navigate_all btn btn-sm btn-outline-primary ms-2 {{ group.isUnassigned ? '' : 'd-none' }}</attribute>
+        </xpath>
+
+        <!-- Add unified info line after group header for assigned groups -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_group_header')]"
+            position="after"
+        >
+            <t t-if="!group.isUnassigned">
+                <t t-set="capacity" t-value="getGroupCapacity(group)" />
+                <t t-set="orderInfo" t-value="getGroupOrderInfo(group)" />
+                <div class="o_group_info_line">
+                    <!-- Driver name (truncated, hover for full name) -->
+                    <t t-if="orderInfo and orderInfo.driverName">
+                        <span
+                            class="o_info_item o_info_driver"
+                            t-att-title="orderInfo.driverName"
+                        >
+                            <i class="fa fa-user" />
+                            <span class="o_driver_name">
+                                <t t-esc="orderInfo.driverName" />
+                            </span>
+                        </span>
+                    </t>
+                    <!-- Vehicle icon (hover for name) -->
+                    <t t-if="orderInfo and orderInfo.vehicleName">
+                        <span class="o_info_item" t-att-title="orderInfo.vehicleName">
+                            <i class="fa fa-truck" />
+                        </span>
+                    </t>
+                    <!-- Separator -->
+                    <span class="o_info_separator">|</span>
+                    <!-- Deliveries count -->
+                    <span class="o_info_item">
+                        <i class="fa fa-map-marker" />
+                        <t t-esc="group.records.length" />
+                    </span>
+                    <!-- Weight (always show as percentage) -->
+                    <t t-if="capacity">
+                        <t t-if="capacity.hasCapacity and capacity.weightCapacity > 0">
+                            <span
+                                t-attf-class="o_info_item {{ capacity.weightUtilization > 100 ? 'text-danger' : capacity.weightUtilization > 80 ? 'text-warning' : 'text-success' }}"
+                                t-att-title="capacity.totalWeight.toFixed(1) + ' / ' + capacity.weightCapacity.toFixed(0) + ' kg'"
+                            >
+                                <i class="fa fa-balance-scale" />
+                                <t t-esc="Math.round(capacity.weightUtilization)" />%
+                            </span>
+                        </t>
+                        <t t-else="">
+                            <span
+                                class="o_info_item text-muted"
+                                t-att-title="capacity.totalWeight.toFixed(1) + ' kg (sem capacidade definida)'"
+                            >
+                                <i class="fa fa-balance-scale" />--%
+                            </span>
+                        </t>
+                        <!-- Volume (always show as percentage) -->
+                        <t t-if="capacity.hasCapacity and capacity.volumeCapacity > 0">
+                            <span
+                                t-attf-class="o_info_item {{ capacity.volumeUtilization > 100 ? 'text-danger' : capacity.volumeUtilization > 80 ? 'text-warning' : 'text-success' }}"
+                                t-att-title="capacity.totalVolume.toFixed(2) + ' / ' + capacity.volumeCapacity.toFixed(1) + ' m³'"
+                            >
+                                <i class="fa fa-cube" />
+                                <t t-esc="Math.round(capacity.volumeUtilization)" />%
+                            </span>
+                        </t>
+                        <t t-else="">
+                            <span
+                                class="o_info_item text-muted"
+                                t-att-title="capacity.totalVolume.toFixed(2) + ' m³ (sem capacidade definida)'"
+                            >
+                                <i class="fa fa-cube" />--%
+                            </span>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+
+        <!-- Add checkbox in each item of unassigned group (before drag handle) -->
+        <xpath
+            expr="//div[contains(@t-attf-class, 'o_pin_item_draggable')]//span[contains(@class, 'o_drag_handle')]"
+            position="before"
+        >
+            <t t-if="isUnassigned(record)">
+                <input
+                    type="checkbox"
+                    class="form-check-input o_tms_stop_checkbox me-1"
+                    t-att-checked="isSelected(record.id)"
+                    t-on-click="(ev) => this.toggleSelection(ev, record.id)"
+                    t-on-mousedown.stop=""
+                />
+            </t>
+        </xpath>
+
+        <!-- Override pin number to use global index instead of group index -->
+        <xpath expr="//span[contains(@class, 'o_pin_number')]" position="replace">
+            <span class="o_pin_number">
+                <t t-esc="getGlobalIndex(record, group, record_index)" />
+            </span>
+        </xpath>
+
+        <!-- Modify tooltip of pin title to show weight/volume -->
+        <xpath expr="//div[contains(@class, 'o_pin_title')]" position="attributes">
+            <attribute name="t-att-title">getItemTooltip(record)</attribute>
+        </xpath>
+
+        <!-- Hide navigate button for stops in assigned groups -->
+        <xpath expr="//a[contains(@class, 'o_pin_navigate')]" position="attributes">
+            <attribute
+                name="t-attf-class"
+            >o_pin_navigate btn btn-sm btn-outline-primary {{ isUnassigned(record) ? '' : 'd-none' }}</attribute>
+        </xpath>
+
+        <!-- Add stop type badge and weight/volume column after pin content for assigned stops -->
+        <xpath expr="//div[contains(@class, 'o_pin_content')]" position="after">
+            <t t-if="!isUnassigned(record)">
+                <div class="o_pin_weight_volume text-muted text-end">
+                    <!-- Stop type badge above volumes -->
+                    <div class="o_stop_type_badge_container">
+                        <span
+                            t-attf-class="badge o_stop_type_badge {{ getStopTypeBadgeClass(record) }}"
+                        >
+                            <t t-esc="getStopTypeBadgeLabel(record)" />
+                        </span>
+                    </div>
+                    <div class="o_wv_volume">
+                        <i class="fa fa-cube" />
+                        <t t-esc="(record.volume || 0).toFixed(2)" />
+                    </div>
+                    <div class="o_wv_weight">
+                        <i class="fa fa-balance-scale" />
+                        <t t-esc="(record.weight || 0).toFixed(1)" />
+                    </div>
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+</templates>

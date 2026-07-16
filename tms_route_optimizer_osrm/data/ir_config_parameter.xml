@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2025 KMEE (https://kmee.com.br)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo noupdate="1">
+    <record id="config_parameter_tms_osrm_server_url" model="ir.config_parameter">
+        <field name="key">tms.osrm_server_url</field>
+        <field name="value">https://router.project-osrm.org</field>
+    </record>
+</odoo>

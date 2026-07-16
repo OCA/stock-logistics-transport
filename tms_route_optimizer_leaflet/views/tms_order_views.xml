@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+Copyright (C) 2025 KMEE (https://kmee.com.br)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <!-- Leaflet Map View for TMS Orders -->
+    <record id="view_tms_order_leaflet_map" model="ir.ui.view">
+        <field name="name">tms.order.leaflet_map</field>
+        <field name="model">tms.order</field>
+        <field name="arch" type="xml">
+            <leaflet_map
+                js_class="tms_optimizer_leaflet_map"
+                field_latitude="map_latitude"
+                field_longitude="map_longitude"
+                field_title="name"
+                field_address="map_display_address"
+                show_pin_list="1"
+                numbered_markers="1"
+                routing="1"
+                enable_navigation="1"
+                panel_title="TMS Orders"
+            >
+                <field name="name" />
+                <field name="map_latitude" />
+                <field name="map_longitude" />
+                <field name="map_display_address" />
+                <field name="route_summary" />
+                <field name="stage_id" />
+                <field name="vehicle_id" />
+                <field name="driver_id" />
+            </leaflet_map>
+        </field>
+    </record>
+
+    <!-- Add leaflet_map to TMS Order action -->
+    <record id="tms.action_tms_dash_order" model="ir.actions.act_window">
+        <field name="view_mode">kanban,list,form,leaflet_map</field>
+    </record>
+
+    <!-- Register leaflet_map view for TMS Order action -->
+    <record id="action_tms_order_view_map" model="ir.actions.act_window.view">
+        <field name="sequence" eval="50" />
+        <field name="view_mode">leaflet_map</field>
+        <field name="view_id" ref="view_tms_order_leaflet_map" />
+        <field name="act_window_id" ref="tms.action_tms_dash_order" />
+    </record>
+
+    <!-- Add Map button to TMS Order form -->
+    <record id="view_tms_order_form_map_button" model="ir.ui.view">
+        <field name="name">tms.order.form.map.button</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_open_route_map"
+                    type="object"
+                    string="Route Map"
+                    icon="fa-map-o"
+                    class="oe_highlight"
+                />
+                <button
+                    name="action_open_stops_map"
+                    type="object"
+                    string="Stops Map"
+                    icon="fa-map-marker"
+                    invisible="not stop_ids"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Leaflet Map View for TMS Order Stops -->
+    <record id="view_tms_order_stop_leaflet_map" model="ir.ui.view">
+        <field name="name">tms.order.stop.leaflet_map</field>
+        <field name="model">tms.order.stop</field>
+        <field name="arch" type="xml">
+            <leaflet_map
+                js_class="tms_optimizer_leaflet_map"
+                field_latitude="latitude"
+                field_longitude="longitude"
+                field_title="display_name"
+                field_address="display_address"
+                show_pin_list="1"
+                numbered_markers="1"
+                routing="1"
+                enable_navigation="1"
+                panel_title="Delivery Stops"
+                group_by="order_id"
+            >
+                <field name="display_name" />
+                <field name="partner_id" />
+                <field name="latitude" />
+                <field name="longitude" />
+                <field name="display_address" />
+                <field name="sequence" />
+                <field name="order_id" />
+            </leaflet_map>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_tms_order_stop_tree_tms" model="ir.ui.view">
+        <field name="name">tms.order.stop.tree.tms</field>
+        <field name="model">tms.order.stop</field>
+        <field name="inherit_id" ref="tms_delivery_stops.tms_order_stop_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//list/field[@name='partner_id']" position="after">
+                <field name="picking_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_tms_order_stop_form_tms" model="ir.ui.view">
+        <field name="name">tms.order.stop.form.tms</field>
+        <field name="model">tms.order.stop</field>
+        <field name="inherit_id" ref="tms_delivery_stops.tms_order_stop_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="picking_id" options="{'no_create': True}" />
+                <field name="sale_order_id" options="{'no_create': True}" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

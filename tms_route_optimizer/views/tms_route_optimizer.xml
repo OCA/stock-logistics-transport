@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Form View for TMS Route Optimizer -->
+    <record id="tms_route_optimizer_form" model="ir.ui.view">
+        <field name="name">tms.route.optimizer.form</field>
+        <field name="model">tms.route.optimizer</field>
+        <field name="arch" type="xml">
+            <form string="Route Optimizer">
+                <header>
+                    <button
+                        name="action_run_optimization"
+                        string="Run Optimization"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'draft'"
+                    />
+                    <button
+                        name="action_create_orders"
+                        string="Create Orders"
+                        type="object"
+                        class="btn-success"
+                        invisible="state != 'done'"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <!-- Planning Mode Section -->
+                    <group string="Planning Configuration">
+                        <group>
+                            <field name="name" />
+                            <field name="planning_mode" widget="radio" />
+                        </group>
+                        <group>
+                            <field name="optimization_date" />
+                            <field name="date_from" />
+                            <field name="date_to" />
+                        </group>
+                    </group>
+
+                    <!-- Start and End Locations -->
+                    <group string="Route Locations">
+                        <group>
+                            <field name="start_location_id" />
+                            <field name="end_location_id" />
+                        </group>
+                    </group>
+
+                    <!-- Vehicle Selection Section (conditional) -->
+                    <group string="Vehicle Selection">
+                        <group>
+                            <!-- Team is always required for stop filtering -->
+                            <field name="team_id" />
+                        </group>
+                        <group>
+                            <!-- Mode: By Specific Vehicles -->
+                            <field
+                                name="vehicle_ids"
+                                widget="many2many_tags"
+                                invisible="planning_mode != 'vehicles'"
+                                required="planning_mode == 'vehicles'"
+                            />
+                            <!-- Mode: By Vehicle Types -->
+                            <field
+                                name="vehicle_type_ids"
+                                widget="many2many_tags"
+                                invisible="planning_mode != 'vehicle_types'"
+                                required="planning_mode == 'vehicle_types'"
+                            />
+                            <field
+                                name="vehicles_per_type"
+                                invisible="planning_mode != 'vehicle_types'"
+                            />
+                        </group>
+                    </group>
+
+                    <!-- Optimization Constraints -->
+                    <group string="Optimization Constraints">
+                        <group>
+                            <field name="optimization_speed" widget="radio" />
+                            <field name="max_stops_per_vehicle" />
+                        </group>
+                        <group>
+                            <field name="enable_multi_day" />
+                            <field
+                                name="planning_horizon_days"
+                                invisible="not enable_multi_day"
+                            />
+                        </group>
+                    </group>
+
+                    <!-- Recalculation Options -->
+                    <group string="Recalculation Options">
+                        <group>
+                            <field name="recalculation_mode" />
+                            <field
+                                name="include_pending_orders"
+                                invisible="recalculation_mode != 'merge'"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="pending_order_ids"
+                                widget="many2many_tags"
+                                readonly="1"
+                                invisible="recalculation_mode != 'merge'"
+                            />
+                            <field
+                                name="selected_pending_order_ids"
+                                widget="many2many_tags"
+                                invisible="recalculation_mode != 'merge' or not include_pending_orders"
+                            />
+                        </group>
+                    </group>
+                    <notebook pages="optimization_notebook">
+                        <!-- Multi-day results page -->
+                        <page
+                            string="Daily Results"
+                            name="daily_results"
+                            invisible="not enable_multi_day or state != 'done'"
+                        >
+                            <field name="day_result_ids" nolabel="1">
+                                <list>
+                                    <field name="planning_date" />
+                                    <field name="total_vehicles" sum="Total" />
+                                    <field name="total_stops" sum="Total" />
+                                    <field name="total_distance" sum="Total" />
+                                    <field name="total_cost" sum="Total" />
+                                    <field name="total_packages" sum="Total" />
+                                    <field name="unassigned_count" sum="Total" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Routes" name="routes" invisible="state != 'done'">
+                            <field name="result_ids" nolabel="1">
+                                <list>
+                                    <field name="vehicle_id" />
+                                    <field name="stop_count" sum="Total" />
+                                    <field name="total_distance" sum="Total" />
+                                    <field name="total_weight" sum="Total" />
+                                    <field name="total_volume" sum="Total" />
+                                    <field name="total_packages" sum="Total" />
+                                    <field name="weight_utilization" />
+                                    <field name="volume_utilization" />
+                                    <field name="route_cost" sum="Total" />
+                                </list>
+                            </field>
+                            <group
+                                name="results"
+                                invisible="state not in ['done', 'error']"
+                            >
+                                <group name="results_left">
+                                    <field name="total_cost" />
+                                    <field name="total_distance" />
+                                </group>
+                                <group name="results_right">
+                                    <field name="total_vehicles_used" />
+                                    <field name="optimization_time" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Delivery Stops" name="delivery_stops">
+                            <field name="delivery_stop_ids" nolabel="1" colspan="4">
+                                <list>
+                                    <field name="partner_id" />
+                                    <field name="weight" sum="Total" />
+                                    <field name="volume" sum="Total" />
+                                    <field name="package_count" sum="Total" />
+                                    <field name="scheduled_date" />
+                                </list>
+                            </field>
+                        </page>
+                        <page
+                            string="Raw Result"
+                            name="raw_result"
+                            invisible="state != 'done'"
+                        >
+                            <field name="optimization_result" nolabel="1" colspan="4" />
+                        </page>
+                        <page string="Error" name="error" invisible="state != 'error'">
+                            <field name="error_message" nolabel="1" colspan="4" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for TMS Route Optimizer -->
+    <record id="tms_route_optimizer_tree" model="ir.ui.view">
+        <field name="name">tms.route.optimizer.tree</field>
+        <field name="model">tms.route.optimizer</field>
+        <field name="arch" type="xml">
+            <list string="Route Optimizations">
+                <field name="name" />
+                <field name="team_id" />
+                <field name="optimization_date" />
+                <field name="total_cost" />
+                <field name="total_distance" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View for TMS Route Optimizer Result -->
+    <record id="tms_route_optimizer_result_form" model="ir.ui.view">
+        <field name="name">tms.route.optimizer.result.form</field>
+        <field name="model">tms.route.optimizer.result</field>
+        <field name="arch" type="xml">
+            <form string="Route Result">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="vehicle_id" />
+                            <field name="vehicle_type_id" />
+                            <field name="stop_count" />
+                        </group>
+                        <group>
+                            <field name="total_distance" />
+                            <field name="total_weight" />
+                            <field name="total_volume" />
+                        </group>
+                    </group>
+                    <group string="Utilization">
+                        <group>
+                            <field name="weight_utilization" widget="gauge" />
+                            <field name="volume_utilization" widget="gauge" />
+                        </group>
+                    </group>
+                    <group string="Costs">
+                        <group>
+                            <field name="route_cost" />
+                            <field name="cost_per_km" />
+                        </group>
+                    </group>
+                    <group string="Navigation">
+                        <group>
+                            <field name="google_maps_url" widget="url" />
+                        </group>
+                    </group>
+                    <group string="Stops">
+                        <field name="stop_ids" nolabel="1" colspan="4">
+                            <list>
+                                <field name="partner_id" />
+                                <field name="weight" />
+                                <field name="volume" />
+                            </list>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View for TMS Route Optimizer Result -->
+    <record id="tms_route_optimizer_result_tree" model="ir.ui.view">
+        <field name="name">tms.route.optimizer.result.tree</field>
+        <field name="model">tms.route.optimizer.result</field>
+        <field name="arch" type="xml">
+            <list string="Route Results">
+                <field name="vehicle_id" />
+                <field name="stop_count" />
+                <field name="total_distance" />
+                <field name="total_weight" />
+                <field name="weight_utilization" />
+                <field name="route_cost" />
+            </list>
+        </field>
+    </record>
+</odoo>
