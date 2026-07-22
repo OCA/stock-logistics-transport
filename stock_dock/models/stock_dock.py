@@ -7,6 +7,7 @@ from odoo import fields, models
 class StockDock(models.Model):
     _name = "stock.dock"
     _description = "Dock, used by trucks to load/unload goods"
+    _check_company_auto = True
 
     name = fields.Char(required=True)
     barcode = fields.Char()
@@ -17,17 +18,12 @@ class StockDock(models.Model):
         string="Warehouse",
         required=True,
         check_company=True,
-        default=lambda self: self._default_warehouse_id(),
     )
     company_id = fields.Many2one(
         comodel_name="res.company",
         string="Company",
-        related="warehouse_id.company_id",
+        default=lambda self: self.env.company,
         readonly=True,
-        store=True,
         index=True,
+        required=True,
     )
-
-    def _default_warehouse_id(self):
-        wh = self.env.ref("stock.warehouse0", raise_if_not_found=False)
-        return wh.id or False
