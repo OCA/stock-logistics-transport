@@ -664,6 +664,11 @@ msgid "Default Weight UoM"
 msgstr ""
 
 #. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_delivery_carrier_id
+msgid "Default delivery method used in sales orders."
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
 msgid "Defines how this stage is evaluated as completed stage"
 msgstr ""
@@ -671,6 +676,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__trust
 msgid "Degree of trust you have in this debtor"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_delivery_carrier_id
+msgid "Delivery Method"
 msgstr ""
 
 #. module: tms
