@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[shipment_advice](shipment_advice/) | 17.0.1.0.0 | <a href='https://github.com/jbaudoux'><img src='https://github.com/jbaudoux.png' width='32' height='32' style='border-radius:50%;' alt='jbaudoux'/></a> | Manage your (un)loading process through shipment advices.
 [stock_depot](stock_depot/) | 17.0.1.0.0 |  | This module allows users to manage partners stock depots.
 [stock_dock](stock_dock/) | 17.0.1.0.0 |  | Manage the loading docks of your warehouse.
 [stock_location_address](stock_location_address/) | 17.0.1.0.0 |  | Adds an address on locations
