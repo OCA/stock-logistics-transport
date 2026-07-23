@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,6 +16,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
 msgid "%(sa)s: %(pick)s background validation"
 msgstr ""
 
@@ -72,6 +73,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
 msgid ""
 "An error occurred while processing:\n"
 "- %(related_object_name)s: %(error)s"
@@ -90,6 +92,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
 msgid "Arrival date should be set on the shipment advice %s."
 msgstr ""
 
@@ -252,6 +255,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
 msgid "Dock should be set on the shipment advice %s."
 msgstr ""
 
@@ -425,6 +429,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "Lines to include have been updated, keeping only those qualified as "
 "delivery."
@@ -558,6 +563,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
+#, python-format
 msgid ""
 "Moves to include have been updated to match the selected shipment type."
 msgstr ""
@@ -565,6 +571,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
+#, python-format
 msgid ""
 "Moves to include have been updated, keeping only those still in progress and"
 " related to a delivery/reception."
@@ -573,6 +580,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
+#, python-format
 msgid ""
 "Moves to include have been updated, keeping only those still in progress and"
 " related to a shipment."
@@ -591,6 +599,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
+#, python-format
 msgid "Moves updated"
 msgstr ""
 
@@ -627,6 +636,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
+#, python-format
 msgid ""
 "No move to plan among selected ones (already done, linked to other moves "
 "through a package, or not related to a delivery/reception)."
@@ -635,6 +645,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
+#, python-format
 msgid ""
 "No move to unplan among selected ones (already done, linked to other moves "
 "through a package, or not related to a shipment)."
@@ -643,6 +654,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "No package to load among selected ones (already done or not qualified as "
 "delivery)."
@@ -651,6 +663,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "No product to load among selected ones (already done or not qualified as "
 "delivery)."
@@ -659,6 +672,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
+#, python-format
 msgid ""
 "No product to unload among selected ones (already done or not related to a "
 "shipment)."
@@ -667,6 +681,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "No transfer to load among selected ones (already done or not qualified as "
 "delivery)."
@@ -675,6 +690,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
+#, python-format
 msgid ""
 "No transfer to plan among selected ones (already done or not qualified as "
 "deliveries/receptions)."
@@ -683,6 +699,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
+#, python-format
 msgid ""
 "No transfer to unload among selected ones (already done or not related to a "
 "shipment)."
@@ -691,6 +708,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
+#, python-format
 msgid ""
 "No transfer to unplan among selected ones (already done or not related to a "
 "shipment)."
@@ -699,6 +717,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
+#, python-format
 msgid ""
 "Nothing to load for %(product)s.\n"
 "Picking: %(picking)s"
@@ -774,6 +793,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "Packages to include have been updated, keeping only those qualified as "
 "delivery."
@@ -787,6 +807,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "Packages to load have been updated to match the selected shipment type."
 msgstr ""
@@ -794,6 +815,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid "Packages updated"
 msgstr ""
 
@@ -858,24 +880,28 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid "Please select at least one record to load in a shipment."
 msgstr ""
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
+#, python-format
 msgid "Please select at least one record to plan in a shipment."
 msgstr ""
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
+#, python-format
 msgid "Please select at least one record to unload from shipment."
 msgstr ""
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
+#, python-format
 msgid "Please select at least one record to unplan from shipment."
 msgstr ""
 
@@ -904,6 +930,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
+#, python-format
 msgid ""
 "Products to include have been updated, keeping only those still in progress "
 "and related to a shipment."
@@ -917,6 +944,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "Products to load have been updated to match the selected shipment type."
 msgstr ""
@@ -929,6 +957,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid "Products updated"
 msgstr ""
 
@@ -967,24 +996,29 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
 msgid "Shipment %s is not canceled, operation aborted."
 msgstr ""
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
 msgid "Shipment %s is not confirmed, operation aborted."
 msgstr ""
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
 msgid "Shipment %s is not draft, operation aborted."
 msgstr ""
 
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
+#: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
 msgid "Shipment %s is not started, operation aborted."
 msgstr ""
 
@@ -1074,6 +1108,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/shipment_advice.py:0
+#, python-format
 msgid ""
 "The following pickings failed to validate\n"
 "%s"
@@ -1103,6 +1138,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
+#, python-format
 msgid ""
 "This move is already loaded  in another shipment.\n"
 "Product: %(product)s.\n"
@@ -1179,6 +1215,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
+#, python-format
 msgid ""
 "Transfers to include have been updated to match the selected shipment type."
 msgstr ""
@@ -1186,6 +1223,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "Transfers to include have been updated, keeping only those assigned and "
 "qualified as delivery."
@@ -1194,6 +1232,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
+#, python-format
 msgid ""
 "Transfers to include have been updated, keeping only those still in progress"
 " and qualified as delivery/reception."
@@ -1203,6 +1242,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/shipment_advice/wizards/unload_shipment.py:0
 #: code:addons/shipment_advice/wizards/unplan_shipment.py:0
+#, python-format
 msgid ""
 "Transfers to include have been updated, keeping only those still in progress"
 " and related to a shipment."
@@ -1216,6 +1256,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "Transfers to load have been updated to match the selected shipment type."
 msgstr ""
@@ -1239,6 +1280,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
 #: code:addons/shipment_advice/wizards/plan_shipment.py:0
+#, python-format
 msgid "Transfers updated"
 msgstr ""
 
@@ -1381,6 +1423,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/wizards/load_shipment.py:0
+#, python-format
 msgid ""
 "You cannot load move lines which are part of a package, unless you select "
 "all the move lines related to this package."
@@ -1389,6 +1432,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
+#, python-format
 msgid ""
 "You cannot load this into this shipment as it has been planned to be loaded "
 "in %s"
@@ -1397,6 +1441,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
+#, python-format
 msgid ""
 "You cannot load this into this shipment because its content is planned already.\n"
 "%(info)s"
@@ -1405,6 +1450,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
+#, python-format
 msgid ""
 "You cannot load this move line alone, you have to move the whole package content.\n"
 "%(info)s"
@@ -1413,6 +1459,7 @@ msgstr ""
 #. module: shipment_advice
 #. odoo-python
 #: code:addons/shipment_advice/models/stock_move_line.py:0
+#, python-format
 msgid ""
 "You cannot unload this move line alone, you have to unload the whole package"
 " content."
