@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="paperformat_euro_landscape" model="report.paperformat">
+        <field name="name">A4</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">40</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+    <record id="action_report_shipment_advice" model="ir.actions.report">
+        <field name="name">Shipment Advice</field>
+        <field name="model">shipment.advice</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">shipment_advice.report_shipment_advice</field>
+        <field name="report_file">shipment_advice.report_shipment_advice</field>
+        <field name="paperformat_id" ref="shipment_advice.paperformat_euro_landscape" />
+        <field name="print_report_name">'Shipment Advice - %s' % (object.name)</field>
+        <field name="binding_model_id" ref="model_shipment_advice" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

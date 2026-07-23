@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Camptocamp SA
+     Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.shipment.advice</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='use_own_routes']" position="after">
+                <setting
+                    id="shipment_advice_backorder_policy"
+                    title="Backorder Policy for Outgoing Shipments"
+                    help="Configure how outgoing shipment advice handles backorders for deliveries"
+                >
+                    <div class="o_setting_right_pane">
+                        <label for="shipment_advice_outgoing_backorder_policy" />
+                        <div class="text-muted">
+                            If you want that closing an outgoing shipment advice marks as
+                            done all related deliveries and create backorder in case of
+                            partial choose 'Create backorder'.
+                            If you want to mark deliveries as done only when they are all
+                            loaded in a shipment advice choose 'Leave open'. This last option
+                            is useful when your deliveries will be shipped by several trucks.
+                        </div>
+                        <field name="shipment_advice_outgoing_backorder_policy" />
+                    </div>
+                </setting>
+
+                <setting
+                    id="shipment_advice_run_in_queue_job"
+                    title="Use Queue Jobs for Shipment Advice"
+                    help="Process shipment advice validation through queued jobs to handle large shipments"
+                >
+                    <field name="shipment_advice_run_in_queue_job" />
+                    <div class="content-group">
+                        <div class="text-muted">
+                            To prevent timeouts for large shipments, enable this option to execute
+                            shipment advice validation through a queued job. Each picking will be
+                            validated in a separate jobs.
+                        </div>
+                    </div>
+                </setting>
+
+                <setting
+                    id="shipment_advice_auto_close_incoming"
+                    title="Auto-close Incoming Shipments"
+                    help="Automatically close incoming shipment advice when all moves are completed"
+                >
+                    <field name="shipment_advice_auto_close_incoming" />
+                    <div class="content-group">
+                        <div class="text-muted">
+                            This flag indicates if an incoming shipment advice
+                            will be automatically set to done
+                            if all related moves are done or canceled
+                        </div>
+                    </div>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
