@@ -19,6 +19,7 @@ class TestShipmentAdvicePlan(Common):
         self.assertEqual(wiz.shipment_advice_id, self.shipment_advice_out)
         self.assertEqual(wiz.shipment_advice_id.planned_picking_ids, picking)
         self.assertEqual(wiz.shipment_advice_id.planned_pickings_count, 1)
+        wiz.shipment_advice_id.action_send_email()
         self.assertEqual(wiz.shipment_advice_id.planned_move_ids, picking.move_ids)
         self.assertEqual(wiz.shipment_advice_id.planned_moves_count, 3)
 

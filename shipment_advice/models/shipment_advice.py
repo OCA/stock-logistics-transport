@@ -729,6 +729,37 @@ class ShipmentAdvice(models.Model):
         action["domain"] = [("id", "in", self.planned_picking_ids.ids)]
         return action
 
+    def action_send_email(self):
+        """Opens a wizard to compose an email, with relevant mail template
+        loaded by default"""
+        self.ensure_one()
+        self.env.context.get("lang")
+        mail_template_id = self.env["ir.model.data"]._xmlid_to_res_id(
+            "shipment_advice.email_template_shipment_advice",
+            raise_if_not_found=False,
+        )
+        if mail_template_id:
+            mail_template = self.env["mail.template"].browse(mail_template_id)
+            if mail_template.lang:
+                mail_template._render_lang(self.ids)[self.id]
+        ctx = {
+            "default_model": self._name,
+            "default_res_id": self.id,
+            "default_use_template": bool(mail_template_id),
+            "default_template_id": mail_template.id if mail_template_id else None,
+            "default_composition_mode": "comment",
+            "force_email": True,
+        }
+        return {
+            "type": "ir.actions.act_window",
+            "view_mode": "form",
+            "res_model": "mail.compose.message",
+            "views": [(False, "form")],
+            "view_id": False,
+            "target": "new",
+            "context": ctx,
+        }
+
 
 class ShipmentAdvicePlannedPickingOrder(models.Model):
     _name = "shipment.advice.planned.picking.order"

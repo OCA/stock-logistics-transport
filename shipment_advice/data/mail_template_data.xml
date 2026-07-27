@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="email_template_shipment_advice" model="mail.template">
+        <field name="name">Shipment Advice: Send by email</field>
+        <field name="model_id" ref="shipment_advice.model_shipment_advice" />
+        <field
+            name="subject"
+        >Shipment Advice {{ object.name or 'n/a' }} {{ format_date(object.departure_date) }} </field>
+        <field
+            name="email_from"
+        >{{ user.email_formatted or object.company_id.partner_id.email_formatted
+            }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;"> Dear, <br /><br
+                    /> This
+                    shipment advice has been planned with departure date <t
+                        t-out="format_date(object.departure_date) or ''"
+                        data-oe-t-inline="true"
+                    /> and arrival date <t
+                        t-out="format_date(object.arrival_date) or ''"
+                        data-oe-t-inline="true"
+                    /> <t
+                        t-out="'from ' + object.dock_id.name"
+                        t-if="object.dock_id"
+                    />. <br /><br />
+                    <h3>Pickings</h3>
+                    <table
+                        cellspacing="0"
+                        cellpadding="0"
+                        width="100%"
+                        style="margin-top:30px;color:#666666;"
+                    >
+                        <thead>
+                            <tr style="color:#9A6C8E; font-size:12px;">
+                                <th
+                                    align="left"
+                                    style="padding-bottom: 0px;width:10%;text-align:left;"
+                                >Origin</th>
+                                <th
+                                    style="width:50%;text-align:right;"
+                                    align="right"
+                                >Address</th>
+                                <th
+                                    style="width:10%;text-align:right;"
+                                    align="right"
+                                >Weight (kg)</th>
+                                <th
+                                    style="width:20%;text-align:right;"
+                                    align="right"
+                                >Products</th>
+                            </tr>
+                            <tr>
+                                <td
+                                    colspan="5"
+                                    style="height:1px;background-color:#9A6C8E;"
+                                />
+                            </tr>
+                        </thead>
+                        <tbody
+                            t-foreach="object.planned_picking_ids.sorted(lambda picking: picking.with_context(active_shipment_advice_id=object.id).sequence_in_shipment_advice)"
+                            t-as="picking"
+                        >
+                            <tr style="font-weight:bold;">
+                                <td align="left">
+                                    <t t-out="picking.origin or ''" />
+                                </td>
+                                <td align="right">
+                                    <t
+                                        t-out="picking.partner_id.contact_address or ''"
+                                    />
+                                </td>
+                                <td align="right">
+                                    <t t-out="picking.weight or ''" />
+                                </td>
+                                <td align="right">
+                                    <t
+                                        t-set="product_names"
+                                        t-value="set(picking.move_line_ids.mapped('product_id.name'))"
+                                    />
+                                    <t t-if="len(product_names) == 1">
+                                    <t t-out="', '.join(product_names) or ''" />
+                                    </t>
+                                    <t t-else="">
+                                        <t t-out="len(product_names)" />
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    colspan="5"
+                                    style="height:1px;background-color:#e3e3e3;"
+                                />
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                Please review attached shipment advice report for more details.<br /><br
+                    />
+                Do not hesitate to contact us if you have any questions. <br />
+                    <t t-if="user.signature">
+                        <br />
+                        <t t-out="user.signature or ''" />
+                    </t>
+                </p>
+            </div>
+        </field>
+        <field name="report_template" ref="action_report_shipment_advice" />
+        <field
+            name="report_name"
+        >{{ (object.name or 'Shipment Advice').replace('/','_') }}</field>
+        <field name="lang">{{ user.lang }}</field>
+        <field name="auto_delete" eval="True" />
+    </record>
+</odoo>

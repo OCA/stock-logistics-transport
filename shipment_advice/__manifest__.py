@@ -34,6 +34,7 @@
         "wizards/unload_shipment.xml",
         "report/reports.xml",
         "report/report_shipment_advice.xml",
+        "data/mail_template_data.xml",
     ],
     "demo": ["demo/stock_dock.xml"],
     "license": "AGPL-3",
