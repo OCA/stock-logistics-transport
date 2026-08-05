@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 
 from odoo import fields
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase
 
 
@@ -10,6 +11,11 @@ class TestTmsDocument(TransactionCase):
         super().setUpClass()
         cls.holder = cls.env["tms.driver"].create({"name": "Doc Holder"})
         cls.Doc = cls.env["tms.document"]
+        # Disable core inline insurance/license checks to isolate our guard.
+        ICP = cls.env["ir.config_parameter"].sudo()
+        ICP.set_param("tms.default_vehicle_insurance_security_days", "0")
+        ICP.set_param("tms.default_driver_license_security_days", "0")
+        cls.order = cls.env["tms.order"].create({"driver_id": cls.holder.id})
 
     def _doc(self, expiry):
         return self.Doc.create({
@@ -43,3 +49,15 @@ class TestTmsDocument(TransactionCase):
         self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
         self.assertEqual(len(self.holder.document_ids), 1)
         self.assertEqual(self.holder.document_ids.state, "valid")
+
+    def test_start_blocked_when_critical_expired(self):
+        doc = self._doc(fields.Date.to_date(date.today()) - timedelta(days=1))
+        doc.critical = True
+        with self.assertRaises(UserError):
+            self.order.button_start_order()
+
+    def test_start_ok_when_no_critical_expired(self):
+        doc = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        doc.critical = True
+        self.order.button_start_order()
+        self.assertTrue(self.order.start_trip)
