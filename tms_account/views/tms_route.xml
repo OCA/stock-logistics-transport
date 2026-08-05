@@ -5,7 +5,11 @@
         <field name="inherit_id" ref="tms.view_tms_route_form" />
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page name="accounting" string="Accounting">
+                <page
+                    name="accounting"
+                    string="Accounting"
+                    groups="analytic.group_analytic_accounting"
+                >
                     <group name="accounting_group">
                         <field
                             name="analytic_account_id"
@@ -23,7 +27,10 @@
         <field name="inherit_id" ref="tms.tms_route_view_list" />
         <field name="arch" type="xml">
             <xpath expr="//list" position="inside">
-                <field name="analytic_account_id" />
+                <field
+                    name="analytic_account_id"
+                    groups="analytic.group_analytic_accounting"
+                />
             </xpath>
         </field>
     </record>
