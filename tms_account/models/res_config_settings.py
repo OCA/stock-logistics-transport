@@ -20,6 +20,7 @@ class ResConfigSettings(models.TransientModel):
 
     tms_analytic_plan = fields.Many2many(
         "account.analytic.plan",
+        groups="account.group_account_user",
     )
 
     tms_analytic_plan_domain = fields.Char(
@@ -28,6 +29,13 @@ class ResConfigSettings(models.TransientModel):
         compute="_compute_tms_analytic_plan_domain",
         readonly=False,
     )
+
+    @api.model
+    def default_get(self, fields_list):
+        res = super().default_get(fields_list)
+        if not self.env.user.has_group("account.group_account_user"):
+            res.pop("tms_analytic_plan", None)
+        return res
 
     @api.depends("tms_analytic_plan", "group_tms_route", "group_analytic_accounting")
     def _compute_tms_analytic_plan_domain(self):
@@ -59,7 +67,7 @@ class ResConfigSettings(models.TransientModel):
         res = super().set_values()
         parameter = self.env["ir.config_parameter"].sudo()
         parameter.set_param(
-            "tms_account.tms_analytic_plan_ids", self.tms_analytic_plan.ids
+            "tms_account.tms_analytic_plan_ids", self.sudo().tms_analytic_plan.ids
         )
         return res
 
