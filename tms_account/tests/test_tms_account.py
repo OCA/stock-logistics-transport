@@ -90,6 +90,21 @@ class TestTMSRouteAccount(TestTMSAccountCommon):
         self.assertTrue(route.analytic_account_id)
         self.assertEqual(route.analytic_account_id.plan_id, self.route_plan)
 
+    def test_route_create_without_analytic_group(self):
+        # Plan group granted without analytic accounting access: the route
+        # must be created without an analytic account, not crash.
+        self.env.user.group_ids = [
+            (6, 0, [self.route_plan_group.id, self.tms_user_group.id, self.route_group.id])
+        ]
+        route = self.env["tms.route"].create(
+            {
+                "name": "Route C",
+                "origin_location_id": self.origin.id,
+                "destination_location_id": self.destination.id,
+            }
+        )
+        self.assertFalse(route.analytic_account_id)
+
     def test_route_total_revenue(self):
         self.route.write({"total_income": 100, "total_expenses": 40})
         self.assertEqual(self.route.total_revenue, 60)
