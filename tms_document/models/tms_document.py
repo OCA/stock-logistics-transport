@@ -25,7 +25,6 @@ class TmsDocument(models.Model):
     state = fields.Selection(
         [("valid", "Valid"), ("expiring", "Expiring"), ("expired", "Expired")],
         compute="_compute_state",
-        string="State",
         store=False,
     )
     critical = fields.Boolean(
@@ -35,8 +34,10 @@ class TmsDocument(models.Model):
     datas = fields.Binary(string="File", attachment=True)
     notes = fields.Text()
     company_id = fields.Many2one(
-        "res.company", string="Company",
-        default=lambda self: self.env.company, required=True,
+        "res.company",
+        string="Company",
+        default=lambda self: self.env.company,
+        required=True,
     )
     active = fields.Boolean(default=True)
 
