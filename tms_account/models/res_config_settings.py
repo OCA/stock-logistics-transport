@@ -69,8 +69,8 @@ class ResConfigSettings(models.TransientModel):
             record.group_tms_route_analytic_plan = False
             record.group_tms_order_analytic_plan = False
 
-            for plan in record.tms_analytic_plan:
-                if plan == self.env.ref("tms_account.tms_route_analytic_plan"):
+            for plan in record.sudo().tms_analytic_plan:
+                if plan.id == self.env.ref("tms_account.tms_route_analytic_plan").id:
                     record.group_tms_route_analytic_plan = True
-                if plan == self.env.ref("tms_account.tms_order_analytic_plan"):
+                if plan.id == self.env.ref("tms_account.tms_order_analytic_plan").id:
                     record.group_tms_order_analytic_plan = True
