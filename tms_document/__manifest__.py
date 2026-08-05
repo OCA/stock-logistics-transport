@@ -17,5 +17,9 @@
         "security/res_groups.xml",
         "security/ir.model.access.csv",
         "data/ir_config_parameter.xml",
+        "views/tms_document_views.xml",
+        "views/tms_driver_views.xml",
+        "views/fleet_vehicle_views.xml",
+        "views/menu.xml",
     ],
 }
