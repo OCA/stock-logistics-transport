@@ -13,5 +13,8 @@
     "installable": True,
     "application": False,
     "depends": ["tms"],
-    "data": [],
+    "data": [
+        "security/res_groups.xml",
+        "security/ir.model.access.csv",
+    ],
 }
