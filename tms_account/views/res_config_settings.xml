@@ -10,6 +10,7 @@
                 <setting
                     help="Manage analytic account for trips or routes."
                     invisible="not module_tms_account"
+                    groups="account.group_account_user"
                 >
                     <field name="group_analytic_accounting" />
                     <span />
