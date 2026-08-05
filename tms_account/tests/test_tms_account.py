@@ -206,6 +206,44 @@ class TestResConfigSettings(TestTMSAccountCommon):
         self.assertTrue(settings.group_tms_order_analytic_plan)
 
 
+class TestResConfigSettingsNoAccount(TestTMSAccountCommon):
+    """Users without account.analytic.plan access must still be able to
+    open and save the Settings page (regression test: the tms_analytic_plan
+    m2m write used to raise AccessError on create)."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.no_account_user = cls.env["res.users"].create(
+            {
+                "name": "No Account User",
+                "login": "no_account_user",
+                "group_ids": [
+                    (
+                        6,
+                        0,
+                        [
+                            cls.env.ref("base.group_user").id,
+                            cls.env.ref("base.group_system").id,
+                        ],
+                    )
+                ],
+            }
+        )
+        cls.no_account_env = cls.env(user=cls.no_account_user)
+
+    def test_default_get_omits_analytic_plan(self):
+        settings = self.no_account_env["res.config.settings"].new({})
+        defaults = settings.default_get(["tms_analytic_plan"])
+        self.assertNotIn("tms_analytic_plan", defaults)
+
+    def test_settings_create_get_and_set_values(self):
+        settings = self.no_account_env["res.config.settings"].create({})
+        settings.set_values()
+        values = self.no_account_env["res.config.settings"].create({}).get_values()
+        self.assertFalse(values["tms_analytic_plan"])
+
+
 class TestSaleOrderLineAnalytic(TestTMSAccountCommon):
     def test_default_analytic_distribution(self):
         self.env.user.group_ids = [
