@@ -82,9 +82,7 @@ class ResConfigSettings(models.TransientModel):
             record.group_tms_route_analytic_plan = False
             record.group_tms_order_analytic_plan = False
 
-            if not self.env.user.has_group(
-                "analytic.group_analytic_accounting"
-            ):
+            if not self.env.user.has_group("analytic.group_analytic_accounting"):
                 continue
             for plan in record.sudo().tms_analytic_plan:
                 if plan.id == self.env.ref("tms_account.tms_route_analytic_plan").id:
