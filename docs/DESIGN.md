@@ -147,13 +147,14 @@ A single polymorphic, expiry-tracked document model. **Replaces the idea of dupl
 ```
 tms.document
  ├─ res_model / res_id            polymorphic holder (tms.driver, fleet.vehicle, …)
- ├─ holder_id (computed M2o to the holder record, for convenience/links)
+ ├─ res_ref           Reference (computed)  → the holder record, for convenience/links
  ├─ doc_type          Selection  (extensible: license, insurance, inspection, adr_vehicle, …)
  ├─ name / reference  Char       (e.g. "SRC2-123456")
  ├─ issue_date / expiry_date     Date
  ├─ datas             Binary (attachment=True, widget=binary)   ← the file
- ├─ state             Selection {valid, expiring, expired}  (computed, store=True)
+ ├─ state             Selection {valid, expiring, expired}  (compute, NOT stored)
  ├─ critical          Boolean    ← if true, expiry blocks button_start_order
+ ├─ active            Boolean    ← archive instead of delete
  ├─ notes             Text
  └─ company_id
 ```
@@ -214,6 +215,8 @@ The core uses kanban `tms.stage` (`stage_type='order'`). Typical stages: *New �
 ```
 - `expiring` horizon configurable (default 30 days).
 - `expired` + `critical=True` ⇒ blocks `button_start_order` for the holder's active order.
+
+> **Note:** `state` is a **non-stored** computed field — it is derived from `expiry_date` on read. Filters/domains must search on `expiry_date` (and the configured horizon), never on `state`.
 
 ### 5.3 `tms.driver` / `fleet.vehicle` — stages (existing); document checks layered on top.
 
