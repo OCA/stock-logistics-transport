@@ -20,16 +20,25 @@ class TmsOrder(models.Model):
         if self.vehicle_id:
             holders.append(("fleet.vehicle", self.vehicle_id))
         for model, holder in holders:
-            expired = self.env["tms.document"].search(
-                [
-                    ("res_model", "=", model),
-                    ("res_id", "=", holder.id),
-                    ("critical", "=", True),
-                    ("expiry_date", "<", today),
-                ]
+            expired = (
+                self.env["tms.document"]
+                .sudo()
+                .search(
+                    [
+                        ("res_model", "=", model),
+                        ("res_id", "=", holder.id),
+                        ("critical", "=", True),
+                        ("expiry_date", "<", today),
+                    ]
+                )
             )
             if expired:
-                names = ", ".join(f"{d.name} ({d.doc_type})" for d in expired)
+                labels = dict(
+                    expired.fields_get(allfields=["doc_type"])["doc_type"]["selection"]
+                )
+                names = ", ".join(
+                    f"{d.name} ({labels.get(d.doc_type, d.doc_type)})" for d in expired
+                )
                 raise UserError(
                     self.env._(
                         "Cannot start the trip: %(holder)s has expired critical "

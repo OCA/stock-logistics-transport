@@ -28,6 +28,13 @@ class TestTmsDocument(TransactionCase):
             }
         )
 
+    def _make_vehicle(self):
+        brand = self.env["fleet.vehicle.model.brand"].create({"name": "Test Brand"})
+        model = self.env["fleet.vehicle.model"].create(
+            {"name": "Test Model", "brand_id": brand.id}
+        )
+        return self.env["fleet.vehicle"].create({"model_id": model.id})
+
     def test_state_valid(self):
         d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
         self.assertEqual(d.state, "valid")
@@ -63,3 +70,39 @@ class TestTmsDocument(TransactionCase):
         doc.critical = True
         self.order.button_start_order()
         self.assertTrue(self.order.start_trip)
+
+    def test_start_blocked_when_vehicle_critical_expired(self):
+        vehicle = self._make_vehicle()
+        doc = self.Doc.create(
+            {
+                "res_model": "fleet.vehicle",
+                "res_id": vehicle.id,
+                "doc_type": "insurance",
+                "name": "INS-1",
+                "expiry_date": fields.Date.to_date(date.today()) - timedelta(days=1),
+            }
+        )
+        doc.critical = True
+        order = self.env["tms.order"].create({"vehicle_id": vehicle.id})
+        with self.assertRaises(UserError):
+            order.button_start_order()
+
+    def test_start_ok_when_expired_but_not_critical(self):
+        doc = self._doc(fields.Date.to_date(date.today()) - timedelta(days=1))
+        doc.critical = False
+        self.order.button_start_order()
+        self.assertTrue(self.order.start_trip)
+
+    def test_start_ok_when_critical_expiring(self):
+        doc = self._doc(fields.Date.to_date(date.today()) + timedelta(days=5))
+        doc.critical = True
+        self.order.button_start_order()
+        self.assertTrue(self.order.start_trip)
+
+    def test_state_expiring_on_today_boundary(self):
+        d = self._doc(fields.Date.to_date(date.today()))
+        self.assertEqual(d.state, "expiring")
+
+    def test_res_ref_points_to_holder(self):
+        d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        self.assertEqual(d.res_ref, self.holder)

@@ -5,15 +5,15 @@ in:
 
 - **Document type**: e.g. driver license, vehicle insurance, inspection.
 - **Number / reference**: the reference printed on the document.
-- **Holder model** and **Holder ID**: the TMS resource the document belongs
-  to (e.g. a driver or a vehicle). You can also set the holder from the
-  driver or vehicle form directly via the *Documents* button, which
-  pre-fills these fields.
+- **Holder model** and **Holder ID** (or the *Holder* reference): the TMS
+  resource the document belongs to (e.g. a driver or a vehicle).
 - **Expiry date**: used to compute the validity state.
 - **Critical**: mark the document as critical to enforce it on trip start.
 
-Once saved, the document appears in the *Documents* tab of its holder's
-form, so all documents of a driver or vehicle are visible in one place.
+Once saved, the document appears read-only in the *Documents* tab of its
+holder's form, so all documents of a driver or vehicle are visible in one
+place. Documents are always created from the *Documents* menu — there is no
+button on the driver or vehicle form that creates or pre-fills them.
 
 ## Validity states
 
