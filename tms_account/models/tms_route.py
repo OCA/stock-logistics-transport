@@ -6,11 +6,14 @@ from odoo import api, fields, models
 class TMSRoute(models.Model):
     _inherit = "tms.route"
 
-    analytic_plan_id = fields.Many2one("account.analytic.plan")
+    analytic_plan_id = fields.Many2one(
+        "account.analytic.plan", groups="analytic.group_analytic_accounting"
+    )
     analytic_account_id = fields.Many2one(
         "account.analytic.account",
         domain=[("plan_id", "=", "%(tms_account.tms_route_analytic_plan)d")],
         copy=False,
+        groups="analytic.group_analytic_accounting",
     )
     total_revenue = fields.Float(
         default=0,

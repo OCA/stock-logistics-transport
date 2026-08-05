@@ -39,13 +39,18 @@ class ResConfigSettings(models.TransientModel):
 
     @api.depends("tms_analytic_plan", "group_tms_route", "group_analytic_accounting")
     def _compute_tms_analytic_plan_domain(self):
-        if not self.group_tms_route:
-            domain = [
-                ("tms_flag", "=", True),
-                ("id", "!=", self.env.ref("tms_account.tms_route_analytic_plan").id),
-            ]
-        else:
-            domain = [("tms_flag", "=", True)]
+        domain = [("tms_flag", "=", True)]
+        if (
+            self.env.user.has_group("analytic.group_analytic_accounting")
+            and not self.group_tms_route
+        ):
+            domain.append(
+                (
+                    "id",
+                    "!=",
+                    self.env.ref("tms_account.tms_route_analytic_plan").id,
+                )
+            )
         self.tms_analytic_plan_domain = domain
 
     @api.model
@@ -77,6 +82,10 @@ class ResConfigSettings(models.TransientModel):
             record.group_tms_route_analytic_plan = False
             record.group_tms_order_analytic_plan = False
 
+            if not self.env.user.has_group(
+                "analytic.group_analytic_accounting"
+            ):
+                continue
             for plan in record.sudo().tms_analytic_plan:
                 if plan.id == self.env.ref("tms_account.tms_route_analytic_plan").id:
                     record.group_tms_route_analytic_plan = True
