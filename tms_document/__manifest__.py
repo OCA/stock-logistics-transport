@@ -9,7 +9,7 @@
     "author": "VSL, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "maintainers": ["volkantasci"],
-    "development_status": "Beta",
+    "development_status": "Alpha",
     "installable": True,
     "application": False,
     "depends": ["tms"],

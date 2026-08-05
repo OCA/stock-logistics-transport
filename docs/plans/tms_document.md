@@ -1,12 +1,24 @@
 # `tms_document` Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use `superpowers:subagent-driven-development` (recommended) or `superpowers:executing-plans` to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use
+> `superpowers:subagent-driven-development` (recommended) or
+> `superpowers:executing-plans` to implement this plan task-by-task. Steps use checkbox
+> (`- [ ]`) syntax for tracking.
 
-**Goal:** Add `tms_document`, a generic, polymorphic, expiry-tracked document framework to the OCA `stock-logistics-transport` `19.0` repo, and wire it into the existing `tms.order.button_start_order` so that expired *critical* documents block trip start.
+**Goal:** Add `tms_document`, a generic, polymorphic, expiry-tracked document framework
+to the OCA `stock-logistics-transport` `19.0` repo, and wire it into the existing
+`tms.order.button_start_order` so that expired _critical_ documents block trip start.
 
-**Architecture:** A single `tms.document` model holds typed documents against any holder via the standard Odoo generic-relation pattern (`res_model` + `res_id`, like `ir.attachment`). Validity (`valid / expiring / expired`) is a **non-stored** compute (deliberately not stored, so it always reflects *today* — fixing the legacy store=True bug). Drivers and vehicles gain a computed One2many of their documents. `button_start_order` is extended via `super()` with a pre-check that searches expired critical documents by `expiry_date` (searchable).
+**Architecture:** A single `tms.document` model holds typed documents against any holder
+via the standard Odoo generic-relation pattern (`res_model` + `res_id`, like
+`ir.attachment`). Validity (`valid / expiring / expired`) is a **non-stored** compute
+(deliberately not stored, so it always reflects _today_ — fixing the legacy store=True
+bug). Drivers and vehicles gain a computed One2many of their documents.
+`button_start_order` is extended via `super()` with a pre-check that searches expired
+critical documents by `expiry_date` (searchable).
 
-**Tech Stack:** Odoo 19 Community (Python 3.12), OCA conventions, `TransactionCase` tests, copier `readme/` fragments.
+**Tech Stack:** Odoo 19 Community (Python 3.12), OCA conventions, `TransactionCase`
+tests, copier `readme/` fragments.
 
 **Depends on:** `tms`. **Branch:** `19.0-add-tms_document` (already created).
 
@@ -14,15 +26,20 @@
 
 ## Conventions (verified against the existing core)
 
-- **Groups** use Odoo 19 `res.groups.privilege` + `res.groups.privilege_id` (NOT `ir.module.category`). Existing: `tms.group_tms_user`, `tms.group_tms_admin`.
-- **Access CSV** format: `id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink`; `user`=read-only, `admin`=full.
-- **Tests** in `tests/test_*.py`, registered in `tests/__init__.py`, class `TransactionCase` with `@classmethod setUpClass`.
+- **Groups** use Odoo 19 `res.groups.privilege` + `res.groups.privilege_id` (NOT
+  `ir.module.category`). Existing: `tms.group_tms_user`, `tms.group_tms_admin`.
+- **Access CSV** format:
+  `id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink`;
+  `user`=read-only, `admin`=full.
+- **Tests** in `tests/test_*.py`, registered in `tests/__init__.py`, class
+  `TransactionCase` with `@classmethod setUpClass`.
 - **License header** on every Python file:
   ```python
   # Copyright (C) 2026 VSL
   # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
   ```
-- **`button_start_order`** lives in `tms/models/tms_order.py`; we extend, do not replace.
+- **`button_start_order`** lives in `tms/models/tms_order.py`; we extend, do not
+  replace.
 
 ---
 
@@ -65,14 +82,17 @@ tms_document/
 
 ## Task 1: Module skeleton (installs cleanly)
 
-**Files:** Create `tms_document/__init__.py`, `tms_document/__manifest__.py`, `tms_document/models/__init__.py`.
+**Files:** Create `tms_document/__init__.py`, `tms_document/__manifest__.py`,
+`tms_document/models/__init__.py`.
 
 - [ ] **Step 1: `tms_document/__init__.py`**
+
 ```python
 from . import models
 ```
 
 - [ ] **Step 2: `tms_document/models/__init__.py`**
+
 ```python
 from . import tms_document
 from . import tms_driver
@@ -81,6 +101,7 @@ from . import tms_order
 ```
 
 - [ ] **Step 3: `tms_document/__manifest__.py`**
+
 ```python
 # Copyright (C) 2026 VSL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -108,18 +129,24 @@ from . import tms_order
     ],
 }
 ```
-(The `models/*.py` imports in Step 2 will fail until Tasks 3–6 land; temporarily comment out `tms_driver`, `fleet_vehicle`, `tms_order` imports for the Task-1 install check, then restore.)
+
+(The `models/*.py` imports in Step 2 will fail until Tasks 3–6 land; temporarily comment
+out `tms_driver`, `fleet_vehicle`, `tms_order` imports for the Task-1 install check,
+then restore.)
 
 - [ ] **Step 4: Install check**
+
 ```bash
 docker compose -f ~/dev/odoo/docker-compose.yml stop web
 docker compose -f ~/dev/odoo/docker-compose.yml run --rm web odoo \
   -d odoo -i tms_document --stop-after-init
 docker compose -f ~/dev/odoo/docker-compose.yml up -d web
 ```
+
 Expected: module installs (no models yet beyond placeholder).
 
 - [ ] **Step 5: Commit**
+
 ```bash
 git add tms_document
 git commit -m "[ADD] tms_document: module skeleton"
@@ -129,9 +156,12 @@ git commit -m "[ADD] tms_document: module skeleton"
 
 ## Task 2: Security group + access rights
 
-**Files:** Create `tms_document/security/res_groups.xml`, `tms_document/security/ir.model.access.csv`. Test: `tms_document/tests/__init__.py`, `tms_document/tests/test_security.py`.
+**Files:** Create `tms_document/security/res_groups.xml`,
+`tms_document/security/ir.model.access.csv`. Test: `tms_document/tests/__init__.py`,
+`tms_document/tests/test_security.py`.
 
 - [ ] **Step 1: Failing test** — `tests/test_security.py`
+
 ```python
 from odoo.tests.common import TransactionCase
 
@@ -142,35 +172,40 @@ class TestSecurity(TransactionCase):
 ```
 
 - [ ] **Step 2: `tests/__init__.py`**
+
 ```python
 from . import test_security
 ```
 
 - [ ] **Step 3: Run — expect FAIL**
+
 ```bash
 docker compose -f ~/dev/odoo/docker-compose.yml stop web
 docker compose -f ~/dev/odoo/docker-compose.yml run --rm web odoo \
   --test-enable -d odoo -i tms_document --test-tags=/tms_document:TestSecurity --stop-after-init
 ```
+
 Expected: FAIL — External ID `tms_document.group_tms_document` not found.
 
 - [ ] **Step 4: Implement** — `security/res_groups.xml`
+
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="privilege_tms_document" model="res.groups.privilege">
-        <field name="name">Manage TMS Documents</field>
-        <field name="category_id" ref="base.module_category_hidden"/>
-    </record>
-    <record id="group_tms_document" model="res.groups">
-        <field name="name">Manage TMS Documents</field>
-        <field name="privilege_id" ref="privilege_tms_document"/>
-        <field name="implied_ids" eval="[(4, ref('tms.group_tms_user'))]"/>
-    </record>
+  <record id="privilege_tms_document" model="res.groups.privilege">
+    <field name="name">Manage TMS Documents</field>
+    <field name="category_id" ref="base.module_category_hidden" />
+  </record>
+  <record id="group_tms_document" model="res.groups">
+    <field name="name">Manage TMS Documents</field>
+    <field name="privilege_id" ref="privilege_tms_document" />
+    <field name="implied_ids" eval="[(4, ref('tms.group_tms_user'))]" />
+  </record>
 </odoo>
 ```
 
 - [ ] **Step 5: `security/ir.model.access.csv`** (one row; will grow as models land)
+
 ```csv
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_tms_document_user,tms.document.user,tms_document.model_tms_document,tms.group_tms_user,1,0,0,0
@@ -178,6 +213,7 @@ access_tms_document_admin,tms.document.admin,tms_document.model_tms_document,tms
 ```
 
 - [ ] **Step 6: Run — PASS.** Commit.
+
 ```bash
 git add tms_document
 git commit -m "[ADD] tms_document: security group and access"
@@ -187,9 +223,11 @@ git commit -m "[ADD] tms_document: security group and access"
 
 ## Task 3: `tms.document` model with expiry compute (TDD)
 
-**Files:** Create `tms_document/models/tms_document.py`. Test: `tests/test_tms_document.py`.
+**Files:** Create `tms_document/models/tms_document.py`. Test:
+`tests/test_tms_document.py`.
 
 - [ ] **Step 1: Failing test** — `tests/test_tms_document.py`
+
 ```python
 from datetime import date, timedelta
 
@@ -227,6 +265,7 @@ class TestTmsDocument(TransactionCase):
 ```
 
 - [ ] **Step 2: Register test** — `tests/__init__.py`
+
 ```python
 from . import test_security
 from . import test_tms_document
@@ -235,6 +274,7 @@ from . import test_tms_document
 - [ ] **Step 3: Run — FAIL** (`tms.document` model missing).
 
 - [ ] **Step 4: Implement** — `models/tms_document.py`
+
 ```python
 # Copyright (C) 2026 VSL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -312,11 +352,17 @@ class TmsDocument(models.Model):
             else:
                 rec.state = "valid"
 ```
-(`timedelta_horizon(n)` and `_get_expiry_horizon_days()` are defined in Task 4; for now inline a helper so tests pass: read `ir.config_parameter` `tms.document.expiry_horizon_days` default 30, and `from datetime import timedelta`.)
 
-> **Why `store=False`:** the legacy module stored this compute, which never recomputes as days pass — so a document that "expires tonight" is wrongly shown valid forever. Non-stored guarantees correctness. Searches use the searchable `expiry_date` instead.
+(`timedelta_horizon(n)` and `_get_expiry_horizon_days()` are defined in Task 4; for now
+inline a helper so tests pass: read `ir.config_parameter`
+`tms.document.expiry_horizon_days` default 30, and `from datetime import timedelta`.)
+
+> **Why `store=False`:** the legacy module stored this compute, which never recomputes
+> as days pass — so a document that "expires tonight" is wrongly shown valid forever.
+> Non-stored guarantees correctness. Searches use the searchable `expiry_date` instead.
 
 - [ ] **Step 5: Run — PASS.** Commit.
+
 ```bash
 git add tms_document
 git commit -m "[ADD] tms_document: document model with non-stored validity compute"
@@ -326,9 +372,11 @@ git commit -m "[ADD] tms_document: document model with non-stored validity compu
 
 ## Task 4: Configurable expiry horizon
 
-**Files:** Add `tms_document/data/ir_config_parameter.xml`; finish the horizon helper in `tms_document.py`.
+**Files:** Add `tms_document/data/ir_config_parameter.xml`; finish the horizon helper in
+`tms_document.py`.
 
 - [ ] **Step 1: Failing test** — append to `test_tms_document.py`
+
 ```python
     def test_horizon_respected(self):
         self.env["ir.config_parameter"].sudo().set_param(
@@ -341,6 +389,7 @@ git commit -m "[ADD] tms_document: document model with non-stored validity compu
 - [ ] **Step 2: Run — FAIL** (helper returns default 30 → 40 days is "valid").
 
 - [ ] **Step 3: Implement** — finalize `models/tms_document.py` helpers:
+
 ```python
     from datetime import timedelta  # top of file
 
@@ -351,20 +400,24 @@ git commit -m "[ADD] tms_document: document model with non-stored validity compu
             )
         )
 ```
-and in `_compute_state` replace `timedelta_horizon(horizon)` with `timedelta(days=horizon)`.
+
+and in `_compute_state` replace `timedelta_horizon(horizon)` with
+`timedelta(days=horizon)`.
 
 - [ ] **Step 4: `data/ir_config_parameter.xml`**
+
 ```xml
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <record id="default_expiry_horizon" model="ir.config_parameter">
-        <field name="key">tms.document.expiry_horizon_days</field>
-        <field name="value">30</field>
-    </record>
+  <record id="default_expiry_horizon" model="ir.config_parameter">
+    <field name="key">tms.document.expiry_horizon_days</field>
+    <field name="value">30</field>
+  </record>
 </odoo>
 ```
 
 - [ ] **Step 5: Run — PASS.** Commit.
+
 ```bash
 git add tms_document
 git commit -m "[IMP] tms_document: configurable expiry horizon"
@@ -374,9 +427,11 @@ git commit -m "[IMP] tms_document: configurable expiry horizon"
 
 ## Task 5: Holder One2many + navigation
 
-**Files:** Create `tms_document/models/tms_driver.py`, `tms_document/models/fleet_vehicle.py`. Test additions.
+**Files:** Create `tms_document/models/tms_driver.py`,
+`tms_document/models/fleet_vehicle.py`. Test additions.
 
 - [ ] **Step 1: Failing test** — append to `test_tms_document.py`
+
 ```python
     def test_driver_documents_o2m(self):
         self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
@@ -387,6 +442,7 @@ git commit -m "[IMP] tms_document: configurable expiry horizon"
 - [ ] **Step 2: Run — FAIL** (`tms.driver` has no `document_ids`).
 
 - [ ] **Step 3: Implement** — `models/tms_driver.py`
+
 ```python
 # Copyright (C) 2026 VSL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -408,7 +464,9 @@ class TmsDriver(models.Model):
                 [("res_model", "=", "tms.driver"), ("res_id", "=", rec.id)]
             )
 ```
+
 `models/fleet_vehicle.py` — identical pattern with `"fleet.vehicle"`:
+
 ```python
 # Copyright (C) 2026 VSL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -430,9 +488,11 @@ class FleetVehicle(models.Model):
                 [("res_model", "=", "fleet.vehicle"), ("res_id", "=", rec.id)]
             )
 ```
+
 Restore the imports in `models/__init__.py` (all four now exist).
 
 - [ ] **Step 4: Run — PASS.** Commit.
+
 ```bash
 git add tms_document
 git commit -m "[ADD] tms_document: computed document_ids O2M on driver and vehicle"
@@ -445,6 +505,7 @@ git commit -m "[ADD] tms_document: computed document_ids O2M on driver and vehic
 **Files:** Create `tms_document/models/tms_order.py`. Test additions.
 
 - [ ] **Step 1: Failing test** — append to `test_tms_document.py`
+
 ```python
     @classmethod
     def setUpClass(cls):
@@ -470,11 +531,14 @@ git commit -m "[ADD] tms_document: computed document_ids O2M on driver and vehic
         self.order.button_start_order()
         self.assertTrue(self.order.start_trip)
 ```
+
 Add `from odoo.exceptions import UserError` to the test imports.
 
-- [ ] **Step 2: Run — FAIL** (no `_tms_document_check_critical`; `button_start_order` not extended).
+- [ ] **Step 2: Run — FAIL** (no `_tms_document_check_critical`; `button_start_order`
+      not extended).
 
 - [ ] **Step 3: Implement** — `models/tms_order.py`
+
 ```python
 # Copyright (C) 2026 VSL
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -512,13 +576,17 @@ class TmsOrder(models.Model):
                     )
                 )
 ```
+
 Add `from odoo import fields` import.
 
 - [ ] **Step 4: Run — PASS** for both guard tests.
 
-  > Note: `button_start_order` in the core also checks vehicle insurance / driver license inline; with our `tms_document` installed those inline checks still run in `super()`. Keep both — our check is additive.
+  > Note: `button_start_order` in the core also checks vehicle insurance / driver
+  > license inline; with our `tms_document` installed those inline checks still run in
+  > `super()`. Keep both — our check is additive.
 
 - [ ] **Step 5: Commit.**
+
 ```bash
 git add tms_document
 git commit -m "[ADD] tms_document: block trip start on expired critical documents"
@@ -528,21 +596,38 @@ git commit -m "[ADD] tms_document: block trip start on expired critical document
 
 ## Task 7: Views + menu
 
-**Files:** Create `views/tms_document_views.xml`, `views/tms_driver_views.xml`, `views/fleet_vehicle_views.xml`, `views/menu.xml`. Add `static/description/icon.png`.
+**Files:** Create `views/tms_document_views.xml`, `views/tms_driver_views.xml`,
+`views/fleet_vehicle_views.xml`, `views/menu.xml`. Add `static/description/icon.png`.
 
-- [ ] **Step 1: `views/tms_document_views.xml`** — `<list>` (Odoo 19, not `<tree>`), no `attrs`/`states`. Fields: `name`, `doc_type`, `res_ref`, `issue_date`, `expiry_date`, `state` (badge), `critical`. Form with the same + `datas` (widget `binary`) + `notes`. Search view with filters: *Expired*, *Expiring*, *Critical*.
+- [ ] **Step 1: `views/tms_document_views.xml`** — `<list>` (Odoo 19, not `<tree>`), no
+      `attrs`/`states`. Fields: `name`, `doc_type`, `res_ref`, `issue_date`,
+      `expiry_date`, `state` (badge), `critical`. Form with the same + `datas` (widget
+      `binary`) + `notes`. Search view with filters: _Expired_, _Expiring_, _Critical_.
 
-- [ ] **Step 2: `views/tms_driver_views.xml`** — inherit the driver form (`tms.tms_driver_form` or the core's form id; verify via `grep -r "tms.driver" tms/views/`), add a notebook page "Documents" with `<field name="document_ids">` and an inline `<list>`/`<form>` (the O2M is computed; users create documents via the dedicated menu or by setting res_model/res_id).
+- [ ] **Step 2: `views/tms_driver_views.xml`** — inherit the driver form
+      (`tms.tms_driver_form` or the core's form id; verify via
+      `grep -r "tms.driver" tms/views/`), add a notebook page "Documents" with
+      `<field name="document_ids">` and an inline `<list>`/`<form>` (the O2M is
+      computed; users create documents via the dedicated menu or by setting
+      res_model/res_id).
 
-  > Verify the exact parent view xmlid before inheriting: `rg "<record.*tms.driver.*form" ~/dev/odoo-tms/tms/views/`. If the core uses an in-form notebook, add a page there.
+  > Verify the exact parent view xmlid before inheriting:
+  > `rg "<record.*tms.driver.*form" ~/dev/odoo-tms/tms/views/`. If the core uses an
+  > in-form notebook, add a page there.
 
-- [ ] **Step 3: `views/fleet_vehicle_views.xml`** — same pattern for `fleet.vehicle` form.
+- [ ] **Step 3: `views/fleet_vehicle_views.xml`** — same pattern for `fleet.vehicle`
+      form.
 
-- [ ] **Step 4: `views/menu.xml`** — under the existing TMS menu (`tms.menu_tms_root` — verify with `rg "menu_tms" ~/dev/odoo-tms/tms/views/menu.xml`), add a "Documents" submenu pointing to the action.
+- [ ] **Step 4: `views/menu.xml`** — under the existing TMS menu (`tms.menu_tms_root` —
+      verify with `rg "menu_tms" ~/dev/odoo-tms/tms/views/menu.xml`), add a "Documents"
+      submenu pointing to the action.
 
-- [ ] **Step 5: Smoke test** — upgrade, open Documents menu, create a document linked to a driver; set expiry in the past + critical → start that driver's order → expect `UserError`.
+- [ ] **Step 5: Smoke test** — upgrade, open Documents menu, create a document linked to
+      a driver; set expiry in the past + critical → start that driver's order → expect
+      `UserError`.
 
 - [ ] **Step 6: Commit.**
+
 ```bash
 git add tms_document
 git commit -m "[ADD] tms_document: views, holder inheritance and menu"
@@ -555,20 +640,25 @@ git commit -m "[ADD] tms_document: views, holder inheritance and menu"
 **Files:** `readme/*.md`, `static/description/icon.png`, `i18n/tms_document.pot`.
 
 - [ ] **Step 1: `readme/DESCRIPTION.md`**
+
 ```markdown
 Generic, expiry-tracked document framework for the TMS.
 
-Attach typed documents (license, insurance, inspection, …) to any TMS
-resource (drivers, vehicles). Document validity (valid / expiring / expired)
-is computed from the expiry date against a configurable horizon.
+Attach typed documents (license, insurance, inspection, …) to any TMS resource (drivers,
+vehicles). Document validity (valid / expiring / expired) is computed from the expiry
+date against a configurable horizon.
 
-A document can be flagged *critical*: an expired critical document on a
-trip's driver or vehicle blocks starting that trip.
+A document can be flagged _critical_: an expired critical document on a trip's driver or
+vehicle blocks starting that trip.
 ```
 
-- [ ] **Step 2:** Write `readme/USAGE.md`, `readme/CONFIGURE.md` (the horizon param), `readme/CREDITS.md` (VSL, OCA), `readme/CONTRIBUTORS.md` (`Volkan Taşçı`), `readme/MAINTAINERS.md` (`volkantasci`). Place a 96×96 `static/description/icon.png`.
+- [ ] **Step 2:** Write `readme/USAGE.md`, `readme/CONFIGURE.md` (the horizon param),
+      `readme/CREDITS.md` (VSL, OCA), `readme/CONTRIBUTORS.md` (`Volkan Taşçı`),
+      `readme/MAINTAINERS.md` (`volkantasci`). Place a 96×96
+      `static/description/icon.png`.
 
 - [ ] **Step 3: Export translation template**
+
 ```bash
 docker compose -f ~/dev/odoo/docker-compose.yml exec web odoo \
   -d odoo --i18n-export=/mnt/extra-addons/tms_document/i18n/tms_document.pot \
@@ -576,12 +666,15 @@ docker compose -f ~/dev/odoo/docker-compose.yml exec web odoo \
 ```
 
 - [ ] **Step 4: Pre-commit**
+
 ```bash
 pre-commit run --files tms_document/** 2>/dev/null || pre-commit run --all-files
 ```
+
 Expected: clean (fix any `black`/`isort`/`oca-checks` findings).
 
 - [ ] **Step 5: Commit.**
+
 ```bash
 git add tms_document
 git commit -m "[ADD] tms_document: readme fragments, icon and translation template"
@@ -591,9 +684,11 @@ git commit -m "[ADD] tms_document: readme fragments, icon and translation templa
 
 ## Definition of done
 
-- `tms_document` installs on top of `tms`; all tests in `tms_document` pass (`--test-tags=/tms_document`).
+- `tms_document` installs on top of `tms`; all tests in `tms_document` pass
+  (`--test-tags=/tms_document`).
 - Documents attach to drivers and vehicles; `state` correctly reflects today.
-- An expired *critical* document on a trip's driver or vehicle blocks `button_start_order` (BR-D3), naming the offending document.
+- An expired _critical_ document on a trip's driver or vehicle blocks
+  `button_start_order` (BR-D3), naming the offending document.
 - Horizon is configurable via `tms.document.expiry_horizon_days`.
 - `pre-commit` clean; `README.md` generates from `readme/`.
 
@@ -602,14 +697,20 @@ git commit -m "[ADD] tms_document: readme fragments, icon and translation templa
 ## Self-review
 
 **Spec coverage (vs `docs/DESIGN.md`):**
+
 - §4.2 `tms_document` model (polymorphic holder, expiry, critical) → Tasks 3–6. ✅
 - §5.2 document FSM (valid/expiring/expired) → Task 3 (non-stored compute). ✅
 - §6 BR-D1/D2/D3 → Tasks 3, 4, 6. ✅
 - §3.2 R1, R2, R3 → Tasks 3, 3+4, 6. ✅
 
-**Placeholder scan:** no TBD/TODO in elaborated steps. View xmlids require a `grep` verification (Task 7 step 2/4) because the exact core view IDs must be confirmed at implementation time — this is a verification step, not a placeholder.
+**Placeholder scan:** no TBD/TODO in elaborated steps. View xmlids require a `grep`
+verification (Task 7 step 2/4) because the exact core view IDs must be confirmed at
+implementation time — this is a verification step, not a placeholder.
 
-**Name consistency:** `tms.document`, fields `res_model`/`res_id`/`res_ref`/`doc_type`/`expiry_date`/`state`/`critical`, group `tms_document.group_tms_document`, method `_tms_document_check_critical` — identical across tasks and aligned with `docs/DESIGN.md`. ✅
+**Name consistency:** `tms.document`, fields
+`res_model`/`res_id`/`res_ref`/`doc_type`/`expiry_date`/`state`/`critical`, group
+`tms_document.group_tms_document`, method `_tms_document_check_critical` — identical
+across tasks and aligned with `docs/DESIGN.md`. ✅
 
 ---
 
@@ -617,5 +718,7 @@ git commit -m "[ADD] tms_document: readme fragments, icon and translation templa
 
 Plan saved to `docs/plans/tms_document.md`. Two execution options:
 
-1. **Subagent-Driven (recommended)** — dispatch a fresh subagent per task with review between tasks (REQUIRED SUB-SKILL: `superpowers:subagent-driven-development`).
-2. **Inline Execution** — execute tasks in this session with checkpoints (REQUIRED SUB-SKILL: `superpowers:executing-plans`).
+1. **Subagent-Driven (recommended)** — dispatch a fresh subagent per task with review
+   between tasks (REQUIRED SUB-SKILL: `superpowers:subagent-driven-development`).
+2. **Inline Execution** — execute tasks in this session with checkpoints (REQUIRED
+   SUB-SKILL: `superpowers:executing-plans`).
