@@ -20,12 +20,14 @@ class TmsOrder(models.Model):
         if self.vehicle_id:
             holders.append(("fleet.vehicle", self.vehicle_id))
         for model, holder in holders:
-            expired = self.env["tms.document"].search([
-                ("res_model", "=", model),
-                ("res_id", "=", holder.id),
-                ("critical", "=", True),
-                ("expiry_date", "<", today),
-            ])
+            expired = self.env["tms.document"].search(
+                [
+                    ("res_model", "=", model),
+                    ("res_id", "=", holder.id),
+                    ("critical", "=", True),
+                    ("expiry_date", "<", today),
+                ]
+            )
             if expired:
                 names = ", ".join(f"{d.name} ({d.doc_type})" for d in expired)
                 raise UserError(

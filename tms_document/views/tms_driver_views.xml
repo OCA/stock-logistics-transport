@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="view_tms_driver_documents" model="ir.ui.view">
         <field name="name">tms.driver.documents</field>
         <field name="model">tms.driver</field>
-        <field name="inherit_id" ref="tms.view_tms_driver_form_inherit"/>
+        <field name="inherit_id" ref="tms.view_tms_driver_form_inherit" />
         <field name="arch" type="xml">
             <xpath expr="//form//notebook" position="inside">
                 <page string="Documents">
-                    <field name="document_ids"/>
+                    <field name="document_ids" />
                 </page>
             </xpath>
         </field>

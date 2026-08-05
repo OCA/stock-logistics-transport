@@ -18,13 +18,15 @@ class TestTmsDocument(TransactionCase):
         cls.order = cls.env["tms.order"].create({"driver_id": cls.holder.id})
 
     def _doc(self, expiry):
-        return self.Doc.create({
-            "res_model": "tms.driver",
-            "res_id": self.holder.id,
-            "doc_type": "license",
-            "name": "LIC-1",
-            "expiry_date": expiry,
-        })
+        return self.Doc.create(
+            {
+                "res_model": "tms.driver",
+                "res_id": self.holder.id,
+                "doc_type": "license",
+                "name": "LIC-1",
+                "expiry_date": expiry,
+            }
+        )
 
     def test_state_valid(self):
         d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
