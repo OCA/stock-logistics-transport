@@ -1,0 +1,1805 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-05 00:00+0000\n"
+"PO-Revision-Date: 2026-08-05 00:00+0000\n"
+"Last-Translator: Volkan Taşçı <info@voslo.co>\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: tms
+msgid "# Vendor Bills"
+msgstr "# Satıcı Faturaları"
+
+#. module: tms
+msgid "Trips Kanban"
+msgstr "Sefer Kanbanı"
+
+#. module: tms
+msgid "Crew name already exists!"
+msgstr "Bu isimde bir ekip zaten mevcut!"
+
+#. module: tms
+msgid "The policy number must be unique for each insurer!"
+msgstr "Poliçe numarası her sigortacı için benzersiz olmalıdır!"
+
+#. module: tms
+msgid "Scheduled duration must be greater than or equal to zero!"
+msgstr "Planlanan süre sıfırdan büyük veya sıfıra eşit olmalıdır!"
+
+#. module: tms
+msgid "Trip name already exists!"
+msgstr "Bu isimde bir sefer zaten mevcut!"
+
+#. module: tms
+msgid "Team name already exists!"
+msgstr "Bu isimde bir takım zaten mevcut!"
+
+#. module: tms
+msgid "Cargo Uom"
+msgstr "Yük Ölçü Birimi"
+
+#. module: tms
+msgid "Driver Id"
+msgstr "Sürücü Kimliği"
+
+#. module: tms
+msgid "Driver license security days"
+msgstr "Sürücü belgesi güvenlik günleri"
+
+#. module: tms
+msgid "Manage Driver License"
+msgstr "Sürücü Belgesini Yönet"
+
+#. module: tms
+msgid "Manage Routes"
+msgstr "Rotaları Yönet"
+
+#. module: tms
+msgid "Manage Route Stops"
+msgstr "Rota Duraklarını Yönet"
+
+#. module: tms
+msgid "Manage Vehicle Insurance"
+msgstr "Araç Sigortasını Yönet"
+
+#. module: tms
+msgid "Manage vehicle as accounting assets"
+msgstr "Araçları muhasebe varlıkları olarak yönet"
+
+#. module: tms
+msgid "Manage trip invoicing"
+msgstr "Sefer faturalamasını yönet"
+
+#. module: tms
+msgid "Manage trip expenses"
+msgstr "Sefer giderlerini yönet"
+
+#. module: tms
+msgid "Manage trip purchases"
+msgstr "Sefer alımlarını yönet"
+
+#. module: tms
+msgid "Manage trip sales"
+msgstr "Sefer satışlarını yönet"
+
+#. module: tms
+msgid "Tms Distance Uom"
+msgstr "TMS Mesafe Ölçü Birimi"
+
+#. module: tms
+msgid "Tms Length Uom"
+msgstr "TMS Uzunluk Ölçü Birimi"
+
+#. module: tms
+msgid "Tms Speed Uom"
+msgstr "TMS Hız Ölçü Birimi"
+
+#. module: tms
+msgid "Tms Time Uom"
+msgstr "TMS Süre Ölçü Birimi"
+
+#. module: tms
+msgid "Tms Weight Uom"
+msgstr "TMS Ağırlık Ölçü Birimi"
+
+#. module: tms
+msgid "Vehicle Insurance security days"
+msgstr "Araç sigortası güvenlik günleri"
+
+#. module: tms
+msgid "Default Vehicle"
+msgstr "Varsayılan Araç"
+
+#. module: tms
+msgid "Other Personnel"
+msgstr "Diğer Personel"
+
+#. module: tms
+msgid "Account Move Count"
+msgstr "Muhasebe Fişi Sayısı"
+
+#. module: tms
+msgid "Active Lang Count"
+msgstr "Aktif Dil Sayısı"
+
+#. module: tms
+msgid "Stats"
+msgstr "İstatistikler"
+
+#. module: tms
+msgid "Auto-post bills"
+msgstr "Faturaları otomatik kaydet"
+
+#. module: tms
+msgid "Available Invoice Template Pdf Report"
+msgstr "Mevcut Fatura Şablonu PDF Raporu"
+
+#. module: tms
+msgid "Avatar 1024"
+msgstr "Avatar 1024"
+
+#. module: tms
+msgid "Avatar 128"
+msgstr "Avatar 128"
+
+#. module: tms
+msgid "Avatar 1920"
+msgstr "Avatar 1920"
+
+#. module: tms
+msgid "Avatar 256"
+msgstr "Avatar 256"
+
+#. module: tms
+msgid "Avatar 512"
+msgstr "Avatar 512"
+
+#. module: tms
+msgid "Avatar"
+msgstr "Avatar"
+
+#. module: tms
+msgid "Bank"
+msgstr "Banka"
+
+#. module: tms
+msgid "Banks"
+msgstr "Bankalar"
+
+#. module: tms
+msgid "Barcode"
+msgstr "Barkod"
+
+#. module: tms
+msgid "Buyer"
+msgstr "Alıcı"
+
+#. module: tms
+msgid "Channels"
+msgstr "Kanallar"
+
+#. module: tms
+msgid "Channel Member"
+msgstr "Kanal Üyesi"
+
+#. module: tms
+msgid "Contact"
+msgstr "Kişi"
+
+#. module: tms
+msgid "City"
+msgstr "Şehir"
+
+#. module: tms
+msgid "Company Name Entity"
+msgstr "Şirket Adı Varlığı"
+
+#. module: tms
+msgid "Commercial Entity"
+msgstr "Ticari Varlık"
+
+#. module: tms
+msgid "Company Name"
+msgstr "Şirket Adı"
+
+#. module: tms
+msgid "Company ID"
+msgstr "Şirket Kimliği"
+
+#. module: tms
+msgid "Company ID Label"
+msgstr "Şirket Kimliği Etiketi"
+
+#. module: tms
+msgid "Company Registry Placeholder"
+msgstr "Şirket Kaydı Yer Tutucusu"
+
+#. module: tms
+msgid "Company Type"
+msgstr "Şirket Türü"
+
+#. module: tms
+msgid "Complete Name"
+msgstr "Tam Ad"
+
+#. module: tms
+msgid "Complete Address"
+msgstr "Tam Adres"
+
+#. module: tms
+msgid "Inlined Complete Address"
+msgstr "Satır İçi Tam Adres"
+
+#. module: tms
+msgid "Partner Contracts"
+msgstr "Ortak Sözleşmeleri"
+
+#. module: tms
+msgid "Country Code"
+msgstr "Ülke Kodu"
+
+#. module: tms
+msgid "Country"
+msgstr "Ülke"
+
+#. module: tms
+msgid "Credit Limit"
+msgstr "Kredi Limiti"
+
+#. module: tms
+msgid "Credit To Invoice"
+msgstr "Faturalanacak Kredi"
+
+#. module: tms
+msgid "Total Receivable"
+msgstr "Toplam Alacak"
+
+#. module: tms
+msgid "Currency"
+msgstr "Para Birimi"
+
+#. module: tms
+msgid "Customer Rank"
+msgstr "Müşteri Sıralaması"
+
+#. module: tms
+msgid "Geolocation Date"
+msgstr "Coğrafi Konum Tarihi"
+
+#. module: tms
+msgid "Days Sales Outstanding (DSO)"
+msgstr "Alacak Tahsil Süresi (DSO)"
+
+#. module: tms
+msgid "Total Payable"
+msgstr "Toplam Borç"
+
+#. module: tms
+msgid "Display Invoice Edi Format"
+msgstr "Fatura EDI Formatını Görüntüle"
+
+#. module: tms
+msgid "Display Invoice Template Pdf Report"
+msgstr "Fatura Şablonu PDF Raporunu Görüntüle"
+
+#. module: tms
+msgid "Distance Traveled Uom"
+msgstr "Alınan Mesafe Ölçü Birimi"
+
+#. module: tms
+msgid "Driver License Expiration Date"
+msgstr "Sürücü Belgesi Son Kullanma Tarihi"
+
+#. module: tms
+msgid "Driver License File"
+msgstr "Sürücü Belgesi Dosyası"
+
+#. module: tms
+msgid "Driver License Number"
+msgstr "Sürücü Belgesi Numarası"
+
+#. module: tms
+msgid "License type"
+msgstr "Belge Türü"
+
+#. module: tms
+msgid "Driving Experience Years"
+msgstr "Sürüş Deneyimi (Yıl)"
+
+#. module: tms
+msgid "Duplicate Bank Partner"
+msgstr "Yinelenen Banka Ortağı"
+
+#. module: tms
+msgid "Email"
+msgstr "E-posta"
+
+#. module: tms
+msgid "Formatted Email"
+msgstr "Biçimlendirilmiş E-posta"
+
+#. module: tms
+msgid "Normalized Email"
+msgstr "Normalize E-posta"
+
+#. module: tms
+msgid "Employee"
+msgstr "Çalışan"
+
+#. module: tms
+msgid "Employees"
+msgstr "Çalışanlar"
+
+#. module: tms
+msgid "Employees Count"
+msgstr "Çalışan Sayısı"
+
+#. module: tms
+msgid "Fiscal Country Codes"
+msgstr "Mali Ülke Kodları"
+
+#. module: tms
+msgid "Fiscal Country Group Codes"
+msgstr "Mali Ülke Grubu Kodları"
+
+#. module: tms
+msgid "Job Position"
+msgstr "Görev Unvanı"
+
+#. module: tms
+msgid "Week Day"
+msgstr "Hafta Günü"
+
+#. module: tms
+msgid "Group RFQ"
+msgstr "RFQ Grubu"
+
+#. module: tms
+msgid "Ignore Abnormal Invoice Amount"
+msgstr "Anormal Fatura Tutarını Yoksay"
+
+#. module: tms
+msgid "Ignore Abnormal Invoice Date"
+msgstr "Anormal Fatura Tarihini Yoksay"
+
+#. module: tms
+msgid "Image 1024"
+msgstr "Görsel 1024"
+
+#. module: tms
+msgid "Image 128"
+msgstr "Görsel 128"
+
+#. module: tms
+msgid "Image 1920"
+msgstr "Görsel 1920"
+
+#. module: tms
+msgid "Image 256"
+msgstr "Görsel 256"
+
+#. module: tms
+msgid "Image 512"
+msgstr "Görsel 512"
+
+#. module: tms
+msgid "Image"
+msgstr "Görsel"
+
+#. module: tms
+msgid "IM Status"
+msgstr "IM Durumu"
+
+#. module: tms
+msgid "Industry"
+msgstr "Sektör"
+
+#. module: tms
+msgid "eInvoice format"
+msgstr "e-Fatura formatı"
+
+#. module: tms
+msgid "Invoice Edi Format Store"
+msgstr "Fatura EDI Formatı Deposu"
+
+#. module: tms
+msgid "Invoices"
+msgstr "Faturalar"
+
+#. module: tms
+msgid "Invoice sending"
+msgstr "Fatura gönderimi"
+
+#. module: tms
+msgid "Invoice report"
+msgstr "Fatura raporu"
+
+#. module: tms
+msgid "Is Active"
+msgstr "Aktif mi"
+
+#. module: tms
+msgid "Blacklist"
+msgstr "Kara Liste"
+
+#. module: tms
+msgid "Is a Company"
+msgstr "Şirket mi"
+
+#. module: tms
+msgid "External Driver"
+msgstr "Harici Sürücü"
+
+#. module: tms
+msgid "Is In Call"
+msgstr "Aramada mı"
+
+#. module: tms
+msgid "Is Public"
+msgstr "Genel mi"
+
+#. module: tms
+msgid "In Training"
+msgstr "Eğitimde"
+
+#. module: tms
+msgid "Language"
+msgstr "Dil"
+
+#. module: tms
+msgid "Location Type"
+msgstr "Konum Türü"
+
+#. module: tms
+msgid "Main User"
+msgstr "Ana Kullanıcı"
+
+#. module: tms
+msgid "Bounce"
+msgstr "Geri Dönen"
+
+#. module: tms
+msgid "Offline since"
+msgstr "Çevrimdışı olduğu zaman"
+
+#. module: tms
+msgid "On-Time Delivery Rate"
+msgstr "Zamanında Teslimat Oranı"
+
+#. module: tms
+msgid "Related Company"
+msgstr "İlişkili Şirket"
+
+#. module: tms
+msgid "Parent name"
+msgstr "Üst ad"
+
+#. module: tms
+msgid "Partner Company Registry Placeholder"
+msgstr "Ortak Şirket Kaydı Yer Tutucusu"
+
+#. module: tms
+msgid "Partner"
+msgstr "Ortak"
+
+#. module: tms
+msgid "Geo Latitude"
+msgstr "Coğrafi Enlem"
+
+#. module: tms
+msgid "Geo Longitude"
+msgstr "Coğrafi Boylam"
+
+#. module: tms
+msgid "Share Partner"
+msgstr "Ortağı Paylaş"
+
+#. module: tms
+msgid "Partner Vat Placeholder"
+msgstr "Ortak Vergi Kimliği Yer Tutucusu"
+
+#. module: tms
+msgid "Payment Token Count"
+msgstr "Ödeme Jetonu Sayısı"
+
+#. module: tms
+msgid "Payment Tokens"
+msgstr "Ödeme Jetonları"
+
+#. module: tms
+msgid "Blacklisted Phone is Phone"
+msgstr "Kara Listeli Telefon"
+
+#. module: tms
+msgid "Phone Number"
+msgstr "Telefon Numarası"
+
+#. module: tms
+msgid "Phone"
+msgstr "Telefon"
+
+#. module: tms
+msgid "Phone Blacklisted"
+msgstr "Kara Listeli Telefon"
+
+#. module: tms
+msgid "Sanitized Number"
+msgstr "Temizlenmiş Numara"
+
+#. module: tms
+msgid "Message for Stock Picking"
+msgstr "Depo Sevkiyatı Mesajı"
+
+#. module: tms
+msgid "Properties Base Definition"
+msgstr "Özellikler Temel Tanımı"
+
+#. module: tms
+msgid "Properties"
+msgstr "Özellikler"
+
+#. module: tms
+msgid "Account Payable"
+msgstr "Borçlu Hesap"
+
+#. module: tms
+msgid "Fiscal Position"
+msgstr "Mali Pozisyon"
+
+#. module: tms
+msgid "Account Receivable"
+msgstr "Alacaklı Hesap"
+
+#. module: tms
+msgid "Property Inbound Payment Method Line"
+msgstr "Gelen Ödeme Yöntemi Hattı Özelliği"
+
+#. module: tms
+msgid "Property Outbound Payment Method Line"
+msgstr "Giden Ödeme Yöntemi Hattı Özelliği"
+
+#. module: tms
+msgid "Customer Payment Terms"
+msgstr "Müşteri Ödeme Koşulları"
+
+#. module: tms
+msgid "Pricelist"
+msgstr "Fiyat Listesi"
+
+#. module: tms
+msgid "Supplier Currency"
+msgstr "Tedarikçi Para Birimi"
+
+#. module: tms
+msgid "Customer Location"
+msgstr "Müşteri Konumu"
+
+#. module: tms
+msgid "Vendor Location"
+msgstr "Satıcı Konumu"
+
+#. module: tms
+msgid "Vendor Payment Terms"
+msgstr "Satıcı Ödeme Koşulları"
+
+#. module: tms
+msgid "Purchase Lines"
+msgstr "Satın Alma Satırları"
+
+#. module: tms
+msgid "Purchase Order Count"
+msgstr "Satın Alma Siparişi Sayısı"
+
+#. module: tms
+msgid "Message for Purchase Order"
+msgstr "Satın Alma Siparişi Mesajı"
+
+#. module: tms
+msgid "Receipt Reminder"
+msgstr "Teslim Hatırlatması"
+
+#. module: tms
+msgid "Companies that refers to partner"
+msgstr "Ortağa işaret eden şirketler"
+
+#. module: tms
+msgid "Reference"
+msgstr "Referans"
+
+#. module: tms
+msgid "Days Before Receipt"
+msgstr "Teslimden Önceki Günler"
+
+#. module: tms
+msgid "Rtc Session"
+msgstr "RTC Oturumu"
+
+#. module: tms
+msgid "Sale Order Count"
+msgstr "Satış Siparişi Sayısı"
+
+#. module: tms
+msgid "Sales Order"
+msgstr "Satış Siparişi"
+
+#. module: tms
+msgid "Message for Sales Order"
+msgstr "Satış Siparişi Mesajı"
+
+#. module: tms
+msgid "Partner with same Company Registry"
+msgstr "Aynı Şirket Kaydına Sahip Ortak"
+
+#. module: tms
+msgid "Partner with same Tax ID"
+msgstr "Aynı Vergi Kimliğine Sahip Ortak"
+
+#. module: tms
+msgid "Self"
+msgstr "Kendisi"
+
+#. module: tms
+msgid "Show Credit Limit"
+msgstr "Kredi Limitini Göster"
+
+#. module: tms
+msgid "Signup Token Type"
+msgstr "Kayıt Jetonu Türü"
+
+#. module: tms
+msgid "Specific Property Product Pricelist"
+msgstr "Belirli Özellik Ürün Fiyat Listesi"
+
+#. module: tms
+msgid "Street2"
+msgstr "Sokak 2"
+
+#. module: tms
+msgid "Street"
+msgstr "Sokak"
+
+#. module: tms
+msgid "Suggest Based On"
+msgstr "Öneri Tabanı"
+
+#. module: tms
+msgid "Suggest Days"
+msgstr "Önerilen Günler"
+
+#. module: tms
+msgid "Suggest Percent"
+msgstr "Önerilen Yüzde"
+
+#. module: tms
+msgid "Supplier Rank"
+msgstr "Tedarikçi Sıralaması"
+
+#. module: tms
+msgid "Transport location"
+msgstr "Taşıma konumu"
+
+#. module: tms
+msgid "Tms Team"
+msgstr "TMS Takımı"
+
+#. module: tms
+msgid "Total Invoiced"
+msgstr "Toplam Faturalanan"
+
+#. module: tms
+msgid "Degree of trust you have in this debtor"
+msgstr "Bu borçluya duyduğunuz güven derecesi"
+
+#. module: tms
+msgid "Address Type Description"
+msgstr "Adres Türü Açıklaması"
+
+#. module: tms
+msgid "Address Type"
+msgstr "Adres Türü"
+
+#. module: tms
+msgid "Timezone offset"
+msgstr "Saat dilimi farkı"
+
+#. module: tms
+msgid "Timezone"
+msgstr "Saat Dilimi"
+
+#. module: tms
+msgid "Partner Limit"
+msgstr "Ortak Limiti"
+
+#. module: tms
+msgid "Salesperson"
+msgstr "Satış Görevlisi"
+
+#. module: tms
+msgid "Users"
+msgstr "Kullanıcılar"
+
+#. module: tms
+msgid "Tax ID Label"
+msgstr "Vergi Kimliği Etiketi"
+
+#. module: tms
+msgid "Tax ID"
+msgstr "Vergi Kimliği"
+
+#. module: tms
+msgid "Website Link"
+msgstr "Web Sitesi Bağlantısı"
+
+#. module: tms
+msgid "Zip"
+msgstr "Posta Kodu"
+
+#. module: tms
+msgid "Coverage Details"
+msgstr "Teminat Detayları"
+
+#. module: tms
+msgid "End Date"
+msgstr "Bitiş Tarihi"
+
+#. module: tms
+msgid "Insurer"
+msgstr "Sigortacı"
+
+#. module: tms
+msgid "Policy Number"
+msgstr "Poliçe Numarası"
+
+#. module: tms
+msgid "Premium Amount"
+msgstr "Prim Tutarı"
+
+#. module: tms
+msgid "Start Date"
+msgstr "Başlangıç Tarihi"
+
+#. module: tms
+msgid "State"
+msgstr "Durum"
+
+#. module: tms
+msgid "Next Activity Deadline"
+msgstr "Sonraki Etkinlik Son Tarihi"
+
+#. module: tms
+msgid "Activity Exception Decoration"
+msgstr "Etkinlik İstisna Dekorasyonu"
+
+#. module: tms
+msgid "Icon"
+msgstr "Simge"
+
+#. module: tms
+msgid "Activities"
+msgstr "Etkinlikler"
+
+#. module: tms
+msgid "Activity State"
+msgstr "Etkinlik Durumu"
+
+#. module: tms
+msgid "Next Activity Summary"
+msgstr "Sonraki Etkinlik Özeti"
+
+#. module: tms
+msgid "Activity Type Icon"
+msgstr "Etkinlik Türü Simgesi"
+
+#. module: tms
+msgid "Next Activity Type"
+msgstr "Sonraki Etkinlik Türü"
+
+#. module: tms
+msgid "Responsible User"
+msgstr "Sorumlu Kullanıcı"
+
+#. module: tms
+msgid "Crew Active"
+msgstr "Ekip Aktif"
+
+#. module: tms
+msgid "Crew Ids Domain"
+msgstr "Ekip Kimlikleri Etki Alanı"
+
+#. module: tms
+msgid "Date End"
+msgstr "Bitiş Tarihi"
+
+#. module: tms
+msgid "Date Start"
+msgstr "Başlangıç Tarihi"
+
+#. module: tms
+msgid "Destination"
+msgstr "Varış Noktası"
+
+#. module: tms
+msgid "Scheduled Duration - Actual Duration"
+msgstr "Planlanan Süre - Gerçek Süre"
+
+#. module: tms
+msgid "Driver Ids Domain"
+msgstr "Sürücü Kimlikleri Etki Alanı"
+
+#. module: tms
+msgid "Trip Duration"
+msgstr "Sefer Süresi"
+
+#. module: tms
+msgid "End Trip"
+msgstr "Seferi Bitir"
+
+#. module: tms
+msgid "Has Message"
+msgstr "Mesajı Var"
+
+#. module: tms
+msgid "Attachment Count"
+msgstr "Ek Sayısı"
+
+#. module: tms
+msgid "Followers"
+msgstr "Takipçiler"
+
+#. module: tms
+msgid "Number of errors"
+msgstr "Hata sayısı"
+
+#. module: tms
+msgid "Message Delivery error"
+msgstr "Mesaj teslimat hatası"
+
+#. module: tms
+msgid "Messages"
+msgstr "Mesajlar"
+
+#. module: tms
+msgid "Is Follower"
+msgstr "Takipçi mi"
+
+#. module: tms
+msgid "Action Needed"
+msgstr "İşlem Gerekli"
+
+#. module: tms
+msgid "Number of Actions"
+msgstr "İşlem Sayısı"
+
+#. module: tms
+msgid "Followers (Partners)"
+msgstr "Takipçiler (Ortaklar)"
+
+#. module: tms
+msgid "My Activity Deadline"
+msgstr "Etkinlik Son Tarihim"
+
+#. module: tms
+msgid "Origin"
+msgstr "Kalkış Noktası"
+
+#. module: tms
+msgid "Route destination"
+msgstr "Rota varışı"
+
+#. module: tms
+msgid "Route origin"
+msgstr "Rota başlangıcı"
+
+#. module: tms
+msgid "Use predefined route"
+msgstr "Önceden tanımlı rotayı kullan"
+
+#. module: tms
+msgid "Scheduled End"
+msgstr "Planlanan Bitiş"
+
+#. module: tms
+msgid "Scheduled Start"
+msgstr "Planlanan Başlangıç"
+
+#. module: tms
+msgid "Start Trip"
+msgstr "Seferi Başlat"
+
+#. module: tms
+msgid "Time Uom"
+msgstr "Süre Ölçü Birimi"
+
+#. module: tms
+msgid "Vehicle Ids Domain"
+msgstr "Araç Kimlikleri Etki Alanı"
+
+#. module: tms
+msgid "Website Messages"
+msgstr "Web Sitesi Mesajları"
+
+#. module: tms
+msgid "Destination Location"
+msgstr "Varış Konumu"
+
+#. module: tms
+msgid "Distance Uom"
+msgstr "Mesafe Ölçü Birimi"
+
+#. module: tms
+msgid "Estimated Time Uom"
+msgstr "Tahmini Süre Ölçü Birimi"
+
+#. module: tms
+msgid "Notes/Comments"
+msgstr "Notlar/Yorumlar"
+
+#. module: tms
+msgid "Origin Location"
+msgstr "Kalkış Konumu"
+
+#. module: tms
+msgid "Stops locations in route"
+msgstr "Rotadaki durak konumları"
+
+#. module: tms
+msgid "Color Code"
+msgstr "Renk Kodu"
+
+#. module: tms
+msgid "Folded in Kanban"
+msgstr "Kanban'da Katlanmış"
+
+#. module: tms
+msgid "Is Completed"
+msgstr "Tamamlandı mı"
+
+#. module: tms
+msgid "Is Default"
+msgstr "Varsayılan mı"
+
+#. module: tms
+msgid "Priority Management Explanation"
+msgstr "Öncelik Yönetimi Açıklaması"
+
+#. module: tms
+msgid "Color Index"
+msgstr "Renk İndeksi"
+
+#. module: tms
+msgid "Company"
+msgstr "Şirket"
+
+#. module: tms
+msgid "Created on"
+msgstr "Oluşturulma Tarihi"
+
+#. module: tms
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: tms
+msgid "Crew"
+msgstr "Ekip"
+
+#. module: tms
+msgid "Display Name"
+msgstr "Görünen Ad"
+
+#. module: tms
+msgid "Drivers Count"
+msgstr "Sürücü Sayısı"
+
+#. module: tms
+msgid "ID"
+msgstr "ID"
+
+#. module: tms
+msgid "Orders Count"
+msgstr "Sipariş Sayısı"
+
+#. module: tms
+msgid "Orders"
+msgstr "Siparişler"
+
+#. module: tms
+msgid "Sequence"
+msgstr "Sıra"
+
+#. module: tms
+msgid "Number of Trips"
+msgstr "Sefer Sayısı"
+
+#. module: tms
+msgid "Vehicles Count"
+msgstr "Araç Sayısı"
+
+#. module: tms
+msgid "Last Updated on"
+msgstr "Son Güncelleme Tarihi"
+
+#. module: tms
+msgid "Last Updated by"
+msgstr "Son Güncelleyen"
+
+#. module: tms
+msgid "Automatically post bills for this trusted partner"
+msgstr "Bu güvenilir ortak için faturaları otomatik olarak kaydet"
+
+#. module: tms
+msgid "Use a barcode to identify this contact."
+msgstr "Bu kişiyi tanımlamak için bir barkod kullanın."
+
+#. module: tms
+msgid "Credit limit specific to this partner."
+msgstr "Bu ortağa özel kredi limiti."
+
+#. module: tms
+msgid "Total amount this customer owes you."
+msgstr "Bu müşterinin size borçlu olduğu toplam tutar."
+
+#. module: tms
+msgid "Total amount you have to pay to this vendor."
+msgstr "Bu satıcıya ödemeniz gereken toplam tutar."
+
+#. module: tms
+msgid "Format email address \"Name <email@domain>\""
+msgstr "E-posta adresini \"Ad <eposta@alan>\" biçiminde biçimlendir"
+
+#. module: tms
+msgid "Related employees based on their private address"
+msgstr "Özel adreslerine göre ilgili çalışanlar"
+
+#. module: tms
+msgid "Whether this contact is an Employee."
+msgstr "Bu kişinin bir çalışan olup olmadığı."
+
+#. module: tms
+msgid "Check if the contact is a company, otherwise it is a person"
+msgstr "Kişinin şirket olup olmadığını kontrol edin, aksi halde gerçek kişidir"
+
+#. module: tms
+msgid "Counter of the number of bounced emails for this contact"
+msgstr "Bu kişi için geri dönen e-postaların sayısı"
+
+#. module: tms
+msgid "Used for sales to the current partner"
+msgstr "Cari ortak için satışlarda kullanılır"
+
+#. module: tms
+msgid "This currency will be used for purchases from the current partner"
+msgstr "Bu para birimi cari ortaktan alımlarda kullanılacak"
+
+#. module: tms
+msgid "Number of days to send reminder email before the promised receipt date"
+msgstr "Vaat edilen teslim tarihinden önce hatırlatma e-postası göndermek için gün sayısı"
+
+#. module: tms
+msgid "Set a value greater than 0.0 to activate a credit limit check"
+msgstr "Kredi limiti kontrolünü etkinleştirmek için 0.0'dan büyük bir değer belirleyin"
+
+#. module: tms
+msgid "The internal user in charge of this contact."
+msgstr "Bu kişiden sorumlu dahili kullanıcı."
+
+#. module: tms
+msgid "You can use '/' to indicate that the customer has no Tax ID."
+msgstr "Müşterinin vergi kimliği olmadığını belirtmek için '/' kullanabilirsiniz."
+
+#. module: tms
+msgid "Company related to this insurance"
+msgstr "Bu sigortayla ilgili şirket"
+
+#. module: tms
+msgid "Type of the exception activity on record."
+msgstr "Kayıttaki istisna etkinliğinin türü."
+
+#. module: tms
+msgid "Icon to indicate an exception activity."
+msgstr "İstisna etkinliğini belirten simge."
+
+#. module: tms
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Font awesome simgesi, örn. fa-tasks"
+
+#. module: tms
+msgid "Number of messages with delivery error"
+msgstr "Teslimat hatası olan mesaj sayısı"
+
+#. module: tms
+msgid "If checked, some messages have a delivery error."
+msgstr "İşaretlenirse bazı mesajlarda teslimat hatası vardır."
+
+#. module: tms
+msgid "Number of messages requiring action"
+msgstr "İşlem gerektiren mesaj sayısı"
+
+#. module: tms
+msgid "If checked, new messages require your attention."
+msgstr "İşaretlenirse yeni mesajlar ilginizi gerektirir."
+
+#. module: tms
+msgid "Scheduled duration of the work in hours"
+msgstr "İşin saat cinsinden planlanan süresi"
+
+#. module: tms
+msgid "Website communication history"
+msgstr "Web sitesi iletişim geçmişi"
+
+#. module: tms
+msgid "Use Hex Code only Ex:-#FFFFFF"
+msgstr "Yalnızca Hex Kodu kullanın Örn:-#FFFFFF"
+
+#. module: tms
+msgid "Defines how this stage is evaluated as completed stage"
+msgstr "Bu aşamanın tamamlanmış aşama olarak nasıl değerlendirileceğini tanımlar"
+
+#. module: tms
+msgid "Used to order stages. Lower is first."
+msgstr "Aşamaları sıralamak için kullanılır. Düşük ilk sıradadır."
+
+#. module: tms
+msgid "Company related to this order"
+msgstr "Bu siparişle ilgili şirket"
+
+#. module: tms
+msgid "Used to sort teams. Lower is better."
+msgstr "Takımları sıralamak için kullanılır. Düşük daha iyidir."
+
+#. module: tms
+msgid "Cargo"
+msgstr "Yük"
+
+#. module: tms
+msgid "Passenger"
+msgstr "Yolcu"
+
+#. module: tms
+msgid "mi"
+msgstr "mi"
+
+#. module: tms
+msgid "A - Motorcycles"
+msgstr "A - Motosikletler"
+
+#. module: tms
+msgid "B - Automobiles"
+msgstr "B - Otomobiller"
+
+#. module: tms
+msgid "C - Truck"
+msgstr "C - Kamyon"
+
+#. module: tms
+msgid "D - Bus"
+msgstr "D - Otobüs"
+
+#. module: tms
+msgid "Terrestrial"
+msgstr "Karayolu"
+
+#. module: tms
+msgid "Active"
+msgstr "Aktif"
+
+#. module: tms
+msgid "Cancelled"
+msgstr "İptal Edildi"
+
+#. module: tms
+msgid "Draft"
+msgstr "Taslak"
+
+#. module: tms
+msgid "Expired"
+msgstr "Süresi Doldu"
+
+#. module: tms
+msgid "Trip"
+msgstr "Sefer"
+
+#. module: tms
+msgid "Config Settings"
+msgstr "Ayarlar"
+
+#. module: tms
+msgid "Transport Management System Crew"
+msgstr "Taşımacılık Yönetim Sistemi Ekibi"
+
+#. module: tms
+msgid "Model for TMS drivers"
+msgstr "TMS sürücüleri için model"
+
+#. module: tms
+msgid "Model for TMS insurances"
+msgstr "TMS sigortaları için model"
+
+#. module: tms
+msgid "Transport Management System Order"
+msgstr "Taşımacılık Yönetim Sistemi Siparişi"
+
+#. module: tms
+msgid "Transport Management System Route"
+msgstr "Taşımacılık Yönetim Sistemi Rotası"
+
+#. module: tms
+msgid "Transport Management System Stage"
+msgstr "Taşımacılık Yönetim Sistemi Aşaması"
+
+#. module: tms
+msgid "Transport Management System Team"
+msgstr "Taşımacılık Yönetim Sistemi Takımı"
+
+#. module: tms
+msgid "Configuration"
+msgstr "Yapılandırma"
+
+#. module: tms
+msgid "Dashboard"
+msgstr "Pano"
+
+#. module: tms
+msgid "Master Data"
+msgstr "Ana Veriler"
+
+#. module: tms
+msgid "Categories"
+msgstr "Kategoriler"
+
+#. module: tms
+msgid "Fleet Models"
+msgstr "Filo Modelleri"
+
+#. module: tms
+msgid "Manufacturers"
+msgstr "Üreticiler"
+
+#. module: tms
+msgid "Models"
+msgstr "Modeller"
+
+#. module: tms
+msgid "Fleet Services"
+msgstr "Filo Hizmetleri"
+
+#. module: tms
+msgid "Types"
+msgstr "Türler"
+
+#. module: tms
+msgid "Fleet Vehicles"
+msgstr "Filo Araçları"
+
+#. module: tms
+msgid "Status"
+msgstr "Durum"
+
+#. module: tms
+msgid "Tags"
+msgstr "Etiketler"
+
+#. module: tms
+msgid "Activity Types"
+msgstr "Etkinlik Türleri"
+
+#. module: tms
+msgid "Contracts"
+msgstr "Sözleşmeler"
+
+#. module: tms
+msgid "Odometers"
+msgstr "Kilometre Sayacı"
+
+#. module: tms
+msgid "Costs"
+msgstr "Maliyetler"
+
+#. module: tms
+msgid "Services"
+msgstr "Hizmetler"
+
+#. module: tms
+msgid "Stages"
+msgstr "Aşamalar"
+
+#. module: tms
+msgid "Teams"
+msgstr "Takımlar"
+
+#. module: tms
+msgid "Insurance Policies"
+msgstr "Sigorta Poliçeleri"
+
+#. module: tms
+msgid "Locations"
+msgstr "Konumlar"
+
+#. module: tms
+msgid "All Trips"
+msgstr "Tüm Seferler"
+
+#. module: tms
+msgid "Routes"
+msgstr "Rotalar"
+
+#. module: tms
+msgid "Operations"
+msgstr "İşlemler"
+
+#. module: tms
+msgid "Reporting"
+msgstr "Raporlama"
+
+#. module: tms
+msgid "Settings"
+msgstr "Ayarlar"
+
+#. module: tms
+msgid "Administrator"
+msgstr "Yönetici"
+
+#. module: tms
+msgid "User"
+msgstr "Kullanıcı"
+
+#. module: tms
+msgid "Manage TMS Crew"
+msgstr "TMS Ekibini Yönet"
+
+#. module: tms
+msgid "Manage TMS Driver License"
+msgstr "TMS Sürücü Belgesini Yönet"
+
+#. module: tms
+msgid "Manage TMS Routes"
+msgstr "TMS Rotalarını Yönet"
+
+#. module: tms
+msgid "Manage TMS Route Stops"
+msgstr "TMS Rota Duraklarını Yönet"
+
+#. module: tms
+msgid "Manage TMS Teams"
+msgstr "TMS Takımlarını Yönet"
+
+#. module: tms
+msgid "Transport Management System"
+msgstr "Taşımacılık Yönetim Sistemi"
+
+#. module: tms
+msgid "Manage TMS Oum"
+msgstr "TMS Ölçü Birimlerini Yönet"
+
+#. module: tms
+msgid "Manage TMS Vehicle Insurance"
+msgstr "TMS Araç Sigortasını Yönet"
+
+#. module: tms
+msgid "Create a Stage."
+msgstr "Bir aşama oluşturun."
+
+#. module: tms
+msgid "Capacity"
+msgstr "Kapasite"
+
+#. module: tms
+msgid "Insurance"
+msgstr "Sigorta"
+
+#. module: tms
+msgid "Insurance Policy"
+msgstr "Sigorta Poliçesi"
+
+#. module: tms
+msgid "Operation"
+msgstr "İşlem"
+
+#. module: tms
+msgid "Allow the use of predefined routes in trips"
+msgstr "Seferlerde önceden tanımlı rotaların kullanımına izin ver"
+
+#. module: tms
+msgid "Create Trip Orders with Sale Orders"
+msgstr "Satış Siparişleriyle Sefer Siparişleri Oluştur"
+
+#. module: tms
+msgid "Create vendor bills and customer invoices when completing trip orders."
+msgstr "Sefer siparişleri tamamlandığında satıcı faturaları ve müşteri faturaları oluşturun."
+
+#. module: tms
+msgid "Days before expiration"
+msgstr "Son kullanma tarihinden önceki gün sayısı"
+
+#. module: tms
+msgid "Default Distance UoM"
+msgstr "Varsayılan Mesafe Ölçü Birimi"
+
+#. module: tms
+msgid "Default Length UoM"
+msgstr "Varsayılan Uzunluk Ölçü Birimi"
+
+#. module: tms
+msgid "Default Speed UoM"
+msgstr "Varsayılan Hız Ölçü Birimi"
+
+#. module: tms
+msgid "Default Time UoM"
+msgstr "Varsayılan Süre Ölçü Birimi"
+
+#. module: tms
+msgid "Default Weight UoM"
+msgstr "Varsayılan Ağırlık Ölçü Birimi"
+
+#. module: tms
+msgid "e.g. Hours"
+msgstr "örn. Saat"
+
+#. module: tms
+msgid "e.g. kg"
+msgstr "örn. kg"
+
+#. module: tms
+msgid "e.g. km"
+msgstr "örn. km"
+
+#. module: tms
+msgid "e.g. km/h"
+msgstr "örn. km/sa"
+
+#. module: tms
+msgid "e.g. m"
+msgstr "örn. m"
+
+#. module: tms
+msgid "Enable the creation of stops in a route"
+msgstr "Rotada durak oluşturulmasını etkinleştir"
+
+#. module: tms
+msgid "Manage Crews"
+msgstr "Ekipleri Yönet"
+
+#. module: tms
+msgid "Manage crews that share the same vehicle"
+msgstr "Aynı aracı paylaşan ekipleri yönet"
+
+#. module: tms
+msgid "Manage depreciations"
+msgstr "Amortismanları yönet"
+
+#. module: tms
+msgid "Manage Driver License Expiration"
+msgstr "Sürücü Belgesi Son Kullanma Tarihini Yönet"
+
+#. module: tms
+msgid "Manage Driver License Expiration Date Before A Trip"
+msgstr "Seferden Önce Sürücü Belgesi Son Kullanma Tarihini Yönet"
+
+#. module: tms
+msgid "Manage expenses of a trip: hotel, tolls, fuel"
+msgstr "Bir seferin giderlerini yönet: otel, köprü geçişi, yakıt"
+
+#. module: tms
+msgid "Manage pre-defined routes"
+msgstr "Önceden tanımlı rotaları yönet"
+
+#. module: tms
+msgid "Manage purchase requests for drivers and other suppliers"
+msgstr "Sürücüler ve diğer tedarikçiler için satın alma taleplerini yönet"
+
+#. module: tms
+msgid "Manage Teams"
+msgstr "Takımları Yönet"
+
+#. module: tms
+msgid "Manage teams that share the same process/stages"
+msgstr "Aynı süreci/aşamaları paylaşan takımları yönet"
+
+#. module: tms
+msgid "Manage Trips Accounting"
+msgstr "Sefer Muhasebesini Yönet"
+
+#. module: tms
+msgid "Manage Vehicle Insurance Expiration"
+msgstr "Araç Sigortası Son Kullanma Tarihini Yönet"
+
+#. module: tms
+msgid "Manage Vehicle Insurance Expiration Date Before A Trip"
+msgstr "Seferden Önce Araç Sigortası Son Kullanma Tarihini Yönet"
+
+#. module: tms
+msgid "Manage vehicles as accounting assets"
+msgstr "Araçları muhasebe varlıkları olarak yönet"
+
+#. module: tms
+msgid "Sell trips or tickets"
+msgstr "Sefer veya bilet sat"
+
+#. module: tms
+msgid "Stops"
+msgstr "Duraklar"
+
+#. module: tms
+msgid "TMS Units of Measure"
+msgstr "TMS Ölçü Birimleri"
+
+#. module: tms
+msgid "Transport"
+msgstr "Taşımacılık"
+
+#. module: tms
+msgid "Units"
+msgstr "Birimler"
+
+#. module: tms
+msgid "Crew Name"
+msgstr "Ekip Adı"
+
+#. module: tms
+msgid "Vehicle"
+msgstr "Araç"
+
+#. module: tms
+msgid "<span class=\"badge badge-primary\">Crew</span>"
+msgstr "<span class=\"badge badge-primary\">Ekip</span>"
+
+#. module: tms
+msgid "Coverage"
+msgstr "Teminat"
+
+#. module: tms
+msgid "Information"
+msgstr "Bilgi"
+
+#. module: tms
+msgid "Trip Reports"
+msgstr "Sefer Raporları"
+
+#. module: tms
+msgid "Add a description for the order..."
+msgstr "Sipariş için bir açıklama ekleyin..."
+
+#. module: tms
+msgid "Description"
+msgstr "Açıklama"
+
+#. module: tms
+msgid "Duration"
+msgstr "Süre"
+
+#. module: tms
+msgid "Planning"
+msgstr "Planlama"
+
+#. module: tms
+msgid "Refresh"
+msgstr "Yenile"
+
+#. module: tms
+msgid "Scheduled Duration"
+msgstr "Planlanan Süre"
+
+#. module: tms
+msgid "<span class=\"w-75\">Hours</span>"
+msgstr "<span class=\"w-75\">Saat</span>"
+
+#. module: tms
+msgid "Trip Name"
+msgstr "Sefer Adı"
+
+#. module: tms
+msgid "Trip Tracking"
+msgstr "Sefer Takibi"
+
+#. module: tms
+msgid "Arrow"
+msgstr "Ok"
+
+#. module: tms
+msgid "Arrow icon"
+msgstr "Ok simgesi"
+
+#. module: tms
+msgid "<span class=\"fa fa-car me-2\" aria-label=\"Vehicle\" title=\"Vehicle\"/>"
+msgstr "<span class=\"fa fa-car me-2\" aria-label=\"Araç\" title=\"Araç\"/>"
+
+#. module: tms
+msgid "<span class=\"fa fa-map-o me-2\" title=\"Route\"/>"
+msgstr "<span class=\"fa fa-map-o me-2\" title=\"Rota\"/>"
+
+#. module: tms
+msgid "<span>Reporting</span>"
+msgstr "<span>Raporlama</span>"
+
+#. module: tms
+msgid "<span>View</span>"
+msgstr "<span>Görünüm</span>"
+
+#. module: tms
+msgid "Tasks Analysis"
+msgstr "Görev Analizi"
+
+#. module: tms
+msgid "End"
+msgstr "Bitiş"
+
+#. module: tms
+msgid "Start"
+msgstr "Başlat"
+
+#. module: tms
+msgid "Trips"
+msgstr "Seferler"
+
+#. module: tms
+msgid "Add a description..."
+msgstr "Bir açıklama ekleyin..."
+
+#. module: tms
+msgid "Stage Description"
+msgstr "Aşama Açıklaması"
+
+#. module: tms
+msgid "Crews"
+msgstr "Ekipler"
+
+#. module: tms
+msgid "Drivers"
+msgstr "Sürücüler"
+
+#. module: tms
+msgid "Personnel"
+msgstr "Personel"
+
+#. module: tms
+msgid "Team Name"
+msgstr "Takım Adı"
+
+#. module: tms
+msgid "Vehicles"
+msgstr "Araçlar"
+
+#. module: tms
+msgid "TRIPS"
+msgstr "SEFERLER"
+
+#. module: tms
+msgid "Distance Traveled"
+msgstr "Alınan Mesafe"
+
+#. module: tms
+msgid "Driver Experience"
+msgstr "Sürücü Deneyimi"
+
+#. module: tms
+msgid "Driver Status"
+msgstr "Sürücü Durumu"
+
+#. module: tms
+msgid "Driver Type"
+msgstr "Sürücü Türü"
+
+#. module: tms
+msgid "Licence Expiration Date"
+msgstr "Belge Son Kullanma Tarihi"
+
+#. module: tms
+msgid "Licence No."
+msgstr "Belge No."
+
+#. module: tms
+msgid "Licence Type"
+msgstr "Belge Türü"
+
+#. module: tms
+msgid "License File"
+msgstr "Belge Dosyası"
+
+#. module: tms
+msgid "Driver"
+msgstr "Sürücü"
+
+#. module: tms
+msgid "<i class=\"fa fa-fw me-1 fa-phone\" title=\"Phone\"/>"
+msgstr "<i class=\"fa fa-fw me-1 fa-phone\" title=\"Telefon\"/>"
+
+#. module: tms
+msgid "<i class=\"fa fa-fw me-1 fa-users\" title=\"Team\"/>"
+msgstr "<i class=\"fa fa-fw me-1 fa-users\" title=\"Takım\"/>"
+
+#. module: tms
+msgid "<span>Crews: </span>"
+msgstr "<span>Ekipler: </span>"
+
+#. module: tms
+msgid "Name"
+msgstr "Ad"
+
+#. module: tms
+msgid "Stage"
+msgstr "Aşama"
+
+#. module: tms
+msgid "Team"
+msgstr "Takım"
+
+#. module: tms
+msgid "Distance"
+msgstr "Mesafe"
+
+#. module: tms
+msgid "Estimated Time"
+msgstr "Tahmini Süre"
+
+#. module: tms
+msgid "Hours"
+msgstr "Saat"
+
+#. module: tms
+msgid "km"
+msgstr "km"
+
+#. module: tms
+msgid "Location"
+msgstr "Konum"
+
+#. module: tms
+msgid "Notes"
+msgstr "Notlar"
+
+#. module: tms
+msgid "Route"
+msgstr "Rota"
+
+#. module: tms
+msgid "Route Details"
+msgstr "Rota Detayları"
+
+#. module: tms
+msgid "Route Name"
+msgstr "Rota Adı"
+
+#. module: tms
+msgid "Stop Locations"
+msgstr "Durak Konumları"
+
+#. module: tms
+msgid "UoM"
+msgstr "UoM"
+
+#. module: tms
+msgid "Type"
+msgstr "Tür"
+
+#. module: tms
+msgid "Archived"
+msgstr "Arşivlendi"
+
+#. module: tms
+msgid "km/h"
+msgstr "km/sa"
+
+#. module: tms
+msgid "mph"
+msgstr "mph"
+
+#. module: tms
+msgid "You cannot delete default stages."
+msgstr "Varsayılan aşamaları silemezsiniz."
+
+#. module: tms
+msgid "You must create an TMS order stage first."
+msgstr "Önce bir TMS sipariş aşaması oluşturmalısınız."
+
+#. module: tms
+msgid "Color code should be Hex Code. Ex:-#FFFFFF"
+msgstr "Renk kodu Hex Kodu olmalıdır. Örn:-#FFFFFF"
