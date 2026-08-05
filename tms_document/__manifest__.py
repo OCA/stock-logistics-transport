@@ -16,5 +16,6 @@
     "data": [
         "security/res_groups.xml",
         "security/ir.model.access.csv",
+        "data/ir_config_parameter.xml",
     ],
 }

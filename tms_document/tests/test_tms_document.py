@@ -31,3 +31,10 @@ class TestTmsDocument(TransactionCase):
     def test_state_expiring_within_horizon(self):
         d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=5))
         self.assertEqual(d.state, "expiring")
+
+    def test_horizon_respected(self):
+        self.env["ir.config_parameter"].sudo().set_param(
+            "tms.document.expiry_horizon_days", 60
+        )
+        d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=40))
+        self.assertEqual(d.state, "expiring")  # within 60-day horizon
