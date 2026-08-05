@@ -38,3 +38,8 @@ class TestTmsDocument(TransactionCase):
         )
         d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=40))
         self.assertEqual(d.state, "expiring")  # within 60-day horizon
+
+    def test_driver_documents_o2m(self):
+        self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        self.assertEqual(len(self.holder.document_ids), 1)
+        self.assertEqual(self.holder.document_ids.state, "valid")
