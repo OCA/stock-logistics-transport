@@ -94,7 +94,11 @@ class TestTMSRouteAccount(TestTMSAccountCommon):
         # Plan group granted without analytic accounting access: the route
         # must be created without an analytic account, not crash.
         self.env.user.group_ids = [
-            (6, 0, [self.route_plan_group.id, self.tms_user_group.id, self.route_group.id])
+            (
+                6,
+                0,
+                [self.route_plan_group.id, self.tms_user_group.id, self.route_group.id],
+            )
         ]
         route = self.env["tms.route"].create(
             {
