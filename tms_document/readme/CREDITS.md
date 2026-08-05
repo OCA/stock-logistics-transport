@@ -1,0 +1,2 @@
+- VSL
+- Odoo Community Association (OCA)

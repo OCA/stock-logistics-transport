@@ -1803,3 +1803,23 @@ msgstr "Önce bir TMS sipariş aşaması oluşturmalısınız."
 #. module: tms
 msgid "Color code should be Hex Code. Ex:-#FFFFFF"
 msgstr "Renk kodu Hex Kodu olmalıdır. Örn:-#FFFFFF"
+
+#. module: tms
+msgid "Confirmed"
+msgstr "Onaylandı"
+
+#. module: tms
+msgid "Completed"
+msgstr "Tamamlandı"
+
+#. module: tms
+msgid "In Base"
+msgstr "Üssünde"
+
+#. module: tms
+msgid "In Trip"
+msgstr "Seferde"
+
+#. module: tms
+msgid "Not Available"
+msgstr "Müsait Değil"
