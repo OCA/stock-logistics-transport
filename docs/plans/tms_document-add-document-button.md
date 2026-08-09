@@ -42,6 +42,7 @@ reference, dates and (optionally) the file.
 
 3. **View changes** — inside the existing `Documents` page of `tms_driver_views.xml` and
    `fleet_vehicle_views.xml`:
+
    ```xml
    <page string="Documents">
      <button

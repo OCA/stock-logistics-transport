@@ -49,10 +49,9 @@ export class TmsDocumentUploader extends Component {
                 {context: this._getContext()}
             );
             await this.props.record.load();
-            this.notification.add(
-                _t("%(count)s document(s) uploaded", {count}),
-                {type: "success"}
-            );
+            this.notification.add(_t("%(count)s document(s) uploaded", {count}), {
+                type: "success",
+            });
         } finally {
             this.attachmentIdsToProcess = [];
         }
