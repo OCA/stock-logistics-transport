@@ -7,6 +7,8 @@ import {registry} from "@web/core/registry";
 import {FileUploader} from "@web/views/fields/file_handler";
 import {standardWidgetProps} from "@web/views/widgets/standard_widget_props";
 
+import {_t} from "@web/core/l10n/translation";
+
 import {Component} from "@odoo/owl";
 
 export class TmsDocumentUploader extends Component {
@@ -24,7 +26,7 @@ export class TmsDocumentUploader extends Component {
     }
 
     async onFileUploaded(file) {
-        const attachment = await this.orm.create(
+        const [attachmentId] = await this.orm.create(
             "ir.attachment",
             [
                 {
@@ -35,19 +37,23 @@ export class TmsDocumentUploader extends Component {
             ],
             {context: this._getContext()}
         );
-        this.attachmentIdsToProcess.push(attachment);
+        this.attachmentIdsToProcess.push(attachmentId);
     }
 
     async onUploadComplete() {
         try {
             const attachmentIds = [...this.attachmentIdsToProcess];
-            const action = await this.orm.call(
+            const {count} = await this.orm.call(
                 "tms.document",
                 "create_document_from_attachment",
                 [attachmentIds],
                 {context: this._getContext()}
             );
-            this.env.services.action.doAction(action);
+            await this.props.record.load();
+            this.notification.add(
+                _t("%(count)s document(s) uploaded", {count}),
+                {type: "success"}
+            );
         } finally {
             this.attachmentIdsToProcess = [];
         }
