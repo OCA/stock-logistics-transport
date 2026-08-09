@@ -111,6 +111,9 @@ class TmsDocument(models.Model):
                     "res_id": holder_id,
                 }
             )
+        # Remove the temporary upload attachments so they do not linger in the
+        # holder's chatter as unattached files; the document owns a copy now.
+        attachments.unlink()
         return {"ids": docs.ids, "count": len(docs)}
 
     def unlink(self):

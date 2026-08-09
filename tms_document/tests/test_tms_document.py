@@ -246,3 +246,33 @@ class TestTmsDocument(TransactionCase):
         self.assertTrue(new_messages)
         tracked_fields = new_messages.tracking_value_ids.field_id.name
         self.assertIn("expiry_date", tracked_fields)
+
+    def test_cannot_delete_attachment_linked_to_document(self):
+        doc = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        file_att = self.env["ir.attachment"].create(
+            {
+                "name": "doc-file.pdf",
+                "res_model": "tms.document",
+                "res_id": doc.id,
+                "datas": base64.b64encode(b"file-content"),
+            }
+        )
+        with self.assertRaises(UserError):
+            file_att.unlink()
+        self.assertTrue(file_att.exists())
+
+    def test_can_delete_attachment_not_linked_to_document(self):
+        att = self.env["ir.attachment"].create(
+            {"name": "junk.txt", "datas": base64.b64encode(b"x")}
+        )
+        att.unlink()
+        self.assertFalse(att.exists())
+
+    def test_create_document_removes_source_attachment(self):
+        attachment = self.env["ir.attachment"].create(
+            {"name": "license.pdf", "datas": base64.b64encode(b"file-content")}
+        )
+        self.Doc.with_context(
+            default_res_model="tms.driver", default_res_id=self.holder.id
+        ).create_document_from_attachment(attachment.ids)
+        self.assertFalse(attachment.exists())
