@@ -3,7 +3,7 @@
 {
     "name": "TMS Document",
     "summary": "Generic expiry-tracked document framework for TMS",
-    "version": "19.0.1.0.1",
+    "version": "19.0.1.0.2",
     "license": "AGPL-3",
     "category": "TMS",
     "author": "VSL, Odoo Community Association (OCA)",
@@ -22,4 +22,10 @@
         "views/fleet_vehicle_views.xml",
         "views/menu.xml",
     ],
+    "assets": {
+        "web.assets_backend": [
+            "tms_document/static/src/form/form_controller.esm.js",
+            "tms_document/static/src/form/form_buttons.xml",
+        ],
+    },
 }
