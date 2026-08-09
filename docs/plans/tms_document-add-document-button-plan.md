@@ -1,6 +1,6 @@
 # Add Document Button on Holder Forms Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Add an "Add Document" button inside the *Documents* page of the driver and
 vehicle forms that opens a `tms.document` dialog pre-filled with the holder.
@@ -42,7 +42,7 @@ Expected at the end: `tms_document` tests pass (13 existing + 2 new).
 - Modify: `tms_document/models/fleet_vehicle.py`
 - Test: `tms_document/tests/test_tms_document.py`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 Append to `tms_document/tests/test_tms_document.py`:
 
@@ -68,12 +68,12 @@ Append to `tms_document/tests/test_tms_document.py`:
         )
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 Run the test-run command above. Expected: FAIL — `'tms.driver' object has no
 attribute 'action_add_document'`.
 
-- [ ] **Step 3: Implement the method on `tms.driver`**
+- [x] **Step 3: Implement the method on `tms.driver`**
 
 Add to `tms_document/models/tms_driver.py`:
 
@@ -90,7 +90,7 @@ Add to `tms_document/models/tms_driver.py`:
         return action
 ```
 
-- [ ] **Step 4: Implement the method on `fleet.vehicle`**
+- [x] **Step 4: Implement the method on `fleet.vehicle`**
 
 Add to `tms_document/models/fleet_vehicle.py`:
 
@@ -111,13 +111,13 @@ Note: the xmlid `action_tms_document_new` does not exist yet (Task 2). Tests wil
 fail until Task 2 lands — expected. If you want a green run between tasks, comment
 the two new tests out, run, then restore.
 
-- [ ] **Step 5: Run tests**
+- [x] **Step 5: Run tests**
 
 Run the test-run command. Expected: the two new tests still FAIL with
 `External ID not found: tms_document.action_tms_document_new` — this is the Task-2
 dependency.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add tms_document/models/tms_driver.py tms_document/models/fleet_vehicle.py \
@@ -135,7 +135,7 @@ git commit -m "[ADD] tms_document: action_add_document on driver and vehicle"
 - Modify: `tms_document/views/fleet_vehicle_views.xml` (add button)
 - Modify: `tms_document/__manifest__.py` (bump version)
 
-- [ ] **Step 1: Add the new action**
+- [x] **Step 1: Add the new action**
 
 In `tms_document/views/tms_document_views.xml`, after the existing
 `action_tms_document` record, add:
@@ -149,7 +149,7 @@ In `tms_document/views/tms_document_views.xml`, after the existing
     </record>
 ```
 
-- [ ] **Step 2: Add the button to the driver form**
+- [x] **Step 2: Add the button to the driver form**
 
 Replace the whole `tms_document/views/tms_driver_views.xml` file with:
 
@@ -179,7 +179,7 @@ Replace the whole `tms_document/views/tms_driver_views.xml` file with:
 </odoo>
 ```
 
-- [ ] **Step 3: Add the button to the vehicle form**
+- [x] **Step 3: Add the button to the vehicle form**
 
 Replace the whole `tms_document/views/fleet_vehicle_views.xml` file with:
 
@@ -209,12 +209,12 @@ Replace the whole `tms_document/views/fleet_vehicle_views.xml` file with:
 </odoo>
 ```
 
-- [ ] **Step 4: Bump module version**
+- [x] **Step 4: Bump module version**
 
 In `tms_document/__manifest__.py`, change:
 `"version": "19.0.1.0.0",` → `"version": "19.0.1.0.1",`
 
-- [ ] **Step 5: Upgrade the module in the running instance**
+- [x] **Step 5: Upgrade the module in the running instance**
 
 ```bash
 docker compose -f ~/dev/odoo-docker/docker-compose.yml exec web odoo \
@@ -223,11 +223,11 @@ docker compose -f ~/dev/odoo-docker/docker-compose.yml exec web odoo \
 
 Expected: upgrade completes without view/action errors.
 
-- [ ] **Step 6: Run the full test suite**
+- [x] **Step 6: Run the full test suite**
 
 Run the test-run command. Expected: all 15 `tms_document` tests pass.
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add tms_document/views/ tms_document/__manifest__.py
@@ -240,7 +240,7 @@ git commit -m "[ADD] tms_document: Add Document button on driver and vehicle for
 
 **Files:** none (verification only).
 
-- [ ] **Step 1: Run pre-commit on the module**
+- [x] **Step 1: Run pre-commit on the module**
 
 ```bash
 cd ~/dev/odoo-tms && pre-commit run --files tms_document/** 2>/dev/null \
@@ -249,7 +249,7 @@ cd ~/dev/odoo-tms && pre-commit run --files tms_document/** 2>/dev/null \
 
 Expected: clean (no `black`, `isort`, `oca-checks`, or `ruff` findings).
 
-- [ ] **Step 2: Manual smoke check in the UI**
+- [x] **Step 2: Manual smoke check in the UI**
 
 1. Open *Drivers* → *Create* → save the driver.
 2. Open the *Documents* tab → confirm an **Add Document** button appears above the
@@ -258,7 +258,7 @@ Expected: clean (no `black`, `isort`, `oca-checks`, or `ruff` findings).
 4. Repeat for *Vehicles* (a saved vehicle's *Documents* tab).
 5. Confirm the button is hidden while the driver/vehicle form is unsaved.
 
-- [ ] **Step 3: Final test run**
+- [x] **Step 3: Final test run**
 
 Run the test-run command once more. Expected: all tests pass.
 
