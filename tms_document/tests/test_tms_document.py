@@ -163,3 +163,21 @@ class TestTmsDocument(TransactionCase):
         self.assertEqual(docs.name, "via-rpc.pdf")
         self.assertEqual(docs.res_model, "tms.driver")
         self.assertEqual(docs.res_id, self.holder.id)
+
+    def test_unlink_soft_deletes_document(self):
+        doc = self._doc(fields.Date.to_date(date.today()) - timedelta(days=1))
+        doc.critical = True
+        doc.unlink()
+        self.assertFalse(doc.active)
+        self.assertNotIn(doc, self.holder.document_ids)
+
+    def test_action_soft_delete_archives_and_unblocks_start(self):
+        doc = self._doc(fields.Date.to_date(date.today()) - timedelta(days=1))
+        doc.critical = True
+        with self.assertRaises(UserError):
+            self.order.button_start_order()
+        doc.action_soft_delete()
+        self.assertFalse(doc.active)
+        self.assertNotIn(doc, self.holder.document_ids)
+        self.order.button_start_order()
+        self.assertTrue(self.order.start_trip)

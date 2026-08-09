@@ -110,3 +110,10 @@ class TmsDocument(models.Model):
                 }
             )
         return {"ids": docs.ids, "count": len(docs)}
+
+    def unlink(self):
+        self.write({"active": False})
+        return True
+
+    def action_soft_delete(self):
+        self.unlink()
