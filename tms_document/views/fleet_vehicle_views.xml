@@ -10,11 +10,16 @@
                     <div class="mb-2" invisible="not id">
                         <widget name="tms_document_uploader" />
                     </div>
-                    <field name="document_ids">
+                    <field
+                        name="document_ids"
+                        context="{'default_res_model': 'fleet.vehicle'}"
+                    >
                         <list>
                             <field name="name" />
                             <field name="doc_type" />
+                            <field name="issue_date" />
                             <field name="expiry_date" />
+                            <field name="critical" />
                             <field name="state" />
                             <button
                                 name="action_soft_delete"
