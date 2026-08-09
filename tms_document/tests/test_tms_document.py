@@ -106,3 +106,23 @@ class TestTmsDocument(TransactionCase):
     def test_res_ref_points_to_holder(self):
         d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
         self.assertEqual(d.res_ref, self.holder)
+
+    def test_action_add_document_driver(self):
+        action = self.holder.action_add_document()
+        self.assertEqual(action["res_model"], "tms.document")
+        self.assertEqual(
+            action["context"],
+            {"default_res_model": "tms.driver", "default_res_id": self.holder.id},
+        )
+
+    def test_action_add_document_vehicle(self):
+        vehicle = self._make_vehicle()
+        action = vehicle.action_add_document()
+        self.assertEqual(action["res_model"], "tms.document")
+        self.assertEqual(
+            action["context"],
+            {
+                "default_res_model": "fleet.vehicle",
+                "default_res_id": vehicle.id,
+            },
+        )
