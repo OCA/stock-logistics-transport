@@ -7,6 +7,14 @@
         <field name="arch" type="xml">
             <xpath expr="//form//notebook" position="inside">
                 <page string="Documents">
+                    <button
+                        name="action_add_document"
+                        type="object"
+                        string="Add Document"
+                        class="btn-primary"
+                        icon="fa-upload"
+                        invisible="not id"
+                    />
                     <field name="document_ids" />
                 </page>
             </xpath>
