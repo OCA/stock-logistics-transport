@@ -1,17 +1,19 @@
 # Add Document Button on Holder Forms Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use
+> superpowers:subagent-driven-development (recommended) or superpowers:executing-plans
+> to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
-**Goal:** Add an "Add Document" button inside the *Documents* page of the driver and
+**Goal:** Add an "Add Document" button inside the _Documents_ page of the driver and
 vehicle forms that opens a `tms.document` dialog pre-filled with the holder.
 
 **Architecture:** A new `ir.actions.act_window` (`action_tms_document_new`,
-`view_mode="form"`, `target="new"`) is opened by a small `action_add_document()`
-method added to both `tms.driver` and `fleet.vehicle`. The method builds the action
-via `_for_xml_id()` and injects `default_res_model` / `default_res_id` from `self`,
-guaranteeing the holder is always pre-filled. A button in the existing *Documents*
-page (hidden until the record is saved) triggers it. Tests verify the returned action
-context for both holder models.
+`view_mode="form"`, `target="new"`) is opened by a small `action_add_document()` method
+added to both `tms.driver` and `fleet.vehicle`. The method builds the action via
+`_for_xml_id()` and injects `default_res_model` / `default_res_id` from `self`,
+guaranteeing the holder is always pre-filled. A button in the existing _Documents_ page
+(hidden until the record is saved) triggers it. Tests verify the returned action context
+for both holder models.
 
 **Tech Stack:** Odoo 19 Community, OCA conventions, `TransactionCase` tests, dockerized
 test runs against the `odoo` database.
@@ -38,6 +40,7 @@ Expected at the end: `tms_document` tests pass (13 existing + 2 new).
 ## Task 1: Model method `action_add_document()`
 
 **Files:**
+
 - Modify: `tms_document/models/tms_driver.py`
 - Modify: `tms_document/models/fleet_vehicle.py`
 - Test: `tms_document/tests/test_tms_document.py`
@@ -70,8 +73,8 @@ Append to `tms_document/tests/test_tms_document.py`:
 
 - [x] **Step 2: Run tests to verify they fail**
 
-Run the test-run command above. Expected: FAIL — `'tms.driver' object has no
-attribute 'action_add_document'`.
+Run the test-run command above. Expected: FAIL —
+`'tms.driver' object has no attribute 'action_add_document'`.
 
 - [x] **Step 3: Implement the method on `tms.driver`**
 
@@ -107,9 +110,9 @@ Add to `tms_document/models/fleet_vehicle.py`:
         return action
 ```
 
-Note: the xmlid `action_tms_document_new` does not exist yet (Task 2). Tests will
-fail until Task 2 lands — expected. If you want a green run between tasks, comment
-the two new tests out, run, then restore.
+Note: the xmlid `action_tms_document_new` does not exist yet (Task 2). Tests will fail
+until Task 2 lands — expected. If you want a green run between tasks, comment the two
+new tests out, run, then restore.
 
 - [x] **Step 5: Run tests**
 
@@ -130,6 +133,7 @@ git commit -m "[ADD] tms_document: action_add_document on driver and vehicle"
 ## Task 2: `action_tms_document_new` action + view buttons
 
 **Files:**
+
 - Modify: `tms_document/views/tms_document_views.xml` (add action)
 - Modify: `tms_document/views/tms_driver_views.xml` (add button)
 - Modify: `tms_document/views/fleet_vehicle_views.xml` (add button)
@@ -137,16 +141,16 @@ git commit -m "[ADD] tms_document: action_add_document on driver and vehicle"
 
 - [x] **Step 1: Add the new action**
 
-In `tms_document/views/tms_document_views.xml`, after the existing
-`action_tms_document` record, add:
+In `tms_document/views/tms_document_views.xml`, after the existing `action_tms_document`
+record, add:
 
 ```xml
-    <record id="action_tms_document_new" model="ir.actions.act_window">
-        <field name="name">New Document</field>
-        <field name="res_model">tms.document</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-    </record>
+<record id="action_tms_document_new" model="ir.actions.act_window">
+  <field name="name">New Document</field>
+  <field name="res_model">tms.document</field>
+  <field name="view_mode">form</field>
+  <field name="target">new</field>
+</record>
 ```
 
 - [x] **Step 2: Add the button to the driver form**
@@ -156,26 +160,26 @@ Replace the whole `tms_document/views/tms_driver_views.xml` file with:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_tms_driver_documents" model="ir.ui.view">
-        <field name="name">tms.driver.documents</field>
-        <field name="model">tms.driver</field>
-        <field name="inherit_id" ref="tms.view_tms_driver_form_inherit" />
-        <field name="arch" type="xml">
-            <xpath expr="//form//notebook" position="inside">
-                <page string="Documents">
-                    <button
-                        name="action_add_document"
-                        type="object"
-                        string="Add Document"
-                        class="btn-primary"
-                        icon="fa-upload"
-                        invisible="not id"
-                    />
-                    <field name="document_ids" />
-                </page>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_tms_driver_documents" model="ir.ui.view">
+    <field name="name">tms.driver.documents</field>
+    <field name="model">tms.driver</field>
+    <field name="inherit_id" ref="tms.view_tms_driver_form_inherit" />
+    <field name="arch" type="xml">
+      <xpath expr="//form//notebook" position="inside">
+        <page string="Documents">
+          <button
+            name="action_add_document"
+            type="object"
+            string="Add Document"
+            class="btn-primary"
+            icon="fa-upload"
+            invisible="not id"
+          />
+          <field name="document_ids" />
+        </page>
+      </xpath>
+    </field>
+  </record>
 </odoo>
 ```
 
@@ -186,33 +190,33 @@ Replace the whole `tms_document/views/fleet_vehicle_views.xml` file with:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_fleet_vehicle_documents" model="ir.ui.view">
-        <field name="name">fleet.vehicle.documents</field>
-        <field name="model">fleet.vehicle</field>
-        <field name="inherit_id" ref="tms.fleet_vehicle_inherit_view_form" />
-        <field name="arch" type="xml">
-            <xpath expr="//form//notebook" position="inside">
-                <page string="Documents">
-                    <button
-                        name="action_add_document"
-                        type="object"
-                        string="Add Document"
-                        class="btn-primary"
-                        icon="fa-upload"
-                        invisible="not id"
-                    />
-                    <field name="document_ids" />
-                </page>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_fleet_vehicle_documents" model="ir.ui.view">
+    <field name="name">fleet.vehicle.documents</field>
+    <field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="tms.fleet_vehicle_inherit_view_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//form//notebook" position="inside">
+        <page string="Documents">
+          <button
+            name="action_add_document"
+            type="object"
+            string="Add Document"
+            class="btn-primary"
+            icon="fa-upload"
+            invisible="not id"
+          />
+          <field name="document_ids" />
+        </page>
+      </xpath>
+    </field>
+  </record>
 </odoo>
 ```
 
 - [x] **Step 4: Bump module version**
 
-In `tms_document/__manifest__.py`, change:
-`"version": "19.0.1.0.0",` → `"version": "19.0.1.0.1",`
+In `tms_document/__manifest__.py`, change: `"version": "19.0.1.0.0",` →
+`"version": "19.0.1.0.1",`
 
 - [x] **Step 5: Upgrade the module in the running instance**
 
@@ -251,11 +255,10 @@ Expected: clean (no `black`, `isort`, `oca-checks`, or `ruff` findings).
 
 - [x] **Step 2: Manual smoke check in the UI**
 
-1. Open *Drivers* → *Create* → save the driver.
-2. Open the *Documents* tab → confirm an **Add Document** button appears above the
-   list.
+1. Open _Drivers_ → _Create_ → save the driver.
+2. Open the _Documents_ tab → confirm an **Add Document** button appears above the list.
 3. Click it → a `tms.document` dialog opens with the holder already set to the driver.
-4. Repeat for *Vehicles* (a saved vehicle's *Documents* tab).
+4. Repeat for _Vehicles_ (a saved vehicle's _Documents_ tab).
 5. Confirm the button is hidden while the driver/vehicle form is unsaved.
 
 - [x] **Step 3: Final test run**
@@ -266,10 +269,10 @@ Run the test-run command once more. Expected: all tests pass.
 
 ## Definition of done
 
-- `tms.driver.action_add_document()` and `fleet.vehicle.action_add_document()` return
-  an action with `res_model="tms.document"` and correct
+- `tms.driver.action_add_document()` and `fleet.vehicle.action_add_document()` return an
+  action with `res_model="tms.document"` and correct
   `default_res_model`/`default_res_id` context (2 new tests).
-- "Add Document" button appears inside the *Documents* page of both the driver and
+- "Add Document" button appears inside the _Documents_ page of both the driver and
   vehicle forms, hidden when the holder is unsaved, and opens the document form as a
   dialog pre-filled with the holder.
 - `tms_document` version bumped to `19.0.1.0.1`; module upgrades cleanly; all tests

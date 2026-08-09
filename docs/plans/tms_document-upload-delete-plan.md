@@ -1,20 +1,33 @@
 # Stay-on-Form Upload + Soft Delete Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use
+> superpowers:subagent-driven-development (recommended) or superpowers:executing-plans
+> to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Keep the driver/vehicle form open when documents are uploaded (refreshing the Documents tab in place) and add a per-row soft-delete (archive) action for documents.
+**Goal:** Keep the driver/vehicle form open when documents are uploaded (refreshing the
+Documents tab in place) and add a per-row soft-delete (archive) action for documents.
 
-**Architecture:** `create_document_from_attachment` stops returning a navigation action and returns `{"ids", "count"}`; the uploader widget then calls `this.props.record.load()` and shows a success notification. Documents are soft-deleted by overriding `unlink()` to set `active = False` (the field already exists), exposed via an `action_soft_delete()` button rendered per row in the `document_ids` inline list on the driver/vehicle forms. `active=False` records are auto-hidden by Odoo's default `active=True` search domain (holder tab, menu, trip-start guard).
+**Architecture:** `create_document_from_attachment` stops returning a navigation action
+and returns `{"ids", "count"}`; the uploader widget then calls
+`this.props.record.load()` and shows a success notification. Documents are soft-deleted
+by overriding `unlink()` to set `active = False` (the field already exists), exposed via
+an `action_soft_delete()` button rendered per row in the `document_ids` inline list on
+the driver/vehicle forms. `active=False` records are auto-hidden by Odoo's default
+`active=True` search domain (holder tab, menu, trip-start guard).
 
-**Tech Stack:** Odoo 19 Community, OCA conventions, `TransactionCase` tests, dockerized test runs against the `odoo_tests` database.
+**Tech Stack:** Odoo 19 Community, OCA conventions, `TransactionCase` tests, dockerized
+test runs against the `odoo_tests` database.
 
-**Depends on:** `tms_document` 19.0.1.0.3 already installed (PR #231 content). The `@api.model` RPC fix on `create_document_from_attachment` is included in this change set (Task 1). **Branch:** `dev-integration` (current).
+**Depends on:** `tms_document` 19.0.1.0.3 already installed (PR #231 content). The
+`@api.model` RPC fix on `create_document_from_attachment` is included in this change set
+(Task 1). **Branch:** `dev-integration` (current).
 
 ---
 
 ## Test-run command (used throughout)
 
-The repo mounts to the running Odoo at `/mnt/oca-tms`. Run the `tms_document` test suite in the container:
+The repo mounts to the running Odoo at `/mnt/oca-tms`. Run the `tms_document` test suite
+in the container:
 
 ```bash
 PW=$(docker exec odoo-docker-web-1 cat /run/secrets/postgresql_password)
@@ -23,19 +36,25 @@ docker exec -i odoo-docker-web-1 odoo -d odoo_tests -u tms_document --test-enabl
   --db_password "$PW" --log-level=info 2>&1 | grep -E "Starting Test|stats:|error\(s\)|failed"
 ```
 
-Expected at the end: `0 failed, 0 error(s) of N tests when loading database 'odoo_tests'` and `odoo.tests.stats: tms_document: N tests`.
+Expected at the end:
+`0 failed, 0 error(s) of N tests when loading database 'odoo_tests'` and
+`odoo.tests.stats: tms_document: N tests`.
 
 ---
 
 ## Task 1: `create_document_from_attachment` returns created ids
 
 **Files:**
+
 - Modify: `tms_document/models/tms_document.py` (lines 112–134)
 - Modify: `tms_document/tests/test_tms_document.py` (three tests)
 
 - [ ] **Step 1: Update the tests to expect the new return value**
 
-In `tms_document/tests/test_tms_document.py`, replace `test_create_document_from_attachment`, `test_create_document_from_attachment_with_holder`, and `test_create_document_from_attachment_via_rpc` with:
+In `tms_document/tests/test_tms_document.py`, replace
+`test_create_document_from_attachment`,
+`test_create_document_from_attachment_with_holder`, and
+`test_create_document_from_attachment_via_rpc` with:
 
 ```python
     def test_create_document_from_attachment(self):
@@ -101,7 +120,8 @@ Run the test-run command. Expected: `FAIL` on the three tests with something lik
 
 - [ ] **Step 3: Change the method to return the created ids**
 
-In `tms_document/models/tms_document.py`, replace the action-building block (currently lines 112–134, from `action = {` through `return action`) with:
+In `tms_document/models/tms_document.py`, replace the action-building block (currently
+lines 112–134, from `action = {` through `return action`) with:
 
 ```python
         return {"ids": docs.ids, "count": len(docs)}
@@ -109,7 +129,8 @@ In `tms_document/models/tms_document.py`, replace the action-building block (cur
 
 - [ ] **Step 4: Run the tests to verify they pass**
 
-Run the test-run command. Expected: `0 failed, 0 error(s)` — all `tms_document` tests pass.
+Run the test-run command. Expected: `0 failed, 0 error(s)` — all `tms_document` tests
+pass.
 
 - [ ] **Step 5: Commit**
 
@@ -123,6 +144,7 @@ git commit -m "[IMP] tms_document: create_document_from_attachment returns creat
 ## Task 2: Uploader widget stays on the holder form
 
 **Files:**
+
 - Modify: `tms_document/static/src/document_uploader/document_uploader.esm.js`
 
 - [ ] **Step 1: Edit the widget**
@@ -159,15 +181,15 @@ import {_t} from "@web/core/l10n/translation";
 ```
 
 `record.load()` reloads the holder record from the server, recomputing the
-`document_ids` one2many so the newly uploaded documents appear in the tab; no
-`doAction` navigation happens, so the user stays on the driver/vehicle form.
+`document_ids` one2many so the newly uploaded documents appear in the tab; no `doAction`
+navigation happens, so the user stays on the driver/vehicle form.
 
 - [ ] **Step 2: Manual smoke check in the UI**
 
 1. Ensure the web assets bundle is refreshed (clear the asset cache by creating and
    deleting a throwaway `ir.asset`, or restart the web container).
-2. Open a saved *Driver* → *Documents* tab.
-3. Upload a file → the driver form stays open, a *"1 document(s) uploaded"* success
+2. Open a saved _Driver_ → _Documents_ tab.
+3. Upload a file → the driver form stays open, a _"1 document(s) uploaded"_ success
    notification appears, and the new document shows in the list.
 
 - [ ] **Step 3: Commit**
@@ -182,7 +204,9 @@ git commit -m "[IMP] tms_document: keep holder form open after document upload"
 ## Task 3: Soft delete on the model
 
 **Files:**
-- Modify: `tms_document/models/tms_document.py` (after `create_document_from_attachment`)
+
+- Modify: `tms_document/models/tms_document.py` (after
+  `create_document_from_attachment`)
 - Modify: `tms_document/tests/test_tms_document.py`
 
 - [ ] **Step 1: Write the failing tests**
@@ -211,7 +235,9 @@ Append to `tms_document/tests/test_tms_document.py`:
 
 - [ ] **Step 2: Run the tests to verify they fail**
 
-Run the test-run command. Expected: `FAIL` — `'tms.document' object has no attribute 'action_soft_delete'` and `doc.active` stays `True` after `unlink` (hard delete).
+Run the test-run command. Expected: `FAIL` —
+`'tms.document' object has no attribute 'action_soft_delete'` and `doc.active` stays
+`True` after `unlink` (hard delete).
 
 - [ ] **Step 3: Implement soft delete**
 
@@ -242,6 +268,7 @@ git commit -m "[IMP] tms_document: soft-delete documents via active flag"
 ## Task 4: Per-row Delete button on the holder Documents tab
 
 **Files:**
+
 - Modify: `tms_document/views/tms_driver_views.xml`
 - Modify: `tms_document/views/fleet_vehicle_views.xml`
 - Modify: `tms_document/__manifest__.py`
@@ -253,35 +280,35 @@ Replace the whole `tms_document/views/tms_driver_views.xml` file with:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_tms_driver_documents" model="ir.ui.view">
-        <field name="name">tms.driver.documents</field>
-        <field name="model">tms.driver</field>
-        <field name="inherit_id" ref="tms.view_tms_driver_form_inherit" />
-        <field name="arch" type="xml">
-            <xpath expr="//form//notebook" position="inside">
-                <page string="Documents">
-                    <div class="mb-2" invisible="not id">
-                        <widget name="tms_document_uploader" />
-                    </div>
-                    <field name="document_ids">
-                        <list>
-                            <field name="name" />
-                            <field name="doc_type" />
-                            <field name="expiry_date" />
-                            <field name="state" />
-                            <button
-                                name="action_soft_delete"
-                                type="object"
-                                string="Delete"
-                                icon="fa-trash"
-                                confirm="Delete this document?"
-                            />
-                        </list>
-                    </field>
-                </page>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_tms_driver_documents" model="ir.ui.view">
+    <field name="name">tms.driver.documents</field>
+    <field name="model">tms.driver</field>
+    <field name="inherit_id" ref="tms.view_tms_driver_form_inherit" />
+    <field name="arch" type="xml">
+      <xpath expr="//form//notebook" position="inside">
+        <page string="Documents">
+          <div class="mb-2" invisible="not id">
+            <widget name="tms_document_uploader" />
+          </div>
+          <field name="document_ids">
+            <list>
+              <field name="name" />
+              <field name="doc_type" />
+              <field name="expiry_date" />
+              <field name="state" />
+              <button
+                name="action_soft_delete"
+                type="object"
+                string="Delete"
+                icon="fa-trash"
+                confirm="Delete this document?"
+              />
+            </list>
+          </field>
+        </page>
+      </xpath>
+    </field>
+  </record>
 </odoo>
 ```
 
@@ -292,35 +319,35 @@ Replace the whole `tms_document/views/fleet_vehicle_views.xml` file with:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_fleet_vehicle_documents" model="ir.ui.view">
-        <field name="name">fleet.vehicle.documents</field>
-        <field name="model">fleet.vehicle</field>
-        <field name="inherit_id" ref="tms.fleet_vehicle_inherit_view_form" />
-        <field name="arch" type="xml">
-            <xpath expr="//form//notebook" position="inside">
-                <page string="Documents">
-                    <div class="mb-2" invisible="not id">
-                        <widget name="tms_document_uploader" />
-                    </div>
-                    <field name="document_ids">
-                        <list>
-                            <field name="name" />
-                            <field name="doc_type" />
-                            <field name="expiry_date" />
-                            <field name="state" />
-                            <button
-                                name="action_soft_delete"
-                                type="object"
-                                string="Delete"
-                                icon="fa-trash"
-                                confirm="Delete this document?"
-                            />
-                        </list>
-                    </field>
-                </page>
-            </xpath>
-        </field>
-    </record>
+  <record id="view_fleet_vehicle_documents" model="ir.ui.view">
+    <field name="name">fleet.vehicle.documents</field>
+    <field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="tms.fleet_vehicle_inherit_view_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//form//notebook" position="inside">
+        <page string="Documents">
+          <div class="mb-2" invisible="not id">
+            <widget name="tms_document_uploader" />
+          </div>
+          <field name="document_ids">
+            <list>
+              <field name="name" />
+              <field name="doc_type" />
+              <field name="expiry_date" />
+              <field name="state" />
+              <button
+                name="action_soft_delete"
+                type="object"
+                string="Delete"
+                icon="fa-trash"
+                confirm="Delete this document?"
+              />
+            </list>
+          </field>
+        </page>
+      </xpath>
+    </field>
+  </record>
 </odoo>
 ```
 
@@ -351,11 +378,11 @@ Run the test-run command. Expected: `0 failed, 0 error(s)`.
 
 - [ ] **Step 6: Manual smoke check**
 
-1. Open a saved *Driver* → *Documents* tab.
+1. Open a saved _Driver_ → _Documents_ tab.
 2. Upload a document (stays on the form; appears in the list).
-3. Click the row trash icon → confirm dialog → the row disappears; the driver form
-   stays open; the record's `active` is now `False` in the DB.
-4. Repeat on a *Vehicle* form.
+3. Click the row trash icon → confirm dialog → the row disappears; the driver form stays
+   open; the record's `active` is now `False` in the DB.
+4. Repeat on a _Vehicle_ form.
 
 - [ ] **Step 7: Commit**
 
@@ -401,13 +428,13 @@ docker exec odoo-docker-db-1 psql -U odoo -d odoo -c \
 
 ## Definition of done
 
-- Uploading a document keeps the driver/vehicle form open, shows a success
-  notification, and the new document appears in the *Documents* tab.
+- Uploading a document keeps the driver/vehicle form open, shows a success notification,
+  and the new document appears in the _Documents_ tab.
 - `tms.document.unlink()` soft-deletes (`active = False`); `action_soft_delete()` is
   callable and a per-row Delete button on both holder forms triggers it with a
   confirmation.
-- Soft-deleted documents are hidden everywhere (holder tab, menu, trip-start guard)
-  with no restore UI.
+- Soft-deleted documents are hidden everywhere (holder tab, menu, trip-start guard) with
+  no restore UI.
 - `create_document_from_attachment` returns `{"ids", "count"}`; all tests pass; module
   version bumped to `19.0.1.0.4`; ruff clean.
 
