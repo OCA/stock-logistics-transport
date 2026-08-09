@@ -7,7 +7,12 @@ class TmsDriver(models.Model):
     _inherit = "tms.driver"
 
     document_ids = fields.One2many(
-        "tms.document", "res_id", string="Documents", compute="_compute_document_ids"
+        "tms.document",
+        "res_id",
+        string="Documents",
+        compute="_compute_document_ids",
+        inverse="_inverse_document_ids",
+        readonly=False,
     )
 
     def _compute_document_ids(self):
@@ -16,3 +21,9 @@ class TmsDriver(models.Model):
             rec.document_ids = Doc.search(
                 [("res_model", "=", "tms.driver"), ("res_id", "=", rec.id)]
             )
+
+    def _inverse_document_ids(self):
+        for rec in self:
+            for doc in rec.document_ids:
+                if doc.res_model != rec._name or doc.res_id != rec.id:
+                    doc.write({"res_model": rec._name, "res_id": rec.id})
