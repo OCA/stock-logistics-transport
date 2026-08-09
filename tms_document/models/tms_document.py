@@ -82,6 +82,7 @@ class TmsDocument(models.Model):
             .get_param("tms.document.expiry_horizon_days", "30")
         )
 
+    @api.model
     def create_document_from_attachment(self, attachment_ids):
         """Create documents from the given attachments for the holder found
         in the context (``default_res_model`` / ``default_res_id``).
@@ -108,9 +109,4 @@ class TmsDocument(models.Model):
                     "res_id": holder_id,
                 }
             )
-        return {
-            "name": self.env._("Generated Documents"),
-            "domain": [("id", "in", docs.ids)],
-            "res_model": "tms.document",
-            "type": "ir.actions.act_window",
-        }
+        return {"ids": docs.ids, "count": len(docs)}
