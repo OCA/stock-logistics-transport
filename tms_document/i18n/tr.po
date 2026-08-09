@@ -17,6 +17,10 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: tms_document
+msgid "%(count)s document(s) uploaded"
+msgstr "%(count)s belge yüklendi"
+
+#. module: tms_document
 msgid "Active"
 msgstr "Aktif"
 
@@ -35,6 +39,14 @@ msgstr "Oluşturulma Tarihi"
 #. module: tms_document
 msgid "Critical"
 msgstr "Kritik"
+
+#. module: tms_document
+msgid "Delete"
+msgstr "Sil"
+
+#. module: tms_document
+msgid "Delete this document?"
+msgstr "Bu belge silinsin mi?"
 
 #. module: tms_document
 msgid "Display Name"
