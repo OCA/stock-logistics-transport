@@ -7,10 +7,7 @@
         t-inherit="web.FormView"
         t-inherit-mode="extension"
     >
-        <xpath
-            expr="//button[hasclass('o_form_button_create')][hasclass('btn-outline-primary')]"
-            position="after"
-        >
+        <xpath expr="//button[hasclass('o_form_button_create')]" position="after">
             <button
                 t-if="canCreate and !model.root.isNew and model.root.resModel in ['tms.driver', 'fleet.vehicle']"
                 type="button"
