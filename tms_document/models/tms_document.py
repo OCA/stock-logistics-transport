@@ -8,6 +8,7 @@ from odoo.exceptions import UserError
 
 class TmsDocument(models.Model):
     _name = "tms.document"
+    _inherit = ["mail.thread"]
     _description = "TMS Document"
     _order = "expiry_date asc nulls last"
     _rec_name = "name"
@@ -18,11 +19,11 @@ class TmsDocument(models.Model):
         selection="_selection_res_model", compute="_compute_res_ref", string="Holder"
     )
     doc_type = fields.Selection(
-        selection="_selection_doc_type", string="Type", required=True
+        selection="_selection_doc_type", string="Type", required=True, tracking=True
     )
-    name = fields.Char(string="Reference", required=True)
-    issue_date = fields.Date()
-    expiry_date = fields.Date(index=True)
+    name = fields.Char(string="Reference", required=True, tracking=True)
+    issue_date = fields.Date(tracking=True)
+    expiry_date = fields.Date(index=True, tracking=True)
     state = fields.Selection(
         [("valid", "Valid"), ("expiring", "Expiring"), ("expired", "Expired")],
         compute="_compute_state",
@@ -31,9 +32,10 @@ class TmsDocument(models.Model):
     critical = fields.Boolean(
         default=False,
         help="If checked, an expired document blocks trip start on its holder.",
+        tracking=True,
     )
     datas = fields.Binary(string="File", attachment=True)
-    notes = fields.Text()
+    notes = fields.Text(tracking=True)
     company_id = fields.Many2one(
         "res.company",
         string="Company",
@@ -112,6 +114,9 @@ class TmsDocument(models.Model):
         return {"ids": docs.ids, "count": len(docs)}
 
     def unlink(self):
+        # pylint: disable=method-required-super
+        # Soft delete: archive instead of removing, keeping the record's
+        # chatter and expiry trail available.
         self.write({"active": False})
         return True
 

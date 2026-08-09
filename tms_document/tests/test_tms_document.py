@@ -181,3 +181,68 @@ class TestTmsDocument(TransactionCase):
         self.assertNotIn(doc, self.holder.document_ids)
         self.order.button_start_order()
         self.assertTrue(self.order.start_trip)
+
+    def test_driver_document_ids_editable(self):
+        field = self.env["tms.driver"]._fields["document_ids"]
+        self.assertFalse(field.readonly)
+        self.assertTrue(field.inverse)
+
+    def test_vehicle_document_ids_editable(self):
+        field = self.env["fleet.vehicle"]._fields["document_ids"]
+        self.assertFalse(field.readonly)
+        self.assertTrue(field.inverse)
+
+    def test_create_document_via_driver_document_ids(self):
+        self.holder.document_ids = [
+            (
+                0,
+                0,
+                {
+                    "res_model": "tms.driver",
+                    "doc_type": "license",
+                    "name": "LIC-NEW",
+                    "expiry_date": fields.Date.to_date(date.today())
+                    + timedelta(days=400),
+                },
+            )
+        ]
+        self.assertEqual(len(self.holder.document_ids), 1)
+        new_doc = self.holder.document_ids
+        self.assertEqual(new_doc.name, "LIC-NEW")
+        self.assertEqual(new_doc.res_model, "tms.driver")
+        self.assertEqual(new_doc.res_id, self.holder.id)
+
+    def test_edit_document_fields_via_document_ids(self):
+        doc = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        self.holder.document_ids.write(
+            {"critical": True, "expiry_date": fields.Date.to_date(date.today())}
+        )
+        self.assertTrue(doc.critical)
+        self.assertEqual(doc.expiry_date, fields.Date.to_date(date.today()))
+
+    def test_create_logs_message_in_chatter(self):
+        d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        self.assertTrue(d.message_ids)
+
+    def test_update_tracked_field_logs_message(self):
+        d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        self.env.cr.precommit.run()
+        before = d.message_ids
+        d.write({"critical": True})
+        self.env.cr.precommit.run()
+        new_messages = d.message_ids - before
+        self.assertTrue(new_messages)
+        tracked_fields = new_messages.tracking_value_ids.field_id.name
+        self.assertIn("critical", tracked_fields)
+
+    def test_update_expiry_logs_message(self):
+        d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        self.env.cr.precommit.run()
+        before = d.message_ids
+        new_expiry = fields.Date.to_date(date.today()) + timedelta(days=50)
+        d.write({"expiry_date": new_expiry})
+        self.env.cr.precommit.run()
+        new_messages = d.message_ids - before
+        self.assertTrue(new_messages)
+        tracked_fields = new_messages.tracking_value_ids.field_id.name
+        self.assertIn("expiry_date", tracked_fields)
