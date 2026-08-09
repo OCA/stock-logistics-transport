@@ -6,7 +6,7 @@
     "version": "19.0.1.0.4",
     "license": "AGPL-3",
     "category": "TMS",
-    "author": "VSL, Odoo Community Association (OCA)",
+    "author": "Volkan Taşçı, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "maintainers": ["volkantasci"],
     "development_status": "Alpha",

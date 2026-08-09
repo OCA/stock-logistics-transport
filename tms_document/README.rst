@@ -123,12 +123,12 @@ Credits
 Authors
 -------
 
-* VSL
+* Volkan Taşçı
 
 Contributors
 ------------
 
-- Volkan Taşçı dev@vsl.com.tr
+- Volkan Taşçı me@volkantasci.com
 
 Other credits
 -------------

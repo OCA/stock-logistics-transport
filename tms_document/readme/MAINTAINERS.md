@@ -8,7 +8,7 @@ promote its widespread use.
 
 Current maintainer:
 
-[![Volkan Taşçı](https://github.com/volkantasci.png?size=40)](https://github.com/volkantasci "Volkan Taşçı")
+[![Volkan TAŞCI](https://github.com/volkantasci.png?size=40)](https://github.com/volkantasci "Volkan TAŞCI")
 
 This module is part of the
 [OCA/stock-logistics-transport](https://github.com/OCA/stock-logistics-transport)
