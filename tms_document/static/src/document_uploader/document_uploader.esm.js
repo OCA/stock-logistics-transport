@@ -2,12 +2,11 @@
 /* Copyright (C) 2026 VSL
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 
-import {useService} from "@web/core/utils/hooks";
+import {_t} from "@web/core/l10n/translation";
 import {registry} from "@web/core/registry";
+import {useService} from "@web/core/utils/hooks";
 import {FileUploader} from "@web/views/fields/file_handler";
 import {standardWidgetProps} from "@web/views/widgets/standard_widget_props";
-
-import {_t} from "@web/core/l10n/translation";
 
 import {Component} from "@odoo/owl";
 

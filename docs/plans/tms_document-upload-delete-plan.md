@@ -8,7 +8,7 @@
 
 **Tech Stack:** Odoo 19 Community, OCA conventions, `TransactionCase` tests, dockerized test runs against the `odoo_tests` database.
 
-**Depends on:** `tms_document` 19.0.1.0.3 already installed (PR #231 content, incl. the `@api.model` RPC fix). **Branch:** `dev-integration` (current).
+**Depends on:** `tms_document` 19.0.1.0.3 already installed (PR #231 content). The `@api.model` RPC fix on `create_document_from_attachment` is included in this change set (Task 1). **Branch:** `dev-integration` (current).
 
 ---
 

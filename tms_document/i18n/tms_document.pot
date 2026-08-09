@@ -16,6 +16,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: tms_document
+#. odoo-js
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "%(count)s document(s) uploaded"
+msgstr ""
+
+#. module: tms_document
 #: model:ir.model.fields,field_description:tms_document.field_tms_document__active
 msgid "Active"
 msgstr ""
@@ -46,6 +52,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_document.field_tms_document__critical
 #: model_terms:ir.ui.view,arch_db:tms_document.view_tms_document_search
 msgid "Critical"
+msgstr ""
+
+#. module: tms_document
+#: model_terms:ir.ui.view,arch_db:tms_document.view_fleet_vehicle_documents
+#: model_terms:ir.ui.view,arch_db:tms_document.view_tms_driver_documents
+msgid "Delete"
+msgstr ""
+
+#. module: tms_document
+#: model_terms:ir.ui.view,arch_db:tms_document.view_fleet_vehicle_documents
+#: model_terms:ir.ui.view,arch_db:tms_document.view_tms_driver_documents
+msgid "Delete this document?"
 msgstr ""
 
 #. module: tms_document
