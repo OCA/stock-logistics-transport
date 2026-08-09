@@ -34,7 +34,7 @@ class TmsDocument(models.Model):
         help="If checked, an expired document blocks trip start on its holder.",
         tracking=True,
     )
-    datas = fields.Binary(string="File", attachment=True)
+    file_id = fields.Many2one("ir.attachment", string="File", ondelete="set null")
     notes = fields.Text(tracking=True)
     company_id = fields.Many2one(
         "res.company",
@@ -102,25 +102,28 @@ class TmsDocument(models.Model):
             )
         docs = self.env["tms.document"]
         for attachment in attachments:
+            # Link the file to the holder so it appears under the holder's
+            # chatter attachments, then reference it from the document.
+            attachment.write({"res_model": holder_model, "res_id": holder_id})
             docs |= self.create(
                 {
                     "name": attachment.name,
                     "doc_type": "other",
-                    "datas": attachment.datas,
+                    "file_id": attachment.id,
                     "res_model": holder_model,
                     "res_id": holder_id,
                 }
             )
-        # Remove the temporary upload attachments so they do not linger in the
-        # holder's chatter as unattached files; the document owns a copy now.
-        attachments.unlink()
         return {"ids": docs.ids, "count": len(docs)}
 
     def unlink(self):
         # pylint: disable=method-required-super
-        # Soft delete: archive instead of removing, keeping the record's
-        # chatter and expiry trail available.
-        self.write({"active": False})
+        # Soft delete: archive the document and drop its file so it no longer
+        # appears under the holder's Attachments, keeping the record (and its
+        # chatter) available.
+        files = self.file_id
+        self.write({"active": False, "file_id": False})
+        files.with_context(tms_document_allow_unlink=True).unlink()
         return True
 
     def action_soft_delete(self):

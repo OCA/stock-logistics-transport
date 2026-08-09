@@ -43,13 +43,14 @@
                     </group>
                     <notebook>
                         <page string="File">
-                            <field name="datas" widget="binary" />
+                            <field name="file_id" />
                         </page>
                         <page string="Notes">
                             <field name="notes" />
                         </page>
                     </notebook>
                 </sheet>
+                <chatter />
             </form>
         </field>
     </record>

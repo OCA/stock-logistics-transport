@@ -14,7 +14,7 @@
                         name="document_ids"
                         context="{'default_res_model': 'tms.driver'}"
                     >
-                        <list>
+                        <list delete="false">
                             <field name="name" />
                             <field name="doc_type" />
                             <field name="issue_date" />
