@@ -799,6 +799,18 @@ msgid ""
 msgstr ""
 
 #. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_driver.py:0
+msgid "Driver Created"
+msgstr ""
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_driver.py:0
+msgid "Driver stage changed"
+msgstr ""
+
+#. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
 msgid "Driver Experience"
 msgstr ""
