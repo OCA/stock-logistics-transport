@@ -110,6 +110,8 @@ class TestTmsDocument(TransactionCase):
     def test_action_add_document_driver(self):
         action = self.holder.action_add_document()
         self.assertEqual(action["res_model"], "tms.document")
+        self.assertEqual(action["view_mode"], "form")
+        self.assertEqual(action["target"], "new")
         self.assertEqual(
             action["context"],
             {"default_res_model": "tms.driver", "default_res_id": self.holder.id},
@@ -119,6 +121,8 @@ class TestTmsDocument(TransactionCase):
         vehicle = self._make_vehicle()
         action = vehicle.action_add_document()
         self.assertEqual(action["res_model"], "tms.document")
+        self.assertEqual(action["view_mode"], "form")
+        self.assertEqual(action["target"], "new")
         self.assertEqual(
             action["context"],
             {
