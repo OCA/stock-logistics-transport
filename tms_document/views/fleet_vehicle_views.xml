@@ -7,6 +7,9 @@
         <field name="arch" type="xml">
             <xpath expr="//form//notebook" position="inside">
                 <page string="Documents">
+                    <div class="mb-2" invisible="not id">
+                        <widget name="tms_document_uploader" />
+                    </div>
                     <field name="document_ids" />
                 </page>
             </xpath>

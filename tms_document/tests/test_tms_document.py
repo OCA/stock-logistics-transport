@@ -1,3 +1,4 @@
+import base64
 from datetime import date, timedelta
 
 from odoo import fields
@@ -107,26 +108,32 @@ class TestTmsDocument(TransactionCase):
         d = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
         self.assertEqual(d.res_ref, self.holder)
 
-    def test_action_add_document_driver(self):
-        action = self.holder.action_add_document()
-        self.assertEqual(action["res_model"], "tms.document")
-        self.assertEqual(action["view_mode"], "form")
-        self.assertEqual(action["target"], "new")
-        self.assertEqual(
-            action["context"],
-            {"default_res_model": "tms.driver", "default_res_id": self.holder.id},
+    def test_create_document_from_attachment(self):
+        attachment = self.env["ir.attachment"].create(
+            {"name": "license.pdf", "datas": base64.b64encode(b"file-content")}
         )
+        action = self.Doc.with_context(
+            default_res_model="tms.driver", default_res_id=self.holder.id
+        ).create_document_from_attachment(attachment.ids)
+        docs = self.Doc.browse(action["domain"][0][2])
+        self.assertEqual(len(docs), 1)
+        self.assertEqual(docs.name, "license.pdf")
+        self.assertEqual(docs.datas, base64.b64encode(b"file-content"))
 
-    def test_action_add_document_vehicle(self):
-        vehicle = self._make_vehicle()
-        action = vehicle.action_add_document()
-        self.assertEqual(action["res_model"], "tms.document")
-        self.assertEqual(action["view_mode"], "form")
-        self.assertEqual(action["target"], "new")
-        self.assertEqual(
-            action["context"],
-            {
-                "default_res_model": "fleet.vehicle",
-                "default_res_id": vehicle.id,
-            },
+    def test_create_document_from_attachment_requires_holder(self):
+        attachment = self.env["ir.attachment"].create(
+            {"name": "license.pdf", "datas": base64.b64encode(b"file-content")}
         )
+        with self.assertRaises(UserError):
+            self.Doc.create_document_from_attachment(attachment.ids)
+
+    def test_create_document_from_attachment_with_holder(self):
+        attachment = self.env["ir.attachment"].create(
+            {"name": "insurance.pdf", "datas": base64.b64encode(b"file-content")}
+        )
+        action = self.Doc.with_context(
+            default_res_model="tms.driver", default_res_id=self.holder.id
+        ).create_document_from_attachment(attachment.ids)
+        docs = self.Doc.browse(action["domain"][0][2])
+        self.assertEqual(docs.res_model, "tms.driver")
+        self.assertEqual(docs.res_id, self.holder.id)

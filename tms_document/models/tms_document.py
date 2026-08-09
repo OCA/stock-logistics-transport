@@ -3,6 +3,7 @@
 from datetime import timedelta
 
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class TmsDocument(models.Model):
@@ -80,3 +81,36 @@ class TmsDocument(models.Model):
             .sudo()
             .get_param("tms.document.expiry_horizon_days", "30")
         )
+
+    def create_document_from_attachment(self, attachment_ids):
+        """Create documents from the given attachments for the holder found
+        in the context (``default_res_model`` / ``default_res_id``).
+        """
+        attachments = self.env["ir.attachment"].browse(attachment_ids)
+        if not attachments:
+            raise UserError(self.env._("No attachment was provided."))
+        holder_model = self.env.context.get("default_res_model")
+        holder_id = self.env.context.get("default_res_id")
+        if not holder_model or not holder_id:
+            raise UserError(
+                self.env._(
+                    "No holder (driver or vehicle) was provided for the documents."
+                )
+            )
+        docs = self.env["tms.document"]
+        for attachment in attachments:
+            docs |= self.create(
+                {
+                    "name": attachment.name,
+                    "doc_type": "other",
+                    "datas": attachment.datas,
+                    "res_model": holder_model,
+                    "res_id": holder_id,
+                }
+            )
+        return {
+            "name": self.env._("Generated Documents"),
+            "domain": [("id", "in", docs.ids)],
+            "res_model": "tms.document",
+            "type": "ir.actions.act_window",
+        }
