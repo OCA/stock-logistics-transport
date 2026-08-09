@@ -1,1 +1,1 @@
-- Volkan Taşçı <dev@vsl.com.tr>
+- Volkan Taşçı <me@volkantasci.com>
