@@ -3,6 +3,7 @@ from datetime import date, timedelta
 
 from odoo import fields
 from odoo.exceptions import UserError
+from odoo.service.model import call_kw
 from odoo.tests.common import TransactionCase
 
 
@@ -112,10 +113,11 @@ class TestTmsDocument(TransactionCase):
         attachment = self.env["ir.attachment"].create(
             {"name": "license.pdf", "datas": base64.b64encode(b"file-content")}
         )
-        action = self.Doc.with_context(
+        result = self.Doc.with_context(
             default_res_model="tms.driver", default_res_id=self.holder.id
         ).create_document_from_attachment(attachment.ids)
-        docs = self.Doc.browse(action["domain"][0][2])
+        self.assertEqual(result["count"], 1)
+        docs = self.Doc.browse(result["ids"])
         self.assertEqual(len(docs), 1)
         self.assertEqual(docs.name, "license.pdf")
         self.assertEqual(docs.datas, base64.b64encode(b"file-content"))
@@ -131,9 +133,33 @@ class TestTmsDocument(TransactionCase):
         attachment = self.env["ir.attachment"].create(
             {"name": "insurance.pdf", "datas": base64.b64encode(b"file-content")}
         )
-        action = self.Doc.with_context(
+        result = self.Doc.with_context(
             default_res_model="tms.driver", default_res_id=self.holder.id
         ).create_document_from_attachment(attachment.ids)
-        docs = self.Doc.browse(action["domain"][0][2])
+        docs = self.Doc.browse(result["ids"])
+        self.assertEqual(docs.res_model, "tms.driver")
+        self.assertEqual(docs.res_id, self.holder.id)
+
+    def test_create_document_from_attachment_via_rpc(self):
+        """The web client sends args=[attachment_ids] which call_kw treats as
+        record ids (args[0]) unless the method is marked @api.model."""
+        attachment = self.env["ir.attachment"].create(
+            {"name": "via-rpc.pdf", "datas": base64.b64encode(b"file-content")}
+        )
+        result = call_kw(
+            self.Doc,
+            "create_document_from_attachment",
+            [[attachment.id]],
+            {
+                "context": {
+                    "default_res_model": "tms.driver",
+                    "default_res_id": self.holder.id,
+                }
+            },
+        )
+        self.assertEqual(result["count"], 1)
+        docs = self.Doc.browse(result["ids"])
+        self.assertEqual(len(docs), 1)
+        self.assertEqual(docs.name, "via-rpc.pdf")
         self.assertEqual(docs.res_model, "tms.driver")
         self.assertEqual(docs.res_id, self.holder.id)
