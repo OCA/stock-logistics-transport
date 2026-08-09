@@ -16,3 +16,14 @@ class TmsDriver(models.Model):
             rec.document_ids = Doc.search(
                 [("res_model", "=", "tms.driver"), ("res_id", "=", rec.id)]
             )
+
+    def action_add_document(self):
+        self.ensure_one()
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "tms_document.action_tms_document_new"
+        )
+        action["context"] = {
+            "default_res_model": "tms.driver",
+            "default_res_id": self.id,
+        }
+        return action
