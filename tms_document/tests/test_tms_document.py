@@ -120,7 +120,9 @@ class TestTmsDocument(TransactionCase):
         docs = self.Doc.browse(result["ids"])
         self.assertEqual(len(docs), 1)
         self.assertEqual(docs.name, "license.pdf")
-        self.assertEqual(docs.datas, base64.b64encode(b"file-content"))
+        self.assertEqual(docs.file_id, attachment)
+        self.assertEqual(attachment.res_model, "tms.driver")
+        self.assertEqual(attachment.res_id, self.holder.id)
 
     def test_create_document_from_attachment_requires_holder(self):
         attachment = self.env["ir.attachment"].create(
@@ -247,11 +249,23 @@ class TestTmsDocument(TransactionCase):
         tracked_fields = new_messages.tracking_value_ids.field_id.name
         self.assertIn("expiry_date", tracked_fields)
 
-    def test_cannot_delete_attachment_linked_to_document(self):
+    def test_cannot_delete_document_file_attachment(self):
+        attachment = self.env["ir.attachment"].create(
+            {"name": "doc-file.pdf", "datas": base64.b64encode(b"file-content")}
+        )
+        self.Doc.with_context(
+            default_res_model="tms.driver", default_res_id=self.holder.id
+        ).create_document_from_attachment(attachment.ids)
+        self.assertTrue(attachment.exists())
+        with self.assertRaises(UserError):
+            attachment.unlink()
+        self.assertTrue(attachment.exists())
+
+    def test_cannot_delete_legacy_document_attachment(self):
         doc = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
         file_att = self.env["ir.attachment"].create(
             {
-                "name": "doc-file.pdf",
+                "name": "legacy.pdf",
                 "res_model": "tms.document",
                 "res_id": doc.id,
                 "datas": base64.b64encode(b"file-content"),
@@ -268,11 +282,26 @@ class TestTmsDocument(TransactionCase):
         att.unlink()
         self.assertFalse(att.exists())
 
-    def test_create_document_removes_source_attachment(self):
+    def test_create_document_keeps_source_attachment_on_holder(self):
         attachment = self.env["ir.attachment"].create(
             {"name": "license.pdf", "datas": base64.b64encode(b"file-content")}
         )
         self.Doc.with_context(
             default_res_model="tms.driver", default_res_id=self.holder.id
         ).create_document_from_attachment(attachment.ids)
+        self.assertTrue(attachment.exists())
+        self.assertEqual(attachment.res_model, "tms.driver")
+        self.assertEqual(attachment.res_id, self.holder.id)
+
+    def test_soft_delete_removes_document_file_from_attachments(self):
+        attachment = self.env["ir.attachment"].create(
+            {"name": "license.pdf", "datas": base64.b64encode(b"file-content")}
+        )
+        result = self.Doc.with_context(
+            default_res_model="tms.driver", default_res_id=self.holder.id
+        ).create_document_from_attachment(attachment.ids)
+        doc = self.Doc.browse(result["ids"])
+        doc.action_soft_delete()
+        self.assertFalse(doc.active)
+        self.assertFalse(doc.file_id)
         self.assertFalse(attachment.exists())
