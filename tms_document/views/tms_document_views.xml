@@ -43,7 +43,16 @@
                     </group>
                     <notebook>
                         <page string="File">
-                            <field name="file_id" />
+                            <group>
+                                <field
+                                    name="file_id"
+                                    readonly="1"
+                                    domain="[('res_model', '=', res_model), ('res_id', '=', res_id)]"
+                                />
+                                <div invisible="not id">
+                                    <widget name="tms_document_file_replace" />
+                                </div>
+                            </group>
                         </page>
                         <page string="Notes">
                             <field name="notes" />

@@ -116,6 +116,18 @@ class TmsDocument(models.Model):
             )
         return {"ids": docs.ids, "count": len(docs)}
 
+    def action_replace_file(self, attachment_id):
+        self.ensure_one()
+        attachment = self.env["ir.attachment"].browse(attachment_id)
+        if not attachment:
+            raise UserError(self.env._("No attachment was provided."))
+        attachment.write({"res_model": self.res_model, "res_id": self.res_id})
+        old_file = self.file_id
+        self.write({"file_id": attachment.id})
+        if old_file:
+            old_file.with_context(tms_document_allow_unlink=True).unlink()
+        return True
+
     def unlink(self):
         # pylint: disable=method-required-super
         # Soft delete: archive the document and drop its file so it no longer
