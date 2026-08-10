@@ -17,8 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
 msgid "%(count)s document(s) uploaded"
 msgstr "%(count)s belge yüklendi"
+
+#. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "Upload"
+msgstr "Yükle"
+
+#. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "Replace File"
+msgstr "Dosyayı Değiştir"
 
 #. module: tms_document
 msgid "Active"
