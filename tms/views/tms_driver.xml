@@ -36,58 +36,6 @@
                 <attribute name="invisible">True</attribute>
             </xpath>
 
-            <xpath expr="//button[@name='215']" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath expr="//button[@name='535']" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath
-                expr="//button[@name='action_view_stock_serial']"
-                position="attributes"
-            >
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath expr="//button[@name='285']" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath expr="//button[@name='317']" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath expr="//button[@name='action_open_employees']" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath
-                expr="//button[@name='mail_action_blacklist_remove']"
-                position="attributes"
-            >
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath
-                expr="//button[@name='phone_action_blacklist_remove']"
-                position="attributes"
-            >
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath expr="//button[@name='create_company']" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath
-                expr="//button[@name='open_commercial_entity']"
-                position="attributes"
-            >
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
             <xpath expr="//span[@name='address_name']" position="attributes">
                 <attribute name="invisible">False</attribute>
             </xpath>
