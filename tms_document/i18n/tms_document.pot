@@ -16,9 +16,21 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: tms_document
-#. odoo-js
+#. odoo-javascript
 #: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
 msgid "%(count)s document(s) uploaded"
+msgstr ""
+
+#. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "Upload"
+msgstr ""
+
+#. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "Replace File"
 msgstr ""
 
 #. module: tms_document
