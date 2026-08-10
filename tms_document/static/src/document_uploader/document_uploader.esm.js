@@ -18,6 +18,10 @@ export class TmsDocumentUploader extends Component {
         record: {type: Object, optional: true},
     };
 
+    get uploadLabel() {
+        return _t("Upload");
+    }
+
     setup() {
         this.orm = useService("orm");
         this.notification = useService("notification");
@@ -68,8 +72,57 @@ export class TmsDocumentUploader extends Component {
     }
 }
 
+export class TmsDocumentFileReplace extends Component {
+    static template = "tms_document.TmsDocumentFileReplace";
+    static components = {FileUploader};
+    static props = {
+        ...standardWidgetProps,
+        record: {type: Object, optional: true},
+    };
+
+    get replaceFileLabel() {
+        return _t("Replace File");
+    }
+
+    setup() {
+        this.orm = useService("orm");
+        this.notification = useService("notification");
+        this.attachmentId = false;
+    }
+
+    async onFileUploaded(file) {
+        const [attachmentId] = await this.orm.create("ir.attachment", [
+            {name: file.name, mimetype: file.type, datas: file.data},
+        ]);
+        this.attachmentId = attachmentId;
+    }
+
+    async onUploadComplete() {
+        if (!this.attachmentId) {
+            return;
+        }
+        try {
+            await this.orm.call("tms.document", "action_replace_file", [
+                this.props.record.resId,
+                this.attachmentId,
+            ]);
+            await this.props.record.load();
+            this.notification.add(_t("File replaced"), {type: "success"});
+        } finally {
+            this.attachmentId = false;
+        }
+    }
+}
+
 export const tmsDocumentUploader = {
     component: TmsDocumentUploader,
 };
 
+export const tmsDocumentFileReplace = {
+    component: TmsDocumentFileReplace,
+};
+
 registry.category("view_widgets").add("tms_document_uploader", tmsDocumentUploader);
+registry
+    .category("view_widgets")
+    .add("tms_document_file_replace", tmsDocumentFileReplace);
