@@ -12,6 +12,7 @@
                     </div>
                     <field
                         name="document_ids"
+                        create="false"
                         context="{'default_res_model': 'fleet.vehicle'}"
                     >
                         <list delete="false">
