@@ -15,7 +15,7 @@
                         create="false"
                         context="{'default_res_model': 'tms.driver'}"
                     >
-                        <list delete="false">
+                        <list create="false" delete="false">
                             <field name="name" />
                             <field name="doc_type" />
                             <field name="issue_date" />
