@@ -324,6 +324,7 @@ msgstr ""
 
 #. module: tms
 #: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__cancelled
+#: model:tms.stage,name:tms.tms_stage_order_cancelled
 msgid "Cancelled"
 msgstr ""
 
@@ -778,6 +779,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/tms/models/tms_insurance.py:0
 #: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__draft
+#: model:tms.stage,name:tms.tms_stage_order_draft
 msgid "Draft"
 msgstr ""
 
@@ -2679,4 +2681,29 @@ msgstr ""
 #. module: tms
 #: model:uom.uom,name:tms.uom_mph
 msgid "mph"
+msgstr ""
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_order_confirmed
+msgid "Confirmed"
+msgstr ""
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_order_completed
+msgid "Completed"
+msgstr ""
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_in_base
+msgid "In Base"
+msgstr ""
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_in_trip
+msgid "In Trip"
+msgstr ""
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_not_available
+msgid "Not Available"
 msgstr ""
