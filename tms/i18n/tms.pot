@@ -2699,11 +2699,10 @@ msgstr ""
 #. module: tms
 #. odoo-python
 #: code:addons/tms/models/tms_driver.py:0
-msgid "Driver Created"
+msgid "Driver created"
 msgstr ""
 
 #. module: tms
-#. odoo-python
-#: code:addons/tms/models/tms_driver.py:0
+#: model:mail.message.subtype,name:tms.mt_driver_stage
 msgid "Driver stage changed"
 msgstr ""

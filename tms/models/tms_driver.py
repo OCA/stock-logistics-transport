@@ -92,7 +92,7 @@ class TmsDriver(models.Model):
 
     def _creation_message(self):
         self.ensure_one()
-        return self.env._("Driver Created")
+        return self.env._("Driver created")
 
     def _track_subtype(self, init_values):
         self.ensure_one()

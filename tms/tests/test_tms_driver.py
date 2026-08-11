@@ -99,18 +99,17 @@ class TestTmsDriver(TransactionCase):
         self.driver.geo_localize()
 
     def test_creation_message(self):
-        self.assertEqual(self.driver._creation_message(), "Driver Created")
+        self.assertEqual(self.driver._creation_message(), "Driver created")
 
     def test_track_subtype_on_stage_change(self):
-        self.driver._track_subtype({"stage_id": self.driver.stage_id.id})
         subtype = self.env.ref("tms.mt_driver_stage")
         self.assertEqual(
-            self.driver._track_subtype({"stage_id": 1}),
+            self.driver._track_subtype({"stage_id": self.stage.id}),
             subtype,
         )
 
     def test_track_subtype_returns_false_for_other_fields(self):
-        self.assertFalse(self.driver._track_subtype({"name": "X"}))
+        self.assertFalse(self.driver._track_subtype({"driver_type": "terrestrial"}))
 
     def test_driver_creation_logs_message_in_chatter(self):
         self.env.cr.precommit.run()
@@ -118,7 +117,7 @@ class TestTmsDriver(TransactionCase):
         self.env.cr.precommit.run()
         messages = new_driver.message_ids
         self.assertTrue(messages)
-        self.assertIn("Driver Created", messages.body)
+        self.assertIn("Driver created", messages[0].body)
 
     def test_stage_change_logs_subtype(self):
         new_stage = self.env["tms.stage"].create(
@@ -143,5 +142,9 @@ class TestTmsDriver(TransactionCase):
         self.env.cr.precommit.run()
         new_messages = self.driver.message_ids - before
         self.assertTrue(new_messages)
-        tracked_fields = new_messages.tracking_value_ids.field_id.name
+        tracked_fields = {
+            field_name
+            for message in new_messages
+            for field_name in message.tracking_value_ids.field_id.mapped("name")
+        }
         self.assertIn("is_external", tracked_fields)

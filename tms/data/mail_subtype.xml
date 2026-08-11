@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo>
+<odoo noupdate="1">
     <record id="mt_driver_stage" model="mail.message.subtype">
         <field name="name">Stage</field>
         <field name="res_model">tms.driver</field>
