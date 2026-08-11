@@ -12,6 +12,7 @@
     "data": [
         "data/ir_sequence_data.xml",
         "data/module_category.xml",
+        "data/mail_subtype.xml",
         "data/tms_stage.xml",
         "data/tms_team.xml",
         "data/uom_category.xml",
