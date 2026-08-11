@@ -117,23 +117,3 @@ class TmsDriver(models.Model):
 
     def action_view_stock_serial(self):
         return self.partner_id.action_view_stock_serial()
-
-    def action_view_purchase_orders(self):
-        self.ensure_one()
-        action = self.env["ir.actions.act_window"]._for_xml_id(
-            "purchase.act_res_partner_2_purchase_order"
-        )
-        action["context"] = {
-            "search_default_partner_id": self.partner_id.id,
-            "default_partner_id": self.partner_id.id,
-        }
-        return action
-
-    def action_view_sale_orders(self):
-        self.ensure_one()
-        action = self.env["ir.actions.act_window"]._for_xml_id(
-            "sale.act_res_partner_2_sale_order"
-        )
-        action["context"] = {"default_partner_id": self.partner_id.id}
-        action["domain"] = [("partner_id", "child_of", self.partner_id.id)]
-        return action
