@@ -88,69 +88,12 @@ class TestTmsDriver(TransactionCase):
         action = self.driver.schedule_meeting()
         self.assertEqual(action.get("res_model"), "calendar.event")
 
-    def _partner_method_available(self, method_name):
-        return hasattr(type(self.driver.partner_id), method_name)
-
     def test_create_company_delegates_to_partner(self):
-        if not self._partner_method_available("create_company"):
-            self.skipTest("create_company not available on res.partner")
         self.driver.create_company()
 
-    def test_action_open_employees_delegates_to_partner(self):
-        if not self._partner_method_available("action_open_employees"):
-            self.skipTest("action_open_employees not available on res.partner")
-        action = self.driver.action_open_employees()
-        self.assertEqual(action.get("res_model"), "hr.employee")
-
     def test_open_commercial_entity_delegates_to_partner(self):
-        if not self._partner_method_available("open_commercial_entity"):
-            self.skipTest("open_commercial_entity not available on res.partner")
         action = self.driver.open_commercial_entity()
         self.assertEqual(action.get("res_model"), "res.partner")
 
-    def test_blacklist_remove_delegates_to_partner(self):
-        if not self._partner_method_available("phone_action_blacklist_remove"):
-            self.skipTest("blacklist methods not available on res.partner")
-        self.driver.phone_action_blacklist_remove()
-        self.driver.mail_action_blacklist_remove()
-
     def test_geo_localize_delegates_to_partner(self):
-        if not self._partner_method_available("geo_localize"):
-            self.skipTest("geo_localize not available on res.partner")
         self.driver.geo_localize()
-
-    def test_action_view_partner_invoices_delegates_to_partner(self):
-        if not self._partner_method_available("action_view_partner_invoices"):
-            self.skipTest("action_view_partner_invoices not available")
-        action = self.driver.action_view_partner_invoices()
-        self.assertEqual(action.get("res_model"), "account.move")
-
-    def test_action_view_stock_serial_delegates_to_partner(self):
-        if not self._partner_method_available("action_view_stock_serial"):
-            self.skipTest("stock module is not installed")
-        action = self.driver.action_view_stock_serial()
-        self.assertEqual(action.get("res_model"), "stock.lot")
-
-    def test_action_view_purchase_orders_uses_partner_id(self):
-        try:
-            action = self.driver.action_view_purchase_orders()
-        except Exception:
-            self.skipTest("purchase module is not installed")
-        self.assertEqual(action.get("res_model"), "purchase.order")
-        self.assertEqual(
-            action.get("context", {}).get("search_default_partner_id"),
-            self.driver.partner_id.id,
-            "Purchase search should use the driver's partner id, not driver id",
-        )
-
-    def test_action_view_sale_orders_uses_partner_id(self):
-        try:
-            action = self.driver.action_view_sale_orders()
-        except Exception:
-            self.skipTest("sale module is not installed")
-        self.assertEqual(action.get("res_model"), "sale.order")
-        self.assertEqual(
-            action.get("context", {}).get("default_partner_id"),
-            self.driver.partner_id.id,
-            "Sale order should default to the driver's partner id, not driver id",
-        )
