@@ -52,3 +52,8 @@ class TestFleetVehicle(BaseCommon):
         )
         self.assertEqual(transportable.vehicle_id, vehicle)
         self.assertEqual(transportable.measure_type, "unit")
+
+    def test_driver_action_view_stock_serial_delegates_to_partner(self):
+        driver = self.env["tms.driver"].create({"name": "Serial Driver"})
+        action = driver.action_view_stock_serial()
+        self.assertEqual(action["res_model"], "stock.lot")
