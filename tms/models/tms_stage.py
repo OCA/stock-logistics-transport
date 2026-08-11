@@ -15,7 +15,7 @@ class TMSStage(models.Model):
         return [default_tms_team_id] if default_tms_team_id else None
 
     active = fields.Boolean(default=True)
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, translate=True)
     sequence = fields.Integer(default=1, help="Used to order stages. Lower is first.")
     legend_priority = fields.Text(
         "Priority Management Explanation",
