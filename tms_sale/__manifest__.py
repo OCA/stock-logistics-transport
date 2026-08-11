@@ -17,6 +17,7 @@
         "views/tms_order_views.xml",
         "views/product_template_views.xml",
         "views/seat_ticket_views.xml",
+        "views/tms_driver_views.xml",
     ],
     "demo": [
         "demo/fleet_vehicle.xml",

@@ -13,6 +13,7 @@
         "views/tms_order.xml",
         "views/purchase_order_views.xml",
         "views/fleet_vehicle_views.xml",
+        "views/tms_driver_views.xml",
     ],
     "demo": [
         "demo/tms_purchase_fleet_vehicle_model_brand.xml",
