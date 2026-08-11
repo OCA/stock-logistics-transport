@@ -123,6 +123,26 @@ class TestTmsPurchase(BaseCommon):
         )
         self.assertEqual(purchase.trip_id, trip)
 
+    def test_driver_action_view_purchase_orders_uses_partner_id(self):
+        """The driver smart button must resolve the driver's partner id
+        (delegation inheritance), not the driver id."""
+        driver = self.env["tms.driver"].create({"name": "Driver Purchase"})
+        action = driver.action_view_purchase_orders()
+        self.assertEqual(action["res_model"], "purchase.order")
+        self.assertEqual(
+            action["context"]["search_default_partner_id"],
+            driver.partner_id.id,
+        )
+        self.assertEqual(
+            action["context"]["default_partner_id"],
+            driver.partner_id.id,
+        )
+        self.assertNotEqual(
+            action["context"]["search_default_partner_id"],
+            driver.id,
+            "Must use partner id, not driver id",
+        )
+
     def test_fleet_vehicle_action_view_order(self):
         action = self.vehicle.action_view_order()
         self.assertEqual(action["res_model"], "purchase.order")
