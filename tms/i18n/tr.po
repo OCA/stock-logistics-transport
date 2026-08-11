@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-05 00:00+0000\n"
-"PO-Revision-Date: 2026-08-05 00:00+0000\n"
+"POT-Creation-Date: 2026-08-11 00:00+0000\n"
+"PO-Revision-Date: 2026-08-11 00:00+0000\n"
 "Last-Translator: Volkan Taşçı <info@voslo.co>\n"
 "Language-Team: Turkish\n"
 "Language: tr\n"
@@ -33,11 +33,12 @@ msgstr "<i class=\"fa fa-fw me-1 fa-users\" title=\"Takım\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
-#, fuzzy
 msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow "
 "icon\" title=\"Arrow\"/>"
-msgstr "<span class=\"fa fa-car me-2\" aria-label=\"Araç\" title=\"Araç\"/>"
+msgstr ""
+"<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Ok "
+"simgesi\" title=\"Ok\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
@@ -46,11 +47,12 @@ msgstr "<span class=\"badge badge-primary\">Ekip</span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
-#, fuzzy
 msgid ""
 "<span class=\"fa fa-bus me-2\" aria-label=\"Vehicle\" title=\"Vehicles\"/>\n"
 "                                                <span>Vehicles: </span>"
-msgstr "<span class=\"fa fa-car me-2\" aria-label=\"Araç\" title=\"Araç\"/>"
+msgstr ""
+"<span class=\"fa fa-bus me-2\" aria-label=\"Araç\" title=\"Araçlar\"/>\n"
+"                                                <span>Araçlar: </span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
@@ -69,6 +71,8 @@ msgid ""
 "<span class=\"fa fa-users me-2\" aria-label=\"Driver\" title=\"Drivers\"/>\n"
 "                                                <span>Drivers: </span>"
 msgstr ""
+"<span class=\"fa fa-users me-2\" aria-label=\"Sürücü\" title=\"Sürücüler\"/>\n"
+"                                                <span>Sürücüler: </span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
@@ -81,6 +85,8 @@ msgid ""
 "<span invisible=\"operation != 'passenger'\" class=\"w-50\">Passengers\n"
 "                                </span>"
 msgstr ""
+"<span invisible=\"operation != 'passenger'\" class=\"w-50\">Yolcular\n"
+"                                </span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
@@ -715,7 +721,6 @@ msgstr ""
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
 msgid "Defines how this stage is evaluated as completed stage"
 msgstr "Bu aşamanın tamamlanmış aşama olarak nasıl değerlendirileceğini tanımlar"
-"Bu aşamanın tamamlanmış aşama olarak nasıl değerlendirileceğini tanımlar"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__trust
@@ -2003,7 +2008,7 @@ msgid ""
 "Set the number of days before the expiration date of the driver license to "
 "show a\n"
 "                                warning."
-msgstr ""
+msgstr "Sürücü ehliyetinin son kullanma tarihinden kaç gün önce uyarı gösterileceğini ayarlayın."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -2227,7 +2232,7 @@ msgstr ""
 #: model:ir.model.fields,help:tms.field_tms_driver__property_account_position_id
 msgid ""
 "The fiscal position determines the taxes/accounts used for this contact."
-msgstr "Sürücü ehliyetinin son kullanma tarihinden kaç gün önce uyarı gösterileceğini ayarlayın."
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__user_id
@@ -2250,13 +2255,13 @@ msgstr ""
 #: model:ir.model.fields,help:tms.field_tms_driver__property_stock_customer
 msgid ""
 "The stock location used as destination when sending goods to this contact."
-msgstr "Sürücü ehliyetinin son kullanma tarihinden kaç gün önce uyarı gösterileceğini ayarlayın."
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_stock_supplier
 msgid ""
 "The stock location used as source when receiving goods from this contact."
-msgstr "Sürücü ehliyetinin son kullanma tarihinden kaç gün önce uyarı gösterileceğini ayarlayın."
+msgstr ""
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__main_user_id
