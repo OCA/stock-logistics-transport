@@ -8,7 +8,10 @@
             <xpath expr="//form//notebook" position="inside">
                 <page string="Documents">
                     <div class="mb-2" invisible="not id">
-                        <widget name="tms_document_uploader" groups="tms_document.group_tms_document" />
+                        <widget
+                            name="tms_document_uploader"
+                            groups="tms_document.group_tms_document"
+                        />
                     </div>
                     <field
                         name="document_ids"
@@ -23,7 +26,8 @@
                             <field name="critical" />
                             <field name="state" />
                             <button
-                                name="action_soft_delete" groups="tms_document.group_tms_document"
+                                name="action_soft_delete"
+                                groups="tms_document.group_tms_document"
                                 type="object"
                                 string="Delete"
                                 icon="fa-trash"
