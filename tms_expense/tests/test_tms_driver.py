@@ -52,3 +52,8 @@ class TestTmsExpenseDriver(TransactionCase):
         action = driver.action_open_employees()
         self.assertEqual(action["res_model"], "hr.employee")
         self.assertEqual(action["view_mode"], "form")
+
+    def test_blacklist_remove_delegates_to_partner(self):
+        driver = self.env["tms.driver"].create({"name": "Blacklist Driver"})
+        driver.phone_action_blacklist_remove()
+        driver.mail_action_blacklist_remove()
