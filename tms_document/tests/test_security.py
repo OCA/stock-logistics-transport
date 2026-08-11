@@ -147,6 +147,20 @@ class TestSecurity(TransactionCase):
         self.assertEqual(doc.res_model, "fleet.vehicle")
         self.assertEqual(doc.res_id, vehicle.id)
 
+    def test_res_ref_clearable(self):
+        """Clearing res_ref via inverse clears the raw fields."""
+        doc = self.Doc.create(
+            {
+                "doc_type": "insurance",
+                "name": "VIA-CLEAR",
+                "res_model": "tms.driver",
+                "res_id": self.driver.id,
+            }
+        )
+        doc.res_ref = False
+        self.assertFalse(doc.res_model)
+        self.assertFalse(doc.res_id)
+
     def test_critical_check_uses_sudo(self):
         """Critical check via sudo sees documents even if user lacks
         read access to tms.document (safety check)."""

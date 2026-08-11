@@ -305,3 +305,61 @@ class TestTmsDocument(TransactionCase):
         self.assertFalse(doc.active)
         self.assertFalse(doc.file_id)
         self.assertFalse(attachment.exists())
+
+    def test_action_replace_file(self):
+        doc = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        old_file = self.env["ir.attachment"].create(
+            {"name": "old.pdf", "datas": base64.b64encode(b"old")}
+        )
+        doc.file_id = old_file
+        new_file = self.env["ir.attachment"].create(
+            {"name": "new.pdf", "datas": base64.b64encode(b"new")}
+        )
+        result = doc.action_replace_file(new_file.id)
+        self.assertTrue(result)
+        self.assertEqual(doc.file_id, new_file)
+        self.assertFalse(old_file.exists())
+        self.assertEqual(new_file.res_model, "tms.driver")
+        self.assertEqual(new_file.res_id, self.holder.id)
+
+    def test_action_replace_file_without_old_file(self):
+        doc = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        self.assertFalse(doc.file_id)
+        new_file = self.env["ir.attachment"].create(
+            {"name": "fresh.pdf", "datas": base64.b64encode(b"fresh")}
+        )
+        doc.action_replace_file(new_file.id)
+        self.assertEqual(doc.file_id, new_file)
+        self.assertTrue(new_file.exists())
+
+    def test_action_replace_file_missing_attachment(self):
+        doc = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        with self.assertRaises(UserError):
+            doc.action_replace_file(0)
+
+    def test_create_document_from_attachment_no_attachment(self):
+        with self.assertRaises(UserError):
+            self.Doc.with_context(
+                default_res_model="tms.driver", default_res_id=self.holder.id
+            ).create_document_from_attachment([])
+
+    def test_move_document_to_other_holder_via_inverse(self):
+        doc = self._doc(fields.Date.to_date(date.today()) + timedelta(days=400))
+        vehicle = self._make_vehicle()
+        vehicle.document_ids = doc
+        self.assertEqual(doc.res_model, "fleet.vehicle")
+        self.assertEqual(doc.res_id, vehicle.id)
+        self.assertEqual(len(vehicle.document_ids), 1)
+
+    def test_vehicle_unlink_archives_documents(self):
+        vehicle = self._make_vehicle()
+        doc = self.Doc.create(
+            {
+                "res_model": "fleet.vehicle",
+                "res_id": vehicle.id,
+                "doc_type": "inspection",
+                "name": "VEH-INSP",
+            }
+        )
+        vehicle.unlink()
+        self.assertFalse(doc.active)
