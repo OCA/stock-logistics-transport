@@ -260,7 +260,44 @@ class TestResConfigSettingsNoAccount(TestTMSAccountCommon):
         settings = self.no_account_env["res.config.settings"].create({})
         settings.set_values()
         values = self.no_account_env["res.config.settings"].create({}).get_values()
-        self.assertFalse(values["tms_analytic_plan"])
+        self.assertNotIn("tms_analytic_plan", values)
+
+    def test_non_analytic_user_save_preserves_plans_and_groups(self):
+        """Seed plans + implied groups as an analytic admin, then save
+        Settings as a non-analytic user.  Both the stored config parameter
+        and the res.groups implied groups must survive."""
+        # Seed: analytic admin configures both plans
+        admin_settings = self.env["res.config.settings"].create({})
+        admin_settings.tms_analytic_plan = [
+            (6, 0, [self.route_plan.id, self.order_plan.id])
+        ]
+        admin_settings.execute()
+        stored = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("tms_account.tms_analytic_plan_ids")
+        )
+        self.assertIn(str(self.route_plan.id), stored)
+        self.assertIn(str(self.order_plan.id), stored)
+
+        # Non-analytic user saves an unrelated setting
+        no_acct_settings = self.no_account_env["res.config.settings"].create({})
+        no_acct_settings.set_values()
+
+        # Stored plans must survive
+        stored_after = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("tms_account.tms_analytic_plan_ids")
+        )
+        self.assertIn(str(self.route_plan.id), stored_after)
+        self.assertIn(str(self.order_plan.id), stored_after)
+
+        # Compute must reflect stored state, not empty in-memory field
+        check = self.no_account_env["res.config.settings"].create({})
+        check._compute_tms_analytic_groups()
+        self.assertTrue(check.group_tms_route_analytic_plan)
+        self.assertTrue(check.group_tms_order_analytic_plan)
 
 
 class TestSaleOrderLineAnalytic(TestTMSAccountCommon):
