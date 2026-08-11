@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright (C) 2026 VSL
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="tms_document.TmsDocumentUploader">
+        <FileUploader
+            fileUploadClass="'tms_document_uploader'"
+            multiUpload="true"
+            onUploaded.bind="onFileUploaded"
+            onUploadComplete.bind="onUploadComplete"
+        >
+            <t t-set-slot="toggler">
+                <button type="button" class="btn btn-primary">
+                    <i class="fa fa-upload me-1" />
+                    <t t-out="uploadLabel" />
+                </button>
+            </t>
+        </FileUploader>
+    </t>
+    <t t-name="tms_document.TmsDocumentFileReplace">
+        <FileUploader
+            fileUploadClass="'tms_document_file_replace'"
+            multiUpload="false"
+            onUploaded.bind="onFileUploaded"
+            onUploadComplete.bind="onUploadComplete"
+        >
+            <t t-set-slot="toggler">
+                <button type="button" class="btn btn-secondary">
+                    <i class="fa fa-upload me-1" />
+                    <t t-out="replaceFileLabel" />
+                </button>
+            </t>
+        </FileUploader>
+    </t>
+</templates>

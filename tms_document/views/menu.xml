@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="menu_tms_document"
+        name="Documents"
+        parent="tms.data"
+        action="action_tms_document"
+        groups="tms.group_tms_user"
+    />
+</odoo>
