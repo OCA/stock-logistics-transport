@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_tms_driver_form_inherit_purchase" model="ir.ui.view">
+        <field name="name">tms.driver.form.inherit.purchase</field>
+        <field name="model">tms.driver</field>
+        <field name="inherit_id" ref="tms.view_tms_driver_form_inherit" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//button[@name='%(purchase.act_res_partner_2_purchase_order)d']"
+                position="attributes"
+            >
+                <attribute name="type">object</attribute>
+                <attribute name="name">action_view_purchase_orders</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
