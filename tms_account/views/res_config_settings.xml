@@ -15,6 +15,7 @@
                     <span />
                     <field
                         name="tms_analytic_plan"
+                        groups="analytic.group_analytic_accounting"
                         invisible="not group_analytic_accounting"
                         domain="tms_analytic_plan_domain"
                         widget="many2many_checkboxes"

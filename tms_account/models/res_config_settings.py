@@ -43,24 +43,33 @@ class ResConfigSettings(models.TransientModel):
     @api.model
     def get_values(self):
         res = super().get_values()
-        parameter = self.env["ir.config_parameter"].sudo()
-        tms_analytic_plan_ids = parameter.get_param(
-            "tms_account.tms_analytic_plan_ids", default="[]"
-        )
-        tms_analytic_plan_ids = ast.literal_eval(tms_analytic_plan_ids)
-        res.update(
-            tms_analytic_plan=[(6, 0, tms_analytic_plan_ids)]
-            if tms_analytic_plan_ids
-            else False,
-        )
+        if self.env.user.has_group("analytic.group_analytic_accounting"):
+            parameter = self.env["ir.config_parameter"].sudo()
+            tms_analytic_plan_ids = parameter.get_param(
+                "tms_account.tms_analytic_plan_ids", default="[]"
+            )
+            tms_analytic_plan_ids = ast.literal_eval(tms_analytic_plan_ids)
+            res.update(
+                tms_analytic_plan=[(6, 0, tms_analytic_plan_ids)]
+                if tms_analytic_plan_ids
+                else False,
+            )
         return res
+
+    def write(self, vals):
+        if "tms_analytic_plan" in vals and not self.env.user.has_group(
+            "analytic.group_analytic_accounting"
+        ):
+            vals.pop("tms_analytic_plan")
+        return super().write(vals)
 
     def set_values(self):
         res = super().set_values()
-        parameter = self.env["ir.config_parameter"].sudo()
-        parameter.set_param(
-            "tms_account.tms_analytic_plan_ids", self.tms_analytic_plan.ids
-        )
+        if self.env.user.has_group("analytic.group_analytic_accounting"):
+            parameter = self.env["ir.config_parameter"].sudo()
+            parameter.set_param(
+                "tms_account.tms_analytic_plan_ids", self.tms_analytic_plan.ids
+            )
         return res
 
     @api.depends("tms_analytic_plan")
@@ -69,7 +78,7 @@ class ResConfigSettings(models.TransientModel):
             record.group_tms_route_analytic_plan = False
             record.group_tms_order_analytic_plan = False
 
-            for plan in record.tms_analytic_plan:
+            for plan in record.sudo().tms_analytic_plan:
                 if plan == self.env.ref("tms_account.tms_route_analytic_plan"):
                     record.group_tms_route_analytic_plan = True
                 if plan == self.env.ref("tms_account.tms_order_analytic_plan"):
