@@ -88,6 +88,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__display_name
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__display_name
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__display_name
+#: model:ir.model.fields,field_description:tms_sale.field_tms_driver__display_name
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__display_name
 msgid "Display Name"
 msgstr ""
@@ -129,6 +130,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__id
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__id
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__id
+#: model:ir.model.fields,field_description:tms_sale.field_tms_driver__id
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__id
 msgid "ID"
 msgstr ""
@@ -145,6 +147,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__write_date
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: tms_sale
+#: model:ir.model,name:tms_sale.model_tms_driver
+msgid "Model for TMS drivers"
 msgstr ""
 
 #. module: tms_sale
