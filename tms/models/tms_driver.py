@@ -92,28 +92,28 @@ class TmsDriver(models.Model):
     # Inherited actions from res_partner
 
     def create_company(self):
-        res = super().create_company()
-        return res
+        return self.partner_id.create_company()
 
     def action_open_employees(self):
-        res = super().action_open_employees()
-        return res
+        return self.partner_id.action_open_employees()
 
     def open_commercial_entity(self):
-        res = super().open_commercial_entity()
-        return res
+        return self.partner_id.open_commercial_entity()
 
     def phone_action_blacklist_remove(self):
-        res = super().phone_action_blacklist_remove()
-        return res
+        return self.partner_id.phone_action_blacklist_remove()
 
     def mail_action_blacklist_remove(self):
-        res = super().mail_action_blacklist_remove()
-        return res
+        return self.partner_id.mail_action_blacklist_remove()
 
     def geo_localize(self):
-        res = super().geo_localize()
-        return res
+        return self.partner_id.geo_localize()
 
     def schedule_meeting(self):
         return self.partner_id.schedule_meeting()
+
+    def action_view_partner_invoices(self):
+        return self.partner_id.action_view_partner_invoices()
+
+    def action_view_stock_serial(self):
+        return self.partner_id.action_view_stock_serial()

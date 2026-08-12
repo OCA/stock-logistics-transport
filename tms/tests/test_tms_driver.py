@@ -87,3 +87,13 @@ class TestTmsDriver(TransactionCase):
             self.skipTest("calendar module is not installed")
         action = self.driver.schedule_meeting()
         self.assertEqual(action.get("res_model"), "calendar.event")
+
+    def test_create_company_delegates_to_partner(self):
+        self.driver.create_company()
+
+    def test_open_commercial_entity_delegates_to_partner(self):
+        action = self.driver.open_commercial_entity()
+        self.assertEqual(action.get("res_model"), "res.partner")
+
+    def test_geo_localize_delegates_to_partner(self):
+        self.driver.geo_localize()

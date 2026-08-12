@@ -46,3 +46,14 @@ class TestTmsExpenseDriver(TransactionCase):
         employee = self.env["hr.employee"].search([("name", "=", driver.name)], limit=1)
         self.assertTrue(employee)
         self.assertEqual(employee.work_contact_id, driver.partner_id)
+
+    def test_action_open_employees_delegates_to_partner(self):
+        driver = self.env["tms.driver"].create({"name": "Employee Driver"})
+        action = driver.action_open_employees()
+        self.assertEqual(action["res_model"], "hr.employee")
+        self.assertEqual(action["view_mode"], "form")
+
+    def test_blacklist_remove_delegates_to_partner(self):
+        driver = self.env["tms.driver"].create({"name": "Blacklist Driver"})
+        driver.phone_action_blacklist_remove()
+        driver.mail_action_blacklist_remove()

@@ -141,6 +141,11 @@ class TestTMSOrderAccount(TestTMSAccountCommon):
         self.assertEqual(action["view_mode"], "list,form")
         self.assertEqual(action["res_model"], "account.move")
 
+    def test_driver_action_view_partner_invoices_delegates_to_partner(self):
+        driver = self.env["tms.driver"].create({"name": "Invoice Driver"})
+        action = driver.action_view_partner_invoices()
+        self.assertEqual(action["res_model"], "account.move")
+
 
 class TestAccountAnalyticLine(TestTMSAccountCommon):
     def test_analytic_line_updates_trip_totals(self):

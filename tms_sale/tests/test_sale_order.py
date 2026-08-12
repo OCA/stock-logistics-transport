@@ -253,3 +253,19 @@ class TestTmsSale(BaseCommon):
         order.sudo().write({"state": "sent"})
         draft_stage = self.env.ref("tms.tms_stage_order_draft")
         self.assertEqual(tms_order.stage_id, draft_stage)
+
+    def test_driver_action_view_sale_orders_uses_partner_id(self):
+        """The driver smart button must resolve the driver's partner id
+        (delegation inheritance), not the driver id."""
+        driver = self.env["tms.driver"].create({"name": "Driver Sale"})
+        action = driver.action_view_sale_orders()
+        self.assertEqual(action["res_model"], "sale.order")
+        self.assertEqual(
+            action["context"]["default_partner_id"],
+            driver.partner_id.id,
+        )
+        self.assertNotEqual(
+            action["context"]["default_partner_id"],
+            driver.id,
+            "Must use partner id, not driver id",
+        )
