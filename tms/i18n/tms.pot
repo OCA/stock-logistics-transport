@@ -467,6 +467,11 @@ msgid "Complete Name"
 msgstr ""
 
 #. module: tms
+#: model:tms.stage,name:tms.tms_stage_order_completed
+msgid "Completed"
+msgstr ""
+
+#. module: tms
 #: model:ir.model,name:tms.model_res_config_settings
 msgid "Config Settings"
 msgstr ""
@@ -474,6 +479,11 @@ msgstr ""
 #. module: tms
 #: model:ir.ui.menu,name:tms.config
 msgid "Configuration"
+msgstr ""
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_order_confirmed
+msgid "Confirmed"
 msgstr ""
 
 #. module: tms
@@ -1147,8 +1157,18 @@ msgid "Image 512"
 msgstr ""
 
 #. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_in_base
+msgid "In Base"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_training
 msgid "In Training"
+msgstr ""
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_in_trip
+msgid "In Trip"
 msgstr ""
 
 #. module: tms
@@ -1589,6 +1609,11 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__email_normalized
 msgid "Normalized Email"
+msgstr ""
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_not_available
+msgid "Not Available"
 msgstr ""
 
 #. module: tms
@@ -2669,29 +2694,4 @@ msgstr ""
 #. module: tms
 #: model:uom.uom,name:tms.uom_mph
 msgid "mph"
-msgstr ""
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_order_confirmed
-msgid "Confirmed"
-msgstr ""
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_order_completed
-msgid "Completed"
-msgstr ""
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_driver_in_base
-msgid "In Base"
-msgstr ""
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_driver_in_trip
-msgid "In Trip"
-msgstr ""
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_driver_not_available
-msgid "Not Available"
 msgstr ""
