@@ -36,6 +36,8 @@ class TMSRoute(models.Model):
         routes = super().create(vals_list)
         if not self.env.user.has_group("tms_account.group_tms_route_analytic_plan"):
             return routes
+        if not self.env.user.has_group("analytic.group_analytic_accounting"):
+            return routes
         analytic_plan = self.env.ref("tms_account.tms_route_analytic_plan")
         AccountAnalyticAccount = self.env["account.analytic.account"]
         for route, vals in zip(routes, vals_list, strict=True):

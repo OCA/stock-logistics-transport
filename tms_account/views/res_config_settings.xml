@@ -10,12 +10,14 @@
                 <setting
                     help="Manage analytic account for trips or routes."
                     invisible="not module_tms_account"
+                    groups="account.group_account_user"
                 >
                     <field name="group_analytic_accounting" />
                     <span />
                     <field
                         name="tms_analytic_plan"
                         invisible="not group_analytic_accounting"
+                        groups="analytic.group_analytic_accounting"
                         domain="tms_analytic_plan_domain"
                         widget="many2many_checkboxes"
                     />

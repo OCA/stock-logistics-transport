@@ -90,6 +90,25 @@ class TestTMSRouteAccount(TestTMSAccountCommon):
         self.assertTrue(route.analytic_account_id)
         self.assertEqual(route.analytic_account_id.plan_id, self.route_plan)
 
+    def test_route_create_without_analytic_group(self):
+        # Plan group granted without analytic accounting access: the route
+        # must be created without an analytic account, not crash.
+        self.env.user.group_ids = [
+            (
+                6,
+                0,
+                [self.route_plan_group.id, self.tms_user_group.id, self.route_group.id],
+            )
+        ]
+        route = self.env["tms.route"].create(
+            {
+                "name": "Route C",
+                "origin_location_id": self.origin.id,
+                "destination_location_id": self.destination.id,
+            }
+        )
+        self.assertFalse(route.analytic_account_id)
+
     def test_route_total_revenue(self):
         self.route.write({"total_income": 100, "total_expenses": 40})
         self.assertEqual(self.route.total_revenue, 60)
@@ -204,6 +223,81 @@ class TestResConfigSettings(TestTMSAccountCommon):
         settings._compute_tms_analytic_groups()
         self.assertTrue(settings.group_tms_route_analytic_plan)
         self.assertTrue(settings.group_tms_order_analytic_plan)
+
+
+class TestResConfigSettingsNoAccount(TestTMSAccountCommon):
+    """Users without account.analytic.plan access must still be able to
+    open and save the Settings page (regression test: the tms_analytic_plan
+    m2m write used to raise AccessError on create)."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.no_account_user = cls.env["res.users"].create(
+            {
+                "name": "No Account User",
+                "login": "no_account_user",
+                "group_ids": [
+                    (
+                        6,
+                        0,
+                        [
+                            cls.env.ref("base.group_user").id,
+                            cls.env.ref("base.group_system").id,
+                        ],
+                    )
+                ],
+            }
+        )
+        cls.no_account_env = cls.env(user=cls.no_account_user)
+
+    def test_default_get_omits_analytic_plan(self):
+        settings = self.no_account_env["res.config.settings"].new({})
+        defaults = settings.default_get(["tms_analytic_plan"])
+        self.assertNotIn("tms_analytic_plan", defaults)
+
+    def test_settings_create_get_and_set_values(self):
+        settings = self.no_account_env["res.config.settings"].create({})
+        settings.set_values()
+        values = self.no_account_env["res.config.settings"].create({}).get_values()
+        self.assertNotIn("tms_analytic_plan", values)
+
+    def test_non_analytic_user_save_preserves_plans_and_groups(self):
+        """Seed plans + implied groups as an analytic admin, then save
+        Settings as a non-analytic user.  Both the stored config parameter
+        and the res.groups implied groups must survive."""
+        # Seed: analytic admin configures both plans
+        admin_settings = self.env["res.config.settings"].create({})
+        admin_settings.tms_analytic_plan = [
+            (6, 0, [self.route_plan.id, self.order_plan.id])
+        ]
+        admin_settings.execute()
+        stored = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("tms_account.tms_analytic_plan_ids")
+        )
+        self.assertIn(str(self.route_plan.id), stored)
+        self.assertIn(str(self.order_plan.id), stored)
+
+        # Non-analytic user saves an unrelated setting
+        no_acct_settings = self.no_account_env["res.config.settings"].create({})
+        no_acct_settings.set_values()
+
+        # Stored plans must survive
+        stored_after = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("tms_account.tms_analytic_plan_ids")
+        )
+        self.assertIn(str(self.route_plan.id), stored_after)
+        self.assertIn(str(self.order_plan.id), stored_after)
+
+        # Compute must reflect stored state, not empty in-memory field
+        check = self.no_account_env["res.config.settings"].create({})
+        check._compute_tms_analytic_groups()
+        self.assertTrue(check.group_tms_route_analytic_plan)
+        self.assertTrue(check.group_tms_order_analytic_plan)
 
 
 class TestSaleOrderLineAnalytic(TestTMSAccountCommon):
