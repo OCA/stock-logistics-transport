@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="mt_driver_stage" model="mail.message.subtype">
+        <field name="name">Stage</field>
+        <field name="res_model">tms.driver</field>
+        <field name="default" eval="False" />
+        <field name="description">Driver stage changed</field>
+    </record>
+</odoo>

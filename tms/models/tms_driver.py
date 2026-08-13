@@ -25,15 +25,15 @@ class TmsDriver(models.Model):
     # ------------------------------
 
     # Driver - Flags
-    is_external = fields.Boolean(string="External Driver")
-    is_training = fields.Boolean(string="In Training")
-    is_active = fields.Boolean(default=True)
+    is_external = fields.Boolean(string="External Driver", tracking=True)
+    is_training = fields.Boolean(string="In Training", tracking=True)
+    is_active = fields.Boolean(default=True, tracking=True)
 
     # Driver - Relations
     vehicles_ids = fields.One2many("fleet.vehicle", "driver_id")
     trips_ids = fields.One2many("tms.order", "driver_id")
 
-    tms_team_id = fields.Many2one("tms.team")
+    tms_team_id = fields.Many2one("tms.team", tracking=True)
     crew_ids = fields.Many2many(
         "tms.crew",
         "tms_crew_drivers_rel",
@@ -44,6 +44,7 @@ class TmsDriver(models.Model):
         string="Stage",
         index=True,
         copy=False,
+        tracking=True,
         default=lambda self: self._default_stage_id(),
         group_expand="_read_group_stage_ids",
     )
@@ -59,19 +60,19 @@ class TmsDriver(models.Model):
 
     # TODO: ADD A LICENCE MODEL
     # Terrestrial - Licenses
-    driver_license_number = fields.Char()
+    driver_license_number = fields.Char(tracking=True)
     driver_license_type = fields.Selection(
-        string="License type", selection=DRIVER_LICENSE_TYPES
+        string="License type", selection=DRIVER_LICENSE_TYPES, tracking=True
     )
-    driver_license_expiration_date = fields.Date()
+    driver_license_expiration_date = fields.Date(tracking=True)
     driver_license_file = fields.Binary()
 
     # Terrestrial - Experience
-    distance_traveled = fields.Integer()
+    distance_traveled = fields.Integer(tracking=True)
     distance_traveled_uom = fields.Selection(
-        selection=[("km", "km"), ("mi", "mi")], default="km"
+        selection=[("km", "km"), ("mi", "mi")], default="km", tracking=True
     )
-    driving_experience_years = fields.Integer()
+    driving_experience_years = fields.Integer(tracking=True)
 
     @api.model
     def _read_group_stage_ids(self, stages, domain, order=None):
@@ -88,6 +89,16 @@ class TmsDriver(models.Model):
         )
         if stage:
             return stage.id
+
+    def _creation_message(self):
+        self.ensure_one()
+        return self.env._("Driver created")
+
+    def _track_subtype(self, init_values):
+        self.ensure_one()
+        if "stage_id" in init_values:
+            return self.env.ref("tms.mt_driver_stage")
+        return super()._track_subtype(init_values)
 
     # Inherited actions from res_partner
 

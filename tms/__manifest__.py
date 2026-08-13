@@ -8,10 +8,11 @@
     "category": "TMS",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
-    "depends": ["base", "uom", "fleet", "base_geolocalize"],
+    "depends": ["base", "mail", "uom", "fleet", "base_geolocalize"],
     "data": [
         "data/ir_sequence_data.xml",
         "data/module_category.xml",
+        "data/mail_subtype.xml",
         "data/tms_stage.xml",
         "data/tms_team.xml",
         "data/uom_category.xml",

@@ -97,3 +97,54 @@ class TestTmsDriver(TransactionCase):
 
     def test_geo_localize_delegates_to_partner(self):
         self.driver.geo_localize()
+
+    def test_creation_message(self):
+        self.assertEqual(self.driver._creation_message(), "Driver created")
+
+    def test_track_subtype_on_stage_change(self):
+        subtype = self.env.ref("tms.mt_driver_stage")
+        self.assertEqual(
+            self.driver._track_subtype({"stage_id": self.stage.id}),
+            subtype,
+        )
+
+    def test_track_subtype_returns_false_for_other_fields(self):
+        self.assertFalse(self.driver._track_subtype({"driver_type": "terrestrial"}))
+
+    def test_driver_creation_logs_message_in_chatter(self):
+        self.env.cr.precommit.run()
+        new_driver = self.env["tms.driver"].create({"name": "Chatter Driver"})
+        self.env.cr.precommit.run()
+        messages = new_driver.message_ids
+        self.assertTrue(messages)
+        self.assertIn("Driver created", messages[0].body)
+
+    def test_stage_change_logs_subtype(self):
+        new_stage = self.env["tms.stage"].create(
+            {
+                "name": "New Stage",
+                "stage_type": "driver",
+                "sequence": 2,
+            }
+        )
+        self.env.cr.precommit.run()
+        self.driver.write({"stage_id": new_stage.id})
+        self.env.cr.precommit.run()
+        subtype_messages = self.driver.message_ids.filtered(
+            lambda m: m.subtype_id == self.env.ref("tms.mt_driver_stage")
+        )
+        self.assertTrue(subtype_messages)
+
+    def test_tracked_field_change_logs_message(self):
+        self.env.cr.precommit.run()
+        before = self.driver.message_ids
+        self.driver.write({"is_external": False})
+        self.env.cr.precommit.run()
+        new_messages = self.driver.message_ids - before
+        self.assertTrue(new_messages)
+        tracked_fields = {
+            field_name
+            for message in new_messages
+            for field_name in message.tracking_value_ids.field_id.mapped("name")
+        }
+        self.assertIn("is_external", tracked_fields)
