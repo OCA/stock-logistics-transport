@@ -71,7 +71,8 @@ msgid ""
 "<span class=\"fa fa-users me-2\" aria-label=\"Driver\" title=\"Drivers\"/>\n"
 "                                                <span>Drivers: </span>"
 msgstr ""
-"<span class=\"fa fa-users me-2\" aria-label=\"Sürücü\" title=\"Sürücüler\"/>\n"
+"<span class=\"fa fa-users me-2\" aria-label=\"Sürücü\" title=\"Sürücüler\"/"
+">\n"
 "                                                <span>Sürücüler: </span>"
 
 #. module: tms
@@ -346,7 +347,9 @@ msgstr "İptal Edildi"
 msgid ""
 "Cannot create TMS Stage because it has the same Type and Sequence of an "
 "existing TMS Stage."
-msgstr "Aynı Tip ve Sıraya sahip bir TMS Aşaması zaten bulunduğundan yeni TMS Aşaması oluşturulamaz."
+msgstr ""
+"Aynı Tip ve Sıraya sahip bir TMS Aşaması zaten bulunduğundan yeni TMS "
+"Aşaması oluşturulamaz."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_fleet_vehicle__capacity
@@ -479,6 +482,11 @@ msgid "Complete Name"
 msgstr "Tam Ad"
 
 #. module: tms
+#: model:tms.stage,name:tms.tms_stage_order_completed
+msgid "Completed"
+msgstr "Tamamlandı"
+
+#. module: tms
 #: model:ir.model,name:tms.model_res_config_settings
 msgid "Config Settings"
 msgstr "Ayarlar"
@@ -487,6 +495,11 @@ msgstr "Ayarlar"
 #: model:ir.ui.menu,name:tms.config
 msgid "Configuration"
 msgstr "Yapılandırma"
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_order_confirmed
+msgid "Confirmed"
+msgstr "Onaylandı"
 
 #. module: tms
 #: model:ir.model,name:tms.model_res_partner
@@ -542,9 +555,10 @@ msgstr "Bir aşama oluşturun."
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
 msgid "Create vendor bills and customer invoices when completing trip orders."
-msgstr "Seyir emirlerini tamamlarken tedarikçi faturaları ve müşteri faturaları oluştur."
-"Sefer siparişleri tamamlandığında satıcı faturaları ve müşteri faturaları "
-"oluşturun."
+msgstr ""
+"Seyir emirlerini tamamlarken tedarikçi faturaları ve müşteri faturaları "
+"oluştur.Sefer siparişleri tamamlandığında satıcı faturaları ve müşteri "
+"faturaları oluşturun."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_crew__create_uid
@@ -720,7 +734,8 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
 msgid "Defines how this stage is evaluated as completed stage"
-msgstr "Bu aşamanın tamamlanmış aşama olarak nasıl değerlendirileceğini tanımlar"
+msgstr ""
+"Bu aşamanın tamamlanmış aşama olarak nasıl değerlendirileceğini tanımlar"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__trust
@@ -816,7 +831,9 @@ msgstr "Sürücü"
 msgid ""
 "Driver %(driver)s license will expire in %(days)s days, which is less than "
 "or equal to the security threshold of %(threshold)s days."
-msgstr "%(driver)s sürücüsünün ehliyeti %(days)s gün içinde sona erecek, bu süre %(threshold)s gün olan güvenlik eşiğine eşit veya daha kısadır."
+msgstr ""
+"%(driver)s sürücüsünün ehliyeti %(days)s gün içinde sona erecek, bu süre %"
+"(threshold)s gün olan güvenlik eşiğine eşit veya daha kısadır."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
@@ -859,9 +876,20 @@ msgid "Driver Type"
 msgstr "Sürücü Türü"
 
 #. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_driver.py:0
+msgid "Driver created"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__driver_license_security_days
 msgid "Driver license security days"
 msgstr "Sürücü belgesi güvenlik günleri"
+
+#. module: tms
+#: model:mail.message.subtype,description:tms.mt_driver_stage
+msgid "Driver stage changed"
+msgstr ""
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_config_stage_driver
@@ -964,7 +992,9 @@ msgstr "Süresi Doldu"
 msgid ""
 "Explanation text to help users using the star and priority mechanism on "
 "stages or orders that are in this stage."
-msgstr "Kullanıcılara bu aşamadaki emirler veya aşamalar üzerinde yıldız ve öncelik mekanizmasını kullanmaları konusunda yardımcı olacak açıklama metni."
+msgstr ""
+"Kullanıcılara bu aşamadaki emirler veya aşamalar üzerinde yıldız ve öncelik "
+"mekanizmasını kullanmaları konusunda yardımcı olacak açıklama metni."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_external
@@ -1165,9 +1195,19 @@ msgid "Image 512"
 msgstr "Görsel 512"
 
 #. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_in_base
+msgid "In Base"
+msgstr "Üssünde"
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_training
 msgid "In Training"
 msgstr "Eğitimde"
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_in_trip
+msgid "In Trip"
+msgstr "Seferde"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__phone_blacklisted
@@ -1610,6 +1650,11 @@ msgid "Normalized Email"
 msgstr "Normalize E-posta"
 
 #. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_not_available
+msgid "Not Available"
+msgstr "Müsait Değil"
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__comment
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
 msgid "Notes"
@@ -2008,7 +2053,9 @@ msgid ""
 "Set the number of days before the expiration date of the driver license to "
 "show a\n"
 "                                warning."
-msgstr "Sürücü ehliyetinin son kullanma tarihinden kaç gün önce uyarı gösterileceğini ayarlayın."
+msgstr ""
+"Sürücü ehliyetinin son kullanma tarihinden kaç gün önce uyarı "
+"gösterileceğini ayarlayın."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -2016,7 +2063,9 @@ msgid ""
 "Set the number of days before the expiration date of the vehicle insurance "
 "to show a\n"
 "                                warning."
-msgstr "Araç sigortasının son kullanma tarihinden kaç gün önce uyarı gösterileceğini ayarlayın."
+msgstr ""
+"Araç sigortasının son kullanma tarihinden kaç gün önce uyarı gösterileceğini "
+"ayarlayın."
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_config
@@ -2047,6 +2096,7 @@ msgstr "Belirli Özellik Ürün Fiyat Listesi"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__stage_id
 #: model:ir.model.fields,field_description:tms.field_tms_order__stage_id
+#: model:mail.message.subtype,name:tms.mt_driver_stage
 #: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_order_search
 msgid "Stage"
@@ -2537,7 +2587,9 @@ msgstr "Araç"
 msgid ""
 "Vehicle %(vehicle)s insurance will expire in %(days)s days, which is less "
 "than or equal to the security threshold of %(threshold)s days."
-msgstr "%(vehicle)s aracının sigortası %(days)s gün içinde sona erecek, bu süre %(threshold)s gün olan güvenlik eşiğine eşit veya daha kısadır."
+msgstr ""
+"%(vehicle)s aracının sigortası %(days)s gün içinde sona erecek, bu süre %"
+"(threshold)s gün olan güvenlik eşiğine eşit veya daha kısadır."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__vehicle_ids_domain
@@ -2615,7 +2667,9 @@ msgstr "Bu kişinin bir çalışan olup olmadığı."
 msgid ""
 "You can add a description to help your coworkers\n"
 "                            understand the meaning and purpose of the stage."
-msgstr "İş arkadaşlarınızın aşamanın anlamını ve amacını anlamasına yardımcı olmak için bir açıklama ekleyebilirsiniz."
+msgstr ""
+"İş arkadaşlarınızın aşamanın anlamını ve amacını anlamasına yardımcı olmak "
+"için bir açıklama ekleyebilirsiniz."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__vat
@@ -2697,31 +2751,6 @@ msgstr "mi"
 #: model:uom.uom,name:tms.uom_mph
 msgid "mph"
 msgstr "mph"
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_order_confirmed
-msgid "Confirmed"
-msgstr "Onaylandı"
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_order_completed
-msgid "Completed"
-msgstr "Tamamlandı"
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_driver_in_base
-msgid "In Base"
-msgstr "Üssünde"
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_driver_in_trip
-msgid "In Trip"
-msgstr "Seferde"
-
-#. module: tms
-#: model:tms.stage,name:tms.tms_stage_driver_not_available
-msgid "Not Available"
-msgstr "Müsait Değil"
 
 #~ msgid "Avatar 1920"
 #~ msgstr "Avatar 1920"
