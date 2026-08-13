@@ -876,9 +876,20 @@ msgid "Driver Type"
 msgstr "Tipo autista"
 
 #. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_driver.py:0
+msgid "Driver created"
+msgstr ""
+
+#. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__driver_license_security_days
 msgid "Driver license security days"
 msgstr "Giorni assicurati patente autista"
+
+#. module: tms
+#: model:mail.message.subtype,description:tms.mt_driver_stage
+msgid "Driver stage changed"
+msgstr ""
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_config_stage_driver
@@ -2099,6 +2110,7 @@ msgstr "Listino prodotto proprietà specifico"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__stage_id
 #: model:ir.model.fields,field_description:tms.field_tms_order__stage_id
+#: model:mail.message.subtype,name:tms.mt_driver_stage
 #: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_order_search
 msgid "Stage"
