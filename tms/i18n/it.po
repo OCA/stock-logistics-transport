@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-07-16 08:46+0000\n"
+"PO-Revision-Date: 2026-08-18 12:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -24,12 +24,12 @@ msgstr "N. fatture fornitore"
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "<i class=\"fa fa-fw me-1 fa-phone\" title=\"Phone\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-fw me-1 fa-phone\" title=\"Telefono\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "<i class=\"fa fa-fw me-1 fa-users\" title=\"Team\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-fw me-1 fa-users\" title=\"Team\"/>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
@@ -92,7 +92,7 @@ msgstr ""
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
 msgid "<span>Crews: </span>"
-msgstr ""
+msgstr "<span>Equipaggio: </span>"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
@@ -112,7 +112,7 @@ msgstr "A - Moto"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__account_move_count
 msgid "Account Move Count"
-msgstr ""
+msgstr "Conto movimento contabile"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_payable_id
@@ -194,7 +194,7 @@ msgstr "Tipo indirizzo"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__type_address_label
 msgid "Address Type Description"
-msgstr ""
+msgstr "Descrizione tipo indirizzo"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_admin
@@ -267,7 +267,7 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__available_invoice_template_pdf_report_ids
 msgid "Available Invoice Template Pdf Report"
-msgstr ""
+msgstr "Resoconto PDF modello fattura disponibile"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
@@ -379,7 +379,7 @@ msgstr "Categorie"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__channel_member_ids
 msgid "Channel Member"
-msgstr ""
+msgstr "Membro canale"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__channel_ids
@@ -456,7 +456,7 @@ msgstr "Entità nome azienda"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__company_registry_placeholder
 msgid "Company Registry Placeholder"
-msgstr ""
+msgstr "Segnaposto registro azienda"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__company_type
@@ -488,7 +488,7 @@ msgstr "Nome completo"
 #. module: tms
 #: model:tms.stage,name:tms.tms_stage_order_completed
 msgid "Completed"
-msgstr ""
+msgstr "Completato"
 
 #. module: tms
 #: model:ir.model,name:tms.model_res_config_settings
@@ -503,7 +503,7 @@ msgstr "Configurazione"
 #. module: tms
 #: model:tms.stage,name:tms.tms_stage_order_confirmed
 msgid "Confirmed"
-msgstr ""
+msgstr "Confermato"
 
 #. module: tms
 #: model:ir.model,name:tms.model_res_partner
@@ -733,6 +733,17 @@ msgid ""
 "is the same week or week day\n"
 "         Always: Replenishment needs will always be grouped."
 msgstr ""
+"Definire se le richieste di offerta (RFQ)         devono essere raggruppate "
+"in base alla data di arrivo prevista, ad eccezione delle operazioni di "
+"dropshipping.\n"
+"         Su ordine: le esigenze di rifornimento saranno raggruppate, ad "
+"eccezione degli ordini su misura (MTO).\n"
+"         Giornaliera: le esigenze di rifornimento saranno raggruppate se la "
+"data di arrivo prevista è lo stesso giorno.\n"
+"         Settimanale: le esigenze di rifornimento saranno raggruppate se la "
+"data di arrivo prevista è la stessa settimana o lo stesso giorno della "
+"settimana.\n"
+"         Sempre: le esigenze di rifornimento saranno sempre raggruppate."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__is_completed
@@ -834,6 +845,8 @@ msgid ""
 "Driver %(driver)s license will expire in %(days)s days, which is less than "
 "or equal to the security threshold of %(threshold)s days."
 msgstr ""
+"La patente di guida dell'autista %(driver)s scadrà in %(days)s giorni, che è "
+"inferiore o uguale alla soglia di sicurezza di %(threshold)s giorni."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
@@ -879,7 +892,7 @@ msgstr "Tipo autista"
 #. odoo-python
 #: code:addons/tms/models/tms_driver.py:0
 msgid "Driver created"
-msgstr ""
+msgstr "Autista creato"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__driver_license_security_days
@@ -889,7 +902,7 @@ msgstr "Giorni assicurati patente autista"
 #. module: tms
 #: model:mail.message.subtype,description:tms.mt_driver_stage
 msgid "Driver stage changed"
-msgstr ""
+msgstr "Stato autista modificato"
 
 #. module: tms
 #: model:ir.actions.act_window,name:tms.action_tms_config_stage_driver
@@ -946,12 +959,12 @@ msgstr "Dipendente"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__employee_ids
 msgid "Employees"
-msgstr ""
+msgstr "Dipendenti"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__employees_count
 msgid "Employees Count"
-msgstr ""
+msgstr "Conteggio dipendenti"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
@@ -1021,7 +1034,7 @@ msgstr "Codici fiscali nazione"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__fiscal_country_group_codes
 msgid "Fiscal Country Group Codes"
-msgstr ""
+msgstr "Codici fiscali gruppo azienda"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_position_id
@@ -1094,7 +1107,7 @@ msgstr "Data geolocalizzazione"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__group_rfq
 msgid "Group RFQ"
-msgstr ""
+msgstr "Raggruppa RdP"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__has_message
@@ -1206,7 +1219,7 @@ msgstr "Immagine 512"
 #. module: tms
 #: model:tms.stage,name:tms.tms_stage_driver_in_base
 msgid "In Base"
-msgstr ""
+msgstr "In sede"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_training
@@ -1216,7 +1229,7 @@ msgstr "In addestramento"
 #. module: tms
 #: model:tms.stage,name:tms.tms_stage_driver_in_trip
 msgid "In Trip"
-msgstr ""
+msgstr "In viaggio"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__phone_blacklisted
@@ -1274,7 +1287,7 @@ msgstr "Deposito formato EDI fattura"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_template_pdf_report_id
 msgid "Invoice report"
-msgstr ""
+msgstr "Resoconto fattura"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_sending_method
@@ -1310,7 +1323,7 @@ msgstr "Segue"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_in_call
 msgid "Is In Call"
-msgstr ""
+msgstr "È in chiamata"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__is_public
@@ -1401,7 +1414,7 @@ msgstr "Ubicazioni"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__main_user_id
 msgid "Main User"
-msgstr ""
+msgstr "Utente pricipale"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_crew
@@ -1664,7 +1677,7 @@ msgstr "E-mail normalizzata"
 #. module: tms
 #: model:tms.stage,name:tms.tms_stage_driver_not_available
 msgid "Not Available"
-msgstr ""
+msgstr "Non disponibile"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__comment
@@ -1720,7 +1733,7 @@ msgstr "Contachilometri"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__offline_since
 msgid "Offline since"
-msgstr ""
+msgstr "Disconnesso da"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__on_time_rate
@@ -1849,7 +1862,7 @@ msgstr "Telefoni in blacklist"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__phone_mobile_search
 msgid "Phone Number"
-msgstr ""
+msgstr "Numero di telefono"
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
@@ -1879,12 +1892,12 @@ msgstr "Spiegazione della gestione delle priorità"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__properties
 msgid "Properties"
-msgstr ""
+msgstr "Proprietà"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__properties_base_definition_id
 msgid "Properties Base Definition"
-msgstr ""
+msgstr "Definizione base proprietà"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_inbound_payment_method_line_id
@@ -1929,7 +1942,7 @@ msgstr "Azienda collegata"
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__employee_ids
 msgid "Related employees based on their private address"
-msgstr ""
+msgstr "Dipendenti collegati in base al loro indirizzo privato"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.reporting
@@ -1979,7 +1992,7 @@ msgstr "Percorsi"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__rtc_session_ids
 msgid "Rtc Session"
-msgstr ""
+msgstr "Sessione RTC"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_count
@@ -2154,7 +2167,7 @@ msgstr "Stato"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__application_statistics
 msgid "Stats"
-msgstr ""
+msgstr "Statistiche"
 
 #. module: tms
 #: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles_status
@@ -2204,17 +2217,17 @@ msgstr "Indirizzo2"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_based_on
 msgid "Suggest Based On"
-msgstr ""
+msgstr "Suggerisci in base a"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_days
 msgid "Suggest Days"
-msgstr ""
+msgstr "Suggerisci giorni"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_percent
 msgid "Suggest Percent"
-msgstr ""
+msgstr "Suggerisci percentuale"
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__property_purchase_currency_id
@@ -2346,11 +2359,14 @@ msgid ""
 "There can be several users related to the same partner. When a single user "
 "is needed, this field attempts to find the most appropriate one."
 msgstr ""
+"Possono esserci più utenti correlati allo stesso partner. Quando è "
+"necessario un singolo utente, questo campo tenta di trovare quello più "
+"appropriato."
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_purchase_currency_id
 msgid "This currency will be used for purchases from the current partner"
-msgstr ""
+msgstr "Questa valuta verrà utilizzata per gli acquisti dal partner attuale"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__email_normalized
@@ -2581,7 +2597,7 @@ msgstr "Utilizzare percorso predefinito"
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__property_product_pricelist
 msgid "Used for sales to the current partner"
-msgstr ""
+msgstr "Usato per le vendite al partner attuale"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_stage__sequence
@@ -2619,6 +2635,8 @@ msgid ""
 "Vehicle %(vehicle)s insurance will expire in %(days)s days, which is less "
 "than or equal to the security threshold of %(threshold)s days."
 msgstr ""
+"L'assicurazione del veicolo %(vehicle)s scadrà in %(days)s giorni, che è "
+"inferiore o uguale alla soglia di sicurezza di %(threshold)s giorni."
 
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_order__vehicle_ids_domain
@@ -2674,7 +2692,7 @@ msgstr "Cronologia comunicazioni sito web"
 #. module: tms
 #: model:ir.model.fields,field_description:tms.field_tms_driver__group_on
 msgid "Week Day"
-msgstr ""
+msgstr "Giorno della settimana"
 
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__tz
@@ -2694,7 +2712,7 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__employee
 msgid "Whether this contact is an Employee."
-msgstr ""
+msgstr "Quanto questo contatto è un dipendente."
 
 #. module: tms
 #: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
@@ -2709,7 +2727,7 @@ msgstr ""
 #. module: tms
 #: model:ir.model.fields,help:tms.field_tms_driver__vat
 msgid "You can use '/' to indicate that the customer has no Tax ID."
-msgstr ""
+msgstr "Si può utilizzare '/' per indicare che il cliente non ha partita IVA."
 
 #. module: tms
 #. odoo-python
