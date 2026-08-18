@@ -6,23 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-08-18 12:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: tms_purchase
 #: model_terms:ir.ui.view,arch_db:tms_purchase.fleet_vehicle_view_form
 msgid "<span class=\"o_stat_text\">Purchase order</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Ordine di acquisto</span>"
 
 #. module: tms_purchase
 #: model_terms:ir.ui.view,arch_db:tms_purchase.purchase_order_form
 msgid "<span class=\"o_stat_text\">Trip</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Viaggio</span>"
 
 #. module: tms_purchase
 #: model:ir.model.fields,field_description:tms_purchase.field_fleet_vehicle__display_name
@@ -31,7 +33,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_purchase.field_tms_driver__display_name
 #: model:ir.model.fields,field_description:tms_purchase.field_tms_order__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: tms_purchase
 #: model:ir.model.fields,field_description:tms_purchase.field_fleet_vehicle__id
@@ -40,91 +42,91 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_purchase.field_tms_driver__id
 #: model:ir.model.fields,field_description:tms_purchase.field_tms_order__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: tms_purchase
 #: model:ir.model,name:tms_purchase.model_tms_driver
 msgid "Model for TMS drivers"
-msgstr ""
+msgstr "Modello per autisti TMS"
 
 #. module: tms_purchase
 #: model:ir.model.fields,field_description:tms_purchase.field_purchase_order__order_vehicle_count
 msgid "Order Vehicle Count"
-msgstr ""
+msgstr "Conteggio veicoli ordini"
 
 #. module: tms_purchase
 #: model:ir.model.fields,field_description:tms_purchase.field_tms_order__purchase_ids
 msgid "Purchase"
-msgstr ""
+msgstr "Acquisto"
 
 #. module: tms_purchase
 #: model:ir.model,name:tms_purchase.model_purchase_order
 #: model:ir.model.fields,field_description:tms_purchase.field_fleet_vehicle__purchase_order_id
 msgid "Purchase Order"
-msgstr ""
+msgstr "Ordine di acquisto"
 
 #. module: tms_purchase
 #: model:ir.model.fields,field_description:tms_purchase.field_tms_order__purchase_order_count
 msgid "Purchase Order Count"
-msgstr ""
+msgstr "Conteggio ordine di acquisto"
 
 #. module: tms_purchase
 #. odoo-python
 #: code:addons/tms_purchase/models/fleet_vehicle.py:0
 msgid "Purchase order: %s"
-msgstr ""
+msgstr "Ordine di acquisto: %s"
 
 #. module: tms_purchase
 #. odoo-python
 #: code:addons/tms_purchase/models/tms_order.py:0
 msgid "Purchase orders for Trip %s"
-msgstr ""
+msgstr "Ordine di acquisto per viaggio %s"
 
 #. module: tms_purchase
 #: model_terms:ir.ui.view,arch_db:tms_purchase.tms_order_view_form
 msgid "Purchases"
-msgstr ""
+msgstr "Acquisti"
 
 #. module: tms_purchase
 #: model:ir.model,name:tms_purchase.model_stock_move
 msgid "Stock Move"
-msgstr ""
+msgstr "Movimento di magazzino"
 
 #. module: tms_purchase
 #: model:ir.model,name:tms_purchase.model_tms_order
 msgid "Transport Management System Order"
-msgstr ""
+msgstr "Ordine sistema gestione trasporto"
 
 #. module: tms_purchase
 #: model:ir.model.fields,field_description:tms_purchase.field_purchase_order__trip_id
 #: model_terms:ir.ui.view,arch_db:tms_purchase.purchase_order_form
 msgid "Trip"
-msgstr ""
+msgstr "Viaggio"
 
 #. module: tms_purchase
 #. odoo-python
 #: code:addons/tms_purchase/models/purchase_order.py:0
 msgid "Trip: %s"
-msgstr ""
+msgstr "Viaggio: %s"
 
 #. module: tms_purchase
 #: model:ir.model,name:tms_purchase.model_fleet_vehicle
 #: model:ir.model.fields,field_description:tms_purchase.field_purchase_order__vehicle_ids
 msgid "Vehicle"
-msgstr ""
+msgstr "Veicolo"
 
 #. module: tms_purchase
 #: model:ir.model.fields,field_description:tms_purchase.field_purchase_order__vehicle_count
 msgid "Vehicle Count"
-msgstr ""
+msgstr "Conteggio veicoli"
 
 #. module: tms_purchase
 #: model_terms:ir.ui.view,arch_db:tms_purchase.purchase_order_form
 msgid "Vehicles"
-msgstr ""
+msgstr "Veicoli"
 
 #. module: tms_purchase
 #. odoo-python
 #: code:addons/tms_purchase/models/purchase_order.py:0
 msgid "Vehicles from purchase order %s"
-msgstr ""
+msgstr "Veicoli da ordine di acquisto %s"
