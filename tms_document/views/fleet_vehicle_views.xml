@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_fleet_vehicle_documents" model="ir.ui.view">
+        <field name="name">fleet.vehicle.documents</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="tms.fleet_vehicle_inherit_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form//notebook" position="inside">
+                <page string="Documents">
+                    <div class="mb-2" invisible="not id">
+                        <widget
+                            name="tms_document_uploader"
+                            groups="tms_document.group_tms_document"
+                        />
+                    </div>
+                    <field
+                        name="document_ids"
+                        create="false"
+                        context="{'default_res_model': 'fleet.vehicle'}"
+                    >
+                        <list create="false" delete="false">
+                            <field name="name" />
+                            <field name="doc_type" />
+                            <field name="issue_date" />
+                            <field name="expiry_date" />
+                            <field name="critical" />
+                            <field name="state" />
+                            <button
+                                name="action_soft_delete"
+                                groups="tms_document.group_tms_document"
+                                type="object"
+                                string="Delete"
+                                icon="fa-trash"
+                                confirm="Delete this document?"
+                            />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

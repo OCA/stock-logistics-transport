@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_document_user,tms.document.user,tms_document.model_tms_document,tms.group_tms_user,1,0,0,0
+access_tms_document_manager,tms.document.manager,tms_document.model_tms_document,tms_document.group_tms_document,1,1,1,1

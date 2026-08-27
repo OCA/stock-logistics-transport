@@ -1,0 +1,163 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_document
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-05 00:00+0000\n"
+"PO-Revision-Date: 2026-08-05 00:00+0000\n"
+"Last-Translator: Volkan Taşçı <info@voslo.co>\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "%(count)s document(s) uploaded"
+msgstr "%(count)s belge yüklendi"
+
+#. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "Upload"
+msgstr "Yükle"
+
+#. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "Replace File"
+msgstr "Dosyayı Değiştir"
+
+#. module: tms_document
+msgid "Active"
+msgstr "Aktif"
+
+#. module: tms_document
+msgid "Company"
+msgstr "Şirket"
+
+#. module: tms_document
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: tms_document
+msgid "Created on"
+msgstr "Oluşturulma Tarihi"
+
+#. module: tms_document
+msgid "Critical"
+msgstr "Kritik"
+
+#. module: tms_document
+msgid "Delete"
+msgstr "Sil"
+
+#. module: tms_document
+msgid "Delete this document?"
+msgstr "Bu belge silinsin mi?"
+
+#. module: tms_document
+msgid "Display Name"
+msgstr "Görünen Ad"
+
+#. module: tms_document
+msgid "Document"
+msgstr "Belge"
+
+#. module: tms_document
+msgid "Documents"
+msgstr "Belgeler"
+
+#. module: tms_document
+msgid "Expired"
+msgstr "Süresi Doldu"
+
+#. module: tms_document
+msgid "Expiring"
+msgstr "Son Kullanma Tarihi Yaklaşıyor"
+
+#. module: tms_document
+msgid "Expiry Date"
+msgstr "Son Kullanma Tarihi"
+
+#. module: tms_document
+msgid "File"
+msgstr "Dosya"
+
+#. module: tms_document
+msgid "Holder"
+msgstr "Sahip"
+
+#. module: tms_document
+msgid "Holder ID"
+msgstr "Sahip Kimliği"
+
+#. module: tms_document
+msgid "Holder Model"
+msgstr "Sahip Modeli"
+
+#. module: tms_document
+msgid "ID"
+msgstr "ID"
+
+#. module: tms_document
+msgid "If checked, an expired document blocks trip start on its holder."
+msgstr "İşaretlenirse, süresi dolan bir belge sahibinin sefer başlatmasını engeller."
+
+#. module: tms_document
+msgid "Issue Date"
+msgstr "Düzenlenme Tarihi"
+
+#. module: tms_document
+msgid "Last Updated by"
+msgstr "Son Güncelleyen"
+
+#. module: tms_document
+msgid "Last Updated on"
+msgstr "Son Güncelleme Tarihi"
+
+#. module: tms_document
+msgid "Manage TMS Documents"
+msgstr "TMS Belgelerini Yönet"
+
+#. module: tms_document
+msgid "Model for TMS drivers"
+msgstr "TMS sürücüleri için model"
+
+#. module: tms_document
+msgid "Notes"
+msgstr "Notlar"
+
+#. module: tms_document
+msgid "Reference"
+msgstr "Referans"
+
+#. module: tms_document
+msgid "State"
+msgstr "Durum"
+
+#. module: tms_document
+msgid "TMS Document"
+msgstr "TMS Belgesi"
+
+#. module: tms_document
+msgid "Transport Management System Order"
+msgstr "Taşımacılık Yönetim Sistemi Siparişi"
+
+#. module: tms_document
+msgid "Type"
+msgstr "Tür"
+
+#. module: tms_document
+msgid "Valid"
+msgstr "Geçerli"
+
+#. module: tms_document
+msgid "Vehicle"
+msgstr "Araç"
