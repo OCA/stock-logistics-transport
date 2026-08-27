@@ -4,10 +4,8 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0-20260723\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-05 18:19+0000\n"
-"PO-Revision-Date: 2026-08-05 18:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -22,20 +20,23 @@ msgid "%(count)s document(s) uploaded"
 msgstr ""
 
 #. module: tms_document
-#. odoo-javascript
-#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
-msgid "Upload"
-msgstr ""
-
-#. module: tms_document
-#. odoo-javascript
-#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
-msgid "Replace File"
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__message_needaction
+msgid "Action Needed"
 msgstr ""
 
 #. module: tms_document
 #: model:ir.model.fields,field_description:tms_document.field_tms_document__active
 msgid "Active"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model,name:tms_document.model_ir_attachment
+msgid "Attachment"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__message_attachment_count
+msgid "Attachment Count"
 msgstr ""
 
 #. module: tms_document
@@ -80,6 +81,7 @@ msgstr ""
 
 #. module: tms_document
 #: model:ir.model.fields,field_description:tms_document.field_fleet_vehicle__display_name
+#: model:ir.model.fields,field_description:tms_document.field_ir_attachment__display_name
 #: model:ir.model.fields,field_description:tms_document.field_tms_document__display_name
 #: model:ir.model.fields,field_description:tms_document.field_tms_driver__display_name
 #: model:ir.model.fields,field_description:tms_document.field_tms_order__display_name
@@ -120,9 +122,30 @@ msgid "Expiry Date"
 msgstr ""
 
 #. module: tms_document
-#: model:ir.model.fields,field_description:tms_document.field_tms_document__datas
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__file_id
 #: model_terms:ir.ui.view,arch_db:tms_document.view_tms_document_form
 msgid "File"
+msgstr ""
+
+#. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "File replaced"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__has_message
+msgid "Has Message"
 msgstr ""
 
 #. module: tms_document
@@ -141,7 +164,14 @@ msgid "Holder Model"
 msgstr ""
 
 #. module: tms_document
+#. odoo-python
+#: code:addons/tms_document/models/tms_document.py:0
+msgid "Holder model %(model)s is not allowed. Allowed models: %(allowed)s"
+msgstr ""
+
+#. module: tms_document
 #: model:ir.model.fields,field_description:tms_document.field_fleet_vehicle__id
+#: model:ir.model.fields,field_description:tms_document.field_ir_attachment__id
 #: model:ir.model.fields,field_description:tms_document.field_tms_document__id
 #: model:ir.model.fields,field_description:tms_document.field_tms_driver__id
 #: model:ir.model.fields,field_description:tms_document.field_tms_order__id
@@ -150,7 +180,24 @@ msgstr ""
 
 #. module: tms_document
 #: model:ir.model.fields,help:tms_document.field_tms_document__critical
-msgid "If checked, an expired document blocks trip start on its holder."
+msgid ""
+"If checked, an expired document blocks trip start on its holder. Documents "
+"without an expiry date are never considered expired."
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,help:tms_document.field_tms_document__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,help:tms_document.field_tms_document__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__message_is_follower
+msgid "Is Follower"
 msgstr ""
 
 #. module: tms_document
@@ -175,8 +222,30 @@ msgid "Manage TMS Documents"
 msgstr ""
 
 #. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: tms_document
 #: model:ir.model,name:tms_document.model_tms_driver
 msgid "Model for TMS drivers"
+msgstr ""
+
+#. module: tms_document
+#. odoo-python
+#: code:addons/tms_document/models/tms_document.py:0
+msgid "No attachment was provided."
+msgstr ""
+
+#. module: tms_document
+#. odoo-python
+#: code:addons/tms_document/models/tms_document.py:0
+msgid "No holder (driver or vehicle) was provided for the documents."
 msgstr ""
 
 #. module: tms_document
@@ -186,8 +255,34 @@ msgid "Notes"
 msgstr ""
 
 #. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,help:tms_document.field_tms_document__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,help:tms_document.field_tms_document__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: tms_document
 #: model:ir.model.fields,field_description:tms_document.field_tms_document__name
 msgid "Reference"
+msgstr ""
+
+#. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "Replace File"
 msgstr ""
 
 #. module: tms_document
@@ -201,6 +296,15 @@ msgid "TMS Document"
 msgstr ""
 
 #. module: tms_document
+#. odoo-python
+#: code:addons/tms_document/models/ir_attachment.py:0
+msgid ""
+"The file '%(names)s' belongs to the document '%(document)s' and cannot be "
+"deleted here. Manage the file (or archive the document) from the document "
+"instead."
+msgstr ""
+
+#. module: tms_document
 #: model:ir.model,name:tms_document.model_tms_order
 msgid "Transport Management System Order"
 msgstr ""
@@ -211,6 +315,12 @@ msgid "Type"
 msgstr ""
 
 #. module: tms_document
+#. odoo-javascript
+#: code:addons/tms_document/static/src/document_uploader/document_uploader.esm.js:0
+msgid "Upload"
+msgstr ""
+
+#. module: tms_document
 #: model:ir.model.fields.selection,name:tms_document.selection__tms_document__state__valid
 msgid "Valid"
 msgstr ""
@@ -218,4 +328,14 @@ msgstr ""
 #. module: tms_document
 #: model:ir.model,name:tms_document.model_fleet_vehicle
 msgid "Vehicle"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,field_description:tms_document.field_tms_document__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: tms_document
+#: model:ir.model.fields,help:tms_document.field_tms_document__website_message_ids
+msgid "Website communication history"
 msgstr ""
