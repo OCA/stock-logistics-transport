@@ -217,7 +217,6 @@ msgstr ""
 
 #. module: tms_document
 #: model:res.groups,name:tms_document.group_tms_document
-#: model:res.groups.privilege,name:tms_document.privilege_tms_document
 msgid "Manage TMS Documents"
 msgstr ""
 
