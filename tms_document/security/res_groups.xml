@@ -8,5 +8,4 @@
     <record id="tms.group_tms_admin" model="res.groups">
         <field name="implied_ids" eval="[(4, ref('group_tms_document'))]" />
     </record>
-    <delete model="res.groups.privilege" id="privilege_tms_document" />
 </odoo>
