@@ -28,67 +28,41 @@
         />
     </record>
 
-    <!-- Hidden Groups -->
-    <record id="privilege_tms_team" model="res.groups.privilege">
-        <field name="name">Manage TMS Teams</field>
-        <field name="category_id" ref="base.module_category_hidden" />
-    </record>
+    <!-- Extra rights: checkboxes on the user form in developer mode -->
     <record id="group_tms_team" model="res.groups">
         <field name="name">Manage TMS Teams</field>
-        <field name="privilege_id" ref="privilege_tms_team" />
-    </record>
-
-    <record id="privilege_tms_crew" model="res.groups.privilege">
-        <field name="name">Manage TMS Crew</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="privilege_id" eval="False" />
     </record>
     <record id="group_tms_crew" model="res.groups">
         <field name="name">Manage TMS Crew</field>
-        <field name="privilege_id" ref="privilege_tms_crew" />
-    </record>
-
-    <record id="privilege_tms_driver_license" model="res.groups.privilege">
-        <field name="name">Manage TMS Driver License</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="privilege_id" eval="False" />
     </record>
     <record id="group_tms_driver_license" model="res.groups">
         <field name="name">Manage TMS Driver License</field>
-        <field name="privilege_id" ref="privilege_tms_driver_license" />
-    </record>
-
-    <record id="privilege_tms_vehicle_insurance" model="res.groups.privilege">
-        <field name="name">Manage TMS Vehicle Insurance</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="privilege_id" eval="False" />
     </record>
     <record id="group_tms_vehicle_insurance" model="res.groups">
         <field name="name">Manage TMS Vehicle Insurance</field>
-        <field name="privilege_id" ref="privilege_tms_vehicle_insurance" />
-    </record>
-
-    <record id="privilege_tms_route" model="res.groups.privilege">
-        <field name="name">Manage TMS Routes</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="privilege_id" eval="False" />
     </record>
     <record id="group_tms_route" model="res.groups">
         <field name="name">Manage TMS Routes</field>
-        <field name="privilege_id" ref="privilege_tms_route" />
-    </record>
-
-    <record id="privilege_tms_route_stop" model="res.groups.privilege">
-        <field name="name">Manage TMS Route Stops</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="privilege_id" eval="False" />
     </record>
     <record id="group_tms_route_stop" model="res.groups">
         <field name="name">Manage TMS Route Stops</field>
-        <field name="privilege_id" ref="privilege_tms_route_stop" />
-    </record>
-
-    <record id="privilege_tms_uom" model="res.groups.privilege">
-        <field name="name">Manage TMS Oum</field>
-        <field name="category_id" ref="base.module_category_hidden" />
+        <field name="privilege_id" eval="False" />
     </record>
     <record id="group_tms_uom" model="res.groups">
         <field name="name">Manage TMS Oum</field>
-        <field name="privilege_id" ref="privilege_tms_uom" />
+        <field name="privilege_id" eval="False" />
     </record>
+
+    <delete model="res.groups.privilege" id="privilege_tms_team" />
+    <delete model="res.groups.privilege" id="privilege_tms_crew" />
+    <delete model="res.groups.privilege" id="privilege_tms_driver_license" />
+    <delete model="res.groups.privilege" id="privilege_tms_vehicle_insurance" />
+    <delete model="res.groups.privilege" id="privilege_tms_route" />
+    <delete model="res.groups.privilege" id="privilege_tms_route_stop" />
+    <delete model="res.groups.privilege" id="privilege_tms_uom" />
 </odoo>
