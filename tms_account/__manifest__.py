@@ -20,5 +20,5 @@
     ],
     "license": "AGPL-3",
     "development_status": "Alpha",
-    "maintainers": ["max3903", "santiagordz", "EdgarRetes"],
+    "maintainers": ["max3903"],
 }
