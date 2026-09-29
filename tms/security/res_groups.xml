@@ -57,12 +57,4 @@
         <field name="name">Manage TMS Oum</field>
         <field name="privilege_id" eval="False" />
     </record>
-
-    <delete model="res.groups.privilege" id="privilege_tms_team" />
-    <delete model="res.groups.privilege" id="privilege_tms_crew" />
-    <delete model="res.groups.privilege" id="privilege_tms_driver_license" />
-    <delete model="res.groups.privilege" id="privilege_tms_vehicle_insurance" />
-    <delete model="res.groups.privilege" id="privilege_tms_route" />
-    <delete model="res.groups.privilege" id="privilege_tms_route_stop" />
-    <delete model="res.groups.privilege" id="privilege_tms_uom" />
 </odoo>
