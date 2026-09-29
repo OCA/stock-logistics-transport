@@ -45,3 +45,38 @@ class TestHrExpenseTrip(TransactionCase):
         self.assertEqual(action["res_id"], self.order.id)
         self.assertEqual(action["view_mode"], "form")
         self.assertIn(self.order.name, action["name"])
+
+    def test_settlement_subtracts_expenses_from_trip_pay(self):
+        self.order.trip_pay = 1000
+        self.assertEqual(self.order.expense_total, 50)
+        self.assertEqual(self.order.settlement_balance, 950)
+
+    def test_hotel_and_advance_products_can_be_expensed(self):
+        hotel = self.env.ref("tms_expense.expense_trip_hotel")
+        advance = self.env.ref("tms_expense.expense_trip_advance")
+        toll = self.env.ref("tms_expense.expense_trip_toll")
+        fuel = self.env.ref("tms_expense.expense_trip_fuel")
+        for product in (hotel, advance, toll, fuel):
+            self.assertTrue(product.can_be_expensed)
+            self.assertEqual(product.type, "service")
+
+    def test_settlement_nets_advance_hotel_toll_and_fuel(self):
+        self.order.trip_pay = 2500
+        amounts = {
+            "tms_expense.expense_trip_toll": 200,
+            "tms_expense.expense_trip_hotel": 600,
+            "tms_expense.expense_trip_advance": 500,
+        }
+        for xmlid, amount in amounts.items():
+            self.env["hr.expense"].create(
+                {
+                    "name": xmlid,
+                    "employee_id": self.employee.id,
+                    "product_id": self.env.ref(xmlid).id,
+                    "total_amount": amount,
+                    "trip_id": self.order.id,
+                }
+            )
+        self.order.invalidate_recordset(["expense_total", "settlement_balance"])
+        self.assertEqual(self.order.expense_total, 1350)
+        self.assertEqual(self.order.settlement_balance, 1150)

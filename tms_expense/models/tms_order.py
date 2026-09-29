@@ -20,6 +20,19 @@ class TMSOrder(models.Model):
     )
 
     expense_count = fields.Integer(compute="_compute_expenses")
+    currency_id = fields.Many2one(related="company_id.currency_id")
+    trip_pay = fields.Monetary(string="Trip pay", currency_field="currency_id")
+    expense_total = fields.Monetary(
+        string="Expenses",
+        currency_field="currency_id",
+        compute="_compute_settlement",
+    )
+    settlement_balance = fields.Monetary(
+        string="Owed to the driver",
+        currency_field="currency_id",
+        compute="_compute_settlement",
+        help="Trip pay minus the expenses recorded on the trip.",
+    )
 
     @api.depends("driver_id")
     def _compute_driver_employee_id(self):
@@ -36,10 +49,17 @@ class TMSOrder(models.Model):
                     expense.action_submit()
         return result
 
-    @api.depends("expense_ids")
+    @api.depends("expense_ids", "expense_ids.total_amount")
     def _compute_expenses(self):
         for record in self:
             record.expense_count = len(record.expense_ids)
+
+    @api.depends("expense_ids.total_amount", "trip_pay")
+    def _compute_settlement(self):
+        for order in self:
+            total = sum(order.expense_ids.mapped("total_amount"))
+            order.expense_total = total
+            order.settlement_balance = order.trip_pay - total
 
     def action_view_expenses(self):
         self.ensure_one()

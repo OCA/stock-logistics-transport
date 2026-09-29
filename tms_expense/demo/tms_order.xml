@@ -1,0 +1,50 @@
+<odoo noupdate="1">
+    <record id="tms.demo_order_4" model="tms.order">
+        <field name="trip_pay">2500</field>
+    </record>
+
+    <record id="demo_expense_fuel" model="hr.expense">
+        <field name="name">Fuel Monterrey</field>
+        <field name="product_id" ref="expense_trip_fuel" />
+        <field name="total_amount">800</field>
+        <field name="trip_id" ref="tms.demo_order_4" />
+        <field
+            name="employee_id"
+            model="hr.employee"
+            eval="obj().env['hr.employee'].search([('work_contact_id', '=', obj().env.ref('tms.demo_driver_2').partner_id.id)], limit=1).id"
+        />
+    </record>
+    <record id="demo_expense_toll" model="hr.expense">
+        <field name="name">Toll Monterrey</field>
+        <field name="product_id" ref="expense_trip_toll" />
+        <field name="total_amount">200</field>
+        <field name="trip_id" ref="tms.demo_order_4" />
+        <field
+            name="employee_id"
+            model="hr.employee"
+            eval="obj().env['hr.employee'].search([('work_contact_id', '=', obj().env.ref('tms.demo_driver_2').partner_id.id)], limit=1).id"
+        />
+    </record>
+    <record id="demo_expense_hotel" model="hr.expense">
+        <field name="name">Hotel Monterrey</field>
+        <field name="product_id" ref="expense_trip_hotel" />
+        <field name="total_amount">600</field>
+        <field name="trip_id" ref="tms.demo_order_4" />
+        <field
+            name="employee_id"
+            model="hr.employee"
+            eval="obj().env['hr.employee'].search([('work_contact_id', '=', obj().env.ref('tms.demo_driver_2').partner_id.id)], limit=1).id"
+        />
+    </record>
+    <record id="demo_expense_advance" model="hr.expense">
+        <field name="name">Advance for Monterrey</field>
+        <field name="product_id" ref="expense_trip_advance" />
+        <field name="total_amount">500</field>
+        <field name="trip_id" ref="tms.demo_order_4" />
+        <field
+            name="employee_id"
+            model="hr.employee"
+            eval="obj().env['hr.employee'].search([('work_contact_id', '=', obj().env.ref('tms.demo_driver_2').partner_id.id)], limit=1).id"
+        />
+    </record>
+</odoo>
