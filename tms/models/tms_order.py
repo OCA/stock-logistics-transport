@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools.float_utils import float_compare
 
 
 class TMSOrder(models.Model):
@@ -74,6 +75,57 @@ class TMSOrder(models.Model):
         readonly=False,
     )
     vehicle_id = fields.Many2one("fleet.vehicle", string="Vehicle")
+    vehicle_operation = fields.Selection(related="vehicle_id.operation")
+    equipment_ids = fields.One2many("tms.order.equipment", "order_id")
+    odometer_start = fields.Float(string="Odometer at departure")
+    odometer_end = fields.Float(string="Odometer at arrival")
+    distance_loaded = fields.Float(string="Loaded kilometers")
+    distance_empty = fields.Float(string="Empty kilometers")
+    pod_note = fields.Text(string="Proof of delivery")
+    pod_attachment_ids = fields.Many2many(
+        "ir.attachment",
+        "tms_order_pod_attachment_rel",
+        "order_id",
+        "attachment_id",
+        string="Delivery documents",
+    )
+    cargo_ids = fields.One2many("tms.cargo", "order_id", copy=False)
+    cargo_weight_uom_id = fields.Many2one(
+        "uom.uom",
+        string="Weight unit",
+        compute="_compute_cargo_capacity",
+    )
+    cargo_volume_uom_id = fields.Many2one(
+        "uom.uom",
+        string="Volume unit",
+        compute="_compute_cargo_capacity",
+    )
+    cargo_weight = fields.Float(
+        string="Total weight",
+        compute="_compute_cargo_capacity",
+    )
+    cargo_volume = fields.Float(
+        string="Total volume",
+        compute="_compute_cargo_capacity",
+    )
+    weight_capacity_set = fields.Boolean(compute="_compute_cargo_capacity")
+    volume_capacity_set = fields.Boolean(compute="_compute_cargo_capacity")
+    capacity_weight = fields.Float(
+        string="Available weight",
+        compute="_compute_cargo_capacity",
+    )
+    capacity_volume = fields.Float(
+        string="Available volume",
+        compute="_compute_cargo_capacity",
+    )
+    remaining_weight = fields.Float(
+        string="Weight remaining",
+        compute="_compute_cargo_capacity",
+    )
+    remaining_volume = fields.Float(
+        string="Volume remaining",
+        compute="_compute_cargo_capacity",
+    )
     tms_team_id = fields.Many2one("tms.team", string="Team")
     crew_id = fields.Many2one("tms.crew", string="Crew")
 
@@ -86,6 +138,10 @@ class TMSOrder(models.Model):
         default=lambda self: self._default_stage_id(),
         group_expand="_read_group_stage_ids",
         ondelete="set null",
+    )
+    allowed_stage_ids = fields.Many2many(
+        "tms.stage",
+        compute="_compute_allowed_stage_ids",
     )
 
     scheduled_date_start = fields.Datetime(
@@ -273,12 +329,318 @@ class TMSOrder(models.Model):
         "Scheduled duration must be greater than or equal to zero!",
     )
 
+    @api.constrains(
+        "odometer_start", "odometer_end", "distance_loaded", "distance_empty"
+    )
+    def _check_odometer_distances(self):
+        for order in self:
+            if (
+                order.odometer_end
+                and order.odometer_start
+                and order.odometer_end < order.odometer_start
+            ):
+                raise ValidationError(
+                    self.env._(
+                        "The arrival odometer must be greater than the departure "
+                        "odometer."
+                    )
+                )
+            driven = order.odometer_end - order.odometer_start
+            split = order.distance_loaded + order.distance_empty
+            if order.odometer_end and order.odometer_start and split:
+                if abs(split - driven) > 0.01:
+                    raise ValidationError(
+                        self.env._(
+                            "Loaded and empty kilometers must add up to the "
+                            "odometer difference."
+                        )
+                    )
+
     @api.model
     def _read_group_stage_ids(self, stages, domain, order=None):
         order = order or "sequence, id"
+        team_id = False
+        for leaf in domain or []:
+            if (
+                isinstance(leaf, (list, tuple))
+                and len(leaf) == 3
+                and leaf[0] == "tms_team_id"
+                and leaf[1] == "="
+            ):
+                team_id = leaf[2]
+                break
+        if team_id:
+            team = self.env["tms.team"].browse(team_id).exists()
+            team_stages = team.stage_ids.filtered(
+                lambda stage: stage.stage_type == "order"
+            )
+            if team_stages:
+                return team_stages.sorted(lambda stage: (stage.sequence, stage.id))
         return self.env["tms.stage"].search([("stage_type", "=", "order")], order=order)
 
+    @api.depends(
+        "tms_team_id.stage_ids", "tms_team_id.operation", "vehicle_id.operation"
+    )
+    def _compute_allowed_stage_ids(self):
+        for order in self:
+            if order.tms_team_id:
+                order.allowed_stage_ids = order.tms_team_id.stage_ids.filtered(
+                    lambda stage: stage.stage_type == "order"
+                )
+            else:
+                order.allowed_stage_ids = self.env["tms.stage"]._stages_for_operation(
+                    order.vehicle_id.operation
+                )
+
+    def _trip_operation(self):
+        self.ensure_one()
+        if self.tms_team_id.operation:
+            return self.tms_team_id.operation
+        return self.vehicle_id.operation or False
+
+    def _check_stage_before_start(self):
+        loaded = self.env.ref("tms.tms_stage_order_loaded", raise_if_not_found=False)
+        for order in self:
+            if (
+                order._trip_operation() == "cargo"
+                and loaded
+                and order.stage_id != loaded
+            ):
+                raise UserError(self.env._("Load the cargo before starting this trip."))
+
+    def _set_in_transit_stage(self):
+        in_transit = self.env.ref(
+            "tms.tms_stage_order_in_transit", raise_if_not_found=False
+        )
+        if in_transit:
+            self.stage_id = in_transit
+
+    def _check_driver_not_on_trip(self):
+        for order in self:
+            if not order.driver_id:
+                continue
+            other = self.search(
+                [
+                    ("id", "!=", order.id),
+                    ("driver_id", "=", order.driver_id.id),
+                    ("start_trip", "=", True),
+                    ("end_trip", "=", False),
+                ],
+                limit=1,
+            )
+            if other:
+                raise UserError(
+                    self.env._(
+                        "Driver %(driver)s is already on trip %(trip)s.",
+                        driver=order.driver_id.name,
+                        trip=other.name,
+                    )
+                )
+
+    def _set_driver_trip_stage(self, on_trip):
+        in_trip = self.env.ref("tms.tms_stage_driver_in_trip", raise_if_not_found=False)
+        in_base = self.env.ref("tms.tms_stage_driver_in_base", raise_if_not_found=False)
+        target = in_trip if on_trip else in_base
+        if not target:
+            return
+        for order in self:
+            driver = order.driver_id
+            if not driver:
+                continue
+            if not on_trip:
+                still_out = self.search(
+                    [
+                        ("id", "!=", order.id),
+                        ("driver_id", "=", driver.id),
+                        ("start_trip", "=", True),
+                        ("end_trip", "=", False),
+                    ],
+                    limit=1,
+                )
+                if still_out:
+                    continue
+            driver.sudo().stage_id = target
+
+    def _set_arrived_stage(self):
+        arrived = self.env.ref("tms.tms_stage_order_arrived", raise_if_not_found=False)
+        if arrived:
+            self.stage_id = arrived
+
+    def _sync_loaded_stage(self):
+        loaded = self.env.ref("tms.tms_stage_order_loaded", raise_if_not_found=False)
+        confirmed = self.env.ref(
+            "tms.tms_stage_order_confirmed", raise_if_not_found=False
+        )
+        if not loaded or not confirmed:
+            return
+        for order in self:
+            if order._trip_operation() != "cargo":
+                continue
+            all_loaded = bool(order.cargo_ids) and all(
+                cargo.state == "loaded" for cargo in order.cargo_ids
+            )
+            if all_loaded and order.stage_id == confirmed:
+                order.stage_id = loaded
+            elif not all_loaded and order.stage_id == loaded:
+                order.stage_id = confirmed
+
+    @api.depends(
+        "cargo_ids.weight",
+        "cargo_ids.weight_uom_id",
+        "cargo_ids.volume",
+        "cargo_ids.volume_uom_id",
+        "vehicle_id.operation",
+        "vehicle_id.capacity",
+        "vehicle_id.cargo_uom_id",
+        "vehicle_id.weight_capacity",
+        "vehicle_id.weight_uom_id",
+        "equipment_ids.dropped",
+        "equipment_ids.role",
+        "equipment_ids.vehicle_id.capacity",
+        "equipment_ids.vehicle_id.cargo_uom_id",
+        "equipment_ids.vehicle_id.weight_capacity",
+        "equipment_ids.vehicle_id.weight_uom_id",
+    )
+    def _compute_cargo_capacity(self):
+        settings = self.env["res.config.settings"]
+        weight_uom = settings._configured_uom(
+            "tms.default_weight_uom", "uom.product_uom_kgm"
+        )
+        volume_uom = settings._configured_uom(
+            "tms.default_volume_uom", "uom.product_uom_cubic_meter"
+        )
+        for order in self:
+            order.cargo_weight_uom_id = weight_uom
+            order.cargo_volume_uom_id = volume_uom
+            order.cargo_weight = order._sum_cargo("weight", "weight_uom_id", weight_uom)
+            order.cargo_volume = order._sum_cargo("volume", "volume_uom_id", volume_uom)
+            limits = order._cargo_capacity_limits(weight_uom, volume_uom)
+            order.weight_capacity_set = limits["weight"] is not None
+            order.volume_capacity_set = limits["volume"] is not None
+            order.capacity_weight = limits["weight"] or 0.0
+            order.capacity_volume = limits["volume"] or 0.0
+            order.remaining_weight = (limits["weight"] or 0.0) - order.cargo_weight
+            order.remaining_volume = (limits["volume"] or 0.0) - order.cargo_volume
+            if limits["weight"] is None:
+                order.remaining_weight = 0.0
+            if limits["volume"] is None:
+                order.remaining_volume = 0.0
+
+    def _sum_cargo(self, amount_field, uom_field, target_uom):
+        self.ensure_one()
+        total = 0.0
+        for cargo in self.cargo_ids:
+            amount = cargo[amount_field]
+            uom = cargo[uom_field]
+            if target_uom and uom:
+                total += uom._compute_quantity(amount, target_uom)
+            else:
+                total += amount
+        return total
+
+    def _sum_vehicle_measure(self, vehicles, amount_field, uom_field, target_uom):
+        total = 0.0
+        found = False
+        for vehicle in vehicles:
+            amount = vehicle[amount_field]
+            uom = vehicle[uom_field]
+            if not amount or not uom or not target_uom:
+                continue
+            found = True
+            total += uom._compute_quantity(amount, target_uom)
+        return total if found else None
+
+    def _coupled_trailers(self):
+        self.ensure_one()
+        return self.equipment_ids.filtered(
+            lambda line: line.role == "trailer" and not line.dropped
+        ).vehicle_id
+
+    def _cargo_capacity_limits(self, weight_uom, volume_uom):
+        self.ensure_one()
+        trailers = self._coupled_trailers()
+        power = self.vehicle_id.filtered(lambda vehicle: vehicle.operation == "cargo")
+        trailer_volume = self._sum_vehicle_measure(
+            trailers, "capacity", "cargo_uom_id", volume_uom
+        )
+        power_volume = self._sum_vehicle_measure(
+            power, "capacity", "cargo_uom_id", volume_uom
+        )
+        trailer_weight = self._sum_vehicle_measure(
+            trailers, "weight_capacity", "weight_uom_id", weight_uom
+        )
+        power_weight = self._sum_vehicle_measure(
+            power, "weight_capacity", "weight_uom_id", weight_uom
+        )
+        if trailer_volume is not None:
+            volume_limit = trailer_volume
+        else:
+            volume_limit = power_volume
+        if trailer_weight is not None and power_weight is not None:
+            weight_limit = min(trailer_weight, power_weight)
+        elif trailer_weight is not None:
+            weight_limit = trailer_weight
+        else:
+            weight_limit = power_weight
+        return {"weight": weight_limit, "volume": volume_limit}
+
+    def _measure_exceeds(self, total, limit, uom):
+        if limit is None or not uom:
+            return False
+        rounding = uom.rounding or 0.01
+        return float_compare(total, limit, precision_rounding=rounding) > 0
+
+    @api.constrains("vehicle_id", "cargo_ids")
+    def _check_cargo_vehicle(self):
+        for order in self:
+            vehicle = order.vehicle_id
+            if order.cargo_ids and vehicle and vehicle.operation != "cargo":
+                raise ValidationError(
+                    self.env._(
+                        "Cargo can be added only when the vehicle manages cargo."
+                    )
+                )
+
+    def _check_cargo_before_start(self):
+        for order in self:
+            vehicle = order.vehicle_id
+            if not vehicle or vehicle.operation != "cargo":
+                continue
+            if not order.cargo_ids:
+                raise UserError(self.env._("Add the cargo before starting this trip."))
+            weight_uom = order.cargo_weight_uom_id
+            volume_uom = order.cargo_volume_uom_id
+            if order._measure_exceeds(
+                order.cargo_volume,
+                order.capacity_volume if order.volume_capacity_set else None,
+                volume_uom,
+            ):
+                raise UserError(
+                    self.env._(
+                        "Cargo volume %(volume)s %(uom)s exceeds the available "
+                        "capacity of %(capacity)s %(uom)s.",
+                        volume=order.cargo_volume,
+                        capacity=order.capacity_volume,
+                        uom=volume_uom.name,
+                    )
+                )
+            if order._measure_exceeds(
+                order.cargo_weight,
+                order.capacity_weight if order.weight_capacity_set else None,
+                weight_uom,
+            ):
+                raise UserError(
+                    self.env._(
+                        "Cargo weight %(weight)s %(uom)s exceeds the available "
+                        "capacity of %(capacity)s %(uom)s.",
+                        weight=order.cargo_weight,
+                        capacity=order.capacity_weight,
+                        uom=weight_uom.name,
+                    )
+                )
+
     def button_start_order(self):
+        self._check_cargo_before_start()
         # Check the vehicle insurance
         vehicle_security_days = int(
             self.env["ir.config_parameter"]
@@ -323,8 +685,38 @@ class TMSOrder(models.Model):
                     )
                 )
 
+        self._check_stage_before_start()
+        self._check_driver_not_on_trip()
         self.date_start = datetime.now()
         self.start_trip = True
+        self._set_in_transit_stage()
+        self._set_driver_trip_stage(on_trip=True)
+
+    def action_split_trip(self):
+        """Open an empty trip with the same route so cargo can be moved onto it."""
+        self.ensure_one()
+        if self.start_trip or self.end_trip:
+            raise UserError(self.env._("This trip has already started."))
+        name = self.env["ir.sequence"].next_by_code("tms.order") or self.env._("New")
+        new_trip = self.copy(
+            default={
+                "name": name,
+                "start_trip": False,
+                "end_trip": False,
+                "date_start": False,
+                "date_end": False,
+            }
+        )
+        if self.stage_id:
+            new_trip.stage_id = self.stage_id
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Trip"),
+            "res_model": "tms.order",
+            "view_mode": "form",
+            "res_id": new_trip.id,
+            "target": "current",
+        }
 
     def button_end_order(self):
         self.date_end = fields.Datetime.now()
@@ -333,11 +725,23 @@ class TMSOrder(models.Model):
         self.diff_duration = round(self.scheduled_duration - self.duration, 2)
         self.start_trip = False
         self.end_trip = True
+        self._set_arrived_stage()
+        self._set_driver_trip_stage(on_trip=False)
 
     def button_refresh_duration(self):
         self.date_end = fields.Datetime.now()
         duration = self.date_end - self.date_start
         self.duration = duration.total_seconds() / 3600
+
+    def write(self, vals):
+        result = super().write(vals)
+        if not self.env.context.get("skip_loaded_stage_sync") and {
+            "stage_id",
+            "vehicle_id",
+            "tms_team_id",
+        } & set(vals):
+            self.with_context(skip_loaded_stage_sync=True)._sync_loaded_stage()
+        return result
 
     @api.model_create_multi
     def create(self, vals_list):

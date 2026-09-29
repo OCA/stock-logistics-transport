@@ -49,6 +49,13 @@
                                 placeholder="e.g. kg"
                             />
                         </setting>
+                        <setting id="tms_volume_uom" invisible="not group_tms_uom">
+                            <field
+                                name="tms_volume_uom"
+                                string="Default Volume UoM"
+                                placeholder="e.g. m³"
+                            />
+                        </setting>
                         <setting id="tms_speed_uom" invisible="not group_tms_uom">
                             <field
                                 name="tms_speed_uom"
@@ -158,6 +165,12 @@
                         </setting>
                         <setting help="Manage expenses of a trip: hotel, tolls, fuel">
                             <field name="module_tms_expense" />
+                        </setting>
+                        <setting
+                            string="Manage Documents"
+                            help="Attach expiry-tracked documents to drivers and vehicles. An expired critical document blocks starting a trip."
+                        >
+                            <field name="module_tms_document" />
                         </setting>
                     </block>
                 </app>
