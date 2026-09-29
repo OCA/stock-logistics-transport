@@ -3,7 +3,7 @@
 {
     "name": "TMS - Product",
     "summary": "Manage Vehicles as Products",
-    "version": "19.0.1.1.0",
+    "version": "19.0.1.2.0",
     "license": "AGPL-3",
     "category": "TMS",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
@@ -19,5 +19,5 @@
         "views/stock_picking_views.xml",
     ],
     "development_status": "Alpha",
-    "maintainers": ["max3903", "santiagordz", "EdgarRetes"],
+    "maintainers": ["max3903"],
 }
