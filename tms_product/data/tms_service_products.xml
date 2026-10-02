@@ -9,6 +9,16 @@
         <field name="tms_factor_distance_uom" ref="uom.product_uom_km" />
     </record>
 
+    <record id="product_tms_cargo_service" model="product.template">
+        <field name="name">TMS Cargo Service</field>
+        <field name="type">service</field>
+        <field name="list_price">1.0</field>
+        <field name="tms_trip" eval="True" />
+        <field name="trip_product_type">trip</field>
+        <field name="tms_factor_type">weight</field>
+        <field name="tms_factor_weight_uom" ref="uom.product_uom_kgm" />
+    </record>
+
     <record id="product_tms_seat_service" model="product.template">
         <field name="name">TMS Seat Service</field>
         <field name="type">service</field>
