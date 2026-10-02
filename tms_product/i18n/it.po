@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-09-30 12:46+0000\n"
+"PO-Revision-Date: 2026-10-02 09:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -57,7 +57,8 @@ msgstr ""
 #: model:ir.model.fields,help:tms_product.field_product_product__trip_product_type
 #: model:ir.model.fields,help:tms_product.field_product_template__trip_product_type
 msgid "Determines if the product is sold as a trip or as a passenger seat"
-msgstr "Determina se il prodotto è venduto come viaggio e come posto passeggero"
+msgstr ""
+"Determina se il prodotto è venduto come viaggio e come seduta passeggero"
 
 #. module: tms_product
 #: model:ir.model.fields,field_description:tms_product.field_fleet_vehicle__display_name
@@ -158,7 +159,7 @@ msgstr "In ricezione"
 #. module: tms_product
 #: model:ir.model.fields.selection,name:tms_product.selection__product_template__trip_product_type__seat
 msgid "Seat"
-msgstr "Posto"
+msgstr "Seduta"
 
 #. module: tms_product
 #: model:ir.model.fields,field_description:tms_product.field_fleet_vehicle__lot_id
@@ -178,12 +179,12 @@ msgstr "Prelievo di magazzino"
 #. module: tms_product
 #: model:product.template,name:tms_product.product_tms_seat_service
 msgid "TMS Seat Service"
-msgstr "Servizio posto TMS"
+msgstr "Servizio seduta TMS"
 
 #. module: tms_product
 #: model_terms:ir.ui.view,arch_db:tms_product.product_template_search_view_tms
 msgid "TMS Seat Services"
-msgstr "Servizi posto TMS"
+msgstr "Servizi seduta TMS"
 
 #. module: tms_product
 #: model:product.template,name:tms_product.product_tms_trip_service
