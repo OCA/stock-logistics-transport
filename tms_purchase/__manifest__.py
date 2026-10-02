@@ -21,5 +21,5 @@
         "demo/tms_purchase_product_template.xml",
     ],
     "development_status": "Alpha",
-    "maintainers": ["max3903", "santiagordz", "EdgarRetes"],
+    "maintainers": ["max3903"],
 }
