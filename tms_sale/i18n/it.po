@@ -6,80 +6,82 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-02 09:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.tms_order_view_form
 msgid "<span class=\"o_stat_text\">Sale Order</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Ordine di vendita</span>"
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/sale_order_line.py:0
 msgid "A scheduled date of end from a trip is not set."
-msgstr ""
+msgstr "Non è impostata una data fine di un viaggio."
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/sale_order_line.py:0
 msgid "A scheduled date of start from a trip is not set."
-msgstr ""
+msgstr "Non è impostata una data inizio di un viaggio."
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/sale_order_line.py:0
 msgid "A ticket isn't assigned to a trip"
-msgstr ""
+msgstr "Un biglietto non è assegnato ad un viaggio"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__available
 #: model:ir.model.fields.selection,name:tms_sale.selection__seat_ticket__available__available
 msgid "Available"
-msgstr ""
+msgstr "Disponibile"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_seat_ticket_view_form
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_trip_view_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/fleet_vehicle.py:0
 msgid "Cargo vehicles must use a trip TMS service product."
-msgstr ""
+msgstr "I veicoli cargo devono usare un prodotto servizio TMS viaggio."
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__create_uid
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__create_uid
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__create_date
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__create_date
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__customer_id
 msgid "Customer"
-msgstr ""
+msgstr "Cliente"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_destination_id
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__destination
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_trip_view_form
 msgid "Destination"
-msgstr ""
+msgstr "Destinazione"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_fleet_vehicle__display_name
@@ -91,37 +93,37 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_sale.field_tms_driver__display_name
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.product_template_form_view
 msgid "Distance UoM"
-msgstr ""
+msgstr "UdM distanza"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_view_form
 msgid "Factor"
-msgstr ""
+msgstr "Fattore"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.product_template_form_view
 msgid "Factor Type"
-msgstr ""
+msgstr "Tipo fattore"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_view_form
 msgid "Factor UoM"
-msgstr ""
+msgstr "UdM fattore"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order__has_tms_order
 msgid "Has Tms Order"
-msgstr ""
+msgstr "Ha ordine TMS"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__has_trip_product
 msgid "Has Trip Product"
-msgstr ""
+msgstr "Ha prodotto viaggio"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_fleet_vehicle__id
@@ -133,118 +135,118 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_sale.field_tms_driver__id
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__write_uid
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__write_uid
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__write_date
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__write_date
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: tms_sale
 #: model:ir.model,name:tms_sale.model_tms_driver
 msgid "Model for TMS drivers"
-msgstr ""
+msgstr "Modello per autisti TMS"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/seat_ticket.py:0
 msgid "New ticket"
-msgstr ""
+msgstr "Nuovo biglietto"
 
 #. module: tms_sale
 #: model:ir.model.fields.selection,name:tms_sale.selection__seat_ticket__available__not_available
 msgid "Not available"
-msgstr ""
+msgstr "Non disponibile"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__vehicle_operation
 msgid "Operation"
-msgstr ""
+msgstr "Operazione"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__order_confirmed
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__order_confirmed
 msgid "Order Confirmed"
-msgstr ""
+msgstr "Ordine confermato"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__order_line_id
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__order_line_id
 msgid "Order Line"
-msgstr ""
+msgstr "Riga ordine"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__sale_order_id
 msgid "Order Reference"
-msgstr ""
+msgstr "Riferimento ordine"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_origin_id
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__origin
 msgid "Origin"
-msgstr ""
+msgstr "Origine"
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/fleet_vehicle.py:0
 msgid "Passenger vehicles must use a seat TMS service product."
-msgstr ""
+msgstr "Veicoli passeggeri devono usare un prodotto servizio TMS seduta."
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__price
 msgid "Price"
-msgstr ""
+msgstr "Prezzo"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__route
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_trip_view_form
 msgid "Route"
-msgstr ""
+msgstr "Percorso"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_route_id
 msgid "Routes"
-msgstr ""
+msgstr "Percorsi"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__sale_id
 msgid "Sale"
-msgstr ""
+msgstr "Vendita"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__sale_line_id
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__sale_line_id
 msgid "Sale Line"
-msgstr ""
+msgstr "Riga di vendita"
 
 #. module: tms_sale
 #: model:ir.model,name:tms_sale.model_sale_order_line_trip
 msgid "Sale Order Line Trip"
-msgstr ""
+msgstr "Riga ordine di vendita viaggio"
 
 #. module: tms_sale
 #: model:ir.model,name:tms_sale.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Ordine di vendita"
 
 #. module: tms_sale
 #: model:ir.model,name:tms_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Riga ordine di vendita"
 
 #. module: tms_sale
 #. odoo-python
@@ -252,196 +254,197 @@ msgstr ""
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__seat_sale_order_count
 #: model_terms:ir.ui.view,arch_db:tms_sale.tms_order_view_form
 msgid "Sales Orders"
-msgstr ""
+msgstr "Ordini di vendita"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_seat_ticket_view_form
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_trip_view_form
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_scheduled_date_end
 msgid "Scheduled End"
-msgstr ""
+msgstr "Fine schedulata"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_scheduled_date_start
 msgid "Scheduled Start"
-msgstr ""
+msgstr "Inizio schedulato"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__end
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_trip_view_form
 msgid "Scheduled end"
-msgstr ""
+msgstr "Fine schedulata"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__start
 msgid "Scheduled start"
-msgstr ""
+msgstr "Inizio schedulato"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__seat_sale_order_ids
 msgid "Seat Sale Order"
-msgstr ""
+msgstr "Ordine di vendita seduta"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__product_id
 msgid "Seat Service"
-msgstr ""
+msgstr "Servizio seduta"
 
 #. module: tms_sale
 #: model:ir.model,name:tms_sale.model_seat_ticket
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__seat_ticket
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__seat_ticket_ids
 msgid "Seat Ticket"
-msgstr ""
+msgstr "Biglietto seduta"
 
 #. module: tms_sale
 #: model:ir.model,name:tms_sale.model_seat_ticket_line
 msgid "Seat Ticket Line"
-msgstr ""
+msgstr "Riga biglietto seduta"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.tms_order_view_form
 msgid "Seats"
-msgstr ""
+msgstr "Sedute"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_fleet_vehicle__tms_service_product_id
 msgid "TMS Service"
-msgstr ""
+msgstr "Servizio TMS"
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/sale_order_line.py:0
 msgid "The destination location from a trip is not set."
-msgstr ""
+msgstr "Non è impostata la località destinazione di un viaggio."
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/sale_order_line.py:0
 msgid "The origin location from a trip is not set."
-msgstr ""
+msgstr "Non è impostata la località origine di un viaggio."
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/sale_order_line.py:0
 msgid "The route is not set in a trip using predefined routes."
 msgstr ""
+"Non è impostato un percorso in un viaggio usando i percorsi predefiniti."
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__ticket_ids
 msgid "Ticket"
-msgstr ""
+msgstr "Biglietto"
 
 #. module: tms_sale
 #: model:ir.actions.act_window,name:tms_sale.action_view_seat_ticket_sale_order_line
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_seat_ticket_view_form
 msgid "Ticket for trip:"
-msgstr ""
+msgstr "Biglietto per viaggio:"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_factor
 msgid "Tms Factor"
-msgstr ""
+msgstr "Fattore TMS"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_factor_uom
 msgid "Tms Factor Uom"
-msgstr ""
+msgstr "UdM fattore TMS"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_order_ids
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket__tms_order_id
 msgid "Tms Order"
-msgstr ""
+msgstr "Ordine TMS"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_fleet_vehicle__tms_service_filter_type
 msgid "Tms Service Filter Type"
-msgstr ""
+msgstr "Tipo filtro servizio TMS"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_ticket_ids
 msgid "Tms Ticket"
-msgstr ""
+msgstr "Biglietto TMS"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_trip_ticket_id
 msgid "Tms Trip Ticket"
-msgstr ""
+msgstr "Biglietto viaggio TMS"
 
 #. module: tms_sale
 #: model:ir.model,name:tms_sale.model_tms_order
 msgid "Transport Management System Order"
-msgstr ""
+msgstr "Ordine sistema gestione trasporto"
 
 #. module: tms_sale
 #: model:ir.model.fields,help:tms_sale.field_sale_order_line__tms_order_ids
 msgid "Transport Order generated by the sales order item"
-msgstr ""
+msgstr "Ordine di trasporto generato dall'elemento ordine di vendita"
 
 #. module: tms_sale
 #. odoo-python
 #: code:addons/tms_sale/models/sale_order.py:0
 msgid "Transport Order(s) Created: %s"
-msgstr ""
+msgstr "Ordine di trasporto creato: %s"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order__tms_order_count
 msgid "Transport Orders"
-msgstr ""
+msgstr "Ordini di trasporto"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order__tms_order_ids
 msgid "Transport orders associated to this sale"
-msgstr ""
+msgstr "Ordini di trasporto associati a questa vendita"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.product_template_form_view
 msgid "Transport product type"
-msgstr ""
+msgstr "Tipo prodotto trasporto"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_seat_ticket_line__trip_id
 msgid "Trip"
-msgstr ""
+msgstr "Viaggio"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__trip_line_ids
 msgid "Trip Line"
-msgstr ""
+msgstr "Riga viaggio"
 
 #. module: tms_sale
 #: model:ir.actions.act_window,name:tms_sale.action_view_trip_sale_order_line
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_trip_view_form
 msgid "Trip information"
-msgstr ""
+msgstr "Informazioni viaggio"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_view_form
 msgid "Trips"
-msgstr ""
+msgstr "Viaggi"
 
 #. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_route_flag
 #: model:ir.model.fields,field_description:tms_sale.field_sale_order_line_trip__has_route
 msgid "Use Routes"
-msgstr ""
+msgstr "Usa percorsi"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.sale_order_line_trip_view_form
 msgid "Use route"
-msgstr ""
+msgstr "Usa percorso"
 
 #. module: tms_sale
 #: model:ir.model,name:tms_sale.model_fleet_vehicle
 msgid "Vehicle"
-msgstr ""
+msgstr "Veicolo"
 
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.product_template_form_view
 msgid "Weight UoM"
-msgstr ""
+msgstr "UdM peso"
