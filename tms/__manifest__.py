@@ -3,7 +3,7 @@
 {
     "name": "Transport",
     "summary": "Manage Vehicles, Drivers, Routes and Trips",
-    "version": "19.0.1.2.0",
+    "version": "19.0.1.10.0",
     "license": "AGPL-3",
     "category": "TMS",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
@@ -15,7 +15,10 @@
         "data/mail_subtype.xml",
         "data/tms_stage.xml",
         "data/tms_team.xml",
+        "data/tms_stage_sync.xml",
         "data/uom_category.xml",
+        "data/fleet_vehicle_model_data.xml",
+        "data/fleet_vehicle_brand_logo.xml",
         "security/res_groups.xml",
         "security/ir.model.access.csv",
         "security/ir_rule.xml",
@@ -35,6 +38,7 @@
     "demo": [
         "demo/res_partner.xml",
         "demo/tms_driver.xml",
+        "demo/fleet_vehicle.xml",
         "demo/tms_route.xml",
         "demo/tms_order.xml",
         "demo/tms_crew.xml",
@@ -42,5 +46,5 @@
     ],
     "application": True,
     "development_status": "Alpha",
-    "maintainers": ["max3903", "santiagordz", "EdgarRetes"],
+    "maintainers": ["max3903"],
 }
