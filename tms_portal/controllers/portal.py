@@ -63,9 +63,9 @@ class PickupPortal(CustomerPortal):
         methods=["POST"],
     )
     def portal_add_pickup(self, trip_id, **post):
-        trip = request.env["tms.order"].browse(trip_id)
-        parent = request.env["tms.cargo"].browse(int(post.get("parent_id") or 0))
         try:
+            trip = request.env["tms.order"].browse(trip_id)
+            parent = request.env["tms.cargo"].browse(int(post.get("parent_id") or 0))
             trip.add_pickup(
                 parent,
                 {
@@ -77,4 +77,4 @@ class PickupPortal(CustomerPortal):
             )
         except (AccessError, UserError, ValueError):
             return request.redirect("/my")
-        return request.redirect("/my/pickups/%s" % trip_id)
+        return request.redirect(f"/my/pickups/{trip_id}")
