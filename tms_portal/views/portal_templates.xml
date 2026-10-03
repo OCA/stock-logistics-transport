@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="portal_my_home_pickups"
+        name="Portal home: pickups"
+        inherit_id="portal.portal_my_home"
+        customize_show="True"
+        priority="40"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Pickups</t>
+                <t t-set="text">Record what you loaded</t>
+                <t t-set="url" t-value="'/my/pickups'" />
+                <t t-set="placeholder_count" t-value="'pickup_count'" />
+            </t>
+        </xpath>
+    </template>
+
+    <template
+        id="portal_breadcrumbs_pickups"
+        name="Portal breadcrumbs: pickups"
+        inherit_id="portal.portal_breadcrumbs"
+        priority="40"
+    >
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li
+                t-if="page_name == 'pickup'"
+                t-attf-class="breadcrumb-item #{'active' if not trip else ''}"
+            >
+                <a t-if="trip" href="/my/pickups">Pickups</a>
+                <t t-else="">Pickups</t>
+            </li>
+            <li t-if="trip" class="breadcrumb-item active">
+                <t t-out="trip.name" />
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_pickups" name="My pickups">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True" />
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Pickups</t>
+            </t>
+            <t t-if="not trips">
+                <p>There are no trips assigned to you.</p>
+            </t>
+            <t t-else="">
+                <t t-call="portal.portal_table">
+                    <thead>
+                        <tr>
+                            <th>Trip</th>
+                            <th>Origin</th>
+                            <th>Destination</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr t-foreach="trips" t-as="trip">
+                            <td>
+                                <a t-attf-href="/my/pickups/#{trip.id}">
+                                    <t t-out="trip.name" />
+                                </a>
+                            </td>
+                            <td>
+                                <t t-out="trip.origin_id.name" />
+                            </td>
+                            <td>
+                                <t t-out="trip.destination_id.name" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_pickup" name="Pickup trip">
+        <t t-call="portal.portal_layout">
+            <t t-set="trip" t-value="trip" />
+            <h3>
+                <t t-out="trip.name" />
+            </h3>
+            <t t-foreach="trip.cargo_ids.filtered(lambda cargo: not cargo.parent_id)" t-as="cargo">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5>
+                            <t t-out="cargo.name" />
+                        </h5>
+                        <p>
+                            Sold:
+                            <t t-out="cargo.quantity" />
+                            /
+                            <t t-out="cargo.weight" />
+                            <t t-out="cargo.weight_uom_id.name" />
+                            /
+                            <t t-out="cargo.volume" />
+                            <t t-out="cargo.volume_uom_id.name" />
+                        </p>
+                        <table class="table" t-if="cargo.pickup_ids">
+                            <thead>
+                                <tr>
+                                    <th>Pickup</th>
+                                    <th>Pieces</th>
+                                    <th>Weight</th>
+                                    <th>Volume</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="cargo.pickup_ids" t-as="pickup">
+                                    <td>
+                                        <t t-out="pickup.name" />
+                                    </td>
+                                    <td>
+                                        <t t-out="pickup.quantity" />
+                                    </td>
+                                    <td>
+                                        <t t-out="pickup.weight" />
+                                    </td>
+                                    <td>
+                                        <t t-out="pickup.volume" />
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form t-attf-action="/my/pickups/#{trip.id}/add" method="post">
+                            <input
+                                type="hidden"
+                                name="csrf_token"
+                                t-att-value="request.csrf_token()"
+                            />
+                            <input type="hidden" name="parent_id" t-att-value="cargo.id" />
+                            <div class="row">
+                                <div class="col-md-3 mb-2">
+                                    <input
+                                        class="form-control"
+                                        name="name"
+                                        placeholder="Description"
+                                        required="required"
+                                    />
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <input
+                                        class="form-control"
+                                        name="quantity"
+                                        placeholder="Pieces"
+                                    />
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <input
+                                        class="form-control"
+                                        name="weight"
+                                        placeholder="Weight"
+                                    />
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <input
+                                        class="form-control"
+                                        name="volume"
+                                        placeholder="Volume"
+                                    />
+                                </div>
+                                <div class="col-md-2 mb-2">
+                                    <button type="submit" class="btn btn-primary">
+                                        Add pickup
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
