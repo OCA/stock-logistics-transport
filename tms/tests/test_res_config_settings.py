@@ -12,13 +12,11 @@ class TestResConfigSettings(TransactionCase):
         installed = ("installed", "to install", "to upgrade")
         for name in ("tms_telematics", "tms_telematics_geotab"):
             module = self.env["ir.module.module"].search([("name", "=", name)])
-            self.assertEqual(
-                settings["module_%s" % name], module.state in installed
-            )
+            self.assertEqual(settings[f"module_{name}"], module.state in installed)
         arch = self.env.ref("tms.res_config_settings_view_form").arch
         self.assertIn("module_tms_telematics", arch)
         self.assertIn("module_tms_telematics_geotab", arch)
-        self.assertIn("invisible=\"not module_tms_telematics\"", arch)
+        self.assertIn('invisible="not module_tms_telematics"', arch)
 
     def test_telematics_expense_module_is_offered(self):
         settings = self.env["res.config.settings"].create({})
@@ -33,4 +31,13 @@ class TestResConfigSettings(TransactionCase):
         )
         arch = self.env.ref("tms.res_config_settings_view_form").arch
         self.assertIn("module_tms_telematics_expense", arch)
-        self.assertIn("invisible=\"not module_tms_telematics\"", arch)
+        self.assertIn('invisible="not module_tms_telematics"', arch)
+
+    def test_portal_module_is_offered(self):
+        settings = self.env["res.config.settings"].create({})
+        self.assertIn("module_tms_portal", settings._fields)
+        module = self.env["ir.module.module"].search([("name", "=", "tms_portal")])
+        installed = ("installed", "to install", "to upgrade")
+        self.assertEqual(settings.module_tms_portal, module.state in installed)
+        arch = self.env.ref("tms.res_config_settings_view_form").arch
+        self.assertIn("module_tms_portal", arch)

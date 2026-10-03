@@ -146,3 +146,4 @@ class ResConfigSettings(models.TransientModel):
     module_tms_telematics_expense = fields.Boolean(
         string="Create fuel expenses from telematics"
     )
+    module_tms_portal = fields.Boolean(string="External drivers on the portal")

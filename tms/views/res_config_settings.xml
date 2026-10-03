@@ -112,6 +112,12 @@
                             <field name="group_tms_crew" />
                         </setting>
                         <setting
+                            string="External drivers"
+                            help="Let portal users assigned as drivers open their trips and record pickups."
+                        >
+                            <field name="module_tms_portal" />
+                        </setting>
+                        <setting
                             string="Manage Driver License Expiration"
                             help="Manage Driver License Expiration Date Before A Trip"
                         >
