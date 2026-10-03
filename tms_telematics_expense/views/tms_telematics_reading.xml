@@ -3,7 +3,10 @@
     <record id="view_tms_telematics_reading_form_expense" model="ir.ui.view">
         <field name="name">tms.telematics.reading.form.expense</field>
         <field name="model">tms.telematics.reading</field>
-        <field name="inherit_id" ref="tms_telematics.view_tms_telematics_reading_form" />
+        <field
+            name="inherit_id"
+            ref="tms_telematics.view_tms_telematics_reading_form"
+        />
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="inside">
                 <div class="oe_button_box" name="button_box">
@@ -27,7 +30,10 @@
     <record id="view_tms_telematics_reading_list_expense" model="ir.ui.view">
         <field name="name">tms.telematics.reading.list.expense</field>
         <field name="model">tms.telematics.reading</field>
-        <field name="inherit_id" ref="tms_telematics.view_tms_telematics_reading_list" />
+        <field
+            name="inherit_id"
+            ref="tms_telematics.view_tms_telematics_reading_list"
+        />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='fuel_liters']" position="after">
                 <field name="fuel_cost" optional="hide" />
