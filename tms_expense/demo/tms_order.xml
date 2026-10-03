@@ -47,4 +47,81 @@
             eval="obj().env['hr.employee'].search([('work_contact_id', '=', obj().env.ref('tms.demo_driver_2').partner_id.id)], limit=1).id"
         />
     </record>
+
+    <record id="demo_alloc_trip_1" model="tms.order">
+        <field name="name">TMS/FUEL1</field>
+        <field name="route">False</field>
+        <field name="origin_id" ref="tms.demo_location_2" />
+        <field name="destination_id" ref="tms.demo_location_1" />
+        <field name="driver_id" ref="tms.demo_driver_2" />
+        <field name="vehicle_id" ref="tms.demo_vehicle_truck_actros" />
+        <field name="date_start">2026-09-10 06:00:00</field>
+        <field name="date_end">2026-09-10 10:00:00</field>
+        <field name="odometer_start">100000</field>
+        <field name="odometer_end">100100</field>
+        <field name="distance_loaded">100</field>
+    </record>
+    <record id="demo_alloc_trip_2" model="tms.order">
+        <field name="name">TMS/FUEL2</field>
+        <field name="route">False</field>
+        <field name="origin_id" ref="tms.demo_location_1" />
+        <field name="destination_id" ref="tms.demo_location_2" />
+        <field name="driver_id" ref="tms.demo_driver_2" />
+        <field name="vehicle_id" ref="tms.demo_vehicle_truck_actros" />
+        <field name="date_start">2026-09-11 06:00:00</field>
+        <field name="date_end">2026-09-11 12:00:00</field>
+        <field name="odometer_start">100100</field>
+        <field name="odometer_end">100250</field>
+        <field name="distance_loaded">150</field>
+    </record>
+    <record id="demo_alloc_trip_3" model="tms.order">
+        <field name="name">TMS/FUEL3</field>
+        <field name="route">False</field>
+        <field name="origin_id" ref="tms.demo_location_2" />
+        <field name="destination_id" ref="tms.demo_location_1" />
+        <field name="driver_id" ref="tms.demo_driver_2" />
+        <field name="vehicle_id" ref="tms.demo_vehicle_truck_actros" />
+        <field name="date_start">2026-09-12 06:00:00</field>
+        <field name="date_end">2026-09-12 12:00:00</field>
+        <field name="odometer_start">100250</field>
+        <field name="odometer_end">100400</field>
+        <field name="distance_loaded">150</field>
+    </record>
+    <record id="demo_alloc_fill_open" model="hr.expense">
+        <field name="name">Fuel opening reading</field>
+        <field name="product_id" ref="expense_trip_fuel" />
+        <field name="total_amount">100</field>
+        <field name="trip_id" ref="demo_alloc_trip_1" />
+        <field name="vehicle_id" ref="tms.demo_vehicle_truck_actros" />
+        <field name="odometer">100000</field>
+        <field
+            name="employee_id"
+            model="hr.employee"
+            eval="obj().env['hr.employee'].search([('work_contact_id', '=', obj().env.ref('tms.demo_driver_2').partner_id.id)], limit=1).id"
+        />
+    </record>
+    <record id="demo_alloc_fill_close" model="hr.expense">
+        <field name="name">Fuel closing reading</field>
+        <field name="product_id" ref="expense_trip_fuel" />
+        <field name="total_amount">400</field>
+        <field name="trip_id" ref="demo_alloc_trip_3" />
+        <field name="vehicle_id" ref="tms.demo_vehicle_truck_actros" />
+        <field name="odometer">100400</field>
+        <field
+            name="employee_id"
+            model="hr.employee"
+            eval="obj().env['hr.employee'].search([('work_contact_id', '=', obj().env.ref('tms.demo_driver_2').partner_id.id)], limit=1).id"
+        />
+    </record>
+    <record id="demo_alloc_toll" model="hr.expense">
+        <field name="name">Toll between fills</field>
+        <field name="product_id" ref="expense_trip_toll" />
+        <field name="total_amount">40</field>
+        <field name="trip_id" ref="demo_alloc_trip_2" />
+        <field
+            name="employee_id"
+            model="hr.employee"
+            eval="obj().env['hr.employee'].search([('work_contact_id', '=', obj().env.ref('tms.demo_driver_2').partner_id.id)], limit=1).id"
+        />
+    </record>
 </odoo>

@@ -23,6 +23,7 @@
         <field name="uom_id" ref="uom.product_uom_unit" />
         <field name="default_code">FUEL</field>
         <field name="can_be_expensed" eval="True" />
+        <field name="tms_spread_by_distance" eval="True" />
         <field name="sale_ok" eval="False" />
         <field name="purchase_ok" eval="False" />
         <field

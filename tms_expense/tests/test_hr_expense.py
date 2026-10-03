@@ -59,6 +59,10 @@ class TestHrExpenseTrip(TransactionCase):
         for product in (hotel, advance, toll, fuel):
             self.assertTrue(product.can_be_expensed)
             self.assertEqual(product.type, "service")
+        self.assertTrue(fuel.tms_spread_by_distance)
+        self.assertFalse(toll.tms_spread_by_distance)
+        self.assertFalse(hotel.tms_spread_by_distance)
+        self.assertFalse(advance.tms_spread_by_distance)
 
     def test_settlement_nets_advance_hotel_toll_and_fuel(self):
         self.order.trip_pay = 2500

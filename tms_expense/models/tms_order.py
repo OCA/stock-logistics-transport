@@ -33,6 +33,13 @@ class TMSOrder(models.Model):
         compute="_compute_settlement",
         help="Trip pay minus the expenses recorded on the trip.",
     )
+    fuel_allocation_ids = fields.One2many("tms.expense.allocation", "trip_id")
+    fuel_allocated = fields.Monetary(
+        string="Fuel allocated",
+        currency_field="currency_id",
+        compute="_compute_fuel_allocated",
+        help="Fuel cost assigned to this trip from fills spread by distance.",
+    )
 
     @api.depends("driver_id")
     def _compute_driver_employee_id(self):
@@ -60,6 +67,30 @@ class TMSOrder(models.Model):
             total = sum(order.expense_ids.mapped("total_amount"))
             order.expense_total = total
             order.settlement_balance = order.trip_pay - total
+
+    @api.depends("fuel_allocation_ids.amount")
+    def _compute_fuel_allocated(self):
+        for order in self:
+            order.fuel_allocated = sum(order.fuel_allocation_ids.mapped("amount"))
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        orders = super().create(vals_list)
+        orders.mapped("vehicle_id")._reallocate_fuel_expenses()
+        return orders
+
+    def write(self, vals):
+        vehicles = self.mapped("vehicle_id")
+        result = super().write(vals)
+        if {
+            "odometer_start",
+            "odometer_end",
+            "odometer_start_id",
+            "odometer_end_id",
+            "vehicle_id",
+        } & set(vals):
+            (vehicles | self.mapped("vehicle_id"))._reallocate_fuel_expenses()
+        return result
 
     def action_view_expenses(self):
         self.ensure_one()

@@ -23,6 +23,7 @@
                     <group>
                         <field name="trip_pay" />
                         <field name="expense_total" />
+                        <field name="fuel_allocated" />
                         <field name="settlement_balance" />
                     </group>
                     <field
