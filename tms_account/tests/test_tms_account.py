@@ -421,6 +421,57 @@ class TestHrExpenseAnalytic(TestTMSAccountCommon):
         expense._onchange_trip_id()
         self.assertEqual(expense.trip_id, trip)
 
+    def test_spread_fuel_splits_analytic_distribution(self):
+        fuel = self.env.ref("tms_expense.expense_trip_fuel")
+        spans = ((1000, 1100), (1100, 1250), (1250, 1400))
+        trips = []
+        for index, (start, end) in enumerate(spans, start=1):
+            trip = self._create_trip(name=f"Analytic fuel {index}")
+            trip.write(
+                {
+                    "odometer_start": start,
+                    "odometer_end": end,
+                    "distance_loaded": end - start,
+                }
+            )
+            trip.analytic_account_id = self.env["account.analytic.account"].create(
+                {
+                    "name": f"Analytic fuel {index}",
+                    "plan_id": self.order_plan.id,
+                }
+            )
+            trips.append(trip)
+        self.env["hr.expense"].create(
+            {
+                "name": "Opening fill",
+                "product_id": fuel.id,
+                "total_amount": 20,
+                "employee_id": self.employee.id,
+                "vehicle_id": self.vehicle.id,
+                "odometer": 1000,
+                "trip_id": trips[0].id,
+            }
+        )
+        closing = self.env["hr.expense"].create(
+            {
+                "name": "Closing fill",
+                "product_id": fuel.id,
+                "total_amount": 400,
+                "employee_id": self.employee.id,
+                "vehicle_id": self.vehicle.id,
+                "odometer": 1400,
+                "trip_id": trips[2].id,
+            }
+        )
+        found = {}
+        for key, share in (closing.analytic_distribution or {}).items():
+            for trip in trips:
+                if str(trip.analytic_account_id.id) in key.split(","):
+                    found[trip] = share
+        self.assertAlmostEqual(found[trips[0]], 25)
+        self.assertAlmostEqual(found[trips[1]], 37.5)
+        self.assertAlmostEqual(found[trips[2]], 37.5)
+
 
 class TestTMSOrderWorkflow(TestTMSAccountCommon):
     def test_compute_invoice_and_bill_counts(self):
