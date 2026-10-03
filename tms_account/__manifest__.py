@@ -4,7 +4,7 @@
 {
     "name": "TMS - Accounting",
     "summary": "Track invoices linked to TMS orders",
-    "version": "19.0.1.2.0",
+    "version": "19.0.1.3.0",
     "category": "Field Service",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
@@ -20,5 +20,5 @@
     ],
     "license": "AGPL-3",
     "development_status": "Alpha",
-    "maintainers": ["max3903", "santiagordz", "EdgarRetes"],
+    "maintainers": ["max3903"],
 }
