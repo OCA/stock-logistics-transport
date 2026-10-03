@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="sale_order_view_form" model="ir.ui.view">
+        <field name="name">sale.order.form.tms.sale.pickup</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="tms_sale.sale_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@string='Cargo']" position="attributes">
+                <attribute
+                    name="invisible"
+                >tms_factor_type not in ('weight', 'volume')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cargo_ids']/list/field[@name='state']" position="before">
+                <field name="sold_locked" column_invisible="1" />
+                <field name="pickup_weight" />
+                <field name="weight_delta" />
+                <field name="pickup_volume" />
+                <field name="volume_delta" />
+                <field name="has_discrepancy" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
