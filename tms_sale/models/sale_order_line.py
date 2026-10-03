@@ -137,7 +137,9 @@ class SaleOrderLine(models.Model):
             total = 0.0
             for cargo in line.cargo_ids:
                 if cargo.weight_uom_id and cargo.weight_uom_id != target:
-                    total += cargo.weight_uom_id._compute_quantity(cargo.weight, target)
+                    total += cargo.weight_uom_id._compute_quantity(
+                        cargo.weight, target
+                    )
                 else:
                     total += cargo.weight
             line.tms_factor = total
