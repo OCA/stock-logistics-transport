@@ -77,8 +77,30 @@ class TMSOrder(models.Model):
     vehicle_id = fields.Many2one("fleet.vehicle", string="Vehicle")
     vehicle_operation = fields.Selection(related="vehicle_id.operation")
     equipment_ids = fields.One2many("tms.order.equipment", "order_id")
-    odometer_start = fields.Float(string="Odometer at departure")
-    odometer_end = fields.Float(string="Odometer at arrival")
+    odometer_start_id = fields.Many2one(
+        "fleet.vehicle.odometer",
+        string="Departure reading",
+        copy=False,
+        index=True,
+    )
+    odometer_end_id = fields.Many2one(
+        "fleet.vehicle.odometer",
+        string="Arrival reading",
+        copy=False,
+        index=True,
+    )
+    odometer_start = fields.Float(
+        string="Odometer at departure",
+        compute="_compute_odometer_start",
+        inverse="_inverse_odometer_start",
+        help="Stored on the vehicle odometer log.",
+    )
+    odometer_end = fields.Float(
+        string="Odometer at arrival",
+        compute="_compute_odometer_end",
+        inverse="_inverse_odometer_end",
+        help="Stored on the vehicle odometer log.",
+    )
     distance_loaded = fields.Float(string="Loaded kilometers")
     distance_empty = fields.Float(string="Empty kilometers")
     pod_note = fields.Text(string="Proof of delivery")
@@ -329,8 +351,71 @@ class TMSOrder(models.Model):
         "Scheduled duration must be greater than or equal to zero!",
     )
 
+    @api.depends("odometer_start_id.value")
+    def _compute_odometer_start(self):
+        for order in self:
+            order.odometer_start = order.odometer_start_id.value
+
+    @api.depends("odometer_end_id.value")
+    def _compute_odometer_end(self):
+        for order in self:
+            order.odometer_end = order.odometer_end_id.value
+
+    def _inverse_odometer_start(self):
+        for order in self:
+            order._assign_odometer_reading(
+                "odometer_start_id", order.odometer_start, order.date_start
+            )
+
+    def _inverse_odometer_end(self):
+        for order in self:
+            order._assign_odometer_reading(
+                "odometer_end_id", order.odometer_end, order.date_end
+            )
+
+    def _odometer_reading_date(self, moment):
+        self.ensure_one()
+        if not moment:
+            return fields.Date.context_today(self)
+        return fields.Date.to_date(moment)
+
+    def _assign_odometer_reading(self, reading_field, value, moment):
+        """Create or update the Fleet odometer line behind a trip reading."""
+        self.ensure_one()
+        if not self.vehicle_id:
+            raise UserError(
+                self.env._("Set the vehicle before recording an odometer reading.")
+            )
+        reading = self[reading_field]
+        vals = {
+            "value": value,
+            "date": self._odometer_reading_date(moment),
+            "vehicle_id": self.vehicle_id.id,
+        }
+        if reading and reading.vehicle_id == self.vehicle_id:
+            reading.write(vals)
+            return
+        self[reading_field] = self.env["fleet.vehicle.odometer"].create(vals)
+
+    def _sync_odometer_readings(self):
+        for order in self:
+            if not order.vehicle_id:
+                order.write({"odometer_start_id": False, "odometer_end_id": False})
+                continue
+            if order.odometer_start_id or order.odometer_start:
+                order._assign_odometer_reading(
+                    "odometer_start_id", order.odometer_start, order.date_start
+                )
+            if order.odometer_end_id or order.odometer_end:
+                order._assign_odometer_reading(
+                    "odometer_end_id", order.odometer_end, order.date_end
+                )
+
     @api.constrains(
-        "odometer_start", "odometer_end", "distance_loaded", "distance_empty"
+        "odometer_start_id",
+        "odometer_end_id",
+        "distance_loaded",
+        "distance_empty",
     )
     def _check_odometer_distances(self):
         for order in self:
@@ -741,6 +826,14 @@ class TMSOrder(models.Model):
             "tms_team_id",
         } & set(vals):
             self.with_context(skip_loaded_stage_sync=True)._sync_loaded_stage()
+        if not self.env.context.get("skip_odometer_sync") and {
+            "date_start",
+            "date_end",
+            "vehicle_id",
+            "odometer_start",
+            "odometer_end",
+        } & set(vals):
+            self.with_context(skip_odometer_sync=True)._sync_odometer_readings()
         return result
 
     @api.model_create_multi

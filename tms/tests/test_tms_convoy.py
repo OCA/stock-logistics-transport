@@ -4,6 +4,7 @@
 import base64
 from datetime import datetime, timedelta
 
+from odoo import fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import TransactionCase
 
@@ -142,6 +143,45 @@ class TestTMSConvoy(TransactionCase):
         trip.write({"odometer_start": 1000, "odometer_end": 1100})
         self.assertEqual(trip.distance_loaded, 0)
         self.assertEqual(trip.distance_empty, 0)
+        self.assertEqual(trip.odometer_start_id.vehicle_id, self.tractor)
+        self.assertEqual(trip.odometer_start_id.value, 1000)
+        self.assertEqual(trip.odometer_end_id.value, 1100)
+        self.assertEqual(
+            self.env["fleet.vehicle.odometer"].search_count(
+                [
+                    ("vehicle_id", "=", self.tractor.id),
+                    ("value", "in", (1000, 1100)),
+                ]
+            ),
+            2,
+        )
+
+    def test_odometer_reading_is_updated_in_place(self):
+        trip = self._trip()
+        trip.write(
+            {
+                "odometer_start": 1000,
+                "odometer_end": 1100,
+                "date_start": "2026-09-01 08:00:00",
+            }
+        )
+        start = trip.odometer_start_id
+        trip.odometer_start = 1010
+        self.assertEqual(trip.odometer_start_id, start)
+        self.assertEqual(start.value, 1010)
+        self.assertEqual(start.date, fields.Date.to_date("2026-09-01"))
+        start.write({"value": 1020})
+        self.assertEqual(trip.odometer_start, 1020)
+
+    def test_odometer_requires_a_vehicle(self):
+        trip = self.env["tms.order"].create(
+            {
+                "origin_id": self.origin.id,
+                "destination_id": self.destination.id,
+            }
+        )
+        with self.assertRaises(UserError):
+            trip.odometer_start = 1000
 
     def test_proof_of_delivery_does_not_block_completed(self):
         trip = self._trip()
