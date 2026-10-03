@@ -5,7 +5,7 @@
         <field name="origin_id" ref="demo_location_3" />
         <field name="destination_id" ref="demo_location_4" />
         <field name="driver_id" ref="demo_driver_3" />
-        <field name="vehicle_id" ref="fleet.vehicle_1" />
+        <field name="vehicle_id" ref="demo_vehicle_bus_tourismo" />
     </record>
 
     <record id="demo_order_2" model="tms.order">
@@ -14,7 +14,7 @@
         <field name="origin_id" ref="demo_location_6" />
         <field name="destination_id" ref="demo_location_1" />
         <field name="driver_id" ref="demo_driver_1" />
-        <field name="vehicle_id" ref="fleet.vehicle_2" />
+        <field name="vehicle_id" ref="demo_vehicle_bus_9700" />
     </record>
 
     <record id="demo_order_3" model="tms.order">
@@ -24,6 +24,94 @@
         <field name="destination_id" ref="demo_location_8" />
         <field name="stage_id" ref="tms_stage_order_confirmed" />
         <field name="driver_id" ref="demo_driver_4" />
-        <field name="vehicle_id" ref="fleet.vehicle_1" />
+        <field name="vehicle_id" ref="demo_vehicle_truck_volvo_fh" />
+    </record>
+    <record id="demo_order_3_cargo" model="tms.cargo">
+        <field name="order_id" ref="demo_order_3" />
+        <field name="name">Palletized freight</field>
+        <field name="quantity">10</field>
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="weight">12000</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">40</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="packaging">Pallets</field>
+    </record>
+
+    <record id="demo_order_4_pod" model="ir.attachment">
+        <field name="name">delivery-demo4.txt</field>
+        <field name="datas">U2lnbmVkIGF0IHRoZSB3YXJlaG91c2Uu</field>
+        <field name="mimetype">text/plain</field>
+    </record>
+
+    <record id="demo_order_4" model="tms.order">
+        <field name="name">TMS/DEMO4</field>
+        <field name="route">False</field>
+        <field name="origin_id" ref="demo_location_2" />
+        <field name="destination_id" ref="demo_location_1" />
+        <field name="stage_id" ref="tms_stage_order_arrived" />
+        <field name="driver_id" ref="demo_driver_2" />
+        <field name="vehicle_id" ref="demo_vehicle_truck_actros" />
+        <field name="date_start">2026-09-20 06:00:00</field>
+        <field name="date_end">2026-09-20 16:00:00</field>
+        <field name="end_trip" eval="True" />
+        <field name="odometer_start">120000</field>
+        <field name="odometer_end">120480</field>
+        <field name="distance_loaded">400</field>
+        <field name="distance_empty">80</field>
+        <field name="pod_note">Received complete at Auditorio Nacional.</field>
+        <field name="pod_attachment_ids" eval="[(4, ref('demo_order_4_pod'))]" />
+    </record>
+    <record id="demo_order_4_cargo" model="tms.cargo">
+        <field name="order_id" ref="demo_order_4" />
+        <field name="name">Boxed appliances</field>
+        <field name="quantity">8</field>
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="weight">6400</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">28</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="packaging">Boxes</field>
+        <field name="state">delivered</field>
+    </record>
+    <record id="demo_order_4_trailer" model="tms.order.equipment">
+        <field name="order_id" ref="demo_order_4" />
+        <field name="vehicle_id" ref="demo_vehicle_trailer_dropped" />
+        <field name="dropped" eval="True" />
+        <field name="drop_location_id" ref="demo_location_1" />
+        <field name="drop_date">2026-09-20 16:00:00</field>
+    </record>
+    <record id="demo_order_4_dolly" model="tms.order.equipment">
+        <field name="order_id" ref="demo_order_4" />
+        <field name="vehicle_id" ref="demo_vehicle_dolly" />
+    </record>
+
+    <record id="demo_order_5" model="tms.order">
+        <field name="name">TMS/DEMO5</field>
+        <field name="route">False</field>
+        <field name="origin_id" ref="demo_location_6" />
+        <field name="destination_id" ref="demo_location_4" />
+        <field name="stage_id" ref="tms_stage_order_in_transit" />
+        <field name="driver_id" ref="demo_driver_1" />
+        <field name="vehicle_id" ref="demo_vehicle_truck_volvo_fh" />
+        <field name="date_start">2026-09-29 08:00:00</field>
+        <field name="start_trip" eval="True" />
+        <field name="odometer_start">98000</field>
+    </record>
+    <record id="demo_order_5_cargo" model="tms.cargo">
+        <field name="order_id" ref="demo_order_5" />
+        <field name="name">Steel coils</field>
+        <field name="quantity">4</field>
+        <field name="uom_id" ref="uom.product_uom_unit" />
+        <field name="weight">8000</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="volume">18</field>
+        <field name="volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="packaging">Coils</field>
+        <field name="state">loaded</field>
+    </record>
+    <record id="demo_order_5_trailer" model="tms.order.equipment">
+        <field name="order_id" ref="demo_order_5" />
+        <field name="vehicle_id" ref="demo_vehicle_trailer_caja" />
     </record>
 </odoo>

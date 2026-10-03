@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_telematics_account" model="tms.telematics.account">
+        <field name="name">Demo telematics</field>
+        <field name="active" eval="False" />
+        <field name="server_url">https://my.geotab.com/apiv1</field>
+    </record>
+</odoo>
