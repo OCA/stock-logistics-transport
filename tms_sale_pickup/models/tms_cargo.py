@@ -90,16 +90,16 @@ class TMSCargo(models.Model):
             if parent_id and not vals.get("order_id"):
                 parent = self.browse(parent_id)
                 vals["order_id"] = parent.order_id.id
-        records = super().create(vals_list)
-        pickups = records.filtered("parent_id")
-        if pickups.sale_line_id:
-            lines = pickups.sale_line_id
-            pickups.with_context(skip_cargo_sale_sync=True).write(
-                {"sale_line_id": False}
-            )
+        records = super(TMSCargo, self.with_context(skip_cargo_sale_sync=True)).create(
+            vals_list
+        )
+        sold = records.filtered(lambda cargo: not cargo.parent_id)
+        sold._link_sale_line_from_trip()
+        sold._link_trip_from_sale_line()
+        lines = (sold | records.parent_id).sudo().sale_line_id
+        if lines:
             lines._sync_tms_weight_factor_from_cargo()
             lines._sync_tms_volume_factor_from_cargo()
-        records.sale_line_id._sync_tms_volume_factor_from_cargo()
         return records
 
     def write(self, vals):
@@ -111,9 +111,9 @@ class TMSCargo(models.Model):
                 )
             )
         if "order_id" in vals:
-            self.filtered(lambda cargo: not cargo.parent_id).pickup_ids.write(
-                {"order_id": vals["order_id"]}
-            )
+            pickups = self.filtered(lambda cargo: not cargo.parent_id).pickup_ids
+            if pickups:
+                pickups.write({"order_id": vals["order_id"]})
         result = super().write(vals)
         if not self.env.context.get("skip_cargo_sale_sync") and {
             "volume",

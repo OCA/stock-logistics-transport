@@ -1,7 +1,7 @@
 # Copyright (C) 2026 Gray Matter Logic (<https://www.graymatterlogic.com>).
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 from odoo.tools.float_utils import float_compare
 
@@ -11,11 +11,12 @@ class SaleOrderLine(models.Model):
 
     @api.depends("product_id", "tms_route_id")
     def _compute_sale_order_line_tms(self):
-        super()._compute_sale_order_line_tms()
+        result = super()._compute_sale_order_line_tms()
         for line in self:
             template = line.product_id.product_tmpl_id
             if template.tms_factor_type == "volume" and template.tms_factor_volume_uom:
                 line.tms_factor_uom = template.tms_factor_volume_uom.name
+        return result
 
     @api.constrains("product_uom_qty", "product_id", "has_trip_product")
     def _check_volume_trip_quantity(self):
@@ -104,7 +105,7 @@ class SaleOrderLine(models.Model):
             )
         elif kind == "distance":
             trips = self.tms_order_ids | self.cargo_ids.order_id
-            value = self._tms_driven_distance(trips)
+            value = self._tms_driven_distance(trips) if trips else None
         else:
             value = None
         if value is None:

@@ -47,8 +47,7 @@ class TMSOrder(models.Model):
         completed = self.env.ref("tms.tms_stage_order_completed")
         for trip in self:
             lines = trip._pickup_sale_lines().filtered(
-                lambda line: line.product_id.product_tmpl_id.tms_factor_type
-                == "volume"
+                lambda line: line.product_id.product_tmpl_id.tms_factor_type == "volume"
             )
             for line in lines:
                 trips = line.tms_order_ids | line.cargo_ids.order_id
