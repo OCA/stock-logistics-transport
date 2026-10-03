@@ -28,10 +28,7 @@
                                 name="vehicle_id"
                                 invisible="not spread_by_distance"
                             />
-                            <field
-                                name="odometer"
-                                invisible="not spread_by_distance"
-                            />
+                            <field name="odometer" invisible="not spread_by_distance" />
                             <field
                                 name="unallocated_amount"
                                 invisible="not spread_by_distance"

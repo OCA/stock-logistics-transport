@@ -23,5 +23,5 @@ class TmsExpenseAllocation(models.Model):
         index=True,
     )
     currency_id = fields.Many2one(related="expense_id.currency_id")
-    distance = fields.Float(string="Distance")
+    distance = fields.Float()
     amount = fields.Monetary(currency_field="currency_id")

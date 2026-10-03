@@ -17,7 +17,6 @@ class HrExpense(models.Model):
         index=True,
     )
     odometer = fields.Float(
-        string="Odometer",
         compute="_compute_odometer",
         inverse="_inverse_odometer",
         help="Pump reading, stored on the vehicle odometer log.",
