@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "TMS - Sales",
-    "version": "19.0.1.1.0",
+    "version": "19.0.1.4.0",
     "summary": "Sell transportation management system.",
     "category": "TMS",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
@@ -36,6 +36,6 @@
     },
     "license": "AGPL-3",
     "development_status": "Alpha",
-    "maintainers": ["max3903", "santiagordz", "EdgarRetes"],
+    "maintainers": ["max3903"],
     "installable": True,
 }
