@@ -255,6 +255,7 @@ class GeotabAPI:
             derived = row.get("derivedVolume") or 0.0
             volume = derived if derived > 0 else None
         latitude, longitude = _point(row.get("location"))
+        cost = row.get("cost") or 0.0
         return [
             {
                 "external_id": external_id,
@@ -263,6 +264,7 @@ class GeotabAPI:
                 "timestamp": row.get("dateTime"),
                 "odometer_km": _meters_to_km(row.get("odometer")),
                 "fuel_liters": volume,
+                "fuel_cost": cost if cost > 0 else False,
                 "latitude": latitude,
                 "longitude": longitude,
             }

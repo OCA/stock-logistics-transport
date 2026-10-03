@@ -116,6 +116,17 @@ class TestGeotab(TransactionCase):
         )[0]
         self.assertEqual(derived["fuel_liters"], 40)
         self.assertEqual(derived["odometer_km"], 150)
+        self.assertFalse(derived["fuel_cost"])
+        priced = api._map_FillUp(
+            {
+                "id": "f-cost",
+                "device": {"id": "d1"},
+                "volume": 20,
+                "cost": 800,
+                "odometer": 0,
+            }
+        )[0]
+        self.assertEqual(priced["fuel_cost"], 800)
         empty = api._map_FillUp(
             {"id": "f2", "device": {"id": "d1"}, "volume": 0, "derivedVolume": -1}
         )[0]
