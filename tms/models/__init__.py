@@ -10,5 +10,6 @@ from . import tms_cargo
 from . import tms_route
 from . import tms_team
 from . import fleet_vehicle
+from . import fleet_vehicle_odometer
 from . import fleet_vehicle_model
 from . import fleet_vehicle_model_brand

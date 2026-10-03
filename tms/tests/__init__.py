@@ -8,3 +8,4 @@ from . import test_tms_crew
 from . import test_fleet_vehicle
 from . import test_tms_stage
 from . import test_tms_convoy
+from . import test_res_config_settings

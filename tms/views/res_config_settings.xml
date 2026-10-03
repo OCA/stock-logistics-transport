@@ -172,6 +172,19 @@
                         >
                             <field name="module_tms_document" />
                         </setting>
+                        <setting
+                            string="Connect telematics"
+                            help="Import GPS positions, odometer readings, and fuel fills."
+                        >
+                            <field name="module_tms_telematics" />
+                        </setting>
+                        <setting
+                            string="Connect Geotab"
+                            help="Pull Geotab and AT&amp;T Fleet Management on one connection."
+                            invisible="not module_tms_telematics"
+                        >
+                            <field name="module_tms_telematics_geotab" />
+                        </setting>
                     </block>
                 </app>
             </xpath>

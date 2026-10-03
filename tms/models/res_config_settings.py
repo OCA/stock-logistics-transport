@@ -141,3 +141,5 @@ class ResConfigSettings(models.TransientModel):
     )
     module_tms_expense = fields.Boolean(string="Manage trip expenses")
     module_tms_document = fields.Boolean(string="Manage documents")
+    module_tms_telematics = fields.Boolean(string="Connect telematics")
+    module_tms_telematics_geotab = fields.Boolean(string="Connect Geotab")
