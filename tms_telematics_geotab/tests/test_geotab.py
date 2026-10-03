@@ -56,9 +56,11 @@ class TestGeotab(TransactionCase):
         )
 
     def test_provider_selection_and_default_server(self):
-        selection = self.env["tms.telematics.account"]._fields[
-            "provider"
-        ]._description_selection(self.env)
+        selection = (
+            self.env["tms.telematics.account"]
+            ._fields["provider"]
+            ._description_selection(self.env)
+        )
         labels = dict(selection)
         self.assertEqual(labels["geotab"], "Geotab")
         account = self.env["tms.telematics.account"].new({"provider": "geotab"})
@@ -436,8 +438,10 @@ class TestGeotab(TransactionCase):
 
         api = GeotabAPI(self.account)
         module = "odoo.addons.tms_telematics_geotab.models.geotab_api"
-        with patch.object(api, "call", call), patch(module + ".FEED_LIMIT", 1), patch(
-            module + ".MAX_FEED_PAGES", 2
+        with (
+            patch.object(api, "call", call),
+            patch(module + ".FEED_LIMIT", 1),
+            patch(module + ".MAX_FEED_PAGES", 2),
         ):
             rows, version = api.get_feed("LogRecord", None)
         self.assertEqual(len(rows), 2)
@@ -462,16 +466,18 @@ class TestGeotab(TransactionCase):
         self.assertEqual(version, "cursor")
 
         self.account.feed_cursor = "["
-        with patch.object(api, "authenticate"), patch.object(
-            api, "get_feed", return_value=([], "v")
+        with (
+            patch.object(api, "authenticate"),
+            patch.object(api, "get_feed", return_value=([], "v")),
         ):
             readings, cursor = api.pull()
         self.assertFalse(readings)
         self.assertEqual(json.loads(cursor)["Device"], "v")
 
         self.account.feed_cursor = "[]"
-        with patch.object(api, "authenticate"), patch.object(
-            api, "get_feed", return_value=([], "w")
+        with (
+            patch.object(api, "authenticate"),
+            patch.object(api, "get_feed", return_value=([], "w")),
         ):
             readings, cursor = api.pull()
         self.assertEqual(json.loads(cursor)["FillUp"], "w")

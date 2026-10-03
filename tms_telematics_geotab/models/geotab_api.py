@@ -74,9 +74,7 @@ class GeotabAPI:
             response.raise_for_status()
             body = response.json()
         except requests.RequestException as error:
-            raise UserError(
-                self.account.env._("The Geotab request failed.")
-            ) from error
+            raise UserError(self.account.env._("The Geotab request failed.")) from error
         except ValueError as error:
             raise UserError(
                 self.account.env._("Geotab returned a response that is not JSON.")
@@ -123,7 +121,7 @@ class GeotabAPI:
         path = result.get("path") or "ThisServer"
         server = account.server_url or DEFAULT_SERVER
         if path != "ThisServer":
-            server = "https://%s/apiv1" % path
+            server = f"https://{path}/apiv1"
         account.write(
             {
                 "session_id": credentials.get("sessionId"),
@@ -182,7 +180,7 @@ class GeotabAPI:
         return mapped
 
     def map_rows(self, type_name, rows):
-        mapper = getattr(self, "_map_%s" % type_name, None)
+        mapper = getattr(self, f"_map_{type_name}", None)
         if not mapper:
             return []
         readings = []
@@ -219,7 +217,7 @@ class GeotabAPI:
         start_km = None if end_km is None else end_km - distance
         readings = [
             {
-                "external_id": "trip-start:%s:%s" % (device_id, row["start"]),
+                "external_id": f"trip-start:{device_id}:{row['start']}",
                 "device_external_id": device_id,
                 "event": "trip_start",
                 "timestamp": row["start"],
@@ -233,7 +231,7 @@ class GeotabAPI:
         latitude, longitude = _point(row.get("stopPoint"))
         readings.append(
             {
-                "external_id": "trip-end:%s:%s" % (device_id, stop),
+                "external_id": f"trip-end:{device_id}:{stop}",
                 "device_external_id": device_id,
                 "event": "trip_end",
                 "timestamp": stop,
