@@ -124,7 +124,7 @@ class TmsTelematicsAccount(models.Model):
         self.ensure_one()
         if not self.provider:
             raise UserError(self.env._("Set a provider before pulling this account."))
-        method = getattr(self, "_pull_%s" % self.provider, None)
+        method = getattr(self, f"_pull_{self.provider}", None)
         if not method:
             raise UserError(
                 self.env._(

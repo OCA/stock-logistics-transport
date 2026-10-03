@@ -396,9 +396,10 @@ class TestTelematics(TransactionCase):
             )
 
         request.make_json_response = make_json_response
-        with patch(
-            "odoo.addons.tms_telematics.controllers.webhook.request", request
-        ), self._patch_delay(bucket):
+        with (
+            patch("odoo.addons.tms_telematics.controllers.webhook.request", request),
+            self._patch_delay(bucket),
+        ):
             queued = controller.hook(self.account.id)
             missing = controller.hook(999999)
             request.httprequest.data = b"not-json"

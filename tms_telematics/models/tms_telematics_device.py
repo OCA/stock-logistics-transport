@@ -50,12 +50,16 @@ class TmsTelematicsDevice(models.Model):
                 limit=1,
             )
         if not vehicle and plate:
-            vehicle = self.env["fleet.vehicle"].sudo().search(
-                [
-                    ("license_plate", "=", plate),
-                    ("company_id", "in", company_ids),
-                ],
-                limit=1,
+            vehicle = (
+                self.env["fleet.vehicle"]
+                .sudo()
+                .search(
+                    [
+                        ("license_plate", "=", plate),
+                        ("company_id", "in", company_ids),
+                    ],
+                    limit=1,
+                )
             )
         if vehicle:
             self.vehicle_id = vehicle
