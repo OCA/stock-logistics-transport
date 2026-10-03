@@ -185,6 +185,13 @@
                         >
                             <field name="module_tms_telematics_geotab" />
                         </setting>
+                        <setting
+                            string="Fuel expenses from telematics"
+                            help="Create a fuel expense when a fill is imported. The amount is split across trips by distance."
+                            invisible="not module_tms_telematics"
+                        >
+                            <field name="module_tms_telematics_expense" />
+                        </setting>
                     </block>
                 </app>
             </xpath>
