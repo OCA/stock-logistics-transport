@@ -44,6 +44,7 @@
                 <field name="vehicle_ids_domain" invisible="1" />
                 <field name="start_trip" invisible="1" />
                 <field name="end_trip" invisible="1" />
+                <field name="vehicle_operation" invisible="1" />
 
                 <!-- Header -->
                 <header>
@@ -68,10 +69,11 @@
                         class="btn btn-primary text-uppercase"
                         invisible="not start_trip or end_trip"
                     />
+                    <field name="allowed_stage_ids" invisible="1" />
                     <field
                         name="stage_id"
                         widget="statusbar"
-                        domain="[('stage_type', '=', 'order')]"
+                        domain="[('id', 'in', allowed_stage_ids)]"
                         options="{'clickable':True, 'fold_field':'fold'}"
                     />
                 </header>
@@ -141,6 +143,115 @@
 
                     <!-- Notebook -->
                     <notebook>
+                        <page
+                            string="Cargo"
+                            name="cargo_page"
+                            invisible="vehicle_operation != 'cargo'"
+                        >
+                            <button
+                                name="action_split_trip"
+                                type="object"
+                                string="New trip"
+                                invisible="start_trip or end_trip"
+                            />
+                            <field name="cargo_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="order_id" />
+                                    <field name="name" />
+                                    <field name="quantity" />
+                                    <field name="uom_id" />
+                                    <field name="weight" />
+                                    <field name="weight_uom_id" />
+                                    <field name="volume" />
+                                    <field name="volume_uom_id" />
+                                    <field name="packaging" />
+                                    <field name="state" />
+                                </list>
+                            </field>
+                            <group>
+                                <field name="weight_capacity_set" invisible="1" />
+                                <field name="volume_capacity_set" invisible="1" />
+                                <label for="cargo_weight" />
+                                <div class="o_row">
+                                    <field
+                                        name="cargo_weight"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                    <field
+                                        name="cargo_weight_uom_id"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                </div>
+                                <label
+                                    for="capacity_weight"
+                                    invisible="not weight_capacity_set"
+                                />
+                                <div class="o_row" invisible="not weight_capacity_set">
+                                    <field
+                                        name="capacity_weight"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                    <field
+                                        name="cargo_weight_uom_id"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                </div>
+                                <label
+                                    for="remaining_weight"
+                                    invisible="not weight_capacity_set"
+                                />
+                                <div class="o_row" invisible="not weight_capacity_set">
+                                    <field
+                                        name="remaining_weight"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                    <field
+                                        name="cargo_weight_uom_id"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                </div>
+                                <label for="cargo_volume" />
+                                <div class="o_row">
+                                    <field
+                                        name="cargo_volume"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                    <field
+                                        name="cargo_volume_uom_id"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                </div>
+                                <label
+                                    for="capacity_volume"
+                                    invisible="not volume_capacity_set"
+                                />
+                                <div class="o_row" invisible="not volume_capacity_set">
+                                    <field
+                                        name="capacity_volume"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                    <field
+                                        name="cargo_volume_uom_id"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                </div>
+                                <label
+                                    for="remaining_volume"
+                                    invisible="not volume_capacity_set"
+                                />
+                                <div class="o_row" invisible="not volume_capacity_set">
+                                    <field
+                                        name="remaining_volume"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                    <field
+                                        name="cargo_volume_uom_id"
+                                        style="flex: 0 0 auto !important; width: auto !important;"
+                                    />
+                                </div>
+                            </group>
+                        </page>
                         <page string="Planning" name="planning_page">
                             <group>
                                 <field name="scheduled_date_start" />
@@ -162,6 +273,36 @@
                                     <field name="duration" class="w-25" />
                                     <span class="w-75">Hours</span>
                                 </div>
+                                <field name="odometer_start" />
+                                <field name="odometer_end" />
+                                <field name="distance_loaded" />
+                                <field name="distance_empty" />
+                            </group>
+                        </page>
+                        <page string="Convoy" name="convoy_page">
+                            <field name="equipment_ids">
+                                <list editable="bottom">
+                                    <field name="vehicle_id" />
+                                    <field name="role" />
+                                    <field name="dropped" />
+                                    <field name="drop_location_id" />
+                                    <field name="drop_date" />
+                                    <button
+                                        name="action_drop"
+                                        type="object"
+                                        string="Drop"
+                                        invisible="dropped or role != 'trailer'"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Proof of delivery" name="pod_page">
+                            <group>
+                                <field name="pod_note" />
+                                <field
+                                    name="pod_attachment_ids"
+                                    widget="many2many_binary"
+                                />
                             </group>
                         </page>
                     </notebook>

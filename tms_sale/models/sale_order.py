@@ -34,15 +34,28 @@ class SaleOrder(models.Model):
             has_tms_order = any(line.has_trip_product for line in sale.order_line)
             sale.has_tms_order = has_tms_order
 
-    @api.depends("order_line.tms_order_ids", "order_line.tms_trip_ticket_id")
+    @api.depends(
+        "order_line.tms_order_ids",
+        "order_line.tms_trip_ticket_id",
+        "order_line.cargo_ids.order_id",
+    )
     def _compute_tms_order_ids(self):
         for sale in self:
             tms = sale.order_line.tms_order_ids | sale.order_line.mapped(
                 "tms_trip_ticket_id"
             )
+            tms |= sale.order_line.cargo_ids.order_id
             tms |= self.env["tms.order"].search([("sale_id", "=", sale.id)])
             sale.tms_order_ids = tms
             sale.tms_order_count = len(sale.tms_order_ids)
+
+    def _tms_expected_trip_count(self, line):
+        """Weight-priced cargo is one shipment, so it creates one trip."""
+        self.ensure_one()
+        template = line.product_id.product_tmpl_id
+        if line.has_trip_product and template.tms_factor_type == "weight":
+            return 1 if line.product_uom_qty else 0
+        return int(line.product_uom_qty)
 
     def _tms_generate_line_tms_orders(self, new_tms_sol):
         """
@@ -54,12 +67,17 @@ class SaleOrder(models.Model):
         new_tms_orders = self.env["tms.order"]
 
         for line in new_tms_sol:
-            for i in range(int(line.product_uom_qty) - len(line.tms_order_ids)):
+            missing = self._tms_expected_trip_count(line) - len(line.tms_order_ids)
+            remaining = max(missing, 0)
+            while remaining:
                 vals = line._prepare_line_tms_values(line)
                 tms_by_line = self.env["tms.order"].sudo().create(vals)
                 line.write({"tms_order_ids": [(4, tms_by_line.id)]})
+                line.cargo_ids.filtered(lambda cargo: not cargo.order_id).write(
+                    {"order_id": tms_by_line.id}
+                )
                 new_tms_orders |= tms_by_line
-                i = i  # pre-commit
+                remaining -= 1
 
         return new_tms_orders
 
@@ -68,9 +86,8 @@ class SaleOrder(models.Model):
         new_tms_orders = self.env["tms.order"]
 
         new_tms_line_sol = self.order_line.filtered(
-            lambda L: L.has_trip_product
-            and len(L.tms_order_ids) != L.product_uom_qty
-            and len(L.tms_order_ids) < L.product_uom_qty
+            lambda line: line.has_trip_product
+            and len(line.tms_order_ids) < self._tms_expected_trip_count(line)
         )
 
         new_tms_orders |= self._tms_generate_line_tms_orders(new_tms_line_sol)
@@ -152,11 +169,14 @@ class SaleOrder(models.Model):
                 trips_to_delete.unlink()
 
         for line in self.order_line:
-            if line.id in initial_quantities:
-                if line.product_uom_qty < initial_quantities[line.id]:
-                    trips_to_delete = line.tms_order_ids[:1]
-                    if trips_to_delete:
-                        trips_to_delete.unlink()
+            if line.id not in initial_quantities:
+                continue
+            if line.product_id.product_tmpl_id.tms_factor_type == "weight":
+                continue
+            if line.product_uom_qty < initial_quantities[line.id]:
+                trips_to_delete = line.tms_order_ids[:1]
+                if trips_to_delete:
+                    trips_to_delete.unlink()
 
     def _refresh_tms_trip_lines(self):
         self.order_line._compute_sale_order_line_tms()
@@ -199,7 +219,10 @@ class SaleOrder(models.Model):
                 stage = self.env.ref("tms.tms_stage_order_draft")
 
             for line in self.order_line:
-                for trip in line.tms_order_ids:
+                trips = line.tms_order_ids | line.cargo_ids.order_id
+                for trip in trips:
+                    if trip.sale_line_id and trip.sale_line_id not in self.order_line:
+                        continue
                     trip.stage_id = stage
 
         return result

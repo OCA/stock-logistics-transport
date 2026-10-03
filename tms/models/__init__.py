@@ -5,6 +5,11 @@ from . import tms_driver
 from . import res_partner
 from . import tms_crew
 from . import tms_order
+from . import tms_order_equipment
+from . import tms_cargo
 from . import tms_route
 from . import tms_team
 from . import fleet_vehicle
+from . import fleet_vehicle_odometer
+from . import fleet_vehicle_model
+from . import fleet_vehicle_model_brand
