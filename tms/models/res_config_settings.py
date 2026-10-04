@@ -75,6 +75,15 @@ class ResConfigSettings(models.TransientModel):
     def _volume_domain(self):
         return self._uom_hierarchy_domain("uom.product_uom_milliliter")
 
+    @api.model
+    def _configured_uom(self, parameter, fallback_xmlid):
+        raw = self.env["ir.config_parameter"].sudo().get_param(parameter)
+        if raw:
+            uom = self.env["uom.uom"].browse(int(raw)).exists()
+            if uom:
+                return uom
+        return self.env.ref(fallback_xmlid, raise_if_not_found=False)
+
     tms_length_uom = fields.Many2one(
         "uom.uom",
         domain=lambda self: self._length_domain(),
@@ -97,6 +106,14 @@ class ResConfigSettings(models.TransientModel):
         default_model="res.config.settings",
         config_parameter="tms.default_weight_uom",
         default=lambda self: self.env.ref("uom.product_uom_kgm").id,
+    )
+
+    tms_volume_uom = fields.Many2one(
+        "uom.uom",
+        domain=lambda self: self._volume_domain(),
+        default_model="res.config.settings",
+        config_parameter="tms.default_volume_uom",
+        default=lambda self: self.env.ref("uom.product_uom_cubic_meter").id,
     )
 
     tms_speed_uom = fields.Many2one(
@@ -123,3 +140,12 @@ class ResConfigSettings(models.TransientModel):
         string="Manage vehicle as accounting assets"
     )
     module_tms_expense = fields.Boolean(string="Manage trip expenses")
+    module_tms_document = fields.Boolean(string="Manage documents")
+    module_tms_telematics = fields.Boolean(string="Connect telematics")
+    module_tms_telematics_geotab = fields.Boolean(string="Connect Geotab")
+    module_tms_telematics_expense = fields.Boolean(
+        string="Create fuel expenses from telematics"
+    )
+    module_tms_portal = fields.Boolean(string="External drivers on the portal")
+    module_tms_routing = fields.Boolean(string="Compute route distance")
+    module_tms_routing_ors = fields.Boolean(string="OpenRouteService")
