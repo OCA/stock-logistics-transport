@@ -41,3 +41,16 @@ class TestResConfigSettings(TransactionCase):
         self.assertEqual(settings.module_tms_portal, module.state in installed)
         arch = self.env.ref("tms.res_config_settings_view_form").arch
         self.assertIn("module_tms_portal", arch)
+
+    def test_routing_modules_are_offered(self):
+        settings = self.env["res.config.settings"].create({})
+        self.assertIn("module_tms_routing", settings._fields)
+        self.assertIn("module_tms_routing_ors", settings._fields)
+        installed = ("installed", "to install", "to upgrade")
+        for name in ("tms_routing", "tms_routing_ors"):
+            module = self.env["ir.module.module"].search([("name", "=", name)])
+            self.assertEqual(settings[f"module_{name}"], module.state in installed)
+        arch = self.env.ref("tms.res_config_settings_view_form").arch
+        self.assertIn("module_tms_routing", arch)
+        self.assertIn("module_tms_routing_ors", arch)
+        self.assertIn('invisible="not module_tms_routing"', arch)

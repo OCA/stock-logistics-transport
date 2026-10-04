@@ -147,3 +147,5 @@ class ResConfigSettings(models.TransientModel):
         string="Create fuel expenses from telematics"
     )
     module_tms_portal = fields.Boolean(string="External drivers on the portal")
+    module_tms_routing = fields.Boolean(string="Compute route distance")
+    module_tms_routing_ors = fields.Boolean(string="OpenRouteService")

@@ -152,6 +152,19 @@
                             <field name="group_tms_route_stop" />
                         </setting>
                         <setting
+                            string="Compute route distance"
+                            help="Ask a routing provider for the distance and duration of a predefined route. The billed trip distance stays the odometer difference."
+                        >
+                            <field name="module_tms_routing" />
+                        </setting>
+                        <setting
+                            string="OpenRouteService"
+                            help="Compute routes with OpenRouteService."
+                            invisible="not module_tms_routing"
+                        >
+                            <field name="module_tms_routing_ors" />
+                        </setting>
+                        <setting
                             string="Manage Trips Accounting"
                             help="Create vendor bills and customer invoices when completing trip orders."
                         >
