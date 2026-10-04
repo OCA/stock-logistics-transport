@@ -1,0 +1,96 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_routing_ors
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-04 02:17+0000\n"
+"PO-Revision-Date: 2026-10-04 02:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tms_routing_ors
+#. odoo-python
+#: code:addons/tms_routing_ors/models/tms_route.py:0
+msgid "A route needs an origin and a destination."
+msgstr ""
+
+#. module: tms_routing_ors
+#: model_terms:ir.ui.view,arch_db:tms_routing_ors.res_config_settings_view_form
+msgid ""
+"API key used to compute the distance and duration of a route. The company "
+"pays for this key."
+msgstr ""
+
+#. module: tms_routing_ors
+#: model:ir.model,name:tms_routing_ors.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: tms_routing_ors
+#: model:ir.model.fields,field_description:tms_routing_ors.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:tms_routing_ors.field_tms_route__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: tms_routing_ors
+#: model:ir.model.fields,field_description:tms_routing_ors.field_res_config_settings__id
+#: model:ir.model.fields,field_description:tms_routing_ors.field_tms_route__id
+msgid "ID"
+msgstr ""
+
+#. module: tms_routing_ors
+#: model_terms:ir.ui.view,arch_db:tms_routing_ors.res_config_settings_view_form
+msgid "OpenRouteService"
+msgstr ""
+
+#. module: tms_routing_ors
+#: model:ir.model.fields,field_description:tms_routing_ors.field_res_config_settings__tms_routing_ors_api_key
+msgid "OpenRouteService API key"
+msgstr ""
+
+#. module: tms_routing_ors
+#. odoo-python
+#: code:addons/tms_routing_ors/models/tms_route.py:0
+msgid "OpenRouteService could not locate %(name)s."
+msgstr ""
+
+#. module: tms_routing_ors
+#. odoo-python
+#: code:addons/tms_routing_ors/models/tms_route.py:0
+msgid "OpenRouteService needs an address for %(name)s."
+msgstr ""
+
+#. module: tms_routing_ors
+#. odoo-python
+#: code:addons/tms_routing_ors/models/tms_route.py:0
+msgid "OpenRouteService refused the request (%(status)s)."
+msgstr ""
+
+#. module: tms_routing_ors
+#. odoo-python
+#: code:addons/tms_routing_ors/models/tms_route.py:0
+msgid "OpenRouteService returned no path."
+msgstr ""
+
+#. module: tms_routing_ors
+#: model_terms:ir.ui.view,arch_db:tms_routing_ors.res_config_settings_view_form
+msgid "Routing"
+msgstr ""
+
+#. module: tms_routing_ors
+#. odoo-python
+#: code:addons/tms_routing_ors/models/tms_route.py:0
+msgid "Set the OpenRouteService API key in Transport settings."
+msgstr ""
+
+#. module: tms_routing_ors
+#: model:ir.model,name:tms_routing_ors.model_tms_route
+msgid "Transport Management System Route"
+msgstr ""
