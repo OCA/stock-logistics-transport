@@ -8,10 +8,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">cargo</field>
-        <field name="capacity">90</field>
-        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
-        <field name="weight_capacity">25000</field>
-        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
         <field name="tms_driver_id" ref="demo_driver_1" />
     </record>
     <record id="demo_vehicle_truck_actros" model="fleet.vehicle">
@@ -22,10 +18,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">cargo</field>
-        <field name="capacity">85</field>
-        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
-        <field name="weight_capacity">22000</field>
-        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
         <field name="tms_driver_id" ref="demo_driver_2" />
     </record>
     <record id="demo_vehicle_truck_cascadia" model="fleet.vehicle">
@@ -36,8 +28,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">cargo</field>
-        <field name="capacity">80</field>
-        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
         <field name="tms_driver_id" ref="demo_driver_4" />
     </record>
     <record id="demo_vehicle_truck_t680" model="fleet.vehicle">
@@ -48,8 +38,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">cargo</field>
-        <field name="capacity">80</field>
-        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
         <field name="tms_driver_id" ref="demo_driver_5" />
     </record>
     <record id="demo_vehicle_truck_scania_r" model="fleet.vehicle">
@@ -60,8 +48,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">cargo</field>
-        <field name="capacity">88</field>
-        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
         <field name="tms_driver_id" ref="demo_driver_3" />
     </record>
     <record id="demo_vehicle_truck_npr" model="fleet.vehicle">
@@ -72,8 +58,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">cargo</field>
-        <field name="capacity">25</field>
-        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
         <field name="tms_driver_id" ref="demo_driver_6" />
     </record>
 
@@ -86,7 +70,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">passenger</field>
-        <field name="capacity">49</field>
         <field name="tms_driver_id" ref="demo_driver_7" />
     </record>
     <record id="demo_vehicle_bus_9700" model="fleet.vehicle">
@@ -97,7 +80,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">passenger</field>
-        <field name="capacity">53</field>
         <field name="tms_driver_id" ref="demo_driver_8" />
     </record>
     <record id="demo_vehicle_bus_irizar" model="fleet.vehicle">
@@ -108,7 +90,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">passenger</field>
-        <field name="capacity">55</field>
         <field name="tms_driver_id" ref="demo_driver_9" />
     </record>
     <record id="demo_vehicle_bus_citaro" model="fleet.vehicle">
@@ -119,7 +100,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">passenger</field>
-        <field name="capacity">80</field>
         <field name="tms_driver_id" ref="demo_driver_10" />
     </record>
     <record id="demo_vehicle_bus_yutong" model="fleet.vehicle">
@@ -130,7 +110,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">passenger</field>
-        <field name="capacity">45</field>
     </record>
     <record id="demo_vehicle_bus_prevost" model="fleet.vehicle">
         <field name="license_plate">06-BUS-606</field>
@@ -140,7 +119,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="odometer_unit">kilometers</field>
         <field name="operation">passenger</field>
-        <field name="capacity">56</field>
     </record>
 
     <!-- Trailers and dolly -->
@@ -163,10 +141,6 @@
         <field name="model_year">2023</field>
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="tms_equipment_type">trailer</field>
-        <field name="capacity">86</field>
-        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
-        <field name="weight_capacity">20000</field>
-        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
     </record>
     <record id="demo_vehicle_trailer_dropped" model="fleet.vehicle">
         <field name="license_plate">08-TRL-802</field>
@@ -175,10 +149,6 @@
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="tms_equipment_type">trailer</field>
         <field name="tms_location_id" ref="demo_location_1" />
-        <field name="capacity">70</field>
-        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
-        <field name="weight_capacity">18000</field>
-        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
     </record>
     <record id="demo_vehicle_dolly" model="fleet.vehicle">
         <field name="license_plate">09-DLY-901</field>
@@ -186,5 +156,72 @@
         <field name="model_year">2019</field>
         <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
         <field name="tms_equipment_type">dolly</field>
+    </record>
+
+    <!-- Boats -->
+    <record id="demo_vehicle_boat_triple_e" model="fleet.vehicle">
+        <field name="license_plate">01-BOT-101</field>
+        <field name="model_id" ref="model_maersk_triple_e" />
+        <field name="color">Blue</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+    </record>
+    <record id="demo_vehicle_boat_gulsun" model="fleet.vehicle">
+        <field name="license_plate">02-BOT-202</field>
+        <field name="model_id" ref="model_msc_gulsun" />
+        <field name="color">Black</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+    </record>
+    <record id="demo_vehicle_boat_longship" model="fleet.vehicle">
+        <field name="license_plate">03-BOT-303</field>
+        <field name="model_id" ref="model_viking_longship" />
+        <field name="color">White</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">passenger</field>
+    </record>
+
+    <!-- Planes -->
+    <record id="demo_vehicle_plane_747_8f" model="fleet.vehicle">
+        <field name="license_plate">01-PLN-101</field>
+        <field name="model_id" ref="model_boeing_747_8f" />
+        <field name="color">White</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+    </record>
+    <record id="demo_vehicle_plane_a330f" model="fleet.vehicle">
+        <field name="license_plate">02-PLN-202</field>
+        <field name="model_id" ref="model_airbus_a330_200f" />
+        <field name="color">White</field>
+        <field name="model_year">2023</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+    </record>
+    <record id="demo_vehicle_plane_787" model="fleet.vehicle">
+        <field name="license_plate">03-PLN-303</field>
+        <field name="model_id" ref="model_boeing_787_9" />
+        <field name="color">Blue</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">passenger</field>
+    </record>
+    <record id="demo_vehicle_plane_atr" model="fleet.vehicle">
+        <field name="license_plate">04-PLN-404</field>
+        <field name="model_id" ref="model_atr_72_600" />
+        <field name="color">White</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">passenger</field>
     </record>
 </odoo>

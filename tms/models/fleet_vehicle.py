@@ -12,7 +12,10 @@ class FleetVehicle(models.Model):
     tms_driver_id = fields.Many2one("tms.driver", string="Driver Id")
 
     # Operation
-    operation = fields.Selection([("cargo", "Cargo"), ("passenger", "Passenger")])
+    operation = fields.Selection(
+        [("cargo", "Cargo"), ("passenger", "Passenger")],
+        string="Transport Type",
+    )
     tms_equipment_type = fields.Selection(
         [
             ("power", "Power unit"),
@@ -29,33 +32,8 @@ class FleetVehicle(models.Model):
         domain="[('tms_location', '=', True)]",
     )
 
-    capacity = fields.Float(string="Volume capacity")
-    cargo_uom_id = fields.Many2one(
-        "uom.uom",
-        string="Volume unit",
-        domain=lambda self: self.env["res.config.settings"]._volume_domain(),
-        default=lambda self: self._default_volume_uom_id(),
-    )
-    weight_capacity = fields.Float(string="Payload")
-    weight_uom_id = fields.Many2one(
-        "uom.uom",
-        string="Weight unit",
-        domain=lambda self: self.env["res.config.settings"]._weight_domain(),
-        default=lambda self: self._default_weight_uom_id(),
-    )
-
     # Insurance
     insurance_id = fields.Many2many("tms.insurance")
-
-    def _default_volume_uom_id(self):
-        return self.env["res.config.settings"]._configured_uom(
-            "tms.default_volume_uom", "uom.product_uom_cubic_meter"
-        )
-
-    def _default_weight_uom_id(self):
-        return self.env["res.config.settings"]._configured_uom(
-            "tms.default_weight_uom", "uom.product_uom_kgm"
-        )
 
     def write(self, vals):
         teams = self.tms_team_id

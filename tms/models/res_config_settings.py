@@ -35,6 +35,26 @@ class ResConfigSettings(models.TransientModel):
     group_tms_uom = fields.Boolean(
         string="TMS Units of Measure", implied_group="uom.group_uom"
     )
+    group_tms_road_user = fields.Boolean(
+        string="Enable Road & Trucking Operations",
+        group="base.group_user",
+        implied_group="tms.group_tms_road_user",
+    )
+    group_tms_air_user = fields.Boolean(
+        string="Enable Air Freight Operations",
+        group="base.group_user",
+        implied_group="tms.group_tms_air_user",
+    )
+    group_tms_water_user = fields.Boolean(
+        string="Enable Ocean Freight Operations",
+        group="base.group_user",
+        implied_group="tms.group_tms_water_user",
+    )
+    group_tms_rail_user = fields.Boolean(
+        string="Enable Rail Freight Operations",
+        group="base.group_user",
+        implied_group="tms.group_tms_rail_user",
+    )
 
     # Custom Fields
 
@@ -74,6 +94,10 @@ class ResConfigSettings(models.TransientModel):
     @api.model
     def _volume_domain(self):
         return self._uom_hierarchy_domain("uom.product_uom_milliliter")
+
+    @api.model
+    def _pressure_domain(self):
+        return self._uom_hierarchy_domain("tms.uom_kg_per_m2")
 
     @api.model
     def _configured_uom(self, parameter, fallback_xmlid):
@@ -141,11 +165,9 @@ class ResConfigSettings(models.TransientModel):
     )
     module_tms_expense = fields.Boolean(string="Manage trip expenses")
     module_tms_document = fields.Boolean(string="Manage documents")
+    module_tms_map = fields.Boolean(string="Interactive map")
     module_tms_telematics = fields.Boolean(string="Connect telematics")
     module_tms_telematics_geotab = fields.Boolean(string="Connect Geotab")
     module_tms_telematics_expense = fields.Boolean(
         string="Create fuel expenses from telematics"
     )
-    module_tms_portal = fields.Boolean(string="External drivers on the portal")
-    module_tms_routing = fields.Boolean(string="Compute route distance")
-    module_tms_routing_ors = fields.Boolean(string="OpenRouteService")

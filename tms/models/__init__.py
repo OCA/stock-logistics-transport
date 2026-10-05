@@ -5,6 +5,7 @@ from . import tms_driver
 from . import res_partner
 from . import tms_crew
 from . import tms_order
+from . import tms_compartment
 from . import tms_order_equipment
 from . import tms_cargo
 from . import tms_route

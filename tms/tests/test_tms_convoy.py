@@ -169,7 +169,7 @@ class TestTMSConvoy(TransactionCase):
         trip.odometer_start = 1010
         self.assertEqual(trip.odometer_start_id, start)
         self.assertEqual(start.value, 1010)
-        self.assertEqual(start.date, fields.Date.to_date("2026-09-01"))
+        self.assertEqual(start.date, fields.Datetime.to_datetime("2026-09-01 08:00:00"))
         start.write({"value": 1020})
         self.assertEqual(trip.odometer_start, 1020)
 

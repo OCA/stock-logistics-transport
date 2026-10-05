@@ -1,11 +1,16 @@
 # Copyright (C) 2026 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import fields, models
 
 
 class FleetVehicleOdometer(models.Model):
     _inherit = "fleet.vehicle.odometer"
+    _order = "date desc, id desc"
+
+    date = fields.Datetime(string="Timestamp", default=fields.Datetime.now)
+    latitude = fields.Float(digits=(10, 7))
+    longitude = fields.Float(digits=(10, 7))
 
     def write(self, vals):
         result = super().write(vals)

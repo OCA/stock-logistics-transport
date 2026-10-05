@@ -159,6 +159,12 @@ Orders
 5. Once confirmed, click 'START' button to start the trip.
 6. Once the trip is completed, click 'END' button to end the trip.
 
+Chatter
+-------
+
+A change of the trip stage is logged on the trip chatter. A change of the
+cargo state is logged on the cargo chatter.
+
 Bug Tracker
 ===========
 

@@ -7,11 +7,34 @@
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
                 <app
-                    data-string="Transport"
-                    string="Transport"
+                    data-string="Transportation"
+                    string="Transportation"
                     name="tms"
                     groups="tms.group_tms_admin"
                 >
+                    <block title="Modes" name="tms_mode_settings">
+                        <setting
+                            string="Road and trucking"
+                            help="Trucks, vans, buses, loading meters, and pallets."
+                        >
+                            <field name="group_tms_road_user" />
+                        </setting>
+                        <setting
+                            string="Air freight"
+                            help="Aircraft fields and flight services."
+                        >
+                            <field name="group_tms_air_user" />
+                        </setting>
+                        <setting
+                            string="Ocean freight"
+                            help="Vessel fields and ocean services."
+                        >
+                            <field name="group_tms_water_user" />
+                        </setting>
+                        <setting string="Rail freight" help="Train services.">
+                            <field name="group_tms_rail_user" />
+                        </setting>
+                    </block>
                     <block title="Units" name="general_settings_container">
                         <setting id="tms_uom">
                             <field name="group_tms_uom" string="TMS Units of Measure" />
@@ -112,12 +135,6 @@
                             <field name="group_tms_crew" />
                         </setting>
                         <setting
-                            string="External drivers"
-                            help="Let portal users assigned as drivers open their trips and record pickups."
-                        >
-                            <field name="module_tms_portal" />
-                        </setting>
-                        <setting
                             string="Manage Driver License Expiration"
                             help="Manage Driver License Expiration Date Before A Trip"
                         >
@@ -152,17 +169,10 @@
                             <field name="group_tms_route_stop" />
                         </setting>
                         <setting
-                            string="Compute route distance"
-                            help="Ask a routing provider for the distance and duration of a predefined route. The billed trip distance stays the odometer difference."
+                            string="Interactive map"
+                            help="Map partners, trips, dispatch, and positions."
                         >
-                            <field name="module_tms_routing" />
-                        </setting>
-                        <setting
-                            string="OpenRouteService"
-                            help="Compute routes with OpenRouteService."
-                            invisible="not module_tms_routing"
-                        >
-                            <field name="module_tms_routing_ors" />
+                            <field name="module_tms_map" />
                         </setting>
                         <setting
                             string="Manage Trips Accounting"
