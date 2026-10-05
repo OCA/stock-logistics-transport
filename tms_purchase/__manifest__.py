@@ -5,7 +5,7 @@
     "summary": "Manage purchase requests to drivers and other suppliers",
     "version": "19.0.1.1.0",
     "license": "AGPL-3",
-    "category": "TMS",
+    "category": "Transportation",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "depends": ["tms", "tms_product", "purchase_stock"],
