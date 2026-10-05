@@ -1,0 +1,67 @@
+.o_tms_map_view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.o_view_controller.o_tms_map_view > .o_content {
+    display: flex;
+    flex-direction: column;
+}
+
+.o_content > .o_tms_map_view {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
+.o_tms_map_root {
+    display: flex;
+    flex-direction: column;
+    min-height: 420px;
+}
+
+.o_tms_map_screen {
+    height: 100%;
+}
+
+.o_tms_map_body {
+    display: flex;
+    flex: 1 1 auto;
+    min-height: 420px;
+}
+
+.o_tms_map_canvas {
+    flex: 1 1 auto;
+    min-height: 420px;
+    z-index: 0;
+}
+
+.o_tms_map_canvas .leaflet-container {
+    height: 100%;
+    width: 100%;
+    background: #dbe4ea;
+}
+
+.o_tms_map_side {
+    width: 280px;
+    overflow: auto;
+    border-left: 1px solid #dee2e6;
+    padding: 0.75rem;
+}
+
+.o_tms_map_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #fff;
+    color: #1f4e79;
+    font-size: 16px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.o_tms_map_popup {
+    min-width: 180px;
+}

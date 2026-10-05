@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="tms_map.TmsUniversalMap">
+        <div t-attf-class="o_tms_map_root {{ isAction ? 'o_tms_map_screen' : '' }}">
+            <div class="o_tms_map_bar p-2" t-if="isAction">
+                <strong t-esc="title" />
+            </div>
+            <div class="text-muted p-2" t-if="state.message" t-esc="state.message" />
+            <div class="o_tms_map_body">
+                <div class="o_tms_map_canvas" t-ref="map" />
+                <aside class="o_tms_map_side" t-if="mapMode === 'dispatch'">
+                    <div
+                        class="mb-3"
+                        t-foreach="state.vehicles"
+                        t-as="vehicle"
+                        t-key="vehicle.id"
+                    >
+                        <strong t-esc="vehicle.name" />
+                        <div class="text-muted" t-esc="vehicle.date" />
+                    </div>
+                    <div
+                        class="mb-3"
+                        t-foreach="state.clusters"
+                        t-as="cluster"
+                        t-key="cluster.partner_id || 'none'"
+                    >
+                        <strong t-esc="cluster.name" />
+                        <div class="text-muted">
+                            <t t-esc="cluster.cargo.length" /> cargo
+                        </div>
+                        <select
+                            class="form-select form-select-sm mt-1"
+                            t-att-data-partner="cluster.partner_id || 0"
+                        >
+                            <option value="">Trip</option>
+                            <option
+                                t-foreach="state.trips"
+                                t-as="trip"
+                                t-key="trip.id"
+                                t-att-value="trip.id"
+                                t-esc="trip.name"
+                            />
+                        </select>
+                        <button
+                            type="button"
+                            class="btn btn-primary btn-sm mt-1"
+                            t-on-click="(ev) => this.assignCluster(cluster, ev)"
+                        >
+                            Assign
+                        </button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </t>
+</templates>

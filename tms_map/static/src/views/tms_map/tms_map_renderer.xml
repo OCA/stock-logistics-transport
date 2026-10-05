@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="tms_map.TmsMapViewRenderer">
+        <div class="o_tms_map_view">
+            <div class="text-muted p-2" t-if="state.message" t-esc="state.message" />
+            <div class="o_tms_map_canvas" t-ref="map" />
+        </div>
+    </t>
+</templates>
