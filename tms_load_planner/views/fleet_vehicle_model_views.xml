@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="fleet_vehicle_model_view_form_layout" model="ir.ui.view">
+        <field name="name">fleet.vehicle.model.form.tms.layout</field>
+        <field name="model">fleet.vehicle.model</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="tms_layout" string="Layout">
+                    <p class="text-muted">
+                        Upload a top view of the loading box. The left edge of
+                        the picture is the front, and the top edge is the left
+                        side. The planner draws that picture on the floor.
+                    </p>
+                    <field name="layout_image" widget="image" />
+                    <p class="text-muted">
+                        Each row is one slot in the loading box. X starts at the
+                        front, Y at the left, and Z at the floor. The box itself
+                        uses the loading length and the door width and height.
+                    </p>
+                    <field name="space_ids">
+                        <list editable="bottom">
+                            <field name="code" />
+                            <field name="zone" />
+                            <field name="is_premium" />
+                            <field name="pos_x" />
+                            <field name="pos_y" />
+                            <field name="pos_z" />
+                            <field name="size_length" />
+                            <field name="size_width" />
+                            <field name="size_height" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

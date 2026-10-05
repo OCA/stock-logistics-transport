@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_vehicle_model_space_user,tms.vehicle.model.space.user,model_tms_vehicle_model_space,base.group_user,1,1,1,1
+access_tms_vehicle_space_user,tms.vehicle.space.user,model_tms_vehicle_space,tms.group_tms_user,1,1,1,0
+access_tms_vehicle_space_admin,tms.vehicle.space.admin,model_tms_vehicle_space,tms.group_tms_admin,1,1,1,1
+access_tms_trip_space_allocation_user,tms.trip.space.allocation.user,model_tms_trip_space_allocation,tms.group_tms_user,1,0,0,0
+access_tms_trip_space_allocation_admin,tms.trip.space.allocation.admin,model_tms_trip_space_allocation,tms.group_tms_admin,1,1,1,1
