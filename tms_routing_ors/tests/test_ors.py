@@ -183,6 +183,13 @@ class TestOpenRouteService(TransactionCase):
         )
         self.assertIn(("ors", "OpenRouteService"), selection)
 
+    def test_provider_needs_an_api_key(self):
+        param = self.env["ir.config_parameter"].sudo()
+        param.search([("key", "=", "tms_routing_ors.api_key")]).unlink()
+        self.assertFalse(self.env["tms.route"]._routing_provider_ready())
+        param.set_param("tms_routing_ors.api_key", "test-key")
+        self.assertTrue(self.env["tms.route"]._routing_provider_ready())
+
     def test_settings_store_the_api_key(self):
         settings = self.env["res.config.settings"].create(
             {"tms_routing_ors_api_key": "stored-key"}

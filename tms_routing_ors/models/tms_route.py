@@ -17,6 +17,15 @@ class TmsRoute(models.Model):
     def _selection_routing_provider(self):
         return super()._selection_routing_provider() + [("ors", "OpenRouteService")]
 
+    @api.model
+    def _routing_provider_ready(self):
+        providers = self._routing_provider_names()
+        if not providers:
+            return False
+        if providers[0][0] == "ors":
+            return bool(self._ors_api_key())
+        return True
+
     def _ors_api_key(self):
         return (
             self.env["ir.config_parameter"].sudo().get_param("tms_routing_ors.api_key")
