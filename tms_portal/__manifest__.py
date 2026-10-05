@@ -4,7 +4,7 @@
     "name": "TMS - Portal",
     "version": "19.0.1.0.0",
     "summary": "Let external drivers record pickups on their trips",
-    "category": "TMS",
+    "category": "Transportation",
     "author": "Gray Matter Logic, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "license": "AGPL-3",
