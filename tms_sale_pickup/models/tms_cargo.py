@@ -14,6 +14,12 @@ LOCKED_SOLD_FIELDS = {
     "volume",
     "volume_uom_id",
     "packaging",
+    "shipment_unit",
+    "container_type",
+    "container_number",
+    "seal_number",
+    "uld_type",
+    "uld_number",
 }
 
 
@@ -23,11 +29,25 @@ class TMSCargo(models.Model):
     parent_id = fields.Many2one(
         "tms.cargo",
         string="Sold cargo",
+        help=(
+            "Shipment line from the sale. "
+            "A pickup records what was collected for that line."
+        ),
         ondelete="cascade",
         index=True,
         copy=False,
     )
     pickup_ids = fields.One2many("tms.cargo", "parent_id", string="Pickups")
+    sold_cargo_id = fields.Many2one(
+        "tms.cargo",
+        string="Sold cargo",
+        compute="_compute_sold_cargo_id",
+        inverse="_inverse_sold_cargo_id",
+        help=(
+            "Shipment line from the sale. "
+            "A pickup records what was collected for that line."
+        ),
+    )
     sold_locked = fields.Boolean(copy=False)
     pickup_quantity = fields.Float(compute="_compute_pickup_delta")
     pickup_weight = fields.Float(compute="_compute_pickup_delta")
@@ -79,6 +99,25 @@ class TMSCargo(models.Model):
                 total += amount
         return total
 
+    @api.depends("parent_id", "sale_line_id")
+    def _compute_sold_cargo_id(self):
+        for cargo in self:
+            if cargo.parent_id:
+                cargo.sold_cargo_id = cargo.parent_id
+            elif cargo.sale_line_id:
+                cargo.sold_cargo_id = cargo
+            else:
+                cargo.sold_cargo_id = False
+
+    def _inverse_sold_cargo_id(self):
+        for cargo in self:
+            chosen = cargo.sold_cargo_id
+            if not chosen or chosen == cargo:
+                if cargo.parent_id:
+                    cargo.parent_id = False
+                continue
+            cargo.parent_id = chosen
+
     def _link_sale_line_from_trip(self):
         sold = self.filtered(lambda cargo: not cargo.parent_id)
         return super(TMSCargo, sold)._link_sale_line_from_trip()
@@ -90,16 +129,16 @@ class TMSCargo(models.Model):
             if parent_id and not vals.get("order_id"):
                 parent = self.browse(parent_id)
                 vals["order_id"] = parent.order_id.id
-        records = super(TMSCargo, self.with_context(skip_cargo_sale_sync=True)).create(
-            vals_list
-        )
-        sold = records.filtered(lambda cargo: not cargo.parent_id)
-        sold._link_sale_line_from_trip()
-        sold._link_trip_from_sale_line()
-        lines = (sold | records.parent_id).sudo().sale_line_id
-        if lines:
+        records = super().create(vals_list)
+        pickups = records.filtered("parent_id")
+        if pickups.sale_line_id:
+            lines = pickups.sale_line_id
+            pickups.with_context(skip_cargo_sale_sync=True).write(
+                {"sale_line_id": False}
+            )
             lines._sync_tms_weight_factor_from_cargo()
             lines._sync_tms_volume_factor_from_cargo()
+        records.sale_line_id._sync_tms_volume_factor_from_cargo()
         return records
 
     def write(self, vals):
@@ -110,11 +149,12 @@ class TMSCargo(models.Model):
                     "Record the difference on a pickup line."
                 )
             )
+        pickups = self.env["tms.cargo"]
         if "order_id" in vals:
             pickups = self.filtered(lambda cargo: not cargo.parent_id).pickup_ids
-            if pickups:
-                pickups.write({"order_id": vals["order_id"]})
         result = super().write(vals)
+        if pickups:
+            pickups.write({"order_id": vals["order_id"]})
         if not self.env.context.get("skip_cargo_sale_sync") and {
             "volume",
             "volume_uom_id",

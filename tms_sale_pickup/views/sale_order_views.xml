@@ -6,14 +6,6 @@
         <field name="inherit_id" ref="tms_sale.sale_order_view_form" />
         <field name="arch" type="xml">
             <xpath
-                expr="//field[@name='cargo_ids']/parent::group"
-                position="attributes"
-            >
-                <attribute
-                    name="invisible"
-                >tms_factor_type not in ('weight', 'volume')</attribute>
-            </xpath>
-            <xpath
                 expr="//field[@name='cargo_ids']/list/field[@name='state']"
                 position="before"
             >

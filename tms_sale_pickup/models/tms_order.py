@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models
-from odoo.tools.float_utils import float_compare
 
 
 class TMSOrder(models.Model):
@@ -27,27 +26,12 @@ class TMSOrder(models.Model):
         lines |= self.cargo_ids.sale_line_id
         return lines
 
-    def _apply_billable_factors(self):
-        """Set the sale factor from pickups or the odometer before invoicing."""
-        lines = self.env["sale.order.line"]
-        for trip in self:
-            lines |= trip._pickup_sale_lines()
-        for line in lines:
-            trips = line.tms_order_ids | line.cargo_ids.order_id
-            if not trips:
-                continue
-            pending = trips - self
-            if any(not trip.stage_id.is_completed for trip in pending):
-                continue
-            factor = line._tms_billable_factor()
-            if float_compare(line.tms_factor, factor, precision_rounding=0.01):
-                line.tms_factor = factor
-
     def _hold_volume_delivery_until_complete(self):
         completed = self.env.ref("tms.tms_stage_order_completed")
         for trip in self:
             lines = trip._pickup_sale_lines().filtered(
-                lambda line: line.product_id.product_tmpl_id.tms_factor_type == "volume"
+                lambda line: line.product_id.product_tmpl_id.transport_type
+                == "cargo"
             )
             for line in lines:
                 trips = line.tms_order_ids | line.cargo_ids.order_id
@@ -60,7 +44,6 @@ class TMSOrder(models.Model):
             stage = self.env["tms.stage"].browse(vals["stage_id"])
             if stage.is_completed:
                 completing = self
-                completing._apply_billable_factors()
         result = super().write(vals)
         if completing:
             completing._hold_volume_delivery_until_complete()

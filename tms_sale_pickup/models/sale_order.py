@@ -18,9 +18,6 @@ class SaleOrder(models.Model):
         return result
 
     def _tms_expected_trip_count(self, line):
-        template = line.product_id.product_tmpl_id
-        if line.has_trip_product and template.tms_factor_type == "volume":
-            return 1 if line.product_uom_qty else 0
         return super()._tms_expected_trip_count(line)
 
     def remove_lines_with_trips(
@@ -34,11 +31,10 @@ class SaleOrder(models.Model):
             )
             if trips_to_delete:
                 trips_to_delete.unlink()
-        kept_factors = ("weight", "volume")
         for line in self.order_line:
             if line.id not in initial_quantities:
                 continue
-            if line.product_id.product_tmpl_id.tms_factor_type in kept_factors:
+            if line.has_trip_product:
                 continue
             if line.product_uom_qty < initial_quantities[line.id]:
                 trips_to_delete = line.tms_order_ids[:1]
