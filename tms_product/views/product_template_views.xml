@@ -9,12 +9,29 @@
                     <field name="tms_vehicle" />
                     <label for="tms_vehicle" />
                 </span>
-                <span class="d-inline-block" invisible="type != 'service'">
-                    <field name="tms_trip" />
-                    <label for="tms_trip" />
-                </span>
             </xpath>
             <xpath expr="//field[@name='type']" position="after">
+                <field
+                    name="transport_type"
+                    widget="radio"
+                    options="{'horizontal': True}"
+                    invisible="type != 'service'"
+                />
+                <field
+                    name="transit_mode_cargo"
+                    invisible="transport_type != 'cargo'"
+                    required="transport_type == 'cargo'"
+                />
+                <field
+                    name="transit_mode_passenger"
+                    invisible="transport_type != 'passenger'"
+                    required="transport_type == 'passenger'"
+                />
+                <field
+                    name="booking_type"
+                    invisible="transport_type not in ('cargo', 'passenger')"
+                    required="transport_type in ('cargo', 'passenger')"
+                />
                 <field
                     name="vehicle_type"
                     invisible="not tms_vehicle"
@@ -38,14 +55,14 @@
             <xpath expr="//filter[@name='filter_to_sell']" position="after">
                 <separator />
                 <filter
-                    string="TMS Trip Services"
+                    string="TMS Cargo Services"
                     name="tms_trip_services"
-                    domain="[('tms_trip', '=', True), ('trip_product_type', '=', 'trip')]"
+                    domain="[('transport_type', '=', 'cargo')]"
                 />
                 <filter
-                    string="TMS Seat Services"
+                    string="TMS Passenger Services"
                     name="tms_seat_services"
-                    domain="[('tms_trip', '=', True), ('trip_product_type', '=', 'seat')]"
+                    domain="[('transport_type', '=', 'passenger')]"
                 />
             </xpath>
         </field>
