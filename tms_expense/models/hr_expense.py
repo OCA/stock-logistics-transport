@@ -17,6 +17,7 @@ class HrExpense(models.Model):
         index=True,
     )
     odometer = fields.Float(
+        string="Odometer",
         compute="_compute_odometer",
         inverse="_inverse_odometer",
         help="Pump reading, stored on the vehicle odometer log.",
@@ -80,7 +81,7 @@ class HrExpense(models.Model):
         reading = self.odometer_id
         vals = {
             "value": value,
-            "date": fields.Date.context_today(self),
+            "date": fields.Datetime.now(),
             "vehicle_id": vehicle.id,
         }
         if reading and reading.vehicle_id == vehicle:

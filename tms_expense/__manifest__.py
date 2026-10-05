@@ -3,9 +3,9 @@
 {
     "name": "TMS - Expense",
     "summary": "Manage expenses of a trip: hotel, tolls, fuel",
-    "version": "19.0.1.3.0",
+    "version": "19.0.1.4.0",
     "license": "AGPL-3",
-    "category": "TMS",
+    "category": "Transportation",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "depends": ["tms", "hr_expense"],
