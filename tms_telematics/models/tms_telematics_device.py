@@ -30,7 +30,20 @@ class TmsTelematicsDevice(models.Model):
         string="Last ignition",
     )
     last_odometer_km = fields.Float(string="Last odometer (km)")
-    reading_ids = fields.One2many("tms.telematics.reading", "device_id")
+    seen_external_ids = fields.Text(copy=False)
+    reading_ids = fields.One2many("fleet.vehicle.odometer", "device_id")
+
+    def _has_external_reading(self, external_id):
+        seen = set(filter(None, (self.seen_external_ids or "").splitlines()))
+        return external_id in seen
+
+    def _remember_external_reading(self, external_id):
+        self.ensure_one()
+        seen = [line for line in (self.seen_external_ids or "").splitlines() if line]
+        if external_id in seen:
+            return
+        seen.append(external_id)
+        self.seen_external_ids = "\n".join(seen)
 
     _account_external_uniq = models.Constraint(
         "unique (account_id, external_id)",
@@ -50,16 +63,12 @@ class TmsTelematicsDevice(models.Model):
                 limit=1,
             )
         if not vehicle and plate:
-            vehicle = (
-                self.env["fleet.vehicle"]
-                .sudo()
-                .search(
-                    [
-                        ("license_plate", "=", plate),
-                        ("company_id", "in", company_ids),
-                    ],
-                    limit=1,
-                )
+            vehicle = self.env["fleet.vehicle"].sudo().search(
+                [
+                    ("license_plate", "=", plate),
+                    ("company_id", "in", company_ids),
+                ],
+                limit=1,
             )
         if vehicle:
             self.vehicle_id = vehicle

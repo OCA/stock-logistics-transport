@@ -83,14 +83,18 @@ class TestTelematics(TransactionCase):
         self.assertEqual(device.last_latitude, 25.68)
         self.assertEqual(device.last_speed, 80)
         self.assertEqual(device.last_ignition, "on")
-        self.assertFalse(
+        self.assertEqual(created.latitude, 25.68)
+        self.assertEqual(created.longitude, -100.31)
+        self.assertEqual(created.event, "position")
+        self.assertEqual(
             self.env["fleet.vehicle.odometer"].search_count(
                 [("vehicle_id", "=", self.vehicle.id)]
-            )
+            ),
+            1,
         )
         again = self.account.apply_readings([self._reading(vin="VIN-TEL-001")])
         self.assertFalse(again)
-        self.assertEqual(created.timestamp.hour, 15)
+        self.assertEqual(created.date.hour, 15)
 
     def test_plate_is_used_when_the_vin_is_unknown(self):
         created = self.account.apply_readings(
@@ -125,15 +129,17 @@ class TestTelematics(TransactionCase):
 
     def test_zero_coordinates_are_stored(self):
         created = self.account.apply_readings(
-            [self._reading(latitude=0, longitude=0, speed=None)]
+            [self._reading(latitude=0, longitude=0, speed=None, vin="VIN-TEL-001")]
         )
         self.assertTrue(created.position_set)
         self.assertEqual(created.device_id.last_latitude, 0)
         self.assertFalse(created.speed_known)
 
     def test_invalid_timestamp_is_empty(self):
-        created = self.account.apply_readings([self._reading(timestamp="not-a-date")])
-        self.assertFalse(created.timestamp)
+        created = self.account.apply_readings(
+            [self._reading(timestamp="not-a-date", vin="VIN-TEL-001")]
+        )
+        self.assertFalse(created.date)
 
     def test_trip_boundaries_write_fleet_readings(self):
         trip = self.env["tms.order"].create(
@@ -271,7 +277,7 @@ class TestTelematics(TransactionCase):
         )
         self.assertAlmostEqual(log.value, 1.0, places=4)
 
-    def test_ignition_off_does_not_repeat_the_same_reading(self):
+    def test_each_reading_is_stored_as_its_own_odometer(self):
         self.account.apply_readings(
             [
                 self._reading(
@@ -294,7 +300,7 @@ class TestTelematics(TransactionCase):
             self.env["fleet.vehicle.odometer"].search_count(
                 [("vehicle_id", "=", self.vehicle.id)]
             ),
-            1,
+            2,
         )
 
     def test_a_reading_without_a_vehicle_does_not_write_the_odometer(self):
@@ -302,7 +308,10 @@ class TestTelematics(TransactionCase):
         created = self.account.apply_readings(
             [self._reading(odometer_km=40, license_plate="UNKNOWN")]
         )
-        self.assertFalse(created.device_id.vehicle_id)
+        device = self.account.device_ids
+        self.assertFalse(created)
+        self.assertFalse(device.vehicle_id)
+        self.assertEqual(device.last_latitude, 25.68)
         self.assertEqual(self.env["fleet.vehicle.odometer"].search_count([]), before)
 
     def test_fill_calls_the_hook(self):
@@ -312,7 +321,9 @@ class TestTelematics(TransactionCase):
             called["liters"] = reading.fuel_liters
             return True
 
-        payload = self._reading(event="fill", fuel_liters=40, odometer_km=10)
+        payload = self._reading(
+            event="fill", fuel_liters=40, odometer_km=10, vin="VIN-TEL-001"
+        )
         with patch.object(type(self.account), "_apply_fill", _apply_fill):
             created = self.account.apply_readings([payload])
         self.assertEqual(created.event, "fill")
@@ -357,7 +368,7 @@ class TestTelematics(TransactionCase):
 
     def test_webhook_queues_a_list_and_rejects_a_bad_token(self):
         bucket = {}
-        payload = [self._reading()]
+        payload = [self._reading(vin="VIN-TEL-001")]
         with self._patch_delay(bucket):
             denied = self.account._accept_webhook("nope", {"readings": payload})
             queued = self.account._accept_webhook(
@@ -396,10 +407,9 @@ class TestTelematics(TransactionCase):
             )
 
         request.make_json_response = make_json_response
-        with (
-            patch("odoo.addons.tms_telematics.controllers.webhook.request", request),
-            self._patch_delay(bucket),
-        ):
+        with patch(
+            "odoo.addons.tms_telematics.controllers.webhook.request", request
+        ), self._patch_delay(bucket):
             queued = controller.hook(self.account.id)
             missing = controller.hook(999999)
             request.httprequest.data = b"not-json"
@@ -413,3 +423,14 @@ class TestTelematics(TransactionCase):
         self.assertEqual(json.loads(missing.get_data())["error"], "unknown")
         self.assertEqual(invalid.status_code, 400)
         self.assertEqual(denied.status_code, 403)
+
+    def test_configuration_menu_groups_telematics(self):
+        menu = self.env.ref("tms_telematics.menu_tms_telematics")
+        accounts = self.env.ref("tms_telematics.menu_tms_telematics_account")
+        devices = self.env.ref("tms_telematics.menu_tms_telematics_device")
+        self.assertEqual(menu.parent_id, self.env.ref("tms.config"))
+        self.assertEqual(menu.name, "Telematics")
+        self.assertEqual(accounts.parent_id, menu)
+        self.assertEqual(accounts.name, "Accounts")
+        self.assertEqual(devices.parent_id, menu)
+        self.assertEqual(devices.name, "Devices")

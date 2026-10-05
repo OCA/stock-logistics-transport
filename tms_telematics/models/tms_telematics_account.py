@@ -9,8 +9,6 @@ from dateutil.parser import isoparse
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools.float_utils import float_compare
-
 _logger = logging.getLogger(__name__)
 
 KM_PER_MILE = 1.609344
@@ -61,7 +59,7 @@ class TmsTelematicsAccount(models.Model):
     )
     last_sync = fields.Datetime(readonly=True)
     device_ids = fields.One2many("tms.telematics.device", "account_id")
-    reading_ids = fields.One2many("tms.telematics.reading", "account_id")
+    reading_ids = fields.One2many("fleet.vehicle.odometer", "account_id")
     reading_count = fields.Integer(compute="_compute_reading_count")
 
     @api.model
@@ -77,8 +75,8 @@ class TmsTelematicsAccount(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": self.env._("Readings"),
-            "res_model": "tms.telematics.reading",
+            "name": self.env._("Odometers"),
+            "res_model": "fleet.vehicle.odometer",
             "view_mode": "list,form",
             "domain": [("account_id", "=", self.id)],
         }
@@ -124,7 +122,7 @@ class TmsTelematicsAccount(models.Model):
         self.ensure_one()
         if not self.provider:
             raise UserError(self.env._("Set a provider before pulling this account."))
-        method = getattr(self, f"_pull_{self.provider}", None)
+        method = getattr(self, "_pull_%s" % self.provider, None)
         if not method:
             raise UserError(
                 self.env._(
@@ -166,7 +164,7 @@ class TmsTelematicsAccount(models.Model):
         self.ensure_one()
         payloads = [row for row in (readings or []) if row.get("external_id")]
         known = set(
-            self.env["tms.telematics.reading"]
+            self.env["fleet.vehicle.odometer"]
             .search(
                 [
                     ("account_id", "=", self.id),
@@ -175,7 +173,7 @@ class TmsTelematicsAccount(models.Model):
             )
             .mapped("external_id")
         )
-        created = self.env["tms.telematics.reading"]
+        created = self.env["fleet.vehicle.odometer"]
         devices = {}
         for payload in payloads:
             if payload["external_id"] in known:
@@ -187,6 +185,14 @@ class TmsTelematicsAccount(models.Model):
             if not device:
                 device = self._ensure_device(payload)
                 devices[device_external_id] = device
+            if device._has_external_reading(payload["external_id"]):
+                known.add(payload["external_id"])
+                continue
+            if not device.vehicle_id:
+                self._payload_position(device, payload)
+                device._remember_external_reading(payload["external_id"])
+                known.add(payload["external_id"])
+                continue
             reading = self._create_reading(device, payload)
             known.add(reading.external_id)
             created |= reading
@@ -250,17 +256,21 @@ class TmsTelematicsAccount(models.Model):
         latitude = payload.get("latitude")
         longitude = payload.get("longitude")
         speed = payload.get("speed")
-        return self.env["tms.telematics.reading"].create(
+        timestamp = as_utc_naive(payload.get("timestamp"))
+        kilometers = payload.get("odometer_km") or 0.0
+        return self.env["fleet.vehicle.odometer"].sudo().create(
             {
+                "vehicle_id": device.vehicle_id.id,
+                "value": self._to_vehicle_unit(device.vehicle_id, kilometers),
+                "date": timestamp or False,
                 "account_id": self.id,
                 "device_id": device.id,
                 "external_id": payload["external_id"],
                 "event": payload.get("event") or "position",
-                "timestamp": as_utc_naive(payload.get("timestamp")),
                 "latitude": latitude or 0.0,
                 "longitude": longitude or 0.0,
                 "position_set": latitude is not None and longitude is not None,
-                "odometer_km": payload.get("odometer_km") or 0.0,
+                "odometer_km": kilometers,
                 "speed": speed if speed is not None and speed >= 0 else 0.0,
                 "speed_known": speed is not None and speed >= 0,
                 "ignition": ignition_value,
@@ -270,29 +280,53 @@ class TmsTelematicsAccount(models.Model):
 
     def _apply_reading(self, device, reading):
         self._update_position(device, reading)
-        assigned = False
         if reading.event in ("trip_start", "trip_end"):
-            assigned = self._assign_trip_reading(device, reading)
-        if reading.odometer_km and not assigned:
-            self._record_odometer(device, reading)
+            self._assign_trip_reading(device, reading)
         if reading.event == "fill":
             self._apply_fill(reading)
         if reading.odometer_km:
             device.last_odometer_km = reading.odometer_km
+
+    def _payload_position(self, device, payload):
+        latitude = payload.get("latitude")
+        longitude = payload.get("longitude")
+        if latitude is None or longitude is None:
+            return
+        timestamp = as_utc_naive(payload.get("timestamp"))
+        if (
+            device.last_position_date
+            and timestamp
+            and timestamp < device.last_position_date
+        ):
+            return
+        speed = payload.get("speed")
+        ignition = payload.get("ignition")
+        vals = {
+            "last_latitude": latitude or 0.0,
+            "last_longitude": longitude or 0.0,
+            "last_position_date": timestamp,
+        }
+        if speed is not None and speed >= 0:
+            vals["last_speed"] = speed
+        if ignition is True:
+            vals["last_ignition"] = "on"
+        elif ignition is False:
+            vals["last_ignition"] = "off"
+        device.write(vals)
 
     def _update_position(self, device, reading):
         if not reading.position_set:
             return
         if (
             device.last_position_date
-            and reading.timestamp
-            and reading.timestamp < device.last_position_date
+            and reading.date
+            and reading.date < device.last_position_date
         ):
             return
         vals = {
             "last_latitude": reading.latitude,
             "last_longitude": reading.longitude,
-            "last_position_date": reading.timestamp,
+            "last_position_date": reading.date,
         }
         if reading.speed_known:
             vals["last_speed"] = reading.speed
@@ -332,12 +366,13 @@ class TmsTelematicsAccount(models.Model):
         value = self._to_vehicle_unit(vehicle, reading.odometer_km)
         if not self._odometer_value_fits(trip, field, value):
             return False
-        vals = {field: value}
-        if field == "odometer_start" and not trip.date_start and reading.timestamp:
-            vals["date_start"] = reading.timestamp
-        if field == "odometer_end" and reading.timestamp:
-            vals["date_end"] = reading.timestamp
-        trip.sudo().write(vals)
+        link = "odometer_start_id" if field == "odometer_start" else "odometer_end_id"
+        vals = {link: reading.id}
+        if field == "odometer_start" and not trip.date_start and reading.date:
+            vals["date_start"] = reading.date
+        if field == "odometer_end" and reading.date:
+            vals["date_end"] = reading.date
+        trip.sudo().with_context(skip_odometer_sync=True).write(vals)
         return True
 
     def _odometer_value_fits(self, trip, field, value):
@@ -348,32 +383,6 @@ class TmsTelematicsAccount(models.Model):
         split = trip.distance_loaded + trip.distance_empty
         if end and start and split and abs(split - (end - start)) > 0.01:
             return False
-        return True
-
-    def _record_odometer(self, device, reading):
-        vehicle = device.vehicle_id
-        if not vehicle:
-            return False
-        value = self._to_vehicle_unit(vehicle, reading.odometer_km)
-        moment = reading.timestamp or fields.Datetime.now()
-        reading_date = fields.Date.to_date(moment)
-        last = self.env["fleet.vehicle.odometer"].search(
-            [("vehicle_id", "=", vehicle.id)],
-            order="date desc, id desc",
-            limit=1,
-        )
-        moved = not last or float_compare(last.value, value, precision_digits=1) != 0
-        if not moved and reading.ignition != "off":
-            return False
-        if not moved and last and last.date == reading_date:
-            return False
-        self.env["fleet.vehicle.odometer"].sudo().create(
-            {
-                "vehicle_id": vehicle.id,
-                "value": value,
-                "date": reading_date,
-            }
-        )
         return True
 
     def _to_vehicle_unit(self, vehicle, kilometers):

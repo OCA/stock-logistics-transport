@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-    <record id="demo_telematics_reading" model="tms.telematics.reading">
+    <record id="demo_telematics_reading" model="fleet.vehicle.odometer">
+        <field name="vehicle_id" ref="tms.demo_vehicle_truck_actros" />
         <field name="account_id" ref="demo_telematics_account" />
         <field name="device_id" ref="demo_telematics_device" />
         <field name="external_id">demo-reading-1</field>
         <field name="event">position</field>
-        <field name="timestamp">2026-09-10 15:00:00</field>
+        <field name="date">2026-09-10 15:00:00</field>
         <field name="latitude">25.6866</field>
         <field name="longitude">-100.3161</field>
         <field name="position_set" eval="True" />
         <field name="speed">80</field>
         <field name="speed_known" eval="True" />
     </record>
-    <record id="demo_telematics_reading_fill" model="tms.telematics.reading">
+    <record id="demo_telematics_reading_fill" model="fleet.vehicle.odometer">
+        <field name="vehicle_id" ref="tms.demo_vehicle_truck_actros" />
+        <field name="value">100400</field>
         <field name="account_id" ref="demo_telematics_account" />
         <field name="device_id" ref="demo_telematics_device" />
         <field name="external_id">demo-reading-fill</field>
         <field name="event">fill</field>
-        <field name="timestamp">2026-09-10 18:30:00</field>
+        <field name="date">2026-09-10 18:30:00</field>
         <field name="odometer_km">100400</field>
         <field name="fuel_liters">180</field>
     </record>

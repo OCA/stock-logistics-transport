@@ -38,7 +38,7 @@
                             <field
                                 name="reading_count"
                                 widget="statinfo"
-                                string="Readings"
+                                string="Odometers"
                             />
                         </button>
                     </div>

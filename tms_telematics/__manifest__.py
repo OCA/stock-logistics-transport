@@ -3,9 +3,9 @@
 {
     "name": "TMS - Telematics",
     "summary": "Import GPS, odometer, and fuel events into trips",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.4.0",
     "license": "AGPL-3",
-    "category": "TMS",
+    "category": "Transportation",
     "author": "Gray Matter Logic, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "depends": ["tms", "queue_job"],
