@@ -22,6 +22,7 @@ class TestTmsOrderSale(BaseCommon):
                 "brand_id": cls.env["fleet.vehicle.model.brand"]
                 .create({"name": "Bus Brand"})
                 .id,
+                "passenger_capacity": 3,
             }
         )
         cls.passenger_vehicle = cls.env["fleet.vehicle"].create(
@@ -29,19 +30,19 @@ class TestTmsOrderSale(BaseCommon):
                 "name": "Passenger Bus",
                 "model_id": cls.vehicle_model.id,
                 "operation": "passenger",
-                "capacity": 3,
-                "tms_service_product_id": cls.env.ref(
-                    "tms_product.product_tms_seat_service"
-                )
-                .product_variant_ids[0]
-                .id,
             }
         )
         cls.sale_order = cls.env["sale.order"].create({"partner_id": cls.partner.id})
         cls.trip_template = cls.env["product.template"].create(
             {"name": "Trip", "type": "service", "list_price": 50.0}
         )
-        cls.trip_template.write({"tms_trip": True, "trip_product_type": "trip"})
+        cls.trip_template.write(
+            {
+                "transport_type": "cargo",
+                "transit_mode": "road",
+                "booking_type": "full_asset",
+            }
+        )
         cls.sale_line = cls.env["sale.order.line"].create(
             {
                 "order_id": cls.sale_order.id,
@@ -72,24 +73,13 @@ class TestTmsOrderSale(BaseCommon):
     def test_passenger_vehicle_creates_seat_tickets_on_create(self):
         tms_order = self._create_tms_order(vehicle_id=self.passenger_vehicle.id)
         self.assertEqual(len(tms_order.seat_ticket_ids), 3)
-        seat_product = self.passenger_vehicle.tms_service_product_id
         for ticket in tms_order.seat_ticket_ids:
             self.assertTrue(ticket.name)
-            self.assertEqual(ticket.product_id, seat_product)
-            self.assertEqual(ticket.price, seat_product.lst_price)
 
     def test_passenger_vehicle_creates_seat_tickets_on_write(self):
         tms_order = self._create_tms_order()
         tms_order.write({"vehicle_id": self.passenger_vehicle.id})
         self.assertEqual(len(tms_order.seat_ticket_ids), 3)
-        seat_product = self.passenger_vehicle.tms_service_product_id
-        self.assertEqual(tms_order.seat_ticket_ids.product_id, seat_product)
-        self.assertTrue(
-            all(
-                ticket.price == seat_product.lst_price
-                for ticket in tms_order.seat_ticket_ids
-            )
-        )
 
     def test_completed_stage_sets_qty_delivered(self):
         tms_order = self._create_tms_order()
@@ -116,7 +106,6 @@ class TestTmsOrderSale(BaseCommon):
                 "name": "Cargo Truck",
                 "model_id": self.vehicle_model.id,
                 "operation": "cargo",
-                "capacity": 3,
             }
         )
         tms_order = self._create_tms_order(vehicle_id=cargo_vehicle.id)
@@ -130,12 +119,18 @@ class TestTmsOrderSale(BaseCommon):
         self.assertFalse(ticket.exists())
 
     def test_passenger_vehicle_change_updates_ticket_count(self):
+        large_model = self.env["fleet.vehicle.model"].create(
+            {
+                "name": "Large Bus Model",
+                "brand_id": self.vehicle_model.brand_id.id,
+                "passenger_capacity": 5,
+            }
+        )
         large_bus = self.env["fleet.vehicle"].create(
             {
                 "name": "Large Bus",
-                "model_id": self.vehicle_model.id,
+                "model_id": large_model.id,
                 "operation": "passenger",
-                "capacity": 5,
             }
         )
         tms_order = self._create_tms_order(vehicle_id=self.passenger_vehicle.id)

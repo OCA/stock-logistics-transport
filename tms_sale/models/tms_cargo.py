@@ -30,6 +30,18 @@ class TMSCargo(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get("shipment_unit") or not vals.get("sale_line_id"):
+                continue
+            line = self.env["sale.order.line"].browse(vals["sale_line_id"])
+            if vals.get("uld_type"):
+                vals["shipment_unit"] = "uld"
+            elif vals.get("container_type") or vals.get("container_number"):
+                vals["shipment_unit"] = "container"
+            else:
+                vals["shipment_unit"] = line._tms_shipment_unit()
+            if not vals.get("name"):
+                vals["name"] = self._shipment_name_from_vals(vals)
         records = super().create(vals_list)
         if self.env.context.get("skip_cargo_sale_sync"):
             return records

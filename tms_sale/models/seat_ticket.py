@@ -19,8 +19,8 @@ class SeatTicket(models.Model):
         "product.product",
         string="Seat Service",
         domain=(
-            "[('type', '=', 'service'), ('product_tmpl_id.tms_trip', '=', True), "
-            "('product_tmpl_id.trip_product_type', '=', 'seat')]"
+            "[('type', '=', 'service'), "
+            "('product_tmpl_id.transport_type', '=', 'passenger')]"
         ),
     )
     sale_line_id = fields.Many2one("sale.order.line")
@@ -56,11 +56,6 @@ class SeatTicket(models.Model):
         trip = self.env["tms.order"].browse(vals.get("tms_order_id"))
         if not trip:
             return vals
-        product = trip.vehicle_id.tms_service_product_id
-        if product and not vals.get("product_id"):
-            vals["product_id"] = product.id
-        if product and not vals.get("price"):
-            vals["price"] = product.lst_price
         new_ticket_label = self.env._("New ticket")
         if not vals.get("name") or vals.get("name") == new_ticket_label:
             vals["name"] = f"{trip.name}-{len(trip.seat_ticket_ids) + 1}"

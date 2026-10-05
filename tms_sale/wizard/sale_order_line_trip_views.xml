@@ -6,60 +6,122 @@
         <field name="arch" type="xml">
             <form string="Trip information" js_class="sale_order_line_trip_form">
                 <field name="order_confirmed" invisible="1" />
-                <group
-                    name="tms_route_group"
-                    string="Route"
-                    groups="tms.group_tms_route"
-                >
-                    <group>
-                        <field
-                            name="has_route"
-                            string="Use route"
-                            readonly="order_confirmed"
-                        />
-                    </group>
-                    <group invisible="not has_route">
-                        <label for="route">Route</label>
-                        <div class="o_row">
-                            <field name="route" readonly="order_confirmed" />
-                        </div>
-                    </group>
-                    <span invisible="has_route" />
+                <field name="product_template_id" invisible="1" />
+                <field name="shipment_unit" invisible="1" />
+                <field name="partner_id" invisible="1" />
+                <field name="allowed_rate_card_ids" invisible="1" />
+                <field name="distance_editable" invisible="1" />
+                <field
+                    name="has_route"
+                    invisible="1"
+                    groups="!tms.group_tms_route"
+                />
+                <group name="tms_route_toggle" groups="tms.group_tms_route">
+                    <field
+                        name="has_route"
+                        string="Use route"
+                        readonly="order_confirmed"
+                    />
+                    <field
+                        name="route"
+                        invisible="not has_route"
+                        readonly="order_confirmed"
+                    />
+                </group>
+                <group name="tms_trip" col="3" class="o_tms_trip_columns">
                     <group>
                         <field
                             name="origin"
                             invisible="has_route"
                             readonly="order_confirmed"
                         />
-                    </group>
-                    <group invisible="has_route">
-                        <label for="destination">Destination</label>
-                        <div class="o_row">
-                            <field name="destination" readonly="order_confirmed" />
-                        </div>
-                    </group>
-                </group>
-                <group name="tms_route" string="Route" groups="!tms.group_tms_route">
-                    <group>
-                        <field name="origin" readonly="order_confirmed" />
-                    </group>
-                    <group>
-                        <label for="destination">Destination</label>
-                        <div class="o_row">
-                            <field name="destination" readonly="order_confirmed" />
-                        </div>
-                    </group>
-                </group>
-                <group>
-                    <group>
                         <field name="start" readonly="order_confirmed" />
                     </group>
                     <group>
-                        <label for="end">Scheduled end</label>
-                        <div class="o_row">
-                            <field name="end" readonly="order_confirmed" />
-                        </div>
+                        <field
+                            name="destination"
+                            invisible="has_route"
+                            readonly="order_confirmed"
+                        />
+                        <field name="end" readonly="order_confirmed" />
                     </group>
+                    <group>
+                        <label for="distance" />
+                        <div class="o_row o_tms_distance_row">
+                            <field name="distance" readonly="not distance_editable" />
+                            <field
+                                name="distance_uom"
+                                nolabel="1"
+                                readonly="not distance_editable"
+                            />
+                        </div>
+                        <field
+                            name="rate_card_id"
+                            readonly="order_confirmed"
+                            options="{'no_create': True}"
+                        />
+                    </group>
+                </group>
+                <group name="tms_cargo" string="Shipment">
+                    <field
+                        name="cargo_line_ids"
+                        nolabel="1"
+                        colspan="2"
+                        readonly="order_confirmed"
+                        context="{'default_shipment_unit': shipment_unit}"
+                    >
+                        <list editable="bottom">
+                            <field name="shipment_unit" column_invisible="1" />
+                            <field
+                                name="name"
+                                string="Description"
+                                required="parent.shipment_unit == 'cargo'"
+                                column_invisible="parent.shipment_unit != 'cargo'"
+                            />
+                            <field name="quantity" />
+                            <field
+                                name="uom_id"
+                                column_invisible="parent.shipment_unit != 'cargo'"
+                            />
+                            <field
+                                name="container_type"
+                                required="parent.shipment_unit == 'container'"
+                                column_invisible="parent.shipment_unit != 'container'"
+                                groups="tms.group_tms_water_user"
+                            />
+                            <field
+                                name="container_number"
+                                column_invisible="parent.shipment_unit != 'container'"
+                                groups="tms.group_tms_water_user"
+                            />
+                            <field
+                                name="seal_number"
+                                column_invisible="parent.shipment_unit != 'container'"
+                                groups="tms.group_tms_water_user"
+                            />
+                            <field
+                                name="uld_type"
+                                required="parent.shipment_unit == 'uld'"
+                                column_invisible="parent.shipment_unit != 'uld'"
+                                groups="tms.group_tms_air_user"
+                            />
+                            <field
+                                name="uld_number"
+                                column_invisible="parent.shipment_unit != 'uld'"
+                                groups="tms.group_tms_air_user"
+                            />
+                            <field name="weight" />
+                            <field name="weight_uom_id" />
+                            <field
+                                name="volume"
+                                column_invisible="parent.shipment_unit != 'cargo'"
+                            />
+                            <field
+                                name="volume_uom_id"
+                                column_invisible="parent.shipment_unit != 'cargo'"
+                            />
+                        </list>
+                    </field>
                 </group>
                 <footer>
                     <button

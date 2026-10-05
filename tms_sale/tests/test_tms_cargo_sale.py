@@ -3,7 +3,7 @@
 
 from datetime import datetime, timedelta
 
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -30,10 +30,9 @@ class TestTMSCargoSale(BaseCommon):
         )
         cls.template.write(
             {
-                "tms_trip": True,
-                "trip_product_type": "trip",
-                "tms_factor_type": "weight",
-                "tms_factor_weight_uom": cls.kilogram.id,
+                "transport_type": "cargo",
+                "transit_mode": "road",
+                "booking_type": "full_asset",
             }
         )
         cls.product = cls.template.product_variant_ids[0]
@@ -52,12 +51,48 @@ class TestTMSCargoSale(BaseCommon):
         values.update(extra)
         return values
 
-    def test_weight_service_quantity_stays_one(self):
+    def test_shipment_quantity_follows_the_sale_uom(self):
+        unit = self.env.ref("uom.product_uom_unit")
+        pallet = self.env.ref("tms.uom_pallet")
+        cubic = self.env.ref("uom.product_uom_cubic_meter")
+        tonne = self.env.ref("uom.product_uom_ton")
         order = self.env["sale.order"].create({"partner_id": self.partner.id})
-        with self.assertRaises(ValidationError):
-            self.env["sale.order.line"].create(
-                {"order_id": order.id, **self._line_vals(product_uom_qty=2)}
-            )
+        line = self.env["sale.order.line"].create(
+            {"order_id": order.id, **self._line_vals()}
+        )
+        self.env["tms.cargo"].create(
+            {
+                "name": "Boxes",
+                "sale_line_id": line.id,
+                "quantity": 3,
+                "uom_id": unit.id,
+                "weight": 500.0,
+                "weight_uom_id": self.kilogram.id,
+                "volume": 2.0,
+                "volume_uom_id": cubic.id,
+            }
+        )
+        self.env["tms.cargo"].create(
+            {
+                "name": "Pallets",
+                "sale_line_id": line.id,
+                "quantity": 2,
+                "uom_id": pallet.id,
+                "weight": 1.5,
+                "weight_uom_id": tonne.id,
+                "volume": 4.0,
+                "volume_uom_id": cubic.id,
+            }
+        )
+        self.assertIn(pallet, line.allowed_uom_ids)
+        self.assertIn(self.kilogram, line.allowed_uom_ids)
+        self.assertEqual(line.product_uom_qty, 3.0)
+        line.product_uom_id = pallet
+        self.assertEqual(line.product_uom_qty, 2.0)
+        line.product_uom_id = self.kilogram
+        self.assertEqual(line.product_uom_qty, 2000.0)
+        line.product_uom_id = cubic
+        self.assertEqual(line.product_uom_qty, 6.0)
 
     def test_cargo_sets_factor_and_links_one_trip(self):
         order = self.env["sale.order"].create({"partner_id": self.partner.id})
@@ -84,8 +119,11 @@ class TestTMSCargoSale(BaseCommon):
         order._action_create_new_trips()
         order.invalidate_recordset(["tms_order_ids", "tms_order_count"])
         self.assertEqual(order.tms_order_count, 1)
-        self.assertEqual(line.tms_factor, 1200.0)
         self.assertEqual(line.cargo_ids.order_id, order.tms_order_ids)
+        trip = order.tms_order_ids
+        self.assertEqual(trip.shipment_line_count, 2)
+        action = trip.action_view_shipment_lines()
+        self.assertEqual(set(action["domain"][0][2]), set(line.cargo_ids.ids))
 
     def test_confirmed_sale_keeps_factor_in_sync_from_the_trip(self):
         order = self.env["sale.order"].create({"partner_id": self.partner.id})
@@ -104,7 +142,7 @@ class TestTMSCargoSale(BaseCommon):
         order._action_create_new_trips()
         order.action_confirm()
         cargo.weight = 950.0
-        self.assertEqual(line.tms_factor, 950.0)
+        self.assertEqual(cargo.weight, 950.0)
 
     def test_cargo_added_on_the_trip_updates_the_factor(self):
         order = self.env["sale.order"].create({"partner_id": self.partner.id})
@@ -122,9 +160,15 @@ class TestTMSCargoSale(BaseCommon):
             }
         )
         self.assertEqual(line.cargo_ids.sale_line_id, line)
-        self.assertEqual(line.tms_factor, 300.0)
         arch = self.env["sale.order"].get_view(view_type="form")["arch"]
-        self.assertIn("tms_factor_type != 'weight'", arch)
+        self.assertIn("not has_trip_product", arch)
+        self.assertNotIn("tms_factor", arch)
+        self.assertIn('string="Cargo"', arch)
+        wizard = self.env.ref("tms_sale.sale_order_line_trip_view_form").arch
+        self.assertIn("cargo_line_ids", wizard)
+        self.assertIn("Pickup date", wizard)
+        self.assertIn("Delivery date", wizard)
+        self.assertIn('name="distance"', wizard)
         self.assertIn("parent.state in ('sale', 'cancel')", arch)
 
     def _order_with_cargo(self, weight, description):
@@ -164,7 +208,6 @@ class TestTMSCargoSale(BaseCommon):
         light.order_id = new_trip
         self.assertEqual(light.sale_line_id, line)
         self.assertEqual(heavy.order_id, trip)
-        self.assertEqual(line.tms_factor, 1200.0)
         self.assertEqual(order.tms_order_count, 2)
         completed = self.env.ref("tms.tms_stage_order_completed")
         trip.stage_id = completed
@@ -179,8 +222,8 @@ class TestTMSCargoSale(BaseCommon):
         cargo_b.order_id = trip_a
         self.assertEqual(cargo_a.sale_line_id, line_a)
         self.assertEqual(cargo_b.sale_line_id, line_b)
-        self.assertEqual(line_a.tms_factor, 500.0)
-        self.assertEqual(line_b.tms_factor, 300.0)
+        self.assertEqual(cargo_a.weight, 500.0)
+        self.assertEqual(cargo_b.weight, 300.0)
         self.assertIn(trip_a, order_b.tms_order_ids)
         self.assertEqual(trip_a.cargo_sale_order_count, 2)
         action = trip_a.action_view_sales()
@@ -194,7 +237,7 @@ class TestTMSCargoSale(BaseCommon):
             }
         )
         self.assertFalse(loose.sale_line_id)
-        self.assertEqual(line_a.tms_factor, 500.0)
+        self.assertEqual(cargo_a.weight, 500.0)
         order_b.action_confirm()
         self.assertEqual(trip_a.stage_id, self.env.ref("tms.tms_stage_order_draft"))
 
@@ -204,18 +247,19 @@ class TestTMSCargoSale(BaseCommon):
         model = self.env["fleet.vehicle.model"].create(
             {"name": "Split Model", "brand_id": brand.id}
         )
+        cubic_meter = self.env.ref("uom.product_uom_cubic_meter")
+        model.max_volume_capacity = 20.0
+        model.max_volume_uom_id = cubic_meter
         vehicle = self.env["fleet.vehicle"].create(
             {
                 "model_id": model.id,
                 "operation": "cargo",
-                "capacity": 20.0,
-                "cargo_uom_id": self.env.ref("uom.product_uom_cubic_meter").id,
             }
         )
         trip = order.tms_order_ids
         trip.vehicle_id = vehicle
         cargo.volume = 1.0
-        cargo.volume_uom_id = vehicle.cargo_uom_id
+        cargo.volume_uom_id = cubic_meter
         trip.stage_id = self.env.ref("tms.tms_stage_order_confirmed")
         cargo.state = "loaded"
         trip.button_start_order()
@@ -228,3 +272,111 @@ class TestTMSCargoSale(BaseCommon):
         )
         with self.assertRaises(UserError):
             cargo.order_id = other
+
+    def test_description_summarizes_cargo_and_distance(self):
+        route = self.env["tms.route"].create(
+            {
+                "name": "Cargo Route",
+                "origin_location_id": self.origin.id,
+                "destination_location_id": self.destination.id,
+                "distance": 120.0,
+                "estimated_time": 2.0,
+                "distance_uom": self.env.ref("uom.product_uom_km").id,
+                "estimated_time_uom": self.env.ref("uom.product_uom_hour").id,
+            }
+        )
+        order = self.env["sale.order"].create({"partner_id": self.partner.id})
+        line = self.env["sale.order.line"].create(
+            {
+                "order_id": order.id,
+                **self._line_vals(tms_route_id=route.id, tms_route_flag=True),
+            }
+        )
+        self.env["tms.cargo"].create(
+            {
+                "name": "Steel coils",
+                "sale_line_id": line.id,
+                "quantity": 4,
+                "weight": 800.0,
+                "weight_uom_id": self.kilogram.id,
+                "packaging": "Pallets",
+            }
+        )
+        self.assertIn("Origin: Cargo Origin", line.name)
+        self.assertIn("Destination: Cargo Destination", line.name)
+        self.assertIn("Distance: 120.00", line.name)
+        self.assertIn("Cargo:", line.name)
+        self.assertIn("Steel coils", line.name)
+        self.assertIn("800.00 kg", line.name)
+        self.assertIn("Pallets", line.name)
+        self.assertIn("Pickup:", line.name)
+        self.assertIn("Delivery:", line.name)
+
+    def test_description_summarizes_container(self):
+        self.template.write({"transit_mode": "water", "booking_type": "full_asset"})
+        order = self.env["sale.order"].create({"partner_id": self.partner.id})
+        line = self.env["sale.order.line"].create(
+            {"order_id": order.id, **self._line_vals()}
+        )
+        cargo = self.env["tms.cargo"].create(
+            {
+                "sale_line_id": line.id,
+                "shipment_unit": "container",
+                "container_type": "40hc",
+                "container_number": "MSCU1234567",
+                "seal_number": "SL123",
+                "quantity": 2,
+                "weight": 18000.0,
+                "weight_uom_id": self.kilogram.id,
+            }
+        )
+        self.assertEqual(cargo.shipment_unit, "container")
+        self.assertIn("40' High Cube", cargo.name)
+        self.assertIn("Containers:", line.name)
+        self.assertIn("2 x 40' High Cube", line.name)
+        self.assertIn("MSCU1234567", line.name)
+        self.assertIn("seal SL123", line.name)
+
+    def test_description_uses_container_fields_when_unit_is_cargo(self):
+        self.template.write({"transit_mode": "water", "booking_type": "full_asset"})
+        order = self.env["sale.order"].create({"partner_id": self.partner.id})
+        line = self.env["sale.order.line"].create(
+            {"order_id": order.id, **self._line_vals()}
+        )
+        self.env["tms.cargo"].create(
+            {
+                "sale_line_id": line.id,
+                "shipment_unit": "cargo",
+                "container_type": "40hc",
+                "container_number": "MSCU1234567",
+                "seal_number": "SL123",
+                "quantity": 1,
+                "weight": 18000.0,
+                "weight_uom_id": self.kilogram.id,
+            }
+        )
+        self.assertIn("Containers:", line.name)
+        self.assertIn("1 x 40' High Cube", line.name)
+        self.assertIn("MSCU1234567", line.name)
+        self.assertNotIn("Cargo:", line.name)
+
+    def test_description_summarizes_uld(self):
+        self.template.write({"transit_mode": "air", "booking_type": "shared_space"})
+        order = self.env["sale.order"].create({"partner_id": self.partner.id})
+        line = self.env["sale.order.line"].create(
+            {"order_id": order.id, **self._line_vals()}
+        )
+        cargo = self.env["tms.cargo"].create(
+            {
+                "sale_line_id": line.id,
+                "uld_type": "ake",
+                "uld_number": "AKE12345AB",
+                "quantity": 1,
+                "weight": 450.0,
+                "weight_uom_id": self.kilogram.id,
+            }
+        )
+        self.assertEqual(cargo.shipment_unit, "uld")
+        self.assertIn("ULD:", line.name)
+        self.assertIn("1 x AKE (LD3)", line.name)
+        self.assertIn("AKE12345AB", line.name)

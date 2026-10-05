@@ -32,15 +32,13 @@ class TestSeatTicket(BaseCommon):
                 "product_uom_qty": 1,
             }
         )
-        cls.seat_product = cls.env.ref(
-            "tms_product.product_tms_seat_service"
-        ).product_variant_ids[0]
         cls.vehicle_model = cls.env["fleet.vehicle.model"].create(
             {
                 "name": "Bus Model",
                 "brand_id": cls.env["fleet.vehicle.model.brand"]
                 .create({"name": "Bus Brand"})
                 .id,
+                "passenger_capacity": 2,
             }
         )
         cls.passenger_vehicle = cls.env["fleet.vehicle"].create(
@@ -48,8 +46,6 @@ class TestSeatTicket(BaseCommon):
                 "name": "Passenger Bus",
                 "model_id": cls.vehicle_model.id,
                 "operation": "passenger",
-                "capacity": 2,
-                "tms_service_product_id": cls.seat_product.id,
             }
         )
 
@@ -70,7 +66,7 @@ class TestSeatTicket(BaseCommon):
         )
         self.assertEqual(ticket.name, "VIP-1")
 
-    def test_create_defaults_product_and_price_from_vehicle(self):
+    def test_passenger_capacity_creates_tickets_without_a_service(self):
         trip = self.env["tms.order"].create(
             {
                 "name": "TRIP-002",
@@ -81,9 +77,7 @@ class TestSeatTicket(BaseCommon):
             }
         )
         self.assertEqual(len(trip.seat_ticket_ids), 2)
-        ticket = trip.seat_ticket_ids[0]
-        self.assertEqual(ticket.product_id, self.seat_product)
-        self.assertEqual(ticket.price, self.seat_product.lst_price)
+        self.assertFalse(trip.seat_ticket_ids.product_id)
 
     def test_write_sale_line_marks_unavailable(self):
         ticket = self.env["seat.ticket"].create({"tms_order_id": self.tms_order.id})

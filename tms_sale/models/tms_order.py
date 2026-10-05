@@ -5,6 +5,14 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
+TRANSIT_VEHICLE_TYPES = {
+    "air": ("plane",),
+    "water": ("boat",),
+    "road": ("truck", "van", "bus", "car"),
+    "rail": (),
+}
+
+
 class TMSOrder(models.Model):
     _inherit = "tms.order"
 
@@ -25,6 +33,12 @@ class TMSOrder(models.Model):
         string="Cargo Sales",
     )
     cargo_sale_order_count = fields.Integer(compute="_compute_cargo_sale_orders")
+    shipment_line_ids = fields.Many2many(
+        "tms.cargo",
+        compute="_compute_shipment_lines",
+        string="Shipment lines",
+    )
+    shipment_line_count = fields.Integer(compute="_compute_shipment_lines")
 
     @api.depends("seat_ticket_ids.sale_line_id.order_id")
     def _compute_seat_sale_orders(self):
@@ -75,6 +89,65 @@ class TMSOrder(models.Model):
                     self.env._("Board the passengers before starting this trip.")
                 )
         return result
+
+    @api.depends(
+        "tms_team_id",
+        "tms_team_id.vehicle_ids",
+        "transport_type",
+        "sale_line_id.product_id.transit_mode",
+        "cargo_ids.sale_line_id.product_id.transit_mode",
+    )
+    def _compute_vehicle_ids_domain(self):
+        super()._compute_vehicle_ids_domain()
+        for order in self:
+            mode = order.sale_line_id.product_id.product_tmpl_id.transit_mode
+            if not mode:
+                modes = set(
+                    order.cargo_ids.sale_line_id.product_id.product_tmpl_id.mapped(
+                        "transit_mode"
+                    )
+                )
+                mode = modes.pop() if len(modes) == 1 else False
+            allowed = TRANSIT_VEHICLE_TYPES.get(mode)
+            if not allowed:
+                continue
+            order.vehicle_ids_domain = order.vehicle_ids_domain.filtered(
+                lambda vehicle, types=allowed: vehicle.model_id.vehicle_type in types
+            )
+
+    @api.depends("cargo_ids.sale_line_id")
+    def _compute_shipment_lines(self):
+        for order in self:
+            lines = order.cargo_ids.filtered("sale_line_id")
+            if "parent_id" in lines._fields:
+                lines = lines.filtered(lambda cargo: not cargo.parent_id)
+            order.shipment_line_ids = lines
+            order.shipment_line_count = len(lines)
+
+    def action_view_shipment_lines(self):
+        self.ensure_one()
+        lines = self.shipment_line_ids
+        form_view = self.env.ref("tms_sale.tms_shipment_line_view_form")
+        list_view = self.env.ref("tms_sale.tms_shipment_line_view_list")
+        action = {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Shipment lines"),
+            "res_model": "tms.cargo",
+            "target": "current",
+            "context": {"create": False},
+        }
+        if len(lines) == 1:
+            action["view_mode"] = "form"
+            action["views"] = [(form_view.id, "form")]
+            action["res_id"] = lines.id
+        else:
+            action["view_mode"] = "list,form"
+            action["views"] = [
+                (list_view.id, "list"),
+                (form_view.id, "form"),
+            ]
+            action["domain"] = [("id", "in", lines.ids)]
+        return action
 
     @api.depends("sale_id", "sale_line_id.order_id", "cargo_ids.sale_line_id.order_id")
     def _compute_cargo_sale_orders(self):
@@ -128,19 +201,17 @@ class TMSOrder(models.Model):
     def _get_passenger_count(self, vehicle):
         if not vehicle or vehicle.operation != "passenger":
             return 0
-        return max(0, int(vehicle.capacity))
+        model = vehicle.model_id
+        if model.vehicle_type == "bus":
+            return max(0, int((model.seats or 0) + (model.standing_capacity or 0)))
+        return max(0, int(model.passenger_capacity or 0))
 
     def _prepare_seat_ticket_vals(self, sequence_number):
         self.ensure_one()
-        vals = {
+        return {
             "name": f"{self.name}-{sequence_number}",
             "tms_order_id": self.id,
         }
-        product = self.vehicle_id.tms_service_product_id
-        if product:
-            vals["product_id"] = product.id
-            vals["price"] = product.lst_price
-        return vals
 
     def _sync_passenger_seat_tickets(self):
         seat_ticket = self.env["seat.ticket"]
@@ -186,13 +257,13 @@ class TMSOrder(models.Model):
                 for order in self:
                     for line in order.sale_id.order_line:
                         template = line.product_id.product_tmpl_id
-                        if template.tms_factor_type == "weight":
+                        if template.transport_type == "cargo":
                             continue
                         line.qty_delivered = line.product_uom_qty
                     weight_lines = order.cargo_ids.sale_line_id
                     if (
-                        order.sale_line_id.product_id.product_tmpl_id.tms_factor_type
-                        == "weight"
+                        order.sale_line_id.product_id.product_tmpl_id.transport_type
+                        == "cargo"
                     ):
                         weight_lines |= order.sale_line_id
                     for line in weight_lines:
