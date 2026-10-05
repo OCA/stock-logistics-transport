@@ -167,3 +167,26 @@ class TestRouting(TransactionCase):
     def test_action_requires_a_provider(self):
         with self.assertRaises(UserError):
             self.route.action_compute_route()
+
+    def test_trip_uses_the_provider_distance(self):
+        self._select_provider(self.route, "fake")
+
+        def _compute_route_path_fake(route):
+            return route._routing_measures(42500, 3600)
+
+        with patch.object(
+            type(self.route),
+            "_compute_route_path_fake",
+            _compute_route_path_fake,
+            create=True,
+        ):
+            order = self.env["tms.order"].create(
+                {
+                    "name": "Quoted trip",
+                    "origin_id": self.origin.id,
+                    "destination_id": self.destination.id,
+                }
+            )
+            self.assertAlmostEqual(order.distance, 42.5)
+            self.assertEqual(order.distance_uom_id, self.km)
+            self.assertFalse(order.distance_editable)

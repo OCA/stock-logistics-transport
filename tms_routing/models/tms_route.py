@@ -32,6 +32,17 @@ class TmsRoute(models.Model):
     def _selection_routing_provider(self):
         return []
 
+    @api.model
+    def _routing_provider_names(self):
+        selection = self._fields["routing_provider"].selection
+        if callable(selection):
+            selection = selection(self)
+        return selection or []
+
+    @api.model
+    def _routing_provider_ready(self):
+        return bool(self._routing_provider_names())
+
     def _routing_points(self):
         """Origin, ordered stops, then destination.
 
@@ -111,6 +122,25 @@ class TmsRoute(models.Model):
                     "routing_error": False,
                 }
             )
+
+    @api.model
+    def _distance_between_partners(self, origin, destination):
+        """Return the provider distance between two locations."""
+        if not origin or not destination:
+            raise UserError(self.env._("Choose an origin and a destination."))
+        providers = self._routing_provider_names()
+        if not providers:
+            raise UserError(self.env._("Install a routing provider."))
+        route = self.new(
+            {
+                "name": self.env._("Quoted distance"),
+                "origin_location_id": origin.id,
+                "destination_location_id": destination.id,
+                "routing_provider": providers[0][0],
+            }
+        )
+        measures = route._compute_route_path()
+        return measures["distance"], measures["distance_uom"]
 
     def action_compute_route(self):
         for route in self:

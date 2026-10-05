@@ -4,9 +4,9 @@
 {
     "name": "TMS - Routing",
     "summary": "Compute a route distance and duration from a path provider",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.1.0",
     "license": "AGPL-3",
-    "category": "TMS",
+    "category": "Transportation",
     "author": "Gray Matter Logic, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "depends": ["tms", "queue_job"],
