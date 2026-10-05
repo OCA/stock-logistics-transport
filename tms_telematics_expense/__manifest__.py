@@ -3,9 +3,9 @@
 {
     "name": "TMS - Telematics Expense",
     "summary": "Create a fuel expense from a telematics fill",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.2.0",
     "license": "AGPL-3",
-    "category": "TMS",
+    "category": "Transportation",
     "author": "Gray Matter Logic, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "depends": ["tms_telematics", "tms_expense"],

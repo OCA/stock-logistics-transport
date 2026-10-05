@@ -68,8 +68,8 @@ class TmsTelematicsAccount(models.Model):
         return self.env._("Fuel")
 
     def _fill_date(self, reading):
-        if reading.timestamp:
-            return fields.Date.to_date(reading.timestamp)
+        if reading.date:
+            return fields.Date.to_date(reading.date)
         return fields.Date.context_today(self)
 
     def _fill_amount(self, reading, product):
@@ -104,6 +104,11 @@ class TmsTelematicsAccount(models.Model):
         if not reading.odometer_km:
             return logs
         value = self._to_vehicle_unit(vehicle, reading.odometer_km)
+        if (
+            reading.vehicle_id == vehicle
+            and float_compare(reading.value, value, precision_digits=1) == 0
+        ):
+            return reading
         for log in logs.search(
             [("vehicle_id", "=", vehicle.id)],
             order="date desc, id desc",
@@ -137,7 +142,7 @@ class TmsTelematicsAccount(models.Model):
             "tms_telematics.demo_telematics_device", raise_if_not_found=False
         )
         if not account or not device or not device.vehicle_id:
-            return self.env["tms.telematics.reading"]
+            return self.env["fleet.vehicle.odometer"]
         return account.apply_readings(
             [
                 {

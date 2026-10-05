@@ -69,6 +69,7 @@ class TestFillExpense(TransactionCase):
         return trip
 
     def test_a_fill_creates_one_fuel_expense_on_the_vehicle(self):
+        before = self.env["hr.expense"].search_count([])
         created = self.account.apply_readings([self._reading()])
         expense = created.expense_id
         self.assertEqual(created.fuel_cost, 4500)
@@ -82,7 +83,7 @@ class TestFillExpense(TransactionCase):
         self.assertEqual(created.action_open_expense()["res_id"], expense.id)
         again = self.account.apply_readings([self._reading()])
         self.assertFalse(again)
-        self.assertEqual(self.env["hr.expense"].search_count([]), 1)
+        self.assertEqual(self.env["hr.expense"].search_count([]), before + 1)
 
     def test_liters_use_the_fuel_product_cost_when_no_receipt_is_sent(self):
         self.fuel.standard_price = 20
@@ -113,7 +114,7 @@ class TestFillExpense(TransactionCase):
                 ),
             ]
         )
-        closing = self.env["tms.telematics.reading"].search(
+        closing = self.env["fleet.vehicle.odometer"].search(
             [("external_id", "=", "close")]
         )
         self.assertEqual(closing.expense_id.trip_id, third)
@@ -193,11 +194,12 @@ class TestFillExpense(TransactionCase):
         self.assertFalse(created.expense_id)
 
     def test_applying_the_hook_twice_keeps_the_same_expense(self):
+        before = self.env["hr.expense"].search_count([])
         created = self.account.apply_readings([self._reading(external_id="once")])
         expense = created.expense_id
         created.account_id._apply_fill(created)
         self.assertEqual(created.expense_id, expense)
-        self.assertEqual(self.env["hr.expense"].search_count([]), 1)
+        self.assertEqual(self.env["hr.expense"].search_count([]), before + 1)
 
     def test_a_missing_fuel_product_creates_nothing(self):
         self.env["ir.model.data"].search(
@@ -254,12 +256,14 @@ class TestFillExpense(TransactionCase):
                 "vehicle_id": self.vehicle.id,
             }
         )
-        reading = self.env["tms.telematics.reading"].create(
+        reading = self.env["fleet.vehicle.odometer"].create(
             {
+                "vehicle_id": self.vehicle.id,
                 "account_id": self.account.id,
                 "device_id": device.id,
                 "external_id": "loose-reading",
                 "event": "fill",
+                "value": 1,
                 "odometer_km": 5,
                 "fuel_liters": 1,
             }

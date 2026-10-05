@@ -4,8 +4,8 @@
 from odoo import fields, models
 
 
-class TmsTelematicsReading(models.Model):
-    _inherit = "tms.telematics.reading"
+class FleetVehicleOdometer(models.Model):
+    _inherit = "fleet.vehicle.odometer"
 
     fuel_cost = fields.Float(string="Fuel cost", digits="Product Price", copy=False)
     expense_id = fields.Many2one(
