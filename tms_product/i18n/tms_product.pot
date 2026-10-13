@@ -170,6 +170,11 @@ msgid "Stock Picking"
 msgstr ""
 
 #. module: tms_product
+#: model:product.template,name:tms_product.product_tms_cargo_service
+msgid "TMS Cargo Service"
+msgstr ""
+
+#. module: tms_product
 #: model:product.template,name:tms_product.product_tms_seat_service
 msgid "TMS Seat Service"
 msgstr ""

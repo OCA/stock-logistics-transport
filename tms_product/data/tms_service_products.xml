@@ -1,19 +1,151 @@
 <odoo noupdate="1">
     <record id="product_tms_trip_service" model="product.template">
-        <field name="name">TMS Trip Service</field>
+        <field name="name">TMS FTL Service</field>
         <field name="type">service</field>
         <field name="list_price">100.0</field>
-        <field name="tms_trip" eval="True" />
-        <field name="trip_product_type">trip</field>
-        <field name="tms_factor_type">distance</field>
-        <field name="tms_factor_distance_uom" ref="uom.product_uom_km" />
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">road</field>
+        <field name="booking_type">full_asset</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_cargo_service" model="product.template">
+        <field name="name">TMS LTL Service</field>
+        <field name="type">service</field>
+        <field name="list_price">1.0</field>
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">road</field>
+        <field name="booking_type">shared_space</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_ocean_service" model="product.template">
+        <field name="name">TMS Vessel Chartering Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">water</field>
+        <field name="booking_type">full_asset</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_fcl_service" model="product.template">
+        <field name="name">TMS FCL Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">water</field>
+        <field name="booking_type">full_asset</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_lcl_service" model="product.template">
+        <field name="name">TMS LCL Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">water</field>
+        <field name="booking_type">shared_space</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_air_service" model="product.template">
+        <field name="name">TMS Air Charter Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">air</field>
+        <field name="booking_type">full_asset</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_back_to_back_service" model="product.template">
+        <field name="name">TMS Back to Back Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">air</field>
+        <field name="booking_type">shared_space</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_air_consolidation_service" model="product.template">
+        <field name="name">TMS Air Consolidation Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">air</field>
+        <field name="booking_type">shared_space</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_charter_service" model="product.template">
+        <field name="name">TMS Charter Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="transport_type">passenger</field>
+        <field name="transit_mode">road</field>
+        <field name="booking_type">full_asset</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_cabin_service" model="product.template">
+        <field name="name">TMS Cabin Service</field>
+        <field name="type">service</field>
+        <field name="list_price">50.0</field>
+        <field name="transport_type">passenger</field>
+        <field name="transit_mode">air</field>
+        <field name="booking_type">shared_space</field>
+        <field name="invoice_policy">order</field>
     </record>
 
     <record id="product_tms_seat_service" model="product.template">
         <field name="name">TMS Seat Service</field>
         <field name="type">service</field>
         <field name="list_price">25.0</field>
-        <field name="tms_trip" eval="True" />
-        <field name="trip_product_type">seat</field>
+        <field name="transport_type">passenger</field>
+        <field name="transit_mode">road</field>
+        <field name="booking_type">shared_space</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_rail_service" model="product.template">
+        <field name="name">TMS Rail Charter Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">rail</field>
+        <field name="booking_type">full_asset</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_rail_consolidation_service" model="product.template">
+        <field name="name">TMS Rail Consolidation Service</field>
+        <field name="type">service</field>
+        <field name="list_price">1.0</field>
+        <field name="transport_type">cargo</field>
+        <field name="transit_mode">rail</field>
+        <field name="booking_type">shared_space</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_train_charter_service" model="product.template">
+        <field name="name">TMS Train Charter Service</field>
+        <field name="type">service</field>
+        <field name="list_price">100.0</field>
+        <field name="transport_type">passenger</field>
+        <field name="transit_mode">rail</field>
+        <field name="booking_type">full_asset</field>
+        <field name="invoice_policy">order</field>
+    </record>
+
+    <record id="product_tms_train_seat_service" model="product.template">
+        <field name="name">TMS Train Seat Service</field>
+        <field name="type">service</field>
+        <field name="list_price">25.0</field>
+        <field name="transport_type">passenger</field>
+        <field name="transit_mode">rail</field>
+        <field name="booking_type">shared_space</field>
+        <field name="invoice_policy">order</field>
     </record>
 </odoo>

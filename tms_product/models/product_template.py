@@ -3,6 +3,36 @@
 
 from odoo import api, fields, models
 
+TRANSIT_MODES = [
+    ("air", "Air"),
+    ("water", "Water"),
+    ("road", "Road"),
+    ("rail", "Rail"),
+]
+CARGO_TRANSIT_MODES = [
+    ("air", "Air Freight"),
+    ("water", "Ocean Freight"),
+    ("road", "Road Freight"),
+    ("rail", "Rail Freight"),
+]
+PASSENGER_TRANSIT_MODES = [
+    ("air", "Flight"),
+    ("water", "Ferry/Cruise"),
+    ("road", "Bus"),
+    ("rail", "Train"),
+]
+BOOKING_TYPES = [
+    ("shared_space", "Shared space"),
+    ("full_asset", "Full asset"),
+]
+_TRANSIT_VALUES = {value for value, _label in TRANSIT_MODES}
+_TRANSIT_GROUPS = {
+    "air": "tms.group_tms_air_user",
+    "water": "tms.group_tms_water_user",
+    "road": "tms.group_tms_road_user",
+    "rail": "tms.group_tms_rail_user",
+}
+
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
@@ -28,53 +58,69 @@ class ProductTemplate(models.Model):
         readonly=False,
     )
 
-    # If it is a trip
-    tms_trip = fields.Boolean(
-        string="Is a trip service",
+    transport_type = fields.Selection(
+        [
+            ("none", "None"),
+            ("cargo", "Cargo"),
+            ("passenger", "Passenger"),
+        ],
+        string="Transport Type",
         compute="_compute_restore_transport_fields",
         store=True,
         readonly=False,
     )
-    trip_product_type = fields.Selection(
-        [
-            ("trip", "New trip"),
-            ("seat", "Seat"),
-        ],
-        default="trip",
-        help="Determines if the product is sold as a trip or as a passenger seat",
+    transit_mode = fields.Selection(
+        selection="_selection_transit_mode",
+        string="Transit mode",
         compute="_compute_restore_transport_line_fields",
         store=True,
         readonly=False,
+        help="Air, water, road, or rail network used for this service.",
     )
-    tms_factor_type = fields.Selection(
-        [
-            ("distance", "Distance"),
-            ("weight", "Weight"),
-        ],
-        default="distance",
-        help="""Determines how the trip will be invoiced to the customer:
-        - Distance: By the amount of distance traveled
-        - Weight: By the amount of weight transported""",
+    transit_mode_cargo = fields.Selection(
+        selection="_selection_transit_mode_cargo",
+        string="Transit mode",
+        compute="_compute_transit_mode_labels",
+        inverse="_inverse_transit_mode_cargo",
+    )
+    transit_mode_passenger = fields.Selection(
+        selection="_selection_transit_mode_passenger",
+        string="Transit mode",
+        compute="_compute_transit_mode_labels",
+        inverse="_inverse_transit_mode_passenger",
+    )
+    booking_type = fields.Selection(
+        BOOKING_TYPES,
+        string="Booking type",
         compute="_compute_restore_transport_line_fields",
         store=True,
         readonly=False,
+        help="Shared space is a seat, cabin, or consolidation. "
+        "Full asset is the whole vehicle or an exclusive container.",
     )
-    tms_factor_distance_uom = fields.Many2one(
-        "uom.uom",
-        domain=lambda self: self.env["res.config.settings"]._length_domain(),
-        string="Distance Unit of Measure",
-        compute="_compute_restore_transport_line_fields",
-        store=True,
-        readonly=False,
-    )
-    tms_factor_weight_uom = fields.Many2one(
-        "uom.uom",
-        domain=lambda self: self.env["res.config.settings"]._weight_domain(),
-        string="Weight Unit of Measure",
-        compute="_compute_restore_transport_line_fields",
-        store=True,
-        readonly=False,
-    )
+
+    @api.model
+    def _allowed_transit_modes(self, modes):
+        if self.env.su:
+            return modes
+        user = self.env.user
+        return [
+            item
+            for item in modes
+            if user.has_group(_TRANSIT_GROUPS[item[0]])
+        ]
+
+    @api.model
+    def _selection_transit_mode(self):
+        return self._allowed_transit_modes(TRANSIT_MODES)
+
+    @api.model
+    def _selection_transit_mode_cargo(self):
+        return self._allowed_transit_modes(CARGO_TRANSIT_MODES)
+
+    @api.model
+    def _selection_transit_mode_passenger(self):
+        return self._allowed_transit_modes(PASSENGER_TRANSIT_MODES)
 
     @api.model
     def _compute_vehicle_type_selection(self):
@@ -89,21 +135,69 @@ class ProductTemplate(models.Model):
         for product in self:
             if product.type == "service":
                 product.tms_vehicle = False
+                if product.transport_type not in ("none", "cargo", "passenger"):
+                    product.transport_type = "none"
             else:
-                product.tms_trip = False
+                product.transport_type = False
 
-    @api.depends("tms_trip")
+    @api.depends("transport_type")
     def _compute_restore_transport_line_fields(self):
         for product in self:
-            if not product.tms_trip:
-                product.trip_product_type = False
-                product.tms_factor_type = False
-                product.tms_factor_distance_uom = False
-                product.tms_factor_weight_uom = False
+            if product.transport_type in ("cargo", "passenger"):
+                mode = product.transit_mode
+                product.transit_mode = mode if mode in _TRANSIT_VALUES else False
+                booking = product.booking_type
+                product.booking_type = (
+                    booking if booking in ("shared_space", "full_asset") else False
+                )
+            else:
+                product.transit_mode = False
+                product.booking_type = False
+
+    @api.depends("transit_mode")
+    def _compute_transit_mode_labels(self):
+        for product in self:
+            mode = (
+                product.transit_mode
+                if product.transit_mode in _TRANSIT_VALUES
+                else False
+            )
+            product.transit_mode_cargo = mode
+            product.transit_mode_passenger = mode
+
+    def _inverse_transit_mode_cargo(self):
+        for product in self:
+            if product.transport_type == "cargo":
+                product.transit_mode = product.transit_mode_cargo
+
+    def _inverse_transit_mode_passenger(self):
+        for product in self:
+            if product.transport_type == "passenger":
+                product.transit_mode = product.transit_mode_passenger
 
     @api.onchange("tms_vehicle")
     def _compute_restore_vehicle_fields(self):
         for product in self:
-            if not product.tms_trip:
+            if product.transport_type not in ("cargo", "passenger"):
                 product.vehicle_type = False
                 product.model_id = False
+
+    def _prepare_transport_vals(self, vals):
+        """Drop the mode that does not belong to the chosen transport type."""
+        if "transport_type" not in vals:
+            return vals
+        vals = dict(vals)
+        if vals["transport_type"] not in ("cargo", "passenger"):
+            vals["transit_mode"] = False
+            vals["booking_type"] = False
+        return vals
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        vals_list = [self._prepare_transport_vals(vals) for vals in vals_list]
+        return super().create(vals_list)
+
+    def write(self, vals):
+        if "transport_type" in vals:
+            vals = self._prepare_transport_vals(vals)
+        return super().write(vals)
