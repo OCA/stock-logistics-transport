@@ -48,25 +48,6 @@ class TMSOrder(models.Model):
                 [("work_contact_id", "=", record.driver_id.partner_id.id)], limit=1
             )
 
-    def write(self, vals):
-        vehicles = self.mapped("vehicle_id")
-        result = super().write(vals)
-        if "stage_id" in vals:
-            for order in self.filtered(lambda order: order.stage_id.is_completed):
-                for expense in order.expense_ids.filtered(
-                    lambda expense: expense.state == "draft"
-                ):
-                    expense.action_submit()
-        if {
-            "odometer_start",
-            "odometer_end",
-            "odometer_start_id",
-            "odometer_end_id",
-            "vehicle_id",
-        } & set(vals):
-            (vehicles | self.mapped("vehicle_id"))._reallocate_fuel_expenses()
-        return result
-
     @api.depends("expense_ids", "expense_ids.total_amount")
     def _compute_expenses(self):
         for record in self:
@@ -89,6 +70,27 @@ class TMSOrder(models.Model):
         orders = super().create(vals_list)
         orders.mapped("vehicle_id")._reallocate_fuel_expenses()
         return orders
+
+    def write(self, vals):
+        vehicles = self.mapped("vehicle_id")
+        result = super().write(vals)
+        if "stage_id" in vals:
+            completed = self.filtered(lambda order: order.stage_id.is_completed)
+            for order in completed:
+                drafts = order.expense_ids.filtered(
+                    lambda expense: expense.state == "draft"
+                )
+                for expense in drafts:
+                    expense.action_submit()
+        if {
+            "odometer_start",
+            "odometer_end",
+            "odometer_start_id",
+            "odometer_end_id",
+            "vehicle_id",
+        } & set(vals):
+            (vehicles | self.mapped("vehicle_id"))._reallocate_fuel_expenses()
+        return result
 
     def action_view_expenses(self):
         self.ensure_one()
