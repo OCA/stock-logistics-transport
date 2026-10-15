@@ -81,7 +81,10 @@
             <h3>
                 <t t-out="trip.name" />
             </h3>
-            <t t-foreach="trip.cargo_ids.filtered(lambda cargo: not cargo.parent_id)" t-as="cargo">
+            <t
+                t-foreach="trip.cargo_ids.filtered(lambda cargo: not cargo.parent_id)"
+                t-as="cargo"
+            >
                 <div class="card mt-3">
                     <div class="card-body">
                         <h5>
@@ -129,7 +132,11 @@
                                 name="csrf_token"
                                 t-att-value="request.csrf_token()"
                             />
-                            <input type="hidden" name="parent_id" t-att-value="cargo.id" />
+                            <input
+                                type="hidden"
+                                name="parent_id"
+                                t-att-value="cargo.id"
+                            />
                             <div class="row">
                                 <div class="col-md-3 mb-2">
                                     <input
