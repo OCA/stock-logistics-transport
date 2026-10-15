@@ -8,7 +8,8 @@ from datetime import datetime, timezone
 from dateutil.parser import isoparse
 
 from odoo import api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+
 _logger = logging.getLogger(__name__)
 
 KM_PER_MILE = 1.609344
@@ -44,6 +45,16 @@ class TmsTelematicsAccount(models.Model):
         index=True,
     )
     provider = fields.Selection(selection=lambda self: self._selection_provider())
+    create_vehicle = fields.Boolean(
+        string="Create vehicles",
+        help="Create a fleet vehicle when a device does not match one "
+        "by VIN or license plate, and link the device to it.",
+    )
+    vehicle_model_id = fields.Many2one(
+        "fleet.vehicle.model",
+        string="Vehicle model",
+        help="Model used when this account creates a vehicle for a device.",
+    )
     server_url = fields.Char(string="Server")
     database_name = fields.Char(string="Database")
     login = fields.Char()
@@ -65,6 +76,14 @@ class TmsTelematicsAccount(models.Model):
     @api.model
     def _selection_provider(self):
         return []
+
+    @api.constrains("create_vehicle", "vehicle_model_id")
+    def _check_create_vehicle_model(self):
+        for account in self:
+            if account.create_vehicle and not account.vehicle_model_id:
+                raise ValidationError(
+                    self.env._("Choose a vehicle model before creating vehicles.")
+                )
 
     @api.depends("reading_ids")
     def _compute_reading_count(self):

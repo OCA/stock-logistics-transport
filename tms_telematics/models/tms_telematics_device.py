@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models
+from odoo.exceptions import UserError
 
 
 class TmsTelematicsDevice(models.Model):
@@ -72,4 +73,24 @@ class TmsTelematicsDevice(models.Model):
             )
         if vehicle:
             self.vehicle_id = vehicle
+            return self.vehicle_id
+        if self.account_id.create_vehicle:
+            self.vehicle_id = self._create_vehicle(vin, plate)
         return self.vehicle_id
+
+    def _create_vehicle(self, vin=None, plate=None):
+        """Create the fleet vehicle this device will report for."""
+        self.ensure_one()
+        account = self.account_id
+        if not account.vehicle_model_id:
+            raise UserError(
+                self.env._("Choose a vehicle model before creating vehicles.")
+            )
+        return self.env["fleet.vehicle"].sudo().create(
+            {
+                "model_id": account.vehicle_model_id.id,
+                "license_plate": plate or False,
+                "vin_sn": vin or False,
+                "company_id": account.company_id.id,
+            }
+        )

@@ -56,6 +56,12 @@
                     <group>
                         <group>
                             <field name="provider" />
+                            <field name="create_vehicle" />
+                            <field
+                                name="vehicle_model_id"
+                                invisible="not create_vehicle"
+                                required="create_vehicle"
+                            />
                             <field name="server_url" />
                             <field name="database_name" />
                             <field name="active" invisible="1" />

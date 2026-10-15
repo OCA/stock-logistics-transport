@@ -4,7 +4,7 @@
 import json
 from unittest.mock import patch
 
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.http import Response
 from odoo.tests.common import TransactionCase
 
@@ -302,6 +302,47 @@ class TestTelematics(TransactionCase):
             ),
             2,
         )
+
+    def test_create_vehicle_links_an_unknown_device(self):
+        self.account.write(
+            {"create_vehicle": True, "vehicle_model_id": self.model.id}
+        )
+        before = self.env["fleet.vehicle"].search_count([])
+        created = self.account.apply_readings(
+            [self._reading(vin="VIN-NEW", license_plate="TEL-NEW")]
+        )
+        self.assertEqual(self.env["fleet.vehicle"].search_count([]), before + 1)
+        vehicle = created.device_id.vehicle_id
+        self.assertEqual(vehicle.vin_sn, "VIN-NEW")
+        self.assertEqual(vehicle.license_plate, "TEL-NEW")
+        self.assertEqual(vehicle.model_id, self.model)
+        self.assertEqual(vehicle.company_id, self.account.company_id)
+        self.assertEqual(created.vehicle_id, vehicle)
+
+    def test_a_later_pull_creates_the_missing_vehicle(self):
+        self.account.apply_readings(
+            [self._reading(vin="VIN-LATER", license_plate="TEL-LATER")]
+        )
+        device = self.account.device_ids
+        self.assertFalse(device.vehicle_id)
+        self.account.write(
+            {"create_vehicle": True, "vehicle_model_id": self.model.id}
+        )
+        created = self.account.apply_readings(
+            [
+                self._reading(
+                    external_id="r2",
+                    vin="VIN-LATER",
+                    license_plate="TEL-LATER",
+                )
+            ]
+        )
+        self.assertTrue(device.vehicle_id)
+        self.assertEqual(created.vehicle_id, device.vehicle_id)
+
+    def test_create_vehicle_requires_a_model(self):
+        with self.assertRaises(ValidationError):
+            self.account.create_vehicle = True
 
     def test_a_reading_without_a_vehicle_does_not_write_the_odometer(self):
         before = self.env["fleet.vehicle.odometer"].search_count([])
