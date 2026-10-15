@@ -218,11 +218,6 @@ msgid "Route"
 msgstr "Percorso"
 
 #. module: tms_sale
-#: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_route_id
-msgid "Routes"
-msgstr "Percorsi"
-
-#. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__sale_id
 msgid "Sale"
 msgstr "Vendita"
