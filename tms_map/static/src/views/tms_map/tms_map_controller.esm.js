@@ -28,9 +28,23 @@ export class TmsMapViewController extends Component {
     }
 
     get modelParams() {
-        const {latitude, longitude} = this.props.archInfo;
+        const {latitude, longitude, mode, motion, shape, perimeter} =
+            this.props.archInfo;
         const activeFields = {};
-        for (const name of ["display_name", latitude, longitude]) {
+        const names = ["display_name", latitude, longitude];
+        if (mode) {
+            names.push(mode);
+        }
+        if (motion) {
+            names.push(motion);
+        }
+        if (shape) {
+            names.push(shape);
+        }
+        if (perimeter) {
+            names.push(perimeter);
+        }
+        for (const name of names) {
             activeFields[name] = makeActiveField();
         }
         const config = this.props.state?.modelState?.config || {

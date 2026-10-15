@@ -5,17 +5,126 @@
             <div class="o_tms_map_bar p-2" t-if="isAction">
                 <strong t-esc="title" />
             </div>
+            <div class="o_tms_map_legend" t-if="showMotionLegend">
+                <span
+                    class="o_tms_map_legend_item"
+                    t-foreach="motionLegend"
+                    t-as="item"
+                    t-key="item.motion"
+                >
+                    <i t-attf-class="o_tms_map_swatch o_tms_map_{{item.motion}}" />
+                    <t t-esc="item.label" />
+                </span>
+            </div>
             <div class="text-muted p-2" t-if="state.message" t-esc="state.message" />
+            <div class="o_tms_map_draw" t-if="showDrawTools">
+                <button
+                    type="button"
+                    class="btn btn-primary btn-sm"
+                    t-if="state.drawing"
+                    t-att-disabled="state.cornerCount &lt; 3"
+                    t-on-click="closePerimeter"
+                >
+                    <t t-esc="closePerimeterLabel" />
+                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary btn-sm"
+                    t-on-click="clearPerimeter"
+                >
+                    <t t-esc="clearPerimeterLabel" />
+                </button>
+            </div>
             <div class="o_tms_map_body">
-                <div class="o_tms_map_canvas" t-ref="map" />
-                <aside class="o_tms_map_side" t-if="mapMode === 'dispatch'">
+                <aside class="o_tms_map_side o_tms_map_list" t-if="mapMode === 'fleet'">
+                    <label class="o_tms_map_check">
+                        <input
+                            type="checkbox"
+                            t-att-checked="state.syncList"
+                            t-on-change="onSyncChange"
+                        />
+                        <span t-esc="syncLabel" />
+                    </label>
+                    <div class="text-muted mb-2" t-esc="sortLabel" />
+                    <button
+                        type="button"
+                        t-foreach="fleetRows"
+                        t-as="vehicle"
+                        t-key="vehicle.id"
+                        t-att-class="fleetClass(vehicle)"
+                        t-on-click="() => this.focusFleet(vehicle)"
+                    >
+                        <i t-att-class="vehiclePinClass(vehicle)" />
+                        <strong t-esc="vehicle.name" />
+                        <span
+                            class="text-muted"
+                            t-if="vehicle.date"
+                            t-esc="sinceLabel(vehicle.date)"
+                        />
+                        <div
+                            class="text-muted"
+                            t-esc="vehicle.driver || noDriverLabel"
+                        />
+                        <div
+                            class="text-muted"
+                            t-if="vehicle.motion"
+                            t-esc="motionLabel(vehicle.motion)"
+                        />
+                    </button>
+                </aside>
+                <aside
+                    class="o_tms_map_side o_tms_map_list"
+                    t-if="mapMode === 'history'"
+                >
+                    <label class="o_tms_map_check">
+                        <input
+                            type="checkbox"
+                            t-att-checked="state.selectSeveral"
+                            t-on-change="onSelectSeveral"
+                        />
+                        <span t-esc="severalLabel" />
+                    </label>
+                    <button
+                        type="button"
+                        t-foreach="state.history"
+                        t-as="trip"
+                        t-key="trip.id"
+                        t-att-class="tripClass(trip)"
+                        t-on-click="() => this.selectTrip(trip)"
+                    >
+                        <strong t-esc="trip.name" />
+                        <div t-esc="trip.vehicle" />
+                        <div class="text-muted" t-esc="tripRange(trip)" />
+                        <div class="text-muted">
+                            <t t-esc="trip.origin" />
+                            <t t-if="trip.destination">
+                                — <t t-esc="trip.destination" />
+                            </t>
+                        </div>
+                        <div
+                            class="text-muted"
+                            t-if="trip.distance"
+                            t-esc="trip.distance"
+                        />
+                    </button>
+                </aside>
+                <aside
+                    class="o_tms_map_side o_tms_map_list"
+                    t-if="mapMode === 'dispatch'"
+                >
                     <div
-                        class="mb-3"
+                        class="o_tms_map_vehicle mb-3"
                         t-foreach="state.vehicles"
                         t-as="vehicle"
                         t-key="vehicle.id"
                     >
+                        <i t-att-class="vehiclePinClass(vehicle)" />
                         <strong t-esc="vehicle.name" />
+                        <div
+                            class="text-muted"
+                            t-if="vehicle.motion"
+                            t-esc="motionLabel(vehicle.motion)"
+                        />
                         <div class="text-muted" t-esc="vehicle.date" />
                     </div>
                     <div
@@ -50,6 +159,7 @@
                         </button>
                     </div>
                 </aside>
+                <div class="o_tms_map_canvas" t-ref="map" />
             </div>
         </div>
     </t>

@@ -7,24 +7,25 @@ import {
     useState,
 } from "@odoo/owl";
 import {_t} from "@web/core/l10n/translation";
+import {useService} from "@web/core/utils/hooks";
 import {
-    divIcon,
     featureGroup,
     map as createMap,
     marker,
+    polygon,
     tileLayer,
 } from "../../lib/leaflet-src.esm.js";
+import {
+    GEOFENCE_STYLE,
+    modeIcon,
+    motionLabel,
+    motionLegend as motionLegendItems,
+    parsePerimeter,
+    pin,
+} from "../../tms_map_pin.esm.js";
+import {drawTransportLocations} from "../../tms_map_locations.esm.js";
 
 const TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-
-function pin() {
-    return divIcon({
-        className: "",
-        html: '<i class="fa fa-map-marker o_tms_map_icon"></i>',
-        iconSize: [28, 28],
-        iconAnchor: [14, 28],
-    });
-}
 
 export class TmsMapViewRenderer extends Component {
     static template = "tms_map.TmsMapViewRenderer";
@@ -35,6 +36,7 @@ export class TmsMapViewRenderer extends Component {
     };
 
     setup() {
+        this.orm = useService("orm");
         this.mapRef = useRef("map");
         this.state = useState({message: ""});
         this.map = null;
@@ -50,14 +52,28 @@ export class TmsMapViewRenderer extends Component {
         );
     }
 
+    get showMotionLegend() {
+        return Boolean(this.props.archInfo.motion);
+    }
+
+    get motionLegend() {
+        return motionLegendItems();
+    }
+
     signature() {
         const root = this.props.model.root;
         const records = (root && root.records) || [];
-        const {latitude, longitude} = this.props.archInfo;
+        const {latitude, longitude, mode, motion} = this.props.archInfo;
         return records
             .map((record) => {
                 const data = record.data;
-                return [record.resId, data[latitude], data[longitude]].join(":");
+                return [
+                    record.resId,
+                    data[latitude],
+                    data[longitude],
+                    mode ? data[mode] : "",
+                    motion ? data[motion] : "",
+                ].join(":");
             })
             .join("|");
     }
@@ -72,6 +88,7 @@ export class TmsMapViewRenderer extends Component {
             attribution: "&copy; OpenStreetMap",
             maxZoom: 19,
         }).addTo(this.map);
+        this.locations = featureGroup().addTo(this.map);
         this.layer = featureGroup().addTo(this.map);
         this.observer = new ResizeObserver(() => this.refit());
         this.observer.observe(element);
@@ -93,25 +110,63 @@ export class TmsMapViewRenderer extends Component {
             return;
         }
         this.layer.clearLayers();
-        const {latitude, longitude} = this.props.archInfo;
+        const {latitude, longitude, mode, motion, shape, perimeter} =
+            this.props.archInfo;
         const records = (this.props.model.root && this.props.model.root.records) || [];
         this.points = [];
         for (const record of records) {
+            const name = record.data.display_name || "";
+            if (shape && record.data[shape] === "area") {
+                const corners = parsePerimeter(record.data[perimeter]);
+                if (corners.length >= 3) {
+                    const area = polygon(corners, GEOFENCE_STYLE).addTo(this.layer);
+                    area.on("click", () => this.props.onOpen(record.resId));
+                    if (name) {
+                        area.bindTooltip(name);
+                    }
+                    this.points.push(...corners);
+                }
+                continue;
+            }
+            if (shape && record.data[shape] !== "point") {
+                continue;
+            }
             const lat = record.data[latitude];
             const lng = record.data[longitude];
             if (!(lat || lng)) {
                 continue;
             }
-            const name = record.data.display_name || "";
-            const placed = marker([lat, lng], {icon: pin(), title: name});
+            const iconClass = mode ? modeIcon(record.data[mode]) : "fa-map-marker";
+            const status = motion ? record.data[motion] || "off" : false;
+            const label = motionLabel(status);
+            const title = label ? `${name} (${label})` : name;
+            const placed = marker([lat, lng], {
+                icon: pin(iconClass, status),
+                title,
+            });
             placed.on("click", () => this.props.onOpen(record.resId));
             placed.addTo(this.layer);
             this.points.push([lat, lng]);
         }
         this.state.message = this.points.length
             ? ""
-            : _t("No coordinates on these locations.");
+            : _t("No coordinates to show.");
         this.refit();
+        this.overlayLocations();
+    }
+
+    async overlayLocations() {
+        if (!this.locations || this.props.archInfo.shape) {
+            return;
+        }
+        const rows = await this.orm.call("res.partner", "tms_map_locations", []);
+        if (!this.locations) {
+            return;
+        }
+        drawTransportLocations(this.locations, rows);
+        if (rows.length) {
+            this.state.message = "";
+        }
     }
 
     refit() {

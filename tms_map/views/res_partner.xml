@@ -7,6 +7,10 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
                 <page string="Map" name="tms_map">
+                    <group>
+                        <field name="tms_map_shape" />
+                        <field name="tms_geofence" invisible="1" />
+                    </group>
                     <widget name="tms_map" mode="geocoding" />
                 </page>
             </xpath>

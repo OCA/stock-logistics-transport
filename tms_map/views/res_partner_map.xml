@@ -5,10 +5,17 @@
         <field name="model">res.partner</field>
         <field name="type">tms_map</field>
         <field name="arch" type="xml">
-            <tms_map latitude="partner_latitude" longitude="partner_longitude">
+            <tms_map
+                latitude="partner_latitude"
+                longitude="partner_longitude"
+                shape="tms_map_shape"
+                perimeter="tms_geofence"
+            >
                 <field name="display_name" />
                 <field name="partner_latitude" />
                 <field name="partner_longitude" />
+                <field name="tms_map_shape" />
+                <field name="tms_geofence" />
             </tms_map>
         </field>
     </record>

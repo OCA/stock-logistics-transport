@@ -14,6 +14,16 @@
     min-height: 0;
 }
 
+.o_content.o_tms_map_action {
+    display: flex;
+    flex-direction: column;
+}
+
+.o_content.o_tms_map_action > .o_tms_map_root {
+    flex: 1 1 auto;
+    min-height: 0;
+}
+
 .o_tms_map_root {
     display: flex;
     flex-direction: column;
@@ -49,8 +59,78 @@
     padding: 0.75rem;
 }
 
-.o_tms_map_icon {
+.o_tms_map_list {
+    width: 340px;
+    border-left: 0;
+    border-right: 1px solid #dee2e6;
+}
+
+.o_tms_map_check {
     display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+}
+
+.o_tms_map_fleet_row,
+.o_tms_map_trip {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border: 0;
+    border-bottom: 1px solid #dee2e6;
+    background: transparent;
+    padding: 0.55rem 0.15rem;
+}
+
+.o_tms_map_fleet_row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.o_tms_map_fleet_row div {
+    flex-basis: 100%;
+}
+
+.o_tms_map_selected {
+    background: #e8f1fb;
+}
+
+.o_tms_map_draw {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0.4rem 0.75rem;
+    background: #fff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.o_tms_map_legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1.25rem;
+    align-items: center;
+    padding: 0.4rem 0.75rem;
+    background: #fff;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.o_tms_map_legend_item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.o_tms_map_swatch {
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+}
+
+.o_tms_map_icon {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 28px;
@@ -60,6 +140,38 @@
     color: #1f4e79;
     font-size: 16px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.o_tms_map_side .o_tms_map_vehicle {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.o_tms_map_side .o_tms_map_icon {
+    width: 22px;
+    height: 22px;
+    font-size: 12px;
+}
+
+.o_tms_map_side .o_tms_map_vehicle .text-muted {
+    flex-basis: 100%;
+}
+
+.o_tms_map_moving {
+    background: #2e7d32;
+    color: #fff;
+}
+
+.o_tms_map_idle {
+    background: #ef6c00;
+    color: #fff;
+}
+
+.o_tms_map_off {
+    background: #c62828;
+    color: #fff;
 }
 
 .o_tms_map_popup {

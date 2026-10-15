@@ -19,12 +19,26 @@
         sequence="16"
         groups="tms.group_tms_user"
     />
+    <record id="action_tms_map_history" model="ir.actions.client">
+        <field name="name">Trip history</field>
+        <field name="tag">tms_map</field>
+        <field name="context">{'map_mode': 'history'}</field>
+    </record>
+
     <menuitem
         id="menu_tms_map_heatmap"
         name="Position heatmap"
         parent="tms.reporting"
         action="action_tms_map_heatmap"
         sequence="40"
+        groups="tms.group_tms_user"
+    />
+    <menuitem
+        id="menu_tms_map_history"
+        name="Trip history"
+        parent="tms.operations"
+        action="action_tms_map_history"
+        sequence="17"
         groups="tms.group_tms_user"
     />
 </odoo>
