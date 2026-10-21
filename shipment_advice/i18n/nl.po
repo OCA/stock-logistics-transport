@@ -29,6 +29,84 @@ msgid "'Shipment Advice - %s' % (object.name)"
 msgstr "'Verzendadvies - %s' % (object.name)"
 
 #. module: shipment_advice
+#: model:mail.template,body_html:shipment_advice.email_template_shipment_advice
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\"> "
+"Dear, <br><br> This\n"
+"                    shipment advice has been planned with departure date <t "
+"t-out=\"format_date(object.departure_date) or ''\" data-oe-t-"
+"inline=\"true\"></t> and arrival date <t t-"
+"out=\"format_date(object.arrival_date) or ''\" data-oe-t-inline=\"true\"></"
+"t> <t t-out=\"'from ' + object.dock_id.name\" t-if=\"object.dock_id\"></t>. "
+"<br><br>\n"
+"                    <h3>Pickings</h3>\n"
+"                    <table cellspacing=\"0\" cellpadding=\"0\" width=\"100%"
+"\" style=\"margin-top:30px;color:#666666;\">\n"
+"                        <thead>\n"
+"                            <tr style=\"color:#9A6C8E; font-size:12px;\">\n"
+"                                <th align=\"left\" style=\"padding-bottom: "
+"0px;width:10%;text-align:left;\">Origin</th>\n"
+"                                <th style=\"width:50%;text-align:right;\" "
+"align=\"right\">Address</th>\n"
+"                                <th style=\"width:10%;text-align:right;\" "
+"align=\"right\">Weight (kg)</th>\n"
+"                                <th style=\"width:20%;text-align:right;\" "
+"align=\"right\">Products</th>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td colspan=\"5\" "
+"style=\"height:1px;background-color:#9A6C8E;\"></td>\n"
+"                            </tr>\n"
+"                        </thead>\n"
+"                        <tbody t-"
+"foreach=\"object.planned_picking_ids.sorted(lambda picking: "
+"picking.with_context(active_shipment_advice_id=object.id).sequence_in_shipment_advice)"
+"\" t-as=\"picking\">\n"
+"                            <tr style=\"font-weight:bold;\">\n"
+"                                <td align=\"left\">\n"
+"                                    <t t-out=\"picking.origin or ''\"></t>\n"
+"                                </td>\n"
+"                                <td align=\"right\">\n"
+"                                    <t t-"
+"out=\"picking.partner_id.contact_address or ''\"></t>\n"
+"                                </td>\n"
+"                                <td align=\"right\">\n"
+"                                    <t t-out=\"picking.weight or ''\"></t>\n"
+"                                </td>\n"
+"                                <td align=\"right\">\n"
+"                                    <t t-set=\"product_names\" t-"
+"value=\"set(picking.move_ids.mapped('product_id.name'))\"></t>\n"
+"                                    <t t-if=\"len(product_names) == 1\">\n"
+"                                    <t t-out=\"', '.join(product_names) or "
+"''\"></t>\n"
+"                                    </t>\n"
+"                                    <t t-else=\"\">\n"
+"                                        <t t-out=\"len(product_names)\"></"
+"t>\n"
+"                                    </t>\n"
+"                                </td>\n"
+"                            </tr>\n"
+"                            <tr>\n"
+"                                <td colspan=\"5\" "
+"style=\"height:1px;background-color:#e3e3e3;\"></td>\n"
+"                            </tr>\n"
+"                        </tbody>\n"
+"                    </table>\n"
+"                    <br>\n"
+"                Please find the shipment advice report attached.<br><br>\n"
+"                Do not hesitate to contact us if you have any questions. "
+"<br>\n"
+"                    <t t-if=\"user.signature\">\n"
+"                        <br>\n"
+"                        <t t-out=\"user.signature or ''\"></t>\n"
+"                    </t>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+
+#. module: shipment_advice
 #: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
 msgid "<span class=\"o_horizontal_separator\">Bulk content</span>"
 msgstr "<span class=\"o_horizontal_separator\">Bulk inhoud</span>"
@@ -1082,6 +1160,11 @@ msgid "Run shipment advice in queue job"
 msgstr "Verzendadvies uitvoeren als wachtrijtaak"
 
 #. module: shipment_advice
+#: model_terms:ir.ui.view,arch_db:shipment_advice.shipment_advice_view_form
+msgid "Send by Email"
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_shipment_advice_planned_picking_order__sequence
 msgid "Sequence"
 msgstr ""
@@ -1110,6 +1193,13 @@ msgid "Shipment Advice Planned Picking Order"
 msgstr ""
 
 #. module: shipment_advice
+#: model:mail.template,subject:shipment_advice.email_template_shipment_advice
+msgid ""
+"Shipment Advice {{ object.name or 'n/a' }} "
+"{{ format_date(object.departure_date) }} "
+msgstr ""
+
+#. module: shipment_advice
 #: model:ir.model.fields,field_description:shipment_advice.field_res_company__shipment_advice_auto_close_incoming
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_auto_close_incoming
 msgid "Shipment Advice: Auto Close Incoming Advices"
@@ -1120,6 +1210,11 @@ msgstr "Verzendadvies: Inkomende adviezen automatisch sluiten"
 #: model:ir.model.fields,field_description:shipment_advice.field_res_config_settings__shipment_advice_outgoing_backorder_policy
 msgid "Shipment Advice: Outgoing backorder policy"
 msgstr "Verzendadvies: Beleid voor uitgaande naleveringen"
+
+#. module: shipment_advice
+#: model:mail.template,name:shipment_advice.email_template_shipment_advice
+msgid "Shipment Advice: Send by email"
+msgstr ""
 
 #. module: shipment_advice
 #: model:ir.actions.act_window,name:shipment_advice.shipment_advice_action
@@ -1620,6 +1715,11 @@ msgstr "shipment_advice_auto_close_incoming"
 #: model_terms:ir.ui.view,arch_db:shipment_advice.res_config_settings_view_form
 msgid "shipment_advice_run_in_queue_job"
 msgstr "shipment_advice_run_in_queue_job"
+
+#. module: shipment_advice
+#: model:mail.template,report_name:shipment_advice.email_template_shipment_advice
+msgid "{{ (object.name or 'Shipment Advice').replace('/','_') }}"
+msgstr ""
 
 #~ msgid ""
 #~ "To prevent timeouts for large shipments, enable this option to execute\n"
