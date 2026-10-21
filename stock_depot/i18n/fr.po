@@ -1,0 +1,73 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_depot
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-01-01 14:06+0000\n"
+"Last-Translator: samibc2c <sami.bouzidi@camptocamp.com>\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: stock_depot
+#: model:ir.actions.act_window,name:stock_depot.stock_depot_action
+#: model:ir.ui.menu,name:stock_depot.stock_depot_menu
+msgid "Depots"
+msgstr "Dépôts"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__id
+msgid "ID"
+msgstr "ID"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: stock_depot
+#: model:ir.model.fields,field_description:stock_depot.field_stock_depot__partner_id
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: stock_depot
+#: model:ir.model,name:stock_depot.model_stock_depot
+msgid "Partner depot"
+msgstr "Dépôt du partenaire"
