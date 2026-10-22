@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class TMSTeam(models.Model):
@@ -40,6 +41,12 @@ class TMSTeam(models.Model):
 
     active = fields.Boolean(default=True)
     name = fields.Char(required=True)
+    operation = fields.Selection(
+        [("cargo", "Cargo"), ("passenger", "Passenger")],
+        compute="_compute_operation",
+        store=True,
+        readonly=False,
+    )
     description = fields.Text()
     color = fields.Integer("Color Index")
     stage_ids = fields.Many2many(
@@ -116,3 +123,51 @@ class TMSTeam(models.Model):
             team.trips_todo_count = sum(count for _stage, count in data)
 
     _name_uniq = models.Constraint("unique (name)", "Team name already exists!")
+
+    @api.depends("vehicle_ids.operation")
+    def _compute_operation(self):
+        for team in self:
+            operations = {op for op in team.vehicle_ids.mapped("operation") if op}
+            if len(operations) == 1:
+                team.operation = operations.pop()
+            elif len(operations) > 1:
+                team.operation = False
+            else:
+                team.operation = team.operation
+
+    @api.constrains("vehicle_ids", "operation")
+    def _check_single_operation(self):
+        for team in self:
+            operations = {op for op in team.vehicle_ids.mapped("operation") if op}
+            if len(operations) > 1 or (
+                len(operations) == 1 and team.operation not in operations
+            ):
+                raise ValidationError(
+                    self.env._(
+                        "A team manages either cargo vehicles or passenger vehicles."
+                    )
+                )
+
+    def _sync_stage_ids(self):
+        if self.env.context.get("skip_team_stage_sync"):
+            return
+        for team in self:
+            order_stages = self.env["tms.stage"]._stages_for_operation(team.operation)
+            other_stages = team.stage_ids.filtered(
+                lambda stage: stage.stage_type != "order"
+            )
+            team.with_context(skip_team_stage_sync=True).stage_ids = (
+                other_stages | order_stages
+            )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        teams = super().create(vals_list)
+        teams._sync_stage_ids()
+        return teams
+
+    def write(self, vals):
+        result = super().write(vals)
+        if "operation" in vals or "vehicle_ids" in vals:
+            self._sync_stage_ids()
+        return result

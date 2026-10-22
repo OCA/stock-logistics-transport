@@ -33,8 +33,9 @@ TMS - Expense
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 The TMS - Expense module allows drivers and users to register expenses
-in trips. This module creates two new expense categories: Fuel and Toll
-expenses.
+in trips. Tolls, hotels, and advances stay on the trip where they were
+paid. Fuel is spread across the trips driven since the previous fill,
+using each trip's odometer distance.
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -76,6 +77,17 @@ Create expenses in trips
 3. In the Expense page, create a new expense. The driver is set as the
    default employee that registered the expense.
 4. When the trip is completed, the expense is automatically submitted.
+
+Spread fuel across trips
+------------------------
+
+1. Record the departure and arrival odometer on each trip. The readings
+   are stored on the vehicle.
+2. On the fuel expense, set the vehicle and the odometer at the pump.
+3. The amount is split across the trips whose readings fall between this
+   fill and the previous fill of the same vehicle.
+4. The amount owed to the driver still uses the full receipt recorded on
+   the trip. Fuel allocated is the trip's share of the tank.
 
 Bug Tracker
 ===========
@@ -125,16 +137,10 @@ promote its widespread use.
 .. |maintainer-max3903| image:: https://github.com/max3903.png?size=40px
     :target: https://github.com/max3903
     :alt: max3903
-.. |maintainer-santiagordz| image:: https://github.com/santiagordz.png?size=40px
-    :target: https://github.com/santiagordz
-    :alt: santiagordz
-.. |maintainer-EdgarRetes| image:: https://github.com/EdgarRetes.png?size=40px
-    :target: https://github.com/EdgarRetes
-    :alt: EdgarRetes
 
-Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-max3903| |maintainer-santiagordz| |maintainer-EdgarRetes| 
+|maintainer-max3903| 
 
 This module is part of the `OCA/stock-logistics-transport <https://github.com/OCA/stock-logistics-transport/tree/19.0/tms_expense>`_ project on GitHub.
 

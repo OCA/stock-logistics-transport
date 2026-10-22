@@ -182,6 +182,10 @@ class TestAccountAnalyticLine(TestTMSAccountCommon):
 
 
 class TestAccountMoveTMS(TestTMSAccountCommon):
+    def test_invoice_line_has_no_factor_column(self):
+        arch = self.env["account.move"].get_view(view_type="form")["arch"]
+        self.assertNotIn("tms_factor", arch)
+
     def test_prepare_product_base_line_with_tms_factor(self):
         move = self.env["account.move"].create(
             {
@@ -325,7 +329,13 @@ class TestSaleOrderLineAnalytic(TestTMSAccountCommon):
                 "list_price": 100,
             }
         )
-        product.product_tmpl_id.write({"tms_trip": True, "trip_product_type": "trip"})
+        product.product_tmpl_id.write(
+            {
+                "transport_type": "cargo",
+                "transit_mode": "road",
+                "booking_type": "full_asset",
+            }
+        )
         sale = self.env["sale.order"].create(
             {
                 "partner_id": self.partner.id,
@@ -421,6 +431,57 @@ class TestHrExpenseAnalytic(TestTMSAccountCommon):
         expense._onchange_trip_id()
         self.assertEqual(expense.trip_id, trip)
 
+    def test_spread_fuel_splits_analytic_distribution(self):
+        fuel = self.env.ref("tms_expense.expense_trip_fuel")
+        spans = ((1000, 1100), (1100, 1250), (1250, 1400))
+        trips = []
+        for index, (start, end) in enumerate(spans, start=1):
+            trip = self._create_trip(name=f"Analytic fuel {index}")
+            trip.write(
+                {
+                    "odometer_start": start,
+                    "odometer_end": end,
+                    "distance_loaded": end - start,
+                }
+            )
+            trip.analytic_account_id = self.env["account.analytic.account"].create(
+                {
+                    "name": f"Analytic fuel {index}",
+                    "plan_id": self.order_plan.id,
+                }
+            )
+            trips.append(trip)
+        self.env["hr.expense"].create(
+            {
+                "name": "Opening fill",
+                "product_id": fuel.id,
+                "total_amount": 20,
+                "employee_id": self.employee.id,
+                "vehicle_id": self.vehicle.id,
+                "odometer": 1000,
+                "trip_id": trips[0].id,
+            }
+        )
+        closing = self.env["hr.expense"].create(
+            {
+                "name": "Closing fill",
+                "product_id": fuel.id,
+                "total_amount": 400,
+                "employee_id": self.employee.id,
+                "vehicle_id": self.vehicle.id,
+                "odometer": 1400,
+                "trip_id": trips[2].id,
+            }
+        )
+        found = {}
+        for key, share in (closing.analytic_distribution or {}).items():
+            for trip in trips:
+                if str(trip.analytic_account_id.id) in key.split(","):
+                    found[trip] = share
+        self.assertAlmostEqual(found[trips[0]], 25)
+        self.assertAlmostEqual(found[trips[1]], 37.5)
+        self.assertAlmostEqual(found[trips[2]], 37.5)
+
 
 class TestTMSOrderWorkflow(TestTMSAccountCommon):
     def test_compute_invoice_and_bill_counts(self):
@@ -447,10 +508,9 @@ class TestSaleOrderAccount(TestTMSAccountCommon):
         )
         cls.product.product_tmpl_id.write(
             {
-                "tms_trip": True,
-                "trip_product_type": "trip",
-                "tms_factor_type": "distance",
-                "tms_factor_distance_uom": cls.env.ref("uom.product_uom_km").id,
+                "transport_type": "cargo",
+                "transit_mode": "road",
+                "booking_type": "full_asset",
             }
         )
 
@@ -527,7 +587,6 @@ class TestSaleOrderAccount(TestTMSAccountCommon):
                             "product_id": self.product.id,
                             "product_uom_qty": 1,
                             "tms_order_ids": [(6, 0, [trip.id])],
-                            "tms_factor": 2,
                         },
                     )
                 ],
@@ -535,8 +594,8 @@ class TestSaleOrderAccount(TestTMSAccountCommon):
         )
         line = sale.order_line
         values = line._prepare_invoice_line()
-        self.assertEqual(values["tms_factor"], 2)
-        self.assertEqual(values["tms_factor_uom"], "km")
+        self.assertNotIn("tms_factor", values)
+        self.assertNotIn("tms_factor_uom", values)
 
     def test_default_analytic_distribution_empty_trip(self):
         line = self.env["sale.order.line"].new(
@@ -780,6 +839,33 @@ class TestTMSOrderInvoicing(TestTMSAccountCommon):
         invoice = sale._create_invoices()
         trip._assign_analytic_accounts(invoice)
         self.assertTrue(invoice.invoice_line_ids.analytic_distribution)
+
+    def test_completed_trip_invoices_every_sale_on_its_cargo(self):
+        trip, sale = self._setup_sale_with_trip()
+        other = self.env["sale.order"].create(
+            {
+                "partner_id": self.partner.id,
+                "order_line": [
+                    (0, 0, {"product_id": self.product.id, "product_uom_qty": 1})
+                ],
+            }
+        )
+        other.action_confirm()
+        line = other.order_line
+        self.env["tms.cargo"].create(
+            {
+                "name": "Shared freight",
+                "order_id": trip.id,
+                "sale_line_id": line.id,
+                "quantity": 1.0,
+            }
+        )
+        own_trips = line.tms_order_ids
+        own_trips.write({"sale_line_id": False, "sale_id": False})
+        trip.create_invoice = True
+        trip.write({"stage_id": self.stage_completed.id})
+        self.assertTrue(sale.invoice_ids)
+        self.assertTrue(other.invoice_ids)
 
     def test_handle_invoices_skips_when_not_all_completed(self):
         trip, sale = self._setup_sale_with_trip()
