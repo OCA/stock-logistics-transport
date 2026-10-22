@@ -3,6 +3,7 @@
         <field name="order_id" ref="demo_tms_sale_order" />
         <field
             name="product_id"
+            model="product.template"
             eval="obj().env.ref('tms_product.product_tms_trip_service').product_variant_ids[0].id"
         />
         <field name="product_uom_qty">1</field>
@@ -16,6 +17,7 @@
         <field name="order_id" ref="demo_tms_sale_order" />
         <field
             name="product_id"
+            model="product.template"
             eval="obj().env.ref('tms_product.product_tms_seat_service').product_variant_ids[0].id"
         />
         <field name="product_uom_qty">1</field>

@@ -34,16 +34,21 @@ class SeatTicket(models.Model):
         default="available",
         readonly=True,
     )
+    boarded = fields.Boolean()
 
-    @api.model
+    def _sync_boarded_stage(self):
+        self.tms_order_id._sync_boarded_stage()
+
     def write(self, vals):
         res = super().write(vals)
-        for record in self:
-            if "sale_line_id" in vals:
+        if "sale_line_id" in vals:
+            for record in self:
                 if vals.get("sale_line_id"):
                     record.available = "not_available"
                 else:
                     record.available = "available"
+        if {"sale_line_id", "boarded", "tms_order_id"} & set(vals):
+            self._sync_boarded_stage()
         return res
 
     @api.model
@@ -63,6 +68,8 @@ class SeatTicket(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        return super().create(
+        tickets = super().create(
             [self._prepare_vals_from_trip(dict(vals)) for vals in vals_list]
         )
+        tickets._sync_boarded_stage()
+        return tickets
