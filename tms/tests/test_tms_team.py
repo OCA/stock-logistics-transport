@@ -1,3 +1,4 @@
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 
@@ -107,3 +108,48 @@ class TestTMSTeam(TransactionCase):
         self.assertIn(
             self.stage2, self.team.stage_ids, "Default stage2 should be in team stages"
         )
+
+    def _vehicle(self, name, operation):
+        return self.env["fleet.vehicle"].create(
+            {
+                "name": name,
+                "operation": operation,
+                "model_id": self.vehicle.model_id.id,
+            }
+        )
+
+    def test_cargo_team_stages_include_loaded(self):
+        truck = self._vehicle("Cargo truck", "cargo")
+        team = self.env["tms.team"].create(
+            {"name": "Cargo team", "vehicle_ids": [(6, 0, [truck.id])]}
+        )
+        self.assertEqual(team.operation, "cargo")
+        self.assertIn(self.env.ref("tms.tms_stage_order_loaded"), team.stage_ids)
+        self.assertNotIn(self.env.ref("tms.tms_stage_order_boarded"), team.stage_ids)
+        stages = self.env["tms.order"]._read_group_stage_ids(
+            self.env["tms.stage"], [("tms_team_id", "=", team.id)]
+        )
+        order_stages = team.stage_ids.filtered(
+            lambda stage: stage.stage_type == "order"
+        )
+        self.assertEqual(stages, order_stages)
+
+    def test_passenger_team_stages_include_boarded(self):
+        bus = self._vehicle("Passenger bus", "passenger")
+        team = self.env["tms.team"].create(
+            {"name": "Passenger team", "vehicle_ids": [(6, 0, [bus.id])]}
+        )
+        self.assertEqual(team.operation, "passenger")
+        self.assertIn(self.env.ref("tms.tms_stage_order_boarded"), team.stage_ids)
+        self.assertNotIn(self.env.ref("tms.tms_stage_order_loaded"), team.stage_ids)
+
+    def test_mixed_vehicles_rejected(self):
+        truck = self._vehicle("Mixed truck", "cargo")
+        bus = self._vehicle("Mixed bus", "passenger")
+        with self.assertRaises(ValidationError):
+            self.env["tms.team"].create(
+                {
+                    "name": "Mixed team",
+                    "vehicle_ids": [(6, 0, [truck.id, bus.id])],
+                }
+            )
