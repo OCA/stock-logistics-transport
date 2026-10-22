@@ -128,6 +128,7 @@ class TestTMSOrder(TransactionCase):
         self.assertTrue(
             order.start_trip, "Start trip flag should be True after starting the order"
         )
+        self.assertEqual(order.stage_id, self.env.ref("tms.tms_stage_order_in_transit"))
 
         order.button_refresh_duration()
         refresh_duration = (order.date_end - order.date_start).total_seconds() / 3600
@@ -149,6 +150,7 @@ class TestTMSOrder(TransactionCase):
         self.assertFalse(
             order.start_trip, "Start trip flag should be False after ending the order"
         )
+        self.assertEqual(order.stage_id, self.env.ref("tms.tms_stage_order_arrived"))
 
         diff_duration = round(order.scheduled_duration - order.duration, 2)
         self.assertEqual(

@@ -1,0 +1,190 @@
+<odoo noupdate="1">
+    <!-- Trucks -->
+    <record id="demo_vehicle_truck_volvo_fh" model="fleet.vehicle">
+        <field name="license_plate">01-TRK-101</field>
+        <field name="model_id" ref="model_volvo_fh" />
+        <field name="color">White</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+        <field name="capacity">90</field>
+        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="weight_capacity">25000</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="tms_driver_id" ref="demo_driver_1" />
+    </record>
+    <record id="demo_vehicle_truck_actros" model="fleet.vehicle">
+        <field name="license_plate">02-TRK-202</field>
+        <field name="model_id" ref="model_mercedes_actros" />
+        <field name="color">Blue</field>
+        <field name="model_year">2023</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+        <field name="capacity">85</field>
+        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="weight_capacity">22000</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="tms_driver_id" ref="demo_driver_2" />
+    </record>
+    <record id="demo_vehicle_truck_cascadia" model="fleet.vehicle">
+        <field name="license_plate">03-TRK-303</field>
+        <field name="model_id" ref="model_freightliner_cascadia" />
+        <field name="color">Red</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+        <field name="capacity">80</field>
+        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="tms_driver_id" ref="demo_driver_4" />
+    </record>
+    <record id="demo_vehicle_truck_t680" model="fleet.vehicle">
+        <field name="license_plate">04-TRK-404</field>
+        <field name="model_id" ref="model_kenworth_t680" />
+        <field name="color">Black</field>
+        <field name="model_year">2022</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+        <field name="capacity">80</field>
+        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="tms_driver_id" ref="demo_driver_5" />
+    </record>
+    <record id="demo_vehicle_truck_scania_r" model="fleet.vehicle">
+        <field name="license_plate">05-TRK-505</field>
+        <field name="model_id" ref="model_scania_r" />
+        <field name="color">Silver</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+        <field name="capacity">88</field>
+        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="tms_driver_id" ref="demo_driver_3" />
+    </record>
+    <record id="demo_vehicle_truck_npr" model="fleet.vehicle">
+        <field name="license_plate">06-TRK-606</field>
+        <field name="model_id" ref="model_isuzu_npr" />
+        <field name="color">White</field>
+        <field name="model_year">2021</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">cargo</field>
+        <field name="capacity">25</field>
+        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="tms_driver_id" ref="demo_driver_6" />
+    </record>
+
+    <!-- Buses -->
+    <record id="demo_vehicle_bus_tourismo" model="fleet.vehicle">
+        <field name="license_plate">01-BUS-101</field>
+        <field name="model_id" ref="model_mercedes_tourismo" />
+        <field name="color">White</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">passenger</field>
+        <field name="capacity">49</field>
+        <field name="tms_driver_id" ref="demo_driver_7" />
+    </record>
+    <record id="demo_vehicle_bus_9700" model="fleet.vehicle">
+        <field name="license_plate">02-BUS-202</field>
+        <field name="model_id" ref="model_volvo_9700" />
+        <field name="color">Silver</field>
+        <field name="model_year">2023</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">passenger</field>
+        <field name="capacity">53</field>
+        <field name="tms_driver_id" ref="demo_driver_8" />
+    </record>
+    <record id="demo_vehicle_bus_irizar" model="fleet.vehicle">
+        <field name="license_plate">03-BUS-303</field>
+        <field name="model_id" ref="model_irizar_i6" />
+        <field name="color">Gray</field>
+        <field name="model_year">2022</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">passenger</field>
+        <field name="capacity">55</field>
+        <field name="tms_driver_id" ref="demo_driver_9" />
+    </record>
+    <record id="demo_vehicle_bus_citaro" model="fleet.vehicle">
+        <field name="license_plate">04-BUS-404</field>
+        <field name="model_id" ref="model_mercedes_citaro" />
+        <field name="color">Blue</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">passenger</field>
+        <field name="capacity">80</field>
+        <field name="tms_driver_id" ref="demo_driver_10" />
+    </record>
+    <record id="demo_vehicle_bus_yutong" model="fleet.vehicle">
+        <field name="license_plate">05-BUS-505</field>
+        <field name="model_id" ref="model_yutong_zk6128" />
+        <field name="color">Green</field>
+        <field name="model_year">2024</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">passenger</field>
+        <field name="capacity">45</field>
+    </record>
+    <record id="demo_vehicle_bus_prevost" model="fleet.vehicle">
+        <field name="license_plate">06-BUS-606</field>
+        <field name="model_id" ref="model_prevost_h3_45" />
+        <field name="color">Black</field>
+        <field name="model_year">2021</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="odometer_unit">kilometers</field>
+        <field name="operation">passenger</field>
+        <field name="capacity">56</field>
+    </record>
+
+    <!-- Trailers and dolly -->
+    <record id="demo_brand_utility" model="fleet.vehicle.model.brand">
+        <field name="name">Utility</field>
+    </record>
+    <record id="demo_model_dry_van" model="fleet.vehicle.model">
+        <field name="name">Dry Van 53</field>
+        <field name="brand_id" ref="demo_brand_utility" />
+        <field name="vehicle_type">truck</field>
+    </record>
+    <record id="demo_model_dolly" model="fleet.vehicle.model">
+        <field name="name">Converter Dolly</field>
+        <field name="brand_id" ref="demo_brand_utility" />
+        <field name="vehicle_type">truck</field>
+    </record>
+    <record id="demo_vehicle_trailer_caja" model="fleet.vehicle">
+        <field name="license_plate">07-TRL-701</field>
+        <field name="model_id" ref="demo_model_dry_van" />
+        <field name="model_year">2023</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="tms_equipment_type">trailer</field>
+        <field name="capacity">86</field>
+        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="weight_capacity">20000</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+    </record>
+    <record id="demo_vehicle_trailer_dropped" model="fleet.vehicle">
+        <field name="license_plate">08-TRL-802</field>
+        <field name="model_id" ref="demo_model_dry_van" />
+        <field name="model_year">2020</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="tms_equipment_type">trailer</field>
+        <field name="tms_location_id" ref="demo_location_1" />
+        <field name="capacity">70</field>
+        <field name="cargo_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="weight_capacity">18000</field>
+        <field name="weight_uom_id" ref="uom.product_uom_kgm" />
+    </record>
+    <record id="demo_vehicle_dolly" model="fleet.vehicle">
+        <field name="license_plate">09-DLY-901</field>
+        <field name="model_id" ref="demo_model_dolly" />
+        <field name="model_year">2019</field>
+        <field name="state_id" ref="fleet.fleet_vehicle_state_registered" />
+        <field name="tms_equipment_type">dolly</field>
+    </record>
+</odoo>
