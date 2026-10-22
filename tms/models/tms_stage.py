@@ -106,6 +106,115 @@ class TMSStage(models.Model):
                 self.env._("Color code should be Hex Code. Ex:-#FFFFFF")
             )
 
+    @api.model
+    def _operation_stage_xmlids(self, operation):
+        xmlids = [
+            "tms_stage_order_draft",
+            "tms_stage_order_confirmed",
+            "tms_stage_order_in_transit",
+            "tms_stage_order_arrived",
+            "tms_stage_order_completed",
+            "tms_stage_order_cancelled",
+        ]
+        if operation == "cargo":
+            xmlids.insert(2, "tms_stage_order_loaded")
+        elif operation == "passenger":
+            xmlids.insert(2, "tms_stage_order_boarded")
+        return xmlids
+
+    @api.model
+    def _stages_for_operation(self, operation):
+        stages = self.env["tms.stage"]
+        for xmlid in self._operation_stage_xmlids(operation):
+            stage = self.env.ref(f"tms.{xmlid}", raise_if_not_found=False)
+            if stage:
+                stages |= stage
+        return stages
+
+    @api.model
+    def _sync_operation_stages(self):
+        """Create the trip stages and keep their sequence on upgrade."""
+        specs = (
+            ("tms_stage_order_draft", "Draft", 10, True, False, False, "#ECF0F1"),
+            (
+                "tms_stage_order_confirmed",
+                "Confirmed",
+                20,
+                True,
+                False,
+                False,
+                "#ECF0F1",
+            ),
+            ("tms_stage_order_loaded", "Loaded", 30, False, False, False, "#F5CBA7"),
+            ("tms_stage_order_boarded", "Boarded", 40, False, False, False, "#AED6F1"),
+            (
+                "tms_stage_order_in_transit",
+                "In Transit",
+                50,
+                True,
+                False,
+                False,
+                "#F9E79F",
+            ),
+            ("tms_stage_order_arrived", "Arrived", 60, True, False, False, "#ABEBC6"),
+            (
+                "tms_stage_order_completed",
+                "Completed",
+                70,
+                True,
+                True,
+                False,
+                "#1C2833",
+            ),
+            (
+                "tms_stage_order_cancelled",
+                "Cancelled",
+                80,
+                True,
+                False,
+                True,
+                "#1C2833",
+            ),
+        )
+        for xmlid, _name, sequence, is_default, is_completed, fold, color in specs:
+            stage = self.env.ref(f"tms.{xmlid}", raise_if_not_found=False)
+            if not stage:
+                continue
+            stage.write(
+                {
+                    "sequence": sequence,
+                    "is_default": is_default,
+                    "is_completed": is_completed,
+                    "fold": fold,
+                    "custom_color": color,
+                }
+            )
+        for xmlid, name, sequence, is_default, is_completed, fold, color in specs:
+            if self.env.ref(f"tms.{xmlid}", raise_if_not_found=False):
+                continue
+            stage = self.create(
+                {
+                    "name": name,
+                    "sequence": sequence,
+                    "stage_type": "order",
+                    "is_default": is_default,
+                    "is_completed": is_completed,
+                    "fold": fold,
+                    "custom_color": color,
+                }
+            )
+            self.env["ir.model.data"].create(
+                {
+                    "module": "tms",
+                    "name": xmlid,
+                    "model": "tms.stage",
+                    "res_id": stage.id,
+                    "noupdate": True,
+                }
+            )
+        # Every team must pick up the operation stages.
+        self.env["tms.team"].search([])._sync_stage_ids()  # pylint: disable=no-search-all
+
     @api.ondelete(at_uninstall=False)
     def _unlink_except_default(self):
         if any(stage.is_default for stage in self):

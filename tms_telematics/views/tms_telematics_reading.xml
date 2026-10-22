@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_tms_telematics_reading_list" model="ir.ui.view">
+        <field name="name">tms.telematics.reading.list</field>
+        <field name="model">tms.telematics.reading</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0" delete="0">
+                <field name="timestamp" />
+                <field name="device_id" />
+                <field name="vehicle_id" />
+                <field name="event" />
+                <field name="odometer_km" />
+                <field name="speed" />
+                <field name="fuel_liters" />
+                <field name="ignition" />
+            </list>
+        </field>
+    </record>
+    <record id="view_tms_telematics_reading_form" model="ir.ui.view">
+        <field name="name">tms.telematics.reading.form</field>
+        <field name="model">tms.telematics.reading</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0" delete="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="account_id" />
+                            <field name="device_id" />
+                            <field name="vehicle_id" />
+                            <field name="external_id" />
+                            <field name="event" />
+                            <field name="timestamp" />
+                        </group>
+                        <group>
+                            <field name="latitude" />
+                            <field name="longitude" />
+                            <field name="odometer_km" />
+                            <field name="speed" />
+                            <field name="ignition" />
+                            <field name="fuel_liters" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_tms_telematics_reading" model="ir.actions.act_window">
+        <field name="name">Telematics Readings</field>
+        <field name="res_model">tms.telematics.reading</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
