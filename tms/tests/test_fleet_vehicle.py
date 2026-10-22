@@ -47,6 +47,46 @@ class TestFleetVehicle(TransactionCase):
             "Vehicle UOM should be correctly assigned",
         )
 
+    def test_truck_and_bus_types(self):
+        selection = dict(
+            self.env["fleet.vehicle.model"]
+            ._fields["vehicle_type"]
+            ._description_selection(self.env)
+        )
+        self.assertEqual(selection["truck"], "Truck")
+        self.assertEqual(selection["bus"], "Bus")
+
+        brand = self.env["fleet.vehicle.model.brand"].create({"name": "Demo Maker"})
+        truck_model = self.env["fleet.vehicle.model"].create(
+            {
+                "name": "Demo Tractor",
+                "brand_id": brand.id,
+                "vehicle_type": "truck",
+            }
+        )
+        truck = self.env["fleet.vehicle"].create(
+            {
+                "model_id": truck_model.id,
+                "license_plate": "TRK-TEST",
+            }
+        )
+        self.assertEqual(truck.vehicle_type, "truck")
+
+        bus_model = self.env["fleet.vehicle.model"].create(
+            {
+                "name": "Demo Coach",
+                "brand_id": brand.id,
+                "vehicle_type": "bus",
+            }
+        )
+        bus = self.env["fleet.vehicle"].create(
+            {
+                "model_id": bus_model.id,
+                "license_plate": "BUS-TEST",
+            }
+        )
+        self.assertEqual(bus.vehicle_type, "bus")
+
     def test_default_volume_uom(self):
         self.assertEqual(
             self.vehicle.cargo_uom_id,

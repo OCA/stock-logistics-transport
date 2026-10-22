@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <function model="tms.telematics.account" name="_demo_import_fills" />
+</odoo>

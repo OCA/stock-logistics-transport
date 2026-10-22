@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_fleet_vehicle_odometer_form_expense" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.form.expense</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field
+            name="inherit_id"
+            ref="tms_telematics.view_fleet_vehicle_odometer_form_telematics"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='fuel_liters']" position="after">
+                <field name="fuel_cost" />
+                <field name="expense_id" />
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="button_box">
+                    <button
+                        name="action_open_expense"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-money"
+                        invisible="not expense_id"
+                    >
+                        <span class="o_stat_text">Expense</span>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_fleet_vehicle_odometer_list_expense" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.list.expense</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field
+            name="inherit_id"
+            ref="tms_telematics.view_fleet_vehicle_odometer_list_telematics"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='fuel_liters']" position="after">
+                <field name="fuel_cost" optional="hide" />
+                <field name="expense_id" optional="show" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
