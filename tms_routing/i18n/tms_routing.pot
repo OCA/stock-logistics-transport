@@ -1,0 +1,167 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms_routing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-04 02:17+0000\n"
+"PO-Revision-Date: 2026-10-04 02:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: tms_routing
+#: model:ir.model.fields,help:tms_routing.field_tms_route__avoid_tolls
+msgid "Ask the provider for a path that does not use toll roads."
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route__avoid_tolls
+msgid "Avoid Tolls"
+msgstr ""
+
+#. module: tms_routing
+#. odoo-python
+#: code:addons/tms_routing/models/tms_route.py:0
+msgid "Choose a routing provider."
+msgstr ""
+
+#. module: tms_routing
+#: model_terms:ir.ui.view,arch_db:tms_routing.view_tms_route_form_routing
+msgid "Compute route"
+msgstr ""
+
+#. module: tms_routing
+#. odoo-python
+#: code:addons/tms_routing/models/tms_route.py:0
+msgid "Compute route %(name)s"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route__display_name
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields.selection,name:tms_routing.selection__tms_route__routing_state__error
+msgid "Error"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route__id
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__id
+msgid "ID"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__latitude
+msgid "Latitude"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__location_id
+msgid "Location"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__longitude
+msgid "Longitude"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields.selection,name:tms_routing.selection__tms_route__routing_state__draft
+msgid "Not requested"
+msgstr ""
+
+#. module: tms_routing
+#: model_terms:ir.ui.view,arch_db:tms_routing.view_tms_route_form_routing
+msgid "Ordered stops"
+msgstr ""
+
+#. module: tms_routing
+#. odoo-python
+#: code:addons/tms_routing/tests/test_routing.py:0
+msgid "Provider down"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields.selection,name:tms_routing.selection__tms_route__routing_state__pending
+msgid "Queued"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__route_id
+msgid "Route"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields.selection,name:tms_routing.selection__tms_route__routing_state__done
+msgid "Routed"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route__routing_error
+msgid "Routing Error"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route__routing_provider
+msgid "Routing Provider"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route__routing_state
+msgid "Routing State"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route_stop__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model.fields,field_description:tms_routing.field_tms_route__stop_ids
+msgid "Stop"
+msgstr ""
+
+#. module: tms_routing
+#. odoo-python
+#: code:addons/tms_routing/models/tms_route.py:0
+msgid "The routing provider %(provider)s is not installed."
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model,name:tms_routing.model_tms_route
+msgid "Transport Management System Route"
+msgstr ""
+
+#. module: tms_routing
+#: model:ir.model,name:tms_routing.model_tms_route_stop
+msgid "Transport Route Stop"
+msgstr ""
