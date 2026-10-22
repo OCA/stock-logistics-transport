@@ -1,0 +1,1118 @@
+<odoo noupdate="1">
+    <!-- Categories -->
+    <record id="model_category_tractor" model="fleet.vehicle.model.category">
+        <field name="name">Tractor</field>
+    </record>
+    <record id="model_category_box_truck" model="fleet.vehicle.model.category">
+        <field name="name">Box Truck</field>
+    </record>
+    <record id="model_category_coach" model="fleet.vehicle.model.category">
+        <field name="name">Coach</field>
+    </record>
+    <record id="model_category_city_bus" model="fleet.vehicle.model.category">
+        <field name="name">City Bus</field>
+    </record>
+
+    <!-- Truck manufacturers missing from Fleet -->
+    <record id="brand_freightliner" model="fleet.vehicle.model.brand">
+        <field name="name">Freightliner</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_freightliner-image.png"
+        />
+    </record>
+    <record id="brand_kenworth" model="fleet.vehicle.model.brand">
+        <field name="name">Kenworth</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_kenworth-image.png"
+        />
+    </record>
+    <record id="brand_peterbilt" model="fleet.vehicle.model.brand">
+        <field name="name">Peterbilt</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_peterbilt-image.png"
+        />
+    </record>
+    <record id="brand_mack" model="fleet.vehicle.model.brand">
+        <field name="name">Mack</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_mack-image.png"
+        />
+    </record>
+    <record id="brand_international" model="fleet.vehicle.model.brand">
+        <field name="name">International</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_international-image.png"
+        />
+    </record>
+    <record id="brand_scania" model="fleet.vehicle.model.brand">
+        <field name="name">Scania</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_scania-image.png"
+        />
+    </record>
+    <record id="brand_man" model="fleet.vehicle.model.brand">
+        <field name="name">MAN</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_man-image.png"
+        />
+    </record>
+    <record id="brand_daf" model="fleet.vehicle.model.brand">
+        <field name="name">DAF</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_daf-image.png"
+        />
+    </record>
+    <record id="brand_iveco" model="fleet.vehicle.model.brand">
+        <field name="name">Iveco</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_iveco-image.png"
+        />
+    </record>
+    <record id="brand_hino" model="fleet.vehicle.model.brand">
+        <field name="name">Hino</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_hino-image.png"
+        />
+    </record>
+
+    <!-- Bus manufacturers missing from Fleet -->
+    <record id="brand_setra" model="fleet.vehicle.model.brand">
+        <field name="name">Setra</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_setra-image.png"
+        />
+    </record>
+    <record id="brand_irizar" model="fleet.vehicle.model.brand">
+        <field name="name">Irizar</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_irizar-image.png"
+        />
+    </record>
+    <record id="brand_marcopolo" model="fleet.vehicle.model.brand">
+        <field name="name">Marcopolo</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_marcopolo-image.png"
+        />
+    </record>
+    <record id="brand_yutong" model="fleet.vehicle.model.brand">
+        <field name="name">Yutong</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_yutong-image.png"
+        />
+    </record>
+    <record id="brand_prevost" model="fleet.vehicle.model.brand">
+        <field name="name">Prevost</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_prevost-image.png"
+        />
+    </record>
+    <record id="brand_mci" model="fleet.vehicle.model.brand">
+        <field name="name">MCI</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_mci-image.png"
+        />
+    </record>
+    <record id="brand_new_flyer" model="fleet.vehicle.model.brand">
+        <field name="name">New Flyer</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_new_flyer-image.png"
+        />
+    </record>
+    <record id="brand_van_hool" model="fleet.vehicle.model.brand">
+        <field name="name">Van Hool</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_van_hool-image.png"
+        />
+    </record>
+    <record id="brand_alexander_dennis" model="fleet.vehicle.model.brand">
+        <field name="name">Alexander Dennis</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_alexander_dennis-image.png"
+        />
+    </record>
+
+    <!-- Truck models -->
+    <record id="model_volvo_fh" model="fleet.vehicle.model">
+        <field name="name">FH</field>
+        <field name="brand_id" ref="fleet.brand_volvo" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">375</field>
+        <field name="horsepower">500</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_volvo_fm" model="fleet.vehicle.model">
+        <field name="name">FM</field>
+        <field name="brand_id" ref="fleet.brand_volvo" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">280</field>
+        <field name="horsepower">380</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_mercedes_actros" model="fleet.vehicle.model">
+        <field name="name">Actros</field>
+        <field name="brand_id" ref="fleet.brand_mercedes" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_mercedes_atego" model="fleet.vehicle.model">
+        <field name="name">Atego</field>
+        <field name="brand_id" ref="fleet.brand_mercedes" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">manual</field>
+        <field name="power">175</field>
+        <field name="horsepower">240</field>
+    </record>
+    <record id="model_freightliner_cascadia" model="fleet.vehicle.model">
+        <field name="name">Cascadia</field>
+        <field name="brand_id" ref="brand_freightliner" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">350</field>
+        <field name="horsepower">470</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_freightliner_m2" model="fleet.vehicle.model">
+        <field name="name">M2 106</field>
+        <field name="brand_id" ref="brand_freightliner" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">260</field>
+        <field name="horsepower">350</field>
+    </record>
+    <record id="model_kenworth_t680" model="fleet.vehicle.model">
+        <field name="name">T680</field>
+        <field name="brand_id" ref="brand_kenworth" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">340</field>
+        <field name="horsepower">455</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_peterbilt_579" model="fleet.vehicle.model">
+        <field name="name">579</field>
+        <field name="brand_id" ref="brand_peterbilt" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">340</field>
+        <field name="horsepower">455</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_mack_anthem" model="fleet.vehicle.model">
+        <field name="name">Anthem</field>
+        <field name="brand_id" ref="brand_mack" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">445</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_international_lt" model="fleet.vehicle.model">
+        <field name="name">LT</field>
+        <field name="brand_id" ref="brand_international" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">340</field>
+        <field name="horsepower">455</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_scania_r" model="fleet.vehicle.model">
+        <field name="name">R-series</field>
+        <field name="brand_id" ref="brand_scania" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_man_tgx" model="fleet.vehicle.model">
+        <field name="name">TGX</field>
+        <field name="brand_id" ref="brand_man" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_daf_xf" model="fleet.vehicle.model">
+        <field name="name">XF</field>
+        <field name="brand_id" ref="brand_daf" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_iveco_s_way" model="fleet.vehicle.model">
+        <field name="name">S-Way</field>
+        <field name="brand_id" ref="brand_iveco" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_hino_338" model="fleet.vehicle.model">
+        <field name="name">338</field>
+        <field name="brand_id" ref="brand_hino" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">191</field>
+        <field name="horsepower">260</field>
+    </record>
+    <record id="model_isuzu_npr" model="fleet.vehicle.model">
+        <field name="name">NPR</field>
+        <field name="brand_id" ref="fleet.brand_isuzu" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">160</field>
+        <field name="horsepower">215</field>
+    </record>
+    <record id="model_ford_f750" model="fleet.vehicle.model">
+        <field name="name">F-750</field>
+        <field name="brand_id" ref="fleet.brand_ford" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">200</field>
+        <field name="horsepower">270</field>
+    </record>
+    <record id="model_renault_t" model="fleet.vehicle.model">
+        <field name="name">T</field>
+        <field name="brand_id" ref="fleet.brand_renault" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+
+    <!-- Bus models -->
+    <record id="model_mercedes_tourismo" model="fleet.vehicle.model">
+        <field name="name">Tourismo</field>
+        <field name="brand_id" ref="fleet.brand_mercedes" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">49</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">315</field>
+        <field name="horsepower">428</field>
+    </record>
+    <record id="model_mercedes_citaro" model="fleet.vehicle.model">
+        <field name="name">Citaro</field>
+        <field name="brand_id" ref="fleet.brand_mercedes" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_city_bus" />
+        <field name="seats">35</field>
+        <field name="doors">3</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">220</field>
+        <field name="horsepower">299</field>
+    </record>
+    <record id="model_volvo_9700" model="fleet.vehicle.model">
+        <field name="name">9700</field>
+        <field name="brand_id" ref="fleet.brand_volvo" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">53</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">339</field>
+        <field name="horsepower">460</field>
+    </record>
+    <record id="model_volvo_7900" model="fleet.vehicle.model">
+        <field name="name">7900 Electric</field>
+        <field name="brand_id" ref="fleet.brand_volvo" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_city_bus" />
+        <field name="seats">40</field>
+        <field name="doors">3</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">electric</field>
+        <field name="transmission">automatic</field>
+        <field name="power">200</field>
+    </record>
+    <record id="model_setra_s516" model="fleet.vehicle.model">
+        <field name="name">S 516 HD</field>
+        <field name="brand_id" ref="brand_setra" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">55</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">315</field>
+        <field name="horsepower">428</field>
+    </record>
+    <record id="model_irizar_i6" model="fleet.vehicle.model">
+        <field name="name">i6</field>
+        <field name="brand_id" ref="brand_irizar" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">55</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+    </record>
+    <record id="model_marcopolo_paradiso" model="fleet.vehicle.model">
+        <field name="name">Paradiso G8</field>
+        <field name="brand_id" ref="brand_marcopolo" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">46</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">manual</field>
+        <field name="power">280</field>
+        <field name="horsepower">380</field>
+    </record>
+    <record id="model_yutong_zk6128" model="fleet.vehicle.model">
+        <field name="name">ZK6128</field>
+        <field name="brand_id" ref="brand_yutong" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">45</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">electric</field>
+        <field name="transmission">automatic</field>
+        <field name="power">250</field>
+    </record>
+    <record id="model_prevost_h3_45" model="fleet.vehicle.model">
+        <field name="name">H3-45</field>
+        <field name="brand_id" ref="brand_prevost" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">56</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">339</field>
+        <field name="horsepower">460</field>
+    </record>
+    <record id="model_mci_j4500" model="fleet.vehicle.model">
+        <field name="name">J4500</field>
+        <field name="brand_id" ref="brand_mci" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">56</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">339</field>
+        <field name="horsepower">450</field>
+    </record>
+    <record id="model_new_flyer_xcelsior" model="fleet.vehicle.model">
+        <field name="name">Xcelsior</field>
+        <field name="brand_id" ref="brand_new_flyer" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_city_bus" />
+        <field name="seats">40</field>
+        <field name="doors">3</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">electric</field>
+        <field name="transmission">automatic</field>
+        <field name="power">200</field>
+    </record>
+    <record id="model_van_hool_cx45" model="fleet.vehicle.model">
+        <field name="name">CX45</field>
+        <field name="brand_id" ref="brand_van_hool" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">56</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+    </record>
+    <record id="model_adl_enviro400" model="fleet.vehicle.model">
+        <field name="name">Enviro400</field>
+        <field name="brand_id" ref="brand_alexander_dennis" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_city_bus" />
+        <field name="seats">70</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">180</field>
+        <field name="horsepower">245</field>
+    </record>
+    <record id="model_scania_touring" model="fleet.vehicle.model">
+        <field name="name">Touring</field>
+        <field name="brand_id" ref="brand_scania" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">49</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+    </record>
+    <record id="model_iveco_crossway" model="fleet.vehicle.model">
+        <field name="name">Crossway</field>
+        <field name="brand_id" ref="brand_iveco" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">55</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">235</field>
+        <field name="horsepower">320</field>
+    </record>
+
+    <!-- Boat and plane categories -->
+    <record id="model_category_container_ship" model="fleet.vehicle.model.category">
+        <field name="name">Container Ship</field>
+    </record>
+    <record id="model_category_cruise_ship" model="fleet.vehicle.model.category">
+        <field name="name">Cruise Ship</field>
+    </record>
+    <record id="model_category_ferry" model="fleet.vehicle.model.category">
+        <field name="name">Ferry</field>
+    </record>
+    <record id="model_category_narrow_body" model="fleet.vehicle.model.category">
+        <field name="name">Narrow-body</field>
+    </record>
+    <record id="model_category_wide_body" model="fleet.vehicle.model.category">
+        <field name="name">Wide-body</field>
+    </record>
+    <record id="model_category_freighter" model="fleet.vehicle.model.category">
+        <field name="name">Freighter</field>
+    </record>
+    <record id="model_category_regional" model="fleet.vehicle.model.category">
+        <field name="name">Regional</field>
+    </record>
+    <record id="model_category_business_jet" model="fleet.vehicle.model.category">
+        <field name="name">Business Jet</field>
+    </record>
+
+    <!-- Boat manufacturers -->
+    <record id="brand_maersk" model="fleet.vehicle.model.brand">
+        <field name="name">Maersk</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_maersk-image.png"
+        />
+    </record>
+    <record id="brand_msc" model="fleet.vehicle.model.brand">
+        <field name="name">MSC</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_msc-image.png"
+        />
+    </record>
+    <record id="brand_cma_cgm" model="fleet.vehicle.model.brand">
+        <field name="name">CMA CGM</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_cma_cgm-image.png"
+        />
+    </record>
+    <record id="brand_cosco" model="fleet.vehicle.model.brand">
+        <field name="name">COSCO Shipping</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_cosco-image.png"
+        />
+    </record>
+    <record id="brand_evergreen" model="fleet.vehicle.model.brand">
+        <field name="name">Evergreen</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_evergreen-image.png"
+        />
+    </record>
+    <record id="brand_hapag_lloyd" model="fleet.vehicle.model.brand">
+        <field name="name">Hapag-Lloyd</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_hapag_lloyd-image.png"
+        />
+    </record>
+    <record id="brand_damen" model="fleet.vehicle.model.brand">
+        <field name="name">Damen</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_damen-image.png"
+        />
+    </record>
+    <record id="brand_fincantieri" model="fleet.vehicle.model.brand">
+        <field name="name">Fincantieri</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_fincantieri-image.png"
+        />
+    </record>
+    <record id="brand_viking" model="fleet.vehicle.model.brand">
+        <field name="name">Viking</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_viking-image.png"
+        />
+    </record>
+
+    <!-- Plane manufacturers -->
+    <record id="brand_boeing" model="fleet.vehicle.model.brand">
+        <field name="name">Boeing</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_boeing-image.png"
+        />
+    </record>
+    <record id="brand_airbus" model="fleet.vehicle.model.brand">
+        <field name="name">Airbus</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_airbus-image.png"
+        />
+    </record>
+    <record id="brand_embraer" model="fleet.vehicle.model.brand">
+        <field name="name">Embraer</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_embraer-image.png"
+        />
+    </record>
+    <record id="brand_atr" model="fleet.vehicle.model.brand">
+        <field name="name">ATR</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_atr-image.png"
+        />
+    </record>
+    <record id="brand_antonov" model="fleet.vehicle.model.brand">
+        <field name="name">Antonov</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_antonov-image.png"
+        />
+    </record>
+    <record id="brand_bombardier" model="fleet.vehicle.model.brand">
+        <field name="name">Bombardier</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_bombardier-image.png"
+        />
+    </record>
+    <record id="brand_gulfstream" model="fleet.vehicle.model.brand">
+        <field name="name">Gulfstream</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_gulfstream-image.png"
+        />
+    </record>
+    <record id="brand_cessna" model="fleet.vehicle.model.brand">
+        <field name="name">Cessna</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_cessna-image.png"
+        />
+    </record>
+    <record id="brand_dassault" model="fleet.vehicle.model.brand">
+        <field name="name">Dassault</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_dassault-image.png"
+        />
+    </record>
+
+    <!-- Boat models -->
+    <record id="model_maersk_triple_e" model="fleet.vehicle.model">
+        <field name="name">Triple-E</field>
+        <field name="brand_id" ref="brand_maersk" />
+        <field name="vehicle_type">boat</field>
+        <field name="category_id" ref="model_category_container_ship" />
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="teu_capacity">18270</field>
+        <field name="deadweight_tonnage">165000</field>
+        <field name="deadweight_uom_id" ref="uom.product_uom_ton" />
+        <field name="draft_limit">14.5</field>
+        <field name="draft_uom_id" ref="uom.product_uom_meter" />
+    </record>
+    <record id="model_msc_gulsun" model="fleet.vehicle.model">
+        <field name="name">Gulsun Class</field>
+        <field name="brand_id" ref="brand_msc" />
+        <field name="vehicle_type">boat</field>
+        <field name="category_id" ref="model_category_container_ship" />
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="teu_capacity">23756</field>
+        <field name="deadweight_tonnage">224000</field>
+        <field name="deadweight_uom_id" ref="uom.product_uom_ton" />
+        <field name="draft_limit">16.5</field>
+        <field name="draft_uom_id" ref="uom.product_uom_meter" />
+    </record>
+    <record id="model_cma_cgm_jacques_saade" model="fleet.vehicle.model">
+        <field name="name">Jacques Saadé</field>
+        <field name="brand_id" ref="brand_cma_cgm" />
+        <field name="vehicle_type">boat</field>
+        <field name="category_id" ref="model_category_container_ship" />
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="teu_capacity">23112</field>
+        <field name="deadweight_tonnage">220000</field>
+        <field name="deadweight_uom_id" ref="uom.product_uom_ton" />
+        <field name="draft_limit">16.0</field>
+        <field name="draft_uom_id" ref="uom.product_uom_meter" />
+    </record>
+    <record id="model_cosco_universe" model="fleet.vehicle.model">
+        <field name="name">Universe Class</field>
+        <field name="brand_id" ref="brand_cosco" />
+        <field name="vehicle_type">boat</field>
+        <field name="category_id" ref="model_category_container_ship" />
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="teu_capacity">21237</field>
+        <field name="deadweight_tonnage">198000</field>
+        <field name="deadweight_uom_id" ref="uom.product_uom_ton" />
+        <field name="draft_limit">16.0</field>
+        <field name="draft_uom_id" ref="uom.product_uom_meter" />
+    </record>
+    <record id="model_evergreen_a_class" model="fleet.vehicle.model">
+        <field name="name">A Class</field>
+        <field name="brand_id" ref="brand_evergreen" />
+        <field name="vehicle_type">boat</field>
+        <field name="category_id" ref="model_category_container_ship" />
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="teu_capacity">23992</field>
+        <field name="deadweight_tonnage">241960</field>
+        <field name="deadweight_uom_id" ref="uom.product_uom_ton" />
+        <field name="draft_limit">16.5</field>
+        <field name="draft_uom_id" ref="uom.product_uom_meter" />
+    </record>
+    <record id="model_hapag_berlin_express" model="fleet.vehicle.model">
+        <field name="name">Berlin Express</field>
+        <field name="brand_id" ref="brand_hapag_lloyd" />
+        <field name="vehicle_type">boat</field>
+        <field name="category_id" ref="model_category_container_ship" />
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="teu_capacity">23664</field>
+        <field name="deadweight_tonnage">229000</field>
+        <field name="deadweight_uom_id" ref="uom.product_uom_ton" />
+        <field name="draft_limit">16.0</field>
+        <field name="draft_uom_id" ref="uom.product_uom_meter" />
+    </record>
+    <record id="model_damen_ropax_6716" model="fleet.vehicle.model">
+        <field name="name">RoPax 6716</field>
+        <field name="brand_id" ref="brand_damen" />
+        <field name="vehicle_type">boat</field>
+        <field name="category_id" ref="model_category_ferry" />
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="seats">600</field>
+        <field name="passenger_capacity">600</field>
+        <field name="deadweight_tonnage">4500</field>
+        <field name="deadweight_uom_id" ref="uom.product_uom_ton" />
+        <field name="draft_limit">4.2</field>
+        <field name="draft_uom_id" ref="uom.product_uom_meter" />
+    </record>
+    <record id="model_fincantieri_vista" model="fleet.vehicle.model">
+        <field name="name">Vista Class</field>
+        <field name="brand_id" ref="brand_fincantieri" />
+        <field name="vehicle_type">boat</field>
+        <field name="category_id" ref="model_category_cruise_ship" />
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="seats">4200</field>
+        <field name="passenger_capacity">4200</field>
+        <field name="draft_limit">8.6</field>
+        <field name="draft_uom_id" ref="uom.product_uom_meter" />
+    </record>
+    <record id="model_viking_longship" model="fleet.vehicle.model">
+        <field name="name">Longship</field>
+        <field name="brand_id" ref="brand_viking" />
+        <field name="vehicle_type">boat</field>
+        <field name="category_id" ref="model_category_cruise_ship" />
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="seats">190</field>
+        <field name="passenger_capacity">190</field>
+        <field name="deadweight_tonnage">1500</field>
+        <field name="deadweight_uom_id" ref="uom.product_uom_ton" />
+        <field name="draft_limit">1.5</field>
+        <field name="draft_uom_id" ref="uom.product_uom_meter" />
+    </record>
+
+    <!-- Plane models -->
+    <record id="model_boeing_737_800" model="fleet.vehicle.model">
+        <field name="name">737-800</field>
+        <field name="brand_id" ref="brand_boeing" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_narrow_body" />
+        <field name="model_year">2024</field>
+        <field name="seats">189</field>
+        <field name="passenger_capacity">189</field>
+        <field name="max_takeoff_weight">79016</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">20000</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_volume_capacity">44</field>
+        <field name="max_volume_uom_id" ref="uom.product_uom_cubic_meter" />
+    </record>
+    <record id="model_boeing_747_8f" model="fleet.vehicle.model">
+        <field name="name">747-8F</field>
+        <field name="brand_id" ref="brand_boeing" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_freighter" />
+        <field name="model_year">2024</field>
+        <field name="position_slots">34</field>
+        <field name="max_takeoff_weight">447700</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">137700</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_volume_capacity">858</field>
+        <field name="max_volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="floor_loading_limit">1500</field>
+        <field name="floor_loading_uom_id" ref="uom_kg_per_m2" />
+    </record>
+    <record id="model_boeing_777f" model="fleet.vehicle.model">
+        <field name="name">777F</field>
+        <field name="brand_id" ref="brand_boeing" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_freighter" />
+        <field name="model_year">2024</field>
+        <field name="position_slots">27</field>
+        <field name="max_takeoff_weight">347800</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">102000</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_volume_capacity">653</field>
+        <field name="max_volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="floor_loading_limit">1500</field>
+        <field name="floor_loading_uom_id" ref="uom_kg_per_m2" />
+    </record>
+    <record id="model_boeing_787_9" model="fleet.vehicle.model">
+        <field name="name">787-9</field>
+        <field name="brand_id" ref="brand_boeing" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_wide_body" />
+        <field name="model_year">2024</field>
+        <field name="seats">296</field>
+        <field name="passenger_capacity">296</field>
+        <field name="max_takeoff_weight">254000</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">50000</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_volume_capacity">150</field>
+        <field name="max_volume_uom_id" ref="uom.product_uom_cubic_meter" />
+    </record>
+    <record id="model_airbus_a320neo" model="fleet.vehicle.model">
+        <field name="name">A320neo</field>
+        <field name="brand_id" ref="brand_airbus" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_narrow_body" />
+        <field name="model_year">2024</field>
+        <field name="seats">180</field>
+        <field name="passenger_capacity">180</field>
+        <field name="max_takeoff_weight">79000</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">20000</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_volume_capacity">37</field>
+        <field name="max_volume_uom_id" ref="uom.product_uom_cubic_meter" />
+    </record>
+    <record id="model_airbus_a330_200f" model="fleet.vehicle.model">
+        <field name="name">A330-200F</field>
+        <field name="brand_id" ref="brand_airbus" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_freighter" />
+        <field name="model_year">2023</field>
+        <field name="position_slots">23</field>
+        <field name="max_takeoff_weight">233000</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">70000</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_volume_capacity">475</field>
+        <field name="max_volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="floor_loading_limit">1500</field>
+        <field name="floor_loading_uom_id" ref="uom_kg_per_m2" />
+    </record>
+    <record id="model_airbus_a350_900" model="fleet.vehicle.model">
+        <field name="name">A350-900</field>
+        <field name="brand_id" ref="brand_airbus" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_wide_body" />
+        <field name="model_year">2024</field>
+        <field name="seats">325</field>
+        <field name="passenger_capacity">325</field>
+        <field name="max_takeoff_weight">280000</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">53000</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_volume_capacity">172</field>
+        <field name="max_volume_uom_id" ref="uom.product_uom_cubic_meter" />
+    </record>
+    <record id="model_airbus_a380" model="fleet.vehicle.model">
+        <field name="name">A380</field>
+        <field name="brand_id" ref="brand_airbus" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_wide_body" />
+        <field name="model_year">2022</field>
+        <field name="seats">525</field>
+        <field name="passenger_capacity">525</field>
+        <field name="max_takeoff_weight">575000</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">84000</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_volume_capacity">184</field>
+        <field name="max_volume_uom_id" ref="uom.product_uom_cubic_meter" />
+    </record>
+    <record id="model_embraer_e195_e2" model="fleet.vehicle.model">
+        <field name="name">E195-E2</field>
+        <field name="brand_id" ref="brand_embraer" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_narrow_body" />
+        <field name="model_year">2024</field>
+        <field name="seats">146</field>
+        <field name="passenger_capacity">146</field>
+        <field name="max_takeoff_weight">61500</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">16000</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+    </record>
+    <record id="model_atr_72_600" model="fleet.vehicle.model">
+        <field name="name">72-600</field>
+        <field name="brand_id" ref="brand_atr" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_regional" />
+        <field name="model_year">2024</field>
+        <field name="seats">72</field>
+        <field name="passenger_capacity">72</field>
+        <field name="max_takeoff_weight">23000</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">7500</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+    </record>
+    <record id="model_antonov_an124" model="fleet.vehicle.model">
+        <field name="name">An-124</field>
+        <field name="brand_id" ref="brand_antonov" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_freighter" />
+        <field name="model_year">2020</field>
+        <field name="max_takeoff_weight">392000</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_weight_capacity">150000</field>
+        <field name="max_weight_uom_id" ref="uom.product_uom_kgm" />
+        <field name="max_volume_capacity">1050</field>
+        <field name="max_volume_uom_id" ref="uom.product_uom_cubic_meter" />
+        <field name="floor_loading_limit">2000</field>
+        <field name="floor_loading_uom_id" ref="uom_kg_per_m2" />
+    </record>
+    <record id="model_bombardier_crj900" model="fleet.vehicle.model">
+        <field name="name">CRJ900</field>
+        <field name="brand_id" ref="brand_bombardier" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_regional" />
+        <field name="model_year">2023</field>
+        <field name="seats">90</field>
+        <field name="passenger_capacity">90</field>
+        <field name="max_takeoff_weight">38330</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+    </record>
+    <record id="model_gulfstream_g650" model="fleet.vehicle.model">
+        <field name="name">G650</field>
+        <field name="brand_id" ref="brand_gulfstream" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_business_jet" />
+        <field name="model_year">2024</field>
+        <field name="seats">18</field>
+        <field name="passenger_capacity">18</field>
+        <field name="max_takeoff_weight">45178</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+    </record>
+    <record id="model_cessna_citation_longitude" model="fleet.vehicle.model">
+        <field name="name">Citation Longitude</field>
+        <field name="brand_id" ref="brand_cessna" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_business_jet" />
+        <field name="model_year">2024</field>
+        <field name="seats">12</field>
+        <field name="passenger_capacity">12</field>
+        <field name="max_takeoff_weight">17917</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+    </record>
+    <record id="model_dassault_falcon_8x" model="fleet.vehicle.model">
+        <field name="name">Falcon 8X</field>
+        <field name="brand_id" ref="brand_dassault" />
+        <field name="vehicle_type">plane</field>
+        <field name="category_id" ref="model_category_business_jet" />
+        <field name="model_year">2024</field>
+        <field name="seats">16</field>
+        <field name="passenger_capacity">16</field>
+        <field name="max_takeoff_weight">33113</field>
+        <field name="max_takeoff_weight_uom_id" ref="uom.product_uom_kgm" />
+    </record>
+</odoo>

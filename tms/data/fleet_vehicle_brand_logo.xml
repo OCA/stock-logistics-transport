@@ -1,0 +1,3 @@
+<odoo>
+    <function model="fleet.vehicle.model.brand" name="_tms_load_brand_logos" />
+</odoo>

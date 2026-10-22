@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_cargo_view_list" model="ir.ui.view">
+        <field name="name">tms.cargo.list</field>
+        <field name="model">tms.cargo</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="quantity" />
+                <field name="uom_id" />
+                <field name="weight" />
+                <field name="weight_uom_id" />
+                <field name="volume" />
+                <field name="volume_uom_id" />
+                <field name="order_id" />
+                <field name="state" />
+                <button
+                    name="action_reassign"
+                    type="object"
+                    icon="fa-truck"
+                    title="Reassign"
+                />
+            </list>
+        </field>
+    </record>
+
+    <record id="tms_cargo_view_form" model="ir.ui.view">
+        <field name="name">tms.cargo.form</field>
+        <field name="model">tms.cargo</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_reassign"
+                        type="object"
+                        string="Reassign"
+                        class="btn-primary"
+                        invisible="not movable"
+                    />
+                    <button
+                        name="action_split_line"
+                        type="object"
+                        string="Split"
+                        invisible="locked or state != 'planned'"
+                    />
+                    <button
+                        name="action_swap"
+                        type="object"
+                        string="Swap"
+                        invisible="locked or not order_id or state != 'planned'"
+                    />
+                    <button
+                        name="action_put_on_hold"
+                        type="object"
+                        string="Put on hold"
+                        invisible="locked or not order_id or state != 'planned'"
+                    />
+                    <button
+                        name="action_release_hold"
+                        type="object"
+                        string="Release hold"
+                        invisible="locked or state != 'hold'"
+                    />
+                    <button
+                        name="action_return_to_pool"
+                        type="object"
+                        string="Return to pool"
+                        confirm="Return this cargo to the unassigned pool?"
+                        invisible="not movable or not order_id"
+                    />
+                    <button
+                        name="action_attach_condition"
+                        type="object"
+                        string="Proof of condition"
+                        invisible="state == 'delivered'"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="unassigned,planned,loaded,delivered"
+                        readonly="1"
+                    />
+                </header>
+                <sheet>
+                    <field name="locked" invisible="1" />
+                    <field name="movable" invisible="1" />
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Description" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="assignment" string="Assignment">
+                            <field name="order_id" />
+                            <field name="origin_id" invisible="not order_id" />
+                            <field name="destination_id" invisible="not order_id" />
+                            <field name="shipment_unit" />
+                            <field name="holding_id" />
+                            <field name="packaging" />
+                            <field
+                                name="is_stackable"
+                                readonly="locked or state not in ('planned', 'hold')"
+                            />
+                        </group>
+                        <group name="measures" string="Measures">
+                            <label for="quantity" />
+                            <div class="o_row">
+                                <field name="quantity" />
+                                <field name="uom_id" nolabel="1" />
+                            </div>
+                            <label for="weight" />
+                            <div class="o_row">
+                                <field name="weight" />
+                                <field name="weight_uom_id" nolabel="1" />
+                            </div>
+                            <label for="volume" />
+                            <div class="o_row">
+                                <field name="volume" />
+                                <field name="volume_uom_id" nolabel="1" />
+                            </div>
+                            <label
+                                for="loading_meters"
+                                groups="tms.group_tms_road_user"
+                            />
+                            <div class="o_row" groups="tms.group_tms_road_user">
+                                <field name="loading_meters" />
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page
+                            string="Container"
+                            name="container"
+                            invisible="shipment_unit != 'container'"
+                            groups="tms.group_tms_water_user"
+                        >
+                            <group>
+                                <field name="container_type" />
+                                <field name="container_number" />
+                                <field name="seal_number" />
+                            </group>
+                        </page>
+                        <page
+                            string="ULD"
+                            name="uld"
+                            invisible="shipment_unit != 'uld'"
+                            groups="tms.group_tms_air_user"
+                        >
+                            <group>
+                                <field name="uld_type" />
+                                <field name="uld_number" />
+                            </group>
+                        </page>
+                        <page
+                            string="Contents"
+                            name="contents"
+                            invisible="shipment_unit == 'cargo'"
+                        >
+                            <field name="content_ids">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                    <field name="quantity" />
+                                    <field name="uom_id" />
+                                    <field name="weight" />
+                                    <field name="volume" />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Condition" name="condition">
+                            <field
+                                name="condition_note"
+                                placeholder="Damage, temperature, or other notes."
+                            />
+                            <field
+                                name="condition_attachment_ids"
+                                widget="many2many_binary"
+                            />
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record id="tms_cargo_view_search" model="ir.ui.view">
+        <field name="name">tms.cargo.search</field>
+        <field name="model">tms.cargo</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="order_id" />
+                <filter
+                    string="Unassigned"
+                    name="unassigned"
+                    domain="[('state', '=', 'unassigned')]"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_tms_cargo_pool" model="ir.actions.act_window">
+        <field name="name">Cargo</field>
+        <field name="res_model">tms.cargo</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{
+            'default_state': 'unassigned',
+            'search_default_unassigned': 1,
+        }</field>
+    </record>
+</odoo>

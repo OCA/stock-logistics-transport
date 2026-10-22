@@ -71,11 +71,11 @@
                             <group>
                                 <field
                                     name="origin_location_id"
-                                    domain="[('tms_location', '=', 'True')]"
+                                    domain="[('tms_location', '=', True)]"
                                 />
                                 <field
                                     name="destination_location_id"
-                                    domain="[('tms_location', '=', 'True')]"
+                                    domain="[('tms_location', '=', True)]"
                                 />
                             </group>
                         </page>
@@ -87,7 +87,7 @@
                             <field
                                 name="stop_location_ids"
                                 widget="many2many"
-                                domain="[('tms_location', '=', 'True')]"
+                                domain="[('tms_location', '=', True)]"
                             >
                                 <list>
                                     <field name="display_name" string="Location" />

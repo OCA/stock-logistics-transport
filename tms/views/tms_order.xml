@@ -9,9 +9,13 @@
                 <field name="end_trip" column_invisible="1" />
                 <field name="date_end" column_invisible="1" />
                 <field name="name" />
+                <field name="origin_id" />
+                <field name="destination_id" />
+                <field name="scheduled_date_start" />
+                <field name="scheduled_date_end" />
+                <field name="vehicle_id" />
                 <field name="driver_id" />
-                <field name="route_id" groups="tms.group_tms_route" />
-                <field name="stage_id" />
+                <field name="route_id" groups="tms.group_tms_route" optional="hide" />
                 <button
                     name="button_start_order"
                     type="object"
@@ -26,6 +30,7 @@
                     class="btn btn-primary text-uppercase"
                     invisible="not start_trip or end_trip"
                 />
+                <field name="stage_id" />
             </list>
         </field>
     </record>
@@ -44,6 +49,7 @@
                 <field name="vehicle_ids_domain" invisible="1" />
                 <field name="start_trip" invisible="1" />
                 <field name="end_trip" invisible="1" />
+                <field name="vehicle_operation" invisible="1" />
 
                 <!-- Header -->
                 <header>
@@ -68,10 +74,11 @@
                         class="btn btn-primary text-uppercase"
                         invisible="not start_trip or end_trip"
                     />
+                    <field name="allowed_stage_ids" invisible="1" />
                     <field
                         name="stage_id"
                         widget="statusbar"
-                        domain="[('stage_type', '=', 'order')]"
+                        domain="[('id', 'in', allowed_stage_ids)]"
                         options="{'clickable':True, 'fold_field':'fold'}"
                     />
                 </header>
@@ -97,6 +104,11 @@
                                 domain="[('id', 'in', crew_ids_domain)]"
                             />
 
+                            <field
+                                name="transport_type"
+                                widget="radio"
+                                options="{'horizontal': True}"
+                            />
                             <field
                                 name="vehicle_id"
                                 domain="[('id', 'in', vehicle_ids_domain)]"
@@ -124,23 +136,248 @@
                                 invisible="route"
                                 required="not route"
                             />
+                            <field name="distance_editable" invisible="1" />
+                            <label for="distance" />
+                            <div class="o_row">
+                                <field
+                                    name="distance"
+                                    readonly="not distance_editable"
+                                    style="flex: 0 0 auto !important; width: auto !important;"
+                                />
+                                <field
+                                    name="distance_uom_id"
+                                    nolabel="1"
+                                    readonly="not distance_editable"
+                                    options="{'no_open': True}"
+                                    style="flex: 0 0 auto !important; width: auto !important;"
+                                />
+                            </div>
                         </group>
                         <group groups="!tms.group_tms_route">
                             <field name="origin_id" required="True" />
                             <field name="destination_id" required="True" />
+                            <field name="distance_editable" invisible="1" />
+                            <label for="distance" />
+                            <div class="o_row">
+                                <field
+                                    name="distance"
+                                    readonly="not distance_editable"
+                                    style="flex: 0 0 auto !important; width: auto !important;"
+                                />
+                                <field
+                                    name="distance_uom_id"
+                                    nolabel="1"
+                                    readonly="not distance_editable"
+                                    options="{'no_open': True}"
+                                    style="flex: 0 0 auto !important; width: auto !important;"
+                                />
+                            </div>
                         </group>
                     </group>
-                    <group string="Description" name="description_grp">
-                        <field
-                            name="description"
-                            nolabel="1"
-                            colspan="2"
-                            placeholder="Add a description for the order..."
-                        />
-                    </group>
-
                     <!-- Notebook -->
                     <notebook>
+                        <page
+                            string="Cargo"
+                            name="cargo_page"
+                            invisible="transport_type != 'cargo'"
+                        >
+                            <field name="cargo_ids">
+                                <list editable="bottom" decoration-muted="state == 'hold'">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="order_id" column_invisible="1" />
+                                    <field name="name" />
+                                    <field name="quantity" />
+                                    <field name="uom_id" />
+                                    <field name="weight" />
+                                    <field name="weight_uom_id" />
+                                    <field name="volume" />
+                                    <field name="volume_uom_id" />
+                                    <field
+                                        name="container_type"
+                                        optional="hide"
+                                        groups="tms.group_tms_water_user"
+                                    />
+                                    <field
+                                        name="container_number"
+                                        optional="hide"
+                                        groups="tms.group_tms_water_user"
+                                    />
+                                    <field
+                                        name="seal_number"
+                                        optional="hide"
+                                        groups="tms.group_tms_water_user"
+                                    />
+                                    <field
+                                        name="uld_type"
+                                        optional="hide"
+                                        groups="tms.group_tms_air_user"
+                                    />
+                                    <field
+                                        name="uld_number"
+                                        optional="hide"
+                                        groups="tms.group_tms_air_user"
+                                    />
+                                    <field name="is_stackable" />
+                                    <field
+                                        name="loading_meters"
+                                        optional="hide"
+                                        groups="tms.group_tms_road_user"
+                                    />
+                                    <field name="state" />
+                                    <button
+                                        name="action_split_line"
+                                        type="object"
+                                        icon="fa-scissors"
+                                        title="Split Line"
+                                        invisible="state != 'planned' or parent.start_trip or parent.end_trip"
+                                    />
+                                    <button
+                                        name="action_reassign"
+                                        type="object"
+                                        icon="fa-truck"
+                                        title="Reassign"
+                                        invisible="state in ('loaded', 'delivered') or parent.start_trip or parent.end_trip"
+                                    />
+                                    <button
+                                        name="action_swap"
+                                        type="object"
+                                        icon="fa-exchange"
+                                        title="Swap Assignment"
+                                        invisible="state != 'planned' or parent.start_trip or parent.end_trip"
+                                    />
+                                    <button
+                                        name="action_put_on_hold"
+                                        type="object"
+                                        icon="fa-pause"
+                                        title="Put on Hold"
+                                        invisible="state != 'planned' or parent.start_trip or parent.end_trip"
+                                    />
+                                    <button
+                                        name="action_release_hold"
+                                        type="object"
+                                        icon="fa-play"
+                                        title="Release hold"
+                                        invisible="state != 'hold' or parent.start_trip or parent.end_trip"
+                                    />
+                                    <button
+                                        name="action_return_to_pool"
+                                        type="object"
+                                        icon="fa-inbox"
+                                        title="Return to Pool"
+                                        confirm="Return this cargo to the unassigned pool?"
+                                        invisible="state in ('loaded', 'delivered') or not order_id or parent.start_trip or parent.end_trip"
+                                    />
+                                    <button
+                                        name="action_toggle_top_load"
+                                        type="object"
+                                        icon="fa-ban"
+                                        title="Top-Load Only"
+                                        invisible="not is_stackable or state in ('delivered', 'unassigned') or parent.start_trip or parent.end_trip"
+                                    />
+                                    <button
+                                        name="action_toggle_top_load"
+                                        type="object"
+                                        icon="fa-cubes"
+                                        title="Allow stacking"
+                                        invisible="is_stackable or state in ('delivered', 'unassigned') or parent.start_trip or parent.end_trip"
+                                    />
+                                    <button
+                                        name="action_attach_condition"
+                                        type="object"
+                                        icon="fa-camera"
+                                        title="Proof of condition"
+                                        invisible="state == 'delivered'"
+                                    />
+                                </list>
+                            </field>
+                            <group name="cargo_capacity" col="3">
+                                <group string="Weight">
+                                    <label for="capacity_weight" string="Total Capacity" />
+                                    <div class="o_row">
+                                        <field name="capacity_weight" />
+                                        <field name="cargo_weight_uom_id" nolabel="1" />
+                                    </div>
+                                    <label for="cargo_weight" string="Total Allocated" />
+                                    <div class="o_row">
+                                        <field name="cargo_weight" />
+                                        <field name="cargo_weight_uom_id" nolabel="1" />
+                                    </div>
+                                    <label for="remaining_weight" string="Available" />
+                                    <div class="o_row">
+                                        <field name="remaining_weight" />
+                                        <field name="cargo_weight_uom_id" nolabel="1" />
+                                    </div>
+                                </group>
+                                <group string="Volume">
+                                    <label for="capacity_volume" string="Total Capacity" />
+                                    <div class="o_row">
+                                        <field name="capacity_volume" />
+                                        <field name="cargo_volume_uom_id" nolabel="1" />
+                                    </div>
+                                    <label for="cargo_volume" string="Total Allocated" />
+                                    <div class="o_row">
+                                        <field name="cargo_volume" />
+                                        <field name="cargo_volume_uom_id" nolabel="1" />
+                                    </div>
+                                    <label for="remaining_volume" string="Available" />
+                                    <div class="o_row">
+                                        <field name="remaining_volume" />
+                                        <field name="cargo_volume_uom_id" nolabel="1" />
+                                    </div>
+                                </group>
+                                <group
+                                    string="Loading meters / pallets"
+                                    groups="tms.group_tms_road_user"
+                                >
+                                    <field name="loading_uses_length" invisible="1" />
+                                    <label
+                                        for="capacity_loading_meters"
+                                        string="Total Capacity"
+                                    />
+                                    <div class="o_row">
+                                        <field name="capacity_loading_meters" />
+                                        <field
+                                            name="cargo_loading_uom_id"
+                                            nolabel="1"
+                                            invisible="not loading_uses_length"
+                                        />
+                                    </div>
+                                    <label for="cargo_pieces" string="Total Allocated" />
+                                    <div class="o_row">
+                                        <field name="cargo_pieces" />
+                                        <field
+                                            name="cargo_loading_uom_id"
+                                            nolabel="1"
+                                            invisible="not loading_uses_length"
+                                        />
+                                    </div>
+                                    <label
+                                        for="remaining_loading_meters"
+                                        string="Available"
+                                    />
+                                    <div class="o_row">
+                                        <field name="remaining_loading_meters" />
+                                        <field
+                                            name="cargo_loading_uom_id"
+                                            nolabel="1"
+                                            invisible="not loading_uses_length"
+                                        />
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        <page
+                            string="Compartments"
+                            name="compartment_page"
+                            invisible="transport_type != 'passenger'"
+                        >
+                            <field name="compartment_ids">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                    <field name="capacity" />
+                                </list>
+                            </field>
+                        </page>
                         <page string="Planning" name="planning_page">
                             <group>
                                 <field name="scheduled_date_start" />
@@ -162,7 +399,44 @@
                                     <field name="duration" class="w-25" />
                                     <span class="w-75">Hours</span>
                                 </div>
+                                <field name="odometer_start" />
+                                <field name="odometer_end" />
+                                <field name="distance_loaded" />
+                                <field name="distance_empty" />
                             </group>
+                        </page>
+                        <page string="Convoy" name="convoy_page">
+                            <field name="equipment_ids">
+                                <list editable="bottom">
+                                    <field name="vehicle_id" />
+                                    <field name="role" />
+                                    <field name="dropped" />
+                                    <field name="drop_location_id" />
+                                    <field name="drop_date" />
+                                    <button
+                                        name="action_drop"
+                                        type="object"
+                                        string="Drop"
+                                        invisible="dropped or role != 'trailer'"
+                                    />
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Proof of delivery" name="pod_page">
+                            <group>
+                                <field name="pod_note" />
+                                <field
+                                    name="pod_attachment_ids"
+                                    widget="many2many_binary"
+                                />
+                            </group>
+                        </page>
+                        <page string="Description" name="description_page">
+                            <field
+                                name="description"
+                                nolabel="1"
+                                placeholder="Add a description for the order..."
+                            />
                         </page>
                     </notebook>
                 </sheet>
@@ -391,17 +665,39 @@
         </field>
     </record>
 
+    <record id="tms_order_view_calendar" model="ir.ui.view">
+        <field name="name">tms.order.view.calendar</field>
+        <field name="model">tms.order</field>
+        <field name="arch" type="xml">
+            <calendar
+                string="Trips"
+                date_start="scheduled_date_start"
+                date_stop="scheduled_date_end"
+                color="vehicle_id"
+                mode="month"
+                quick_create="0"
+                event_open_popup="1"
+            >
+                <field name="origin_id" />
+                <field name="destination_id" />
+                <field name="vehicle_id" />
+                <field name="driver_id" />
+                <field name="stage_id" />
+            </calendar>
+        </field>
+    </record>
+
     <!-- Actions -->
     <record id="action_tms_operation_trip" model="ir.actions.act_window">
         <field name="name">Trips</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">list,calendar,form</field>
     </record>
 
     <record id="action_tms_report_order" model="ir.actions.act_window">
         <field name="name">Trips</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">graph,pivot</field>
+        <field name="view_mode">graph,pivot,calendar</field>
     </record>
 
     <record id="action_tms_config_stage_travel" model="ir.actions.act_window">
@@ -413,13 +709,13 @@
     <record id="action_tms_dash_order" model="ir.actions.act_window">
         <field name="name">Trips</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">kanban,list,form</field>
+        <field name="view_mode">kanban,list,calendar,form</field>
     </record>
 
     <record id="action_tms_order_kanban" model="ir.actions.act_window">
         <field name="name">Trips Kanban</field>
         <field name="res_model">tms.order</field>
-        <field name="view_mode">kanban,list,form</field>
+        <field name="view_mode">kanban,list,calendar,form</field>
         <field name="domain">[('tms_team_id', '=', active_id)]</field>
     </record>
 </odoo>

@@ -12,24 +12,32 @@ class FleetVehicle(models.Model):
     tms_driver_id = fields.Many2one("tms.driver", string="Driver Id")
 
     # Operation
-    operation = fields.Selection([("cargo", "Cargo"), ("passenger", "Passenger")])
-
-    capacity = fields.Float()
-    cargo_uom_id = fields.Many2one(
-        "uom.uom",
-        domain=lambda self: self.env["res.config.settings"]._volume_domain(),
-        default=lambda self: self._default_volume_uom_id(),
+    operation = fields.Selection(
+        [("cargo", "Cargo"), ("passenger", "Passenger")],
+        string="Transport Type",
+    )
+    tms_equipment_type = fields.Selection(
+        [
+            ("power", "Power unit"),
+            ("trailer", "Trailer"),
+            ("dolly", "Dolly"),
+        ],
+        string="Equipment",
+        default="power",
+        required=True,
+    )
+    tms_location_id = fields.Many2one(
+        "res.partner",
+        string="Current location",
+        domain="[('tms_location', '=', True)]",
     )
 
     # Insurance
     insurance_id = fields.Many2many("tms.insurance")
 
-    def _default_volume_uom_id(self):
-        default_volume_uom_id = (
-            self.env["ir.config_parameter"].sudo().get_param("tms.default_weight_uom")
-        )
-
-        if default_volume_uom_id:
-            return self.env["uom.uom"].browse(int(default_volume_uom_id))
-        else:
-            return self.env.ref("uom.product_uom_cubic_meter", raise_if_not_found=False)
+    def write(self, vals):
+        teams = self.tms_team_id
+        result = super().write(vals)
+        if "operation" in vals or "tms_team_id" in vals:
+            (teams | self.tms_team_id)._sync_stage_ids()
+        return result

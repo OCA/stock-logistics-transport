@@ -26,3 +26,10 @@ class TestResPartner(TransactionCase):
             "terrestrial",
             "Location type should be 'terrestrial'",
         )
+
+    def test_locations_default_to_transport_locations(self):
+        action = self.env.ref("tms.action_tms_location")
+        search = self.env.ref("tms.view_res_partner_search_inherit")
+        self.assertIn("list", action.view_mode)
+        self.assertIn("search_default_tms_location", action.context)
+        self.assertIn('name="tms_location"', search.arch)
