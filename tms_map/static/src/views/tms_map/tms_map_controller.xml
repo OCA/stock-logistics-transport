@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="tms_map.TmsMapView">
+        <div t-att-class="props.className" t-ref="root">
+            <Layout display="props.display">
+                <t t-set-slot="layout-actions">
+                    <SearchBar t-if="searchBarToggler.state.showSearchBar" />
+                </t>
+                <t t-component="props.Renderer" t-props="rendererProps" />
+            </Layout>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="fleet_vehicle_view_form_trip_history" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.trip.history</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="%(action_tms_map_history)d"
+                    type="action"
+                    class="oe_stat_button"
+                    icon="fa-road"
+                    groups="tms.group_tms_user"
+                    context="{'vehicle_id': id}"
+                >
+                    <field
+                        name="tms_trip_count"
+                        widget="statinfo"
+                        string="Trip history"
+                    />
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
