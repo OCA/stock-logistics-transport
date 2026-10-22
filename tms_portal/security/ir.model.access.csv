@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_order_portal,tms.order.portal,tms.model_tms_order,base.group_portal,1,0,0,0
+access_tms_cargo_portal,tms.cargo.portal,tms.model_tms_cargo,base.group_portal,1,0,0,0
+access_tms_stage_portal,tms.stage.portal,tms.model_tms_stage,base.group_portal,1,0,0,0
+access_tms_driver_portal,tms.driver.portal,tms.model_tms_driver,base.group_portal,1,0,0,0
