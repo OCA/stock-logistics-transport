@@ -1,0 +1,614 @@
+<odoo noupdate="1">
+    <!-- Categories -->
+    <record id="model_category_tractor" model="fleet.vehicle.model.category">
+        <field name="name">Tractor</field>
+    </record>
+    <record id="model_category_box_truck" model="fleet.vehicle.model.category">
+        <field name="name">Box Truck</field>
+    </record>
+    <record id="model_category_coach" model="fleet.vehicle.model.category">
+        <field name="name">Coach</field>
+    </record>
+    <record id="model_category_city_bus" model="fleet.vehicle.model.category">
+        <field name="name">City Bus</field>
+    </record>
+
+    <!-- Truck manufacturers missing from Fleet -->
+    <record id="brand_freightliner" model="fleet.vehicle.model.brand">
+        <field name="name">Freightliner</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_freightliner-image.png"
+        />
+    </record>
+    <record id="brand_kenworth" model="fleet.vehicle.model.brand">
+        <field name="name">Kenworth</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_kenworth-image.png"
+        />
+    </record>
+    <record id="brand_peterbilt" model="fleet.vehicle.model.brand">
+        <field name="name">Peterbilt</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_peterbilt-image.png"
+        />
+    </record>
+    <record id="brand_mack" model="fleet.vehicle.model.brand">
+        <field name="name">Mack</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_mack-image.png"
+        />
+    </record>
+    <record id="brand_international" model="fleet.vehicle.model.brand">
+        <field name="name">International</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_international-image.png"
+        />
+    </record>
+    <record id="brand_scania" model="fleet.vehicle.model.brand">
+        <field name="name">Scania</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_scania-image.png"
+        />
+    </record>
+    <record id="brand_man" model="fleet.vehicle.model.brand">
+        <field name="name">MAN</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_man-image.png"
+        />
+    </record>
+    <record id="brand_daf" model="fleet.vehicle.model.brand">
+        <field name="name">DAF</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_daf-image.png"
+        />
+    </record>
+    <record id="brand_iveco" model="fleet.vehicle.model.brand">
+        <field name="name">Iveco</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_iveco-image.png"
+        />
+    </record>
+    <record id="brand_hino" model="fleet.vehicle.model.brand">
+        <field name="name">Hino</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_hino-image.png"
+        />
+    </record>
+
+    <!-- Bus manufacturers missing from Fleet -->
+    <record id="brand_setra" model="fleet.vehicle.model.brand">
+        <field name="name">Setra</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_setra-image.png"
+        />
+    </record>
+    <record id="brand_irizar" model="fleet.vehicle.model.brand">
+        <field name="name">Irizar</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_irizar-image.png"
+        />
+    </record>
+    <record id="brand_marcopolo" model="fleet.vehicle.model.brand">
+        <field name="name">Marcopolo</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_marcopolo-image.png"
+        />
+    </record>
+    <record id="brand_yutong" model="fleet.vehicle.model.brand">
+        <field name="name">Yutong</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_yutong-image.png"
+        />
+    </record>
+    <record id="brand_prevost" model="fleet.vehicle.model.brand">
+        <field name="name">Prevost</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_prevost-image.png"
+        />
+    </record>
+    <record id="brand_mci" model="fleet.vehicle.model.brand">
+        <field name="name">MCI</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_mci-image.png"
+        />
+    </record>
+    <record id="brand_new_flyer" model="fleet.vehicle.model.brand">
+        <field name="name">New Flyer</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_new_flyer-image.png"
+        />
+    </record>
+    <record id="brand_van_hool" model="fleet.vehicle.model.brand">
+        <field name="name">Van Hool</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_van_hool-image.png"
+        />
+    </record>
+    <record id="brand_alexander_dennis" model="fleet.vehicle.model.brand">
+        <field name="name">Alexander Dennis</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="tms/static/img/brand_alexander_dennis-image.png"
+        />
+    </record>
+
+    <!-- Truck models -->
+    <record id="model_volvo_fh" model="fleet.vehicle.model">
+        <field name="name">FH</field>
+        <field name="brand_id" ref="fleet.brand_volvo" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">375</field>
+        <field name="horsepower">500</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_volvo_fm" model="fleet.vehicle.model">
+        <field name="name">FM</field>
+        <field name="brand_id" ref="fleet.brand_volvo" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">280</field>
+        <field name="horsepower">380</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_mercedes_actros" model="fleet.vehicle.model">
+        <field name="name">Actros</field>
+        <field name="brand_id" ref="fleet.brand_mercedes" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_mercedes_atego" model="fleet.vehicle.model">
+        <field name="name">Atego</field>
+        <field name="brand_id" ref="fleet.brand_mercedes" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">manual</field>
+        <field name="power">175</field>
+        <field name="horsepower">240</field>
+    </record>
+    <record id="model_freightliner_cascadia" model="fleet.vehicle.model">
+        <field name="name">Cascadia</field>
+        <field name="brand_id" ref="brand_freightliner" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">350</field>
+        <field name="horsepower">470</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_freightliner_m2" model="fleet.vehicle.model">
+        <field name="name">M2 106</field>
+        <field name="brand_id" ref="brand_freightliner" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">260</field>
+        <field name="horsepower">350</field>
+    </record>
+    <record id="model_kenworth_t680" model="fleet.vehicle.model">
+        <field name="name">T680</field>
+        <field name="brand_id" ref="brand_kenworth" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">340</field>
+        <field name="horsepower">455</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_peterbilt_579" model="fleet.vehicle.model">
+        <field name="name">579</field>
+        <field name="brand_id" ref="brand_peterbilt" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">340</field>
+        <field name="horsepower">455</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_mack_anthem" model="fleet.vehicle.model">
+        <field name="name">Anthem</field>
+        <field name="brand_id" ref="brand_mack" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">445</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_international_lt" model="fleet.vehicle.model">
+        <field name="name">LT</field>
+        <field name="brand_id" ref="brand_international" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">340</field>
+        <field name="horsepower">455</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_scania_r" model="fleet.vehicle.model">
+        <field name="name">R-series</field>
+        <field name="brand_id" ref="brand_scania" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_man_tgx" model="fleet.vehicle.model">
+        <field name="name">TGX</field>
+        <field name="brand_id" ref="brand_man" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_daf_xf" model="fleet.vehicle.model">
+        <field name="name">XF</field>
+        <field name="brand_id" ref="brand_daf" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_iveco_s_way" model="fleet.vehicle.model">
+        <field name="name">S-Way</field>
+        <field name="brand_id" ref="brand_iveco" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+    <record id="model_hino_338" model="fleet.vehicle.model">
+        <field name="name">338</field>
+        <field name="brand_id" ref="brand_hino" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">191</field>
+        <field name="horsepower">260</field>
+    </record>
+    <record id="model_isuzu_npr" model="fleet.vehicle.model">
+        <field name="name">NPR</field>
+        <field name="brand_id" ref="fleet.brand_isuzu" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">160</field>
+        <field name="horsepower">215</field>
+    </record>
+    <record id="model_ford_f750" model="fleet.vehicle.model">
+        <field name="name">F-750</field>
+        <field name="brand_id" ref="fleet.brand_ford" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_box_truck" />
+        <field name="seats">3</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">200</field>
+        <field name="horsepower">270</field>
+    </record>
+    <record id="model_renault_t" model="fleet.vehicle.model">
+        <field name="name">T</field>
+        <field name="brand_id" ref="fleet.brand_renault" />
+        <field name="vehicle_type">truck</field>
+        <field name="category_id" ref="model_category_tractor" />
+        <field name="seats">2</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+        <field name="trailer_hook" eval="True" />
+    </record>
+
+    <!-- Bus models -->
+    <record id="model_mercedes_tourismo" model="fleet.vehicle.model">
+        <field name="name">Tourismo</field>
+        <field name="brand_id" ref="fleet.brand_mercedes" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">49</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">315</field>
+        <field name="horsepower">428</field>
+    </record>
+    <record id="model_mercedes_citaro" model="fleet.vehicle.model">
+        <field name="name">Citaro</field>
+        <field name="brand_id" ref="fleet.brand_mercedes" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_city_bus" />
+        <field name="seats">35</field>
+        <field name="doors">3</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">220</field>
+        <field name="horsepower">299</field>
+    </record>
+    <record id="model_volvo_9700" model="fleet.vehicle.model">
+        <field name="name">9700</field>
+        <field name="brand_id" ref="fleet.brand_volvo" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">53</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">339</field>
+        <field name="horsepower">460</field>
+    </record>
+    <record id="model_volvo_7900" model="fleet.vehicle.model">
+        <field name="name">7900 Electric</field>
+        <field name="brand_id" ref="fleet.brand_volvo" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_city_bus" />
+        <field name="seats">40</field>
+        <field name="doors">3</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">electric</field>
+        <field name="transmission">automatic</field>
+        <field name="power">200</field>
+    </record>
+    <record id="model_setra_s516" model="fleet.vehicle.model">
+        <field name="name">S 516 HD</field>
+        <field name="brand_id" ref="brand_setra" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">55</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">315</field>
+        <field name="horsepower">428</field>
+    </record>
+    <record id="model_irizar_i6" model="fleet.vehicle.model">
+        <field name="name">i6</field>
+        <field name="brand_id" ref="brand_irizar" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">55</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+    </record>
+    <record id="model_marcopolo_paradiso" model="fleet.vehicle.model">
+        <field name="name">Paradiso G8</field>
+        <field name="brand_id" ref="brand_marcopolo" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">46</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">manual</field>
+        <field name="power">280</field>
+        <field name="horsepower">380</field>
+    </record>
+    <record id="model_yutong_zk6128" model="fleet.vehicle.model">
+        <field name="name">ZK6128</field>
+        <field name="brand_id" ref="brand_yutong" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">45</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">electric</field>
+        <field name="transmission">automatic</field>
+        <field name="power">250</field>
+    </record>
+    <record id="model_prevost_h3_45" model="fleet.vehicle.model">
+        <field name="name">H3-45</field>
+        <field name="brand_id" ref="brand_prevost" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">56</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">339</field>
+        <field name="horsepower">460</field>
+    </record>
+    <record id="model_mci_j4500" model="fleet.vehicle.model">
+        <field name="name">J4500</field>
+        <field name="brand_id" ref="brand_mci" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">56</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">339</field>
+        <field name="horsepower">450</field>
+    </record>
+    <record id="model_new_flyer_xcelsior" model="fleet.vehicle.model">
+        <field name="name">Xcelsior</field>
+        <field name="brand_id" ref="brand_new_flyer" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_city_bus" />
+        <field name="seats">40</field>
+        <field name="doors">3</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">electric</field>
+        <field name="transmission">automatic</field>
+        <field name="power">200</field>
+    </record>
+    <record id="model_van_hool_cx45" model="fleet.vehicle.model">
+        <field name="name">CX45</field>
+        <field name="brand_id" ref="brand_van_hool" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">56</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+    </record>
+    <record id="model_adl_enviro400" model="fleet.vehicle.model">
+        <field name="name">Enviro400</field>
+        <field name="brand_id" ref="brand_alexander_dennis" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_city_bus" />
+        <field name="seats">70</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">180</field>
+        <field name="horsepower">245</field>
+    </record>
+    <record id="model_scania_touring" model="fleet.vehicle.model">
+        <field name="name">Touring</field>
+        <field name="brand_id" ref="brand_scania" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">49</field>
+        <field name="doors">2</field>
+        <field name="model_year">2024</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">330</field>
+        <field name="horsepower">450</field>
+    </record>
+    <record id="model_iveco_crossway" model="fleet.vehicle.model">
+        <field name="name">Crossway</field>
+        <field name="brand_id" ref="brand_iveco" />
+        <field name="vehicle_type">bus</field>
+        <field name="category_id" ref="model_category_coach" />
+        <field name="seats">55</field>
+        <field name="doors">2</field>
+        <field name="model_year">2023</field>
+        <field name="default_fuel_type">diesel</field>
+        <field name="transmission">automatic</field>
+        <field name="power">235</field>
+        <field name="horsepower">320</field>
+    </record>
+</odoo>

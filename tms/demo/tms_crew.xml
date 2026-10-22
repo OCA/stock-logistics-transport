@@ -1,7 +1,7 @@
 <odoo noupdate="1">
     <record id="demo_crew_1" model="tms.crew">
         <field name="name">Crew Mexico 1</field>
-        <field name="default_vehicle_id" ref="fleet.vehicle_1" />
+        <field name="default_vehicle_id" ref="demo_vehicle_bus_tourismo" />
         <field
             name="driver_ids"
             eval="[(6, 0, [
