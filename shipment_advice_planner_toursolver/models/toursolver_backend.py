@@ -83,6 +83,9 @@ class TourSolverBackend(models.Model):
         default=10,
         required=True,
     )
+    advanced_settings = fields.Char(
+        default="BalancingCost=1,CostsWeights=balancing:5,BalancingValue=WORKTIME"
+    )
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -120,6 +123,7 @@ class TourSolverBackend(models.Model):
 
     def _get_loading_duration_formatted(self):
         h, m = divmod(self.loading_duration, 60)
+        # flake8: noqa: E231
         return f"{h:02d}:{m:02d}:00"
 
     def _get_backend_default_options(self):
