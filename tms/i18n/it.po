@@ -1449,43 +1449,36 @@ msgstr "Gestione percorsi"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_crew
-#: model:res.groups.privilege,name:tms.privilege_tms_crew
 msgid "Manage TMS Crew"
 msgstr "Gestione equipaggio TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_driver_license
-#: model:res.groups.privilege,name:tms.privilege_tms_driver_license
 msgid "Manage TMS Driver License"
 msgstr "Gestione licenza autista TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_uom
-#: model:res.groups.privilege,name:tms.privilege_tms_uom
 msgid "Manage TMS Oum"
 msgstr "Gestione udm TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_route_stop
-#: model:res.groups.privilege,name:tms.privilege_tms_route_stop
 msgid "Manage TMS Route Stops"
 msgstr "Gestione fermate viaggio TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_route
-#: model:res.groups.privilege,name:tms.privilege_tms_route
 msgid "Manage TMS Routes"
 msgstr "Gestione percorsi TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_team
-#: model:res.groups.privilege,name:tms.privilege_tms_team
 msgid "Manage TMS Teams"
 msgstr "Gestione squadre TMS"
 
 #. module: tms
 #: model:res.groups,name:tms.group_tms_vehicle_insurance
-#: model:res.groups.privilege,name:tms.privilege_tms_vehicle_insurance
 msgid "Manage TMS Vehicle Insurance"
 msgstr "Gestione assicurazione veicolo TMS"
 

@@ -29,10 +29,9 @@ class TestSaleOrderLineTms(BaseCommon):
         )
         cls.trip_template.write(
             {
-                "tms_trip": True,
-                "trip_product_type": "trip",
-                "tms_factor_type": "distance",
-                "tms_factor_distance_uom": cls.env.ref("uom.product_uom_meter").id,
+                "transport_type": "cargo",
+                "transit_mode": "road",
+                "booking_type": "full_asset",
             }
         )
         cls.trip_product = cls.trip_template.product_variant_ids[0]
@@ -60,20 +59,18 @@ class TestSaleOrderLineTms(BaseCommon):
             {"order_id": self.env["sale.order"].new()}
         )
         line._compute_sale_order_line_tms()
-        self.assertFalse(line.tms_factor_uom)
         self.assertFalse(line.has_trip_product)
         self.assertFalse(line.seat_ticket)
 
-    def test_compute_weight_factor_uom(self):
+    def test_cargo_service_sets_trip_product(self):
         weight_template = self.env["product.template"].create(
             {"name": "Weight Trip", "type": "service", "list_price": 80.0}
         )
         weight_template.write(
             {
-                "tms_trip": True,
-                "trip_product_type": "trip",
-                "tms_factor_type": "weight",
-                "tms_factor_weight_uom": self.env.ref("uom.product_uom_kgm").id,
+                "transport_type": "cargo",
+                "transit_mode": "road",
+                "booking_type": "shared_space",
             }
         )
         line = self.env["sale.order.line"].create(
@@ -86,7 +83,7 @@ class TestSaleOrderLineTms(BaseCommon):
             }
         )
         line._compute_sale_order_line_tms()
-        self.assertEqual(line.tms_factor_uom, self.env.ref("uom.product_uom_kgm").name)
+        self.assertTrue(line.has_trip_product)
 
     def test_compute_route_distance_factor(self):
         route = self.env["tms.route"].create(
@@ -100,10 +97,8 @@ class TestSaleOrderLineTms(BaseCommon):
                 "estimated_time_uom": self.env.ref("uom.product_uom_hour").id,
             }
         )
-        line = self._create_line(tms_route_id=route.id)
-        line._compute_sale_order_line_tms()
-        self.assertEqual(line.tms_factor, route.distance)
-        self.assertEqual(line.tms_factor_uom, route.distance_uom.name)
+        line = self._create_line(tms_route_id=route.id, tms_route_flag=True)
+        self.assertIn("Distance: 42.00", line.name)
 
     def test_prepare_tms_values_int_duration(self):
         line = self._create_line()
@@ -162,14 +157,26 @@ class TestSaleOrderLineTms(BaseCommon):
         seat_template = self.env["product.template"].create(
             {"name": "Seat", "type": "service", "list_price": 25.0}
         )
-        seat_template.write({"tms_trip": True, "trip_product_type": "seat"})
+        seat_template.write(
+            {
+                "transport_type": "passenger",
+                "transit_mode": "road",
+                "booking_type": "shared_space",
+            }
+        )
+        order = self.env["sale.order"].create({"partner_id": self.partner.id})
+        line = self.env["sale.order.line"].create(
+            {
+                "order_id": order.id,
+                "product_id": seat_template.product_variant_ids.id,
+                "product_uom_qty": 1,
+                "tms_origin_id": self.origin.id,
+                "tms_destination_id": self.destination.id,
+            }
+        )
+        self.env.cr.execute(
+            "UPDATE sale_order SET state = 'sale' WHERE id = %s", [order.id]
+        )
+        order.invalidate_recordset(["state"])
         with self.assertRaises(ValidationError):
-            self.env["sale.order.line"].create(
-                {
-                    "order_id": self.env["sale.order"]
-                    .create({"partner_id": self.partner.id})
-                    .id,
-                    "product_id": seat_template.product_variant_ids.id,
-                    "product_uom_qty": 1,
-                }
-            )
+            line._check_required_fields()

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_shipment_line_view_list" model="ir.ui.view">
+        <field name="name">tms.cargo.shipment.list</field>
+        <field name="model">tms.cargo</field>
+        <field name="arch" type="xml">
+            <list create="0" edit="0">
+                <field name="name" />
+                <field name="quantity" />
+                <field name="uom_id" />
+                <field name="weight" />
+                <field name="weight_uom_id" />
+                <field name="volume" />
+                <field name="volume_uom_id" />
+                <field name="sale_line_id" />
+                <field name="order_id" />
+            </list>
+        </field>
+    </record>
+
+    <record id="tms_cargo_view_form_sale" model="ir.ui.view">
+        <field name="name">tms.cargo.form.sale</field>
+        <field name="model">tms.cargo</field>
+        <field name="inherit_id" ref="tms.tms_cargo_view_form" />
+        <field name="arch" type="xml">
+            <field name="order_id" position="after">
+                <field name="sale_line_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="tms_shipment_line_view_form" model="ir.ui.view">
+        <field name="name">tms.cargo.shipment.form</field>
+        <field name="model">tms.cargo</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="quantity" />
+                            <field name="uom_id" />
+                            <field name="weight" />
+                            <field name="weight_uom_id" />
+                        </group>
+                        <group>
+                            <field name="volume" />
+                            <field name="volume_uom_id" />
+                            <field name="sale_line_id" />
+                            <field name="order_id" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

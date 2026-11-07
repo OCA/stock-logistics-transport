@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.tms.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="tms.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='general_settings_container']" position="after">
+                <block title="Rates" name="tms_rate_settings">
+                    <setting
+                        string="Exchange rate date"
+                        help="Shipment date uses the departure day. Order date freezes the rate when the sales order is confirmed."
+                    >
+                        <field name="tms_rate_exchange_date" />
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

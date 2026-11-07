@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_partner_category_vip" model="res.partner.category">
+        <field name="name">VIP Clients</field>
+    </record>
+
+    <record id="demo_rate_card_road_ftl" model="tms.rate.card">
+        <field name="name">ROAD-FTL</field>
+        <field name="transit_mode">road</field>
+        <field name="transport_type">cargo</field>
+        <field name="booking_type">full_asset</field>
+    </record>
+    <record id="demo_rate_lane_road_ftl" model="tms.rate.card.line">
+        <field name="rate_card_id" ref="demo_rate_card_road_ftl" />
+        <field name="origin_id" ref="tms.demo_location_1" />
+        <field name="destination_id" ref="tms.demo_location_2" />
+        <field name="rate_type">flat</field>
+        <field name="fixed_price">18500</field>
+    </record>
+
+    <record id="demo_rate_card_road_ftl_customer" model="tms.rate.card">
+        <field name="name">ROAD-FTL-DEMO</field>
+        <field name="partner_id" ref="demo_tms_sale_customer" />
+        <field name="transit_mode">road</field>
+        <field name="transport_type">cargo</field>
+        <field name="booking_type">full_asset</field>
+    </record>
+    <record id="demo_rate_lane_road_ftl_customer" model="tms.rate.card.line">
+        <field name="rate_card_id" ref="demo_rate_card_road_ftl_customer" />
+        <field name="origin_id" ref="tms.demo_location_1" />
+        <field name="destination_id" ref="tms.demo_location_2" />
+        <field name="rate_type">flat</field>
+        <field name="fixed_price">15000</field>
+    </record>
+
+    <record id="demo_rate_card_road_ftl_vip" model="tms.rate.card">
+        <field name="name">ROAD-FTL-VIP</field>
+        <field name="category_id" ref="demo_partner_category_vip" />
+        <field name="transit_mode">road</field>
+        <field name="transport_type">cargo</field>
+        <field name="booking_type">full_asset</field>
+        <field name="date_start">2026-01-01</field>
+        <field name="date_end">2026-12-31</field>
+    </record>
+    <record id="demo_rate_lane_road_ftl_vip" model="tms.rate.card.line">
+        <field name="rate_card_id" ref="demo_rate_card_road_ftl_vip" />
+        <field name="origin_id" ref="tms.demo_location_1" />
+        <field name="destination_id" ref="tms.demo_location_2" />
+        <field name="rate_type">flat</field>
+        <field name="fixed_price">16000</field>
+    </record>
+
+    <record id="demo_rate_card_road_ltl" model="tms.rate.card">
+        <field name="name">ROAD-LTL</field>
+        <field name="transit_mode">road</field>
+        <field name="transport_type">cargo</field>
+        <field name="booking_type">shared_space</field>
+    </record>
+    <record id="demo_rate_lane_road_ltl" model="tms.rate.card.line">
+        <field name="rate_card_id" ref="demo_rate_card_road_ltl" />
+        <field name="origin_id" ref="tms.demo_location_1" />
+        <field name="destination_id" ref="tms.demo_location_2" />
+        <field name="rate_type">bracket</field>
+    </record>
+    <record id="demo_rate_bracket_ltl_low" model="tms.rate.bracket">
+        <field name="rate_line_id" ref="demo_rate_lane_road_ltl" />
+        <field name="weight_or_qty_min">0</field>
+        <field name="weight_or_qty_max">100</field>
+        <field name="price_per_unit">18</field>
+    </record>
+    <record id="demo_rate_bracket_ltl_high" model="tms.rate.bracket">
+        <field name="rate_line_id" ref="demo_rate_lane_road_ltl" />
+        <field name="weight_or_qty_min">101</field>
+        <field name="weight_or_qty_max">1000</field>
+        <field name="price_per_unit">12</field>
+    </record>
+</odoo>

@@ -215,11 +215,6 @@ msgid "Route"
 msgstr ""
 
 #. module: tms_sale
-#: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_route_id
-msgid "Routes"
-msgstr ""
-
-#. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_tms_order__sale_id
 msgid "Sale"
 msgstr ""
@@ -305,6 +300,11 @@ msgstr ""
 #. module: tms_sale
 #: model_terms:ir.ui.view,arch_db:tms_sale.tms_order_view_form
 msgid "Seats"
+msgstr ""
+
+#. module: tms_sale
+#: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_route_id
+msgid "TMS Route"
 msgstr ""
 
 #. module: tms_sale

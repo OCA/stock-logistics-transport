@@ -4,6 +4,23 @@
         <field name="model">sale.order</field>
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="allowed_rate_card_ids" invisible="1" />
+                <field
+                    name="rate_card_id"
+                    options="{'no_create': True}"
+                />
+                <field name="spot_quote_required" invisible="1" />
+            </xpath>
+            <xpath expr="//notebook" position="before">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="not spot_quote_required"
+                >
+                    Spot quote required. No valid card covers this route.
+                </div>
+            </xpath>
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button
                     type="object"
@@ -15,9 +32,27 @@
                     <field name="tms_order_count" widget="statinfo" string="Trips" />
                 </button>
             </xpath>
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='product_uom_qty']"
+                position="attributes"
+            >
+                <attribute
+                    name="readonly"
+                >is_downpayment or has_trip_product</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='product_uom_qty']"
+                position="attributes"
+            >
+                <attribute name="readonly">has_trip_product</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/list/field[@name='product_uom_id']"
+                position="before"
+            >
+                <field name="allowed_uom_ids" column_invisible="1" />
+            </xpath>
             <xpath expr="//list//field[@name='name']" position="after">
-                <field name="tms_factor" string="Factor" />
-                <field name="tms_factor_uom" string="Factor UoM" />
                 <field name="has_trip_product" column_invisible="1" />
                 <field name="seat_ticket" column_invisible="1" />
                 <field name="tms_trip_ticket_id" column_invisible="1" />
@@ -28,6 +63,65 @@
                 <field name="tms_scheduled_date_end" column_invisible="1" />
                 <field name="tms_route_id" column_invisible="1" />
                 <field name="tms_route_flag" column_invisible="1" />
+                <field name="allowed_rate_card_ids" column_invisible="1" />
+                <field name="rate_card_id" column_invisible="1" />
+                <field name="spot_quote" optional="show" />
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form/group[1]" position="after">
+                <field name="has_trip_product" invisible="1" />
+                <field name="allowed_uom_ids" invisible="1" />
+                <field name="is_container_shipment" invisible="1" />
+                <field name="is_uld_shipment" invisible="1" />
+                <group
+                    name="tms_cargo"
+                    string="Cargo"
+                    invisible="not has_trip_product"
+                >
+                    <field
+                        name="cargo_ids"
+                        nolabel="1"
+                        colspan="2"
+                        readonly="parent.state in ('sale', 'cancel')"
+                    >
+                        <list editable="bottom">
+                            <field name="order_id" string="Trip" />
+                            <field name="name" />
+                            <field name="quantity" />
+                            <field name="uom_id" />
+                            <field name="weight" />
+                            <field name="weight_uom_id" />
+                            <field name="volume" />
+                            <field name="volume_uom_id" />
+                            <field
+                                name="container_type"
+                                column_invisible="not parent.is_container_shipment"
+                                groups="tms.group_tms_water_user"
+                            />
+                            <field
+                                name="container_number"
+                                column_invisible="not parent.is_container_shipment"
+                                groups="tms.group_tms_water_user"
+                            />
+                            <field
+                                name="seal_number"
+                                column_invisible="not parent.is_container_shipment"
+                                groups="tms.group_tms_water_user"
+                            />
+                            <field
+                                name="uld_type"
+                                column_invisible="not parent.is_uld_shipment"
+                                groups="tms.group_tms_air_user"
+                            />
+                            <field
+                                name="uld_number"
+                                column_invisible="not parent.is_uld_shipment"
+                                groups="tms.group_tms_air_user"
+                            />
+                            <field name="shipment_unit" column_invisible="1" />
+                            <field name="state" />
+                        </list>
+                    </field>
+                </group>
             </xpath>
         </field>
     </record>
