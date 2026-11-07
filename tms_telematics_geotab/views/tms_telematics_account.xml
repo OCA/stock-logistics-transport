@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_tms_telematics_account_form_geotab" model="ir.ui.view">
+        <field name="name">tms.telematics.account.form.geotab</field>
+        <field name="model">tms.telematics.account</field>
+        <field
+            name="inherit_id"
+            ref="tms_telematics.view_tms_telematics_account_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='server_url']" position="after">
+                <div
+                    class="alert alert-info"
+                    role="alert"
+                    colspan="2"
+                    invisible="provider != 'geotab'"
+                >
+                    Geotab and AT&amp;T Fleet Management share this connection.
+                    For AT&amp;T, set the server to the AT&amp;T host.
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

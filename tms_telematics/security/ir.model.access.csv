@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_telematics_account_user,tms.telematics.account.user,model_tms_telematics_account,tms.group_tms_user,1,0,0,0
+access_tms_telematics_account_admin,tms.telematics.account.admin,model_tms_telematics_account,tms.group_tms_admin,1,1,1,1
+access_tms_telematics_device_user,tms.telematics.device.user,model_tms_telematics_device,tms.group_tms_user,1,0,0,0
+access_tms_telematics_device_admin,tms.telematics.device.admin,model_tms_telematics_device,tms.group_tms_admin,1,1,1,1
+access_tms_telematics_reading_user,tms.telematics.reading.user,model_tms_telematics_reading,tms.group_tms_user,1,0,0,0
+access_tms_telematics_reading_admin,tms.telematics.reading.admin,model_tms_telematics_reading,tms.group_tms_admin,1,1,1,1
