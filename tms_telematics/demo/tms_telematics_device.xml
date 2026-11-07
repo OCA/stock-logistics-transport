@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_telematics_device" model="tms.telematics.device">
+        <field name="name">Actros tracker</field>
+        <field name="account_id" ref="demo_telematics_account" />
+        <field name="external_id">demo-device-1</field>
+        <field name="vehicle_id" ref="tms.demo_vehicle_truck_actros" />
+        <field name="license_plate">02-TRK-202</field>
+    </record>
+</odoo>
