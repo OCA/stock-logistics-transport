@@ -89,7 +89,7 @@ class TMSOrder(models.Model):
     )
 
     scheduled_date_start = fields.Datetime(
-        string="Scheduled Start", default=datetime.now()
+        string="Scheduled Start", default=fields.Datetime.now
     )
     scheduled_duration = fields.Float(
         help="Scheduled duration of the work in" " hours",
