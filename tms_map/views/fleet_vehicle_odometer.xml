@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="fleet_vehicle_odometer_view_form_map" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.form.map</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_form" />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="latitude" />
+                <field name="longitude" />
+            </field>
+        </field>
+    </record>
+    <record id="fleet_vehicle_odometer_view_tree_map" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.list.map</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_tree" />
+        <field name="arch" type="xml">
+            <field name="value" position="after">
+                <field name="latitude" optional="hide" />
+                <field name="longitude" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>

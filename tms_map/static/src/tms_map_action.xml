@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="tms_map.TmsMapAction">
+        <div class="o_action">
+            <WithSearch
+                t-if="state.model"
+                resModel="state.model"
+                searchViewArch="state.arch"
+                searchViewFields="state.fields"
+                loadIrFilters="true"
+                searchMenuTypes="['filter', 'favorite']"
+                domain="domain"
+            >
+                <t t-set-slot="default" t-slot-scope="search">
+                    <Layout className="'o_tms_map_action'" display="layoutDisplay">
+                        <t t-set-slot="layout-actions">
+                            <SearchBar autofocus="false" />
+                        </t>
+                        <TmsUniversalMap
+                            mapMode="mapMode"
+                            action="props.action"
+                            searchModelName="state.model"
+                            searchDomain="search.domain"
+                        />
+                    </Layout>
+                </t>
+            </WithSearch>
+        </div>
+    </t>
+</templates>

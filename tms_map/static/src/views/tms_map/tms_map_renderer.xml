@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="tms_map.TmsMapViewRenderer">
+        <div class="o_tms_map_view">
+            <div class="o_tms_map_legend" t-if="showMotionLegend">
+                <span
+                    class="o_tms_map_legend_item"
+                    t-foreach="motionLegend"
+                    t-as="item"
+                    t-key="item.motion"
+                >
+                    <i t-attf-class="o_tms_map_swatch o_tms_map_{{item.motion}}" />
+                    <t t-esc="item.label" />
+                </span>
+            </div>
+            <div class="text-muted p-2" t-if="state.message" t-esc="state.message" />
+            <div class="o_tms_map_canvas" t-ref="map" />
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_form_tms_map" model="ir.ui.view">
+        <field name="name">res.partner.form.tms.map</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Map" name="tms_map">
+                    <group>
+                        <field name="tms_map_shape" />
+                        <field name="tms_geofence" invisible="1" />
+                    </group>
+                    <widget name="tms_map" mode="geocoding" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="fleet_vehicle_view_tms_map" model="ir.ui.view">
+        <field name="name">fleet.vehicle.tms.map</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="type">tms_map</field>
+        <field name="arch" type="xml">
+            <tms_map
+                latitude="tms_last_latitude"
+                longitude="tms_last_longitude"
+                mode="tms_map_mode"
+                motion="tms_motion"
+            >
+                <field name="display_name" />
+                <field name="tms_last_latitude" />
+                <field name="tms_last_longitude" />
+                <field name="tms_map_mode" />
+                <field name="tms_motion" />
+            </tms_map>
+        </field>
+    </record>
+
+    <record id="action_tms_map_fleet" model="ir.actions.client">
+        <field name="name">Live fleet</field>
+        <field name="tag">tms_map</field>
+        <field name="context">{'map_mode': 'fleet'}</field>
+    </record>
+
+    <record id="tms_team_view_kanban_map" model="ir.ui.view">
+        <field name="name">tms.team.kanban.map</field>
+        <field name="model">tms.team</field>
+        <field name="inherit_id" ref="tms.tms_team_view_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_kanban_bottom_left')]" position="inside">
+                <button
+                    class="btn btn-primary ms-2"
+                    name="%(action_tms_map_fleet)d"
+                    type="action"
+                >
+                    <t t-esc="record.vehicle_count.value" />
+                    VEHICLES
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

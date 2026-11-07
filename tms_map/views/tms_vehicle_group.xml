@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_vehicle_group_view_list" model="ir.ui.view">
+        <field name="name">tms.vehicle.group.list</field>
+        <field name="model">tms.vehicle.group</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="vehicle_ids" widget="many2many_tags" />
+            </list>
+        </field>
+    </record>
+
+    <record id="tms_vehicle_group_view_form" model="ir.ui.view">
+        <field name="name">tms.vehicle.group.form</field>
+        <field name="model">tms.vehicle.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="vehicle_ids" widget="many2many_tags" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_tms_vehicle_group" model="ir.actions.act_window">
+        <field name="name">Vehicle Groups</field>
+        <field name="res_model">tms.vehicle.group</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_tms_vehicle_group"
+        name="Vehicle Groups"
+        parent="tms.config"
+        action="action_tms_vehicle_group"
+        groups="tms_map.group_tms_vehicle_group"
+        sequence="45"
+    />
+
+    <record id="fleet_vehicle_view_form_tms_group" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.tms.group</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+            <field name="driver_id" position="after">
+                <field name="tms_vehicle_group_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+</odoo>

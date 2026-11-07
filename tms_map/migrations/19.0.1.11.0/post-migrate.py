@@ -1,0 +1,11 @@
+# Copyright (C) 2026 Gray Matter Logic (<https://www.graymatterlogic.com>).
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo import SUPERUSER_ID, api
+
+
+def migrate(cr, version):
+    if not version:
+        return
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    env["res.partner"]._demo_apply_location_perimeters()
