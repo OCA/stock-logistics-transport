@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_tms_route_form_routing" model="ir.ui.view">
+        <field name="name">tms.route.form.routing</field>
+        <field name="model">tms.route</field>
+        <field name="inherit_id" ref="tms.view_tms_route_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet" position="before">
+                <header>
+                    <button
+                        name="action_compute_route"
+                        type="object"
+                        string="Compute route"
+                        class="btn-primary"
+                    />
+                    <field
+                        name="routing_state"
+                        widget="statusbar"
+                        statusbar_visible="draft,pending,done"
+                    />
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='stop_locations']" position="after">
+                <field name="routing_provider" />
+                <field name="avoid_tolls" />
+                <field name="routing_error" invisible="not routing_error" />
+            </xpath>
+            <xpath
+                expr="//field[@name='stop_location_ids']/parent::page"
+                position="after"
+            >
+                <page string="Ordered stops" groups="tms.group_tms_route_stop">
+                    <field name="stop_ids">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle" />
+                            <field
+                                name="location_id"
+                                domain="[('tms_location', '=', True)]"
+                            />
+                            <field name="latitude" />
+                            <field name="longitude" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
