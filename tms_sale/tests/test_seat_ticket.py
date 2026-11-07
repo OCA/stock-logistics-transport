@@ -94,3 +94,35 @@ class TestSeatTicket(BaseCommon):
 
         ticket.write({"sale_line_id": False})
         self.assertEqual(ticket.available, "available")
+
+    def test_boarded_tickets_move_trip_to_boarded(self):
+        trip = self.env["tms.order"].create(
+            {
+                "name": "TRIP-BOARD",
+                "company_id": self.env.company.id,
+                "origin_id": self.origin.id,
+                "destination_id": self.destination.id,
+                "vehicle_id": self.passenger_vehicle.id,
+                "stage_id": self.env.ref("tms.tms_stage_order_confirmed").id,
+            }
+        )
+        tickets = self.env["seat.ticket"].create(
+            [
+                {
+                    "tms_order_id": trip.id,
+                    "sale_line_id": self.sale_line.id,
+                    "name": "Seat 1",
+                },
+                {
+                    "tms_order_id": trip.id,
+                    "sale_line_id": self.sale_line.id,
+                    "name": "Seat 2",
+                },
+            ]
+        )
+        tickets[0].boarded = True
+        self.assertEqual(trip.stage_id, self.env.ref("tms.tms_stage_order_confirmed"))
+        tickets[1].boarded = True
+        self.assertEqual(trip.stage_id, self.env.ref("tms.tms_stage_order_boarded"))
+        trip.button_start_order()
+        self.assertEqual(trip.stage_id, self.env.ref("tms.tms_stage_order_in_transit"))
