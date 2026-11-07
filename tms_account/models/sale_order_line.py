@@ -43,11 +43,5 @@ class SaleOrderLine(models.Model):
     def _prepare_invoice_line(self, **optional_values):
         res = super()._prepare_invoice_line(**optional_values)
         if not self.display_type:
-            res.update(
-                {
-                    "tms_factor": self.tms_factor,
-                    "tms_factor_uom": self.tms_factor_uom,
-                }
-            )
             self._set_analytic_distribution(res, **optional_values)
         return res

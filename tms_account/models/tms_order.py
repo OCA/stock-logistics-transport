@@ -65,25 +65,44 @@ class TMSOrder(models.Model):
             stage = self.env["tms.stage"].browse(vals["stage_id"])
             for order in self:
                 if stage.is_completed and order.create_invoice:
-                    if order.sale_id:
+                    if order._related_sales():
                         order._handle_invoices()
                     if order.purchase_ids:
                         order._handle_bills()
         return res
 
+    def _related_sales(self):
+        """Sales orders this trip carries, including cargo from another order."""
+        self.ensure_one()
+        sales = self.sale_id | self.sale_line_id.order_id
+        sales |= self.cargo_ids.sale_line_id.order_id
+        return sales
+
+    def _line_trips(self, line):
+        return line.tms_order_ids | line.cargo_ids.order_id
+
+    def _sale_ready_for_trip_invoice(self, sale):
+        tracked = sale.order_line.filtered(lambda line: self._line_trips(line))
+        if not tracked:
+            return False
+        return all(
+            all(trip.stage_id.is_completed for trip in self._line_trips(line))
+            for line in tracked
+        )
+
     def _handle_invoices(self):
         self.ensure_one()
-        all_completed = True
-        for line in self.sale_id.order_line:
-            if line.tms_order_ids.id == self.id:
-                line.qty_delivered = line.product_uom_qty
-            if not line.tms_order_ids.stage_id.is_completed:
-                all_completed = False
-
-        if not self.sale_id.invoice_ids and all_completed:
-            invoice = self.sale_id._create_invoices()
-
-            if self.env.user.has_group("analytic.group_analytic_accounting"):
+        for sale in self._related_sales():
+            if sale.invoice_ids or not self._sale_ready_for_trip_invoice(sale):
+                continue
+            for line in sale.order_line:
+                trips = self._line_trips(line)
+                if trips and all(trip.stage_id.is_completed for trip in trips):
+                    line.qty_delivered = line.product_uom_qty
+            invoice = sale._create_invoices()
+            if invoice and self.env.user.has_group(
+                "analytic.group_analytic_accounting"
+            ):
                 self._assign_analytic_accounts(invoice)
 
     def _assign_analytic_accounts(self, invoice):
@@ -131,7 +150,7 @@ class TMSOrder(models.Model):
     def _compute_get_invoiced(self):
         for trip in self:
             trip.bill_count = 0
-            trip.invoice_count = trip.sale_id.invoice_count
+            trip.invoice_count = sum(trip._related_sales().mapped("invoice_count"))
 
             purchase_with_bills = self.env["purchase.order"].search(
                 [("id", "in", trip.purchase_ids.ids), ("invoice_ids", "!=", False)]
@@ -140,7 +159,16 @@ class TMSOrder(models.Model):
 
     def action_view_invoices(self):
         self.ensure_one()
-        return self.sale_id.action_view_invoice()
+        sales = self._related_sales()
+        if len(sales) <= 1:
+            return (sales or self.sale_id).action_view_invoice()
+        return {
+            "type": "ir.actions.act_window",
+            "name": self.env._("Invoices"),
+            "res_model": "account.move",
+            "view_mode": "list,form",
+            "domain": [("id", "in", sales.invoice_ids.ids)],
+        }
 
     def action_view_bills(self):
         self.ensure_one()

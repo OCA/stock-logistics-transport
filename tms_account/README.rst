@@ -167,16 +167,10 @@ promote its widespread use.
 .. |maintainer-max3903| image:: https://github.com/max3903.png?size=40px
     :target: https://github.com/max3903
     :alt: max3903
-.. |maintainer-santiagordz| image:: https://github.com/santiagordz.png?size=40px
-    :target: https://github.com/santiagordz
-    :alt: santiagordz
-.. |maintainer-EdgarRetes| image:: https://github.com/EdgarRetes.png?size=40px
-    :target: https://github.com/EdgarRetes
-    :alt: EdgarRetes
 
-Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-max3903| |maintainer-santiagordz| |maintainer-EdgarRetes| 
+|maintainer-max3903| 
 
 This module is part of the `OCA/stock-logistics-transport <https://github.com/OCA/stock-logistics-transport/tree/19.0/tms_account>`_ project on GitHub.
 

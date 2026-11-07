@@ -7,4 +7,3 @@ class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
     tms_factor = fields.Float()
-    tms_factor_uom = fields.Char(readonly=True)

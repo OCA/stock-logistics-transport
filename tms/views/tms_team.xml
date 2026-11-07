@@ -119,6 +119,7 @@
                             />
                         </group>
                         <group string="Vehicles">
+                            <field name="operation" />
                             <field
                                 name="vehicle_ids"
                                 widget="many2many_tags"
