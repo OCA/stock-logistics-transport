@@ -311,6 +311,11 @@ msgid "Seats"
 msgstr "Sedute"
 
 #. module: tms_sale
+#: model:ir.model.fields,field_description:tms_sale.field_sale_order_line__tms_route_id
+msgid "TMS Route"
+msgstr ""
+
+#. module: tms_sale
 #: model:ir.model.fields,field_description:tms_sale.field_fleet_vehicle__tms_service_product_id
 msgid "TMS Service"
 msgstr "Servizio TMS"
