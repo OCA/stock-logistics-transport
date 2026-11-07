@@ -9,4 +9,14 @@
         <field name="relative_factor">1.60934</field>
         <field name="relative_uom_id" ref="tms.uom_kmh" />
     </record>
+
+    <record id="uom_kg_per_m2" model="uom.uom">
+        <field name="name">kg/m²</field>
+        <field name="relative_factor" eval="1.0" />
+    </record>
+
+    <record id="uom_pallet" model="uom.uom">
+        <field name="name">Pallet</field>
+        <field name="relative_factor" eval="1.0" />
+    </record>
 </odoo>

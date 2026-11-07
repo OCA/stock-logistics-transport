@@ -7,11 +7,34 @@
         <field name="arch" type="xml">
             <xpath expr="//form" position="inside">
                 <app
-                    data-string="Transport"
-                    string="Transport"
+                    data-string="Transportation"
+                    string="Transportation"
                     name="tms"
                     groups="tms.group_tms_admin"
                 >
+                    <block title="Modes" name="tms_mode_settings">
+                        <setting
+                            string="Road and trucking"
+                            help="Trucks, vans, buses, loading meters, and pallets."
+                        >
+                            <field name="group_tms_road_user" />
+                        </setting>
+                        <setting
+                            string="Air freight"
+                            help="Aircraft fields and flight services."
+                        >
+                            <field name="group_tms_air_user" />
+                        </setting>
+                        <setting
+                            string="Ocean freight"
+                            help="Vessel fields and ocean services."
+                        >
+                            <field name="group_tms_water_user" />
+                        </setting>
+                        <setting string="Rail freight" help="Train services.">
+                            <field name="group_tms_rail_user" />
+                        </setting>
+                    </block>
                     <block title="Units" name="general_settings_container">
                         <setting id="tms_uom">
                             <field name="group_tms_uom" string="TMS Units of Measure" />
@@ -47,6 +70,13 @@
                                 name="tms_weight_uom"
                                 string="Default Weight UoM"
                                 placeholder="e.g. kg"
+                            />
+                        </setting>
+                        <setting id="tms_volume_uom" invisible="not group_tms_uom">
+                            <field
+                                name="tms_volume_uom"
+                                string="Default Volume UoM"
+                                placeholder="e.g. m³"
                             />
                         </setting>
                         <setting id="tms_speed_uom" invisible="not group_tms_uom">
@@ -139,6 +169,12 @@
                             <field name="group_tms_route_stop" />
                         </setting>
                         <setting
+                            string="Interactive map"
+                            help="Map partners, trips, dispatch, and positions."
+                        >
+                            <field name="module_tms_map" />
+                        </setting>
+                        <setting
                             string="Manage Trips Accounting"
                             help="Create vendor bills and customer invoices when completing trip orders."
                         >
@@ -158,6 +194,32 @@
                         </setting>
                         <setting help="Manage expenses of a trip: hotel, tolls, fuel">
                             <field name="module_tms_expense" />
+                        </setting>
+                        <setting
+                            string="Manage Documents"
+                            help="Attach expiry-tracked documents to drivers and vehicles. An expired critical document blocks starting a trip."
+                        >
+                            <field name="module_tms_document" />
+                        </setting>
+                        <setting
+                            string="Connect telematics"
+                            help="Import GPS positions, odometer readings, and fuel fills."
+                        >
+                            <field name="module_tms_telematics" />
+                        </setting>
+                        <setting
+                            string="Connect Geotab"
+                            help="Pull Geotab and AT&amp;T Fleet Management on one connection."
+                            invisible="not module_tms_telematics"
+                        >
+                            <field name="module_tms_telematics_geotab" />
+                        </setting>
+                        <setting
+                            string="Fuel expenses from telematics"
+                            help="Create a fuel expense when a fill is imported. The amount is split across trips by distance."
+                            invisible="not module_tms_telematics"
+                        >
+                            <field name="module_tms_telematics_expense" />
                         </setting>
                     </block>
                 </app>

@@ -8,7 +8,6 @@
                 <field name="name" />
                 <field name="driver_ids" />
                 <field name="driver_count" />
-                <field name="vehicle_ids" />
                 <field name="vehicle_count" />
                 <field name="crew_ids" />
                 <field name="trips_todo_count" />
@@ -42,19 +41,6 @@
                                                 />
                                                 <span>Drivers:&#032;</span>
                                                 <t t-esc="record.driver_count.value" />
-                                            </div>
-                                            <!-- Vehicles -->
-                                            <div
-                                                class="o_row text-muted"
-                                                t-if="record.vehicle_ids.value"
-                                            >
-                                                <span
-                                                    class="fa fa-bus me-2"
-                                                    aria-label="Vehicle"
-                                                    title="Vehicles"
-                                                />
-                                                <span>Vehicles:&#032;</span>
-                                                <t t-esc="record.vehicle_count.value" />
                                             </div>
                                         </div>
                                     </div>
@@ -119,6 +105,7 @@
                             />
                         </group>
                         <group string="Vehicles">
+                            <field name="operation" />
                             <field
                                 name="vehicle_ids"
                                 widget="many2many_tags"

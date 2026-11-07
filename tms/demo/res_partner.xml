@@ -9,6 +9,8 @@
         <field name="state_id" ref="base.state_mx_df" />
         <field name="zip">76100</field>
         <field name="country_id" ref="base.mx" />
+        <field name="partner_latitude">19.4247897</field>
+        <field name="partner_longitude">-99.1948518</field>
     </record>
 
     <record id="demo_location_2" model="res.partner">
@@ -19,6 +21,8 @@
         <field name="state_id" ref="base.state_mx_nl" />
         <field name="zip">64849</field>
         <field name="country_id" ref="base.mx" />
+        <field name="partner_latitude">25.6530621</field>
+        <field name="partner_longitude">-100.2943069</field>
     </record>
 
     <record id="demo_location_3" model="res.partner">
@@ -29,6 +33,8 @@
         <field name="state_id" ref="base.state_mx_qro" />
         <field name="zip">76090</field>
         <field name="country_id" ref="base.mx" />
+        <field name="partner_latitude">20.5787461</field>
+        <field name="partner_longitude">-100.3490319</field>
     </record>
 
     <record id="demo_location_4" model="res.partner">
@@ -39,6 +45,8 @@
         <field name="state_id" ref="base.state_mx_qro" />
         <field name="zip">76000</field>
         <field name="country_id" ref="base.mx" />
+        <field name="partner_latitude">20.5959313</field>
+        <field name="partner_longitude">-100.3737996</field>
     </record>
 
     <record id="demo_location_5" model="res.partner">
@@ -49,6 +57,8 @@
         <field name="state_id" ref="base.state_mx_qro" />
         <field name="zip">76000</field>
         <field name="country_id" ref="base.mx" />
+        <field name="partner_latitude">20.5943526</field>
+        <field name="partner_longitude">-100.3927594</field>
     </record>
 
     <record id="demo_location_6" model="res.partner">
@@ -59,6 +69,8 @@
         <field name="state_id" ref="base.state_mx_qro" />
         <field name="zip">76000</field>
         <field name="country_id" ref="base.mx" />
+        <field name="partner_latitude">20.5930735</field>
+        <field name="partner_longitude">-100.4098745</field>
     </record>
 
     <record id="demo_location_7" model="res.partner">
@@ -69,6 +81,8 @@
         <field name="state_id" ref="base.state_mx_qro" />
         <field name="zip">76000</field>
         <field name="country_id" ref="base.mx" />
+        <field name="partner_latitude">20.5909633</field>
+        <field name="partner_longitude">-100.3934582</field>
     </record>
 
     <record id="demo_location_8" model="res.partner">
@@ -79,6 +93,8 @@
         <field name="state_id" ref="base.state_mx_qro" />
         <field name="zip">76000</field>
         <field name="country_id" ref="base.mx" />
+        <field name="partner_latitude">20.5930221</field>
+        <field name="partner_longitude">-100.3896405</field>
     </record>
 
     <record id="demo_location_9" model="res.partner">
@@ -89,6 +105,8 @@
         <field name="state_id" ref="base.state_us_44" />
         <field name="zip">78205</field>
         <field name="country_id" ref="base.us" />
+        <field name="partner_latitude">29.4261578</field>
+        <field name="partner_longitude">-98.4866962</field>
     </record>
 
     <record id="demo_location_10" model="res.partner">
@@ -99,5 +117,7 @@
         <field name="state_id" ref="base.state_us_44" />
         <field name="zip">77058</field>
         <field name="country_id" ref="base.us" />
+        <field name="partner_latitude">29.5513096</field>
+        <field name="partner_longitude">-95.0974022</field>
     </record>
 </odoo>

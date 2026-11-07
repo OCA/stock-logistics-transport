@@ -1,0 +1,14 @@
+<odoo noupdate="1">
+    <!-- Fresh installs start with every mode. Later upgrades leave a mode off. -->
+    <record id="base.group_user" model="res.groups">
+        <field
+            name="implied_ids"
+            eval="[
+                (4, ref('group_tms_road_user')),
+                (4, ref('group_tms_air_user')),
+                (4, ref('group_tms_water_user')),
+                (4, ref('group_tms_rail_user')),
+            ]"
+        />
+    </record>
+</odoo>

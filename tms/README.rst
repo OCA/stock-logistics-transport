@@ -159,6 +159,12 @@ Orders
 5. Once confirmed, click 'START' button to start the trip.
 6. Once the trip is completed, click 'END' button to end the trip.
 
+Chatter
+-------
+
+A change of the trip stage is logged on the trip chatter. A change of the
+cargo state is logged on the cargo chatter.
+
 Bug Tracker
 ===========
 
@@ -218,16 +224,10 @@ promote its widespread use.
 .. |maintainer-max3903| image:: https://github.com/max3903.png?size=40px
     :target: https://github.com/max3903
     :alt: max3903
-.. |maintainer-santiagordz| image:: https://github.com/santiagordz.png?size=40px
-    :target: https://github.com/santiagordz
-    :alt: santiagordz
-.. |maintainer-EdgarRetes| image:: https://github.com/EdgarRetes.png?size=40px
-    :target: https://github.com/EdgarRetes
-    :alt: EdgarRetes
 
-Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-max3903| |maintainer-santiagordz| |maintainer-EdgarRetes| 
+|maintainer-max3903| 
 
 This module is part of the `OCA/stock-logistics-transport <https://github.com/OCA/stock-logistics-transport/tree/19.0/tms>`_ project on GitHub.
 

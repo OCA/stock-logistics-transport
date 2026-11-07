@@ -46,16 +46,23 @@
     <record id="view_res_partner_search_inherit" model="ir.ui.view">
         <field name="name">res.partner.search.inherit</field>
         <field name="model">res.partner</field>
+        <field name="mode">primary</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
         <field name="arch" type="xml">
-            <search>
-                <field name="tms_location" />
-            </search>
+            <filter name="inactive" position="before">
+                <filter
+                    name="tms_location"
+                    string="Locations"
+                    domain="[('tms_location', '=', True)]"
+                />
+            </filter>
         </field>
     </record>
 
     <record id="action_tms_location" model="ir.actions.act_window">
         <field name="name">Locations</field>
         <field name="res_model">res.partner</field>
+        <field name="search_view_id" ref="view_res_partner_search_inherit" />
         <field
             name="context"
         >{"search_default_tms_location": True, "default_tms_location": True}

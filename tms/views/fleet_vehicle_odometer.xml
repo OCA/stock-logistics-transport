@@ -1,0 +1,54 @@
+<odoo>
+    <record id="fleet_vehicle_odometer_view_tree_tms" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.list.tms</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list position="attributes">
+                <attribute name="default_order">date desc, id desc</attribute>
+            </list>
+            <field name="date" position="attributes">
+                <attribute name="widget">datetime</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="fleet_vehicle_odometer_view_search_tms" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.search.tms</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_search" />
+        <field name="arch" type="xml">
+            <filter name="groupby_date" position="attributes">
+                <attribute name="string">Timestamp</attribute>
+                <attribute name="context">{'group_by': 'date:day'}</attribute>
+            </filter>
+        </field>
+    </record>
+
+    <record id="action_tms_odometer" model="ir.actions.act_window">
+        <field name="name">Odometers</field>
+        <field name="res_model">fleet.vehicle.odometer</field>
+        <field name="view_mode">list,form,graph</field>
+        <field name="search_view_id" ref="fleet.fleet_vehicle_odometer_view_search" />
+        <field name="context">{'search_default_groupby_vehicle': True}</field>
+        <field
+            name="view_ids"
+            eval="[
+            (5, 0, 0),
+            (0, 0, {
+                'view_mode': 'list',
+                'view_id': ref('fleet_vehicle_odometer_view_tree_tms'),
+            }),
+            (0, 0, {
+                'view_mode': 'form',
+                'view_id': ref('fleet.fleet_vehicle_odometer_view_form'),
+            }),
+            (0, 0, {
+                'view_mode': 'graph',
+                'view_id': ref('fleet.fleet_vehicle_odometer_view_graph'),
+            }),
+            ]"
+        />
+    </record>
+</odoo>
