@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <menuitem
+        id="menu_tms_telematics"
+        name="Telematics"
+        parent="tms.config"
+        sequence="80"
+        groups="tms.group_tms_admin"
+    />
+    <menuitem
+        id="menu_tms_telematics_account"
+        name="Accounts"
+        action="action_tms_telematics_account"
+        parent="menu_tms_telematics"
+        sequence="10"
+        groups="tms.group_tms_admin"
+    />
+    <menuitem
+        id="menu_tms_telematics_device"
+        name="Devices"
+        action="action_tms_telematics_device"
+        parent="menu_tms_telematics"
+        sequence="20"
+        groups="tms.group_tms_admin"
+    />
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_fleet_vehicle_odometer_form_telematics" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.form.telematics</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="after">
+                <group invisible="not account_id">
+                    <group>
+                        <field name="account_id" />
+                        <field name="device_id" />
+                        <field name="external_id" />
+                        <field name="event" />
+                        <field name="position_set" invisible="1" />
+                        <field name="speed_known" invisible="1" />
+                    </group>
+                    <group>
+                        <field name="odometer_km" />
+                        <field name="speed" />
+                        <field name="ignition" />
+                        <field name="fuel_liters" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_fleet_vehicle_odometer_list_telematics" model="ir.ui.view">
+        <field name="name">fleet.vehicle.odometer.list.telematics</field>
+        <field name="model">fleet.vehicle.odometer</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_tree" />
+        <field name="arch" type="xml">
+            <field name="value" position="after">
+                <field name="event" optional="hide" />
+                <field name="device_id" optional="hide" />
+                <field name="odometer_km" optional="hide" />
+                <field name="speed" optional="hide" />
+                <field name="fuel_liters" optional="hide" />
+                <field name="ignition" optional="hide" />
+            </field>
+        </field>
+    </record>
+</odoo>

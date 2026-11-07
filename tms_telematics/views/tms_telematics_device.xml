@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_tms_telematics_device_list" model="ir.ui.view">
+        <field name="name">tms.telematics.device.list</field>
+        <field name="model">tms.telematics.device</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="account_id" />
+                <field name="external_id" />
+                <field name="vehicle_id" />
+                <field name="vin" />
+                <field name="license_plate" />
+                <field name="last_position_date" />
+                <field name="last_odometer_km" />
+            </list>
+        </field>
+    </record>
+    <record id="view_tms_telematics_device_form" model="ir.ui.view">
+        <field name="name">tms.telematics.device.form</field>
+        <field name="model">tms.telematics.device</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="account_id" />
+                            <field name="external_id" />
+                            <field name="vehicle_id" />
+                        </group>
+                        <group>
+                            <field name="vin" />
+                            <field name="license_plate" />
+                            <field name="last_latitude" />
+                            <field name="last_longitude" />
+                            <field name="last_position_date" />
+                            <field name="last_speed" />
+                            <field name="last_ignition" />
+                            <field name="last_odometer_km" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_tms_telematics_device" model="ir.actions.act_window">
+        <field name="name">Telematics Devices</field>
+        <field name="res_model">tms.telematics.device</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
