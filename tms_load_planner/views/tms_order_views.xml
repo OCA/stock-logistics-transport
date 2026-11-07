@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_order_view_list_load" model="ir.ui.view">
+        <field name="name">tms.order.list.load.planner</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_list" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='stage_id']" position="before">
+                <field name="weight_load_percent" widget="progressbar" />
+                <field name="volume_load_percent" widget="progressbar" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="tms_order_view_form_load" model="ir.ui.view">
+        <field name="name">tms.order.form.load.planner</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Spaces" name="space_allocation_page">
+                    <field name="space_allocation_ids">
+                        <list create="false" delete="false" editable="bottom">
+                            <field name="vehicle_space_id" readonly="1" />
+                            <field name="zone" />
+                            <field name="state" />
+                            <field name="cargo_id" readonly="1" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_open_load_planner"
+                    type="object"
+                    string="Load planner"
+                    invisible="transport_type == 'passenger'"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

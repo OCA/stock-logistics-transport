@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- The planner opens from a trip. A menu has no trip to plan. -->
+    <delete model="ir.ui.menu" id="menu_tms_load_planner" />
+    <delete model="ir.actions.client" id="action_tms_load_planner" />
+</odoo>
