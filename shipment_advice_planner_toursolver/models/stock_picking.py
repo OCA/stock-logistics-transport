@@ -7,19 +7,9 @@ from odoo.osv.expression import AND, OR
 
 class StockPicking(models.Model):
     _inherit = "stock.picking"
-    _order = (
-        "toursolver_shipment_advice_rank asc, priority desc, scheduled_date asc,"
-        " id desc"
-    )
 
     toursolver_task_id = fields.Many2one(
         comodel_name="toursolver.task", readonly=True, copy=False
-    )
-    toursolver_shipment_advice_rank = fields.Integer(
-        readonly=True,
-        string="Toursolver Rank",
-        help="The rank given by TourSolver to this picking in the set of planned stops"
-        " of the related shipment advice",
     )
 
     @api.model
