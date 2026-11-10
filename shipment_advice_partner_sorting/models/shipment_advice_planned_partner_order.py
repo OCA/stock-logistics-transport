@@ -1,8 +1,9 @@
 # Copyright 2021 Camptocamp SA
 # Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
-# Copyright 2026 ACSONE SA/NV
+# Copyright 2026 ACSONE SA/NV (https://acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+
 from odoo import fields, models
 
 
@@ -26,6 +27,12 @@ class ShipmentAdvicePlannedPartnerOrder(models.Model):
         check_company=True,
         index=True,
     )
+    operation_type = fields.Selection(
+        selection=[
+            ("pickup", "Pickup"),
+            ("delivery", "Delivery"),
+        ]
+    )
     stock_picking_ids = fields.Many2many(
         comodel_name="stock.picking",
         string="Planned Transfers",
@@ -45,12 +52,12 @@ class ShipmentAdvicePlannedPartnerOrder(models.Model):
 
     def _get_planned_order_key(self):
         self.ensure_one()
-        return ("partner", self.partner_id.id or False)
+        return (self.partner_id.id or False, self.operation_type or False)
 
     _sql_constraints = [
         (
-            "shipment_advice_planned_partner_uniq",
-            "unique(shipment_advice_id, partner_id)",
-            "A partner can only be planned once per shipment advice.",
+            "shipment_advice_planned_partner_operation_uniq",
+            "unique(shipment_advice_id, partner_id, operation_type)",
+            "A partner and operation type can only be planned once per shipment advice.",
         ),
     ]

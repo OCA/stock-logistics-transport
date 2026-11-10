@@ -9,6 +9,7 @@
             <tree>
                 <field name="sequence" widget="handle" />
                 <field name="partner_id" />
+                <field name="operation_type" />
                 <field name="stock_picking_ids" widget="many2many_tags" />
             </tree>
         </field>

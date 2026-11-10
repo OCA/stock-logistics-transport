@@ -23,8 +23,10 @@ class ShipmentAdvice(models.Model):
 
     @api.depends(
         "partner_sorting_enabled",
+        "shipment_type",
         "planned_move_ids.picking_id",
         "planned_move_ids.picking_id.partner_id",
+        "planned_move_ids.picking_id.picking_type_id.code",
     )
     def _compute_planned_partner_order_ids(self):
         order_model = self.env["shipment.advice.planned.partner.order"]
@@ -35,14 +37,19 @@ class ShipmentAdvice(models.Model):
                 continue
             planned_by_key = {}
             for picking in shipment.planned_picking_ids:
-                key = ("partner", picking.partner_id.id or False)
+                key = shipment._get_planned_partner_order_key(picking)
                 planned_by_key.setdefault(key, self.env["stock.picking"])
                 planned_by_key[key] |= picking
 
             existing_by_key = {}
+            legacy_sequence_by_key = {}
             obsolete_orders = order_model
             for order in shipment.planned_partner_order_ids:
                 key = order._get_planned_order_key()
+                if not order.operation_type and shipment.shipment_type == "outgoing":
+                    for picking in order.stock_picking_ids:
+                        legacy_key = shipment._get_planned_partner_order_key(picking)
+                        legacy_sequence_by_key.setdefault(legacy_key, order.sequence)
                 if not key or key in existing_by_key:
                     obsolete_orders |= order
                 else:
@@ -62,12 +69,24 @@ class ShipmentAdvice(models.Model):
                     commands.append(
                         Command.create(
                             {
-                                "partner_id": key[1],
+                                "partner_id": key[0],
+                                "operation_type": key[1],
+                                "sequence": legacy_sequence_by_key.get(key, 0),
                                 "stock_picking_ids": [Command.set(pickings.ids)],
                             }
                         )
                     )
             shipment.planned_partner_order_ids = commands
+
+    def _get_planned_partner_order_key(self, picking):
+        self.ensure_one()
+        operation_type = False
+        if self.shipment_type == "outgoing":
+            operation_type = {
+                "incoming": "pickup",
+                "outgoing": "delivery",
+            }.get(picking.picking_type_id.code, False)
+        return (picking.partner_id.id or False, operation_type)
 
     def _sort_by_partner_sequence(self, records, get_picking):
         self.ensure_one()
