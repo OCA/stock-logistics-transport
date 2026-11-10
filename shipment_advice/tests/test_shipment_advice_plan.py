@@ -1,6 +1,8 @@
 # Copyright 2021 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
+from odoo import Command
+
 from .common import Common
 
 
@@ -112,6 +114,82 @@ class TestShipmentAdvicePlan(Common):
             .with_context(active_shipment_advice_id=self.shipment_advice_out.id)
             .shipment_advice_sort_key,
             (7, picking.id, picking.move_ids[0].id),
+        )
+
+    def test_planned_order_splits_partner_by_operation_type(self):
+        partner = self.env["res.partner"].create({"name": "Shared delivery address"})
+        delivery = self.move_product_out1.picking_id
+        pickup = self.move_product_in1.picking_id
+        (delivery | pickup).partner_id = partner
+
+        wizard_model = self.env["wizard.plan.shipment"].with_context(
+            active_model="stock.picking",
+            active_ids=(delivery | pickup).ids,
+        )
+        wizard = wizard_model.create(
+            {
+                "shipment_advice_id": self.shipment_advice_out.id,
+                "picking_ids": [Command.set((delivery | pickup).ids)],
+            }
+        )
+        wizard._onchange_shipment_advice_id()
+        self.assertEqual(wizard.picking_ids, delivery | pickup)
+        wizard.action_plan()
+
+        orders = self.shipment_advice_out.planned_partner_order_ids
+        self.assertEqual(len(orders), 2)
+        self.assertEqual(
+            set(orders.mapped("operation_type")),
+            {"delivery", "pickup"},
+        )
+        self.assertEqual(
+            orders.filtered(
+                lambda order: order.operation_type == "delivery"
+            ).stock_picking_ids,
+            delivery,
+        )
+        self.assertEqual(
+            orders.filtered(
+                lambda order: order.operation_type == "pickup"
+            ).stock_picking_ids,
+            pickup,
+        )
+
+    def test_incoming_shipment_advice_does_not_set_operation_type(self):
+        self.plan_records_in_shipment(
+            self.shipment_advice_in,
+            self.move_product_in1.picking_id,
+        )
+
+        self.assertFalse(
+            self.shipment_advice_in.planned_partner_order_ids.operation_type
+        )
+
+    def test_splitting_legacy_partner_order_preserves_sequence(self):
+        partner = self.env["res.partner"].create({"name": "Shared delivery address"})
+        delivery = self.move_product_out1.picking_id
+        pickup = self.move_product_in1.picking_id
+        (delivery | pickup).partner_id = partner
+        shipment = self.shipment_advice_out
+        self.plan_records_in_shipment(shipment, delivery | pickup)
+        shipment.planned_partner_order_ids.unlink()
+        self.env["shipment.advice.planned.partner.order"].create(
+            {
+                "shipment_advice_id": shipment.id,
+                "partner_id": partner.id,
+                "sequence": 12,
+                "stock_picking_ids": [Command.set((delivery | pickup).ids)],
+            }
+        )
+
+        shipment._compute_planned_partner_order_ids()
+
+        orders = shipment.planned_partner_order_ids
+        self.assertEqual(len(orders), 2)
+        self.assertEqual(set(orders.mapped("sequence")), {12})
+        self.assertEqual(
+            set(orders.mapped("operation_type")),
+            {"delivery", "pickup"},
         )
 
     def test_planned_order_keeps_unpartnered_pickings_separate(self):

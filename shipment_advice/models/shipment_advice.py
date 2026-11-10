@@ -4,12 +4,24 @@
 # Copyright 2026 ACSONE SA/NV (https://acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
+from typing import NamedTuple
+
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.safe_eval import safe_eval
 
 from odoo.addons.queue_job.delay import chain, group
 from odoo.addons.queue_job.job import identity_exact
+
+
+class PlannedPartnerOrderKey(NamedTuple):
+    kind: str
+    record_id: int
+    operation_type: str | bool
+
+    @property
+    def partner_id(self):
+        return self.record_id if self.kind == "partner" else False
 
 
 class ShipmentAdvice(models.Model):
@@ -328,55 +340,70 @@ class ShipmentAdvice(models.Model):
             )
 
     @api.depends(
+        "shipment_type",
         "planned_move_ids.picking_id",
         "planned_move_ids.picking_id.partner_id",
+        "planned_move_ids.picking_id.picking_type_id.code",
     )
     def _compute_planned_partner_order_ids(self):
         order_model = self.env["shipment.advice.planned.partner.order"]
         for shipment in self:
             planned_by_key = {}
             for picking in shipment.planned_picking_ids:
-                key = (
-                    ("partner", picking.partner_id.id)
-                    if picking.partner_id
-                    else ("picking", picking.id)
-                )
+                key = shipment._get_planned_partner_order_key(picking)
                 planned_by_key.setdefault(key, self.env["stock.picking"])
                 planned_by_key[key] |= picking
 
             existing_by_key = {}
-            obsolete_orders = order_model
+            sequence_by_key = {}
+            existing_orders = shipment.planned_partner_order_ids
             for order in shipment.planned_partner_order_ids:
-                key = order._get_planned_order_key()
-                if not key:
-                    obsolete_orders |= order
-                    continue
-                if key in existing_by_key:
-                    obsolete_orders |= order
-                else:
-                    existing_by_key[key] = order
-
-            for key, order in existing_by_key.items():
-                if key not in planned_by_key:
-                    obsolete_orders |= order
-            obsolete_orders.unlink()
+                for picking in order.stock_picking_ids:
+                    key = shipment._get_planned_partner_order_key(picking)
+                    sequence_by_key.setdefault(key, order.sequence)
+                    existing_by_key.setdefault(key, order)
 
             order_commands = []
+            used_orders = order_model
             for key, pickings in planned_by_key.items():
                 order = existing_by_key.get(key)
-                if order:
-                    order.stock_picking_ids = [Command.set(pickings.ids)]
+                if order and order not in used_orders:
+                    order.write(
+                        {
+                            "partner_id": key.partner_id,
+                            "operation_type": key.operation_type,
+                            "stock_picking_ids": [Command.set(pickings.ids)],
+                        }
+                    )
+                    used_orders |= order
                     order_commands.append(Command.link(order.id))
                 else:
                     order_commands.append(
                         Command.create(
                             {
-                                "partner_id": key[1] if key[0] == "partner" else False,
+                                "partner_id": key.partner_id,
+                                "operation_type": key.operation_type,
+                                "sequence": sequence_by_key.get(key, 0),
                                 "stock_picking_ids": [Command.set(pickings.ids)],
                             }
                         )
                     )
+            (existing_orders - used_orders).unlink()
             shipment.planned_partner_order_ids = order_commands
+
+    def _get_planned_partner_order_key(self, picking):
+        self.ensure_one()
+        operation_type = False
+        if self.shipment_type == "outgoing":
+            operation_type = {
+                "incoming": "pickup",
+                "outgoing": "delivery",
+            }.get(picking.picking_type_id.code, False)
+        if picking.partner_id:
+            return PlannedPartnerOrderKey(
+                "partner", picking.partner_id.id, operation_type
+            )
+        return PlannedPartnerOrderKey("picking", picking.id, operation_type)
 
     @api.depends(
         "loaded_move_line_ids.package_level_id.package_id",
