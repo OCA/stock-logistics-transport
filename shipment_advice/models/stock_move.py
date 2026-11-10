@@ -31,6 +31,22 @@ class StockMove(models.Model):
                 ).sequence_in_shipment_advice
             move.picking_sequence_in_shipment_advice = picking_sequence
 
+    @property
+    def shipment_advice_sort_key(self):
+        """
+        Return a tuple that can be used to sort moves in a shipment advice.
+        This is used to sort the moves into the shipment advice report...
+        """
+        self.ensure_one()
+        return (
+            *self.picking_id.with_context(
+                active_shipment_advice_id=self.env.context.get(
+                    "active_shipment_advice_id"
+                )
+            ).shipment_advice_sort_key,
+            self.sequence,
+        )
+
     def _plan_in_shipment(self, shipment_advice):
         """Plan the moves into the given shipment advice."""
         self.shipment_advice_id = shipment_advice

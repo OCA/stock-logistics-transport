@@ -58,7 +58,7 @@
                             </tr>
                         </thead>
                         <tbody
-                            t-foreach="object.planned_picking_ids.sorted(lambda picking: picking.with_context(active_shipment_advice_id=object.id).sequence_in_shipment_advice)"
+                            t-foreach="object.planned_picking_ids.sorted(lambda picking: picking.with_context(active_shipment_advice_id=object.id).shipment_advice_sort_key)"
                             t-as="picking"
                         >
                             <tr style="font-weight:bold;">

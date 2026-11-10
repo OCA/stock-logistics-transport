@@ -15,15 +15,29 @@ class StockPicking(models.Model):
         index=True,
     )
 
-    shipment_advice_planned_picking_order_ids = fields.One2many(
-        comodel_name="shipment.advice.planned.picking.order",
-        inverse_name="stock_picking_id",
+    shipment_advice_planned_partner_order_ids = fields.Many2many(
+        comodel_name="shipment.advice.planned.partner.order",
+        relation="shipment_advice_planned_partner_order_stock_picking_rel",
+        column1="stock_picking_id",
+        column2="shipment_advice_planned_partner_order_id",
     )
 
     sequence_in_shipment_advice = fields.Integer(
         compute="_compute_sequence_in_shipment_advice",
         inverse="_inverse_sequence_in_shipment_advice",
     )
+
+    @property
+    def shipment_advice_sort_key(self):
+        """
+        Return a tuple that can be used to sort pickings in a shipment advice.
+        This is used to sort the pickings into the shipment advice report...
+        """
+        self.ensure_one()
+        return (
+            self.sequence_in_shipment_advice,
+            self.id,
+        )
 
     is_fully_loaded_in_shipment = fields.Boolean(
         string="Is fully loaded in a shipment?",
@@ -185,11 +199,11 @@ class StockPicking(models.Model):
                 picking.loaded_progress_f = picking.loaded_move_lines_progress_f
                 picking.loaded_progress = picking.loaded_move_lines_progress
 
-    @api.depends("shipment_advice_planned_picking_order_ids.sequence")
+    @api.depends("shipment_advice_planned_partner_order_ids.sequence")
     @api.depends_context("active_shipment_advice_id")
     def _compute_sequence_in_shipment_advice(self):
         for picking in self:
-            planned_order = picking.shipment_advice_planned_picking_order_ids.filtered(
+            planned_order = picking.shipment_advice_planned_partner_order_ids.filtered(
                 lambda r: r.shipment_advice_id.id
                 == self.env.context.get("active_shipment_advice_id")
             )
@@ -202,7 +216,7 @@ class StockPicking(models.Model):
             if not (active_id := self.env.context.get("active_shipment_advice_id")):
                 return
 
-            planned_order = picking.shipment_advice_planned_picking_order_ids.filtered(
+            planned_order = picking.shipment_advice_planned_partner_order_ids.filtered(
                 lambda r: r.shipment_advice_id.id == active_id
             )
             if planned_order:

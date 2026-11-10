@@ -528,9 +528,8 @@ class ToursolverTask(models.Model):
                 ),
                 start=1,
             ):
-                planned = shipment.planned_picking_order_ids.filtered(
-                    lambda plo, p_id=partner_id: plo.stock_picking_id.partner_id.id
-                    == p_id
+                planned = shipment.planned_partner_order_ids.filtered(
+                    lambda plo, p_id=partner_id: plo.partner_id.id == p_id
                 )
                 planned.write({"sequence": rank})
 
