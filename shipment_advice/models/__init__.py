@@ -5,3 +5,4 @@ from . import stock_move_line
 from . import stock_package_level
 from . import shipment_advice
 from . import stock_picking
+from . import shipment_advice_planned_partner_order

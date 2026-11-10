@@ -91,7 +91,7 @@
                             attrs="{'invisible': [('planned_picking_ids', '=', [])]}"
                         >
                             <field
-                                string="Planned"
+                                string="Planned transfers"
                                 name="planned_pickings_count"
                                 widget="statinfo"
                             />
