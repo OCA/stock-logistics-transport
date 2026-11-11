@@ -108,6 +108,11 @@ class ShipmentAdvice(models.Model):
         digits=(16, 2),
         compute="_compute_total_load",
     )
+    total_volume = fields.Float(
+        string="Total volume (m3)",
+        digits=(16, 2),
+        compute="_compute_total_volume",
+    )
     planned_move_ids = fields.One2many(
         comodel_name="stock.move",
         inverse_name="shipment_advice_id",
@@ -301,11 +306,25 @@ class ShipmentAdvice(models.Model):
         """
         return True
 
-    @api.depends("loaded_move_line_ids.result_package_id.shipping_weight")
+    @api.depends(
+        "loaded_move_line_ids.result_package_id.shipping_weight",
+        "loaded_move_line_without_package_ids.product_id.weight",
+    )
     def _compute_total_load(self):
         for shipment in self:
             packages = shipment.loaded_move_line_ids.result_package_id
-            shipment.total_load = sum(packages.mapped("shipping_weight"))
+            without_packages = shipment.loaded_move_line_without_package_ids
+            shipment.total_load = sum(packages.mapped("shipping_weight")) + sum(
+                line.product_id.weight * line.qty_done for line in without_packages
+            )
+
+    @api.depends("loaded_move_line_without_package_ids.product_id.volume")
+    def _compute_total_volume(self):
+        for shipment in self:
+            without_packages = shipment.loaded_move_line_without_package_ids
+            shipment.total_volume = sum(
+                line.product_id.volume * line.qty_done for line in without_packages
+            )
 
     @api.depends(
         "planned_move_ids", "loaded_move_line_ids.picking_id.loaded_shipment_advice_ids"
