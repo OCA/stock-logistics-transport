@@ -5,10 +5,6 @@ from .common import Common
 
 
 class TestShipmentAdvicePlan(Common):
-    def _create_distinct_picking(self, picking_type, product, qty):
-        group2 = self.env["procurement.group"].create({})
-        return self._create_move(picking_type, product, qty, group2).picking_id
-
     def test_shipment_advice_plan_picking(self):
         picking = self.move_product_out1.picking_id
 
@@ -42,6 +38,7 @@ class TestShipmentAdvicePlan(Common):
             .with_context(active_shipment_advice_id=self.shipment_advice_out.id)
             .search(
                 [("move_ids.shipment_advice_id", "=", self.shipment_advice_out.id)],
+                order="sequence_in_shipment_advice",
             )
         )
         self.assertEqual(shipment_advice_out_first_picking[0], picking2)
@@ -50,7 +47,7 @@ class TestShipmentAdvicePlan(Common):
         self.env["stock.picking"].with_context(
             active_shipment_advice_id=self.shipment_advice_out.id
         ).search_count(
-            [("move_ids.shipment_advice_id", "=", self.shipment_advice_out.id)]
+            [("move_ids.shipment_advice_id", "=", self.shipment_advice_out.id)],
         )
 
         # test the same is reflected when searching at stock.move level
@@ -59,6 +56,7 @@ class TestShipmentAdvicePlan(Common):
             .with_context(active_shipment_advice_id=self.shipment_advice_out.id)
             .search(
                 [("shipment_advice_id", "=", self.shipment_advice_out.id)],
+                order="picking_sequence_in_shipment_advice",
             )
         )
 
@@ -67,7 +65,9 @@ class TestShipmentAdvicePlan(Common):
         # test stock.move search count don't raise error
         self.env["stock.move"].with_context(
             active_shipment_advice_id=self.shipment_advice_out.id
-        ).search_count([("shipment_advice_id", "=", self.shipment_advice_out.id)])
+        ).search_count(
+            [("shipment_advice_id", "=", self.shipment_advice_out.id)],
+        )
 
         # test same picking planned in different shipment advices might have different
         # order
@@ -111,7 +111,7 @@ class TestShipmentAdvicePlan(Common):
             picking.move_ids[0]
             .with_context(active_shipment_advice_id=self.shipment_advice_out.id)
             .shipment_advice_sort_key,
-            (7, picking.id, picking.move_ids[0].sequence),
+            (7, picking.id, picking.move_ids[0].id),
         )
 
     def test_planned_order_keeps_unpartnered_pickings_separate(self):

@@ -8,3 +8,5 @@ from . import test_shipment_advice_unload
 from . import test_shipment_advice_stock_user
 from . import test_shipment_advice_auto_close
 from . import test_shipment_advice_mail
+from . import test_shipment_advice_stock_picking
+from . import test_shipment_advice_stock_move

@@ -28,6 +28,7 @@
         "views/stock_package_level.xml",
         "views/stock_move.xml",
         "views/stock_move_line.xml",
+        "views/shipment_advice_planned_partner_order.xml",
         "wizards/plan_shipment.xml",
         "wizards/unplan_shipment.xml",
         "wizards/load_shipment.xml",
