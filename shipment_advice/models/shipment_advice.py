@@ -127,7 +127,7 @@ class ShipmentAdvice(models.Model):
         compute="_compute_picking_ids",
         string="Planned transfers",
     )
-
+    planned_pickings_count = fields.Integer(compute="_compute_count")
     planned_partner_order_ids = fields.One2many(
         "shipment.advice.planned.partner.order",
         "shipment_advice_id",
@@ -135,8 +135,7 @@ class ShipmentAdvice(models.Model):
         compute="_compute_planned_partner_order_ids",
         store=True,
     )
-
-    planned_pickings_count = fields.Integer(compute="_compute_count")
+    planned_partners_count = fields.Integer(compute="_compute_count")
     loaded_move_line_ids = fields.One2many(
         comodel_name="stock.move.line",
         inverse_name="shipment_advice_id",
@@ -409,6 +408,7 @@ class ShipmentAdvice(models.Model):
             )
             shipment.loaded_packages_count = len(shipment.loaded_package_ids)
             shipment.lines_to_load_count = len(shipment.line_to_load_ids)
+            shipment.planned_partners_count = len(shipment.planned_partner_order_ids)
 
     @api.depends("planned_picking_ids", "loaded_picking_ids")
     def _compute_carrier_ids(self):
@@ -683,6 +683,13 @@ class ShipmentAdvice(models.Model):
             action["context"].update(
                 {"active_shipment_advice_id": active_shipment_advice_id}
             )
+        return action
+
+    def button_open_planned_partners(self):
+        self.ensure_one()
+        action_xmlid = "shipment_advice.action_shipment_advice_planned_partner_order"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
+        action["domain"] = [("shipment_advice_id", "=", self.id)]
         return action
 
     def button_open_loaded_pickings(self):

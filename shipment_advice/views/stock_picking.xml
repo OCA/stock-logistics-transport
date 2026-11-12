@@ -63,9 +63,11 @@
         <field name="mode">primary</field>
         <field name="priority">101</field>
         <field name="arch" type="xml">
-            <field name="name" position="before">
-                <field name="sequence_in_shipment_advice" widget="handle" />
-            </field>
+            <xpath expr="//tree" position="attributes">
+                <attribute
+                    name="default_order"
+                >sequence_in_shipment_advice, id</attribute>
+            </xpath>
         </field>
     </record>
 

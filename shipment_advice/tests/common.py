@@ -212,3 +212,44 @@ class Common(TransactionCase):
         ).save()
         backorder_wizard.process()
         return cls.env["stock.picking"].search([("backorder_id", "=", picking.id)])
+
+    @classmethod
+    def _create_distinct_picking(cls, picking_type, product, qty):
+        group2 = cls.env["procurement.group"].create({})
+        return cls._create_move(picking_type, product, qty, group2).picking_id
+
+
+class ShipmentAdviceSearchCommonCase(Common):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context))
+        cls.picking1 = cls.move_product_out1.picking_id
+        cls.picking2 = cls._create_distinct_picking(
+            cls.picking_type_out, cls.product_out2, 5
+        )
+        cls.picking3 = cls._create_distinct_picking(
+            cls.picking_type_out, cls.product_out3, 5
+        )
+        cls.other_shipment = cls.env["shipment.advice"].create(
+            {"shipment_type": "outgoing"}
+        )
+        cls.planned_orders = cls.env["shipment.advice.planned.partner.order"].create(
+            [
+                {
+                    "shipment_advice_id": cls.shipment_advice_out.id,
+                    "stock_picking_ids": [(6, 0, cls.picking1.ids)],
+                    "sequence": 20,
+                },
+                {
+                    "shipment_advice_id": cls.shipment_advice_out.id,
+                    "stock_picking_ids": [(6, 0, cls.picking2.ids)],
+                    "sequence": 10,
+                },
+                {
+                    "shipment_advice_id": cls.other_shipment.id,
+                    "stock_picking_ids": [(6, 0, (cls.picking1 | cls.picking2).ids)],
+                    "sequence": 5,
+                },
+            ]
+        )
