@@ -28,6 +28,15 @@ class ShipmentAdvicePlanner(models.TransientModel):
         comodel_name="toursolver.task", string="Toursolver Task", readonly=True
     )
 
+    toursolver_force_delivery_first = fields.Boolean(
+        string="Force Delivery First",
+        help="Force the delivery to be planned first before other operations. "
+        "If set and the shipment contains pickups and deliveries, this "
+        "ensures that the deliveries operations are the first ones to be "
+        "processed in the resulting plan and other operations follow afterwards.",
+        default=False,
+    )
+
     def _prepare_shipment_advice_common_vals(self, picking_type):
         res = super()._prepare_shipment_advice_common_vals(picking_type)
         res.update(
@@ -42,10 +51,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
         self.ensure_one()
         if self.shipment_planning_method != "toursolver":
             return super()._plan_shipments_for_method()
-        for (
-            picking_type,
-            pickings_to_plan,
-        ) in self._get_picking_to_plan_by_picking_type().items():
+        for picking_type, pickings_to_plan in self._get_picking_to_plan_by_warehouse():
             self._init_toursolver_task(picking_type, pickings_to_plan)
         return self.env["shipment.advice"]
 
@@ -58,6 +64,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
             "dock_id": self.dock_id.id,
             "picking_ids": [Command.set(pickings_to_plan.ids)],
             "delivery_resource_ids": [Command.set(self.delivery_resource_ids.ids)],
+            "force_delivery_first": self.toursolver_force_delivery_first,
         }
 
     def _init_toursolver_task(self, picking_type, pickings_to_plan):

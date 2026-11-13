@@ -11,7 +11,10 @@
         />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='shipment_planning_method']" position="after">
-
+                <field
+                    name="toursolver_force_delivery_first"
+                    attrs="{'invisible': [('shipment_planning_method', '!=', 'toursolver')]}"
+                />
                 <field
                     name="delivery_resource_ids"
                     widget="many2many_tags"
