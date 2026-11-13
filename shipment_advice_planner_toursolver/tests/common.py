@@ -11,7 +11,9 @@ class TestShipmentAdvicePlannerToursolverCommon(TransactionCase):
         super().setUpClass()
         cls.pickings = cls.env["stock.picking"].search([])
         cls.context = {
-            "active_ids": cls.pickings.ids,
+            "active_ids": cls.pickings.filtered(
+                lambda picking: picking.picking_type_code == "outgoing"
+            ).ids,
             "active_model": "stock.picking",
         }
         cls.warehouse = cls.env.ref("stock.warehouse0")

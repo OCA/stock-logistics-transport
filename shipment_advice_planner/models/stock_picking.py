@@ -30,7 +30,7 @@ class StockPicking(models.Model):
                     or rec.planned_shipment_advice_id.state == "error"
                 )
                 and rec.state == "assigned"
-                and rec.picking_type_code == "outgoing"
+                and rec.picking_type_code in ("outgoing", "incoming")
             )
 
     def _search_can_be_planned_in_shipment_advice(self, operator, value):
@@ -40,14 +40,14 @@ class StockPicking(models.Model):
                 ("planned_shipment_advice_id", "=", False),
                 ("planned_shipment_advice_id.state", "=", "error"),
                 ("state", "=", "assigned"),
-                ("picking_type_code", "=", "outgoing"),
+                ("picking_type_code", "in", ("outgoing", "incoming")),
             ]
         return [
             "|",
             "|",
-            "|",
+            "&",
             ("planned_shipment_advice_id", "!=", False),
             ("planned_shipment_advice_id.state", "!=", "error"),
             ("state", "!=", "assigned"),
-            ("picking_type_code", "!=", "outgoing"),
+            ("picking_type_code", "not in", ("outgoing", "incoming")),
         ]

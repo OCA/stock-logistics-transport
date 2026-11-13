@@ -9,7 +9,6 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='planned_shipment_advice_id']" position="after">
                 <field name="toursolver_task_id" />
-                <field name="toursolver_shipment_advice_rank" />
             </xpath>
         </field>
     </record>

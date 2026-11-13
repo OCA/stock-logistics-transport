@@ -5,7 +5,7 @@
     "name": "Shipment Advice",
     "summary": "Manage your (un)loading process through shipment advices.",
     "version": "16.0.1.13.0",
-    "author": "Camptocamp, Odoo Community Association (OCA)",
+    "author": "Camptocamp,BCIM,ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "category": "Warehouse Management",
     "depends": [
@@ -28,6 +28,7 @@
         "views/stock_package_level.xml",
         "views/stock_move.xml",
         "views/stock_move_line.xml",
+        "views/shipment_advice_planned_partner_order.xml",
         "wizards/plan_shipment.xml",
         "wizards/unplan_shipment.xml",
         "wizards/load_shipment.xml",

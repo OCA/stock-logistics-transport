@@ -78,6 +78,13 @@ class ToursolverTask(models.Model):
         string="Shipment Advices",
         readonly=True,
     )
+    force_delivery_first = fields.Boolean(
+        help="Force the delivery to be planned first before other operations. "
+        "If set and the shipment contains pickups and deliveries, this "
+        "ensures that the deliveries operations are the first ones to be "
+        "processed in the resulting plan and other operations follow afterwards.",
+        default=False,
+    )
 
     @api.depends("request_data")
     def _compute_result_json(self):
@@ -246,17 +253,59 @@ class ToursolverTask(models.Model):
 
     def _toursolver_json_request_orders(self):
         return [
-            self._toursolver_json_request_order(partner)
-            for partner in self._toursolver_partners_to_deliver()
+            self._toursolver_json_request_order(
+                order_id, partner, operation_type, pickings
+            )
+            for order_id, (partner, operation_type, pickings) in (
+                self._toursolver_order_groups().items()
+            )
         ]
 
-    def _toursolver_partners_to_deliver(self):
-        return self.picking_ids.mapped("partner_id")
+    def _toursolver_order_groups(self):
+        """Return order groups for the TourSolver request.
 
-    def _toursolver_json_request_order(self, partner):
+        In toursolver we group orders by partner and operation type (pickup or delivery).
+        """
+        self.ensure_one()
+        groups = {}
+        operation_types = {"incoming": "pickup", "outgoing": "delivery"}
+        for picking in self.picking_ids.filtered("partner_id"):
+            operation_type = operation_types.get(picking.picking_type_id.code)
+            if not operation_type:
+                raise ValidationError(
+                    _(
+                        "Picking %(picking)s has an unsupported operation type "
+                        "%(operation_type)s for TourSolver."
+                    )
+                    % {
+                        "picking": picking.display_name,
+                        "operation_type": picking.picking_type_id.code,
+                    }
+                )
+            order_id = f"{picking.partner_id.id}_{operation_type}"
+            if order_id not in groups:
+                groups[order_id] = (
+                    picking.partner_id,
+                    operation_type,
+                    self.env["stock.picking"],
+                )
+            groups[order_id] = (
+                groups[order_id][0],
+                groups[order_id][1],
+                groups[order_id][2] | picking,
+            )
+        return groups
+
+    def _toursolver_json_request_order(
+        self, order_id, partner, operation_type, pickings
+    ):
         backend = self.toursolver_backend_id
-        order = self._toursolver_json_request_order_common(partner)
-        custom_data_map = self._toursolver_json_request_order_custom_data_map(partner)
+        order = self._toursolver_json_request_order_common(
+            order_id, partner, operation_type
+        )
+        custom_data_map = self._toursolver_json_request_order_custom_data_map(
+            partner, pickings
+        )
         if custom_data_map:
             order["customDataMap"] = custom_data_map
         if not backend.delivery_window_disabled:
@@ -265,18 +314,26 @@ class ToursolverTask(models.Model):
                 order["timeWindows"] = time_windows
         return order
 
-    def _toursolver_json_request_order_common(self, partner):
+    def _get_toursolveroperation_type(self, operation_type):
+        if operation_type == "pickup":
+            return 1
+        if self.force_delivery_first:
+            return 2
+        return 0
+
+    def _toursolver_json_request_order_common(self, order_id, partner, operation_type):
         self.ensure_one()
         backend = self.toursolver_backend_id
         phones = filter(None, (partner.mobile or None, partner.phone or None))
         delivery_duration = backend._get_partner_delivery_duration(partner)
+        order_type = self._get_toursolveroperation_type(operation_type)
         data = {
             "customerId": partner.ref,
             "fixedVisitDuration": seconds_to_duration(delivery_duration),
-            "id": partner.id,
+            "id": order_id,
             "label": partner.display_name,
             "phone": "| ".join(phones),
-            "type": 0,  # delivery,
+            "type": order_type,
             "x": partner.partner_longitude,
             "y": partner.partner_latitude,
             "possibleVisitDays": ["1"],
@@ -284,10 +341,11 @@ class ToursolverTask(models.Model):
         order_properties = backend._get_rqst_orders_properties()
         if order_properties:
             data.update(order_properties)
+        data.update({"id": order_id, "type": order_type})
         return data
 
     @api.model
-    def _toursolver_json_request_order_custom_data_map(self, partner):
+    def _toursolver_json_request_order_custom_data_map(self, partner, pickings):
         custom_data_map = {}
         if partner.comment:
             custom_data_map["notes"] = partner.comment
@@ -295,6 +353,7 @@ class ToursolverTask(models.Model):
             char == "" or char.isspace() for char in partner.contact_address.split("\n")
         ):
             custom_data_map["address"] = partner.contact_address
+        custom_data_map["pickingIds"] = json.dumps(pickings.ids)
         return custom_data_map
 
     @api.model
@@ -410,28 +469,35 @@ class ToursolverTask(models.Model):
 
     def _toursolver_validate_result(self):
         self.ensure_one()
-        expected_partners = set(self._toursolver_partners_to_deliver().ids)
-        received_partners = self._toursolver_planned_partner_ids()
-        missing_partners = self.env["res.partner"].browse(
-            list(expected_partners - received_partners)
-        )
-        unexpected_partner_ids = list(received_partners - expected_partners)
+        order_groups = self._toursolver_order_groups()
+        expected_order_ids = set(order_groups)
+        received_order_ids = self._toursolver_planned_order_ids()
+        missing_order_ids = expected_order_ids - received_order_ids
+        unexpected_order_ids = received_order_ids - expected_order_ids
         error_messages = []
-        if missing_partners:
+        if missing_order_ids:
+            missing_orders = [
+                _("%(partner)s (%(operation)s)")
+                % {
+                    "partner": order_groups[order_id][0].display_name,
+                    "operation": order_groups[order_id][1],
+                }
+                for order_id in sorted(missing_order_ids)
+            ]
             error_messages.append(
                 _(
-                    "The following partners are not found into the "
+                    "The following operations are not found into the "
                     "optimization result: %s"
                 )
-                % ", ".join(missing_partners.mapped("name"))
+                % ", ".join(missing_orders)
             )
-        if unexpected_partner_ids:
+        if unexpected_order_ids:
             error_messages.append(
                 _(
-                    "The following partner ids are not expected into the "
+                    "The following order ids are not expected into the "
                     "optimization result: %(names)s"
                 )
-                % dict(names=", ".join([str(i) for i in unexpected_partner_ids]))
+                % {"names": ", ".join(str(i) for i in sorted(unexpected_order_ids))}
             )
         if error_messages:
             self.write(
@@ -441,39 +507,40 @@ class ToursolverTask(models.Model):
                 }
             )
 
-    def _toursolver_planned_partner_ids_by_resource_id(self):
+    def _toursolver_planned_order_ids_by_resource_id(self):
         result = defaultdict(list)
         for tour in self.result_json["tours"]:
             for order in tour["plannedOrders"]:
                 if (
                     order.get("resourceId")
                     and order.get("stopId")
-                    and order.get("stopId").isdigit()
                     and order.get("stopType", 0) == 0
                 ):
-                    result[order.get("resourceId")].append(int(order.get("stopId")))
+                    result[order.get("resourceId")].append(str(order.get("stopId")))
         return result
 
-    def _toursolver_planned_partner_ids(self):
-        planned_partner_by_resource = (
-            self._toursolver_planned_partner_ids_by_resource_id()
+    def _toursolver_planned_order_ids(self):
+        planned_order_ids_by_resource = (
+            self._toursolver_planned_order_ids_by_resource_id()
         )
         res = []
-        for partner_ids in planned_partner_by_resource.values():
-            res.extend(partner_ids)
+        for order_ids in planned_order_ids_by_resource.values():
+            res.extend(order_ids)
         return set(res)
 
     def _toursolver_pickings_to_plan_by_resource(self):
+        order_groups = self._toursolver_order_groups()
         for (
             resource_id,
-            partner_ids,
-        ) in self._toursolver_planned_partner_ids_by_resource_id().items():
+            order_ids,
+        ) in self._toursolver_planned_order_ids_by_resource_id().items():
             resource = self.delivery_resource_ids.filtered(
                 lambda r, r_id=resource_id: r.resource_id == r_id
             )
-            pickings_to_plan = self.picking_ids.filtered(
-                lambda p, p_ids=partner_ids: p.partner_id.id in p_ids
-            )
+            pickings_to_plan = self.env["stock.picking"]
+            for order_id in order_ids:
+                if order_id in order_groups:
+                    pickings_to_plan |= order_groups[order_id][2]
             yield resource, pickings_to_plan
 
     def _toursolver_new_shipment_advice_planer(self, resource, pickings_to_plan):
@@ -522,26 +589,31 @@ class ToursolverTask(models.Model):
         for shipment in self.shipment_advice_ids:
             if not shipment.toursolver_resource_id:
                 continue
-            rank = 1
-            for partner_id in self._toursolver_planned_partner_ids_sorted(
-                shipment.toursolver_resource_id.resource_id
+            order_groups = self._toursolver_order_groups()
+            for rank, order_id in enumerate(
+                self._toursolver_planned_order_ids_sorted(
+                    shipment.toursolver_resource_id.resource_id
+                ),
+                start=1,
             ):
-                picks = shipment.planned_picking_ids.filtered(
-                    lambda pick, p_id=partner_id: pick.partner_id.id == p_id
+                if order_id not in order_groups:
+                    continue
+                partner, operation_type, _pickings = order_groups[order_id]
+                planned = shipment.planned_partner_order_ids.filtered(
+                    lambda plo, p=partner, o=operation_type: plo.partner_id == p
+                    and plo.operation_type == o
                 )
-                picks.write({"toursolver_shipment_advice_rank": rank})
-                rank += 1
+                planned.write({"sequence": rank})
 
-    def _toursolver_planned_partner_ids_sorted(self, resource_id):
+    def _toursolver_planned_order_ids_sorted(self, resource_id):
         for tour in self.result_json["tours"]:
             for order in tour["plannedOrders"]:
                 if (
                     order.get("resourceId") == resource_id
                     and order.get("stopId")
-                    and order.get("stopId").isdigit()
                     and order.get("stopType", 0) == 0
                 ):
-                    yield int(order.get("stopId"))
+                    yield str(order.get("stopId"))
 
     def button_cancel(self):
         self.write({"toursolver_status": "aborted"})

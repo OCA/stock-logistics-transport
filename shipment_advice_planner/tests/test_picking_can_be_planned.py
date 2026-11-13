@@ -53,8 +53,12 @@ class TestPickingCanBePlanned(TestShipmentAdvicePlannerCommon):
         ]
         self.assert_can_not_be_planned_in_shipment_advice(non_assigned_picking)
         non_autgoing_picking = self.pickings.filtered(
-            lambda p: p.picking_type_code != "outgoing"
-        )[0]
+            lambda p: p.picking_type_code not in ("outgoing", "incoming")
+        )[:1]
+        if not non_autgoing_picking:
+            non_autgoing_picking = self.pickings[0].copy(
+                {"picking_type_id": self.env.ref("stock.picking_type_internal").id}
+            )
         self.assert_can_not_be_planned_in_shipment_advice(non_autgoing_picking)
         picking = self.pickings.filtered(lambda p: p.state == "assigned")[0]
         self.assert_picking_can_be_planned_in_shipment_advice(picking)
