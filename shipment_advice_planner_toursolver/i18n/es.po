@@ -646,15 +646,6 @@ msgstr ""
 "Los siguientes socios no se encuentran en el resultado de la optimización: %s"
 
 #. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
-msgid ""
-"The rank given by TourSolver to this picking in the set of planned stops of "
-"the related shipment advice"
-msgstr ""
-"La clasificación otorgada por TourSolver a esta recolección en el conjunto "
-"de paradas planificadas del aviso de envío relacionado"
-
-#. module: shipment_advice_planner_toursolver
 #. odoo-python
 #: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
 #, python-format
@@ -755,11 +746,6 @@ msgstr "Duración de entrega de Toursolver"
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__toursolver_error_message
 msgid "Toursolver Error Message"
 msgstr "Mensaje de error de Toursolver"
-
-#. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
-msgid "Toursolver Rank"
-msgstr "Rango del Toursolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_resource
@@ -873,6 +859,16 @@ msgstr ""
 "propiedad id.\n"
 "                            El campo obligatorio ResourceId se utilizará en "
 "la solicitud de optimización."
+
+#~ msgid ""
+#~ "The rank given by TourSolver to this picking in the set of planned stops "
+#~ "of the related shipment advice"
+#~ msgstr ""
+#~ "La clasificación otorgada por TourSolver a esta recolección en el "
+#~ "conjunto de paradas planificadas del aviso de envío relacionado"
+
+#~ msgid "Toursolver Rank"
+#~ msgstr "Rango del Toursolver"
 
 #~ msgid ""
 #~ "Add the required options for route calculation by TourSolver.\n"

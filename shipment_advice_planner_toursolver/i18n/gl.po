@@ -40,14 +40,16 @@ msgstr "Activo"
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
 msgid ""
-"Add additional properties added to each item of the orders field of the optimization request for route calculation by TourSolver.\n"
+"Add additional properties added to each item of the orders field of the "
+"optimization request for route calculation by TourSolver.\n"
 "                                You can check the"
 msgstr ""
 
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_backend_form_view
 msgid ""
-"Add additional properties to the options field of the optimization request for route calculation by TourSolver.\n"
+"Add additional properties to the options field of the optimization request "
+"for route calculation by TourSolver.\n"
 "                                You can check the"
 msgstr ""
 
@@ -456,7 +458,8 @@ msgstr "Seleccións para planificar"
 #: code:addons/shipment_advice_planner_toursolver/models/toursolver_backend.py:0
 #, python-format
 msgid "Please configure your timezone in your user preferences"
-msgstr "Por favor configure a súa zona horaria nas súas preferencias de usuario"
+msgstr ""
+"Por favor configure a súa zona horaria nas súas preferencias de usuario"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_resource__resource_properties
@@ -573,7 +576,8 @@ msgstr "Método de planificación de envíos"
 #. module: shipment_advice_planner_toursolver
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.res_config_settings_form_view
 msgid "Shipment advices planning by geo-optimization (TourSolver)"
-msgstr "Planificación de avisos de envío mediante geo optimización (TourSolver)"
+msgstr ""
+"Planificación de avisos de envío mediante geo optimización (TourSolver)"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__state
@@ -588,7 +592,8 @@ msgstr ""
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_toursolver_task__toursolver_status
 msgid "Status of the optimization task provided by the TourSolver service."
-msgstr "Estado da tarefa de optimización proporcionada polo servizo TourSolver."
+msgstr ""
+"Estado da tarefa de optimización proporcionada polo servizo TourSolver."
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields.selection,name:shipment_advice_planner_toursolver.selection__toursolver_task__state__success
@@ -629,8 +634,8 @@ msgid ""
 "The following partner ids are not expected into the optimization result: "
 "%(names)s"
 msgstr ""
-"Os seguintes ID de socios non se esperan no resultado da optimización: %"
-"(names)s"
+"Os seguintes ID de socios non se esperan no resultado da optimización: "
+"%(names)s"
 
 #. module: shipment_advice_planner_toursolver
 #. odoo-python
@@ -638,15 +643,6 @@ msgstr ""
 #, python-format
 msgid "The following partners are not found into the optimization result: %s"
 msgstr "Os seguintes socios non se atopan no resultado da optimización: %s"
-
-#. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
-msgid ""
-"The rank given by TourSolver to this picking in the set of planned stops of "
-"the related shipment advice"
-msgstr ""
-"A clasificación outorgada por TourSolver a esta recolección no conxunto de "
-"paradas planificadas do aviso de envío relacionado"
 
 #. module: shipment_advice_planner_toursolver
 #. odoo-python
@@ -713,8 +709,8 @@ msgstr "Xanela de entrega de TourSolver"
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_shipment_advice_planner__toursolver_resource_id
 msgid ""
-"TourSolver resource to be propgated to the shipment advice in simpleplanning"
-" method"
+"TourSolver resource to be propgated to the shipment advice in simpleplanning "
+"method"
 msgstr ""
 "O recurso TourSolver propagarase ao aviso de envío no método de "
 "planificación simple"
@@ -749,11 +745,6 @@ msgstr "Duración de entrega de Toursolver"
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__toursolver_error_message
 msgid "Toursolver Error Message"
 msgstr "Mensaxe de erro de Toursolver"
-
-#. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
-msgid "Toursolver Rank"
-msgstr "Rango do Toursolver"
 
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model,name:shipment_advice_planner_toursolver.model_toursolver_resource
@@ -857,11 +848,23 @@ msgstr "para aprender máis.<br/>"
 #: model_terms:ir.ui.view,arch_db:shipment_advice_planner_toursolver.toursolver_resource_form_view
 msgid ""
 "to learn more.<br/>\n"
-"                            Note that it is not necessary to add the id property.\n"
-"                            The mandatory field resourceId will be used in the optimization request."
+"                            Note that it is not necessary to add the id "
+"property.\n"
+"                            The mandatory field resourceId will be used in "
+"the optimization request."
 msgstr ""
 "para aprender máis.<br/>\n"
 "                            Teña en conta que non é necesario agregar a "
 "propiedade ide.\n"
 "                            O campo obrigatorio ResourceId utilizarase na "
 "solicitude de optimización."
+
+#~ msgid ""
+#~ "The rank given by TourSolver to this picking in the set of planned stops "
+#~ "of the related shipment advice"
+#~ msgstr ""
+#~ "A clasificación outorgada por TourSolver a esta recolección no conxunto "
+#~ "de paradas planificadas do aviso de envío relacionado"
+
+#~ msgid "Toursolver Rank"
+#~ msgstr "Rango do Toursolver"
