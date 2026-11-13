@@ -1,6 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+import random
 
 from odoo import fields
 from odoo.tests.common import Form, TransactionCase, new_test_user
@@ -98,7 +99,7 @@ class Common(TransactionCase):
         )
 
     @classmethod
-    def _create_move(cls, picking_type, product, quantity, group=False):
+    def _create_move(cls, picking_type, product, quantity, group=False, partner=False):
         move = cls.env["stock.move"].create(
             {
                 "name": product.display_name,
@@ -110,6 +111,7 @@ class Common(TransactionCase):
                 "warehouse_id": picking_type.warehouse_id.id,
                 "picking_type_id": picking_type.id,
                 "group_id": group and group.id or False,
+                "partner_id": partner and partner.id or False,
                 # "procure_method": "make_to_order",
                 # "state": "draft",
             }
@@ -215,8 +217,11 @@ class Common(TransactionCase):
 
     @classmethod
     def _create_distinct_picking(cls, picking_type, product, qty):
+        partner = cls.env["res.partner"].create(
+            {"name": f"Partner {random.randint(1, 1000)}"}
+        )
         group2 = cls.env["procurement.group"].create({})
-        return cls._create_move(picking_type, product, qty, group2).picking_id
+        return cls._create_move(picking_type, product, qty, group2, partner).picking_id
 
 
 class ShipmentAdviceSearchCommonCase(Common):

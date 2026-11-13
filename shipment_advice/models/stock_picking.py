@@ -24,7 +24,6 @@ class StockPicking(models.Model):
 
     sequence_in_shipment_advice = fields.Integer(
         compute="_compute_sequence_in_shipment_advice",
-        inverse="_inverse_sequence_in_shipment_advice",
     )
 
     @property
@@ -210,17 +209,6 @@ class StockPicking(models.Model):
             picking.sequence_in_shipment_advice = (
                 planned_order.sequence if planned_order else False
             )
-
-    def _inverse_sequence_in_shipment_advice(self):
-        for picking in self:
-            if not (active_id := self.env.context.get("active_shipment_advice_id")):
-                return
-
-            planned_order = picking.shipment_advice_planned_partner_order_ids.filtered(
-                lambda r: r.shipment_advice_id.id == active_id
-            )
-            if planned_order:
-                planned_order.sequence = picking.sequence_in_shipment_advice
 
     def button_plan_in_shipment(self):
         action_xmlid = "shipment_advice.wizard_plan_shipment_picking_action"
