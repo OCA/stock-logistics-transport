@@ -15,15 +15,28 @@ class StockPicking(models.Model):
         index=True,
     )
 
-    shipment_advice_planned_picking_order_ids = fields.One2many(
-        comodel_name="shipment.advice.planned.picking.order",
-        inverse_name="stock_picking_id",
+    shipment_advice_planned_partner_order_ids = fields.Many2many(
+        comodel_name="shipment.advice.planned.partner.order",
+        relation="shipment_advice_planned_partner_order_stock_picking_rel",
+        column1="stock_picking_id",
+        column2="shipment_advice_planned_partner_order_id",
     )
 
     sequence_in_shipment_advice = fields.Integer(
         compute="_compute_sequence_in_shipment_advice",
-        inverse="_inverse_sequence_in_shipment_advice",
     )
+
+    @property
+    def shipment_advice_sort_key(self):
+        """
+        Return a tuple that can be used to sort pickings in a shipment advice.
+        This is used to sort the pickings into the shipment advice report...
+        """
+        self.ensure_one()
+        return (
+            self.sequence_in_shipment_advice,
+            self.id,
+        )
 
     is_fully_loaded_in_shipment = fields.Boolean(
         string="Is fully loaded in a shipment?",
@@ -185,28 +198,17 @@ class StockPicking(models.Model):
                 picking.loaded_progress_f = picking.loaded_move_lines_progress_f
                 picking.loaded_progress = picking.loaded_move_lines_progress
 
-    @api.depends("shipment_advice_planned_picking_order_ids.sequence")
+    @api.depends("shipment_advice_planned_partner_order_ids.sequence")
     @api.depends_context("active_shipment_advice_id")
     def _compute_sequence_in_shipment_advice(self):
         for picking in self:
-            planned_order = picking.shipment_advice_planned_picking_order_ids.filtered(
+            planned_order = picking.shipment_advice_planned_partner_order_ids.filtered(
                 lambda r: r.shipment_advice_id.id
                 == self.env.context.get("active_shipment_advice_id")
             )
             picking.sequence_in_shipment_advice = (
                 planned_order.sequence if planned_order else False
             )
-
-    def _inverse_sequence_in_shipment_advice(self):
-        for picking in self:
-            if not (active_id := self.env.context.get("active_shipment_advice_id")):
-                return
-
-            planned_order = picking.shipment_advice_planned_picking_order_ids.filtered(
-                lambda r: r.shipment_advice_id.id == active_id
-            )
-            if planned_order:
-                planned_order.sequence = picking.sequence_in_shipment_advice
 
     def button_plan_in_shipment(self):
         action_xmlid = "shipment_advice.wizard_plan_shipment_picking_action"
@@ -241,17 +243,54 @@ class StockPicking(models.Model):
         self.move_line_ids._unload_from_shipment()
 
     @api.model
-    def search(self, domain, offset=0, limit=None, order=None, count=False):
-        res = super().search(
-            domain, offset=offset, limit=limit, order=order, count=count
-        )
-        # if this is used to count, sorting does not make sense, also if limit is set
-        # at this point sorting for what?
+    def _generate_order_by(self, order_spec, query):
+        active_id = self.env.context.get("active_shipment_advice_id")
+        order_spec = order_spec or self._order
+        if not active_id or not order_spec:
+            return super()._generate_order_by(order_spec, query)
 
-        if (
-            self.env.context.get("active_shipment_advice_id")
-            and not count
-            and not limit
-        ):
-            res = res.sorted("sequence_in_shipment_advice")
-        return res
+        self._check_qorder(order_spec)
+        parts = [part.strip().split() for part in order_spec.split(",")]
+        if not any(part[0] == "sequence_in_shipment_advice" for part in parts):
+            return super()._generate_order_by(order_spec, query)
+
+        self.flush_model(["shipment_advice_planned_partner_order_ids"])
+        self.env["shipment.advice.planned.partner.order"].flush_model(
+            ["shipment_advice_id", "sequence", "stock_picking_ids"]
+        )
+        # we join on a subquery that calculates the sequence
+        # associated to the active shipment advice for the partner's
+        # picking
+        order_alias = query.left_join(
+            self._table,
+            "id",
+            """
+                SELECT rel.stock_picking_id, partner_order.shipment_advice_id,
+                       MIN(partner_order.sequence) AS sequence
+                FROM shipment_advice_planned_partner_order_stock_picking_rel rel
+                JOIN shipment_advice_planned_partner_order partner_order
+                  ON partner_order.id = rel.shipment_advice_planned_partner_order_id
+                GROUP BY rel.stock_picking_id, partner_order.shipment_advice_id
+            """,
+            "stock_picking_id",
+            "shipment_advice_sequence",
+            extra='"{rhs}"."shipment_advice_id" = %s',
+            extra_params=(active_id,),
+        )
+        order_elements = []
+        # we mimic the behaviour of native odoo by constructing the ORDER BY clause manually
+        # and process only the parts relevant to sequence_in_shipment_advice. Other parts
+        # are delegated to the super method.
+        for part in parts:
+            if part[0] == "sequence_in_shipment_advice":
+                direction = part[1].upper() if len(part) == 2 else ""
+                # always put pickings not linked to the active shipment advice at the end
+                default_sequence = 999999 if direction in ("ASC", "") else -999999
+                order_elements.append(
+                    f'COALESCE("{order_alias}"."sequence", {default_sequence}) {direction}'
+                )
+            else:
+                clause = super()._generate_order_by(" ".join(part), query)
+                if clause:
+                    order_elements.append(clause.strip()[len("ORDER BY ") :])
+        return " ORDER BY " + ", ".join(order_elements) + " "

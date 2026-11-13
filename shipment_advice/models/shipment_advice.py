@@ -1,6 +1,7 @@
 # Copyright 2021 Camptocamp SA
 # Copyright 2024 Michael Tietz (MT Software) <mtietz@mt-software.de>
 # Copyright 2025 Jacques-Etienne Baudoux (BCIM) <je@bcim.be>
+# Copyright 2026 ACSONE SA/NV (https://acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import Command, _, api, fields, models
@@ -126,16 +127,15 @@ class ShipmentAdvice(models.Model):
         compute="_compute_picking_ids",
         string="Planned transfers",
     )
-
-    planned_picking_order_ids = fields.One2many(
-        "shipment.advice.planned.picking.order",
+    planned_pickings_count = fields.Integer(compute="_compute_count")
+    planned_partner_order_ids = fields.One2many(
+        "shipment.advice.planned.partner.order",
         "shipment_advice_id",
-        string="Planned Pickings Order",
-        compute="_compute_planned_picking_order_ids",
+        string="Planned Partners Sequence",
+        compute="_compute_planned_partner_order_ids",
         store=True,
     )
-
-    planned_pickings_count = fields.Integer(compute="_compute_count")
+    planned_partners_count = fields.Integer(compute="_compute_count")
     loaded_move_line_ids = fields.One2many(
         comodel_name="stock.move.line",
         inverse_name="shipment_advice_id",
@@ -327,26 +327,56 @@ class ShipmentAdvice(models.Model):
                 to_validate_picking_ids
             )
 
-    @api.depends("planned_picking_ids")
-    def _compute_planned_picking_order_ids(self):
+    @api.depends(
+        "planned_move_ids.picking_id",
+        "planned_move_ids.picking_id.partner_id",
+    )
+    def _compute_planned_partner_order_ids(self):
+        order_model = self.env["shipment.advice.planned.partner.order"]
         for shipment in self:
-            # unplanned pickings
-            shipment.planned_picking_order_ids.filtered(
-                lambda it, s=shipment: it.stock_picking_id not in s.planned_picking_ids
-            ).unlink()
-            planned_pickings = [
-                Command.create(
-                    {
-                        "stock_picking_id": planned_picking.id,
-                        "sequence": 0,
-                    }
+            planned_by_key = {}
+            for picking in shipment.planned_picking_ids:
+                key = (
+                    ("partner", picking.partner_id.id)
+                    if picking.partner_id
+                    else ("picking", picking.id)
                 )
-                for planned_picking in (
-                    shipment.planned_picking_ids
-                    - shipment.planned_picking_order_ids.stock_picking_id
-                )
-            ]
-            shipment.planned_picking_order_ids = planned_pickings
+                planned_by_key.setdefault(key, self.env["stock.picking"])
+                planned_by_key[key] |= picking
+
+            existing_by_key = {}
+            obsolete_orders = order_model
+            for order in shipment.planned_partner_order_ids:
+                key = order._get_planned_order_key()
+                if not key:
+                    obsolete_orders |= order
+                    continue
+                if key in existing_by_key:
+                    obsolete_orders |= order
+                else:
+                    existing_by_key[key] = order
+
+            for key, order in existing_by_key.items():
+                if key not in planned_by_key:
+                    obsolete_orders |= order
+            obsolete_orders.unlink()
+
+            order_commands = []
+            for key, pickings in planned_by_key.items():
+                order = existing_by_key.get(key)
+                if order:
+                    order.stock_picking_ids = [Command.set(pickings.ids)]
+                    order_commands.append(Command.link(order.id))
+                else:
+                    order_commands.append(
+                        Command.create(
+                            {
+                                "partner_id": key[1] if key[0] == "partner" else False,
+                                "stock_picking_ids": [Command.set(pickings.ids)],
+                            }
+                        )
+                    )
+            shipment.planned_partner_order_ids = order_commands
 
     @api.depends(
         "loaded_move_line_ids.package_level_id.package_id",
@@ -378,6 +408,7 @@ class ShipmentAdvice(models.Model):
             )
             shipment.loaded_packages_count = len(shipment.loaded_package_ids)
             shipment.lines_to_load_count = len(shipment.line_to_load_ids)
+            shipment.planned_partners_count = len(shipment.planned_partner_order_ids)
 
     @api.depends("planned_picking_ids", "loaded_picking_ids")
     def _compute_carrier_ids(self):
@@ -654,6 +685,13 @@ class ShipmentAdvice(models.Model):
             )
         return action
 
+    def button_open_planned_partners(self):
+        self.ensure_one()
+        action_xmlid = "shipment_advice.action_shipment_advice_planned_partner_order"
+        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
+        action["domain"] = [("shipment_advice_id", "=", self.id)]
+        return action
+
     def button_open_loaded_pickings(self):
         action_xmlid = "stock.action_picking_tree_all"
         action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
@@ -755,40 +793,3 @@ class ShipmentAdvice(models.Model):
             "target": "new",
             "context": ctx,
         }
-
-
-class ShipmentAdvicePlannedPickingOrder(models.Model):
-    _name = "shipment.advice.planned.picking.order"
-    _description = "Shipment Advice Planned Picking Order"
-    _order = "shipment_advice_id, sequence"
-    _check_company_auto = True
-
-    shipment_advice_id = fields.Many2one(
-        comodel_name="shipment.advice",
-        string="Shipment Advice",
-        required=True,
-        ondelete="cascade",
-        index=True,
-    )
-    stock_picking_id = fields.Many2one(
-        comodel_name="stock.picking",
-        string="Planned Picking",
-        required=True,
-        ondelete="cascade",
-        check_company=True,
-        index=True,
-    )
-    sequence = fields.Integer(default=0)
-    company_id = fields.Many2one(
-        related="shipment_advice_id.company_id",
-        store=True,
-        readonly=True,
-    )
-
-    _sql_constraints = [
-        (
-            "shipment_advice_planned_picking_uniq",
-            "unique(shipment_advice_id, stock_picking_id)",
-            "A stock picking can only be planned once per shipment advice.",
-        ),
-    ]

@@ -78,7 +78,6 @@
                         <page string="Pickings to plan">
                             <field name="picking_ids">
                                 <tree>
-                                    <field name="toursolver_shipment_advice_rank" />
                                     <field name="name" />
                                     <field name="partner_id" />
                                     <field name="origin" />

@@ -83,6 +83,19 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box">
                         <button
+                            name="button_open_planned_partners"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-map-marker"
+                            attrs="{'invisible': [('planned_picking_ids', '=', [])]}"
+                        >
+                            <field
+                                string="Planned"
+                                name="planned_partners_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                        <button
                             name="button_open_planned_pickings"
                             type="object"
                             class="oe_stat_button"
@@ -91,7 +104,7 @@
                             attrs="{'invisible': [('planned_picking_ids', '=', [])]}"
                         >
                             <field
-                                string="Planned"
+                                string="Planned transfers"
                                 name="planned_pickings_count"
                                 widget="statinfo"
                             />

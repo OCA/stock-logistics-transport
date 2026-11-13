@@ -103,17 +103,17 @@ class TestShipmentAdvicePlannerToursolver(
         self.assertEqual(task.state, "done")
         shipment = task.shipment_advice_ids
         self.assertEqual(shipment.toursolver_resource_id, self.resource_2)
-        planned_picking = shipment.planned_picking_ids
+        planned_partner_order = shipment.planned_partner_order_ids
         planned_partners = shipment.planned_picking_ids.mapped("partner_id")
         self.assertEqual(
-            set(planned_picking.mapped("toursolver_shipment_advice_rank")),
+            set(planned_partner_order.mapped("sequence")),
             {1, 2},
         )
-        first_stop = planned_picking.filtered(
-            lambda p: p.toursolver_shipment_advice_rank == 1
+        first_stop = planned_partner_order.filtered(
+            lambda p: p.sequence == 1
         ).partner_id
-        second_stop = planned_picking.filtered(
-            lambda p: p.toursolver_shipment_advice_rank == 2
+        second_stop = planned_partner_order.filtered(
+            lambda p: p.sequence == 2
         ).partner_id
         self.assertEqual(first_stop, planned_partners[1])
         self.assertEqual(second_stop, planned_partners[0])
