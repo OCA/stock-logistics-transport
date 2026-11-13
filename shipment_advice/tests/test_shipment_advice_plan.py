@@ -26,12 +26,12 @@ class TestShipmentAdvicePlan(Common):
         self.assertTrue(self.shipment_advice_out.planned_partner_order_ids)
 
         # test that manual changes to order are preserved
-        picking.with_context(
-            active_shipment_advice_id=self.shipment_advice_out.id
-        ).sequence_in_shipment_advice = 20
-        picking2.with_context(
-            active_shipment_advice_id=self.shipment_advice_out.id
-        ).sequence_in_shipment_advice = 0
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking: o.partner_id == pick.partner_id
+        ).sequence = 20
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking2: o.partner_id == pick.partner_id
+        ).sequence = 0
 
         shipment_advice_out_first_picking = (
             self.env["stock.picking"]
@@ -98,9 +98,9 @@ class TestShipmentAdvicePlan(Common):
         self.assertEqual(len(orders), 1)
         self.assertEqual(orders.partner_id, partner)
         self.assertEqual(orders.stock_picking_ids, picking | picking2)
-        picking.with_context(
-            active_shipment_advice_id=self.shipment_advice_out.id
-        ).sequence_in_shipment_advice = 7
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking: o.partner_id == pick.partner_id
+        ).sequence = 7
         self.assertEqual(
             picking2.with_context(
                 active_shipment_advice_id=self.shipment_advice_out.id
@@ -157,14 +157,12 @@ class TestShipmentAdvicePlan(Common):
 
         self.plan_records_in_shipment(self.shipment_advice_out, picking1)
         self.plan_records_in_shipment(self.shipment_advice_out, picking2)
-
-        picking2.with_context(
-            active_shipment_advice_id=self.shipment_advice_out.id
-        ).sequence_in_shipment_advice = 0
-        picking1.with_context(
-            active_shipment_advice_id=self.shipment_advice_out.id
-        ).sequence_in_shipment_advice = 10
-
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking2: o.partner_id == pick.partner_id
+        ).sequence = 0
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking1: o.partner_id == pick.partner_id
+        ).sequence = 10
         sa = self.shipment_advice_out
         sorted_pickings = sa.planned_picking_ids.sorted(
             lambda p: p.with_context(
