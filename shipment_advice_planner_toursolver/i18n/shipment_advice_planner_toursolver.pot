@@ -617,13 +617,6 @@ msgid "The following partners are not found into the optimization result: %s"
 msgstr ""
 
 #. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,help:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
-msgid ""
-"The rank given by TourSolver to this picking in the set of planned stops of "
-"the related shipment advice"
-msgstr ""
-
-#. module: shipment_advice_planner_toursolver
 #. odoo-python
 #: code:addons/shipment_advice_planner_toursolver/models/toursolver_task.py:0
 #, python-format
@@ -721,11 +714,6 @@ msgstr ""
 #. module: shipment_advice_planner_toursolver
 #: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_toursolver_task__toursolver_error_message
 msgid "Toursolver Error Message"
-msgstr ""
-
-#. module: shipment_advice_planner_toursolver
-#: model:ir.model.fields,field_description:shipment_advice_planner_toursolver.field_stock_picking__toursolver_shipment_advice_rank
-msgid "Toursolver Rank"
 msgstr ""
 
 #. module: shipment_advice_planner_toursolver
