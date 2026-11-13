@@ -1,0 +1,96 @@
+interactions:
+- request:
+    body: '{"simulationName": "TST/00000275", "countryCode": "US", "beginDate": "2026-11-13",
+      "language": "en_US", "depots": [{"x": 0.0, "y": 0.0, "id": "dep_1"}], "orders":
+      [{"customerId": false, "fixedVisitDuration": "00:03:00", "id": "187_delivery",
+      "label": "Delivery partner", "phone": "", "type": 2, "x": 0.0, "y": 0.0, "possibleVisitDays":
+      ["1"], "maxDelayTime": "00:40", "delayPenaltyPerHour": 20, "customDataMap":
+      {"pickingIds": "[21, 22]"}}, {"customerId": false, "fixedVisitDuration": "00:03:00",
+      "id": "188_pickup", "label": "Pickup partner", "phone": "", "type": 1, "x":
+      0.0, "y": 0.0, "possibleVisitDays": ["1"], "maxDelayTime": "00:40", "delayPenaltyPerHour":
+      20, "customDataMap": {"pickingIds": "[9]"}}], "resources": [{"travelPenalty":
+      0.0, "workPenalty": 0.0, "workStartTime": "15:18:00", "fixedLoadingDuration":
+      "00:00:00", "mobileLogin": "d1@email.com", "openStart": false, "loadBeforeDeparture":
+      true, "noReload": true, "globalCapacity": 9999, "useAllCapacities": false, "id":
+      "D1", "startX": 0.0, "startY": 0.0, "endX": 0.0, "endY": 0.0}, {"travelPenalty":
+      0.0, "workPenalty": 0.0, "workStartTime": "15:18:00", "fixedLoadingDuration":
+      "00:00:00", "mobileLogin": "d2@email.com", "openStart": false, "loadBeforeDeparture":
+      true, "noReload": true, "globalCapacity": 9999, "useAllCapacities": false, "id":
+      "D2", "startX": 0.0, "startY": 0.0, "endX": 0.0, "endY": 0.0}], "options": {"maxOptimDuration":
+      "00:00:15", "vehicleCode": "deliveryIntermediateVehicle", "useForbiddenTransitAreas":
+      false}}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '1502'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - python-requests/2.32.5
+    method: POST
+    uri: https://geoservices.geoconcept.com/ToursolverCloud/api/ts/toursolver/optimize?tsCloudApiKey=fake_api_key
+  response:
+    body:
+      string: '{"message":null,"status":"OK","errCode":null,"taskId":"7FFFFE5E2ABA65BFKiPqznwXTEOp7p7L9IM5rw","token":"g/qIR7ea382+IGvD2g7z5xSm+ySLW28rnJ8BYjoDb0UvCKwTA8sWnsaeohbIKlQc","optimCredits":0,"remainingCredits":0,"creditsResetDate":null}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - '232'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 13 Nov 2026 14:17:51 GMT
+      Server:
+      - Apache
+      Set-Cookie:
+      - INGRESSTSPRODCOOKIE=7d55cb1e3b99391d; Path=/; HttpOnly; Secure; SameSite=None
+      - JSESSIONID=8D14CC26D6BDE8455D2DAA00BAF111D6; Path=/ToursolverCloud; HttpOnly;
+        SameSite=None; Secure
+      Vary:
+      - Origin
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Connection:
+      - keep-alive
+      User-Agent:
+      - python-requests/2.32.5
+    method: GET
+    uri: https://geoservices.geoconcept.com/ToursolverCloud/api/ts/toursolver/toursResult?taskId=7FFFFE5E2ABA65BFKiPqznwXTEOp7p7L9IM5rw&tsCloudApiKey=fake_api_key
+  response:
+    body:
+      string: '{"message":null,"status":"OK","errCode":null,"tours":[{"resourceId":"D1","mobileLogin":null,"mobileFullName":null,"dayId":"1","travelDistance":0,"travelDuration":"00:00","resourceCapacities":[null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"usedCapacities":[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],"deliveryCost":0.0,"additionalCost":0.0,"totalCost":0.0,"plannedOrders":[{"resourceId":"D1","dayId":"1","stopId":"1","stopPosition":0,"stopY":0.0,"stopX":0.0,"stopType":1,"stopDriveTime":"00:00","stopStartTime":"15:18","stopDuration":"00:00","stopStatus":0,"stopDriveDistance":0,"stopElapsedDistance":0,"placeName":null,"placeAddress":null,"aggregationInfo":null,"walkGoupRootId":null,"walkGroupPosition":0,"stopDriveSpeed":0.0,"frequencyNumber":null,"frequencyCount":null},{"resourceId":"D1","dayId":"1","stopId":"dep_1","stopPosition":0,"stopY":0.0,"stopX":0.0,"stopType":4,"stopDriveTime":"00:00","stopStartTime":"15:18","stopDuration":"00:00","stopStatus":0,"stopDriveDistance":0,"stopElapsedDistance":0,"placeName":null,"placeAddress":null,"aggregationInfo":null,"walkGoupRootId":null,"walkGroupPosition":0,"stopDriveSpeed":0.0,"frequencyNumber":null,"frequencyCount":null},{"resourceId":"D1","dayId":"1","stopId":"187_delivery","stopPosition":1,"stopY":0.0,"stopX":0.0,"stopType":0,"stopDriveTime":"00:00","stopStartTime":"15:18","stopDuration":"00:03","stopStatus":0,"stopDriveDistance":0,"stopElapsedDistance":0,"placeName":null,"placeAddress":null,"aggregationInfo":"1-1","walkGoupRootId":"187_delivery","walkGroupPosition":1,"stopDriveSpeed":0.0,"frequencyNumber":null,"frequencyCount":null},{"resourceId":"D1","dayId":"1","stopId":"188_pickup","stopPosition":2,"stopY":0.0,"stopX":0.0,"stopType":0,"stopDriveTime":"00:00","stopStartTime":"15:21","stopDuration":"00:03","stopStatus":2,"stopDriveDistance":0,"stopElapsedDistance":0,"placeName":null,"placeAddress":null,"aggregationInfo":"1-2","walkGoupRootId":"187_delivery","walkGroupPosition":2,"stopDriveSpeed":0.0,"frequencyNumber":null,"frequencyCount":null},{"resourceId":"D1","dayId":"1","stopId":"2","stopPosition":0,"stopY":0.0,"stopX":0.0,"stopType":2,"stopDriveTime":"00:00","stopStartTime":"15:24","stopDuration":"00:00","stopStatus":0,"stopDriveDistance":0,"stopElapsedDistance":0,"placeName":null,"placeAddress":null,"aggregationInfo":null,"walkGoupRootId":null,"walkGroupPosition":0,"stopDriveSpeed":0.0,"frequencyNumber":null,"frequencyCount":null}],"reloadNb":1}],"unplannedOrders":[],"warnings":[],"taskId":"7FFFFE5E2ABA65BFKiPqznwXTEOp7p7L9IM5rw","inputData":null,"beginDate":null,"agencyId":null,"username":null}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Fri, 13 Nov 2026 14:18:11 GMT
+      Server:
+      - Apache
+      Set-Cookie:
+      - INGRESSTSPRODCOOKIE=7d55cb1e3b99391d; Path=/; HttpOnly; Secure; SameSite=None
+      - JSESSIONID=C211C79EA6228C08DAD67472E422D19C; Path=/ToursolverCloud; HttpOnly;
+        SameSite=None; Secure
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Origin
+    status:
+      code: 200
+      message: OK
+version: 1
