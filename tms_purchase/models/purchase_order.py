@@ -65,7 +65,6 @@ class PurchaseOrder(models.Model):
 
         return result
 
-    @api.model
     def action_view_vehicles_button(self):
         self.ensure_one()
         return {
