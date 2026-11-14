@@ -188,7 +188,6 @@ class SaleOrderLine(models.Model):
     def _compute_amount(self):
         return super()._compute_amount()
 
-    @api.model
     def write(self, vals):
         line = super().write(vals)
         for trip in self.tms_order_ids:
