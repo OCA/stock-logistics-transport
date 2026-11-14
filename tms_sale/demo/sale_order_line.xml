@@ -3,7 +3,7 @@
         <field name="order_id" ref="demo_tms_sale_order" />
         <field
             name="product_id"
-            eval="obj().env.ref('tms_product.product_tms_trip_service').product_variant_ids[0].id"
+            search="[('product_tmpl_id', '=', ref('tms_product.product_tms_trip_service'))]"
         />
         <field name="product_uom_qty">1</field>
         <field name="tms_origin_id" ref="tms.demo_location_3" />
@@ -16,7 +16,7 @@
         <field name="order_id" ref="demo_tms_sale_order" />
         <field
             name="product_id"
-            eval="obj().env.ref('tms_product.product_tms_seat_service').product_variant_ids[0].id"
+            search="[('product_tmpl_id', '=', ref('tms_product.product_tms_seat_service'))]"
         />
         <field name="product_uom_qty">1</field>
         <field name="tms_trip_ticket_id" ref="tms.demo_order_1" />
