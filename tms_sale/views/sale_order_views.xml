@@ -29,6 +29,33 @@
                 <field name="tms_route_id" column_invisible="1" />
                 <field name="tms_route_flag" column_invisible="1" />
             </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form/div[@name='invoice_lines']"
+                position="before"
+            >
+                <field name="tms_factor_type" invisible="1" />
+                <group string="Cargo" invisible="tms_factor_type != 'weight'">
+                    <field
+                        name="cargo_ids"
+                        nolabel="1"
+                        colspan="2"
+                        readonly="parent.state in ('sale', 'cancel')"
+                    >
+                        <list editable="bottom">
+                            <field name="order_id" string="Trip" />
+                            <field name="name" />
+                            <field name="quantity" />
+                            <field name="uom_id" />
+                            <field name="weight" />
+                            <field name="weight_uom_id" />
+                            <field name="volume" />
+                            <field name="volume_uom_id" />
+                            <field name="packaging" />
+                            <field name="state" />
+                        </list>
+                    </field>
+                </group>
+            </xpath>
         </field>
     </record>
 </odoo>
