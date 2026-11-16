@@ -40,9 +40,10 @@
                 </button>
             </xpath>
             <xpath expr="//field[@name='driver_id']" position="after">
+                <field name="cargo_sale_order_ids" invisible="1" />
                 <field
                     name="create_invoice"
-                    invisible="not sale_id and not purchase_ids"
+                    invisible="not sale_id and not purchase_ids and not cargo_sale_order_ids"
                 />
             </xpath>
         </field>
