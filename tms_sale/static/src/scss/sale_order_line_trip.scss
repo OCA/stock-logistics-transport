@@ -1,0 +1,29 @@
+.o_form_view .o_form_editable .o_tms_distance_row.o_row > .o_field_widget {
+    flex: 0 0 auto;
+    width: auto !important;
+}
+
+.modal-dialog:has(.o_sale_order_line_trip_form_view) {
+    max-width: 1080px;
+}
+
+.modal .o_sale_order_line_trip_form_view {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.o_sale_order_line_trip_form_view .o_group.o_tms_trip_columns {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 1.5rem;
+    // The outer group is a Bootstrap row. Its negative margin pulls the
+    // first column against the dialog edge.
+    margin-left: 0;
+    margin-right: 0;
+
+    > .o_inner_group {
+        width: auto;
+        max-width: none;
+        padding: 0;
+    }
+}

@@ -28,10 +28,9 @@ class TestTmsSale(BaseCommon):
         )
         cls.trip_template.write(
             {
-                "tms_trip": True,
-                "trip_product_type": "trip",
-                "tms_factor_type": "distance",
-                "tms_factor_distance_uom": cls.env.ref("uom.product_uom_meter").id,
+                "transport_type": "cargo",
+                "transit_mode": "road",
+                "booking_type": "full_asset",
             }
         )
         cls.env.flush_all()
@@ -157,13 +156,13 @@ class TestTmsSale(BaseCommon):
         )
         line._compute_sale_order_line_tms()
         tax_base = line._prepare_base_line_for_taxes_computation()
-        self.assertEqual(tax_base["quantity"], line.product_uom_qty * line.tms_factor)
+        self.assertEqual(tax_base["quantity"], line.product_uom_qty)
 
     def test_seat_product_compute(self):
         seat_template = self.env["product.template"].create(
             {"name": "Seat", "type": "service", "list_price": 25.0}
         )
-        seat_template.write({"tms_trip": True, "trip_product_type": "seat"})
+        seat_template.write({"transport_type": "passenger"})
         line = self.env["sale.order.line"].new(
             {
                 "order_id": self.env["sale.order"].new({"partner_id": self.partner.id}),
@@ -183,7 +182,7 @@ class TestTmsSale(BaseCommon):
         seat_template = self.env["product.template"].create(
             {"name": "Seat", "type": "service", "list_price": 25.0}
         )
-        seat_template.write({"tms_trip": True, "trip_product_type": "seat"})
+        seat_template.write({"transport_type": "passenger"})
         tms_trip = self.env["tms.order"].create(
             {
                 "name": "PASSENGER-TRIP",
@@ -207,13 +206,10 @@ class TestTmsSale(BaseCommon):
 
     def test_action_view_tms_order_multiple_orders(self):
         order = self.env["sale.order"].create({"partner_id": self.partner.id})
-        self.env["sale.order.line"].create(
-            {
-                "order_id": order.id,
-                **self._create_sale_order_line_vals(),
-                "product_uom_qty": 2,
-            }
-        )
+        for _index in range(2):
+            self.env["sale.order.line"].create(
+                {"order_id": order.id, **self._create_sale_order_line_vals()}
+            )
         order._refresh_tms_trip_lines()
         order._action_create_new_trips()
         order.invalidate_recordset(["tms_order_ids", "tms_order_count"])
@@ -221,23 +217,20 @@ class TestTmsSale(BaseCommon):
         action = order.action_view_tms_order()
         self.assertEqual(action["domain"], [("id", "in", order.tms_order_ids.ids)])
 
-    def test_decrease_qty_removes_tms_order(self):
+    def test_removing_a_line_removes_its_trip(self):
         order = self.env["sale.order"].create({"partner_id": self.partner.id})
-        line = self.env["sale.order.line"].create(
-            {
-                "order_id": order.id,
-                **self._create_sale_order_line_vals(),
-                "product_uom_qty": 2,
-            }
+        first = self.env["sale.order.line"].create(
+            {"order_id": order.id, **self._create_sale_order_line_vals()}
+        )
+        self.env["sale.order.line"].create(
+            {"order_id": order.id, **self._create_sale_order_line_vals()}
         )
         order._refresh_tms_trip_lines()
         order._action_create_new_trips()
         order.invalidate_recordset(["tms_order_ids", "tms_order_count"])
-        tms_orders = order.tms_order_ids
-        self.assertEqual(len(tms_orders), 2)
-        order.write({"order_line": [(1, line.id, {"product_uom_qty": 1})]})
-        self.assertEqual(len(order.tms_order_ids), 1)
-        self.assertEqual(len(tms_orders.exists()), 1)
+        self.assertEqual(order.tms_order_count, 2)
+        order.write({"order_line": [(2, first.id)]})
+        self.assertEqual(order.tms_order_count, 1)
 
     def test_post_tms_message(self):
         order = self._create_order_with_trip_line()

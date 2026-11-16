@@ -19,6 +19,45 @@ class SaleOrder(models.Model):
     )
 
     has_tms_order = fields.Boolean(compute="_compute_has_tms_order")
+    spot_quote_required = fields.Boolean(compute="_compute_spot_quote_required")
+    allowed_rate_card_ids = fields.Many2many(
+        "tms.rate.card",
+        compute="_compute_allowed_rate_card_ids",
+    )
+    rate_card_id = fields.Many2one(
+        "tms.rate.card",
+        string="Rate card",
+        domain="[('id', 'in', allowed_rate_card_ids)]",
+        help=(
+            "Optional. Empty follows the customer contract, "
+            "then a card for one of the customer's tags, then the public tariff."
+        ),
+    )
+
+    def action_confirm(self):
+        result = super().action_confirm()
+        if (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("tms_sale.rate_exchange_date", "shipment")
+            != "order"
+        ):
+            return result
+        today = fields.Date.context_today(self)
+        lines = self.order_line.with_context(tms_rate_exchange_date=today)
+        for line in lines.filtered(lambda item: item._tms_route_is_set()):
+            quote = line._tms_rate_quote()
+            if not quote:
+                continue
+            line.with_context(tms_rate_exchange_date=today).write(
+                {
+                    "tms_rate_locked": True,
+                    "tms_locked_exchange": quote["rate"],
+                    "tms_locked_date": today,
+                    "tms_locked_currency_id": quote["currency"].id,
+                }
+            )
+        return result
 
     def action_view_trip_sale_order_line(self):
         return {
@@ -28,21 +67,65 @@ class SaleOrder(models.Model):
             "view_mode": "form",
         }
 
+    @api.depends("order_line.spot_quote")
+    def _compute_spot_quote_required(self):
+        for order in self:
+            order.spot_quote_required = any(order.order_line.mapped("spot_quote"))
+
+    @api.depends("partner_id", "company_id")
+    def _compute_allowed_rate_card_ids(self):
+        cards = self.env["tms.rate.card"]
+        for order in self:
+            partner_ids = [False]
+            partner = order.partner_id
+            if partner:
+                partner_ids.extend((partner | partner.commercial_partner_id).ids)
+            order.allowed_rate_card_ids = cards.search(
+                [
+                    ("partner_id", "in", partner_ids),
+                    (
+                        "company_id",
+                        "in",
+                        [False, order.company_id.id] if order.company_id else [False],
+                    ),
+                ]
+            )
+
+    @api.onchange("partner_id")
+    def _onchange_partner_rate_card(self):
+        if (
+            self.rate_card_id
+            and self.rate_card_id not in self.allowed_rate_card_ids
+        ):
+            self.rate_card_id = False
+
     @api.depends("order_line.has_trip_product")
     def _compute_has_tms_order(self):
         for sale in self:
             has_tms_order = any(line.has_trip_product for line in sale.order_line)
             sale.has_tms_order = has_tms_order
 
-    @api.depends("order_line.tms_order_ids", "order_line.tms_trip_ticket_id")
+    @api.depends(
+        "order_line.tms_order_ids",
+        "order_line.tms_trip_ticket_id",
+        "order_line.cargo_ids.order_id",
+    )
     def _compute_tms_order_ids(self):
         for sale in self:
             tms = sale.order_line.tms_order_ids | sale.order_line.mapped(
                 "tms_trip_ticket_id"
             )
+            tms |= sale.order_line.cargo_ids.order_id
             tms |= self.env["tms.order"].search([("sale_id", "=", sale.id)])
             sale.tms_order_ids = tms
             sale.tms_order_count = len(sale.tms_order_ids)
+
+    def _tms_expected_trip_count(self, line):
+        """A cargo service is one shipment, so it creates one trip."""
+        self.ensure_one()
+        if line.has_trip_product:
+            return 1
+        return int(line.product_uom_qty)
 
     def _tms_generate_line_tms_orders(self, new_tms_sol):
         """
@@ -54,12 +137,19 @@ class SaleOrder(models.Model):
         new_tms_orders = self.env["tms.order"]
 
         for line in new_tms_sol:
-            for i in range(int(line.product_uom_qty) - len(line.tms_order_ids)):
+            if line._tms_plan_on_confirm():
+                continue
+            missing = self._tms_expected_trip_count(line) - len(line.tms_order_ids)
+            remaining = max(missing, 0)
+            while remaining:
                 vals = line._prepare_line_tms_values(line)
                 tms_by_line = self.env["tms.order"].sudo().create(vals)
                 line.write({"tms_order_ids": [(4, tms_by_line.id)]})
+                line.cargo_ids.filtered(lambda cargo: not cargo.order_id).write(
+                    {"order_id": tms_by_line.id}
+                )
                 new_tms_orders |= tms_by_line
-                i = i  # pre-commit
+                remaining -= 1
 
         return new_tms_orders
 
@@ -68,9 +158,8 @@ class SaleOrder(models.Model):
         new_tms_orders = self.env["tms.order"]
 
         new_tms_line_sol = self.order_line.filtered(
-            lambda L: L.has_trip_product
-            and len(L.tms_order_ids) != L.product_uom_qty
-            and len(L.tms_order_ids) < L.product_uom_qty
+            lambda line: line.has_trip_product
+            and len(line.tms_order_ids) < self._tms_expected_trip_count(line)
         )
 
         new_tms_orders |= self._tms_generate_line_tms_orders(new_tms_line_sol)
@@ -152,11 +241,14 @@ class SaleOrder(models.Model):
                 trips_to_delete.unlink()
 
         for line in self.order_line:
-            if line.id in initial_quantities:
-                if line.product_uom_qty < initial_quantities[line.id]:
-                    trips_to_delete = line.tms_order_ids[:1]
-                    if trips_to_delete:
-                        trips_to_delete.unlink()
+            if line.id not in initial_quantities:
+                continue
+            if line.has_trip_product:
+                continue
+            if line.product_uom_qty < initial_quantities[line.id]:
+                trips_to_delete = line.tms_order_ids[:1]
+                if trips_to_delete:
+                    trips_to_delete.unlink()
 
     def _refresh_tms_trip_lines(self):
         self.order_line._compute_sale_order_line_tms()
@@ -191,6 +283,9 @@ class SaleOrder(models.Model):
             self._action_create_new_trips()
 
         if "state" in vals:
+            for sale in self:
+                if sale.state == "sale":
+                    sale._tms_plan_confirmed_lines()
             if self.state == "sale":
                 stage = self.env.ref("tms.tms_stage_order_confirmed")
             elif self.state == "cancel":
@@ -199,7 +294,10 @@ class SaleOrder(models.Model):
                 stage = self.env.ref("tms.tms_stage_order_draft")
 
             for line in self.order_line:
-                for trip in line.tms_order_ids:
+                trips = line.tms_order_ids | line.cargo_ids.order_id
+                for trip in trips:
+                    if trip.sale_line_id and trip.sale_line_id not in self.order_line:
+                        continue
                     trip.stage_id = stage
 
         return result

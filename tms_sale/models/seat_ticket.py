@@ -19,8 +19,8 @@ class SeatTicket(models.Model):
         "product.product",
         string="Seat Service",
         domain=(
-            "[('type', '=', 'service'), ('product_tmpl_id.tms_trip', '=', True), "
-            "('product_tmpl_id.trip_product_type', '=', 'seat')]"
+            "[('type', '=', 'service'), "
+            "('product_tmpl_id.transport_type', '=', 'passenger')]"
         ),
     )
     sale_line_id = fields.Many2one("sale.order.line")
@@ -34,16 +34,21 @@ class SeatTicket(models.Model):
         default="available",
         readonly=True,
     )
+    boarded = fields.Boolean()
 
-    @api.model
+    def _sync_boarded_stage(self):
+        self.tms_order_id._sync_boarded_stage()
+
     def write(self, vals):
         res = super().write(vals)
-        for record in self:
-            if "sale_line_id" in vals:
+        if "sale_line_id" in vals:
+            for record in self:
                 if vals.get("sale_line_id"):
                     record.available = "not_available"
                 else:
                     record.available = "available"
+        if {"sale_line_id", "boarded", "tms_order_id"} & set(vals):
+            self._sync_boarded_stage()
         return res
 
     @api.model
@@ -51,11 +56,6 @@ class SeatTicket(models.Model):
         trip = self.env["tms.order"].browse(vals.get("tms_order_id"))
         if not trip:
             return vals
-        product = trip.vehicle_id.tms_service_product_id
-        if product and not vals.get("product_id"):
-            vals["product_id"] = product.id
-        if product and not vals.get("price"):
-            vals["price"] = product.lst_price
         new_ticket_label = self.env._("New ticket")
         if not vals.get("name") or vals.get("name") == new_ticket_label:
             vals["name"] = f"{trip.name}-{len(trip.seat_ticket_ids) + 1}"
@@ -63,6 +63,8 @@ class SeatTicket(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        return super().create(
+        tickets = super().create(
             [self._prepare_vals_from_trip(dict(vals)) for vals in vals_list]
         )
+        tickets._sync_boarded_stage()
+        return tickets

@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import datetime, timedelta
+from unittest.mock import patch
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -22,7 +23,13 @@ class TestTmsSaleWizard(BaseCommon):
         cls.trip_template = cls.env["product.template"].create(
             {"name": "Trip", "type": "service", "list_price": 50.0}
         )
-        cls.trip_template.write({"tms_trip": True, "trip_product_type": "trip"})
+        cls.trip_template.write(
+            {
+                "transport_type": "cargo",
+                "transit_mode": "road",
+                "booking_type": "full_asset",
+            }
+        )
         cls.start = datetime.now()
         cls.end = cls.start + timedelta(hours=1)
 
@@ -46,6 +53,24 @@ class TestTmsSaleWizard(BaseCommon):
         elif state == "cancel":
             order.action_cancel()
         return line
+
+    def test_trip_wizard_defaults_the_order_rate_card(self):
+        line = self._create_trip_line()
+        card = self.env["tms.rate.card"].create(
+            {
+                "name": "WIZARD-ROAD",
+                "transport_type": "cargo",
+                "transit_mode": "road",
+                "booking_type": "full_asset",
+            }
+        )
+        line.order_id.rate_card_id = card
+        wizard = (
+            self.env["sale.order.line.trip"]
+            .with_context(default_order_line_id=line.id)
+            .create({})
+        )
+        self.assertEqual(wizard.rate_card_id, card)
 
     def test_trip_wizard_editable_on_draft_order(self):
         line = self._create_trip_line()
@@ -96,3 +121,48 @@ class TestTmsSaleWizard(BaseCommon):
         )
         wizard._compute_readonly_fields()
         self.assertTrue(wizard.order_confirmed)
+
+    def test_provider_distance_from_origin_and_destination(self):
+        def fake_apply(wizard):
+            wizard.distance = 42.5
+            wizard.distance_uom = "km"
+            return True
+
+        line = self._create_trip_line()
+        wizard = self.env["sale.order.line.trip"].new(
+            {
+                "order_line_id": line.id,
+                "origin": self.origin.id,
+                "destination": self.destination.id,
+            }
+        )
+        route_model = type(self.env["tms.route"])
+        with (
+            patch.object(route_model, "_routing_provider_ready", lambda model: True),
+            patch.object(type(wizard), "_apply_provider_distance", fake_apply),
+        ):
+            wizard._onchange_distance()
+        self.assertEqual(wizard.distance, 42.5)
+        self.assertEqual(wizard.distance_uom, "km")
+
+    def test_wizard_reloads_container_lines(self):
+        self.trip_template.write(
+            {"transit_mode": "water", "booking_type": "full_asset"}
+        )
+        line = self._create_trip_line()
+        self.env["tms.cargo"].create(
+            {
+                "sale_line_id": line.id,
+                "container_type": "20dry",
+                "container_number": "TCLU0000001",
+                "quantity": 1,
+            }
+        )
+        wizard = (
+            self.env["sale.order.line.trip"]
+            .with_context(default_order_line_id=line.id)
+            .create({})
+        )
+        self.assertEqual(wizard.shipment_unit, "container")
+        self.assertEqual(wizard.cargo_line_ids.container_number, "TCLU0000001")
+        self.assertEqual(wizard.cargo_line_ids.container_type, "20dry")

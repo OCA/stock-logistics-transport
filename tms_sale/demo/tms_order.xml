@@ -4,7 +4,7 @@
     </record>
 
     <record id="tms.demo_order_3" model="tms.order">
-        <field name="vehicle_id" ref="fleet.vehicle_1" />
+        <field name="vehicle_id" ref="fleet.vehicle_2" />
     </record>
 
     <record id="demo_tms_sale_order_trip" model="tms.order">

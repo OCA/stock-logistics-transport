@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_rate_card_view_list" model="ir.ui.view">
+        <field name="name">tms.rate.card.list</field>
+        <field name="model">tms.rate.card</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="category_id" />
+                <field name="date_start" />
+                <field name="date_end" />
+                <field name="transport_type" />
+                <field name="transit_mode" />
+                <field name="booking_type" />
+                <field name="currency_id" />
+                <field name="company_id" groups="base.group_multi_company" />
+            </list>
+        </field>
+    </record>
+
+    <record id="tms_rate_card_view_form" model="ir.ui.view">
+        <field name="name">tms.rate.card.form</field>
+        <field name="model">tms.rate.card</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="category_id" />
+                            <field name="transport_type" />
+                            <field name="transit_mode" />
+                            <field name="booking_type" />
+                        </group>
+                        <group>
+                            <field name="date_start" />
+                            <field name="date_end" />
+                            <field name="currency_id" />
+                            <field name="company_id" groups="base.group_multi_company" />
+                        </group>
+                    </group>
+                    <field name="line_ids">
+                        <list editable="bottom">
+                            <field name="currency_id" column_invisible="1" />
+                            <field name="origin_id" />
+                            <field name="destination_id" />
+                            <field name="rate_type" />
+                            <field name="fixed_price" readonly="rate_type != 'flat'" />
+                        </list>
+                        <form>
+                            <group>
+                                <field name="origin_id" />
+                                <field name="destination_id" />
+                                <field name="rate_type" />
+                                <field
+                                    name="fixed_price"
+                                    invisible="rate_type != 'flat'"
+                                />
+                                <field name="currency_id" invisible="1" />
+                            </group>
+                            <field name="bracket_ids" invisible="rate_type != 'bracket'">
+                                <list editable="bottom">
+                                    <field name="currency_id" column_invisible="1" />
+                                    <field name="weight_or_qty_min" />
+                                    <field name="weight_or_qty_max" />
+                                    <field name="price_per_unit" />
+                                </list>
+                            </field>
+                        </form>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="tms_rate_card_action" model="ir.actions.act_window">
+        <field name="name">Rate Cards</field>
+        <field name="res_model">tms.rate.card</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_tms_rate_card"
+        name="Rate Cards"
+        parent="tms.data"
+        action="tms_rate_card_action"
+        sequence="80"
+    />
+    <menuitem
+        id="menu_tms_rate_card_sale"
+        name="Rate Cards"
+        parent="sale.product_menu_catalog"
+        action="tms_rate_card_action"
+        groups="tms.group_tms_user"
+        sequence="40"
+    />
+
+</odoo>
