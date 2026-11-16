@@ -1,6 +1,8 @@
 # Copyright (C) 2026 Gray Matter Logic (<https://www.graymatterlogic.com>).
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.service.model import call_kw
+
 from odoo.addons.base.tests.common import BaseCommon
 
 
@@ -93,6 +95,18 @@ class TestTmsPurchase(BaseCommon):
         action = self.purchase.action_view_vehicles_button()
         self.assertEqual(action["res_model"], "fleet.vehicle")
         self.assertEqual(action["view_mode"], "list,form")
+        self.assertEqual(
+            action["domain"], [("purchase_order_id", "=", self.purchase.id)]
+        )
+
+    def test_purchase_order_action_view_vehicles_button_rpc(self):
+        """The button of the purchase form calls the method through RPC"""
+        action = call_kw(
+            self.env["purchase.order"],
+            "action_view_vehicles_button",
+            [self.purchase.ids],
+            {},
+        )
         self.assertEqual(
             action["domain"], [("purchase_order_id", "=", self.purchase.id)]
         )
