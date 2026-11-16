@@ -88,6 +88,18 @@ class TestTmsSale(BaseCommon):
         self.assertEqual(order.tms_order_count, 1)
         self.assertEqual(order.tms_order_ids.sale_line_id, order.order_line)
 
+    def test_confirm_several_orders_updates_tms_stage(self):
+        orders = (
+            self._create_order_with_trip_line() + self._create_order_with_trip_line()
+        )
+        orders.action_confirm()
+        self.assertEqual(orders.mapped("state"), ["sale", "sale"])
+        self.assertEqual(
+            orders.tms_order_ids.stage_id,
+            self.env.ref("tms.tms_stage_order_confirmed"),
+        )
+        self.assertEqual(len(orders.tms_order_ids), 2)
+
     def test_sale_order_state_updates_tms_stage(self):
         order = self._create_order_with_trip_line()
         tms_order = order.tms_order_ids

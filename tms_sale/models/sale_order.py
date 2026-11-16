@@ -173,7 +173,6 @@ class SaleOrder(models.Model):
                 order.invalidate_recordset(["tms_order_ids", "tms_order_count"])
         return orders
 
-    @api.model
     def write(self, vals):
         initial_trips = self.env["tms.order"].search(
             [("sale_line_id", "in", self.order_line.ids)]
@@ -191,15 +190,16 @@ class SaleOrder(models.Model):
             self._action_create_new_trips()
 
         if "state" in vals:
-            if self.state == "sale":
-                stage = self.env.ref("tms.tms_stage_order_confirmed")
-            elif self.state == "cancel":
-                stage = self.env.ref("tms.tms_stage_order_cancelled")
-            else:
-                stage = self.env.ref("tms.tms_stage_order_draft")
+            for order in self:
+                if order.state == "sale":
+                    stage = self.env.ref("tms.tms_stage_order_confirmed")
+                elif order.state == "cancel":
+                    stage = self.env.ref("tms.tms_stage_order_cancelled")
+                else:
+                    stage = self.env.ref("tms.tms_stage_order_draft")
 
-            for line in self.order_line:
-                for trip in line.tms_order_ids:
-                    trip.stage_id = stage
+                for line in order.order_line:
+                    for trip in line.tms_order_ids:
+                        trip.stage_id = stage
 
         return result
