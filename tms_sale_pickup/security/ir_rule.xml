@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_order_driver_rule" model="ir.rule">
+        <field name="name">Driver reads assigned trips</field>
+        <field name="model_id" ref="tms.model_tms_order" />
+        <field
+            name="domain_force"
+        >[('driver_id.partner_id', '=', user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('tms.group_tms_driver'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+    <record id="tms_order_admin_rule" model="ir.rule">
+        <field name="name">Administrator reads every trip</field>
+        <field name="model_id" ref="tms.model_tms_order" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('tms.group_tms_admin'))]" />
+    </record>
+    <record id="tms_cargo_driver_read_rule" model="ir.rule">
+        <field name="name">Driver reads cargo on assigned trips</field>
+        <field name="model_id" ref="tms.model_tms_cargo" />
+        <field
+            name="domain_force"
+        >[('order_id.driver_id.partner_id', '=', user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('tms.group_tms_driver'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+    <record id="tms_cargo_driver_write_rule" model="ir.rule">
+        <field name="name">Driver records pickups on assigned trips</field>
+        <field name="model_id" ref="tms.model_tms_cargo" />
+        <field name="domain_force">[
+            '&amp;',
+            ('parent_id', '!=', False),
+            ('order_id.driver_id.partner_id', '=', user.partner_id.id)
+        ]</field>
+        <field name="groups" eval="[(4, ref('tms.group_tms_driver'))]" />
+        <field name="perm_read" eval="False" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_create" eval="True" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+    <record id="tms_cargo_admin_rule" model="ir.rule">
+        <field name="name">Administrator manages every cargo line</field>
+        <field name="model_id" ref="tms.model_tms_cargo" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="groups" eval="[(4, ref('tms.group_tms_admin'))]" />
+    </record>
+</odoo>

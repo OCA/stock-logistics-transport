@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_order_portal_rule" model="ir.rule">
+        <field name="name">Portal driver reads assigned trips</field>
+        <field name="model_id" ref="tms.model_tms_order" />
+        <field
+            name="domain_force"
+        >[('driver_id.partner_id', '=', user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+    <record id="tms_cargo_portal_rule" model="ir.rule">
+        <field name="name">Portal driver reads cargo on assigned trips</field>
+        <field name="model_id" ref="tms.model_tms_cargo" />
+        <field
+            name="domain_force"
+        >[('order_id.driver_id.partner_id', '=', user.partner_id.id)]</field>
+        <field name="groups" eval="[(4, ref('base.group_portal'))]" />
+        <field name="perm_read" eval="True" />
+        <field name="perm_write" eval="False" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="False" />
+    </record>
+</odoo>

@@ -5,16 +5,20 @@
         <field name="inherit_id" ref="tms.tms_order_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="sale_id" invisible="1" />
+                <field name="sale_line_id" invisible="1" />
                 <button
                     name="action_view_sales"
                     type="object"
                     class="oe_stat_button"
                     icon="fa-usd"
-                    invisible="not sale_id"
+                    invisible="cargo_sale_order_count == 0"
                 >
-                    <span class="o_stat_text">Sale Order</span>
-                    <field name="sale_id" invisible="1" />
-                    <field name="sale_line_id" invisible="1" />
+                    <field
+                        name="cargo_sale_order_count"
+                        widget="statinfo"
+                        string="Sales Orders"
+                    />
                 </button>
                 <button
                     type="object"
@@ -30,9 +34,6 @@
                     />
                 </button>
             </xpath>
-            <xpath expr="//field[@name='vehicle_id']" position="after">
-                <field name="vehicle_operation" invisible="1" />
-            </xpath>
             <xpath expr="//page[@name='planning_page']" position="after">
                 <page
                     name="seats_page"
@@ -46,6 +47,7 @@
                             <field name="price" />
                             <field name="sale_order_id" />
                             <field name="customer_id" />
+                            <field name="boarded" />
                             <field
                                 name="available"
                                 widget="badge"

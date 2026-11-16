@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_order_view_form" model="ir.ui.view">
+        <field name="name">tms.order.form.pickup</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='cargo_ids']/list" position="attributes">
+                <attribute name="decoration-warning">has_discrepancy</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='cargo_ids']/list/field[@name='name']"
+                position="before"
+            >
+                <field name="parent_id" />
+                <field name="sold_locked" column_invisible="1" />
+            </xpath>
+            <xpath
+                expr="//field[@name='cargo_ids']/list/field[@name='name']"
+                position="attributes"
+            >
+                <attribute name="readonly">sold_locked</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='cargo_ids']/list/field[@name='quantity']"
+                position="attributes"
+            >
+                <attribute name="readonly">sold_locked</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='cargo_ids']/list/field[@name='weight']"
+                position="attributes"
+            >
+                <attribute name="readonly">sold_locked</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='cargo_ids']/list/field[@name='volume']"
+                position="attributes"
+            >
+                <attribute name="readonly">sold_locked</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='cargo_ids']/list/field[@name='state']"
+                position="before"
+            >
+                <field name="pickup_weight" />
+                <field name="weight_delta" />
+                <field name="pickup_volume" />
+                <field name="volume_delta" />
+                <field name="has_discrepancy" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_tms_my_pickups" model="ir.actions.act_window">
+        <field name="name">My pickups</field>
+        <field name="res_model">tms.order</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('driver_id.partner_id.user_ids', 'in', [uid])]</field>
+    </record>
+
+    <menuitem
+        id="menu_tms_my_pickups"
+        name="My pickups"
+        parent="tms.operations"
+        action="action_tms_my_pickups"
+        groups="tms.group_tms_driver"
+        sequence="15"
+    />
+</odoo>
