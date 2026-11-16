@@ -1,5 +1,7 @@
 from datetime import datetime, timedelta
 
+from freezegun import freeze_time
+
 from odoo import _
 from odoo.tests.common import TransactionCase
 
@@ -162,6 +164,12 @@ class TestTMSOrder(TransactionCase):
         uom = self.env.ref("uom.product_uom_hour")
         order = self.create_order()
         self.assertEqual(order.time_uom, uom, "Default UOM should be hours")
+
+    @freeze_time("2030-02-15 08:00:00")
+    def test_default_scheduled_date_start(self):
+        # The order is scheduled now, not when the server was started
+        order = self.create_order()
+        self.assertEqual(order.scheduled_date_start, datetime(2030, 2, 15, 8, 0))
 
     def test_default_stage_id(self):
         stage = self.env["tms.stage"].create(
