@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 from unittest.mock import PropertyMock, patch
 
 from odoo.exceptions import ValidationError
+from odoo.service.model import call_kw
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -173,3 +174,16 @@ class TestSaleOrderLineTms(BaseCommon):
                     "product_uom_qty": 1,
                 }
             )
+
+    def test_write_through_rpc(self):
+        order = self.env["sale.order"].create({"partner_id": self.partner.id})
+        line = self.env["sale.order.line"].create(
+            {"order_id": order.id, "product_id": self.trip_product.id}
+        )
+        call_kw(
+            self.env["sale.order.line"],
+            "write",
+            [line.ids, {"product_uom_qty": 2.0}],
+            {},
+        )
+        self.assertEqual(line.product_uom_qty, 2.0)

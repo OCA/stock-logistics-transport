@@ -35,7 +35,6 @@ class SeatTicket(models.Model):
         readonly=True,
     )
 
-    @api.model
     def write(self, vals):
         res = super().write(vals)
         for record in self:

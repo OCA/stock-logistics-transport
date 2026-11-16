@@ -1,6 +1,8 @@
 # Copyright (C) 2026 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.service.model import call_kw
+
 from odoo.addons.base.tests.common import BaseCommon
 
 
@@ -94,3 +96,14 @@ class TestSeatTicket(BaseCommon):
 
         ticket.write({"sale_line_id": False})
         self.assertEqual(ticket.available, "available")
+
+    def test_write_through_rpc(self):
+        ticket = self.env["seat.ticket"].create({"tms_order_id": self.tms_order.id})
+        call_kw(
+            self.env["seat.ticket"],
+            "write",
+            [ticket.ids, {"sale_line_id": self.sale_line.id}],
+            {},
+        )
+        self.assertEqual(ticket.sale_line_id, self.sale_line)
+        self.assertEqual(ticket.available, "not_available")
