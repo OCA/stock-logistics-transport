@@ -522,15 +522,15 @@ class ToursolverTask(models.Model):
         for shipment in self.shipment_advice_ids:
             if not shipment.toursolver_resource_id:
                 continue
+            shipment.partner_sorting_enabled = True
             for rank, partner_id in enumerate(
                 self._toursolver_planned_partner_ids_sorted(
                     shipment.toursolver_resource_id.resource_id
                 ),
                 start=1,
             ):
-                planned = shipment.planned_picking_order_ids.filtered(
-                    lambda plo, p_id=partner_id: plo.stock_picking_id.partner_id.id
-                    == p_id
+                planned = shipment.planned_partner_order_ids.filtered(
+                    lambda plo, p_id=partner_id: plo.partner_id.id == p_id
                 )
                 planned.write({"sequence": rank})
 

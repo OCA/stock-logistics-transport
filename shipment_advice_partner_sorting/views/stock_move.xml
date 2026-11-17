@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_picking_move_tree_sorting" model="ir.ui.view">
+        <field name="name">stock.move.tree.shipment.sorting</field>
+        <field name="model">stock.move</field>
+        <field name="inherit_id" ref="shipment_advice.view_picking_move_tree" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute
+                    name="default_order"
+                >picking_sequence_in_shipment_advice, priority, date, id</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

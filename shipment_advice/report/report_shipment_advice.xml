@@ -79,10 +79,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                t-foreach="o.loaded_package_level_ids.sorted(lambda r: r.with_context(active_shipment_advice_id=o.id).picking_id.sequence_in_shipment_advice)"
-                                t-as="package_level"
-                            >
+                            <tr t-foreach="get_package_levels(o)" t-as="package_level">
                                 <td>
                                     <span t-field="package_level.package_id" />
                                 </td>
@@ -130,10 +127,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                t-foreach="o.loaded_move_line_without_package_ids.sorted(lambda r: (r.move_id.with_context(active_shipment_advice_id=o.id).picking_sequence_in_shipment_advice, 'sequence'))"
-                                t-as="line"
-                            >
+                            <tr t-foreach="get_bulk_move_lines(o)" t-as="line">
                                 <td>
                                     <span t-field="line.product_id" />
                                 </td>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="shipment_advice_form_sorting" model="ir.ui.view">
+        <field name="name">shipment.advice.form.partner.sorting</field>
+        <field name="model">shipment.advice</field>
+        <field name="inherit_id" ref="shipment_advice.shipment_advice_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='shipment_type']" position="after">
+                <field name="partner_sorting_enabled" />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="button_open_planned_partners"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-map-marker"
+                    attrs="{'invisible': [('partner_sorting_enabled', '=', False)]}"
+                >
+                    <field
+                        name="planned_partners_count"
+                        string="Planned"
+                        widget="statinfo"
+                    />
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

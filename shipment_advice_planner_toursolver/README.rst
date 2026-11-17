@@ -70,6 +70,9 @@ The task will pass through different states by a dedicated cron and at the end
 of the process will create shipment advices according the returned result from
 TourSolver.
 
+Partner ordering is enabled automatically for shipment advices planned by
+TourSolver, including when a task is created for an existing shipment advice.
+
 Known issues / Roadmap
 ======================
 
@@ -117,6 +120,14 @@ This module is maintained by the OCA.
 OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
+
+.. |maintainer-lmignon| image:: https://github.com/lmignon.png?size=40px
+    :target: https://github.com/lmignon
+    :alt: lmignon
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-lmignon| 
 
 This module is part of the `OCA/stock-logistics-transport <https://github.com/OCA/stock-logistics-transport/tree/16.0/shipment_advice_planner_toursolver>`_ project on GitHub.
 

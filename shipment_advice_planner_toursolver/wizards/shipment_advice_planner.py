@@ -34,6 +34,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
             {
                 "toursolver_resource_id": self.toursolver_resource_id.id,
                 "toursolver_task_id": self.toursolver_task_id.id,
+                "partner_sorting_enabled": bool(self.toursolver_task_id),
             }
         )
         return res
