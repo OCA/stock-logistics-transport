@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="ir_cron_tms_telematics_pull" model="ir.cron">
+        <field name="name">TMS Telematics: pull feeds</field>
+        <field name="model_id" ref="model_tms_telematics_account" />
+        <field name="state">code</field>
+        <field name="code">model._cron_pull()</field>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+    </record>
+</odoo>
