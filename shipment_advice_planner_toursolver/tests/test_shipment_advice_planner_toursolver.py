@@ -103,6 +103,7 @@ class TestShipmentAdvicePlannerToursolver(
         self.assertEqual(task.state, "done")
         shipment = task.shipment_advice_ids
         self.assertEqual(shipment.toursolver_resource_id, self.resource_2)
+        self.assertTrue(shipment.partner_sorting_enabled)
         planned_partner_order = shipment.planned_partner_order_ids
         planned_partners = shipment.planned_picking_ids.mapped("partner_id")
         self.assertEqual(
@@ -193,7 +194,11 @@ class TestShipmentAdvicePlannerToursolver(
             shipment.create_toursolver_task()
         task.unlink()
         self.assertTrue(shipment.is_create_toursolver_task_allowed)
+        shipment.partner_sorting_enabled = False
+        self.assertFalse(shipment.planned_partner_order_ids)
         shipment.create_toursolver_task()
+        self.assertTrue(shipment.partner_sorting_enabled)
+        self.assertTrue(shipment.planned_partner_order_ids)
         self.assertTrue(shipment.toursolver_task_id)
         task = shipment.toursolver_task_id
         self.assertEqual(task.state, "draft")
@@ -202,7 +207,12 @@ class TestShipmentAdvicePlannerToursolver(
         self.assertFalse(task.toursolver_error_message)
         task.button_check_status()
         self.assertEqual(task.state, "success")
+        shipment.partner_sorting_enabled = False
         task.button_get_result()
         self.assertEqual(task.state, "done")
         self.assertEqual(task.shipment_advice_ids, shipment)
         self.assertEqual(shipment.state, "confirmed")
+        self.assertTrue(shipment.partner_sorting_enabled)
+        self.assertEqual(
+            set(shipment.planned_partner_order_ids.mapped("sequence")), {1, 2}
+        )

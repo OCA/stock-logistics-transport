@@ -4,7 +4,7 @@
 # Copyright 2026 ACSONE SA/NV (https://acsone.eu)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import Command, _, api, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools.safe_eval import safe_eval
 
@@ -128,14 +128,6 @@ class ShipmentAdvice(models.Model):
         string="Planned transfers",
     )
     planned_pickings_count = fields.Integer(compute="_compute_count")
-    planned_partner_order_ids = fields.One2many(
-        "shipment.advice.planned.partner.order",
-        "shipment_advice_id",
-        string="Planned Partners Sequence",
-        compute="_compute_planned_partner_order_ids",
-        store=True,
-    )
-    planned_partners_count = fields.Integer(compute="_compute_count")
     loaded_move_line_ids = fields.One2many(
         comodel_name="stock.move.line",
         inverse_name="shipment_advice_id",
@@ -301,6 +293,10 @@ class ShipmentAdvice(models.Model):
         """
         return True
 
+    def _get_email_planned_pickings(self):
+        self.ensure_one()
+        return self.planned_picking_ids.sorted(lambda picking: picking.id)
+
     @api.depends("loaded_move_line_ids.result_package_id.shipping_weight")
     def _compute_total_load(self):
         for shipment in self:
@@ -326,57 +322,6 @@ class ShipmentAdvice(models.Model):
             shipment.to_validate_picking_ids = self.env["stock.picking"].browse(
                 to_validate_picking_ids
             )
-
-    @api.depends(
-        "planned_move_ids.picking_id",
-        "planned_move_ids.picking_id.partner_id",
-    )
-    def _compute_planned_partner_order_ids(self):
-        order_model = self.env["shipment.advice.planned.partner.order"]
-        for shipment in self:
-            planned_by_key = {}
-            for picking in shipment.planned_picking_ids:
-                key = (
-                    ("partner", picking.partner_id.id)
-                    if picking.partner_id
-                    else ("picking", picking.id)
-                )
-                planned_by_key.setdefault(key, self.env["stock.picking"])
-                planned_by_key[key] |= picking
-
-            existing_by_key = {}
-            obsolete_orders = order_model
-            for order in shipment.planned_partner_order_ids:
-                key = order._get_planned_order_key()
-                if not key:
-                    obsolete_orders |= order
-                    continue
-                if key in existing_by_key:
-                    obsolete_orders |= order
-                else:
-                    existing_by_key[key] = order
-
-            for key, order in existing_by_key.items():
-                if key not in planned_by_key:
-                    obsolete_orders |= order
-            obsolete_orders.unlink()
-
-            order_commands = []
-            for key, pickings in planned_by_key.items():
-                order = existing_by_key.get(key)
-                if order:
-                    order.stock_picking_ids = [Command.set(pickings.ids)]
-                    order_commands.append(Command.link(order.id))
-                else:
-                    order_commands.append(
-                        Command.create(
-                            {
-                                "partner_id": key[1] if key[0] == "partner" else False,
-                                "stock_picking_ids": [Command.set(pickings.ids)],
-                            }
-                        )
-                    )
-            shipment.planned_partner_order_ids = order_commands
 
     @api.depends(
         "loaded_move_line_ids.package_level_id.package_id",
@@ -408,7 +353,6 @@ class ShipmentAdvice(models.Model):
             )
             shipment.loaded_packages_count = len(shipment.loaded_package_ids)
             shipment.lines_to_load_count = len(shipment.line_to_load_ids)
-            shipment.planned_partners_count = len(shipment.planned_partner_order_ids)
 
     @api.depends("planned_picking_ids", "loaded_picking_ids")
     def _compute_carrier_ids(self):
@@ -662,11 +606,6 @@ class ShipmentAdvice(models.Model):
         context.update({"active_shipment_advice_id": self.id})
         action["context"] = context
 
-        tree_view = self.env.ref(
-            "shipment_advice.vpicktree_planned_shipment_advice_order"
-        )
-        tree_view_index = action["views"].index((False, "tree"))
-        action["views"][tree_view_index] = (tree_view.id, "tree")
         return action
 
     def button_open_planned_moves(self):
@@ -683,13 +622,6 @@ class ShipmentAdvice(models.Model):
             action["context"].update(
                 {"active_shipment_advice_id": active_shipment_advice_id}
             )
-        return action
-
-    def button_open_planned_partners(self):
-        self.ensure_one()
-        action_xmlid = "shipment_advice.action_shipment_advice_planned_partner_order"
-        action = self.env["ir.actions.act_window"]._for_xml_id(action_xmlid)
-        action["domain"] = [("shipment_advice_id", "=", self.id)]
         return action
 
     def button_open_loaded_pickings(self):

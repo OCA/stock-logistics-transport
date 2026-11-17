@@ -8,7 +8,11 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
-    "depends": ["shipment_advice_planner", "base_time_window"],
+    "depends": [
+        "shipment_advice_planner",
+        "shipment_advice_partner_sorting",
+        "base_time_window",
+    ],
     "data": [
         # data
         "data/toursolver_backend.xml",
@@ -38,4 +42,5 @@
         "demo/toursolver_resource.xml",
         "demo/res_compnay.xml",
     ],
+    "maintainers": ["lmignon"],
 }

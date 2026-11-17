@@ -87,6 +87,7 @@ class ShipmentAdvice(models.Model):
         self.ensure_one()
         if not self.is_create_toursolver_task_allowed:
             raise UserError(_("You can't recreate the toursolver task."))
+        self.partner_sorting_enabled = True
         task_model = self.env["toursolver.task"]
         backend = task_model._get_default_toursolver_backend()
         task_model.sudo().create(

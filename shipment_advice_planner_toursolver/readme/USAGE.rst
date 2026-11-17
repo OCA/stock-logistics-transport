@@ -5,3 +5,6 @@ the pickings you want to plan.
 The task will pass through different states by a dedicated cron and at the end
 of the process will create shipment advices according the returned result from
 TourSolver.
+
+Partner ordering is enabled automatically for shipment advices planned by
+TourSolver, including when a task is created for an existing shipment advice.
