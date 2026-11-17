@@ -3,6 +3,7 @@
     <record id="demo_driver_1" model="tms.driver">
         <field name="name">Sergio Perez</field>
         <field name="driver_type">terrestrial</field>
+        <field name="stage_id" ref="tms_stage_driver_in_trip" />
     </record>
 
     <record id="demo_driver_2" model="tms.driver">
