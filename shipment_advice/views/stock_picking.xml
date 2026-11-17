@@ -52,6 +52,19 @@
             </field>
         </field>
     </record>
+    <record id="vpicktree_planned_shipment_advice_order" model="ir.ui.view">
+        <field name="name">stock.picking.tree.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="shipment_advice.vpicktree" />
+        <field name="mode">primary</field>
+        <field name="priority">101</field>
+        <field name="arch" type="xml">
+            <field name="name" position="before">
+                <field name="sequence_in_shipment_advice" widget="handle" />
+            </field>
+        </field>
+    </record>
+
     <record id="view_picking_internal_search" model="ir.ui.view">
         <field name="name">stock.picking.search.inherit</field>
         <field name="model">stock.picking</field>

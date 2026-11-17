@@ -12,7 +12,9 @@ class TestShipmentAdviceStockUser(Common):
 
     def test_shipment_advice_button_open_planned_pickings(self):
         shipment_advice = self.shipment_advice_out.with_user(self.stock_user)
-        action = shipment_advice.button_open_planned_pickings()
+        action = shipment_advice.with_context(
+            allowed_company_ids=self.env.company.ids
+        ).button_open_planned_pickings()
         self.assertEqual(action["name"], "Transfers")
 
     def test_shipment_advice_button_open_planned_moves(self):
