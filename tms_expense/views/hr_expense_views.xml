@@ -22,7 +22,30 @@
                     <page string="Trip">
                         <group>
                             <field name="trip_id" string="Trip" />
+                            <field name="spread_by_distance" invisible="1" />
+                            <field name="currency_id" invisible="1" />
+                            <field
+                                name="vehicle_id"
+                                invisible="not spread_by_distance"
+                            />
+                            <field name="odometer" invisible="not spread_by_distance" />
+                            <field
+                                name="unallocated_amount"
+                                invisible="not spread_by_distance"
+                            />
                         </group>
+                        <field
+                            name="allocation_ids"
+                            invisible="not spread_by_distance"
+                            readonly="1"
+                        >
+                            <list create="0" edit="0" delete="0">
+                                <field name="currency_id" column_invisible="1" />
+                                <field name="trip_id" />
+                                <field name="distance" />
+                                <field name="amount" />
+                            </list>
+                        </field>
                     </page>
                 </notebook>
             </xpath>
