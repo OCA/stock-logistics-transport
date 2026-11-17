@@ -2,7 +2,7 @@
     <!-- Main Menu -->
     <menuitem
         id="root"
-        name="Transport"
+        name="Transportation"
         sequence="10"
         web_icon="tms,static/description/icon.png"
     />
@@ -42,9 +42,16 @@
         sequence="10"
     />
     <menuitem
+        id="menu_tms_cargo_pool"
+        name="Unassigned cargo"
+        action="action_tms_cargo_pool"
+        parent="operations"
+        sequence="15"
+    />
+    <menuitem
         id="menu_fleet_odometers"
         name="Odometers"
-        action="fleet.fleet_vehicle_odometer_action"
+        action="action_tms_odometer"
         parent="operations"
         sequence="20"
     />

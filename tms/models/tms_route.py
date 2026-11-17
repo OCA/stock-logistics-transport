@@ -66,6 +66,11 @@ class TMSRoute(models.Model):
             # If no default_length_uom is set, return None or a default value
             return self.env.ref("uom.product_uom_km", raise_if_not_found=False)
 
+    @api.model
+    def _routing_provider_ready(self):
+        """A routing module reports when it can compute a road distance."""
+        return False
+
     def _default_time_uom_id(self):
         # Fetch the value of default_time_uom from settings
         default_time_uom_id = (
