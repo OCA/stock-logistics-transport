@@ -513,7 +513,14 @@ class ShipmentAdvice(models.Model):
             return
         moves_to_unplan = (
             self.loaded_move_line_ids.move_id | self.planned_move_ids
-        ).filtered(lambda m: m.state not in ("cancel", "done") and not m.quantity_done)
+        ).filtered(
+            lambda m: (
+                m.state not in ("cancel", "done")
+                and not m.quantity_done
+                # Pickups are not loaded by the operator and stay planned
+                and m.picking_type_id.code != "incoming"
+            )
+        )
         moves_to_unplan.shipment_advice_id = False
 
     def _postprocess_action_done(self, backorder_policy):
