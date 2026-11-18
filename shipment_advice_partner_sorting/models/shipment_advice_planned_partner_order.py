@@ -57,7 +57,7 @@ class ShipmentAdvicePlannedPartnerOrder(models.Model):
     _sql_constraints = [
         (
             "shipment_advice_planned_partner_operation_uniq",
-            "unique(shipment_advice_id, partner_id, operation_type)",
+            "UNIQUE NULLS NOT DISTINCT(shipment_advice_id, partner_id, operation_type)",
             "A partner and operation type can only be planned once per shipment advice.",
         ),
     ]

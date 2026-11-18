@@ -17,15 +17,20 @@ class ShipmentAdviceSearchCommonCase(Common):
         cls.other_shipment = cls.env["shipment.advice"].create(
             {"shipment_type": "outgoing"}
         )
+        cls.partner1, cls.partner2 = cls.env["res.partner"].create(
+            [{"name": "Sorting partner 1"}, {"name": "Sorting partner 2"}]
+        )
         cls.planned_orders = cls.env["shipment.advice.planned.partner.order"].create(
             [
                 {
                     "shipment_advice_id": cls.shipment_advice_out.id,
+                    "partner_id": cls.partner1.id,
                     "stock_picking_ids": [(6, 0, cls.picking1.ids)],
                     "sequence": 20,
                 },
                 {
                     "shipment_advice_id": cls.shipment_advice_out.id,
+                    "partner_id": cls.partner2.id,
                     "stock_picking_ids": [(6, 0, cls.picking2.ids)],
                     "sequence": 10,
                 },
