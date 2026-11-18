@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_res_partner_tms_map" model="ir.ui.view">
+        <field name="name">res.partner.tms.map</field>
+        <field name="model">res.partner</field>
+        <field name="type">tms_map</field>
+        <field name="arch" type="xml">
+            <tms_map
+                latitude="partner_latitude"
+                longitude="partner_longitude"
+                shape="tms_map_shape"
+                perimeter="tms_geofence"
+            >
+                <field name="display_name" />
+                <field name="partner_latitude" />
+                <field name="partner_longitude" />
+                <field name="tms_map_shape" />
+                <field name="tms_geofence" />
+            </tms_map>
+        </field>
+    </record>
+
+    <record id="tms.action_tms_location" model="ir.actions.act_window">
+        <field name="view_mode">list,tms_map,form</field>
+        <field
+            name="view_ids"
+            eval="[
+            (5, 0, 0),
+            (0, 0, {
+                'view_mode': 'list',
+                'view_id': ref('tms.view_res_partner_list_tms_location'),
+            }),
+            (0, 0, {
+                'view_mode': 'tms_map',
+                'view_id': ref('view_res_partner_tms_map'),
+            }),
+            (0, 0, {
+                'view_mode': 'form',
+                'view_id': ref('tms.view_res_partner_form_inherit_tms_location'),
+            }),
+            ]"
+        />
+    </record>
+</odoo>

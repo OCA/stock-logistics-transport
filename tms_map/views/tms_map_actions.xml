@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_tms_map_dispatch" model="ir.actions.client">
+        <field name="name">Dispatch map</field>
+        <field name="tag">tms_map</field>
+        <field name="context">{"map_mode": "dispatch"}</field>
+    </record>
+    <record id="action_tms_map_heatmap" model="ir.actions.client">
+        <field name="name">Position heatmap</field>
+        <field name="tag">tms_map</field>
+        <field name="context">{"map_mode": "heatmap"}</field>
+    </record>
+
+    <menuitem
+        id="menu_tms_map_dispatch"
+        name="Dispatch map"
+        parent="tms.operations"
+        action="action_tms_map_dispatch"
+        sequence="16"
+        groups="tms.group_tms_user"
+    />
+    <record id="action_tms_map_history" model="ir.actions.client">
+        <field name="name">Trip history</field>
+        <field name="tag">tms_map</field>
+        <field name="context">{'map_mode': 'history'}</field>
+    </record>
+
+    <menuitem
+        id="menu_tms_map_heatmap"
+        name="Position heatmap"
+        parent="tms.reporting"
+        action="action_tms_map_heatmap"
+        sequence="40"
+        groups="tms.group_tms_user"
+    />
+    <menuitem
+        id="menu_tms_map_history"
+        name="Trip history"
+        parent="tms.operations"
+        action="action_tms_map_history"
+        sequence="17"
+        groups="tms.group_tms_user"
+    />
+</odoo>

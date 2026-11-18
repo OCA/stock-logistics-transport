@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <function model="res.partner" name="_demo_apply_location_perimeters" />
+</odoo>

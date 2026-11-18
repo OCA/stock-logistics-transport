@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_vehicle_group_mexico_cargo" model="tms.vehicle.group">
+        <field name="name">Mexico Cargo</field>
+        <field
+            name="vehicle_ids"
+            eval="[(6, 0, [
+                ref('tms.demo_vehicle_truck_volvo_fh'),
+                ref('tms.demo_vehicle_truck_actros'),
+                ref('tms.demo_vehicle_truck_scania_r'),
+                ref('tms.demo_vehicle_truck_npr'),
+            ])]"
+        />
+    </record>
+    <record id="demo_vehicle_group_usa_cargo" model="tms.vehicle.group">
+        <field name="name">USA Cargo</field>
+        <field
+            name="vehicle_ids"
+            eval="[(6, 0, [
+                ref('tms.demo_vehicle_truck_cascadia'),
+                ref('tms.demo_vehicle_truck_t680'),
+            ])]"
+        />
+    </record>
+    <record id="demo_vehicle_group_passenger" model="tms.vehicle.group">
+        <field name="name">Passenger</field>
+        <field
+            name="vehicle_ids"
+            eval="[(6, 0, [
+                ref('tms.demo_vehicle_bus_tourismo'),
+                ref('tms.demo_vehicle_bus_9700'),
+                ref('tms.demo_vehicle_bus_irizar'),
+                ref('tms.demo_vehicle_bus_citaro'),
+                ref('tms.demo_vehicle_bus_yutong'),
+                ref('tms.demo_vehicle_bus_prevost'),
+            ])]"
+        />
+    </record>
+    <record id="demo_vehicle_group_maritime" model="tms.vehicle.group">
+        <field name="name">Maritime</field>
+        <field
+            name="vehicle_ids"
+            eval="[(6, 0, [
+                ref('tms.demo_vehicle_boat_triple_e'),
+                ref('tms.demo_vehicle_boat_gulsun'),
+                ref('tms.demo_vehicle_boat_longship'),
+            ])]"
+        />
+    </record>
+    <record id="demo_vehicle_group_air" model="tms.vehicle.group">
+        <field name="name">Air</field>
+        <field
+            name="vehicle_ids"
+            eval="[(6, 0, [
+                ref('tms.demo_vehicle_plane_747_8f'),
+                ref('tms.demo_vehicle_plane_a330f'),
+                ref('tms.demo_vehicle_plane_787'),
+                ref('tms.demo_vehicle_plane_atr'),
+            ])]"
+        />
+    </record>
+</odoo>
