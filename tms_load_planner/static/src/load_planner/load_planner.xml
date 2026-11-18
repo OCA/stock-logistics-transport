@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="tms_load_planner.LoadPlanner">
+        <div class="o_tms_load_planner d-flex h-100">
+            <div class="o_tms_load_canvas flex-grow-1 position-relative">
+                <div class="o_tms_load_caption p-2" t-if="state.trip.name">
+                    <button
+                        class="btn btn-secondary btn-sm me-2"
+                        t-on-click="backToTrip"
+                    >
+                        Back to trip
+                    </button>
+                    <strong t-esc="state.trip.name" />
+                    <span class="ms-2" t-esc="state.trip.vehicle" />
+                    <span class="ms-2 text-muted">
+                        <t t-esc="state.trip.origin" />
+                        <t t-if="state.trip.destination">
+                            → <t t-esc="state.trip.destination" />
+                        </t>
+                    </span>
+                    <div class="text-muted" t-esc="orientationHint()" />
+                    <div class="text-danger" t-if="state.message" t-esc="state.message" />
+                </div>
+                <ul class="o_tms_load_legend list-unstyled mb-0" t-if="state.trip.name">
+                    <li>
+                        <i class="o_tms_swatch o_tms_swatch_empty" />
+                        Available
+                    </li>
+                    <li>
+                        <i class="o_tms_swatch o_tms_swatch_stackable" />
+                        Booked
+                    </li>
+                    <li>
+                        <i class="o_tms_swatch o_tms_swatch_blocked" />
+                        Out of service
+                    </li>
+                    <li>
+                        <i class="o_tms_swatch o_tms_swatch_blocked" />
+                        Blocked, no stackable cargo below
+                    </li>
+                    <li>
+                        <i class="o_tms_swatch o_tms_swatch_taken" />
+                        In use on another trip
+                    </li>
+                </ul>
+                <div
+                    class="o_tms_load_drop h-100"
+                    t-ref="viewport"
+                    t-on-dragover="onDragOver"
+                    t-on-drop="onDrop"
+                />
+                <div class="o_tms_load_empty p-4 text-muted" t-if="!state.tripId">
+                    Open a trip and use Load planner.
+                </div>
+            </div>
+            <aside class="o_tms_load_pool border-start">
+                <div class="o_tms_load_detail border-bottom p-2" t-if="state.selected">
+                    <div class="fw-bold" t-esc="state.selected.name" />
+                    <div class="text-muted" t-esc="state.selected.state_label" />
+                    <dl class="mb-0 mt-2">
+                        <dt>Space</dt>
+                        <dd t-esc="state.selected.space || 'No space'" />
+                        <dt>Pieces</dt>
+                        <dd>
+                            <t t-esc="state.selected.quantity" />
+                            <t t-esc="state.selected.uom" />
+                        </dd>
+                        <dt>Weight</dt>
+                        <dd>
+                            <t t-esc="state.selected.weight" />
+                            <t t-esc="state.selected.weight_uom" />
+                        </dd>
+                        <dt>Volume</dt>
+                        <dd>
+                            <t t-esc="state.selected.volume" />
+                            <t t-esc="state.selected.volume_uom" />
+                        </dd>
+                        <dt>Stackable</dt>
+                        <dd t-esc="state.selected.is_stackable ? 'Yes' : 'No'" />
+                        <dt t-if="state.selected.packaging">Packaging</dt>
+                        <dd
+                            t-if="state.selected.packaging"
+                            t-esc="state.selected.packaging"
+                        />
+                    </dl>
+                    <p class="text-muted mb-0 mt-2">
+                        Drag this cargo onto a space, or into On the trip, no space.
+                    </p>
+                </div>
+                <div class="p-2 fw-bold">In a space</div>
+                <ul class="list-unstyled mb-0">
+                    <li
+                        t-foreach="placedCargo()"
+                        t-as="cargo"
+                        t-key="cargo.id"
+                        t-att-data-cargo-id="cargo.id"
+                        t-att-class="{
+                            'o_tms_load_card border m-2 p-2': true,
+                            'o_tms_load_card_selected': state.selectedId === cargo.id,
+                        }"
+                        draggable="true"
+                        t-on-click="() => this.selectCargo(cargo.id)"
+                        t-on-dragstart="(ev) => this.onDragStart(cargo, ev)"
+                    >
+                        <div t-esc="cargo.name" />
+                        <small class="text-muted">
+                            <t t-esc="cargo.space" /> ·
+                            <t t-esc="cargo.weight" />
+                            <t t-esc="cargo.weight_uom" />
+                        </small>
+                    </li>
+                </ul>
+                <div
+                    t-att-class="{
+                        'o_tms_load_loose': true,
+                        'o_tms_load_loose_over': state.looseHover,
+                    }"
+                    t-on-dragover="onLooseDragOver"
+                    t-on-dragleave="onLooseDragLeave"
+                    t-on-drop="onDropLoose"
+                >
+                <div class="p-2 fw-bold">On the trip, no space</div>
+                <ul class="list-unstyled mb-0">
+                    <li
+                        t-foreach="state.loose"
+                        t-as="cargo"
+                        t-key="cargo.id"
+                        t-att-data-cargo-id="cargo.id"
+                        t-att-class="{
+                            'o_tms_load_card border m-2 p-2': true,
+                            'o_tms_load_card_selected': state.selectedId === cargo.id,
+                        }"
+                        draggable="true"
+                        t-on-click="() => this.selectCargo(cargo.id)"
+                        t-on-dragstart="(ev) => this.onDragStart(cargo, ev)"
+                    >
+                        <div t-esc="cargo.name" />
+                        <small class="text-muted">
+                            <t t-esc="cargo.weight" />
+                            <t t-esc="cargo.weight_uom" /> ·
+                            <t t-esc="cargo.volume" />
+                            <t t-esc="cargo.volume_uom" />
+                        </small>
+                    </li>
+                </ul>
+                </div>
+                <div class="p-2 fw-bold">Unassigned cargo</div>
+                <ul class="list-unstyled mb-0">
+                    <li
+                        t-foreach="state.pool"
+                        t-as="cargo"
+                        t-key="cargo.id"
+                        t-att-data-cargo-id="cargo.id"
+                        t-att-class="{
+                            'o_tms_load_card border m-2 p-2': true,
+                            'o_tms_load_card_selected': state.selectedId === cargo.id,
+                        }"
+                        draggable="true"
+                        t-on-click="() => this.selectCargo(cargo.id)"
+                        t-on-dragstart="(ev) => this.onDragStart(cargo, ev)"
+                    >
+                        <div t-esc="cargo.name" />
+                        <small class="text-muted">
+                            <t t-esc="cargo.weight" />
+                            <t t-esc="cargo.weight_uom" /> ·
+                            <t t-esc="cargo.volume" />
+                            <t t-esc="cargo.volume_uom" />
+                        </small>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+    </t>
+</templates>
