@@ -57,7 +57,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
                 lambda p: not p.can_be_planned_in_shipment_advice
             ):
                 raise ValidationError(
-                    _("The transfers selected must be ready and of the delivery type.")
+                    _("The transfers selected must be ready deliveries or receipts.")
                 )
 
     @api.onchange("picking_to_plan_ids")
@@ -113,10 +113,7 @@ class ShipmentAdvicePlanner(models.TransientModel):
         prepare_method = getattr(self, prepare_method_name)
         shipment_advice_model = self.env["shipment.advice"]
         create_vals = []
-        for (
-            picking_type,
-            pickings_to_plan,
-        ) in self._get_picking_to_plan_by_picking_type().items():
+        for picking_type, pickings_to_plan in self._get_picking_to_plan_by_warehouse():
             create_vals.extend(prepare_method(picking_type, pickings_to_plan))
         return shipment_advice_model.create(create_vals)
 
@@ -137,6 +134,19 @@ class ShipmentAdvicePlanner(models.TransientModel):
             picking_type = picking_type_model.browse(group.get("picking_type_id")[0])
             res[picking_type] = picking_model.search(group.get("__domain"))
         return res
+
+    def _get_picking_to_plan_by_warehouse(self):
+        groups = {}
+        for (
+            picking_type,
+            pickings,
+        ) in self._get_picking_to_plan_by_picking_type().items():
+            warehouse = picking_type.warehouse_id
+            if warehouse in groups:
+                groups[warehouse][1] |= pickings
+            else:
+                groups[warehouse] = [picking_type, pickings]
+        return groups.values()
 
     def _prepare_shipment_advice_simple_vals_list(self, picking_type, pickings_to_plan):
         self.ensure_one()

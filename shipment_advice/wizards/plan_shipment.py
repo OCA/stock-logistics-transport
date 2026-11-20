@@ -103,11 +103,16 @@ class WizardPlanShipment(models.TransientModel):
     def _onchange_shipment_advice_id(self):
         if not self.shipment_advice_id:
             return
+        picking_type_codes = (
+            ("incoming", "outgoing")
+            if self.shipment_advice_id.shipment_type == "outgoing"
+            else ("incoming",)
+        )
         pickings = self.picking_ids.filtered(
-            lambda o: o.picking_type_code == self.shipment_advice_id.shipment_type
+            lambda picking: picking.picking_type_code in picking_type_codes
         )
         moves = self.move_ids.filtered(
-            lambda o: o.picking_type_id.code == self.shipment_advice_id.shipment_type
+            lambda move: move.picking_type_id.code in picking_type_codes
         )
         res = {}
         if self.picking_ids != pickings:
@@ -116,7 +121,7 @@ class WizardPlanShipment(models.TransientModel):
                     "title": _("Transfers updated"),
                     "message": _(
                         "Transfers to include have been updated "
-                        "to match the selected shipment type."
+                        "to match the selected shipment advice."
                     ),
                 }
             )
@@ -126,7 +131,7 @@ class WizardPlanShipment(models.TransientModel):
                     "title": _("Moves updated"),
                     "message": _(
                         "Moves to include have been updated "
-                        "to match the selected shipment type."
+                        "to match the selected shipment advice."
                     ),
                 }
             )

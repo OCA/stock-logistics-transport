@@ -124,6 +124,20 @@ class TestShipmentAdvice(Common):
         )
         self.assertEqual(picking.state, "done")
 
+    def test_shipment_advice_done_keeps_pickup_planned(self):
+        """Pickups planned in an outgoing shipment are not unplanned on done."""
+        delivery = self.move_product_out1.picking_id
+        pickup = self.move_product_in1.picking_id
+        self.plan_records_in_shipment(self.shipment_advice_out, delivery | pickup)
+        self.progress_shipment_advice(self.shipment_advice_out)
+        self.load_records_in_shipment(self.shipment_advice_out, delivery)
+        self.shipment_advice_out.action_done()
+        self.assertEqual(self.shipment_advice_out.state, "done")
+        self.assertEqual(delivery.state, "done")
+        self.assertEqual(pickup.state, "assigned")
+        self.assertEqual(pickup.move_ids.shipment_advice_id, self.shipment_advice_out)
+        self.assertIn(pickup, self.shipment_advice_out.planned_picking_ids)
+
     def test_shipment_advice_done_backorder_policy_disabled(self):
         """Validating a shipment with no backorder policy should let partial
         transfers open.

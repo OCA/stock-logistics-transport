@@ -1,0 +1,247 @@
+# Copyright 2021 Camptocamp SA
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+
+from odoo import Command
+
+from odoo.addons.shipment_advice.tests.common import Common
+
+
+class TestShipmentAdvicePlan(Common):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.shipment_advice_out.partner_sorting_enabled = True
+
+    def test_shipment_advice_plan_picking(self):
+        picking = self.move_product_out1.picking_id
+
+        self.assertFalse(self.shipment_advice_out.planned_partner_order_ids)
+        wiz = self.plan_records_in_shipment(self.shipment_advice_out, picking)
+        self.assertEqual(wiz.picking_ids, picking)
+        self.assertFalse(wiz.move_ids)
+        self.assertEqual(wiz.shipment_advice_id, self.shipment_advice_out)
+        self.assertEqual(wiz.shipment_advice_id.planned_picking_ids, picking)
+        self.assertEqual(wiz.shipment_advice_id.planned_pickings_count, 1)
+        self.assertEqual(wiz.shipment_advice_id.planned_move_ids, picking.move_ids)
+        self.assertEqual(wiz.shipment_advice_id.planned_moves_count, 3)
+
+        # test generation of default order for pickings
+        picking2 = self._create_distinct_picking(
+            self.picking_type_out, self.product_out2, 5
+        )
+        self.plan_records_in_shipment(self.shipment_advice_out, picking2)
+        self.assertTrue(self.shipment_advice_out.planned_partner_order_ids)
+
+        # test that manual changes to order are preserved
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking: o.partner_id == pick.partner_id
+        ).sequence = 20
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking2: o.partner_id == pick.partner_id
+        ).sequence = 0
+
+        shipment_advice_out_first_picking = (
+            self.env["stock.picking"]
+            .with_context(active_shipment_advice_id=self.shipment_advice_out.id)
+            .search(
+                [("move_ids.shipment_advice_id", "=", self.shipment_advice_out.id)],
+                order="sequence_in_shipment_advice",
+            )
+        )
+        self.assertEqual(shipment_advice_out_first_picking[0], picking2)
+
+        # test stock.picking search count don't raise error
+        self.env["stock.picking"].with_context(
+            active_shipment_advice_id=self.shipment_advice_out.id
+        ).search_count(
+            [("move_ids.shipment_advice_id", "=", self.shipment_advice_out.id)],
+        )
+
+        # test the same is reflected when searching at stock.move level
+        shipment_advice_out_first_move = (
+            self.env["stock.move"]
+            .with_context(active_shipment_advice_id=self.shipment_advice_out.id)
+            .search(
+                [("shipment_advice_id", "=", self.shipment_advice_out.id)],
+                order="picking_sequence_in_shipment_advice",
+            )
+        )
+
+        self.assertEqual(shipment_advice_out_first_move.picking_id[0], picking2)
+
+        # test stock.move search count don't raise error
+        self.env["stock.move"].with_context(
+            active_shipment_advice_id=self.shipment_advice_out.id
+        ).search_count(
+            [("shipment_advice_id", "=", self.shipment_advice_out.id)],
+        )
+
+        # test same picking planned in different shipment advices might have different
+        # order
+        shipment_advice_out2 = self.env["shipment.advice"].create(
+            {"shipment_type": "outgoing", "partner_sorting_enabled": True}
+        )
+        self.plan_records_in_shipment(shipment_advice_out2, picking)
+        self.assertTrue(
+            picking.with_context(
+                active_shipment_advice_id=self.shipment_advice_out.id
+            ).sequence_in_shipment_advice
+            != picking.with_context(
+                active_shipment_advice_id=shipment_advice_out2.id
+            ).sequence_in_shipment_advice
+        )
+
+    def test_planned_order_groups_pickings_by_partner(self):
+        partner = self.env["res.partner"].create({"name": "Shared delivery address"})
+        picking = self.move_product_out1.picking_id
+        picking2 = self._create_distinct_picking(
+            self.picking_type_out, self.product_out2, 5
+        )
+        (picking | picking2).partner_id = partner
+
+        self.plan_records_in_shipment(self.shipment_advice_out, picking | picking2)
+
+        orders = self.shipment_advice_out.planned_partner_order_ids
+        self.assertEqual(len(orders), 1)
+        self.assertEqual(orders.partner_id, partner)
+        self.assertEqual(orders.stock_picking_ids, picking | picking2)
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking: o.partner_id == pick.partner_id
+        ).sequence = 7
+        self.assertEqual(
+            picking2.with_context(
+                active_shipment_advice_id=self.shipment_advice_out.id
+            ).sequence_in_shipment_advice,
+            7,
+        )
+
+    def test_planned_order_groups_unpartnered_pickings(self):
+        picking = self.move_product_out1.picking_id
+        picking2 = self._create_distinct_picking(
+            self.picking_type_out, self.product_out2, 5
+        )
+        (picking | picking2).partner_id = False
+
+        self.plan_records_in_shipment(self.shipment_advice_out, picking | picking2)
+
+        orders = self.shipment_advice_out.planned_partner_order_ids
+        self.assertEqual(len(orders), 1)
+        self.assertFalse(orders.partner_id)
+
+        self.assertEqual(
+            orders.stock_picking_ids,
+            picking | picking2,
+        )
+
+    def test_planned_order_splits_partner_by_operation_type(self):
+        partner = self.env["res.partner"].create({"name": "Shared delivery address"})
+        delivery = self.move_product_out1.picking_id
+        pickup = self.move_product_in1.picking_id
+        (delivery | pickup).partner_id = partner
+        self.plan_records_in_shipment(self.shipment_advice_out, delivery | pickup)
+        orders = self.shipment_advice_out.planned_partner_order_ids
+        self.assertEqual(len(orders), 2)
+        self.assertEqual(
+            orders.filtered(
+                lambda order: order.operation_type == "delivery"
+            ).stock_picking_ids,
+            delivery,
+        )
+        self.assertEqual(
+            orders.filtered(
+                lambda order: order.operation_type == "pickup"
+            ).stock_picking_ids,
+            pickup,
+        )
+
+    def test_incoming_shipment_advice_does_not_set_operation_type(self):
+        self.shipment_advice_in.partner_sorting_enabled = True
+        self.plan_records_in_shipment(
+            self.shipment_advice_in, self.move_product_in1.picking_id
+        )
+        self.assertFalse(
+            self.shipment_advice_in.planned_partner_order_ids.operation_type
+        )
+
+    def test_unpartnered_pickings_grouped_by_operation_type(self):
+        delivery = self.move_product_out1.picking_id
+        delivery2 = self._create_distinct_picking(
+            self.picking_type_out, self.product_out2, 5
+        )
+        pickup = self.move_product_in1.picking_id
+        (delivery | delivery2 | pickup).partner_id = False
+        shipment = self.shipment_advice_out
+        self.plan_records_in_shipment(shipment, delivery | delivery2 | pickup)
+        orders = shipment.planned_partner_order_ids
+        self.assertEqual(len(orders), 2)
+        self.assertEqual(
+            orders.filtered(
+                lambda order: order.operation_type == "delivery"
+            ).stock_picking_ids,
+            delivery | delivery2,
+        )
+        self.assertEqual(
+            orders.filtered(
+                lambda order: order.operation_type == "pickup"
+            ).stock_picking_ids,
+            pickup,
+        )
+
+    def test_splitting_legacy_partner_order_preserves_sequence(self):
+        partner = self.env["res.partner"].create({"name": "Shared delivery address"})
+        delivery = self.move_product_out1.picking_id
+        pickup = self.move_product_in1.picking_id
+        (delivery | pickup).partner_id = partner
+        shipment = self.shipment_advice_out
+        self.plan_records_in_shipment(shipment, delivery | pickup)
+        shipment.planned_partner_order_ids.unlink()
+        self.env["shipment.advice.planned.partner.order"].create(
+            {
+                "shipment_advice_id": shipment.id,
+                "partner_id": partner.id,
+                "sequence": 12,
+                "stock_picking_ids": [Command.set((delivery | pickup).ids)],
+            }
+        )
+        shipment.invalidate_recordset(["planned_partner_order_ids"])
+        shipment._compute_planned_partner_order_ids()
+        orders = shipment.planned_partner_order_ids
+        self.assertEqual(len(orders), 2)
+        self.assertEqual(set(orders.mapped("sequence")), {12})
+        self.assertEqual(set(orders.mapped("operation_type")), {"delivery", "pickup"})
+
+    def test_shipment_advice_plan_move(self):
+        picking = self.move_product_out1.picking_id
+        wiz = self.plan_records_in_shipment(
+            self.shipment_advice_out, self.move_product_out1
+        )
+        self.assertEqual(wiz.move_ids, self.move_product_out1)
+        self.assertFalse(wiz.picking_ids)
+        self.assertEqual(wiz.shipment_advice_id, self.shipment_advice_out)
+        self.assertEqual(wiz.shipment_advice_id.planned_picking_ids, picking)
+        self.assertEqual(wiz.shipment_advice_id.planned_pickings_count, 1)
+        self.assertEqual(
+            wiz.shipment_advice_id.planned_move_ids, self.move_product_out1
+        )
+        self.assertEqual(wiz.shipment_advice_id.planned_moves_count, 1)
+
+    def test_shipment_advice_plan_picking_order_sorted(self):
+        """Verify the order of planned pickings in the email."""
+        picking1 = self.move_product_out1.picking_id
+        picking2 = self._create_distinct_picking(
+            self.picking_type_out, self.product_out2, 5
+        )
+
+        self.plan_records_in_shipment(self.shipment_advice_out, picking1)
+        self.plan_records_in_shipment(self.shipment_advice_out, picking2)
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking2: o.partner_id == pick.partner_id
+        ).sequence = 0
+        self.shipment_advice_out.planned_partner_order_ids.filtered(
+            lambda o, pick=picking1: o.partner_id == pick.partner_id
+        ).sequence = 10
+        sa = self.shipment_advice_out
+        sorted_pickings = sa._get_email_planned_pickings()
+
+        self.assertEqual(sorted_pickings[0], picking2)
+        self.assertEqual(sorted_pickings[1], picking1)
