@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_geotab_device" model="tms.telematics.device">
+        <field name="name">Volvo FH tracker</field>
+        <field name="account_id" ref="demo_geotab_account" />
+        <field name="external_id">b1</field>
+        <field name="vehicle_id" ref="tms.demo_vehicle_truck_volvo_fh" />
+        <field name="license_plate">01-TRK-101</field>
+        <field name="vin">DEMOGEOTABVIN0001</field>
+    </record>
+</odoo>
