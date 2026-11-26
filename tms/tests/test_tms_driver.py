@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from odoo.tests.common import TransactionCase
 
 
@@ -59,3 +61,26 @@ class TestTmsDriver(TransactionCase):
         self.assertTrue(
             self.driver.stage_id, "Driver stage should be correctly assigned"
         )
+
+    def test_schedule_meeting_delegates_to_partner(self):
+        expected_action = {
+            "type": "ir.actions.act_window",
+            "res_model": "calendar.event",
+        }
+        partner_model = type(self.env["res.partner"])
+        with patch.object(
+            partner_model,
+            "schedule_meeting",
+            lambda self: expected_action,
+            create=True,
+        ):
+            action = self.driver.schedule_meeting()
+        self.assertEqual(action, expected_action)
+
+    def test_schedule_meeting_with_calendar(self):
+        if not hasattr(type(self.driver.partner_id), "schedule_meeting"):
+            self.skipTest("calendar module is not installed")
+        action = self.driver.schedule_meeting()
+        self.assertEqual(action.get("res_model"), "calendar.event")
+        partner_ids = action.get("context", {}).get("default_partner_ids", [])
+        self.assertIn(self.driver.partner_id.id, partner_ids)
