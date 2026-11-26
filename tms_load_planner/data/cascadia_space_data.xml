@@ -1,0 +1,267 @@
+<odoo noupdate="1">
+    <!-- Cascadia loading box: 10 rows x 2 pallets, front to rear. -->
+    <record id="space_cascadia_row_01_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-01-LEFT</field>
+        <field name="zone">front</field>
+        <field name="is_premium" eval="True" />
+        <field name="pos_x">0.0</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_01_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-01-RIGHT</field>
+        <field name="zone">front</field>
+        <field name="is_premium" eval="True" />
+        <field name="pos_x">0.0</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_02_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-02-LEFT</field>
+        <field name="zone">front</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">1.45</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_02_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-02-RIGHT</field>
+        <field name="zone">front</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">1.45</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_03_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-03-LEFT</field>
+        <field name="zone">front</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">2.9</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_03_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-03-RIGHT</field>
+        <field name="zone">front</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">2.9</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_04_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-04-LEFT</field>
+        <field name="zone">center</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">4.35</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_04_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-04-RIGHT</field>
+        <field name="zone">center</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">4.35</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_05_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-05-LEFT</field>
+        <field name="zone">center</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">5.8</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_05_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-05-RIGHT</field>
+        <field name="zone">center</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">5.8</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_06_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-06-LEFT</field>
+        <field name="zone">center</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">7.25</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_06_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-06-RIGHT</field>
+        <field name="zone">center</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">7.25</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_07_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-07-LEFT</field>
+        <field name="zone">center</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">8.7</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_07_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-07-RIGHT</field>
+        <field name="zone">center</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">8.7</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_08_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-08-LEFT</field>
+        <field name="zone">rear</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">10.15</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_08_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-08-RIGHT</field>
+        <field name="zone">rear</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">10.15</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_09_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-09-LEFT</field>
+        <field name="zone">rear</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">11.6</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_09_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-09-RIGHT</field>
+        <field name="zone">rear</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">11.6</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_10_left" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-10-LEFT</field>
+        <field name="zone">rear</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">13.05</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_10_right" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-10-RIGHT</field>
+        <field name="zone">rear</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">13.05</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">0</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_01_left_top" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-01-LEFT-TOP</field>
+        <field name="zone">front</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">0.0</field>
+        <field name="pos_y">0.2</field>
+        <field name="pos_z">1.4</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+    <record id="space_cascadia_row_01_right_top" model="tms.vehicle.model.space">
+        <field name="model_id" ref="tms.model_freightliner_cascadia" />
+        <field name="code">ROW-01-RIGHT-TOP</field>
+        <field name="zone">front</field>
+        <field name="is_premium" eval="False" />
+        <field name="pos_x">0.0</field>
+        <field name="pos_y">1.5</field>
+        <field name="pos_z">1.4</field>
+        <field name="size_length">1.2</field>
+        <field name="size_width">1.2</field>
+        <field name="size_height">1.4</field>
+    </record>
+</odoo>

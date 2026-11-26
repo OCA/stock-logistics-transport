@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="fleet_vehicle_view_form_space" model="ir.ui.view">
+        <field name="name">fleet.vehicle.form.tms.space</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page name="tms_vehicle_spaces" string="Spaces">
+                    <field name="space_ids">
+                        <list create="false" delete="false">
+                            <field name="model_space_id" />
+                            <field name="zone" />
+                            <field name="state" />
+                            <field name="cargo_count" string="Cargo" />
+                        </list>
+                        <form>
+                            <sheet>
+                                <!-- Odoo hides div[name=button_box] inside a dialog.
+                                     Spaces open from this list in a dialog. -->
+                                <div class="o-form-buttonbox d-print-none d-flex mb-2">
+                                    <button
+                                        class="oe_stat_button btn btn-outline-secondary"
+                                        type="object"
+                                        name="action_view_cargo"
+                                        icon="fa-cubes"
+                                    >
+                                        <field
+                                            name="cargo_count"
+                                            widget="statinfo"
+                                            string="Cargo"
+                                        />
+                                    </button>
+                                </div>
+                                <group>
+                                    <field name="vehicle_id" readonly="1" />
+                                    <field name="model_space_id" readonly="1" />
+                                    <field name="zone" />
+                                    <field name="state" />
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

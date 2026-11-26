@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_cargo_view_list_space_history" model="ir.ui.view">
+        <field name="name">tms.cargo.list.space.history</field>
+        <field name="model">tms.cargo</field>
+        <field name="arch" type="xml">
+            <list default_order="space_trip_date desc, id desc">
+                <field name="space_trip_date" />
+                <field name="name" />
+                <field name="order_id" />
+                <field name="origin_id" />
+                <field name="destination_id" />
+                <field name="state" />
+            </list>
+        </field>
+    </record>
+    <record id="tms_cargo_view_form_space" model="ir.ui.view">
+        <field name="name">tms.cargo.form.space</field>
+        <field name="model">tms.cargo</field>
+        <field name="inherit_id" ref="tms.tms_cargo_view_form" />
+        <field name="arch" type="xml">
+            <field name="shipment_unit" position="after">
+                <field
+                    name="space_allocation_id"
+                    domain="[('trip_id', '=', order_id)]"
+                />
+                <field name="booking_type" />
+            </field>
+        </field>
+    </record>
+
+    <record id="tms_order_view_form_cargo_space" model="ir.ui.view">
+        <field name="name">tms.order.form.cargo.space</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='cargo_ids']//field[@name='weight']"
+                position="before"
+            >
+                <field name="booking_type" optional="hide" />
+                <field
+                    name="space_allocation_id"
+                    optional="show"
+                    domain="[('trip_id', '=', parent.id)]"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
