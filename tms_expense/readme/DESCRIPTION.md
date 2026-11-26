@@ -1,1 +1,1 @@
-The TMS - Expense module allows drivers and users to register expenses in trips. This module creates two new expense categories: Fuel and Toll expenses.
+The TMS - Expense module allows drivers and users to register expenses in trips. Tolls, hotels, and advances stay on the trip where they were paid. Fuel is spread across the trips driven since the previous fill, using each trip's odometer distance.
