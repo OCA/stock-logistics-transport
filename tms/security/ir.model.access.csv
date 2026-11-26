@@ -13,3 +13,13 @@ access_tms_crew_tms_user,tms.crew.user,model_tms_crew,tms.group_tms_user,1,0,0,0
 access_tms_crew_tms_admin,tms.crew.admin,model_tms_crew,tms.group_tms_admin,1,1,1,1
 access_tms_insurance_tms_user,tms.insurance.user,model_tms_insurance,tms.group_tms_user,1,0,0,0
 access_tms_insurance_tms_admin,tms.insurance.admin,model_tms_insurance,tms.group_tms_admin,1,1,1,1
+access_tms_compartment_tms_user,tms.compartment.user,model_tms_compartment,tms.group_tms_user,1,0,0,0
+access_tms_compartment_tms_admin,tms.compartment.admin,model_tms_compartment,tms.group_tms_admin,1,1,1,1
+access_tms_cargo_tms_user,tms.cargo.user,model_tms_cargo,tms.group_tms_user,1,0,0,0
+access_tms_cargo_tms_admin,tms.cargo.admin,model_tms_cargo,tms.group_tms_admin,1,1,1,1
+access_tms_cargo_split_tms_admin,tms.cargo.split.admin,model_tms_cargo_split,tms.group_tms_admin,1,1,1,1
+access_tms_cargo_reassign_tms_admin,tms.cargo.reassign.admin,model_tms_cargo_reassign,tms.group_tms_admin,1,1,1,1
+access_tms_cargo_swap_tms_admin,tms.cargo.swap.admin,model_tms_cargo_swap,tms.group_tms_admin,1,1,1,1
+access_tms_cargo_condition_tms_admin,tms.cargo.condition.admin,model_tms_cargo_condition,tms.group_tms_admin,1,1,1,1
+access_tms_order_equipment_tms_user,tms.order.equipment.user,model_tms_order_equipment,tms.group_tms_user,1,1,1,0
+access_tms_order_equipment_tms_admin,tms.order.equipment.admin,model_tms_order_equipment,tms.group_tms_admin,1,1,1,1

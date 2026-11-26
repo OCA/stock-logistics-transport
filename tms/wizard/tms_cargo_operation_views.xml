@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_cargo_split_view_form" model="ir.ui.view">
+        <field name="name">tms.cargo.split.form</field>
+        <field name="model">tms.cargo.split</field>
+        <field name="arch" type="xml">
+            <form string="Split Line">
+                <group>
+                    <field name="cargo_id" invisible="1" />
+                    <field name="quantity" />
+                    <field name="weight" />
+                    <field name="volume" />
+                </group>
+                <footer>
+                    <button
+                        name="action_apply"
+                        type="object"
+                        string="Split"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="tms_cargo_reassign_view_form" model="ir.ui.view">
+        <field name="name">tms.cargo.reassign.form</field>
+        <field name="model">tms.cargo.reassign</field>
+        <field name="arch" type="xml">
+            <form string="Reassign">
+                <group>
+                    <field name="cargo_id" invisible="1" />
+                    <field name="allowed_trip_ids" invisible="1" />
+                    <field name="trip_id" />
+                </group>
+                <footer>
+                    <button
+                        name="action_apply"
+                        type="object"
+                        string="Reassign"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="tms_cargo_swap_view_form" model="ir.ui.view">
+        <field name="name">tms.cargo.swap.form</field>
+        <field name="model">tms.cargo.swap</field>
+        <field name="arch" type="xml">
+            <form string="Swap Assignment">
+                <group>
+                    <field name="cargo_id" invisible="1" />
+                    <field name="candidate_ids" invisible="1" />
+                    <field name="candidate_id" />
+                </group>
+                <footer>
+                    <button
+                        name="action_apply"
+                        type="object"
+                        string="Swap"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="tms_cargo_condition_view_form" model="ir.ui.view">
+        <field name="name">tms.cargo.condition.form</field>
+        <field name="model">tms.cargo.condition</field>
+        <field name="arch" type="xml">
+            <form string="Proof of condition">
+                <group>
+                    <field name="cargo_id" invisible="1" />
+                    <field name="note" />
+                    <field name="attachment_ids" widget="many2many_binary" />
+                </group>
+                <footer>
+                    <button
+                        name="action_apply"
+                        type="object"
+                        string="Save"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

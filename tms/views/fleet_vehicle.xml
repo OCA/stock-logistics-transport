@@ -7,29 +7,17 @@
             <xpath expr="//form//notebook" position="inside">
                 <page string="Transport">
                     <group>
-                        <group name="operation" string="Operation">
+                        <group name="operation" string="Transport Type">
                             <field
                                 name="operation"
                                 widget="radio"
                                 options="{'horizontal': True}"
                             />
-                            <label
-                                for="capacity"
-                                invisible="not operation"
-                            >Capacity</label>
-                            <div class="d-flex w-50" invisible="not operation">
-                                <field name="capacity" class="w-50" />
-                                <field
-                                    name="cargo_uom_id"
-                                    invisible="operation != 'cargo'"
-                                    class="w-50"
-                                />
-                                <span
-                                    invisible="operation != 'passenger'"
-                                    class="w-50"
-                                >Passengers
-                                </span>
-                            </div>
+                            <field name="tms_equipment_type" />
+                            <field
+                                name="tms_location_id"
+                                invisible="tms_equipment_type == 'power'"
+                            />
                         </group>
                         <group name="insurance" string="Insurance">
                             <field
@@ -46,6 +34,304 @@
             </xpath>
             <xpath expr="//field[@name='driver_id']" position="after">
                 <field name="tms_driver_id" />
+            </xpath>
+            <xpath expr="//button[field[@name='odometer_count']]" position="attributes">
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='acquisition_date']" position="attributes">
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='write_off_date']" position="attributes">
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath expr="//label[@for='odometer']" position="attributes">
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath expr="//div[field[@name='odometer']]" position="attributes">
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='seats']" position="attributes">
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='doors']" position="attributes">
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='trailer_hook']" position="attributes">
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath
+                expr="//page[@name='page_model']//field[@name='fuel_type']/parent::group"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath
+                expr="//page[@name='page_model']//field[@name='transmission']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="fleet_vehicle_model_view_form_tms" model="ir.ui.view">
+        <field name="name">fleet.vehicle.model.form.tms</field>
+        <field name="model">fleet.vehicle.model</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='information']//field[@name='model_year']/parent::group"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath expr="//group[@name='group_engine']" position="attributes">
+                <attribute
+                    name="invisible"
+                >vehicle_type not in ('car', 'truck', 'bus')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='category_id']" position="after">
+                <label for="max_weight_capacity" />
+                <div class="o_row">
+                    <field name="max_weight_capacity" />
+                    <field name="max_weight_uom_id" />
+                </div>
+                <label for="max_volume_capacity" />
+                <div class="o_row">
+                    <field name="max_volume_capacity" />
+                    <field name="max_volume_uom_id" />
+                </div>
+                <label
+                    for="trunk_volume"
+                    invisible="vehicle_type not in ('car', 'van')"
+                    groups="tms.group_tms_road_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type not in ('car', 'van')"
+                    groups="tms.group_tms_road_user"
+                >
+                    <field name="trunk_volume" />
+                    <field name="trunk_volume_uom_id" />
+                </div>
+                <field
+                    name="passenger_capacity"
+                    invisible="vehicle_type not in ('car', 'van')"
+                    groups="tms.group_tms_road_user"
+                />
+                <label
+                    for="belly_volume"
+                    invisible="vehicle_type != 'bus'"
+                    groups="tms.group_tms_road_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type != 'bus'"
+                    groups="tms.group_tms_road_user"
+                >
+                    <field name="belly_volume" />
+                    <field name="belly_volume_uom_id" />
+                </div>
+                <label
+                    for="belly_weight"
+                    invisible="vehicle_type != 'bus'"
+                    groups="tms.group_tms_road_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type != 'bus'"
+                    groups="tms.group_tms_road_user"
+                >
+                    <field name="belly_weight" />
+                    <field name="belly_weight_uom_id" />
+                </div>
+                <field
+                    name="seats"
+                    invisible="vehicle_type != 'bus'"
+                    groups="tms.group_tms_road_user"
+                />
+                <field
+                    name="standing_capacity"
+                    invisible="vehicle_type != 'bus'"
+                    groups="tms.group_tms_road_user"
+                />
+                <label
+                    for="loading_length"
+                    invisible="vehicle_type != 'truck'"
+                    groups="tms.group_tms_road_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type != 'truck'"
+                    groups="tms.group_tms_road_user"
+                >
+                    <field name="loading_length" />
+                    <field name="loading_length_uom_id" />
+                </div>
+                <field
+                    name="pallet_capacity"
+                    invisible="vehicle_type != 'truck'"
+                    groups="tms.group_tms_road_user"
+                />
+                <label
+                    for="max_axle_weight"
+                    invisible="vehicle_type != 'truck'"
+                    groups="tms.group_tms_road_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type != 'truck'"
+                    groups="tms.group_tms_road_user"
+                >
+                    <field name="max_axle_weight" />
+                    <field name="max_axle_weight_uom_id" />
+                </div>
+                <label
+                    for="door_width"
+                    string="Door Dimensions (Width x Height)"
+                    invisible="vehicle_type != 'truck'"
+                    groups="tms.group_tms_road_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type != 'truck'"
+                    groups="tms.group_tms_road_user"
+                >
+                    <field name="door_width" />
+                    <span>x</span>
+                    <field name="door_height" />
+                    <field name="door_dimension_uom_id" />
+                </div>
+                <field
+                    name="teu_capacity"
+                    invisible="vehicle_type != 'boat'"
+                    groups="tms.group_tms_water_user"
+                />
+                <label
+                    for="deadweight_tonnage"
+                    invisible="vehicle_type != 'boat'"
+                    groups="tms.group_tms_water_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type != 'boat'"
+                    groups="tms.group_tms_water_user"
+                >
+                    <field name="deadweight_tonnage" />
+                    <field name="deadweight_uom_id" />
+                </div>
+                <label
+                    for="draft_limit"
+                    invisible="vehicle_type != 'boat'"
+                    groups="tms.group_tms_water_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type != 'boat'"
+                    groups="tms.group_tms_water_user"
+                >
+                    <field name="draft_limit" />
+                    <field name="draft_uom_id" />
+                </div>
+                <field
+                    name="position_slots"
+                    invisible="vehicle_type != 'plane'"
+                    groups="tms.group_tms_air_user"
+                />
+                <label
+                    for="max_takeoff_weight"
+                    invisible="vehicle_type != 'plane'"
+                    groups="tms.group_tms_air_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type != 'plane'"
+                    groups="tms.group_tms_air_user"
+                >
+                    <field name="max_takeoff_weight" />
+                    <field name="max_takeoff_weight_uom_id" />
+                </div>
+                <label
+                    for="floor_loading_limit"
+                    invisible="vehicle_type != 'plane'"
+                    groups="tms.group_tms_air_user"
+                />
+                <div
+                    class="o_row"
+                    invisible="vehicle_type != 'plane'"
+                    groups="tms.group_tms_air_user"
+                >
+                    <field name="floor_loading_limit" />
+                    <field name="floor_loading_uom_id" />
+                </div>
+            </xpath>
+            <xpath
+                expr="//page[@name='information']//field[@name='seats']"
+                position="attributes"
+            >
+                <attribute name="invisible">vehicle_type == 'bus'</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="fleet_vehicle_view_search_tms" model="ir.ui.view">
+        <field name="name">fleet.vehicle.search.tms</field>
+        <field name="model">fleet.vehicle</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='cars']" position="after">
+                <filter
+                    string="Trucks"
+                    name="trucks"
+                    domain="[('vehicle_type', '=', 'truck')]"
+                    groups="tms.group_tms_road_user"
+                />
+                <filter
+                    string="Buses"
+                    name="buses"
+                    domain="[('vehicle_type', '=', 'bus')]"
+                    groups="tms.group_tms_road_user"
+                />
+                <filter
+                    string="Boats"
+                    name="boats"
+                    domain="[('vehicle_type', '=', 'boat')]"
+                    groups="tms.group_tms_water_user"
+                />
+                <filter
+                    string="Planes"
+                    name="planes"
+                    domain="[('vehicle_type', '=', 'plane')]"
+                    groups="tms.group_tms_air_user"
+                />
+                <filter
+                    string="Vans"
+                    name="vans"
+                    domain="[('vehicle_type', '=', 'van')]"
+                    groups="tms.group_tms_road_user"
+                />
             </xpath>
         </field>
     </record>
