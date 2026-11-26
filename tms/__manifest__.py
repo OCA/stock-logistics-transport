@@ -42,5 +42,5 @@
     ],
     "application": True,
     "development_status": "Alpha",
-    "maintainers": ["max3903", "santiagordz", "EdgarRetes"],
+    "maintainers": ["max3903"],
 }
