@@ -5,7 +5,7 @@
     "summary": "Generic expiry-tracked document framework for TMS",
     "version": "19.0.1.0.4",
     "license": "AGPL-3",
-    "category": "TMS",
+    "category": "Transportation",
     "author": "Volkan Taşçı, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "maintainers": ["volkantasci"],
