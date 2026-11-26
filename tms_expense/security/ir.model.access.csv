@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_expense_allocation_user,tms.expense.allocation.user,model_tms_expense_allocation,tms.group_tms_user,1,1,1,1
+access_tms_expense_allocation_admin,tms.expense.allocation.admin,model_tms_expense_allocation,tms.group_tms_admin,1,1,1,1
