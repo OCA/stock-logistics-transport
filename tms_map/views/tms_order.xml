@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="tms_order_view_form_map" model="ir.ui.view">
+        <field name="name">tms.order.form.map</field>
+        <field name="model">tms.order</field>
+        <field name="inherit_id" ref="tms.tms_order_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Map" name="tms_map">
+                    <widget name="tms_map" mode="tracking" />
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form_tms_map" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.tms.map</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="tms.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <block name="vehicles_settings_container" position="inside">
+                <setting
+                    id="tms_vehicle_group_setting"
+                    string="Manage Vehicle Groups"
+                    help="Group vehicles and filter the maps by those groups."
+                >
+                    <field name="group_tms_vehicle_group" />
+                </setting>
+            </block>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="group_tms_vehicle_group" model="res.groups">
+        <field name="name">Manage Vehicle Groups</field>
+        <field name="privilege_id" eval="False" />
+    </record>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_vehicle_group_user,tms.vehicle.group.user,model_tms_vehicle_group,tms.group_tms_user,1,0,0,0
+access_tms_vehicle_group_admin,tms.vehicle.group.admin,model_tms_vehicle_group,tms.group_tms_admin,1,1,1,1
