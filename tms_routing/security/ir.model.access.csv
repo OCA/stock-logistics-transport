@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tms_route_stop_user,tms.route.stop.user,model_tms_route_stop,tms.group_tms_user,1,0,0,0
+access_tms_route_stop_admin,tms.route.stop.admin,model_tms_route_stop,tms.group_tms_admin,1,1,1,1
