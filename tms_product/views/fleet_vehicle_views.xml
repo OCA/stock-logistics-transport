@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2021 - TODAY, Marcel Savegnago <marcel.savegnago@escodoo.com.br>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-    <record model="ir.ui.view" id="fleet_vehicle_view_form">
+    <record id="fleet_vehicle_view_form" model="ir.ui.view">
         <field name="name">fleet.vehicle.form.inherit.tms.product</field>
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
@@ -52,7 +52,7 @@
             </xpath>
         </field>
     </record>
-    <record model="ir.ui.view" id="fleet_vehicle_search_view">
+    <record id="fleet_vehicle_search_view" model="ir.ui.view">
         <field name="name">fleet.vehicle.search.inherit.tms.product</field>
         <field name="model">fleet.vehicle</field>
         <field name="inherit_id" ref="fleet.fleet_vehicle_view_search" />

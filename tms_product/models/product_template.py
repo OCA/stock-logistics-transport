@@ -22,7 +22,6 @@ class ProductTemplate(models.Model):
     )
     model_id = fields.Many2one(
         "fleet.vehicle.model",
-        string="Model",
         compute="_compute_restore_vehicle_fields",
         store=True,
         readonly=False,
