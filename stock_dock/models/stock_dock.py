@@ -14,7 +14,6 @@ class StockDock(models.Model):
     warehouse_id = fields.Many2one(
         comodel_name="stock.warehouse",
         ondelete="cascade",
-        string="Warehouse",
         required=True,
         check_company=True,
         default=lambda self: self._default_warehouse_id(),
