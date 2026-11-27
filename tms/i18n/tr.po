@@ -1,0 +1,2759 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* tms
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-11 00:00+0000\n"
+"PO-Revision-Date: 2026-08-11 00:00+0000\n"
+"Last-Translator: Volkan Taşçı <info@voslo.co>\n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_invoice_count
+msgid "# Vendor Bills"
+msgstr "# Satıcı Faturaları"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<i class=\"fa fa-fw me-1 fa-phone\" title=\"Phone\"/>"
+msgstr "<i class=\"fa fa-fw me-1 fa-phone\" title=\"Telefon\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<i class=\"fa fa-fw me-1 fa-users\" title=\"Team\"/>"
+msgstr "<i class=\"fa fa-fw me-1 fa-users\" title=\"Takım\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid ""
+"<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Arrow "
+"icon\" title=\"Arrow\"/>"
+msgstr ""
+"<i class=\"fa fa-long-arrow-right mx-2 oe_read_only\" aria-label=\"Ok "
+"simgesi\" title=\"Ok\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
+msgid "<span class=\"badge badge-primary\">Crew</span>"
+msgstr "<span class=\"badge badge-primary\">Ekip</span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
+msgid ""
+"<span class=\"fa fa-bus me-2\" aria-label=\"Vehicle\" title=\"Vehicles\"/>\n"
+"                                                <span>Vehicles: </span>"
+msgstr ""
+"<span class=\"fa fa-bus me-2\" aria-label=\"Araç\" title=\"Araçlar\"/>\n"
+"                                                <span>Araçlar: </span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid ""
+"<span class=\"fa fa-car me-2\" aria-label=\"Vehicle\" title=\"Vehicle\"/>"
+msgstr "<span class=\"fa fa-car me-2\" aria-label=\"Araç\" title=\"Araç\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "<span class=\"fa fa-map-o me-2\" title=\"Route\"/>"
+msgstr "<span class=\"fa fa-map-o me-2\" title=\"Rota\"/>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
+msgid ""
+"<span class=\"fa fa-users me-2\" aria-label=\"Driver\" title=\"Drivers\"/>\n"
+"                                                <span>Drivers: </span>"
+msgstr ""
+"<span class=\"fa fa-users me-2\" aria-label=\"Sürücü\" title=\"Sürücüler\"/"
+">\n"
+"                                                <span>Sürücüler: </span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "<span class=\"w-75\">Hours</span>"
+msgstr "<span class=\"w-75\">Saat</span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid ""
+"<span invisible=\"operation != 'passenger'\" class=\"w-50\">Passengers\n"
+"                                </span>"
+msgstr ""
+"<span invisible=\"operation != 'passenger'\" class=\"w-50\">Yolcular\n"
+"                                </span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "<span>Crews: </span>"
+msgstr "<span>Ekipler: </span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "<span>Reporting</span>"
+msgstr "<span>Raporlama</span>"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "<span>View</span>"
+msgstr "<span>Görünüm</span>"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__a
+msgid "A - Motorcycles"
+msgstr "A - Motosikletler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__account_move_count
+msgid "Account Move Count"
+msgstr "Muhasebe Fişi Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_payable_id
+msgid "Account Payable"
+msgstr "Borçlu Hesap"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_receivable_id
+msgid "Account Receivable"
+msgstr "Alacaklı Hesap"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_needaction
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_needaction
+msgid "Action Needed"
+msgstr "İşlem Gerekli"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__active
+#: model:ir.model.fields,field_description:tms.field_tms_driver__active
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__active
+#: model:ir.model.fields,field_description:tms.field_tms_order__active
+#: model:ir.model.fields,field_description:tms.field_tms_route__active
+#: model:ir.model.fields,field_description:tms.field_tms_stage__active
+#: model:ir.model.fields,field_description:tms.field_tms_team__active
+#: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__active
+msgid "Active"
+msgstr "Aktif"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__active_lang_count
+msgid "Active Lang Count"
+msgstr "Aktif Dil Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_ids
+msgid "Activities"
+msgstr "Etkinlikler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_exception_decoration
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Etkinlik İstisna Dekorasyonu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_state
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_state
+msgid "Activity State"
+msgstr "Etkinlik Durumu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_type_icon
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Etkinlik Türü Simgesi"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_activity_types
+msgid "Activity Types"
+msgstr "Etkinlik Türleri"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Add a description for the order..."
+msgstr "Sipariş için bir açıklama ekleyin..."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
+msgid "Add a description..."
+msgstr "Bir açıklama ekleyin..."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__type
+msgid "Address Type"
+msgstr "Adres Türü"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__type_address_label
+msgid "Address Type Description"
+msgstr "Adres Türü Açıklaması"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_admin
+msgid "Administrator"
+msgstr "Yönetici"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_tms_operation_trip
+msgid "All Trips"
+msgstr "Tüm Seferler"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__lang
+msgid ""
+"All the emails and documents sent to this contact will be translated in this "
+"language."
+msgstr ""
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Allow the use of predefined routes in trips"
+msgstr "Seferlerde önceden tanımlı rotaların kullanımına izin ver"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_crew_search
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_order_search
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_search
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_stage_search
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_team_search
+msgid "Archived"
+msgstr "Arşivlendi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "Arrow"
+msgstr "Ok"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "Arrow icon"
+msgstr "Ok simgesi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_attachment_count
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_attachment_count
+msgid "Attachment Count"
+msgstr "Ek Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__autopost_bills
+msgid "Auto-post bills"
+msgstr "Faturaları otomatik kaydet"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__autopost_bills
+msgid "Automatically post bills for this trusted partner"
+msgstr "Bu güvenilir ortak için faturaları otomatik olarak kaydet"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__receipt_reminder_email
+msgid ""
+"Automatically send a confirmation email to the vendor X days before the "
+"expected receipt date, asking him to confirm the exact date."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__available_invoice_template_pdf_report_ids
+msgid "Available Invoice Template Pdf Report"
+msgstr "Mevcut Fatura Şablonu PDF Raporu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1920
+msgid "Avatar"
+msgstr "Avatar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_1024
+msgid "Avatar 1024"
+msgstr "Avatar 1024"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_128
+msgid "Avatar 128"
+msgstr "Avatar 128"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_256
+msgid "Avatar 256"
+msgstr "Avatar 256"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__avatar_512
+msgid "Avatar 512"
+msgstr "Avatar 512"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__b
+msgid "B - Automobiles"
+msgstr "B - Otomobiller"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__bank_account_count
+msgid "Bank"
+msgstr "Banka"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__bank_ids
+msgid "Banks"
+msgstr "Bankalar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__barcode
+msgid "Barcode"
+msgstr "Barkod"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_blacklisted
+msgid "Blacklist"
+msgstr "Kara Liste"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_blacklisted
+msgid "Blacklisted Phone is Phone"
+msgstr "Kara Listeli Telefon"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_bounce
+msgid "Bounce"
+msgstr "Geri Dönen"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__buyer_id
+msgid "Buyer"
+msgstr "Alıcı"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__c
+msgid "C - Truck"
+msgstr "C - Kamyon"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__cancelled
+#: model:tms.stage,name:tms.tms_stage_order_cancelled
+msgid "Cancelled"
+msgstr "İptal Edildi"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_stage.py:0
+msgid ""
+"Cannot create TMS Stage because it has the same Type and Sequence of an "
+"existing TMS Stage."
+msgstr ""
+"Aynı Tip ve Sıraya sahip bir TMS Aşaması zaten bulunduğundan yeni TMS "
+"Aşaması oluşturulamaz."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__capacity
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid "Capacity"
+msgstr "Kapasite"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__fleet_vehicle__operation__cargo
+msgid "Cargo"
+msgstr "Yük"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__cargo_uom_id
+msgid "Cargo Uom"
+msgstr "Yük Ölçü Birimi"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_models_categories
+msgid "Categories"
+msgstr "Kategoriler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__channel_member_ids
+msgid "Channel Member"
+msgstr "Kanal Üyesi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__channel_ids
+msgid "Channels"
+msgstr "Kanallar"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__is_company
+msgid "Check if the contact is a company, otherwise it is a person"
+msgstr "Kişinin şirket olup olmadığını kontrol edin, aksi halde gerçek kişidir"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__city
+msgid "City"
+msgstr "Şehir"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__custom_color
+msgid "Color Code"
+msgstr "Renk Kodu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__color
+#: model:ir.model.fields,field_description:tms.field_tms_team__color
+msgid "Color Index"
+msgstr "Renk İndeksi"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_stage.py:0
+msgid "Color code should be Hex Code. Ex:-#FFFFFF"
+msgstr "Renk kodu Hex Kodu olmalıdır. Örn:-#FFFFFF"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__commercial_partner_id
+msgid "Commercial Entity"
+msgstr "Ticari Varlık"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__ref_company_ids
+msgid "Companies that refers to partner"
+msgstr "Ortağa işaret eden şirketler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_order__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_stage__company_id
+#: model:ir.model.fields,field_description:tms.field_tms_team__company_id
+msgid "Company"
+msgstr "Şirket"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_registry
+msgid "Company ID"
+msgstr "Şirket Kimliği"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_registry_label
+msgid "Company ID Label"
+msgstr "Şirket Kimliği Etiketi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_name
+msgid "Company Name"
+msgstr "Şirket Adı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__commercial_company_name
+msgid "Company Name Entity"
+msgstr "Şirket Adı Varlığı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_registry_placeholder
+msgid "Company Registry Placeholder"
+msgstr "Şirket Kaydı Yer Tutucusu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__company_type
+msgid "Company Type"
+msgstr "Şirket Türü"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_insurance__company_id
+msgid "Company related to this insurance"
+msgstr "Bu sigortayla ilgili şirket"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_crew__company_id
+#: model:ir.model.fields,help:tms.field_tms_order__company_id
+#: model:ir.model.fields,help:tms.field_tms_team__company_id
+msgid "Company related to this order"
+msgstr "Bu siparişle ilgili şirket"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__contact_address
+msgid "Complete Address"
+msgstr "Tam Adres"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__complete_name
+msgid "Complete Name"
+msgstr "Tam Ad"
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_order_completed
+msgid "Completed"
+msgstr "Tamamlandı"
+
+#. module: tms
+#: model:ir.model,name:tms.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ayarlar"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.config
+msgid "Configuration"
+msgstr "Yapılandırma"
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_order_confirmed
+msgid "Confirmed"
+msgstr "Onaylandı"
+
+#. module: tms
+#: model:ir.model,name:tms.model_res_partner
+#: model:ir.model.fields,field_description:tms.field_tms_driver__child_ids
+msgid "Contact"
+msgstr "Kişi"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_contracts
+msgid "Contracts"
+msgstr "Sözleşmeler"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_reporting_cost
+msgid "Costs"
+msgstr "Maliyetler"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_bounce
+msgid "Counter of the number of bounced emails for this contact"
+msgstr "Bu kişi için geri dönen e-postaların sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__country_id
+msgid "Country"
+msgstr "Ülke"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__country_code
+msgid "Country Code"
+msgstr "Ülke Kodu"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_insurance_view_form
+msgid "Coverage"
+msgstr "Teminat"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__coverage_details
+msgid "Coverage Details"
+msgstr "Teminat Detayları"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Create Trip Orders with Sale Orders"
+msgstr "Satış Siparişleriyle Sefer Siparişleri Oluştur"
+
+#. module: tms
+#: model_terms:ir.actions.act_window,help:tms.action_tms_stage
+msgid "Create a Stage."
+msgstr "Bir aşama oluşturun."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Create vendor bills and customer invoices when completing trip orders."
+msgstr ""
+"Seyir emirlerini tamamlarken tedarikçi faturaları ve müşteri faturaları "
+"oluştur.Sefer siparişleri tamamlandığında satıcı faturaları ve müşteri "
+"faturaları oluşturun."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_driver__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_order__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_route__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_stage__create_uid
+#: model:ir.model.fields,field_description:tms.field_tms_team__create_uid
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_driver__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_order__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_route__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_stage__create_date
+#: model:ir.model.fields,field_description:tms.field_tms_team__create_date
+msgid "Created on"
+msgstr "Oluşturulma Tarihi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__credit_limit
+msgid "Credit Limit"
+msgstr "Kredi Limiti"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__credit_to_invoice
+msgid "Credit To Invoice"
+msgstr "Faturalanacak Kredi"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__credit_limit
+msgid "Credit limit specific to this partner."
+msgstr "Bu ortağa özel kredi limiti."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__crew_id
+#: model:ir.model.fields,field_description:tms.field_tms_team__crew_ids
+msgid "Crew"
+msgstr "Ekip"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__crew_active
+msgid "Crew Active"
+msgstr "Ekip Aktif"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__crew_ids_domain
+msgid "Crew Ids Domain"
+msgstr "Ekip Kimlikleri Etki Alanı"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
+msgid "Crew Name"
+msgstr "Ekip Adı"
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_crew_name_uniq
+msgid "Crew name already exists!"
+msgstr "Bu isimde bir ekip zaten mevcut!"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config_crew
+#: model:ir.actions.act_window,name:tms.action_tms_dash_crew
+#: model:ir.model.fields,field_description:tms.field_tms_driver__crew_ids
+#: model:ir.ui.menu,name:tms.menu_tms_config_crew
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Crews"
+msgstr "Ekipler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__currency_id
+msgid "Currency"
+msgstr "Para Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_customer
+msgid "Customer Location"
+msgstr "Müşteri Konumu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_payment_term_id
+msgid "Customer Payment Terms"
+msgstr "Müşteri Ödeme Koşulları"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__customer_rank
+msgid "Customer Rank"
+msgstr "Müşteri Sıralaması"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_license_type__d
+msgid "D - Bus"
+msgstr "D - Otobüs"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.dashboard
+msgid "Dashboard"
+msgstr "Pano"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__date_end
+msgid "Date End"
+msgstr "Bitiş Tarihi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__date_start
+msgid "Date Start"
+msgstr "Başlangıç Tarihi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__reminder_date_before_receipt
+msgid "Days Before Receipt"
+msgstr "Teslimden Önceki Günler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__days_sales_outstanding
+msgid "Days Sales Outstanding (DSO)"
+msgstr "Alacak Tahsil Süresi (DSO)"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Days before expiration"
+msgstr "Son kullanma tarihinden önceki gün sayısı"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Distance UoM"
+msgstr "Varsayılan Mesafe Ölçü Birimi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Length UoM"
+msgstr "Varsayılan Uzunluk Ölçü Birimi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Speed UoM"
+msgstr "Varsayılan Hız Ölçü Birimi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Time UoM"
+msgstr "Varsayılan Süre Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__default_vehicle_id
+msgid "Default Vehicle"
+msgstr "Varsayılan Araç"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Default Weight UoM"
+msgstr "Varsayılan Ağırlık Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__group_rfq
+msgid ""
+"Define if RFQ should be grouped         together based on expected arrival, "
+"except for dropship operations.\n"
+"         On Order: Replenishment needs will be grouped together except for "
+"MTO.\n"
+"         Daily: Replenishment needs will be grouped if the expected arrival "
+"is the same day\n"
+"         Weekly: Replenishment needs will be grouped if the expected arrival "
+"is the same week or week day\n"
+"         Always: Replenishment needs will always be grouped."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__is_completed
+msgid "Defines how this stage is evaluated as completed stage"
+msgstr ""
+"Bu aşamanın tamamlanmış aşama olarak nasıl değerlendirileceğini tanımlar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__trust
+msgid "Degree of trust you have in this debtor"
+msgstr "Bu borçluya duyduğunuz güven derecesi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__description
+#: model:ir.model.fields,field_description:tms.field_tms_order__description
+#: model:ir.model.fields,field_description:tms.field_tms_stage__description
+#: model:ir.model.fields,field_description:tms.field_tms_team__description
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Description"
+msgstr "Açıklama"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__destination_id
+msgid "Destination"
+msgstr "Varış Noktası"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__destination_location
+#: model:ir.model.fields,field_description:tms.field_tms_route__destination_location_id
+msgid "Destination Location"
+msgstr "Varış Konumu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__display_invoice_edi_format
+msgid "Display Invoice Edi Format"
+msgstr "Fatura EDI Formatını Görüntüle"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__display_invoice_template_pdf_report_id
+msgid "Display Invoice Template Pdf Report"
+msgstr "Fatura Şablonu PDF Raporunu Görüntüle"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__display_name
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:tms.field_res_partner__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_crew__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_driver__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_order__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_route__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_stage__display_name
+#: model:ir.model.fields,field_description:tms.field_tms_team__display_name
+msgid "Display Name"
+msgstr "Görünen Ad"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__distance
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Distance"
+msgstr "Mesafe"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__distance_traveled
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Distance Traveled"
+msgstr "Alınan Mesafe"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__distance_traveled_uom
+msgid "Distance Traveled Uom"
+msgstr "Alınan Mesafe Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__distance_uom
+msgid "Distance Uom"
+msgstr "Mesafe Ölçü Birimi"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_insurance.py:0
+#: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__draft
+#: model:tms.stage,name:tms.tms_stage_order_draft
+msgid "Draft"
+msgstr "Taslak"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__driver_id
+#: model:ir.model.fields,field_description:tms.field_tms_team__driver_ids
+#: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__driver
+#: model:res.groups,name:tms.group_tms_driver
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_kanban
+msgid "Driver"
+msgstr "Sürücü"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_order.py:0
+msgid ""
+"Driver %(driver)s license will expire in %(days)s days, which is less than "
+"or equal to the security threshold of %(threshold)s days."
+msgstr ""
+"%(driver)s sürücüsünün ehliyeti %(days)s gün içinde sona erecek, bu süre %"
+"(threshold)s gün olan güvenlik eşiğine eşit veya daha kısadır."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Driver Experience"
+msgstr "Sürücü Deneyimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__tms_driver_id
+msgid "Driver Id"
+msgstr "Sürücü Kimliği"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__driver_ids_domain
+msgid "Driver Ids Domain"
+msgstr "Sürücü Kimlikleri Etki Alanı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_expiration_date
+msgid "Driver License Expiration Date"
+msgstr "Sürücü Belgesi Son Kullanma Tarihi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_file
+msgid "Driver License File"
+msgstr "Sürücü Belgesi Dosyası"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_number
+msgid "Driver License Number"
+msgstr "Sürücü Belgesi Numarası"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Driver Status"
+msgstr "Sürücü Durumu"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Driver Type"
+msgstr "Sürücü Türü"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_driver.py:0
+msgid "Driver created"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__driver_license_security_days
+msgid "Driver license security days"
+msgstr "Sürücü belgesi güvenlik günleri"
+
+#. module: tms
+#: model:mail.message.subtype,description:tms.mt_driver_stage
+msgid "Driver stage changed"
+msgstr ""
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config_stage_driver
+#: model:ir.actions.act_window,name:tms.action_tms_driver
+#: model:ir.model.fields,field_description:tms.field_tms_crew__driver_ids
+#: model:ir.ui.menu,name:tms.menu_tms_config_driver
+#: model:ir.ui.menu,name:tms.menu_tms_driver
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Drivers"
+msgstr "Sürücüler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__driver_count
+msgid "Drivers Count"
+msgstr "Sürücü Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driving_experience_years
+msgid "Driving Experience Years"
+msgstr "Sürüş Deneyimi (Yıl)"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__duplicate_bank_partner_ids
+msgid "Duplicate Bank Partner"
+msgstr "Yinelenen Banka Ortağı"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Duration"
+msgstr "Süre"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__partner_share
+msgid ""
+"Either customer (not a user), either shared user. Indicated the current "
+"partner is a customer without access or with a limited access created for "
+"sharing data."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__email
+msgid "Email"
+msgstr "E-posta"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__employee
+msgid "Employee"
+msgstr "Çalışan"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__employee_ids
+msgid "Employees"
+msgstr "Çalışanlar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__employees_count
+msgid "Employees Count"
+msgstr "Çalışan Sayısı"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Enable the creation of stops in a route"
+msgstr "Rotada durak oluşturulmasını etkinleştir"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_list
+msgid "End"
+msgstr "Bitiş"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__end_date
+msgid "End Date"
+msgstr "Bitiş Tarihi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__end_trip
+msgid "End Trip"
+msgstr "Seferi Bitir"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__estimated_time
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Estimated Time"
+msgstr "Tahmini Süre"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__estimated_time_uom
+msgid "Estimated Time Uom"
+msgstr "Tahmini Süre Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_insurance__state__expired
+msgid "Expired"
+msgstr "Süresi Doldu"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__legend_priority
+msgid ""
+"Explanation text to help users using the star and priority mechanism on "
+"stages or orders that are in this stage."
+msgstr ""
+"Kullanıcılara bu aşamadaki emirler veya aşamalar üzerinde yıldız ve öncelik "
+"mekanizmasını kullanmaları konusunda yardımcı olacak açıklama metni."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_external
+msgid "External Driver"
+msgstr "Harici Sürücü"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__phone_sanitized
+msgid ""
+"Field used to store sanitized phone number. Helps speeding up searches and "
+"comparisons."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__fiscal_country_codes
+msgid "Fiscal Country Codes"
+msgstr "Mali Ülke Kodları"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__fiscal_country_group_codes
+msgid "Fiscal Country Group Codes"
+msgstr "Mali Ülke Grubu Kodları"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_account_position_id
+msgid "Fiscal Position"
+msgstr "Mali Pozisyon"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_models
+msgid "Fleet Models"
+msgstr "Filo Modelleri"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_services
+msgid "Fleet Services"
+msgstr "Filo Hizmetleri"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles
+msgid "Fleet Vehicles"
+msgstr "Filo Araçları"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__fold
+msgid "Folded in Kanban"
+msgstr "Kanban'da Katlanmış"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_follower_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_follower_ids
+msgid "Followers"
+msgstr "Takipçiler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_partner_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Takipçiler (Ortaklar)"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__activity_type_icon
+#: model:ir.model.fields,help:tms.field_tms_order__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Font awesome simgesi, örn. fa-tasks"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__email_formatted
+msgid "Format email address \"Name <email@domain>\""
+msgstr "E-posta adresini \"Ad <eposta@alan>\" biçiminde biçimlendir"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__email_formatted
+msgid "Formatted Email"
+msgstr "Biçimlendirilmiş E-posta"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_latitude
+msgid "Geo Latitude"
+msgstr "Coğrafi Enlem"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_longitude
+msgid "Geo Longitude"
+msgstr "Coğrafi Boylam"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__date_localization
+msgid "Geolocation Date"
+msgstr "Coğrafi Konum Tarihi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__group_rfq
+msgid "Group RFQ"
+msgstr "RFQ Grubu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__has_message
+#: model:ir.model.fields,field_description:tms.field_tms_order__has_message
+msgid "Has Message"
+msgstr "Mesajı Var"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Hours"
+msgstr "Saat"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__id
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__id
+#: model:ir.model.fields,field_description:tms.field_res_partner__id
+#: model:ir.model.fields,field_description:tms.field_tms_crew__id
+#: model:ir.model.fields,field_description:tms.field_tms_driver__id
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__id
+#: model:ir.model.fields,field_description:tms.field_tms_order__id
+#: model:ir.model.fields,field_description:tms.field_tms_route__id
+#: model:ir.model.fields,field_description:tms.field_tms_stage__id
+#: model:ir.model.fields,field_description:tms.field_tms_team__id
+msgid "ID"
+msgstr "ID"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__im_status
+msgid "IM Status"
+msgstr "IM Durumu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_exception_icon
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_exception_icon
+msgid "Icon"
+msgstr "Simge"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__activity_exception_icon
+#: model:ir.model.fields,help:tms.field_tms_order__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "İstisna etkinliğini belirten simge."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_needaction
+#: model:ir.model.fields,help:tms.field_tms_order__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "İşaretlenirse yeni mesajlar ilginizi gerektirir."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_has_error
+#: model:ir.model.fields,help:tms.field_tms_order__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "İşaretlenirse bazı mesajlarda teslimat hatası vardır."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__is_blacklisted
+msgid ""
+"If the email address is on the blacklist, the contact won't receive mass "
+"mailing anymore, from any list"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__phone_sanitized_blacklisted
+msgid ""
+"If the sanitized phone number is on the blacklist, the contact won't receive "
+"mass mailing sms anymore, from any list"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__ignore_abnormal_invoice_amount
+msgid "Ignore Abnormal Invoice Amount"
+msgstr "Anormal Fatura Tutarını Yoksay"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__ignore_abnormal_invoice_date
+msgid "Ignore Abnormal Invoice Date"
+msgstr "Anormal Fatura Tarihini Yoksay"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_1920
+msgid "Image"
+msgstr "Görsel"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_1024
+msgid "Image 1024"
+msgstr "Görsel 1024"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_128
+msgid "Image 128"
+msgstr "Görsel 128"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_256
+msgid "Image 256"
+msgstr "Görsel 256"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__image_512
+msgid "Image 512"
+msgstr "Görsel 512"
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_in_base
+msgid "In Base"
+msgstr "Üssünde"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_training
+msgid "In Training"
+msgstr "Eğitimde"
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_in_trip
+msgid "In Trip"
+msgstr "Seferde"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__phone_blacklisted
+msgid ""
+"Indicates if a blacklisted sanitized phone number is a phone number. Helps "
+"distinguish which number is blacklisted             when there is both a "
+"mobile and phone field in a model."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__industry_id
+msgid "Industry"
+msgstr "Sektör"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_insurance_view_form
+msgid "Information"
+msgstr "Bilgi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__contact_address_inline
+msgid "Inlined Complete Address"
+msgstr "Satır İçi Tam Adres"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__insurance_id
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid "Insurance"
+msgstr "Sigorta"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_insurance
+#: model:ir.ui.menu,name:tms.menu_tms_insurance
+msgid "Insurance Policies"
+msgstr "Sigorta Poliçeleri"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid "Insurance Policy"
+msgstr "Sigorta Poliçesi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__insurer_id
+msgid "Insurer"
+msgstr "Sigortacı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_edi_format_store
+msgid "Invoice Edi Format Store"
+msgstr "Fatura EDI Formatı Deposu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_template_pdf_report_id
+msgid "Invoice report"
+msgstr "Fatura raporu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_sending_method
+msgid "Invoice sending"
+msgstr "Fatura gönderimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_ids
+msgid "Invoices"
+msgstr "Faturalar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_active
+msgid "Is Active"
+msgstr "Aktif mi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__is_completed
+msgid "Is Completed"
+msgstr "Tamamlandı mı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__is_default
+msgid "Is Default"
+msgstr "Varsayılan mı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_is_follower
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_is_follower
+msgid "Is Follower"
+msgstr "Takipçi mi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_in_call
+msgid "Is In Call"
+msgstr "Aramada mı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_public
+msgid "Is Public"
+msgstr "Genel mi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__is_company
+msgid "Is a Company"
+msgstr "Şirket mi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__function
+msgid "Job Position"
+msgstr "Görev Unvanı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__lang
+msgid "Language"
+msgstr "Dil"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_driver__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_order__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_route__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_stage__write_uid
+#: model:ir.model.fields,field_description:tms.field_tms_team__write_uid
+msgid "Last Updated by"
+msgstr "Son Güncelleyen"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_driver__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_order__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_route__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_stage__write_date
+#: model:ir.model.fields,field_description:tms.field_tms_team__write_date
+msgid "Last Updated on"
+msgstr "Son Güncelleme Tarihi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Licence Expiration Date"
+msgstr "Belge Son Kullanma Tarihi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Licence No."
+msgstr "Belge No."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "Licence Type"
+msgstr "Belge Türü"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_form_inherit
+msgid "License File"
+msgstr "Belge Dosyası"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_license_type
+msgid "License type"
+msgstr "Belge Türü"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_res_partner_list_tms_location
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Location"
+msgstr "Konum"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_partner__location_type
+#: model:ir.model.fields,field_description:tms.field_res_users__location_type
+#: model:ir.model.fields,field_description:tms.field_tms_driver__location_type
+msgid "Location Type"
+msgstr "Konum Türü"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_location
+#: model:ir.ui.menu,name:tms.menu_tms_location
+msgid "Locations"
+msgstr "Konumlar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__main_user_id
+msgid "Main User"
+msgstr "Ana Kullanıcı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_crew
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Crews"
+msgstr "Ekipleri Yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_driver_license
+msgid "Manage Driver License"
+msgstr "Sürücü Belgesini Yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Driver License Expiration"
+msgstr "Sürücü Belgesi Son Kullanma Tarihini Yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Driver License Expiration Date Before A Trip"
+msgstr "Seferden Önce Sürücü Belgesi Son Kullanma Tarihini Yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_route_stop
+msgid "Manage Route Stops"
+msgstr "Rota Duraklarını Yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_route
+msgid "Manage Routes"
+msgstr "Rotaları Yönet"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_crew
+#: model:res.groups.privilege,name:tms.privilege_tms_crew
+msgid "Manage TMS Crew"
+msgstr "TMS Ekibini Yönet"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_driver_license
+#: model:res.groups.privilege,name:tms.privilege_tms_driver_license
+msgid "Manage TMS Driver License"
+msgstr "TMS Sürücü Belgesini Yönet"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_uom
+#: model:res.groups.privilege,name:tms.privilege_tms_uom
+msgid "Manage TMS Oum"
+msgstr "TMS Ölçü Birimlerini Yönet"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_route_stop
+#: model:res.groups.privilege,name:tms.privilege_tms_route_stop
+msgid "Manage TMS Route Stops"
+msgstr "TMS Rota Duraklarını Yönet"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_route
+#: model:res.groups.privilege,name:tms.privilege_tms_route
+msgid "Manage TMS Routes"
+msgstr "TMS Rotalarını Yönet"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_team
+#: model:res.groups.privilege,name:tms.privilege_tms_team
+msgid "Manage TMS Teams"
+msgstr "TMS Takımlarını Yönet"
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_vehicle_insurance
+#: model:res.groups.privilege,name:tms.privilege_tms_vehicle_insurance
+msgid "Manage TMS Vehicle Insurance"
+msgstr "TMS Araç Sigortasını Yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_team
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Teams"
+msgstr "Takımları Yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Trips Accounting"
+msgstr "Sefer Muhasebesini Yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_vehicle_insurance
+msgid "Manage Vehicle Insurance"
+msgstr "Araç Sigortasını Yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Vehicle Insurance Expiration"
+msgstr "Araç Sigortası Son Kullanma Tarihini Yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage Vehicle Insurance Expiration Date Before A Trip"
+msgstr "Seferden Önce Araç Sigortası Son Kullanma Tarihini Yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage crews that share the same vehicle"
+msgstr "Aynı aracı paylaşan ekipleri yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage depreciations"
+msgstr "Amortismanları yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage expenses of a trip: hotel, tolls, fuel"
+msgstr "Bir seferin giderlerini yönet: otel, köprü geçişi, yakıt"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage pre-defined routes"
+msgstr "Önceden tanımlı rotaları yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage purchase requests for drivers and other suppliers"
+msgstr "Sürücüler ve diğer tedarikçiler için satın alma taleplerini yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage teams that share the same process/stages"
+msgstr "Aynı süreci/aşamaları paylaşan takımları yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_expense
+msgid "Manage trip expenses"
+msgstr "Sefer giderlerini yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_account
+msgid "Manage trip invoicing"
+msgstr "Sefer faturalamasını yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_purchase
+msgid "Manage trip purchases"
+msgstr "Sefer alımlarını yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_sale
+msgid "Manage trip sales"
+msgstr "Sefer satışlarını yönet"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__module_tms_account_asset
+msgid "Manage vehicle as accounting assets"
+msgstr "Araçları muhasebe varlıkları olarak yönet"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Manage vehicles as accounting assets"
+msgstr "Araçları muhasebe varlıkları olarak yönet"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_models_Manufacturers
+msgid "Manufacturers"
+msgstr "Üreticiler"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.data
+msgid "Master Data"
+msgstr "Ana Veriler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_error
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_has_error
+msgid "Message Delivery error"
+msgstr "Mesaj teslimat hatası"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_warn_msg
+msgid "Message for Purchase Order"
+msgstr "Satın Alma Siparişi Mesajı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_warn_msg
+msgid "Message for Sales Order"
+msgstr "Satış Siparişi Mesajı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__picking_warn_msg
+msgid "Message for Stock Picking"
+msgstr "Depo Sevkiyatı Mesajı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_ids
+msgid "Messages"
+msgstr "Mesajlar"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_driver
+msgid "Model for TMS drivers"
+msgstr "TMS sürücüleri için model"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_insurance
+msgid "Model for TMS insurances"
+msgstr "TMS sigortaları için model"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_models_models
+msgid "Models"
+msgstr "Modeller"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__my_activity_date_deadline
+#: model:ir.model.fields,field_description:tms.field_tms_order__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Etkinlik Son Tarihim"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__name
+#: model:ir.model.fields,field_description:tms.field_tms_driver__name
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__name
+#: model:ir.model.fields,field_description:tms.field_tms_order__name
+#: model:ir.model.fields,field_description:tms.field_tms_stage__name
+#: model:ir.model.fields,field_description:tms.field_tms_team__name
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_driver_list
+msgid "Name"
+msgstr "Ad"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_order.py:0
+#: code:addons/tms/tests/test_tms_order.py:0
+msgid "New"
+msgstr "Yeni"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_date_deadline
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Sonraki Etkinlik Son Tarihi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_summary
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_summary
+msgid "Next Activity Summary"
+msgstr "Sonraki Etkinlik Özeti"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_type_id
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_type_id
+msgid "Next Activity Type"
+msgstr "Sonraki Etkinlik Türü"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__email_normalized
+msgid "Normalized Email"
+msgstr "Normalize E-posta"
+
+#. module: tms
+#: model:tms.stage,name:tms.tms_stage_driver_not_available
+msgid "Not Available"
+msgstr "Müsait Değil"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__comment
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Notes"
+msgstr "Notlar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__notes
+msgid "Notes/Comments"
+msgstr "Notlar/Yorumlar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_needaction_counter
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_needaction_counter
+msgid "Number of Actions"
+msgstr "İşlem Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__trips_todo_count
+msgid "Number of Trips"
+msgstr "Sefer Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__reminder_date_before_receipt
+msgid "Number of days to send reminder email before the promised receipt date"
+msgstr ""
+"Vaat edilen teslim tarihinden önce hatırlatma e-postası göndermek için gün "
+"sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__message_has_error_counter
+#: model:ir.model.fields,field_description:tms.field_tms_order__message_has_error_counter
+msgid "Number of errors"
+msgstr "Hata sayısı"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_needaction_counter
+#: model:ir.model.fields,help:tms.field_tms_order__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "İşlem gerektiren mesaj sayısı"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__message_has_error_counter
+#: model:ir.model.fields,help:tms.field_tms_order__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Teslimat hatası olan mesaj sayısı"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_odometers
+msgid "Odometers"
+msgstr "Kilometre Sayacı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__offline_since
+msgid "Offline since"
+msgstr "Çevrimdışı olduğu zaman"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__on_time_rate
+msgid "On-Time Delivery Rate"
+msgstr "Zamanında Teslimat Oranı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__operation
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+msgid "Operation"
+msgstr "İşlem"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.operations
+msgid "Operations"
+msgstr "İşlemler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__order_ids
+msgid "Orders"
+msgstr "Siparişler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__order_count
+msgid "Orders Count"
+msgstr "Sipariş Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__origin_id
+msgid "Origin"
+msgstr "Kalkış Noktası"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__origin_location
+#: model:ir.model.fields,field_description:tms.field_tms_route__origin_location_id
+msgid "Origin Location"
+msgstr "Kalkış Konumu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_crew__personnel_ids
+msgid "Other Personnel"
+msgstr "Diğer Personel"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__on_time_rate
+msgid ""
+"Over the past x days; the number of products received on time divided by the "
+"number of ordered products.x is either the System Parameter "
+"purchase_stock.on_time_delivery_days or the default 365"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__parent_name
+msgid "Parent name"
+msgstr "Üst ad"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_id
+msgid "Partner"
+msgstr "Ortak"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_company_registry_placeholder
+msgid "Partner Company Registry Placeholder"
+msgstr "Ortak Şirket Kaydı Yer Tutucusu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__contract_ids
+msgid "Partner Contracts"
+msgstr "Ortak Sözleşmeleri"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__use_partner_credit_limit
+msgid "Partner Limit"
+msgstr "Ortak Limiti"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_vat_placeholder
+msgid "Partner Vat Placeholder"
+msgstr "Ortak Vergi Kimliği Yer Tutucusu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__same_company_registry_partner_id
+msgid "Partner with same Company Registry"
+msgstr "Aynı Şirket Kaydına Sahip Ortak"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__same_vat_partner_id
+msgid "Partner with same Tax ID"
+msgstr "Aynı Vergi Kimliğine Sahip Ortak"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__fleet_vehicle__operation__passenger
+msgid "Passenger"
+msgstr "Yolcu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_count
+msgid "Payment Token Count"
+msgstr "Ödeme Jetonu Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__payment_token_ids
+msgid "Payment Tokens"
+msgstr "Ödeme Jetonları"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Personnel"
+msgstr "Personel"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone
+msgid "Phone"
+msgstr "Telefon"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_sanitized_blacklisted
+msgid "Phone Blacklisted"
+msgstr "Kara Listeli Telefon"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_mobile_search
+msgid "Phone Number"
+msgstr "Telefon Numarası"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Planning"
+msgstr "Planlama"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__policy_number
+msgid "Policy Number"
+msgstr "Poliçe Numarası"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__premium_amount
+msgid "Premium Amount"
+msgstr "Prim Tutarı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_product_pricelist
+msgid "Pricelist"
+msgstr "Fiyat Listesi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_stage__legend_priority
+msgid "Priority Management Explanation"
+msgstr "Öncelik Yönetimi Açıklaması"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__properties
+msgid "Properties"
+msgstr "Özellikler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__properties_base_definition_id
+msgid "Properties Base Definition"
+msgstr "Özellikler Temel Tanımı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_inbound_payment_method_line_id
+msgid "Property Inbound Payment Method Line"
+msgstr "Gelen Ödeme Yöntemi Hattı Özelliği"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_outbound_payment_method_line_id
+msgid "Property Outbound Payment Method Line"
+msgstr "Giden Ödeme Yöntemi Hattı Özelliği"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_line_ids
+msgid "Purchase Lines"
+msgstr "Satın Alma Satırları"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__purchase_order_count
+msgid "Purchase Order Count"
+msgstr "Satın Alma Siparişi Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__receipt_reminder_email
+msgid "Receipt Reminder"
+msgstr "Teslim Hatırlatması"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__ref
+msgid "Reference"
+msgstr "Referans"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Refresh"
+msgstr "Yenile"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__parent_id
+msgid "Related Company"
+msgstr "İlişkili Şirket"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__employee_ids
+msgid "Related employees based on their private address"
+msgstr "Özel adreslerine göre ilgili çalışanlar"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.reporting
+msgid "Reporting"
+msgstr "Raporlama"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__activity_user_id
+#: model:ir.model.fields,field_description:tms.field_tms_order__activity_user_id
+msgid "Responsible User"
+msgstr "Sorumlu Kullanıcı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route_id
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Route"
+msgstr "Rota"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Route Details"
+msgstr "Rota Detayları"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__name
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Route Name"
+msgstr "Rota Adı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route_destination
+msgid "Route destination"
+msgstr "Rota varışı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route_origin
+msgid "Route origin"
+msgstr "Rota başlangıcı"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_route
+#: model:ir.ui.menu,name:tms.menu_tms_route
+msgid "Routes"
+msgstr "Rotalar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__rtc_session_ids
+msgid "Rtc Session"
+msgstr "RTC Oturumu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_count
+msgid "Sale Order Count"
+msgstr "Satış Siparişi Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__sale_order_ids
+msgid "Sales Order"
+msgstr "Satış Siparişi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__user_id
+msgid "Salesperson"
+msgstr "Satış Görevlisi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__phone_sanitized
+msgid "Sanitized Number"
+msgstr "Temizlenmiş Numara"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__scheduled_duration
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Scheduled Duration"
+msgstr "Planlanan Süre"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__diff_duration
+msgid "Scheduled Duration - Actual Duration"
+msgstr "Planlanan Süre - Gerçek Süre"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__scheduled_date_end
+msgid "Scheduled End"
+msgstr "Planlanan Bitiş"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__scheduled_date_start
+msgid "Scheduled Start"
+msgstr "Planlanan Başlangıç"
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_order_duration_ge_zero
+msgid "Scheduled duration must be greater than or equal to zero!"
+msgstr "Planlanan süre sıfırdan büyük veya sıfıra eşit olmalıdır!"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_order__scheduled_duration
+msgid "Scheduled duration of the work in hours"
+msgstr "İşin saat cinsinden planlanan süresi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__self
+msgid "Self"
+msgstr "Kendisi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Sell trips or tickets"
+msgstr "Sefer veya bilet sat"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__sequence
+#: model:ir.model.fields,field_description:tms.field_tms_stage__sequence
+#: model:ir.model.fields,field_description:tms.field_tms_team__sequence
+msgid "Sequence"
+msgstr "Sıra"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_fleet_services
+msgid "Services"
+msgstr "Hizmetler"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__use_partner_credit_limit
+msgid "Set a value greater than 0.0 to activate a credit limit check"
+msgstr ""
+"Kredi limiti kontrolünü etkinleştirmek için 0.0'dan büyük bir değer "
+"belirleyin"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid ""
+"Set the number of days before the expiration date of the driver license to "
+"show a\n"
+"                                warning."
+msgstr ""
+"Sürücü ehliyetinin son kullanma tarihinden kaç gün önce uyarı "
+"gösterileceğini ayarlayın."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid ""
+"Set the number of days before the expiration date of the vehicle insurance "
+"to show a\n"
+"                                warning."
+msgstr ""
+"Araç sigortasının son kullanma tarihinden kaç gün önce uyarı gösterileceğini "
+"ayarlayın."
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config
+#: model:ir.ui.menu,name:tms.settings
+msgid "Settings"
+msgstr "Ayarlar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__partner_share
+msgid "Share Partner"
+msgstr "Ortağı Paylaş"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__show_credit_limit
+msgid "Show Credit Limit"
+msgstr "Kredi Limitini Göster"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__signup_type
+msgid "Signup Token Type"
+msgstr "Kayıt Jetonu Türü"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__specific_property_product_pricelist
+msgid "Specific Property Product Pricelist"
+msgstr "Belirli Özellik Ürün Fiyat Listesi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__stage_id
+#: model:ir.model.fields,field_description:tms.field_tms_order__stage_id
+#: model:mail.message.subtype,name:tms.mt_driver_stage
+#: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_order_search
+msgid "Stage"
+msgstr "Aşama"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
+msgid "Stage Description"
+msgstr "Aşama Açıklaması"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config_stage_travel
+#: model:ir.actions.act_window,name:tms.action_tms_stage
+#: model:ir.model.fields,field_description:tms.field_tms_team__stage_ids
+#: model:ir.ui.menu,name:tms.menu_tms_config_stage
+msgid "Stages"
+msgstr "Aşamalar"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_list
+msgid "Start"
+msgstr "Başlat"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__start_date
+msgid "Start Date"
+msgstr "Başlangıç Tarihi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__start_trip
+msgid "Start Trip"
+msgstr "Seferi Başlat"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__state_id
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__state
+msgid "State"
+msgstr "Durum"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__application_statistics
+msgid "Stats"
+msgstr "İstatistikler"
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles_status
+msgid "Status"
+msgstr "Durum"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__activity_state
+#: model:ir.model.fields,help:tms.field_tms_order__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__stop_location_ids
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "Stop Locations"
+msgstr "Durak Konumları"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Stops"
+msgstr "Duraklar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_route__stop_locations
+msgid "Stops locations in route"
+msgstr "Rotadaki durak konumları"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__street
+msgid "Street"
+msgstr "Sokak"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__street2
+msgid "Street2"
+msgstr "Sokak 2"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_based_on
+msgid "Suggest Based On"
+msgstr "Öneri Tabanı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_days
+msgid "Suggest Days"
+msgstr "Önerilen Günler"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__suggest_percent
+msgid "Suggest Percent"
+msgstr "Önerilen Yüzde"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_purchase_currency_id
+msgid "Supplier Currency"
+msgstr "Tedarikçi Para Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__supplier_rank
+msgid "Supplier Rank"
+msgstr "Tedarikçi Sıralaması"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__group_tms_uom
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "TMS Units of Measure"
+msgstr "TMS Ölçü Birimleri"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_kanban
+msgid "TRIPS"
+msgstr "SEFERLER"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__category_id
+#: model:ir.ui.menu,name:tms.menu_config_fleet_vehicles_tags
+msgid "Tags"
+msgstr "Etiketler"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_kanban
+msgid "Tasks Analysis"
+msgstr "Görev Analizi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__vat
+msgid "Tax ID"
+msgstr "Vergi Kimliği"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__vat_label
+msgid "Tax ID Label"
+msgstr "Vergi Kimliği Etiketi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__tms_team_id
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_order_search
+msgid "Team"
+msgstr "Takım"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Team Name"
+msgstr "Takım Adı"
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_team_name_uniq
+msgid "Team name already exists!"
+msgstr "Bu isimde bir takım zaten mevcut!"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_config_team
+#: model:ir.actions.act_window,name:tms.action_tms_dash_team
+#: model:ir.model.fields,field_description:tms.field_tms_stage__tms_team_ids
+#: model:ir.ui.menu,name:tms.menu_tms_config_team
+#: model:ir.ui.menu,name:tms.menu_tms_dash_team
+msgid "Teams"
+msgstr "Takımlar"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__res_partner__location_type__terrestrial
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__driver_type__terrestrial
+msgid "Terrestrial"
+msgstr "Karayolu"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__country_code
+msgid ""
+"The ISO country code in two chars. \n"
+"You can use this field for quick search."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_account_position_id
+msgid ""
+"The fiscal position determines the taxes/accounts used for this contact."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__user_id
+msgid "The internal user in charge of this contact."
+msgstr "Bu kişiden sorumlu dahili kullanıcı."
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_insurance_unique_policy_number_per_insurer
+msgid "The policy number must be unique for each insurer!"
+msgstr "Poliçe numarası her sigortacı için benzersiz olmalıdır!"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__company_registry
+msgid ""
+"The registry number of the company. Use it if it is different from the Tax "
+"ID. It must be unique across all partners of a same country"
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_stock_customer
+msgid ""
+"The stock location used as destination when sending goods to this contact."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_stock_supplier
+msgid ""
+"The stock location used as source when receiving goods from this contact."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__main_user_id
+msgid ""
+"There can be several users related to the same partner. When a single user "
+"is needed, this field attempts to find the most appropriate one."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_purchase_currency_id
+msgid "This currency will be used for purchases from the current partner"
+msgstr "Bu para birimi cari ortaktan alımlarda kullanılacak"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__email_normalized
+msgid ""
+"This field is used to search on email address as the primary email field can "
+"contain more than strictly an email address."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__fold
+msgid ""
+"This stage is folded in the kanban view when there are no record in that "
+"stage to display."
+msgstr "Görüntülenecek kayıt olmadığında bu aşama kanban görünümünde katlanır."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__time_uom
+msgid "Time Uom"
+msgstr "Süre Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__tz
+msgid "Timezone"
+msgstr "Saat Dilimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__tz_offset
+msgid "Timezone offset"
+msgstr "Saat dilimi farkı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_distance_uom
+msgid "Tms Distance Uom"
+msgstr "TMS Mesafe Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_length_uom
+msgid "Tms Length Uom"
+msgstr "TMS Uzunluk Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_speed_uom
+msgid "Tms Speed Uom"
+msgstr "TMS Hız Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_fleet_vehicle__tms_team_id
+#: model:ir.model.fields,field_description:tms.field_tms_crew__tms_team_id
+#: model:ir.model.fields,field_description:tms.field_tms_driver__tms_team_id
+msgid "Tms Team"
+msgstr "TMS Takımı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_time_uom
+msgid "Tms Time Uom"
+msgstr "TMS Süre Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__tms_weight_uom
+msgid "Tms Weight Uom"
+msgstr "TMS Ağırlık Ölçü Birimi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__total_invoiced
+msgid "Total Invoiced"
+msgstr "Toplam Faturalanan"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__debit
+msgid "Total Payable"
+msgstr "Toplam Borç"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__credit
+msgid "Total Receivable"
+msgstr "Toplam Alacak"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__credit
+msgid "Total amount this customer owes you."
+msgstr "Bu müşterinin size borçlu olduğu toplam tutar."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__debit
+msgid "Total amount you have to pay to this vendor."
+msgstr "Bu satıcıya ödemeniz gereken toplam tutar."
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.root
+#: model_terms:ir.ui.view,arch_db:tms.fleet_vehicle_inherit_view_form
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Transport"
+msgstr "Taşımacılık"
+
+#. module: tms
+#: model:ir.module.category,name:tms.tms
+#: model:res.groups.privilege,name:tms.privilege_tms
+msgid "Transport Management System"
+msgstr "Taşımacılık Yönetim Sistemi"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_crew
+msgid "Transport Management System Crew"
+msgstr "Taşımacılık Yönetim Sistemi Ekibi"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_order
+msgid "Transport Management System Order"
+msgstr "Taşımacılık Yönetim Sistemi Siparişi"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_route
+msgid "Transport Management System Route"
+msgstr "Taşımacılık Yönetim Sistemi Rotası"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_stage
+msgid "Transport Management System Stage"
+msgstr "Taşımacılık Yönetim Sistemi Aşaması"
+
+#. module: tms
+#: model:ir.model,name:tms.model_tms_team
+msgid "Transport Management System Team"
+msgstr "Taşımacılık Yönetim Sistemi Takımı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_partner__tms_location
+#: model:ir.model.fields,field_description:tms.field_res_users__tms_location
+#: model:ir.model.fields,field_description:tms.field_tms_driver__tms_location
+msgid "Transport location"
+msgstr "Taşıma konumu"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_stage__stage_type__order
+msgid "Trip"
+msgstr "Sefer"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__duration
+msgid "Trip Duration"
+msgstr "Sefer Süresi"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Trip Name"
+msgstr "Sefer Adı"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_report_view_graph
+msgid "Trip Reports"
+msgstr "Sefer Raporları"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_form
+msgid "Trip Tracking"
+msgstr "Sefer Takibi"
+
+#. module: tms
+#: model:ir.model.constraint,message:tms.constraint_tms_order_name_uniq
+msgid "Trip name already exists!"
+msgstr "Bu isimde bir sefer zaten mevcut!"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_dash_order
+#: model:ir.actions.act_window,name:tms.action_tms_operation_trip
+#: model:ir.actions.act_window,name:tms.action_tms_report_order
+#: model:ir.model.fields,field_description:tms.field_tms_driver__trips_ids
+#: model:ir.ui.menu,name:tms.menu_tms_dash_order
+#: model:ir.ui.menu,name:tms.menu_tms_report_trip
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_kanban
+#: model_terms:ir.ui.view,arch_db:tms.tms_order_view_pivot
+msgid "Trips"
+msgstr "Seferler"
+
+#. module: tms
+#: model:ir.actions.act_window,name:tms.action_tms_order_kanban
+msgid "Trips Kanban"
+msgstr "Sefer Kanbanı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__driver_type
+#: model:ir.model.fields,field_description:tms.field_tms_stage__stage_type
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_stage_search
+msgid "Type"
+msgstr "Tür"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__activity_exception_decoration
+#: model:ir.model.fields,help:tms.field_tms_order__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Kayıttaki istisna etkinliğinin türü."
+
+#. module: tms
+#: model:ir.ui.menu,name:tms.menu_config_fleet_services_types
+msgid "Types"
+msgstr "Türler"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "Units"
+msgstr "Birimler"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "UoM"
+msgstr "UoM"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__custom_color
+msgid "Use Hex Code only Ex:-#FFFFFF"
+msgstr "Yalnızca Hex Kodu kullanın Örn:-#FFFFFF"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__barcode
+msgid "Use a barcode to identify this contact."
+msgstr "Bu kişiyi tanımlamak için bir barkod kullanın."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__route
+msgid "Use predefined route"
+msgstr "Önceden tanımlı rotayı kullan"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__property_product_pricelist
+msgid "Used for sales to the current partner"
+msgstr "Cari ortak için satışlarda kullanılır"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_stage__sequence
+msgid "Used to order stages. Lower is first."
+msgstr "Aşamaları sıralamak için kullanılır. Düşük ilk sıradadır."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_team__sequence
+msgid "Used to sort teams. Lower is better."
+msgstr "Takımları sıralamak için kullanılır. Düşük daha iyidir."
+
+#. module: tms
+#: model:res.groups,name:tms.group_tms_user
+msgid "User"
+msgstr "Kullanıcı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__user_ids
+msgid "Users"
+msgstr "Kullanıcılar"
+
+#. module: tms
+#: model:ir.model,name:tms.model_fleet_vehicle
+#: model:ir.model.fields,field_description:tms.field_tms_insurance__vehicle_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__vehicle_id
+#: model:ir.model.fields,field_description:tms.field_tms_team__vehicle_ids
+#: model_terms:ir.ui.view,arch_db:tms.tms_crew_view_form
+msgid "Vehicle"
+msgstr "Araç"
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_order.py:0
+msgid ""
+"Vehicle %(vehicle)s insurance will expire in %(days)s days, which is less "
+"than or equal to the security threshold of %(threshold)s days."
+msgstr ""
+"%(vehicle)s aracının sigortası %(days)s gün içinde sona erecek, bu süre %"
+"(threshold)s gün olan güvenlik eşiğine eşit veya daha kısadır."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_order__vehicle_ids_domain
+msgid "Vehicle Ids Domain"
+msgstr "Araç Kimlikleri Etki Alanı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_res_config_settings__vehicle_insurance_security_days
+msgid "Vehicle Insurance security days"
+msgstr "Araç sigortası güvenlik günleri"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__vehicles_ids
+#: model:ir.ui.menu,name:tms.menu_fleet_vehicle
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_insurance_view_form
+#: model_terms:ir.ui.view,arch_db:tms.tms_team_view_form
+msgid "Vehicles"
+msgstr "Araçlar"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_team__vehicle_count
+msgid "Vehicles Count"
+msgstr "Araç Sayısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_stock_supplier
+msgid "Vendor Location"
+msgstr "Satıcı Konumu"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__property_supplier_payment_term_id
+msgid "Vendor Payment Terms"
+msgstr "Satıcı Ödeme Koşulları"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__website
+msgid "Website Link"
+msgstr "Web Sitesi Bağlantısı"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__website_message_ids
+#: model:ir.model.fields,field_description:tms.field_tms_order__website_message_ids
+msgid "Website Messages"
+msgstr "Web Sitesi Mesajları"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__website_message_ids
+#: model:ir.model.fields,help:tms.field_tms_order__website_message_ids
+msgid "Website communication history"
+msgstr "Web sitesi iletişim geçmişi"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__group_on
+msgid "Week Day"
+msgstr "Hafta Günü"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__tz
+msgid ""
+"When printing documents and exporting/importing data, time values are "
+"computed according to this timezone.\n"
+"If the timezone is not set, UTC (Coordinated Universal Time) is used.\n"
+"Anywhere else, time values are computed according to the time offset of your "
+"web client."
+msgstr ""
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__employee
+msgid "Whether this contact is an Employee."
+msgstr "Bu kişinin bir çalışan olup olmadığı."
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.tms_stage_form_view
+msgid ""
+"You can add a description to help your coworkers\n"
+"                            understand the meaning and purpose of the stage."
+msgstr ""
+"İş arkadaşlarınızın aşamanın anlamını ve amacını anlamasına yardımcı olmak "
+"için bir açıklama ekleyebilirsiniz."
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__vat
+msgid "You can use '/' to indicate that the customer has no Tax ID."
+msgstr ""
+"Müşterinin vergi kimliği olmadığını belirtmek için '/' kullanabilirsiniz."
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_stage.py:0
+msgid "You cannot delete default stages."
+msgstr "Varsayılan aşamaları silemezsiniz."
+
+#. module: tms
+#. odoo-python
+#: code:addons/tms/models/tms_order.py:0
+msgid "You must create an TMS order stage first."
+msgstr "Önce bir TMS sipariş aşaması oluşturmalısınız."
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__zip
+msgid "Zip"
+msgstr "Posta Kodu"
+
+#. module: tms
+#: model:ir.model.fields,help:tms.field_tms_driver__days_sales_outstanding
+msgid ""
+"[(Total Receivable/Total Revenue) * number of days since the first invoice] "
+"for this customer"
+msgstr ""
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. Hours"
+msgstr "örn. Saat"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. kg"
+msgstr "örn. kg"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. km"
+msgstr "örn. km"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. km/h"
+msgstr "örn. km/sa"
+
+#. module: tms
+#: model_terms:ir.ui.view,arch_db:tms.res_config_settings_view_form
+msgid "e.g. m"
+msgstr "örn. m"
+
+#. module: tms
+#: model:ir.model.fields,field_description:tms.field_tms_driver__invoice_edi_format
+msgid "eInvoice format"
+msgstr "e-Fatura formatı"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__distance_traveled_uom__km
+#: model_terms:ir.ui.view,arch_db:tms.view_tms_route_form
+msgid "km"
+msgstr "km"
+
+#. module: tms
+#: model:uom.uom,name:tms.uom_kmh
+msgid "km/h"
+msgstr "km/sa"
+
+#. module: tms
+#: model:ir.model.fields.selection,name:tms.selection__tms_driver__distance_traveled_uom__mi
+msgid "mi"
+msgstr "mi"
+
+#. module: tms
+#: model:uom.uom,name:tms.uom_mph
+msgid "mph"
+msgstr "mph"
+
+#~ msgid "Avatar 1920"
+#~ msgstr "Avatar 1920"
+
+#~ msgid "Image 1920"
+#~ msgstr "Görsel 1920"
