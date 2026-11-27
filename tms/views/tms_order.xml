@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- TMS Order list View -->
     <record id="tms_order_view_list" model="ir.ui.view">
@@ -255,8 +256,8 @@
                                             </span>
                                             <!-- VEHICLE -->
                                             <span
-                                                class="o_text_overflow text-muted"
                                                 t-if="record.vehicle_id.value"
+                                                class="o_text_overflow text-muted"
                                             >
                                                 <span
                                                     class="fa fa-car me-2"
@@ -314,8 +315,8 @@
                                 <div class="oe_kanban_bottom_left">
                                     <div
                                         t-if="record.tms_team_id.raw_value or record.crew_id.raw_value"
-                                        groups="tms.group_tms_team"
                                         class="text-muted o_row"
+                                        groups="tms.group_tms_team"
                                     >
                                         <i>
                                             <t

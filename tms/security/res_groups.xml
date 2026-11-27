@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- TMS Privilege -->
     <record id="privilege_tms" model="res.groups.privilege">

@@ -25,11 +25,10 @@ class TMSCrew(models.Model):
         "tms_crew_personnel_rel",
         string="Other Personnel",
     )
-    default_vehicle_id = fields.Many2one("fleet.vehicle", string="Default Vehicle")
+    default_vehicle_id = fields.Many2one("fleet.vehicle")
 
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         required=True,
         index=True,
         default=lambda self: self.env.company,

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- Drivers -->
     <record id="view_tms_driver_list" model="ir.ui.view">
@@ -133,8 +134,8 @@
                             </div>
                             <div
                                 t-if="record.crew_ids.raw_value.length"
-                                groups="tms.group_tms_crew"
                                 class="text-muted"
+                                groups="tms.group_tms_crew"
                             >
                                 <span>Crews: </span>
                                 <field name="crew_ids" widget="many2many_tags" />

@@ -1,7 +1,7 @@
 # Copyright (C) 2024 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
@@ -10,7 +10,7 @@ from odoo.exceptions import UserError, ValidationError
 class TMSOrder(models.Model):
     _name = "tms.order"
     _description = "Transport Management System Order"
-    _inherit = ["mail.thread", "mail.activity.mixin"]
+    _inherit = ("mail.thread", "mail.activity.mixin")
 
     active = fields.Boolean(default=True)
 
@@ -24,7 +24,6 @@ class TMSOrder(models.Model):
 
     company_id = fields.Many2one(
         "res.company",
-        string="Company",
         required=True,
         index=True,
         default=lambda self: self.env.company,
@@ -68,18 +67,16 @@ class TMSOrder(models.Model):
 
     driver_id = fields.Many2one(
         "tms.driver",
-        string="Driver",
         compute="_compute_vehicle_id_set_driver",
         store=True,
         readonly=False,
     )
-    vehicle_id = fields.Many2one("fleet.vehicle", string="Vehicle")
+    vehicle_id = fields.Many2one("fleet.vehicle")
     tms_team_id = fields.Many2one("tms.team", string="Team")
-    crew_id = fields.Many2one("tms.crew", string="Crew")
+    crew_id = fields.Many2one("tms.crew")
 
     stage_id = fields.Many2one(
         "tms.stage",
-        string="Stage",
         index=True,
         copy=False,
         domain="[('stage_type', '=', 'order')]",
@@ -89,7 +86,7 @@ class TMSOrder(models.Model):
     )
 
     scheduled_date_start = fields.Datetime(
-        string="Scheduled Start", default=datetime.now()
+        string="Scheduled Start", default=fields.Datetime.now
     )
     scheduled_duration = fields.Float(
         help="Scheduled duration of the work in hours",
@@ -229,9 +226,9 @@ class TMSOrder(models.Model):
         "fleet.vehicle",
         "team_vehicles_rel",
         compute="_compute_vehicle_ids_domain",
-        default=lambda self: self.env["fleet.vehicle"]
-        .browse(self.env["fleet.vehicle"]._search([]))
-        .ids,
+        default=lambda self: (
+            self.env["fleet.vehicle"].browse(self.env["fleet.vehicle"]._search([])).ids
+        ),
     )
 
     @api.depends("tms_team_id")
@@ -248,9 +245,9 @@ class TMSOrder(models.Model):
         "tms.crew",
         "team_crews_rel",
         compute="_compute_crew_ids_domain",
-        default=lambda self: self.env["tms.crew"]
-        .browse(self.env["tms.crew"]._search([]))
-        .ids,
+        default=lambda self: (
+            self.env["tms.crew"].browse(self.env["tms.crew"]._search([])).ids
+        ),
     )
 
     @api.depends("crew_id")
@@ -287,7 +284,9 @@ class TMSOrder(models.Model):
         )
         if vehicle_security_days and self.vehicle_id.insurance_id:
             insurance_id = self.vehicle_id.insurance_id
-            days_to_expire = (insurance_id.end_date - datetime.today().date()).days
+            days_to_expire = (
+                insurance_id.end_date - fields.Date.context_today(self)
+            ).days
 
             if days_to_expire <= vehicle_security_days:
                 raise UserError(
@@ -309,7 +308,7 @@ class TMSOrder(models.Model):
         )
         if driver_security_days and self.driver_id.driver_license_expiration_date:
             expiration_date = self.driver_id.driver_license_expiration_date
-            days_to_expire = (expiration_date - datetime.today().date()).days
+            days_to_expire = (expiration_date - fields.Date.context_today(self)).days
 
             if days_to_expire <= driver_security_days:
                 raise UserError(
@@ -323,7 +322,7 @@ class TMSOrder(models.Model):
                     )
                 )
 
-        self.date_start = datetime.now()
+        self.date_start = fields.Datetime.now()
         self.start_trip = True
 
     def button_end_order(self):

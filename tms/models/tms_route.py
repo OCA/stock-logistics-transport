@@ -16,13 +16,11 @@ class TMSRoute(models.Model):
     name = fields.Char(string="Route Name", required=True)
     origin_location_id = fields.Many2one(
         "res.partner",
-        string="Origin Location",
         required=True,
         context={"default_tms_location": True},
     )
     destination_location_id = fields.Many2one(
         "res.partner",
-        string="Destination Location",
         required=True,
         context={"default_tms_location": True},
     )

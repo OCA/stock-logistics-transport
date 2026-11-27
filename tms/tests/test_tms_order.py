@@ -1,5 +1,6 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 
+from odoo import fields
 from odoo.tests.common import TransactionCase
 
 
@@ -99,7 +100,7 @@ class TestTMSOrder(TransactionCase):
         )
 
     def test_calculate_scheduled_duration(self):
-        start_time = datetime.now()
+        start_time = fields.Datetime.now()
         order = self.create_order(
             scheduled_date_start=start_time, scheduled_duration=2.0
         )
@@ -111,7 +112,7 @@ class TestTMSOrder(TransactionCase):
             "Scheduled end date calculation is incorrect",
         )
 
-        order.scheduled_date_end = datetime.now() + timedelta(hours=3.0)
+        order.scheduled_date_end = fields.Datetime.now() + timedelta(hours=3.0)
         order._compute_scheduled_duration()
         expected_duration = (
             order.scheduled_date_end - order.scheduled_date_start
@@ -123,7 +124,7 @@ class TestTMSOrder(TransactionCase):
         )
 
     def test_button_start_order(self):
-        order = self.create_order(scheduled_date_start=datetime.now())
+        order = self.create_order(scheduled_date_start=fields.Datetime.now())
         order.button_start_order()
         self.assertTrue(
             order.start_trip, "Start trip flag should be True after starting the order"
@@ -137,10 +138,10 @@ class TestTMSOrder(TransactionCase):
 
     def test_button_end_order(self):
         order = self.create_order(
-            scheduled_date_start=datetime.now(), scheduled_duration=1.0
+            scheduled_date_start=fields.Datetime.now(), scheduled_duration=1.0
         )
         order.button_start_order()
-        order.date_start = datetime.now()
+        order.date_start = fields.Datetime.now()
         order.date_end = order.date_start + timedelta(hours=1)
         order.button_end_order()
         self.assertTrue(

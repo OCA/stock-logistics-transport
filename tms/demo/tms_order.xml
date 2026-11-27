@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record id="demo_order_1" model="tms.order">
         <field name="name">TMS/DEMO1</field>

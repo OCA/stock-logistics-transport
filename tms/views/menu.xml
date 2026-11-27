@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- Main Menu -->
     <menuitem
@@ -167,24 +168,24 @@
         groups="fleet.fleet_group_manager"
     />
     <menuitem
+        id="menu_config_fleet_models_Manufacturers"
         name="Manufacturers"
         action="fleet.fleet_vehicle_model_brand_action"
         parent="menu_config_fleet_models"
-        id="menu_config_fleet_models_Manufacturers"
         sequence="10"
     />
     <menuitem
+        id="menu_config_fleet_models_models"
         name="Models"
         action="fleet.fleet_vehicle_model_action"
         parent="menu_config_fleet_models"
-        id="menu_config_fleet_models_models"
         sequence="20"
     />
     <menuitem
+        id="menu_config_fleet_models_categories"
         name="Categories"
         action="fleet.fleet_vehicle_model_category_action"
         parent="menu_config_fleet_models"
-        id="menu_config_fleet_models_categories"
         sequence="30"
     />
 

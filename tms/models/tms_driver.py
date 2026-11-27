@@ -14,8 +14,8 @@ LOCATION_TYPES = [("terrestrial", "Terrestrial")]
 
 class TmsDriver(models.Model):
     _name = "tms.driver"
-    _inherit = ["mail.thread"]
-    _inherits = {"res.partner": "partner_id"}
+    _inherit = "mail.thread"
+    _inherits = {"res.partner": "partner_id"}  # noqa: RUF012
     _description = "Model for TMS drivers"
 
     partner_id = fields.Many2one("res.partner", required=True, ondelete="cascade")
@@ -41,7 +41,6 @@ class TmsDriver(models.Model):
     )
     stage_id = fields.Many2one(
         "tms.stage",
-        string="Stage",
         index=True,
         copy=False,
         tracking=True,

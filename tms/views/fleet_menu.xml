@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- Add the Transport Admin group to the Fleet menu -->
     <record id="fleet.menu_root" model="ir.ui.menu">
