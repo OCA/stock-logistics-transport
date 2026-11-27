@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!--TMS Order Inherit Form -->
     <record id="tms_order_inherit_view_form" model="ir.ui.view">
