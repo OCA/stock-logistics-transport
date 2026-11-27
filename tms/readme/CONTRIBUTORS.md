@@ -12,3 +12,5 @@
 - Isabel Ávila <isabel.esparza@jarsa.com.mx>
 - Erick Reza <alexis.reza.s@gmail.com>
 - Tecnativa: * Sergio Teruel * Carlos Dauden
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia

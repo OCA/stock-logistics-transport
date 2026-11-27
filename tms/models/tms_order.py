@@ -122,7 +122,7 @@ class TMSOrder(models.Model):
     def _default_time_uom_id(self):
         # Fetch the value of default_time_uom from settings
         default_time_uom_id = (
-            self.env["ir.config_parameter"].sudo().get_param("tms.default_time_uom")
+            self.env["ir.config_parameter"].sudo().get_int("tms.default_time_uom")
         )
 
         # Return the actual record based on the ID retrieved from settings
@@ -277,10 +277,10 @@ class TMSOrder(models.Model):
 
     def button_start_order(self):
         # Check the vehicle insurance
-        vehicle_security_days = int(
+        vehicle_security_days = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("tms.default_vehicle_insurance_security_days")
+            .get_int("tms.default_vehicle_insurance_security_days")
         )
         if vehicle_security_days and self.vehicle_id.insurance_id:
             insurance_id = self.vehicle_id.insurance_id
@@ -301,10 +301,10 @@ class TMSOrder(models.Model):
                 )
 
         # Check the drivers license
-        driver_security_days = int(
+        driver_security_days = (
             self.env["ir.config_parameter"]
             .sudo()
-            .get_param("tms.default_driver_license_security_days")
+            .get_int("tms.default_driver_license_security_days")
         )
         if driver_security_days and self.driver_id.driver_license_expiration_date:
             expiration_date = self.driver_id.driver_license_expiration_date

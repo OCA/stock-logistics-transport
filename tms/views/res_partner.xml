@@ -23,10 +23,7 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <xpath expr="//span[@name='address_name']" position="before">
-                <field name="tms_location" widget="boolean_button" />
-            </xpath>
-            <xpath expr="//field[@name='type']" position="attributes">
-                <attribute name="invisible">True</attribute>
+                <field name="tms_location" widget="boolean_toggle" />
             </xpath>
 
             <xpath expr="//span[@name='address_name']" position="attributes">

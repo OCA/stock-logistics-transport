@@ -93,11 +93,11 @@ class TmsDriver(models.Model):
         self.ensure_one()
         return self.env._("Driver created")
 
-    def _track_subtype(self, init_values):
+    def _track_log_get_default_subtype(self, init_values):
         self.ensure_one()
         if "stage_id" in init_values:
             return self.env.ref("tms.mt_driver_stage")
-        return super()._track_subtype(init_values)
+        return super()._track_log_get_default_subtype(init_values)
 
     # Inherited actions from res_partner
 

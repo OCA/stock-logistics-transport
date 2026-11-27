@@ -29,14 +29,6 @@
                     />
                 </header>
             </xpath>
-            <xpath expr="//field[@name='company_type']" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
-            <xpath expr="//field[@name='type']" position="attributes">
-                <attribute name="invisible">True</attribute>
-            </xpath>
-
             <xpath expr="//span[@name='address_name']" position="attributes">
                 <attribute name="invisible">False</attribute>
             </xpath>
@@ -45,7 +37,7 @@
                 <attribute name="invisible">True</attribute>
             </xpath>
 
-            <xpath expr="//group" position="after">
+            <xpath expr="//sheet/group" position="after">
                 <group>
                     <group string="Driver Status">
                         <field name="is_external" />

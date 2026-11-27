@@ -26,10 +26,10 @@ class FleetVehicle(models.Model):
 
     def _default_volume_uom_id(self):
         default_volume_uom_id = (
-            self.env["ir.config_parameter"].sudo().get_param("tms.default_weight_uom")
+            self.env["ir.config_parameter"].sudo().get_int("tms.default_weight_uom")
         )
 
         if default_volume_uom_id:
-            return self.env["uom.uom"].browse(int(default_volume_uom_id))
+            return self.env["uom.uom"].browse(default_volume_uom_id)
         else:
             return self.env.ref("uom.product_uom_cubic_meter", raise_if_not_found=False)

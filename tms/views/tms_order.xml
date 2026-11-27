@@ -252,7 +252,7 @@
                                                 class="o_text_overflow mb-2"
                                                 t-att-title="record.name.value"
                                             >
-                                                <t t-esc="record.name.value" />
+                                                <t t-out="record.name.value" />
                                             </span>
                                             <!-- VEHICLE -->
                                             <span
@@ -264,7 +264,7 @@
                                                     aria-label="Vehicle"
                                                     title="Vehicle"
                                                 />
-                                                <t t-esc="record.vehicle_id.value" />
+                                                <t t-out="record.vehicle_id.value" />
                                             </span>
                                             <!-- ROUTES -->
                                             <div
@@ -277,7 +277,7 @@
                                                     title="Route"
                                                 />
                                                 <t
-                                                    t-esc="record.route_origin.value"
+                                                    t-out="record.route_origin.value"
                                                     groups="tms.group_tms_route"
                                                 />
                                                 <i
@@ -288,7 +288,7 @@
                                                 />
                                                 <t
                                                     groups="tms.group_tms_route"
-                                                    t-esc="record.route_destination.value"
+                                                    t-out="record.route_destination.value"
                                                 />
                                             </div>
                                             <!-- NOT ROUTES -->
@@ -297,14 +297,14 @@
                                                     class="fa fa-map-o me-2"
                                                     title="Route"
                                                 />
-                                                <t t-esc="record.origin_id.value" />
+                                                <t t-out="record.origin_id.value" />
                                                 <i
                                                     class="fa fa-long-arrow-right mx-2 oe_read_only"
                                                     aria-label="Arrow icon"
                                                     title="Arrow"
                                                 />
                                                 <t
-                                                    t-esc="record.destination_id.value"
+                                                    t-out="record.destination_id.value"
                                                 />
                                             </div>
                                         </div>
@@ -321,7 +321,7 @@
                                         <i>
                                             <t
                                                 t-if="record.tms_team_id.raw_value"
-                                                t-esc="record.tms_team_id.value"
+                                                t-out="record.tms_team_id.value"
                                                 groups="tms.group_tms_team"
                                             />
                                             <span
@@ -331,7 +331,7 @@
                                             </span>
                                             <t
                                                 t-if="record.crew_id.raw_value"
-                                                t-esc="record.crew_id.value"
+                                                t-out="record.crew_id.value"
                                                 groups="tms.group_tms_crew"
                                             />
                                         </i>

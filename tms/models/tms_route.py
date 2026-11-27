@@ -54,7 +54,7 @@ class TMSRoute(models.Model):
     def _default_distance_uom_id(self):
         # Fetch the value of default_distance_uom from settings
         default_distance_uom_id = (
-            self.env["ir.config_parameter"].sudo().get_param("tms.default_distance_uom")
+            self.env["ir.config_parameter"].sudo().get_int("tms.default_distance_uom")
         )
 
         # Return the actual record based on the ID retrieved from settings
@@ -67,7 +67,7 @@ class TMSRoute(models.Model):
     def _default_time_uom_id(self):
         # Fetch the value of default_time_uom from settings
         default_time_uom_id = (
-            self.env["ir.config_parameter"].sudo().get_param("tms.default_time_uom")
+            self.env["ir.config_parameter"].sudo().get_int("tms.default_time_uom")
         )
 
         # Return the actual record based on the ID retrieved from settings

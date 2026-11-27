@@ -89,6 +89,8 @@ class TestTmsDriver(TransactionCase):
         self.assertEqual(action.get("res_model"), "calendar.event")
 
     def test_create_company_delegates_to_partner(self):
+        if not hasattr(type(self.driver.partner_id), "create_company"):
+            self.skipTest("create_company is removed in Odoo 20.0")
         self.driver.create_company()
 
     def test_open_commercial_entity_delegates_to_partner(self):
@@ -104,12 +106,14 @@ class TestTmsDriver(TransactionCase):
     def test_track_subtype_on_stage_change(self):
         subtype = self.env.ref("tms.mt_driver_stage")
         self.assertEqual(
-            self.driver._track_subtype({"stage_id": self.stage.id}),
+            self.driver._track_log_get_default_subtype({"stage_id": self.stage.id}),
             subtype,
         )
 
     def test_track_subtype_returns_false_for_other_fields(self):
-        self.assertFalse(self.driver._track_subtype({"driver_type": "terrestrial"}))
+        self.assertFalse(
+            self.driver._track_log_get_default_subtype({"driver_type": "terrestrial"})
+        )
 
     def test_driver_creation_logs_message_in_chatter(self):
         self.env.cr.precommit.run()
@@ -142,9 +146,5 @@ class TestTmsDriver(TransactionCase):
         self.env.cr.precommit.run()
         new_messages = self.driver.message_ids - before
         self.assertTrue(new_messages)
-        tracked_fields = {
-            field_name
-            for message in new_messages
-            for field_name in message.tracking_value_ids.field_id.mapped("name")
-        }
-        self.assertIn("is_external", tracked_fields)
+        self.assertEqual(new_messages[0].message_type, "tracking")
+        self.assertIn("External Driver", new_messages[0].body)

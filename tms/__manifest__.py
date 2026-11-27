@@ -3,7 +3,7 @@
 {
     "name": "Transport",
     "summary": "Manage Vehicles, Drivers, Routes and Trips",
-    "version": "19.0.1.2.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "category": "TMS",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
@@ -17,8 +17,7 @@
         "data/tms_team.xml",
         "data/uom_category.xml",
         "security/res_groups.xml",
-        "security/ir.model.access.csv",
-        "security/ir_rule.xml",
+        "security/ir.access.csv",
         "views/res_config_settings.xml",
         "views/tms_driver.xml",
         "views/res_partner.xml",

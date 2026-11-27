@@ -37,7 +37,7 @@ class TestFleetVehicle(TransactionCase):
         self.assertTrue(self.vehicle, "Vehicle wasn't created successfully")
         self.assertEqual(
             self.vehicle.name,
-            "Test Brand/Test Model/Test Plate",
+            "Test Plate: Test Brand/Test Model",
             "Vehicle name should be 'Test Vehicle'",
         )
         self.assertEqual(self.vehicle.capacity, 50, "Vehicle capacity should be 5000")
