@@ -1,0 +1,1 @@
+odoo-addon-tms @ git+https://github.com/OCA/stock-logistics-transport@refs/pull/274/head#subdirectory=tms
