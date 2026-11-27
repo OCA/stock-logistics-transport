@@ -7,6 +7,12 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestStockMove(BaseCommon):
+    _test_user_groups = (
+        "fleet.fleet_group_manager",
+        "product.group_product_manager",
+        "stock.group_stock_manager",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -45,7 +51,7 @@ class TestStockMove(BaseCommon):
         self.env["stock.move"].create(
             {
                 "product_id": product.id,
-                "product_uom": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "product_uom_qty": qty,
                 "picking_id": picking.id,
                 "location_id": self.supplier_location.id,
@@ -67,7 +73,7 @@ class TestStockMove(BaseCommon):
             {
                 "move_id": move.id,
                 "product_id": self.vehicle_product.id,
-                "product_uom_id": self.vehicle_product.uom_id.id,
+                "uom_id": self.vehicle_product.uom_id.id,
                 "quantity": 1.0,
                 "lot_id": lot.id,
                 "location_id": self.supplier_location.id,
@@ -93,7 +99,7 @@ class TestStockMove(BaseCommon):
             {
                 "move_id": move.id,
                 "product_id": self.vehicle_product.id,
-                "product_uom_id": self.vehicle_product.uom_id.id,
+                "uom_id": self.vehicle_product.uom_id.id,
                 "quantity": 1.0,
                 "lot_id": lot.id,
                 "location_id": self.supplier_location.id,
@@ -124,7 +130,7 @@ class TestStockMove(BaseCommon):
             {
                 "move_id": move.id,
                 "product_id": product.id,
-                "product_uom_id": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "quantity": 1.0,
                 "lot_id": lot.id,
                 "location_id": self.supplier_location.id,
@@ -156,7 +162,7 @@ class TestStockMove(BaseCommon):
             {
                 "move_id": move.id,
                 "product_id": product.id,
-                "product_uom_id": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "quantity": 1.0,
                 "lot_id": lot.id,
                 "location_id": self.supplier_location.id,

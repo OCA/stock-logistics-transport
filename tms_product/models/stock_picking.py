@@ -22,8 +22,9 @@ class StockPicking(models.Model):
         self.ensure_one()
         tms_vehicles = self.mapped("tms_vehicle_ids")
         return {
+            "name": self.env._("Vehicles"),
             "type": "ir.actions.act_window",
             "res_model": "fleet.vehicle",
-            "views": [(False, "list")],
+            "views": [(False, "list"), (False, "form")],
             "domain": [("id", "in", tms_vehicles.ids)],
         }

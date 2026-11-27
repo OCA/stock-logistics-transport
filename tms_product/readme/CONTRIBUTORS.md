@@ -2,3 +2,5 @@
   - Maxime Chambreuil \<<maxime.chambreuil@graymatterlogic.com>\>
   - Santiago Rodriguez \<<srodriguez@opensourceintegrators.com>\>
   - Edgar Martinez \<<emartinez@opensourceintegrators.com>\>
+- [Heliconia Solutions Pvt. Ltd.](https://www.heliconia.io)
+  - Bhavesh Heliconia

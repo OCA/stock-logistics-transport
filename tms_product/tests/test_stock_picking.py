@@ -5,6 +5,11 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestStockPicking(BaseCommon):
+    _test_user_groups = (
+        "fleet.fleet_group_manager",
+        "stock.group_stock_manager",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

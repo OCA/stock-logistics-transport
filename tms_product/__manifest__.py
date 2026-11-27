@@ -3,14 +3,14 @@
 {
     "name": "TMS - Product",
     "summary": "Manage Vehicles as Products",
-    "version": "19.0.1.1.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "category": "TMS",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/stock-logistics-transport",
     "depends": ["tms", "stock", "product"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "data/tms_service_products.xml",
         "views/transportable_product_views.xml",
         "views/fleet_vehicle_views.xml",

@@ -5,6 +5,13 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestFleetVehicle(BaseCommon):
+    _test_user_groups = (
+        "fleet.fleet_group_manager",
+        "product.group_product_manager",
+        "stock.group_stock_manager",
+        "tms.group_tms_admin",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

@@ -11,7 +11,7 @@
                     type="object"
                     name="action_view_tms_vehicle"
                     class="oe_stat_button"
-                    icon="fa-car"
+                    icon="directions_car"
                     invisible="tms_vehicle_count == 0"
                 >
                     <field
