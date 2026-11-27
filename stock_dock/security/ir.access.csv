@@ -1,0 +1,3 @@
+id,name,model_id,group_id/id,operation,domain
+access_stock_dock_manager,stock.dock.manager,stock.dock,stock.group_stock_manager,crud,
+access_stock_dock_user,stock.dock.user,stock.dock,base.group_user,r,
