@@ -11,7 +11,7 @@
                     name="action_view_order"
                     type="object"
                     class="oe_stat_button"
-                    icon="fa-handshake-o"
+                    icon="handshake"
                     invisible="not purchase_order_id"
                 >
                     <span class="o_stat_text">Purchase order</span>

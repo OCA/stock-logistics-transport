@@ -32,10 +32,11 @@ class TMSOrder(models.Model):
         for order in self:
             order.purchase_order_count = len(order.purchase_ids)
 
-    @api.model
-    def create(self, vals):
-        order = super().create(vals)
-        if len(order.purchase_ids) > 0:
-            for purchase in order.purchase_ids:
-                purchase.trip_id = order
-        return order
+    @api.model_create_multi
+    def create(self, vals_list):
+        orders = super().create(vals_list)
+        for order in orders:
+            if len(order.purchase_ids) > 0:
+                for purchase in order.purchase_ids:
+                    purchase.trip_id = order
+        return orders

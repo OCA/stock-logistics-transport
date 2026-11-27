@@ -21,13 +21,13 @@ TMS - Purchase
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fstock--logistics--transport-lightgray.png?logo=github
-    :target: https://github.com/OCA/stock-logistics-transport/tree/19.0/tms_purchase
+    :target: https://github.com/OCA/stock-logistics-transport/tree/20.0/tms_purchase
     :alt: OCA/stock-logistics-transport
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/stock-logistics-transport-19-0/stock-logistics-transport-19-0-tms_purchase
+    :target: https://translation.odoo-community.org/projects/stock-logistics-transport-20-0/stock-logistics-transport-20-0-tms_purchase
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-transport&target_branch=19.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/stock-logistics-transport&target_branch=20.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -95,7 +95,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/stock-logistics-transport/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/stock-logistics-transport/issues/new?body=module:%20tms_purchase%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/stock-logistics-transport/issues/new?body=module:%20tms_purchase%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -115,6 +115,10 @@ Contributors
 - `Gray Matter Logic <https://www.graymatterlogic.com>`__:
 
   - Maxime Chambreuil maxime.chambreuil@graymatterlogic.com
+
+- `Heliconia Solutions Pvt. Ltd. <https://www.heliconia.io>`__
+
+  - Bhavesh Heliconia
 
 Other credits
 -------------
@@ -148,6 +152,6 @@ Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-max3903| |maintainer-santiagordz| |maintainer-EdgarRetes| 
 
-This module is part of the `OCA/stock-logistics-transport <https://github.com/OCA/stock-logistics-transport/tree/19.0/tms_purchase>`_ project on GitHub.
+This module is part of the `OCA/stock-logistics-transport <https://github.com/OCA/stock-logistics-transport/tree/20.0/tms_purchase>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

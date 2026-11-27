@@ -11,7 +11,7 @@
                     name="action_view_purchase_orders"
                     type="object"
                     groups="purchase.group_purchase_user"
-                    icon="fa-handshake-o"
+                    icon="handshake"
                 >
                     <field
                         string="Purchases"

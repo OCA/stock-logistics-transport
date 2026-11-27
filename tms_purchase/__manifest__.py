@@ -3,7 +3,7 @@
 {
     "name": "TMS - Purchase",
     "summary": "Manage purchase requests to drivers and other suppliers",
-    "version": "19.0.1.1.1",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "category": "TMS",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",

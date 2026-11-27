@@ -12,7 +12,7 @@
                     name="action_view_vehicles_button"
                     type="object"
                     class="oe_stat_button"
-                    icon="fa-car"
+                    icon="directions_car"
                     invisible="not vehicle_ids"
                 >
                     <field string="Vehicles" name="vehicle_count" widget="statinfo" />
@@ -21,7 +21,7 @@
                     name="action_view_order"
                     type="object"
                     class="oe_stat_button"
-                    icon="fa-truck"
+                    icon="local_shipping"
                     invisible="not trip_id"
                 >
                     <span class="o_stat_text">Trip</span>

@@ -7,6 +7,14 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestTmsPurchase(BaseCommon):
+    _test_user_groups = (
+        "fleet.fleet_group_manager",
+        "product.group_product_manager",
+        "purchase.group_purchase_manager",
+        "stock.group_stock_manager",
+        "tms.group_tms_admin",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -202,7 +210,7 @@ class TestTmsPurchase(BaseCommon):
         move = self.env["stock.move"].create(
             {
                 "product_id": product.id,
-                "product_uom": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "product_uom_qty": 1,
                 "picking_id": picking.id,
                 "location_id": supplier_location.id,
@@ -215,7 +223,7 @@ class TestTmsPurchase(BaseCommon):
             {
                 "move_id": move.id,
                 "product_id": product.id,
-                "product_uom_id": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "quantity": 1.0,
                 "lot_id": lot.id,
                 "location_id": supplier_location.id,
@@ -271,7 +279,7 @@ class TestTmsPurchase(BaseCommon):
         move = self.env["stock.move"].create(
             {
                 "product_id": product.id,
-                "product_uom": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "product_uom_qty": 1,
                 "picking_id": picking.id,
                 "location_id": supplier_location.id,
@@ -283,7 +291,7 @@ class TestTmsPurchase(BaseCommon):
             {
                 "move_id": move.id,
                 "product_id": product.id,
-                "product_uom_id": product.uom_id.id,
+                "uom_id": product.uom_id.id,
                 "quantity": 1.0,
                 "lot_id": lot.id,
                 "location_id": supplier_location.id,
