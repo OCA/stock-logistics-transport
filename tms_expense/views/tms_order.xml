@@ -11,7 +11,7 @@
                     name="action_view_expenses"
                     type="object"
                     class="oe_stat_button"
-                    icon="fa-money"
+                    icon="payments"
                     invisible="not expense_ids"
                 >
                     <field string="Expenses" name="expense_count" widget="statinfo" />
